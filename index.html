@@ -36,9 +36,12 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <style>
+        [x-cloak] { display: none !important; }
+        
         html[lang="ar"] .lang-en { display: none !important; }
         html[lang="en"] .lang-ar { display: none !important; }
         
@@ -196,14 +199,14 @@
                     </button>
                 </div>
 
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 text-slate-600 hover:text-primary transition-colors">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 text-slate-600 hover:text-primary transition-colors z-50">
                     <i data-lucide="menu" class="w-8 h-8" x-show="!mobileMenuOpen"></i>
                     <i data-lucide="x" class="w-8 h-8" x-show="mobileMenuOpen" x-cloak></i>
                 </button>
             </div>
         </div>
 
-        <div x-show="mobileMenuOpen" x-transition x-collapse class="md:hidden bg-white/90 backdrop-blur-2xl border-b border-slate-200 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] absolute w-full left-0 top-full">
+        <div x-show="mobileMenuOpen" x-transition x-collapse class="md:hidden bg-white/90 backdrop-blur-2xl border-b border-slate-200 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] absolute w-full left-0 top-full max-h-[calc(100vh-5rem)] overflow-y-auto" x-cloak>
             <div class="flex flex-col p-6 gap-5 font-bold text-lg text-center">
                 <a href="#about" @click="mobileMenuOpen = false" class="text-slate-600 hover:text-primary lang-ar">المدرب</a>
                 <a href="#about" @click="mobileMenuOpen = false" class="text-slate-600 hover:text-primary lang-en">Instructor</a>
@@ -232,8 +235,8 @@
         
         <div class="max-w-7xl mx-auto px-4 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
             <div data-aos="fade-up" data-aos-duration="1000">
-                <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-red-100 shadow-sm mb-8 transform hover:scale-105 transition-transform">
-                    <span class="relative flex h-3.5 w-3.5">
+                <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-red-100 shadow-sm mb-8 transform hover:scale-105 transition-transform max-w-full">
+                    <span class="relative flex h-3.5 w-3.5 shrink-0">
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-600"></span>
                     </span>
@@ -288,7 +291,7 @@
                 </div>
             </div>
             
-            <div class="relative w-full h-[500px] md:h-[600px] perspective-1000" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
+            <div class="relative w-full h-[500px] md:h-[600px]" style="perspective: 1000px;" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
                 <div class="absolute inset-0 bg-gradient-to-tr from-primary to-primary_light rounded-[2.5rem] rotate-3 opacity-20 animate-pulse"></div>
                 
                 <img :style="`transform: translate(${mouseX * -0.02}px, ${mouseY * -0.02}px) rotateY(${mouseX * 0.01}deg) rotateX(${mouseY * -0.01}deg)`" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="Excel Dashboard" class="absolute inset-0 w-full h-full object-cover rounded-[2.5rem] shadow-2xl border-4 border-white parallax-bg z-10">
@@ -432,12 +435,12 @@
                 </div>
 
                 <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:bg-gradient-to-br hover:from-white hover:to-slate-50/50 hover:shadow-xl transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
-<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">
-جوهر التحليل
-</div>
-<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">
-Core Analysis
-</div>
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">
+                    جوهر التحليل
+                    </div>
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">
+                    Core Analysis
+                    </div>
                     
                     <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2">
                         <i data-lucide="function-square" class="w-8 h-8"></i>
@@ -451,13 +454,13 @@ Core Analysis
                     </ul>
                 </div>
 
-<div class="glass-card p-8 lg:p-10 rounded-[2.5rem] group hover:bg-gradient-to-br hover:from-white hover:to-slate-50/50 hover:shadow-xl transition-all duration-500"> 
-<div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-glow transform group-hover:-translate-y-2">
+                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] group hover:bg-gradient-to-br hover:from-white hover:to-slate-50/50 hover:shadow-xl transition-all duration-500" data-aos="fade-up" data-aos-delay="200"> 
+                    <div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-glow transform group-hover:-translate-y-2">
                         <i data-lucide="pie-chart" class="w-8 h-8"></i>
                     </div>
                     <h3 class="text-2xl font-black mb-6 text-dark lang-ar">المستوى 3: ذكاء الأعمال والتحليل</h3>
                     <h3 class="text-2xl font-black mb-6 text-dark lang-en">Level 3: Business Intelligence</h3>
-<ul class="space-y-5 text-slate-700 font-bold text-lg">
+                    <ul class="space-y-5 text-slate-700 font-bold text-lg">
                         <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0"></i> <span class="lang-ar">الجداول المحورية (Pivot Tables) المتقدمة</span><span class="lang-en">Advanced Pivot Tables</span></li>
                         <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0"></i> <span class="lang-ar">تصميم لوحات القيادة التفاعلية (Dashboards)</span><span class="lang-en">Designing Interactive Dashboards</span></li>
                         <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0"></i> <span class="lang-ar">المخططات البيانية (Charts) وتحليل الاتجاهات</span><span class="lang-en">Charts and Trend Analysis</span></li>
@@ -583,7 +586,7 @@ Core Analysis
                     <button @click="open = !open" class="w-full px-6 py-5 text-start font-black text-lg flex justify-between items-center text-dark hover:text-primary transition-colors">
                         <span class="lang-ar">هل الدورة تناسب المبتدئين تماماً؟</span>
                         <span class="lang-en">Is the course suitable for complete beginners?</span>
-                        <div class="bg-slate-50 p-2 rounded-full" :class="open ? 'bg-primary/10 text-primary' : 'text-slate-400'">
+                        <div class="bg-slate-50 p-2 rounded-full shrink-0" :class="open ? 'bg-primary/10 text-primary' : 'text-slate-400'">
                             <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" x-show="!open"></i>
                             <i data-lucide="minus" class="w-5 h-5 transition-transform duration-300" x-show="open" x-cloak></i>
                         </div>
@@ -598,7 +601,7 @@ Core Analysis
                     <button @click="open = !open" class="w-full px-6 py-5 text-start font-black text-lg flex justify-between items-center text-dark hover:text-primary transition-colors">
                         <span class="lang-ar">هل المحاضرات مسجلة؟</span>
                         <span class="lang-en">Are the sessions recorded?</span>
-                        <div class="bg-slate-50 p-2 rounded-full" :class="open ? 'bg-primary/10 text-primary' : 'text-slate-400'">
+                        <div class="bg-slate-50 p-2 rounded-full shrink-0" :class="open ? 'bg-primary/10 text-primary' : 'text-slate-400'">
                             <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" x-show="!open"></i>
                             <i data-lucide="minus" class="w-5 h-5 transition-transform duration-300" x-show="open" x-cloak></i>
                         </div>
@@ -613,14 +616,14 @@ Core Analysis
                     <button @click="open = !open" class="w-full px-6 py-5 text-start font-black text-lg flex justify-between items-center text-dark hover:text-primary transition-colors">
                         <span class="lang-ar">ما هي طرق الدفع المتاحة لرسوم الدورة (70 دينار)؟</span>
                         <span class="lang-en">What are the payment methods for the fee (70 JOD)?</span>
-                        <div class="bg-slate-50 p-2 rounded-full" :class="open ? 'bg-primary/10 text-primary' : 'text-slate-400'">
+                        <div class="bg-slate-50 p-2 rounded-full shrink-0" :class="open ? 'bg-primary/10 text-primary' : 'text-slate-400'">
                             <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" x-show="!open"></i>
                             <i data-lucide="minus" class="w-5 h-5 transition-transform duration-300" x-show="open" x-cloak></i>
                         </div>
                     </button>
                     <div x-show="open" x-collapse x-transition:enter="transition ease-out duration-300" class="px-6 pb-6 text-slate-600 font-medium leading-relaxed">
-<span class="lang-ar">الدفع متاح عبر كليك XAcademy - بنك الاتحاد. يرجى ملاحظة أن تأكيد التسجيل يتم بعد اتمام عملية الدفع.</span>
-<span class="lang-en">Payment is available via CliQ (XAcademy) - Bank Al Etihad. Please note that registration is confirmed after the payment is completed.</span>
+                        <span class="lang-ar">الدفع متاح عبر كليك XAcademy - بنك الاتحاد. يرجى ملاحظة أن تأكيد التسجيل يتم بعد اتمام عملية الدفع.</span>
+                        <span class="lang-en">Payment is available via CliQ (XAcademy) - Bank Al Etihad. Please note that registration is confirmed after the payment is completed.</span>
                     </div>
                 </div>
                 
@@ -628,7 +631,7 @@ Core Analysis
                     <button @click="open = !open" class="w-full px-6 py-5 text-start font-black text-lg flex justify-between items-center text-dark hover:text-primary transition-colors">
                         <span class="lang-ar">كيف أحصل على الشهادات المعتمدة؟</span>
                         <span class="lang-en">How do I get the accredited certificates?</span>
-                        <div class="bg-slate-50 p-2 rounded-full" :class="open ? 'bg-primary/10 text-primary' : 'text-slate-400'">
+                        <div class="bg-slate-50 p-2 rounded-full shrink-0" :class="open ? 'bg-primary/10 text-primary' : 'text-slate-400'">
                             <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" x-show="!open"></i>
                             <i data-lucide="minus" class="w-5 h-5 transition-transform duration-300" x-show="open" x-cloak></i>
                         </div>
