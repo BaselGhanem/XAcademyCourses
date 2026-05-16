@@ -252,9 +252,6 @@ a,button,input,select{cursor:pointer;}
 </style>
 </head>
 
-<!-- ════════════════════════════════════════
-     INTRO SCREEN (Pure Vanilla JS)
-════════════════════════════════════════ -->
 <body>
 <div id="introScreen">
     <canvas id="matrixCanvas"></canvas>
@@ -278,19 +275,13 @@ a,button,input,select{cursor:pointer;}
     </div>
 </div>
 
-<!-- ════════════════════════════════════════
-     MAIN SITE (Alpine.js)
-════════════════════════════════════════ -->
 <div id="mainSite" style="display:none" x-data="platform()" @mousemove="cursorX=$event.clientX;cursorY=$event.clientY" @keydown.window="handleKey($event)">
-
     <div class="custom-cursor hidden md:block" :class="{'hover':isHovering}" :style="`left:${cursorX}px;top:${cursorY}px`"></div>
 
-    <!-- ██ ADMIN LOGIN ██ -->
     <div class="fixed inset-0 z-[9800] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md"
          x-show="showAdminLogin" x-cloak
          x-transition:enter="transition duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
-        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md p-10" @click.stop
-             x-transition:enter="transition duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md p-10" @click.stop>
             <div class="flex items-center gap-3 mb-8">
                 <div class="bg-gradient-to-br from-primary to-primary_dark p-2.5 rounded-xl text-white"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
                 <div><p class="font-black text-dark text-lg">Admin Access</p><p class="text-sm text-slate-500">X Academy Trainer Dashboard</p></div>
@@ -307,59 +298,80 @@ a,button,input,select{cursor:pointer;}
                 <p class="text-red-500 text-sm font-bold" x-show="adminError" x-text="adminError"></p>
                 <button @click="adminLogin()" class="w-full bg-gradient-to-r from-primary to-primary_dark text-white font-black py-4 rounded-2xl hover:shadow-glow transition-all flex items-center justify-center gap-3">
                     <span x-show="!adminLoading">Enter Dashboard</span>
-                    <span x-show="adminLoading" class="flex items-center gap-2"><svg class="spinner w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10" opacity=".25"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>Authenticating...</span>
+                    <span x-show="adminLoading" class="flex items-center gap-2"><svg class="spinner w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10" opacity=".25"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>Authenticating</span>
                 </button>
-                <button @click="showAdminLogin=false;adminError=''" class="w-full text-slate-500 font-bold py-3 hover:text-dark transition">Cancel</button>
             </div>
+            <button @click="showAdminLogin=false" class="mt-6 w-full py-3 text-slate-400 hover:text-dark font-bold transition-colors">Cancel</button>
         </div>
     </div>
 
-    <!-- ██ ADMIN DASHBOARD ██ -->
-    <div class="admin-overlay" x-show="showAdmin" x-cloak x-transition:enter="transition duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
-        <div class="sticky top-0 z-10 border-b border-white/10 px-6 py-4 flex items-center justify-between" style="background:rgba(11,17,32,.95);backdrop-filter:blur(12px);">
-            <div class="flex items-center gap-3">
-                <div class="bg-gradient-to-br from-primary to-primary_dark p-2 rounded-lg text-white"><i data-lucide="bar-chart-3" class="w-5 h-5"></i></div>
-                <span class="text-white font-black text-lg">X Academy <span class="text-primary">· Admin</span></span>
+    <div class="admin-overlay" x-show="showAdmin" x-cloak x-transition:enter="transition duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
+        <div class="max-w-7xl mx-auto p-6 min-h-screen flex flex-col">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-10 bg-white/5 border border-white/10 p-6 rounded-3xl backdrop-blur-md">
+                <div class="flex items-center gap-4">
+                    <div class="bg-gradient-to-br from-primary to-primary_dark p-3 rounded-2xl text-white shadow-glow"><i data-lucide="shield" class="w-8 h-8"></i></div>
+                    <div>
+                        <h1 class="text-3xl font-black text-white mb-1">Trainer Command Center</h1>
+                        <p class="text-slate-400 font-medium">Real-time Registration Data</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button @click="exportCSV()" class="bg-white/10 hover:bg-white/20 text-white px-5 py-3 rounded-xl transition-all font-bold flex items-center gap-2 border border-white/10"><i data-lucide="download" class="w-5 h-5"></i> Export CSV</button>
+                    <button @click="adminLogout()" class="bg-red-500/20 hover:bg-red-500/30 text-red-400 px-5 py-3 rounded-xl transition-all font-bold border border-red-500/20">Sign Out</button>
+                </div>
             </div>
-            <div class="flex items-center gap-3">
-                <button @click="exportCSV()" class="flex items-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-xl font-bold transition text-sm border border-primary/20"><i data-lucide="download" class="w-4 h-4"></i>Export CSV</button>
-                <button @click="adminLogout()" class="flex items-center gap-2 text-slate-400 hover:text-white px-4 py-2 rounded-xl font-bold transition text-sm"><i data-lucide="log-out" class="w-4 h-4"></i>Logout</button>
-                <button @click="showAdmin=false" class="text-slate-400 hover:text-white p-2 rounded-lg transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                <div class="stat-card p-6 rounded-2xl">
+                    <p class="text-slate-400 font-bold mb-2">Total Students</p>
+                    <p class="text-4xl font-black text-white" x-text="registrations.length"></p>
+                </div>
+                <div class="stat-card p-6 rounded-2xl">
+                    <p class="text-slate-400 font-bold mb-2">Excel Track</p>
+                    <p class="text-4xl font-black text-white" x-text="registrations.filter(r=>r.course==='excel').length"></p>
+                </div>
+                <div class="stat-card p-6 rounded-2xl">
+                    <p class="text-slate-400 font-bold mb-2">Power BI Track</p>
+                    <p class="text-4xl font-black text-white" x-text="registrations.filter(r=>r.course==='powerbi').length"></p>
+                </div>
             </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-6 py-8">
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
-                <div class="stat-card rounded-2xl p-5 col-span-1"><p class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Total</p><p class="text-4xl font-black text-white" x-text="registrations.length"></p><p class="text-slate-500 text-xs mt-1">registrations</p></div>
-                <div class="stat-card rounded-2xl p-5"><p class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Excel</p><p class="text-4xl font-black text-primary" x-text="registrations.filter(r=>r.course==='excel').length"></p><p class="text-slate-500 text-xs mt-1">enrolled</p></div>
-                <div class="stat-card rounded-2xl p-5"><p class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Power BI</p><p class="text-4xl font-black text-primary" x-text="registrations.filter(r=>r.course==='powerbi').length"></p><p class="text-slate-500 text-xs mt-1">enrolled</p></div>
-                <div class="stat-card rounded-2xl p-5"><p class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Beginner</p><p class="text-4xl font-black text-yellow-400" x-text="registrations.filter(r=>r.levelTag==='beginner').length"></p><p class="text-slate-500 text-xs mt-1">level</p></div>
-                <div class="stat-card rounded-2xl p-5"><p class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Advanced</p><p class="text-4xl font-black text-green-400" x-text="registrations.filter(r=>r.levelTag==='advanced').length"></p><p class="text-slate-500 text-xs mt-1">level</p></div>
-            </div>
-            <div class="flex flex-wrap items-center gap-3 mb-6">
-                <select x-model="adminFilter" class="bg-white/5 text-slate-300 border border-white/10 rounded-xl px-4 py-2.5 font-bold text-sm outline-none"><option value="">All Courses</option><option value="excel">Excel</option><option value="powerbi">Power BI</option></select>
-                <select x-model="adminLevelFilter" class="bg-white/5 text-slate-300 border border-white/10 rounded-xl px-4 py-2.5 font-bold text-sm outline-none"><option value="">All Levels</option><option value="beginner">Beginner</option><option value="advanced">Advanced</option></select>
-                <input type="text" x-model="adminSearch" placeholder="Search name / email..." class="bg-white/5 text-slate-300 border border-white/10 rounded-xl px-4 py-2.5 font-bold text-sm outline-none flex-1 min-w-48 placeholder-slate-600">
-                <button @click="loadStudents()" class="flex items-center gap-2 text-primary border border-primary/30 rounded-xl px-4 py-2.5 font-bold text-sm hover:bg-primary/10 transition"><i data-lucide="refresh-cw" class="w-4 h-4" :class="{'spinner':adminLoading}"></i> Refresh</button>
-            </div>
-            <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+
+            <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden flex-1">
+                <div class="p-6 border-b border-white/10 flex flex-col md:flex-row gap-4 items-center justify-between">
+                    <div class="relative w-full md:w-96">
+                        <i data-lucide="search" class="w-5 h-5 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                        <input type="text" x-model="adminSearch" placeholder="Search by name, email, phone..." class="w-full bg-black/40 border border-white/10 text-white px-12 py-3 rounded-xl focus:border-primary outline-none transition placeholder-slate-500">
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="px-4 py-2 rounded-lg font-bold transition-all text-sm" :class="adminCourseFilter==='all'?'bg-primary text-white':'bg-white/5 text-slate-400 hover:bg-white/10'" @click="adminCourseFilter='all'">All</button>
+                        <button class="px-4 py-2 rounded-lg font-bold transition-all text-sm" :class="adminCourseFilter==='excel'?'bg-primary text-white':'bg-white/5 text-slate-400 hover:bg-white/10'" @click="adminCourseFilter='excel'">Excel</button>
+                        <button class="px-4 py-2 rounded-lg font-bold transition-all text-sm" :class="adminCourseFilter==='powerbi'?'bg-primary text-white':'bg-white/5 text-slate-400 hover:bg-white/10'" @click="adminCourseFilter='powerbi'">Power BI</button>
+                    </div>
+                </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
-                        <thead><tr class="border-b border-white/10"><th class="text-start py-4 px-5 text-slate-400 font-black uppercase tracking-wider text-xs">#</th><th class="text-start py-4 px-5 text-slate-400 font-black uppercase tracking-wider text-xs">Name</th><th class="text-start py-4 px-5 text-slate-400 font-black uppercase tracking-wider text-xs">Email</th><th class="text-start py-4 px-5 text-slate-400 font-black uppercase tracking-wider text-xs">Phone</th><th class="text-start py-4 px-5 text-slate-400 font-black uppercase tracking-wider text-xs">Course</th><th class="text-start py-4 px-5 text-slate-400 font-black uppercase tracking-wider text-xs">Track</th><th class="text-start py-4 px-5 text-slate-400 font-black uppercase tracking-wider text-xs">Score</th><th class="text-start py-4 px-5 text-slate-400 font-black uppercase tracking-wider text-xs">Date</th></tr></thead>
+                        <thead>
+                            <tr class="border-b border-white/10 bg-black/20">
+                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Date</th>
+                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Name</th>
+                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Contact</th>
+                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Course</th>
+                            </tr>
+                        </thead>
                         <tbody>
-                            <template x-if="adminLoading"><tr><td colspan="8" class="py-16 text-center text-slate-500 font-bold"><div class="flex items-center justify-center gap-3"><svg class="spinner w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10" opacity=".25"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>Loading...</div></td></tr></template>
-                            <template x-if="!adminLoading && filteredStudents.length===0"><tr><td colspan="8" class="py-16 text-center text-slate-500 font-bold">No registrations found.</td></tr></template>
-                            <template x-for="(s,i) in filteredStudents" :key="s.id">
+                            <template x-for="r in filteredStudents" :key="r.id">
                                 <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
-                                    <td class="py-4 px-5 text-slate-500 font-bold" x-text="i+1"></td>
-                                    <td class="py-4 px-5 text-white font-bold" x-text="s.name"></td>
-                                    <td class="py-4 px-5 text-slate-300" x-text="s.email"></td>
-                                    <td class="py-4 px-5 text-slate-300 font-mono" x-text="s.phone"></td>
-                                    <td class="py-4 px-5"><span class="px-3 py-1 rounded-full text-xs font-black" :class="s.course==='excel'?'bg-blue-500/20 text-blue-300':'bg-purple-500/20 text-purple-300'" x-text="s.course==='excel'?'Excel':'Power BI'"></span></td>
-                                    <td class="py-4 px-5 text-slate-300 text-xs font-bold max-w-[160px]" x-text="s.trackLabel||'—'"></td>
-                                    <td class="py-4 px-5"><span class="font-black text-lg" :class="(s.totalScore||0)>=6?'text-green-400':'text-yellow-400'" x-text="(s.totalScore||0)+'/12'"></span></td>
-                                    <td class="py-4 px-5 text-slate-500 text-xs" x-text="s.createdAt?new Date(s.createdAt).toLocaleDateString('en-GB'):'—'"></td>
+                                    <td class="py-4 px-6 text-slate-400" x-text="r.createdAt ? new Date(r.createdAt).toLocaleDateString('en-GB') : '-'"></td>
+                                    <td class="py-4 px-6 font-bold text-white" x-text="r.name"></td>
+                                    <td class="py-4 px-6 text-slate-300"><div x-text="r.email"></div><div class="text-xs text-slate-500 mt-1" x-text="r.phone"></div></td>
+                                    <td class="py-4 px-6">
+                                        <span class="px-3 py-1 rounded-full text-xs font-bold" :class="r.course==='excel'?'bg-blue-500/20 text-blue-400':'bg-yellow-500/20 text-yellow-400'" x-text="r.course==='excel'?'Excel':'Power BI'"></span>
+                                    </td>
                                 </tr>
                             </template>
+                            <tr x-show="filteredStudents.length === 0">
+                                <td colspan="4" class="py-12 text-center text-slate-500 font-bold">No registrations found.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -367,130 +379,62 @@ a,button,input,select{cursor:pointer;}
         </div>
     </div>
 
-    <!-- ██ ENROLLMENT OVERLAY ██ -->
     <div class="enrollment-overlay" x-show="showEnrollment" x-cloak>
-        <!-- Top bar -->
-        <div class="fixed top-0 left-0 right-0 z-10 px-6 py-4 flex items-center gap-6 bg-white/95 backdrop-blur-sm border-b border-slate-100">
-            <button @click="confirmCloseEnrollment()" class="text-slate-400 hover:text-dark transition-colors p-2 rounded-xl hover:bg-slate-100 flex-shrink-0"><i data-lucide="x" class="w-5 h-5"></i></button>
-            <div class="flex-1" x-show="quizStep>=1&&quizStep<=8">
-                <div class="h-1 bg-slate-100 rounded-full overflow-hidden">
-                    <div class="h-full bg-gradient-to-r from-primary to-primary_dark progress-bar-fill rounded-full" :style="`width:${Math.round(((quizStep-1)/7)*100)}%`"></div>
-                </div>
-            </div>
-            <div x-show="quizStep>=1&&quizStep<=4" class="text-sm font-black text-slate-400 flex-shrink-0"><span x-text="quizStep"></span>/4</div>
-            <div x-show="quizStep>=6&&quizStep<=8" class="text-sm font-black text-slate-400 flex-shrink-0"><span x-text="quizStep-5"></span>/3</div>
+        <div class="w-full h-1 bg-slate-100 sticky top-0 z-50">
+            <div class="h-full bg-primary progress-bar-fill" :style="`width:${(quizStep/7)*100}%`"></div>
         </div>
-        <!-- Back button -->
-        <div class="fixed top-4 right-6 z-10" x-show="quizStep>0&&quizStep<9">
-            <button @click="goBack()" class="text-slate-400 hover:text-dark p-2 rounded-xl hover:bg-slate-100 flex items-center gap-1.5 lang-ar"><i data-lucide="arrow-right" class="w-4 h-4"></i><span class="text-sm font-bold">رجوع</span></button>
-            <button @click="goBack()" class="text-slate-400 hover:text-dark p-2 rounded-xl hover:bg-slate-100 flex items-center gap-1.5 lang-en"><i data-lucide="arrow-left" class="w-4 h-4"></i><span class="text-sm font-bold">Back</span></button>
-        </div>
+        <div class="max-w-2xl mx-auto px-6 py-12 md:py-20 h-full flex flex-col justify-center">
+            
+            <button @click="showEnrollment=false; quizStep=1; totalScore=0; formData={name:'',email:'',phone:''}" class="absolute top-6 left-6 w-12 h-12 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-all">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
 
-        <div class="min-h-screen flex flex-col items-center justify-center px-4 py-24">
-
-            <!-- STEP 0: Course select -->
-            <div x-show="quizStep===0" class="w-full max-w-3xl slide-in">
-                <p class="text-primary font-black text-sm uppercase tracking-widest mb-4 lang-ar">الخطوة الأولى</p>
-                <p class="text-primary font-black text-sm uppercase tracking-widest mb-4 lang-en">Step One</p>
-                <h2 class="text-4xl md:text-5xl font-black text-dark mb-4 leading-tight lang-ar">أيّ دورة تختار، <span class="gradient-text" x-text="userName ? userName.split(' ')[0] : ''"></span>؟</h2>
-                <h2 class="text-4xl md:text-5xl font-black text-dark mb-4 leading-tight lang-en">Which course, <span class="gradient-text" x-text="userName ? userName.split(' ')[0] : ''"></span>?</h2>
-                <p class="text-slate-500 text-lg font-medium mb-12 lang-ar">ستقوم بتقييم مستواك الفعلي أولاً، ثم نضمن لك المحتوى المثالي.</p>
-                <p class="text-slate-500 text-lg font-medium mb-12 lang-en">We'll assess your real level first, then guarantee you the perfect content.</p>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <button @click="selectCourse('excel')" class="group p-8 border-2 border-slate-200 rounded-3xl text-start hover:border-primary transition-all duration-300 hover:shadow-premium hover:-translate-y-2 bg-white">
-                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform shadow-lg"><i data-lucide="table-2" class="w-7 h-7"></i></div>
-                        <h3 class="text-2xl font-black text-dark mb-2 lang-ar">Excel الاحترافية</h3>
-                        <h3 class="text-2xl font-black text-dark mb-2 lang-en">Professional Excel</h3>
-                        <p class="text-slate-500 font-medium text-sm mb-6 lang-ar">من الصفر إلى لوحات قيادة وتحليل بيانات متقدم</p>
-                        <p class="text-slate-500 font-medium text-sm mb-6 lang-en">From zero to dashboards and advanced data analysis</p>
-                        <div class="flex items-baseline gap-2"><span class="text-3xl font-black text-dark">75</span><span class="text-primary font-black lang-ar">د.ا</span><span class="text-primary font-black lang-en">JOD</span><span class="text-slate-400 line-through text-sm">150</span><span class="bg-green-100 text-green-700 text-xs font-black px-2 py-0.5 rounded-md lang-ar">وفر 50%</span><span class="bg-green-100 text-green-700 text-xs font-black px-2 py-0.5 rounded-md lang-en">50% OFF</span></div>
-                    </button>
-                    <button @click="selectCourse('powerbi')" class="group p-8 border-2 border-slate-200 rounded-3xl text-start hover:border-primary transition-all duration-300 hover:shadow-premium hover:-translate-y-2 bg-white relative">
-                        <div class="absolute -top-3 left-8 bg-primary text-white text-xs font-black px-3 py-1 rounded-full lang-ar">جديد 🎉</div>
-                        <div class="absolute -top-3 left-8 bg-primary text-white text-xs font-black px-3 py-1 rounded-full lang-en">NEW 🎉</div>
-                        <div class="w-14 h-14 bg-gradient-to-br from-primary to-primary_dark rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform shadow-glow"><i data-lucide="bar-chart-3" class="w-7 h-7"></i></div>
-                        <h3 class="text-2xl font-black text-dark mb-2 lang-ar">Power BI المتخصصة</h3>
-                        <h3 class="text-2xl font-black text-dark mb-2 lang-en">Power BI Specialist</h3>
-                        <p class="text-slate-500 font-medium text-sm mb-6 lang-ar">تقارير تفاعلية ذكية وتحليلات بيانية احترافية</p>
-                        <p class="text-slate-500 font-medium text-sm mb-6 lang-en">Smart interactive reports & professional data analytics</p>
-                        <div class="flex items-baseline gap-2"><span class="text-3xl font-black text-dark">100</span><span class="text-primary font-black lang-ar">د.ا</span><span class="text-primary font-black lang-en">JOD</span><span class="text-slate-400 line-through text-sm">200</span><span class="bg-green-100 text-green-700 text-xs font-black px-2 py-0.5 rounded-md lang-ar">وفر 50%</span><span class="bg-green-100 text-green-700 text-xs font-black px-2 py-0.5 rounded-md lang-en">50% OFF</span></div>
-                    </button>
+            <div x-show="typeof quizStep === 'number' && quizStep <= 4" x-transition.opacity.duration.300ms class="slide-in">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg" :class="selectedCourse==='excel'?'bg-gradient-to-br from-blue-500 to-cyan-500':'bg-gradient-to-br from-primary to-primary_dark'"><span x-text="quizStep"></span></div>
+                    <span class="text-slate-400 font-bold text-sm lang-ar" x-text="selectedCourse==='excel'?'تقييم مستوى Excel':'تقييم مستوى Power BI'"></span>
+                    <span class="text-slate-400 font-bold text-sm lang-en" x-text="selectedCourse==='excel'?'Excel Level Assessment':'Power BI Level Assessment'"></span>
                 </div>
-                <p class="text-center text-slate-400 text-sm font-bold mt-8 flex items-center justify-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-primary"></i><span class="lang-ar">ضمان استرداد كامل خلال 48 ساعة</span><span class="lang-en">100% money-back guarantee within 48 hours</span></p>
-            </div>
-
-            <!-- STEPS 1–4: Quiz -->
-            <template x-for="stub in [currentQuizQuestion]" :key="quizStep">
-                <div x-show="quizStep>=1&&quizStep<=4&&currentQuizQuestion" class="w-full max-w-2xl slide-in">
-                    <div class="flex items-center gap-3 mb-8">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-black text-sm" :class="selectedCourse==='excel'?'bg-gradient-to-br from-blue-500 to-cyan-500':'bg-gradient-to-br from-primary to-primary_dark'"><span x-text="quizStep"></span></div>
-                        <span class="text-slate-400 font-bold text-sm lang-ar" x-text="selectedCourse==='excel'?'تقييم مستوى Excel':'تقييم مستوى Power BI'"></span>
-                        <span class="text-slate-400 font-bold text-sm lang-en" x-text="selectedCourse==='excel'?'Excel Level Assessment':'Power BI Level Assessment'"></span>
-                    </div>
-                    <h2 class="text-3xl md:text-4xl font-black text-dark mb-10 leading-tight" x-text="document.documentElement.lang==='ar'?currentQuizQuestion.ar:currentQuizQuestion.en"></h2>
-                    <div class="space-y-4">
-                        <template x-for="(opt,oi) in currentQuizQuestion.options" :key="oi">
-                            <button class="quiz-option" :class="{'selected':quizAnswers[quizStep-1]===opt.score}" @click="pickAnswer(opt.score)">
-                                <div class="opt-key" x-text="['A','B','C','D'][oi]"></div>
-                                <span class="font-bold text-slate-700 text-base leading-snug" x-text="document.documentElement.lang==='ar'?opt.ar:opt.en"></span>
-                                <i data-lucide="check-circle" class="w-5 h-5 text-primary ms-auto flex-shrink-0 opacity-0 transition-opacity" :class="{'opacity-100':quizAnswers[quizStep-1]===opt.score}"></i>
-                            </button>
-                        </template>
-                    </div>
-                    <button @click="nextQuizStep()" :disabled="quizAnswers[quizStep-1]===undefined" class="mt-10 w-full bg-gradient-to-r from-primary to-primary_dark text-white font-black py-4 rounded-2xl hover:shadow-glow transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-3">
-                        <span class="lang-ar">التالي</span><span class="lang-en">Next</span>
-                        <i data-lucide="arrow-left" class="w-5 h-5 lang-ar"></i><i data-lucide="arrow-right" class="w-5 h-5 lang-en"></i>
-                    </button>
-                    <p class="text-center text-slate-400 text-xs font-bold mt-4 lang-ar">اضغط A · B · C · D للاختيار السريع</p>
-                    <p class="text-center text-slate-400 text-xs font-bold mt-4 lang-en">Press A · B · C · D for quick selection</p>
-                </div>
-            </template>
-
-            <!-- STEP 5: PERSONALIZED INSIGHTS (New!) -->
-            <div x-show="quizStep===5" class="w-full max-w-3xl slide-in">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 text-primary rounded-full font-black text-sm mb-6">
-                    <i data-lucide="sparkles" class="w-4 h-4"></i>
-                    <span class="lang-ar" x-text="'تقرير مخصص لك، ' + (userName ? userName.split(' ')[0] : '') + '!'"></span>
-                    <span class="lang-en" x-text="'Personalized for you, ' + (userName ? userName.split(' ')[0] : '') + '!'"></span>
-                </div>
-
-                <h2 class="text-3xl md:text-4xl font-black text-dark mb-3 lang-ar">هذا ما سيتغير في مسيرتك 🚀</h2>
-                <h2 class="text-3xl md:text-4xl font-black text-dark mb-3 lang-en">Here's how your career changes 🚀</h2>
-                <p class="text-slate-500 text-lg font-medium mb-8 lang-ar">بناءً على إجاباتك، إليك ما ستكسبه من هذه الدورة تحديداً:</p>
-                <p class="text-slate-500 text-lg font-medium mb-8 lang-en">Based on your answers, here's exactly what you will gain from this course:</p>
-
-                <!-- Track badge -->
-                <div class="flex items-center gap-4 mb-8 p-5 bg-slate-50 rounded-2xl border border-slate-200">
-                    <span class="text-4xl" x-text="assessmentResult?.emoji||'🎯'"></span>
-                    <div>
-                        <p class="text-xs font-black text-slate-500 uppercase tracking-wider lang-ar">مسارك التدريبي</p>
-                        <p class="text-xs font-black text-slate-500 uppercase tracking-wider lang-en">Your Training Track</p>
-                        <p class="text-xl font-black text-dark mt-1" x-text="document.documentElement.lang==='ar'?assessmentResult?.trackAr:assessmentResult?.trackEn"></p>
-                    </div>
-                    <div class="ms-auto flex flex-col items-center">
-                        <p class="text-3xl font-black text-primary" x-text="quizScore+'/12'"></p>
-                        <p class="text-xs text-slate-500 font-bold lang-ar">نتيجتك</p>
-                        <p class="text-xs text-slate-500 font-bold lang-en">Your Score</p>
-                    </div>
-                </div>
-
-                <!-- Insight cards grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-                    <template x-for="(ins, i) in personalizedInsights" :key="i">
-                        <div class="insight-card">
-                            <span class="text-2xl flex-shrink-0" x-text="ins.emoji"></span>
-                            <div>
-                                <p class="font-black text-dark text-sm leading-snug" x-text="document.documentElement.lang==='ar'?ins.ar:ins.en"></p>
-                                <span class="inline-block mt-2 text-xs font-black px-2 py-0.5 rounded-full" :class="ins.type==='learn'?'bg-blue-100 text-blue-700':ins.type==='deepen'?'bg-primary/10 text-primary':'bg-green-100 text-green-700'">
-                                    <span x-text="ins.type==='learn'?(document.documentElement.lang==='ar'?'ستتعلمه':'You will learn it'):ins.type==='deepen'?(document.documentElement.lang==='ar'?'ستعمّقه':'You will deepen it'):(document.documentElement.lang==='ar'?'مضمون':'Guaranteed')"></span>
-                                </span>
-                            </div>
-                        </div>
+                <h2 class="text-3xl md:text-4xl font-black text-dark mb-10 leading-tight" x-text="document.documentElement.lang==='ar'?currentQuizQuestion.ar:currentQuizQuestion.en"></h2>
+                
+                <div class="space-y-4">
+                    <template x-for="(opt,oi) in currentQuizQuestion.options" :key="oi">
+                        <button @click="answerQuestion(opt.score)" class="quiz-option text-lg font-bold text-slate-700">
+                            <div class="opt-key" x-text="['A','B','C','D'][oi]"></div>
+                            <span x-text="document.documentElement.lang==='ar'?opt.ar:opt.en"></span>
+                        </button>
                     </template>
                 </div>
+            </div>
 
-                <!-- Power BI Dashboard Embed -->
-                <div class="mb-8">
+            <div x-show="quizStep === 5" x-cloak class="slide-in w-full pb-20">
+                <div class="text-center mb-10">
+                    <div class="inline-flex bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-black mb-4 lang-ar">تم التقييم بنجاح ✅</div>
+                    <div class="inline-flex bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-black mb-4 lang-en">Assessment Complete ✅</div>
+                    <h2 class="text-4xl font-black text-dark mb-3 lang-ar">خطتك التدريبية جاهزة، <span x-text="userName"></span></h2>
+                    <h2 class="text-4xl font-black text-dark mb-3 lang-en">Your Plan is Ready, <span x-text="userName"></span></h2>
+                    <p class="text-slate-500 text-lg font-medium lang-ar">بناءً على مستواك، صممنا لك مساراً يختصر عليك سنوات من التجربة.</p>
+                    <p class="text-slate-500 text-lg font-medium lang-en">Based on your level, we've designed a track to save you years of trial and error.</p>
+                </div>
+
+                <div class="bg-white border-2 border-primary/20 rounded-[2rem] p-6 md:p-10 shadow-2xl relative overflow-hidden mb-8">
+                    <div class="absolute -top-16 -right-16 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+                    <div class="space-y-4 relative z-10">
+                        <template x-for="(ins, i) in generatedInsights" :key="i">
+                            <div class="insight-card">
+                                <div class="text-2xl" x-text="ins.emoji"></div>
+                                <div>
+                                    <p class="font-bold text-dark text-lg mb-1" x-text="document.documentElement.lang==='ar'?ins.ar:ins.en"></p>
+                                    <span class="text-xs font-black px-2 py-1 rounded-md" :class="ins.type==='learn'?'bg-blue-100 text-blue-700':ins.type==='deepen'?'bg-purple-100 text-purple-700':'bg-green-100 text-green-700'">
+                                        <span x-text="ins.type==='learn'?(document.documentElement.lang==='ar'?'ستتعلمه':'You will learn it'):ins.type==='deepen'?(document.documentElement.lang==='ar'?'ستعمّقه':'You will deepen it'):(document.documentElement.lang==='ar'?'مضمون':'Guaranteed')"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="mb-8" x-show="selectedCourse === 'powerbi' && quizStep === 5" x-transition x-cloak>
                     <div class="flex items-center gap-3 mb-4">
                         <div class="h-px flex-1 bg-slate-200"></div>
                         <p class="text-sm font-black text-slate-500 text-center lang-ar">🖥️ هذا ما ستبنيه أنت عند إتمام الدورة</p>
@@ -502,825 +446,609 @@ a,button,input,select{cursor:pointer;}
                             <div class="pbi-dot" style="background:#ff5f57"></div>
                             <div class="pbi-dot" style="background:#febc2e"></div>
                             <div class="pbi-dot" style="background:#28c840"></div>
-                            <span class="text-slate-400 text-xs font-mono ms-3 lang-ar">لوحة قيادة تنفيذية – X Academy</span>
-                            <span class="text-slate-400 text-xs font-mono ms-3 lang-en">Executive Dashboard – X Academy</span>
+                            <div class="flex-1 text-center text-xs font-bold text-slate-400">Interactive Sales Dashboard</div>
                         </div>
-                        <iframe
-                            src="https://app.powerbi.com/view?r=eyJrIjoiMWUwODU5MjEtMjQ2OS00OTM0LWJmNWMtY2Q0MjY5ZDg1NGVmIiwidCI6IjhiNjAyNDRiLTFiZGQtNDk4YS04ODY3LTljNzJhNGQ5NzFhMCIsImMiOjl9"
-                            width="100%" height="420" frameborder="0" allowfullscreen="true"
-                            style="display:block;background:#f8fafc;">
-                        </iframe>
+                        <div class="w-full relative pt-[56.25%]">
+                            <iframe title="Sales Analysis Dashboard" class="absolute top-0 left-0 w-full h-full border-0"
+                                src="https://app.powerbi.com/view?r=eyJrIjoiNGEyNTc1Y2UtNmZlYi00YWQzLWFlYjgtMjIzYTQ1Nzg2MjQwIiwidCI6IjI0YzcxNjEzLWQ2NWUtNDQyZC04NTgxLTEyMmVlNDk2ZGNiMSIsImMiOjh9"
+                                frameborder="0" allowFullScreen="true"></iframe>
+                        </div>
                     </div>
-                    <p class="text-center text-xs text-slate-400 font-bold mt-3 lang-ar">✨ لوحة قيادة حقيقية ستبنيها بنفسك خلال الدورة</p>
-                    <p class="text-center text-xs text-slate-400 font-bold mt-3 lang-en">✨ A real dashboard you will build yourself during the course</p>
                 </div>
 
-                <button @click="quizStep=6" class="w-full bg-gradient-to-r from-primary to-primary_dark text-white font-black py-5 rounded-2xl hover:shadow-glow transition-all text-lg flex items-center justify-center gap-3">
-                    <i data-lucide="edit-3" class="w-5 h-5"></i>
-                    <span class="lang-ar">إكمال التسجيل الآن</span>
-                    <span class="lang-en">Complete Registration Now</span>
+                <button @click="quizStep = 6" class="w-full bg-gradient-to-r from-primary to-primary_dark text-white font-black py-4 rounded-2xl text-xl hover:shadow-glow transition-all flex items-center justify-center gap-3">
+                    <span class="lang-ar">الخطوة الأخيرة: حجز المقعد</span><span class="lang-en">Final Step: Secure Your Seat</span><i data-lucide="arrow-left" class="w-6 h-6 rtl:hidden"></i><i data-lucide="arrow-right" class="w-6 h-6 ltr:hidden"></i>
                 </button>
             </div>
 
-            <!-- STEPS 6–8: Form -->
-            <template x-if="quizStep>=6&&quizStep<=8">
-                <div class="w-full max-w-xl slide-in">
-                    <div x-show="quizStep===6">
-                        <p class="text-slate-400 font-black text-sm uppercase tracking-widest mb-6 lang-ar">سؤال 1 من 3</p>
-                        <p class="text-slate-400 font-black text-sm uppercase tracking-widest mb-6 lang-en">Question 1 of 3</p>
-                        <label class="text-4xl font-black text-dark block mb-10 leading-tight lang-ar">ما اسمك الكامل؟ 👋</label>
-                        <label class="text-4xl font-black text-dark block mb-10 leading-tight lang-en">What's your full name? 👋</label>
-                        <input class="tf-input lang-ar" type="text" x-model="formData.name" placeholder="مثال: أحمد محمد علي" @keyup.enter="nextFormStep()" autocomplete="name">
-                        <input class="tf-input lang-en" type="text" x-model="formData.name" placeholder="e.g. Ahmad Ali" @keyup.enter="nextFormStep()" autocomplete="name">
+            <div x-show="quizStep === 6" x-cloak class="slide-in w-full">
+                <div class="mb-10 text-center">
+                    <h2 class="text-4xl font-black text-dark mb-3 lang-ar">تفاصيل التواصل</h2>
+                    <h2 class="text-4xl font-black text-dark mb-3 lang-en">Contact Details</h2>
+                    <p class="text-slate-500 text-lg lang-ar">لنرسل لك التفاصيل المالية وتأكيد التسجيل.</p>
+                    <p class="text-slate-500 text-lg lang-en">To send you payment details and confirm registration.</p>
+                </div>
+                <div class="space-y-8 bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
+                    <div>
+                        <label class="text-sm font-black text-slate-500 uppercase tracking-wider block mb-2 lang-ar">الإيميل الشخصي</label>
+                        <label class="text-sm font-black text-slate-500 uppercase tracking-wider block mb-2 lang-en">Email Address</label>
+                        <input type="email" x-model="formData.email" placeholder="example@gmail.com" class="tf-input">
                     </div>
-                    <div x-show="quizStep===7">
-                        <p class="text-slate-400 font-black text-sm uppercase tracking-widest mb-6 lang-ar">سؤال 2 من 3</p>
-                        <p class="text-slate-400 font-black text-sm uppercase tracking-widest mb-6 lang-en">Question 2 of 3</p>
-                        <label class="text-4xl font-black text-dark block mb-10 leading-tight lang-ar">ما بريدك الإلكتروني؟ 📧</label>
-                        <label class="text-4xl font-black text-dark block mb-10 leading-tight lang-en">What's your email? 📧</label>
-                        <input class="tf-input" type="email" x-model="formData.email" placeholder="example@gmail.com" @keyup.enter="nextFormStep()" autocomplete="email">
-                    </div>
-                    <div x-show="quizStep===8">
-                        <p class="text-slate-400 font-black text-sm uppercase tracking-widest mb-6 lang-ar">سؤال 3 من 3</p>
-                        <p class="text-slate-400 font-black text-sm uppercase tracking-widest mb-6 lang-en">Question 3 of 3</p>
-                        <label class="text-4xl font-black text-dark block mb-10 leading-tight lang-ar">ما رقم هاتفك؟ 📱</label>
-                        <label class="text-4xl font-black text-dark block mb-10 leading-tight lang-en">What's your phone? 📱</label>
-                        <input class="tf-input" type="tel" x-model="formData.phone" placeholder="+962 79 xxx xxxx" @keyup.enter="nextFormStep()" autocomplete="tel">
+                    <div>
+                        <label class="text-sm font-black text-slate-500 uppercase tracking-wider block mb-2 lang-ar">رقم الواتساب (للتواصل السريع)</label>
+                        <label class="text-sm font-black text-slate-500 uppercase tracking-wider block mb-2 lang-en">WhatsApp Number</label>
+                        <input type="tel" x-model="formData.phone" dir="ltr" placeholder="+962 7X XXX XXXX" class="tf-input">
                     </div>
                     <p class="text-red-500 text-sm font-bold mt-4" x-show="formError" x-text="formError"></p>
-                    <button @click="nextFormStep()" :disabled="isSubmitting" class="flex-1 w-full mt-10 bg-gradient-to-r from-primary to-primary_dark text-white font-black py-4 rounded-2xl hover:shadow-glow transition-all disabled:opacity-60 flex items-center justify-center gap-3">
+                    <button @click="submitForm()" :disabled="isSubmitting" class="flex-1 w-full mt-10 bg-gradient-to-r from-primary to-primary_dark text-white font-black py-4 rounded-2xl hover:shadow-glow transition-all disabled:opacity-60 flex items-center justify-center gap-3">
                         <template x-if="isSubmitting"><span class="flex items-center gap-2"><svg class="spinner w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10" opacity=".25"/><path d="M12 2a10 10 0 0 1 10 10"/></svg><span class="lang-ar">جاري الحفظ...</span><span class="lang-en">Saving...</span></span></template>
-                        <template x-if="!isSubmitting"><span class="lang-ar" x-text="quizStep===8?'أرسل التسجيل 🚀':'التالي'"></span></template>
-                        <template x-if="!isSubmitting"><span class="lang-en" x-text="quizStep===8?'Submit Registration 🚀':'Next'"></span></template>
+                        <template x-if="!isSubmitting"><span><span class="lang-ar">تأكيد التسجيل 🚀</span><span class="lang-en">Confirm Registration 🚀</span></span></template>
                     </button>
-                    <p class="text-slate-400 text-xs font-bold mt-4 flex items-center gap-2"><i data-lucide="lock" class="w-3.5 h-3.5"></i><span class="lang-ar">بياناتك محمية ومشفرة بالكامل</span><span class="lang-en">Your data is fully protected and encrypted</span></p>
                 </div>
-            </template>
-
-            <!-- STEP 9: Success -->
-            <div x-show="quizStep===9" class="w-full max-w-xl text-center slide-in">
-                <div class="w-28 h-28 mx-auto mb-8 relative">
-                    <div class="w-full h-full bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center text-white shadow-2xl shadow-green-300"><i data-lucide="check" class="w-14 h-14"></i></div>
-                    <div class="absolute -top-2 -right-2 w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-xl animate-bounce shadow-lg">⭐</div>
-                </div>
-                <h2 class="text-4xl font-black text-dark mb-4 lang-ar">تم التسجيل! 🎉</h2>
-                <h2 class="text-4xl font-black text-dark mb-4 lang-en">You're In! 🎉</h2>
-                <p class="text-slate-500 text-xl font-medium mb-2 lang-ar">شكراً، <strong class="text-dark" x-text="formData.name"></strong>! سيتواصل معك المدرب باسل قريباً.</p>
-                <p class="text-slate-500 text-xl font-medium mb-2 lang-en">Thank you, <strong class="text-dark" x-text="formData.name"></strong>! Trainer Basel will contact you soon.</p>
-                <div class="bg-slate-50 rounded-2xl p-6 mb-8 mt-6 text-start space-y-3">
-                    <div class="flex justify-between items-center"><span class="font-bold text-slate-500 lang-ar">الدورة</span><span class="font-bold text-slate-500 lang-en">Course</span><span class="font-black text-dark" x-text="selectedCourse==='excel'?'Excel الاحترافية':'Power BI المتخصصة'"></span></div>
-                    <div class="flex justify-between items-center"><span class="font-bold text-slate-500 lang-ar">مستواك</span><span class="font-bold text-slate-500 lang-en">Level</span><span class="font-black text-primary" x-text="document.documentElement.lang==='ar'?assessmentResult?.trackAr:assessmentResult?.trackEn"></span></div>
-                    <div class="flex justify-between items-center"><span class="font-bold text-slate-500 lang-ar">نقاطك</span><span class="font-bold text-slate-500 lang-en">Score</span><span class="font-black text-dark" x-text="quizScore+'/12'"></span></div>
-                </div>
-                <a href="http://wa.me/962788458787" target="_blank" class="w-full bg-[#25D366] text-white font-black py-4 rounded-2xl flex items-center justify-center gap-3 hover:shadow-lg transition-all mb-4"><i data-lucide="message-circle" class="w-5 h-5"></i><span class="lang-ar">تواصل مع المدرب الآن</span><span class="lang-en">Contact the Trainer Now</span></a>
-                <button @click="closeEnrollment()" class="w-full text-slate-500 font-bold py-3 hover:text-dark transition"><span class="lang-ar">العودة للموقع</span><span class="lang-en">Back to Site</span></button>
             </div>
 
-        </div><!-- /min-h-screen -->
-    </div><!-- /enrollment-overlay -->
-
-    <!-- ══════ NAV ══════ -->
-    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex items-center gap-3 cursor-pointer group" @click="logoClick()" @mouseenter="isHovering=true" @mouseleave="isHovering=false">
-                    <div class="bg-gradient-to-br from-primary to-primary_dark p-2.5 rounded-xl text-white shadow-glow group-hover:scale-110 transition-transform"><i data-lucide="bar-chart-2" class="w-6 h-6"></i></div>
-                    <span class="text-2xl font-black text-dark tracking-tight lang-ar">إكس <span class="gradient-text">أكاديمي</span></span>
-                    <span class="text-2xl font-black text-dark tracking-tight lang-en">X <span class="gradient-text">Academy</span></span>
-                </div>
-                <div class="hidden md:flex items-center gap-8 font-bold text-slate-600">
-                    <a href="#about" class="hover:text-primary transition-colors lang-ar">المدرب</a>
-                    <a href="#about" class="hover:text-primary transition-colors lang-en">Instructor</a>
-                    <a href="#syllabus" class="hover:text-primary transition-colors lang-ar">المحاور</a>
-                    <a href="#syllabus" class="hover:text-primary transition-colors lang-en">Syllabus</a>
-                    <a href="#schedule" class="hover:text-primary transition-colors lang-ar">المواعيد</a>
-                    <a href="#schedule" class="hover:text-primary transition-colors lang-en">Schedule</a>
-                    <a href="#faq" class="hover:text-primary transition-colors lang-ar">الأسئلة</a>
-                    <a href="#faq" class="hover:text-primary transition-colors lang-en">FAQ</a>
-                    <button @click="openEnrollment()" @mouseenter="isHovering=true" @mouseleave="isHovering=false" class="bg-dark text-white px-7 py-2.5 rounded-full hover:bg-primary transition-all shadow-lg hover:shadow-glow lang-ar flex items-center gap-2">سجل الآن <i data-lucide="arrow-left" class="w-4 h-4"></i></button>
-                    <button @click="openEnrollment()" @mouseenter="isHovering=true" @mouseleave="isHovering=false" class="bg-dark text-white px-7 py-2.5 rounded-full hover:bg-primary transition-all shadow-lg hover:shadow-glow lang-en flex items-center gap-2">Register Now <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
-                    <button id="langToggle" class="flex items-center gap-2 text-primary font-bold hover:bg-primary/10 px-3 py-1.5 rounded-lg transition border border-transparent hover:border-primary/20"><i data-lucide="globe" class="w-5 h-5"></i><span class="lang-ar">EN</span><span class="lang-en">عربي</span></button>
-                </div>
-                <button @click="mobileMenuOpen=!mobileMenuOpen" class="md:hidden p-2 text-slate-600 hover:text-primary transition-colors z-50">
-                    <i data-lucide="menu" class="w-8 h-8" x-show="!mobileMenuOpen"></i>
-                    <i data-lucide="x" class="w-8 h-8" x-show="mobileMenuOpen" x-cloak></i>
-                </button>
+            <div x-show="quizStep === 'success'" x-cloak class="slide-in text-center">
+                <div class="w-24 h-24 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="check" class="w-12 h-12"></i></div>
+                <h2 class="text-4xl font-black text-dark mb-4 lang-ar">تم تسجيل بياناتك بنجاح!</h2>
+                <h2 class="text-4xl font-black text-dark mb-4 lang-en">Registration Successful!</h2>
+                <p class="text-xl text-slate-600 mb-8 lang-ar">تم حجز مقعدك المبدئي. سنتواصل معك عبر الواتساب في أقرب وقت لتأكيد الدفع وإتمام الإجراءات.</p>
+                <p class="text-xl text-slate-600 mb-8 lang-en">Your seat is reserved. We will contact you via WhatsApp shortly to confirm payment and finalize details.</p>
+                <button @click="showEnrollment=false; quizStep=1;" class="bg-slate-100 hover:bg-slate-200 text-dark font-black px-8 py-3 rounded-xl transition-colors lang-ar">العودة للموقع</button>
+                <button @click="showEnrollment=false; quizStep=1;" class="bg-slate-100 hover:bg-slate-200 text-dark font-black px-8 py-3 rounded-xl transition-colors lang-en">Back to Home</button>
             </div>
         </div>
-        <div x-show="mobileMenuOpen" x-transition x-collapse class="md:hidden bg-white/95 backdrop-blur-2xl border-b border-slate-200 shadow-xl absolute w-full left-0 top-full max-h-[calc(100vh-5rem)] overflow-y-auto" x-cloak>
-            <div class="flex flex-col p-6 gap-5 font-bold text-lg text-center">
-                <a href="#about" @click="mobileMenuOpen=false" class="text-slate-600 hover:text-primary lang-ar">المدرب</a>
-                <a href="#about" @click="mobileMenuOpen=false" class="text-slate-600 hover:text-primary lang-en">Instructor</a>
-                <a href="#syllabus" @click="mobileMenuOpen=false" class="text-slate-600 hover:text-primary lang-ar">المحاور</a>
-                <a href="#syllabus" @click="mobileMenuOpen=false" class="text-slate-600 hover:text-primary lang-en">Syllabus</a>
-                <a href="#schedule" @click="mobileMenuOpen=false" class="text-slate-600 hover:text-primary lang-ar">المواعيد</a>
-                <a href="#schedule" @click="mobileMenuOpen=false" class="text-slate-600 hover:text-primary lang-en">Schedule</a>
-                <button @click="mobileMenuOpen=false;openEnrollment()" class="bg-gradient-to-r from-primary to-primary_dark text-white py-4 rounded-xl shadow-glow lang-ar">سجل الآن</button>
-                <button @click="mobileMenuOpen=false;openEnrollment()" class="bg-gradient-to-r from-primary to-primary_dark text-white py-4 rounded-xl shadow-glow lang-en">Register Now</button>
-                <button id="langToggleMobile" class="text-primary border-2 border-primary/20 hover:bg-primary/5 py-3 rounded-xl transition-colors"><span class="lang-ar">Switch to English</span><span class="lang-en">التبديل للعربية</span></button>
+    </div>
+
+    <nav class="fixed top-0 w-full z-40 glass-nav transition-all duration-300" :class="{'py-2':scrolled,'py-4':!scrolled}">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center">
+            <div class="flex items-center gap-3 relative z-50">
+                <div class="bg-gradient-to-br from-primary to-primary_dark p-2.5 rounded-xl text-white shadow-glow transform hover:rotate-12 transition-transform duration-500 cursor-pointer" @click="logoClick()"><i data-lucide="bar-chart-2" class="w-6 h-6"></i></div>
+                <div class="font-black text-xl tracking-tight text-dark"><span class="text-primary">X</span> Academy</div>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 font-bold text-slate-600">
+                <a href="#about" class="hover:text-primary transition-colors lang-ar">المدرب</a>
+                <a href="#about" class="hover:text-primary transition-colors lang-en">Instructor</a>
+                <a href="#syllabus" class="hover:text-primary transition-colors lang-ar">المحاور</a>
+                <a href="#syllabus" class="hover:text-primary transition-colors lang-en">Syllabus</a>
+                <a href="#schedule" class="hover:text-primary transition-colors lang-ar">المواعيد</a>
+                <a href="#schedule" class="hover:text-primary transition-colors lang-en">Schedule</a>
+                <a href="#faq" class="hover:text-primary transition-colors lang-ar">الأسئلة</a>
+                <a href="#faq" class="hover:text-primary transition-colors lang-en">FAQ</a>
+                <button @click="openEnrollment()" class="bg-dark text-white px-7 py-2.5 rounded-full hover:bg-primary transition-all shadow-lg hover:shadow-glow lang-ar flex items-center gap-2">احجز مقعدك <i data-lucide="arrow-left" class="w-4 h-4"></i></button>
+                <button @click="openEnrollment()" class="bg-dark text-white px-7 py-2.5 rounded-full hover:bg-primary transition-all shadow-lg hover:shadow-glow lang-en flex items-center gap-2">Enroll Now <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                <button id="langToggle" class="text-slate-400 hover:text-dark font-black flex items-center gap-1 transition-colors"><i data-lucide="globe" class="w-4 h-4"></i> <span x-text="document.documentElement.lang==='ar'?'EN':'AR'"></span></button>
+            </div>
+            
+            <button @click="mobileMenu=!mobileMenu" class="md:hidden text-dark p-2 relative z-50">
+                <i :data-lucide="mobileMenu?'x':'menu'" class="w-7 h-7"></i>
+            </button>
+        </div>
+        
+        <div x-show="mobileMenu" x-collapse class="md:hidden bg-white border-b border-slate-100 absolute w-full left-0 top-full shadow-2xl">
+            <div class="flex flex-col p-6 gap-4 font-bold text-center text-lg">
+                <a @click="mobileMenu=false" href="#about" class="py-2 text-slate-600 lang-ar">المدرب</a>
+                <a @click="mobileMenu=false" href="#about" class="py-2 text-slate-600 lang-en">Instructor</a>
+                <a @click="mobileMenu=false" href="#syllabus" class="py-2 text-slate-600 lang-ar">المحاور</a>
+                <a @click="mobileMenu=false" href="#syllabus" class="py-2 text-slate-600 lang-en">Syllabus</a>
+                <button @click="mobileMenu=false; openEnrollment();" class="mt-4 bg-primary text-white py-3 rounded-xl lang-ar">سجل الآن</button>
+                <button @click="mobileMenu=false; openEnrollment();" class="mt-4 bg-primary text-white py-3 rounded-xl lang-en">Register Now</button>
+                <button id="langToggleMobile" class="py-2 text-slate-400 flex justify-center items-center gap-2"><i data-lucide="globe" class="w-5 h-5"></i> <span x-text="document.documentElement.lang==='ar'?'Switch to English':'التبديل للعربية'"></span></button>
             </div>
         </div>
     </nav>
 
-    <!-- ══════ HERO ══════ -->
-    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-50">
-        <div class="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:40px_40px] opacity-40"></div>
-        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
-        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary_light/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
-        <div class="max-w-7xl mx-auto px-4 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
-            <div data-aos="fade-up" data-aos-duration="1000">
-                <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-orange-100 shadow-sm mb-8 transform hover:scale-105 transition-transform max-w-full">
-                    <i data-lucide="users" class="w-4 h-4 text-orange-500 flex-shrink-0"></i>
-                    <span class="text-sm font-bold text-orange-600 lang-ar">المقاعد محدودة – سجّل الآن لتضمن مكانك</span>
-                    <span class="text-sm font-bold text-orange-600 lang-en">Limited seats – Register now to secure yours</span>
-                </div>
-                <!-- Personalized greeting if name available -->
-                <div x-show="userName" class="mb-4">
-                    <span class="text-primary font-black text-lg lang-ar" x-text="'أهلاً ' + userName.split(' ')[0] + '! 👋'"></span>
-                    <span class="text-primary font-black text-lg lang-en" x-text="'Welcome ' + userName.split(' ')[0] + '! 👋'"></span>
-                </div>
-                <h1 class="text-5xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight text-dark lang-ar">المخطط الشامل<br>لاحتراف <span class="gradient-text">البيانات</span></h1>
-                <h1 class="text-5xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight text-dark lang-en">The Ultimate<br><span class="gradient-text">Data Mastery</span></h1>
-                <!-- Course-specific info -->
-                <div x-show="currentCourse==='excel'||!currentCourse">
-                    <p class="text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed font-medium lang-ar">انضم لأقوى تجربة تدريبية في <strong class="text-dark">Excel</strong> بقيادة الخبير <strong class="text-dark">باسل غانم</strong>. من الصفر إلى لوحات قيادة احترافية + 5 اعتمادات دولية.</p>
-                    <p class="text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed font-medium lang-en">Join the most powerful <strong class="text-dark">Excel</strong> training led by expert <strong class="text-dark">Basel Ghanem</strong>. Zero to dashboards + 5 international accreditations.</p>
-                </div>
-                <div x-show="currentCourse==='powerbi'">
-                    <p class="text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed font-medium lang-ar">انضم لأقوى تجربة تدريبية في <strong class="text-dark">Power BI</strong> بقيادة الخبير <strong class="text-dark">باسل غانم</strong>. تقارير تفاعلية احترافية + 5 اعتمادات دولية.</p>
-                    <p class="text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed font-medium lang-en">Join the most powerful <strong class="text-dark">Power BI</strong> training led by expert <strong class="text-dark">Basel Ghanem</strong>. Professional interactive reports + 5 international accreditations.</p>
-                </div>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                    <div class="w-full sm:w-auto text-center">
-                        <button @click="openEnrollment()" class="w-full sm:w-auto bg-gradient-to-r from-primary to-primary_dark text-white text-xl font-black px-10 py-5 rounded-2xl shadow-premium btn-glow flex items-center justify-center gap-3">
-                            <i data-lucide="zap" class="w-6 h-6 fill-current text-yellow-300"></i>
-                            <span class="lang-ar">ابدأ التقييم الذكي</span><span class="lang-en">Start Smart Assessment</span>
-                        </button>
-                        <p class="mt-3 text-sm font-bold text-slate-500 flex items-center justify-center gap-1.5 lang-ar"><i data-lucide="shield-check" class="w-4 h-4 text-primary"></i>ضمان استرداد كامل للرسوم</p>
-                        <p class="mt-3 text-sm font-bold text-slate-500 flex items-center justify-center gap-1.5 lang-en"><i data-lucide="shield-check" class="w-4 h-4 text-primary"></i>100% Money-Back Guarantee</p>
-                    </div>
-                    <div class="bg-white px-6 py-4 rounded-2xl shadow-lg border border-slate-100 flex flex-col justify-center w-full sm:w-auto">
-                        <div class="flex items-center gap-3">
-                            <div class="text-slate-400 line-through text-sm font-bold lang-ar" x-text="currentCourse==='powerbi'?'200 دينار':'150 دينار'"></div>
-                            <div class="text-slate-400 line-through text-sm font-bold lang-en" x-text="currentCourse==='powerbi'?'200 JOD':'150 JOD'"></div>
-                            <div class="bg-green-100 text-green-700 text-xs font-black px-2 py-1 rounded-md lang-ar">وفر 50%</div>
-                            <div class="bg-green-100 text-green-700 text-xs font-black px-2 py-1 rounded-md lang-en">Save 50%</div>
-                        </div>
-                        <div class="text-4xl font-black text-dark flex items-baseline gap-1 mt-1">
-                            <span x-text="currentCourse==='powerbi'?'100':'75'"></span>
-                            <span class="text-xl text-primary lang-ar">دينار</span><span class="text-xl text-primary lang-en">JOD</span>
-                        </div>
-                    </div>
-                </div>
+    <header class="pt-32 pb-20 md:pt-40 md:pb-28 px-4 relative overflow-hidden">
+        <div class="absolute top-1/4 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-6xl mx-auto text-center relative z-10" data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-100 mb-8">
+                <span class="flex h-3 w-3 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span></span>
+                <span class="text-sm font-bold text-slate-600 lang-ar">التسجيل مفتوح للدفعات الجديدة 2025</span>
+                <span class="text-sm font-bold text-slate-600 lang-en">Registration Open for 2025 Cohorts</span>
             </div>
-            <div class="relative w-full h-[500px] md:h-[600px]" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
-                <div class="absolute inset-0 bg-gradient-to-tr from-primary to-primary_light rounded-[2.5rem] rotate-3 opacity-20 animate-pulse"></div>
-                <img src="https://raw.githubusercontent.com/BaselGhanem/ExcelRegistration/refs/heads/main/Dashboard.png" alt="Dashboard" class="absolute inset-0 w-full h-full object-cover rounded-[2.5rem] shadow-2xl border-4 border-white z-10">
-                <div class="absolute -bottom-4 -right-4 md:-bottom-8 md:-right-8 bg-white p-5 rounded-3xl shadow-2xl border border-slate-100 flex items-center gap-5 z-20 animate-float" style="animation-delay:1s">
-                    <div class="bg-gradient-to-br from-green-400 to-green-600 p-4 rounded-2xl text-white shadow-lg shadow-green-200"><i data-lucide="award" class="w-8 h-8"></i></div>
-                    <div><p class="font-black text-3xl text-dark">5</p><p class="text-sm text-slate-500 font-bold lang-ar">اعتمادات دولية</p><p class="text-sm text-slate-500 font-bold lang-en">Global Accreditations</p></div>
-                </div>
-                <div class="absolute -top-6 -left-6 bg-white p-4 rounded-2xl shadow-2xl border border-slate-100 flex items-center gap-4 z-20 animate-float hidden md:flex">
-                    <div class="flex -space-x-3 rtl:space-x-reverse">
-                        <img class="w-10 h-10 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=1" alt=""><img class="w-10 h-10 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=2" alt=""><img class="w-10 h-10 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=3" alt="">
-                        <div class="w-10 h-10 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">+2k</div>
-                    </div>
-                    <div><p class="text-sm font-bold text-dark lang-ar">متدربين تخرجوا</p><p class="text-sm font-bold text-dark lang-en">Graduates</p><div class="flex text-yellow-400 gap-0.5 mt-1"><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i></div></div>
-                </div>
+            
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight text-dark lang-ar">المخطط الشامل<br>لاحتراف <span class="gradient-text">البيانات</span></h1>
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight text-dark lang-en">The Ultimate<br><span class="gradient-text">Data Mastery</span></h1>
+            
+            <div x-show="currentCourse === 'excel'" x-cloak>
+                <p class="text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed font-medium lang-ar">انضم لأقوى تجربة تدريبية في <strong class="text-dark">Excel</strong> بقيادة الخبير <strong class="text-dark">باسل غانم</strong>. من الصفر إلى لوحات قيادة احترافية + 5 اعتمادات دولية.</p>
+                <p class="text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed font-medium lang-en">Join the most powerful <strong class="text-dark">Excel</strong> bootcamp led by expert <strong class="text-dark">Basel Ghanem</strong>. From zero to pro dashboards + 5 global accreditations.</p>
+            </div>
+            
+            <div x-show="currentCourse === 'powerbi'" x-cloak>
+                <p class="text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed font-medium lang-ar">احتراف حقيقي لـ <strong class="text-dark">Power BI</strong>. صمم تقارير تفاعلية، اربط قواعد البيانات، وكن خبير ذكاء الأعمال المعتمد.</p>
+                <p class="text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed font-medium lang-en">Master <strong class="text-dark">Power BI</strong> completely. Build interactive reports, connect databases, and become a certified BI expert.</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <button @click="openEnrollment()" class="w-full sm:w-auto bg-gradient-to-r from-primary to-primary_dark text-white px-10 py-4 rounded-2xl font-black text-lg hover:shadow-glow transition-all btn-glow lang-ar">قيّم مستواك وابدأ <i data-lucide="rocket" class="inline w-5 h-5 mr-2"></i></button>
+                <button @click="openEnrollment()" class="w-full sm:w-auto bg-gradient-to-r from-primary to-primary_dark text-white px-10 py-4 rounded-2xl font-black text-lg hover:shadow-glow transition-all btn-glow lang-en"><i data-lucide="rocket" class="inline w-5 h-5 mr-2"></i> Assess & Start</button>
+                <a href="#syllabus" class="w-full sm:w-auto bg-white text-dark px-10 py-4 rounded-2xl font-black text-lg border-2 border-slate-100 hover:border-slate-300 transition-colors lang-ar">استكشف المنهج</a>
+                <a href="#syllabus" class="w-full sm:w-auto bg-white text-dark px-10 py-4 rounded-2xl font-black text-lg border-2 border-slate-100 hover:border-slate-300 transition-colors lang-en">View Syllabus</a>
+            </div>
+            
+            <div class="mt-16 pt-10 border-t border-slate-200 flex flex-wrap justify-center gap-8 md:gap-16 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg" alt="Excel" class="h-10">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" class="h-10">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Microsoft_logo.svg" alt="Microsoft" class="h-8 object-contain">
             </div>
         </div>
     </header>
 
-    <!-- ══════ Accreditations ══════ -->
-    <section class="py-12 border-y border-slate-200 bg-white relative z-20">
-        <div class="max-w-7xl mx-auto px-4">
-            <p class="text-center text-xs font-black text-slate-400 mb-8 uppercase tracking-widest lang-ar">اعتمادات الدورة الرسمية التي ستعزز سيرتك الذاتية</p>
-            <p class="text-center text-xs font-black text-slate-400 mb-8 uppercase tracking-widest lang-en">Official Accreditations To Boost Your Resume</p>
-            <div class="flex flex-wrap justify-center gap-4 md:gap-8">
-                <template x-for="cert in ['LPCIS','CPD','ISO 9001:2015','QCET-UK','ETDD']" :key="cert">
-                    <div class="group px-6 py-3 bg-slate-50 hover:bg-white rounded-xl font-bold text-slate-600 hover:text-primary border border-slate-100 hover:border-primary/30 flex items-center gap-3 transition-all cursor-default shadow-sm hover:shadow-md hover:-translate-y-1"><i data-lucide="shield" class="w-5 h-5 text-primary group-hover:scale-110 transition-transform"></i><span x-text="cert"></span></div>
-                </template>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════ About ══════ -->
-    <section id="about" class="py-24 bg-slate-50 relative overflow-hidden">
-        <div class="absolute top-1/2 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] -translate-y-1/2"></div>
-        <div class="max-w-6xl mx-auto px-4 relative z-10">
-            <div class="glass-card bg-white rounded-[3rem] p-10 md:p-16 border-t-8 border-primary" data-aos="fade-up" data-aos-duration="1000">
-                <div class="flex flex-col lg:flex-row items-center gap-16">
-                    <div class="relative group shrink-0 w-56 h-56 md:w-80 md:h-80 mx-auto lg:mx-0">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-primary to-primary_dark rounded-[2.5rem] rotate-6 group-hover:rotate-12 transition-transform duration-700 opacity-20"></div>
-                        <div class="absolute inset-0 bg-gradient-to-bl from-primary_light to-primary rounded-[2.5rem] -rotate-3 group-hover:-rotate-6 transition-transform duration-700 opacity-20"></div>
-                        <img src="https://raw.githubusercontent.com/BaselGhanem/Portfolio/refs/heads/main/BaselGhanem.jpg" alt="Basel Ghanem" class="relative w-full h-full object-cover rounded-[2.5rem] shadow-2xl border-4 border-white transition-transform duration-500 group-hover:scale-105 z-10">
-                        <div class="absolute -bottom-6 -right-6 bg-dark text-white px-5 py-3 rounded-2xl font-black text-sm shadow-xl flex items-center gap-3 z-20 animate-float"><i data-lucide="award" class="w-6 h-6 text-yellow-400"></i><div><span class="block text-xs font-medium text-slate-300">Certified</span>Microsoft Expert</div></div>
-                    </div>
-                    <div class="text-center lg:text-start flex-1">
-                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full font-bold text-sm mb-6"><i data-lucide="user" class="w-4 h-4"></i><span class="lang-ar">خبير التدريب وتحليل البيانات</span><span class="lang-en">Data Analysis & Training Expert</span></div>
-                        <h3 class="text-4xl md:text-5xl font-black mb-6 text-dark lang-ar">باسل غانم</h3>
-                        <h3 class="text-4xl md:text-5xl font-black mb-6 text-dark lang-en">Basel Ghanem</h3>
-                        <p class="text-xl text-slate-600 mb-8 leading-relaxed lang-ar font-medium">محلل مبيعات أول وخبير استراتيجي في البيانات بخبرة تتجاوز الـ <strong class="text-primary font-black">15 عاماً</strong>. معتمد كخبير من مايكروسوفت. درّب آلاف المحترفين على تحويل البيانات إلى قرارات استراتيجية. مؤسس X Academy في عمّان، الأردن.</p>
-                        <p class="text-xl text-slate-600 mb-8 leading-relaxed lang-en font-medium">Senior Sales Analyst & Data Strategist with <strong class="text-primary font-black">15+ years</strong> of experience. Microsoft Certified Expert. Trained thousands of professionals to transform data into strategic decisions. Founder of X Academy, Amman, Jordan.</p>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 hover:border-primary/30 transition-colors text-center"><span class="block font-black text-3xl text-primary mb-1">+15</span><span class="text-sm font-bold text-slate-500 lang-ar">سنوات خبرة</span><span class="text-sm font-bold text-slate-500 lang-en">Years Experience</span></div>
-                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 hover:border-primary/30 transition-colors text-center"><span class="block font-black text-3xl text-primary mb-1">+2000</span><span class="text-sm font-bold text-slate-500 lang-ar">متدرب ناجح</span><span class="text-sm font-bold text-slate-500 lang-en">Trained Professionals</span></div>
-                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 hover:border-primary/30 transition-colors text-center col-span-2 md:col-span-1"><span class="block font-black text-3xl text-primary mb-1">X</span><span class="text-sm font-bold text-slate-500 lang-ar">مؤسس X Academy</span><span class="text-sm font-bold text-slate-500 lang-en">Founder of X Academy</span></div>
-                        </div>
+    <section id="about" class="py-20 bg-white relative">
+        <div class="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
+            <div class="relative" data-aos="fade-left">
+                <div class="absolute inset-0 bg-primary/10 rounded-full blur-3xl transform -rotate-12 translate-x-10"></div>
+                <div class="relative z-10 glass-card rounded-[3rem] p-4 transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Basel Ghanem" class="rounded-[2.5rem] w-full h-[500px] object-cover">
+                    <div class="absolute bottom-6 right-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-4 z-20">
+                        <div class="bg-yellow-100 p-2 rounded-lg text-yellow-600"><i data-lucide="award" class="w-8 h-8"></i></div>
+                        <div><p class="font-black text-3xl text-dark">5</p><p class="text-sm text-slate-500 font-bold lang-ar">اعتمادات دولية</p><p class="text-sm text-slate-500 font-bold lang-en">Global Accreditations</p></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ══════ Syllabus ══════ -->
-    <section id="syllabus" class="py-24 bg-white relative" x-data="{ syllTab: currentCourse||'excel' }">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12" data-aos="fade-down">
-                <span class="text-primary font-black tracking-wider text-sm mb-3 block uppercase lang-ar">المنهجية العلمية</span><span class="text-primary font-black tracking-wider text-sm mb-3 block uppercase lang-en">Scientific Methodology</span>
-                <h2 class="text-4xl md:text-5xl font-black text-dark mb-6 lang-ar">خريطة طريقك نحو الاحتراف</h2><h2 class="text-4xl md:text-5xl font-black text-dark mb-6 lang-en">Your Roadmap to Mastery</h2>
-            </div>
-            <div class="flex justify-center gap-3 mb-14">
-                <button @click="syllTab='excel'" class="tab-btn flex items-center gap-2 px-6 py-3 rounded-2xl font-black transition-all border border-slate-200" :class="syllTab==='excel'?'active border-transparent':'text-slate-500 hover:border-primary/30 hover:text-primary'"><i data-lucide="table-2" class="w-5 h-5"></i><span>Excel</span></button>
-                <button @click="syllTab='powerbi'" class="tab-btn flex items-center gap-2 px-6 py-3 rounded-2xl font-black transition-all border border-slate-200" :class="syllTab==='powerbi'?'active border-transparent':'text-slate-500 hover:border-primary/30 hover:text-primary'"><i data-lucide="bar-chart-3" class="w-5 h-5"></i><span>Power BI</span></button>
-            </div>
-            <div x-show="syllTab==='excel'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] group hover:shadow-xl transition-all duration-500" data-aos="fade-up"><div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm transform group-hover:-translate-y-2"><i data-lucide="layout" class="w-8 h-8"></i></div><h3 class="text-2xl font-black mb-6 text-dark lang-ar">المستوى 1: التأسيس القوي</h3><h3 class="text-2xl font-black mb-6 text-dark lang-en">Level 1: Solid Foundation</h3><ul class="space-y-5 text-slate-700 font-bold text-base"><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">واجهة البرنامج وإدارة الملفات</span><span class="lang-en">UI orientation & file management</span></li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">إدخال البيانات والتنسيق الشرطي</span><span class="lang-en">Data entry & Conditional Formatting</span></li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">الطباعة وإعداد الصفحات</span><span class="lang-en">Printing & page setup</span></li></ul></div>
-                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:shadow-xl transition-all duration-500" data-aos="fade-up" data-aos-delay="100"><div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">جوهر التحليل</div><div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">Core Analysis</div><div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2"><i data-lucide="function-square" class="w-8 h-8"></i></div><h3 class="text-2xl font-black mb-6 text-dark lang-ar">المستوى 2: قوة الدوال</h3><h3 class="text-2xl font-black mb-6 text-dark lang-en">Level 2: Power of Functions</h3><ul class="space-y-5 text-slate-700 font-bold text-base"><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">IF · SUMIFS · COUNTIFS</span><span class="lang-en">IF · SUMIFS · COUNTIFS</span></li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">VLOOKUP · XLOOKUP · INDEX MATCH</span><span class="lang-en">VLOOKUP · XLOOKUP · INDEX MATCH</span></li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">التحقق من صحة البيانات</span><span class="lang-en">Data Validation</span></li></ul></div>
-                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] group hover:shadow-xl transition-all duration-500" data-aos="fade-up" data-aos-delay="200"><div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm transform group-hover:-translate-y-2"><i data-lucide="pie-chart" class="w-8 h-8"></i></div><h3 class="text-2xl font-black mb-6 text-dark lang-ar">المستوى 3: ذكاء الأعمال</h3><h3 class="text-2xl font-black mb-6 text-dark lang-en">Level 3: Business Intelligence</h3><ul class="space-y-5 text-slate-700 font-bold text-base"><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">الجداول المحورية المتقدمة</span><span class="lang-en">Advanced Pivot Tables</span></li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">لوحات القيادة التفاعلية</span><span class="lang-en">Interactive Dashboards</span></li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">المخططات وتحليل الاتجاهات</span><span class="lang-en">Charts & Trend Analysis</span></li></ul></div>
-            </div>
-            <div x-show="syllTab==='powerbi'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] group hover:shadow-xl transition-all duration-500"><div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm transform group-hover:-translate-y-2"><i data-lucide="monitor" class="w-8 h-8"></i></div><h3 class="text-2xl font-black mb-6 text-dark lang-ar">المستوى 1: الأساسيات</h3><h3 class="text-2xl font-black mb-6 text-dark lang-en">Level 1: Fundamentals</h3><ul class="space-y-5 text-slate-700 font-bold text-base"><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">واجهة Power BI وإعدادات المشروع</span><span class="lang-en">Power BI interface & project setup</span></li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">استيراد البيانات – Power Query</span><span class="lang-en">Data import – Power Query</span></li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">التصورات البيانية الأساسية</span><span class="lang-en">Basic visualizations</span></li></ul></div>
-                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:shadow-xl transition-all duration-500"><div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">جوهر الدورة</div><div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">Core of Course</div><div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2"><i data-lucide="code-2" class="w-8 h-8"></i></div><h3 class="text-2xl font-black mb-6 text-dark lang-ar">المستوى 2: DAX ونمذجة البيانات</h3><h3 class="text-2xl font-black mb-6 text-dark lang-en">Level 2: DAX & Data Modeling</h3><ul class="space-y-5 text-slate-700 font-bold text-base"><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">معادلات DAX والمقاييس المحسوبة</span><span class="lang-en">DAX formulas & calculated measures</span></li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">نمذجة البيانات والعلاقات</span><span class="lang-en">Data modeling & relationships</span></li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">الفلاتر التفاعلية</span><span class="lang-en">Interactive filters & slicers</span></li></ul></div>
-                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] group hover:shadow-xl transition-all duration-500"><div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm transform group-hover:-translate-y-2"><i data-lucide="globe" class="w-8 h-8"></i></div><h3 class="text-2xl font-black mb-6 text-dark lang-ar">المستوى 3: النشر والاحتراف</h3><h3 class="text-2xl font-black mb-6 text-dark lang-en">Level 3: Publishing & Mastery</h3><ul class="space-y-5 text-slate-700 font-bold text-base"><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">نشر التقارير على Power BI Service</span><span class="lang-en">Publishing to Power BI Service</span></li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">صلاحيات الأمان (RLS)</span><span class="lang-en">Row-level security (RLS)</span></li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">لوحات قيادة تنفيذية متكاملة</span><span class="lang-en">Executive dashboard projects</span></li></ul></div>
+            
+            <div data-aos="fade-right">
+                <h2 class="text-primary font-black tracking-widest uppercase mb-4 text-sm lang-ar">الخبير والمدرب</h2>
+                <h2 class="text-primary font-black tracking-widest uppercase mb-4 text-sm lang-en">Instructor & Expert</h2>
+                <h3 class="text-4xl md:text-5xl font-black mb-6 text-dark lang-ar">باسل غانم</h3>
+                <h3 class="text-4xl md:text-5xl font-black mb-6 text-dark lang-en">Basel Ghanem</h3>
+                <p class="text-xl text-slate-600 mb-8 leading-relaxed lang-ar font-medium">محلل مبيعات أول وخبير استراتيجي في البيانات بخبرة تتجاوز الـ <strong class="text-primary font-black">15 عاماً</strong>. معتمد كخبير من مايكروسوفت. درّب آلاف المحترفين على تحويل البيانات إلى قرارات استراتيجية. مؤسس X Academy في عمّان، الأردن.</p>
+                <p class="text-xl text-slate-600 mb-8 leading-relaxed lang-en font-medium">Senior Sales Analyst & Data Strategist with <strong class="text-primary font-black">15+ years</strong> of experience. Microsoft Certified Expert. Trained thousands of professionals to transform data into strategic decisions. Founder of X Academy, Amman, Jordan.</p>
             </div>
         </div>
     </section>
 
-    <!-- ══════ Success Stories ══════ -->
-    <section class="py-24 bg-slate-50 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4"><div class="text-center mb-16" data-aos="fade-up"><h2 class="text-4xl font-black text-dark mb-4 lang-ar">قصص نجاح متدربينا</h2><h2 class="text-4xl font-black text-dark mb-4 lang-en">Trainees Success Stories</h2></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center">
-            <div class="w-full flex justify-center" data-aos="fade-up"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7431052300653109249?collapsed=1" class="w-full max-w-[504px] h-[610px] rounded-[2rem] shadow-lg border border-slate-100 bg-white" frameborder="0" allowfullscreen title="Embedded post"></iframe></div>
-            <div class="w-full flex justify-center" data-aos="fade-up" data-aos-delay="100"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7432085365173190656?collapsed=1" class="w-full max-w-[504px] h-[614px] rounded-[2rem] shadow-lg border border-slate-100 bg-white" frameborder="0" allowfullscreen title="Embedded post"></iframe></div>
-            <div class="w-full flex justify-center" data-aos="fade-up" data-aos-delay="200"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7431283890323034112?collapsed=1" class="w-full max-w-[504px] h-[612px] rounded-[2rem] shadow-lg border border-slate-100 bg-white" frameborder="0" allowfullscreen title="Embedded post"></iframe></div>
-            <div class="w-full flex justify-center" data-aos="fade-up" data-aos-delay="300"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7434718142041346048?collapsed=1" class="w-full max-w-[504px] h-[605px] rounded-[2rem] shadow-lg border border-slate-100 bg-white" frameborder="0" allowfullscreen title="Embedded post"></iframe></div>
-        </div></div>
+    <section id="syllabus" class="py-24 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-primary font-black tracking-widest uppercase mb-4 text-sm lang-ar">ماذا ستتعلم؟</h2>
+                <h2 class="text-primary font-black tracking-widest uppercase mb-4 text-sm lang-en">What will you learn?</h2>
+                <h3 class="text-4xl md:text-5xl font-black text-dark lang-ar">رحلة المنهج التدريبي</h3>
+                <h3 class="text-4xl md:text-5xl font-black text-dark lang-en">Course Syllabus Journey</h3>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8" x-show="currentCourse === 'excel'" x-cloak>
+                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:shadow-xl transition-all duration-500" data-aos="fade-up">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">الأساسيات القوية</div>
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">Strong Basics</div>
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2"><i data-lucide="layout-grid" class="w-8 h-8"></i></div>
+                    <h4 class="text-2xl font-black text-dark mb-6 lang-ar">1. واجهة البرنامج</h4>
+                    <h4 class="text-2xl font-black text-dark mb-6 lang-en">1. UI & Basics</h4>
+                    <ul class="space-y-4 text-slate-600 font-bold">
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">فهم بيئة العمل والأشرطة</span><span class="lang-en">Understanding environment & ribbons</span></li>
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">إدخال البيانات والتنسيق الشرطي</span><span class="lang-en">Data entry & Conditional Formatting</span></li>
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">الطباعة وإعداد الصفحات</span><span class="lang-en">Printing & page setup</span></li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:shadow-xl transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">جوهر التحليل</div>
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">Core Analysis</div>
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2"><i data-lucide="function-square" class="w-8 h-8"></i></div>
+                    <h4 class="text-2xl font-black text-dark mb-6 lang-ar">2. الدوال والمعادلات</h4>
+                    <h4 class="text-2xl font-black text-dark mb-6 lang-en">2. Formulas & Functions</h4>
+                    <ul class="space-y-4 text-slate-600 font-bold">
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">دوال البحث (VLOOKUP, XLOOKUP)</span><span class="lang-en">Lookup Functions (VLOOKUP, XLOOKUP)</span></li>
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">الدوال المنطقية (IF, AND, OR)</span><span class="lang-en">Logical Functions (IF, AND, OR)</span></li>
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">دوال النصوص والتاريخ</span><span class="lang-en">Text & Date Functions</span></li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:shadow-xl transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">الاحترافية والتصور</div>
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">Pro Visualization</div>
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2"><i data-lucide="pie-chart" class="w-8 h-8"></i></div>
+                    <h4 class="text-2xl font-black text-dark mb-6 lang-ar">3. التقارير الذكية</h4>
+                    <h4 class="text-2xl font-black text-dark mb-6 lang-en">3. Smart Reports</h4>
+                    <ul class="space-y-4 text-slate-600 font-bold">
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">الجداول المحورية (Pivot Tables)</span><span class="lang-en">Advanced Pivot Tables</span></li>
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">بناء لوحات القيادة (Dashboards)</span><span class="lang-en">Building Dashboards</span></li>
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">المخططات البيانية التفاعلية</span><span class="lang-en">Interactive Charts</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8" x-show="currentCourse === 'powerbi'" x-cloak>
+                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:shadow-xl transition-all duration-500" data-aos="fade-up">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">تجهيز البيانات</div>
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">Data Prep</div>
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2"><i data-lucide="database" class="w-8 h-8"></i></div>
+                    <h4 class="text-2xl font-black text-dark mb-6 lang-ar">1. Power Query</h4>
+                    <h4 class="text-2xl font-black text-dark mb-6 lang-en">1. Power Query</h4>
+                    <ul class="space-y-4 text-slate-600 font-bold">
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">جلب البيانات من مصادر متعددة</span><span class="lang-en">Get data from various sources</span></li>
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">تنظيف وتحويل البيانات</span><span class="lang-en">Data cleaning & transformation</span></li>
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">التعامل مع الأخطاء والقيم الفارغة</span><span class="lang-en">Handling errors & nulls</span></li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:shadow-xl transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">نمذجة البيانات</div>
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">Data Modeling</div>
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2"><i data-lucide="network" class="w-8 h-8"></i></div>
+                    <h4 class="text-2xl font-black text-dark mb-6 lang-ar">2. DAX & Modeling</h4>
+                    <h4 class="text-2xl font-black text-dark mb-6 lang-en">2. DAX & Modeling</h4>
+                    <ul class="space-y-4 text-slate-600 font-bold">
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">بناء العلاقات (Relationships)</span><span class="lang-en">Building Relationships</span></li>
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">مقدمة لمعادلات DAX</span><span class="lang-en">Intro to DAX functions</span></li>
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">بناء الـ Measures المتقدمة</span><span class="lang-en">Advanced Measures creation</span></li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:shadow-xl transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">العرض والنشر</div>
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">Viz & Publish</div>
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2"><i data-lucide="bar-chart-2" class="w-8 h-8"></i></div>
+                    <h4 class="text-2xl font-black text-dark mb-6 lang-ar">3. Visualization</h4>
+                    <h4 class="text-2xl font-black text-dark mb-6 lang-en">3. Visualization</h4>
+                    <ul class="space-y-4 text-slate-600 font-bold">
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">تصميم لوحات تفاعلية</span><span class="lang-en">Interactive dashboard design</span></li>
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">النشر على Power BI Service</span><span class="lang-en">Publish to Power BI Service</span></li>
+                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">مشاركة التقارير والصلاحيات</span><span class="lang-en">Sharing & Row Level Security</span></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
     </section>
 
-    <!-- ══════ Schedule ══════ -->
     <section id="schedule" class="py-24 bg-white" x-data="{ schedTab: currentCourse||'excel' }">
         <div class="max-w-5xl mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6" data-aos="fade-up">
-                <div><h2 class="text-4xl font-black text-dark mb-4 lang-ar">جدول المحاضرات القادمة</h2><h2 class="text-4xl font-black text-dark mb-4 lang-en">Upcoming Class Schedule</h2><p class="text-slate-500 text-lg font-medium lang-ar">أوقات مسائية تناسب الموظفين والطلاب.</p><p class="text-slate-500 text-lg font-medium lang-en">Evening timings for professionals & students.</p></div>
-                <div class="bg-primary/10 px-6 py-3 rounded-xl border border-primary/20 flex items-center gap-4"><i data-lucide="clock" class="w-6 h-6 text-primary"></i><div><p class="font-black text-dark lang-ar">10 محاضرات مكثفة</p><p class="font-black text-dark lang-en">10 Intensive Sessions</p><p class="text-sm font-bold text-primary">19:00 – 21:00 | 2h each</p></div></div>
-            </div>
-            <div class="flex gap-3 mb-8">
-                <button @click="schedTab='excel'" class="tab-btn flex items-center gap-2 px-5 py-2.5 rounded-xl font-black transition-all border border-slate-200" :class="schedTab==='excel'?'active border-transparent':'text-slate-500 hover:text-primary'"><i data-lucide="table-2" class="w-4 h-4"></i>Excel</button>
-                <button @click="schedTab='powerbi'" class="tab-btn flex items-center gap-2 px-5 py-2.5 rounded-xl font-black transition-all border border-slate-200" :class="schedTab==='powerbi'?'active border-transparent':'text-slate-500 hover:text-primary'"><i data-lucide="bar-chart-3" class="w-4 h-4"></i>Power BI</button>
-            </div>
-            <div class="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-200" data-aos="zoom-in">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-center whitespace-nowrap" x-show="schedTab==='excel'">
-                        <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 font-black uppercase tracking-wider text-sm"><tr><th class="py-5 px-6 lang-ar">رقم</th><th class="py-5 px-6 lang-en">Session</th><th class="py-5 px-6 lang-ar">التاريخ</th><th class="py-5 px-6 lang-en">Date</th><th class="py-5 px-6 lang-ar">اليوم</th><th class="py-5 px-6 lang-en">Day</th><th class="py-5 px-6">⏰</th></tr></thead>
-                        <tbody class="text-slate-700 divide-y divide-slate-100 font-bold">
-                            <template x-for="(s,i) in excelSchedule" :key="i">
-                                <tr class="hover:bg-primary/5 transition-colors cursor-default" :class="i===9?'bg-primary/5 font-black':''">
-                                    <td class="py-4 px-6 text-primary font-black" x-text="String(i+1).padStart(2,'0')"></td>
-                                    <td class="py-4 px-6" x-text="s.date"></td>
-                                    <td class="py-4 px-6"><span class="lang-ar bg-slate-100 px-3 py-1 rounded-md" x-text="s.dayAr"></span><span class="lang-en bg-slate-100 px-3 py-1 rounded-md" x-text="s.dayEn"></span><template x-if="i===9"><span class="ms-2 text-xs text-primary font-black">✓ Final</span></template></td>
-                                    <td class="py-4 px-6 text-slate-500 text-sm">19:00 – 21:00</td>
-                                </tr>
-                            </template>
-                        </tbody>
-                    </table>
-                    <table class="w-full text-center whitespace-nowrap" x-show="schedTab==='powerbi'">
-                        <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 font-black uppercase tracking-wider text-sm"><tr><th class="py-5 px-6 lang-ar">رقم</th><th class="py-5 px-6 lang-en">Session</th><th class="py-5 px-6 lang-ar">التاريخ</th><th class="py-5 px-6 lang-en">Date</th><th class="py-5 px-6 lang-ar">اليوم</th><th class="py-5 px-6 lang-en">Day</th><th class="py-5 px-6">⏰</th></tr></thead>
-                        <tbody class="text-slate-700 divide-y divide-slate-100 font-bold">
-                            <template x-for="(s,i) in powerbiSchedule" :key="i">
-                                <tr class="hover:bg-primary/5 transition-colors cursor-default" :class="i===9?'bg-primary/5 font-black':''">
-                                    <td class="py-4 px-6 text-primary font-black" x-text="String(i+1).padStart(2,'0')"></td>
-                                    <td class="py-4 px-6" x-text="s.date"></td>
-                                    <td class="py-4 px-6"><span class="lang-ar bg-slate-100 px-3 py-1 rounded-md" x-text="s.dayAr"></span><span class="lang-en bg-slate-100 px-3 py-1 rounded-md" x-text="s.dayEn"></span><template x-if="i===9"><span class="ms-2 text-xs text-primary font-black">✓ Final</span></template></td>
-                                    <td class="py-4 px-6 text-slate-500 text-sm">19:00 – 21:00</td>
-                                </tr>
-                            </template>
-                        </tbody>
-                    </table>
+                <div>
+                    <h2 class="text-4xl font-black text-dark mb-4 lang-ar">جدول المحاضرات القادمة</h2>
+                    <h2 class="text-4xl font-black text-dark mb-4 lang-en">Upcoming Class Schedule</h2>
+                    <p class="text-slate-500 text-lg font-medium lang-ar">أوقات مسائية تناسب الموظفين والطلاب.</p>
+                    <p class="text-slate-500 text-lg font-medium lang-en">Evening timings for professionals & students.</p>
                 </div>
             </div>
+
+            <div x-show="currentCourse === 'excel'" x-cloak class="space-y-4">
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-primary/30 transition-colors">
+                    <div class="flex items-center gap-6 w-full md:w-auto">
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-3 text-center min-w-[80px]">
+                            <div class="text-xs font-black text-primary uppercase mb-1">MAR</div>
+                            <div class="text-3xl font-black text-dark">05</div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-black text-dark mb-1 lang-ar">مجموعة Excel المسائية</h4>
+                            <h4 class="text-xl font-black text-dark mb-1 lang-en">Excel Evening Cohort</h4>
+                            <div class="flex items-center gap-4 text-slate-500 text-sm font-bold mt-2">
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-4 h-4"></i> 7:00 PM - 9:00 PM</span>
+                                <span class="flex items-center gap-1"><i data-lucide="video" class="w-4 h-4"></i> Online / Live</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button @click="openEnrollment()" class="w-full md:w-auto bg-white text-primary border-2 border-primary hover:bg-primary hover:text-white px-8 py-3 rounded-xl font-black transition-colors lang-ar">حجز مقعد</button>
+                    <button @click="openEnrollment()" class="w-full md:w-auto bg-white text-primary border-2 border-primary hover:bg-primary hover:text-white px-8 py-3 rounded-xl font-black transition-colors lang-en">Book Seat</button>
+                </div>
+            </div>
+
+            <div x-show="currentCourse === 'powerbi'" x-cloak class="space-y-4">
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-primary/30 transition-colors">
+                    <div class="flex items-center gap-6 w-full md:w-auto">
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-3 text-center min-w-[80px]">
+                            <div class="text-xs font-black text-primary uppercase mb-1">MAR</div>
+                            <div class="text-3xl font-black text-dark">12</div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-black text-dark mb-1 lang-ar">مجموعة Power BI المسائية</h4>
+                            <h4 class="text-xl font-black text-dark mb-1 lang-en">Power BI Evening Cohort</h4>
+                            <div class="flex items-center gap-4 text-slate-500 text-sm font-bold mt-2">
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-4 h-4"></i> 6:00 PM - 8:30 PM</span>
+                                <span class="flex items-center gap-1"><i data-lucide="video" class="w-4 h-4"></i> Online / Live</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button @click="openEnrollment()" class="w-full md:w-auto bg-white text-primary border-2 border-primary hover:bg-primary hover:text-white px-8 py-3 rounded-xl font-black transition-colors lang-ar">حجز مقعد</button>
+                    <button @click="openEnrollment()" class="w-full md:w-auto bg-white text-primary border-2 border-primary hover:bg-primary hover:text-white px-8 py-3 rounded-xl font-black transition-colors lang-en">Book Seat</button>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- ══════ FAQ ══════ -->
-    <section id="faq" class="py-24 bg-slate-50 relative">
+    <section id="faq" class="py-24 bg-slate-50">
         <div class="max-w-3xl mx-auto px-4">
-            <div class="text-center mb-16" data-aos="fade-up"><span class="w-12 h-1 bg-primary mx-auto block mb-6 rounded-full"></span><h2 class="text-4xl font-black text-dark mb-4 lang-ar">الأسئلة الشائعة</h2><h2 class="text-4xl font-black text-dark mb-4 lang-en">Frequently Asked Questions</h2></div>
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-primary font-black tracking-widest uppercase mb-4 text-sm lang-ar">دعم فوري</h2>
+                <h2 class="text-primary font-black tracking-widest uppercase mb-4 text-sm lang-en">Instant Support</h2>
+                <h2 class="text-4xl md:text-5xl font-black text-dark lang-ar">الأسئلة الشائعة</h2>
+                <h2 class="text-4xl md:text-5xl font-black text-dark lang-en">Frequently Asked Questions</h2>
+            </div>
+            
             <div class="space-y-4" data-aos="fade-up" data-aos-delay="100">
                 <template x-for="(faq,i) in faqs" :key="i">
                     <div x-data="{open:false}" class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                         <button @click="open=!open" class="w-full px-6 py-5 text-start font-black text-lg flex justify-between items-center text-dark hover:text-primary transition-colors">
                             <span class="lang-ar" x-text="faq.qAr"></span><span class="lang-en" x-text="faq.qEn"></span>
-                            <div class="p-2 rounded-full shrink-0 ms-4" :class="open?'bg-primary/10 text-primary':'bg-slate-50 text-slate-400'"><i data-lucide="plus" class="w-5 h-5" x-show="!open"></i><i data-lucide="minus" class="w-5 h-5" x-show="open" x-cloak></i></div>
+                            <div class="p-2 rounded-full shrink-0 ms-4" :class="open?'bg-primary/10 text-primary':'bg-slate-50 text-slate-400'">
+                                <i :data-lucide="open?'minus':'plus'" class="w-5 h-5"></i>
+                            </div>
                         </button>
-                        <div x-show="open" x-collapse x-transition:enter="transition ease-out duration-300" class="px-6 pb-6 text-slate-600 font-medium leading-relaxed"><span class="lang-ar" x-text="faq.aAr"></span><span class="lang-en" x-text="faq.aEn"></span></div>
+                        <div x-show="open" x-collapse>
+                            <div class="px-6 pb-6 pt-2 text-slate-600 leading-relaxed font-medium">
+                                <span class="lang-ar" x-text="faq.aAr"></span><span class="lang-en" x-text="faq.aEn"></span>
+                            </div>
+                        </div>
                     </div>
                 </template>
             </div>
         </div>
     </section>
 
-    <!-- ══════ Register CTA ══════ -->
-    <section id="register" class="py-32 premium-gradient-bg relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.03]"></div>
-        <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary rounded-full blur-[150px] opacity-30"></div>
-        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-primary_light rounded-full blur-[150px] opacity-20"></div>
-        <div class="max-w-4xl mx-auto px-4 relative z-10">
-            <div class="bg-white p-8 md:p-16 rounded-[3rem] shadow-2xl" data-aos="zoom-in" data-aos-duration="800">
-                <div class="text-center">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-red-100 text-red-600 rounded-full font-bold text-xs mb-6 animate-pulse"><i data-lucide="flame" class="w-4 h-4"></i><span class="lang-ar">يسجل الآن 5 أشخاص في نفس الوقت</span><span class="lang-en">5 people registering right now</span></div>
-                    <h2 class="text-4xl md:text-5xl font-black text-dark mb-4 lang-ar">استثمر في مستقبلك الآن</h2><h2 class="text-4xl md:text-5xl font-black text-dark mb-4 lang-en">Invest In Your Future Now</h2>
-                    <p class="text-slate-500 text-xl font-medium mb-10 lang-ar">التسجيل يستغرق أقل من دقيقتين. تقييم ذكي + خطة تدريبية مخصصة لك.</p>
-                    <p class="text-slate-500 text-xl font-medium mb-10 lang-en">Registration takes less than 2 minutes. Smart assessment + personalized training plan.</p>
-                    <button @click="openEnrollment()" class="w-full md:w-auto bg-gradient-to-r from-primary to-primary_dark text-white text-2xl font-black px-14 py-6 rounded-2xl shadow-premium btn-glow flex items-center justify-center gap-4 mx-auto mb-10"><i data-lucide="zap" class="w-7 h-7 fill-current text-yellow-300"></i><span class="lang-ar">ابدأ التقييم الذكي الآن</span><span class="lang-en">Start Smart Assessment Now</span></button>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div class="flex items-center gap-3 bg-slate-50 rounded-2xl p-4 justify-center"><i data-lucide="shield-check" class="w-5 h-5 text-primary shrink-0"></i><span class="font-bold text-slate-600 text-sm lang-ar">ضمان استرداد كامل</span><span class="font-bold text-slate-600 text-sm lang-en">Money-Back Guarantee</span></div>
-                        <div class="flex items-center gap-3 bg-slate-50 rounded-2xl p-4 justify-center"><i data-lucide="award" class="w-5 h-5 text-primary shrink-0"></i><span class="font-bold text-slate-600 text-sm lang-ar">5 اعتمادات دولية</span><span class="font-bold text-slate-600 text-sm lang-en">5 Accreditations</span></div>
-                        <div class="flex items-center gap-3 bg-slate-50 rounded-2xl p-4 justify-center"><i data-lucide="video" class="w-5 h-5 text-primary shrink-0"></i><span class="font-bold text-slate-600 text-sm lang-ar">تسجيلات مدى الحياة</span><span class="font-bold text-slate-600 text-sm lang-en">Lifetime Recordings</span></div>
-                    </div>
-                </div>
+    <footer class="premium-gradient-bg pt-20 pb-10 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex justify-center mb-10">
+                <div class="bg-gradient-to-br from-primary to-primary_dark p-4 rounded-2xl text-white shadow-glow transform hover:rotate-12 transition-transform duration-500 cursor-pointer" @click="logoClick()"><i data-lucide="bar-chart-2" class="w-10 h-10"></i></div>
             </div>
-        </div>
-    </section>
-
-    <!-- ══════ Footer ══════ -->
-    <footer class="bg-dark text-slate-400 py-16 px-4 text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px] opacity-20"></div>
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="flex justify-center mb-8"><div class="bg-gradient-to-br from-primary to-primary_dark p-4 rounded-2xl text-white shadow-glow transform hover:rotate-12 transition-transform duration-500 cursor-pointer" @click="logoClick()"><i data-lucide="bar-chart-2" class="w-10 h-10"></i></div></div>
             <div class="flex flex-wrap justify-center gap-8 mb-10">
                 <a href="https://www.linkedin.com/in/baselghanem/" target="_blank" class="text-slate-400 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all flex items-center gap-2 font-bold"><i data-lucide="linkedin" class="w-5 h-5 text-[#0A66C2]"></i>LinkedIn</a>
                 <a href="http://wa.me/962788458787" target="_blank" class="text-slate-400 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all flex items-center gap-2 font-bold"><i data-lucide="message-circle" class="w-5 h-5 text-[#25D366]"></i>WhatsApp</a>
-                <a href="https://baselghanem.github.io/Portfolio/" target="_blank" class="text-slate-400 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all flex items-center gap-2 font-bold"><i data-lucide="globe" class="w-5 h-5 text-primary"></i>Portfolio</a>
+                <a href="mailto:info@x-academy.com" class="text-slate-400 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all flex items-center gap-2 font-bold"><i data-lucide="mail" class="w-5 h-5"></i>Email</a>
             </div>
-            <div class="text-sm font-medium bg-white/5 inline-block px-6 py-3 rounded-full border border-white/10">© 2026 – <strong class="text-white">X Academy</strong>, Amman · Jordan</div>
+            <div class="border-t border-white/10 pt-8 text-slate-500 text-sm font-bold flex flex-col md:flex-row justify-center gap-2">
+                <span>© 2024 X Academy. All rights reserved.</span>
+                <span class="hidden md:inline text-slate-700">|</span>
+                <span class="lang-ar">عمّان، الأردن</span><span class="lang-en">Amman, Jordan</span>
+            </div>
         </div>
     </footer>
 
-</div><!-- #mainSite -->
+</div>
 
-<!-- ════════════════════════════════════════
-     INTRO JAVASCRIPT
-════════════════════════════════════════ -->
 <script>
-(function(){
-    /* Matrix rain */
-    const canvas = document.getElementById('matrixCanvas');
-    const ctx = canvas.getContext('2d');
-    function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    resize(); window.addEventListener('resize', resize);
-    const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&|<>{}[]01';
-    const FS = 13;
-    let drops = [];
-    function initDrops(){ drops = Array(Math.floor(canvas.width/FS)).fill(0).map(()=>Math.random()*canvas.height/FS); }
-    initDrops(); window.addEventListener('resize', initDrops);
-    function drawMatrix(){
-        ctx.fillStyle = 'rgba(0,0,0,0.065)';
-        ctx.fillRect(0,0,canvas.width,canvas.height);
-        for(let i=0;i<drops.length;i++){
-            const bright = Math.random() > 0.92;
-            ctx.fillStyle = bright ? '#7fff00' : 'rgba(0,255,65,0.75)';
-            ctx.font = `${FS}px "Share Tech Mono",monospace`;
-            ctx.fillText(CHARS[Math.floor(Math.random()*CHARS.length)], i*FS, drops[i]*FS);
-            if(drops[i]*FS > canvas.height && Math.random() > 0.975) drops[i] = 0;
-            drops[i] += 0.5;
-        }
-    }
-    const matrixInterval = setInterval(drawMatrix, 40);
+// ==========================================
+// 1) Vanilla JS INTRO SCREEN
+// ==========================================
+const isAr = document.documentElement.lang === 'ar';
+const introScreen = document.getElementById('introScreen');
+const mainSite = document.getElementById('mainSite');
+const linesContainer = document.getElementById('terminalLines');
+const inputRow = document.getElementById('inputRow');
+const nameInput = document.getElementById('nameInput');
+const courseSelect = document.getElementById('courseSelect');
+const terminalContent = document.getElementById('terminalContent');
 
-    /* Terminal typing */
-    const linesEl = document.getElementById('terminalLines');
-    const inputRow = document.getElementById('inputRow');
-    const nameInput = document.getElementById('nameInput');
-    const courseSelect = document.getElementById('courseSelect');
-    const isAr = document.documentElement.lang === 'ar';
+// تسريع الكتابة هنا بتخفيض قيمة delay
+const typeSpeed = 2; // أسرع بكثير
+function typeLine(text, className, delay=0) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            const line = document.createElement('div');
+            line.className = 't-line ' + className;
+            linesContainer.appendChild(line);
+            terminalContent.scrollTop = terminalContent.scrollHeight;
+            
+            let i = 0;
+            function type() {
+                if(i < text.length) {
+                    line.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, typeSpeed);
+                } else {
+                    resolve();
+                }
+            }
+            type();
+        }, delay); // الأوقات أصبحت قصيرة جداً (10 ملي ثانية مثلاً في الاستدعاء)
+    });
+}
 
-    function addLine(text, cls='', delay=0){
-        return new Promise(res=>{
-            setTimeout(()=>{
-                const d = document.createElement('div');
-                d.className = 't-line ' + cls;
-                d.textContent = text;
-                linesEl.appendChild(d);
-                linesEl.scrollTop = linesEl.scrollHeight;
-                res();
-            }, delay);
-        });
-    }
-
-    async function typeLine(text, cls='', speed=28){
-        const d = document.createElement('div');
-        d.className = 't-line ' + cls;
-        linesEl.appendChild(d);
-        for(const ch of text){
-            d.textContent += ch;
-            linesEl.scrollTop = linesEl.scrollHeight;
-            await new Promise(r=>setTimeout(r, speed + Math.random()*speed*.6));
-        }
-    }
-
-    async function runIntro(){
-        await new Promise(r=>setTimeout(r,600));
-        await typeLine('> SYSTEM BOOT...','dim',35);
-        await new Promise(r=>setTimeout(r,200));
-        await typeLine('> X-ACADEMY PLATFORM v2.0 INITIALIZED','system',28);
-        await new Promise(r=>setTimeout(r,180));
-        await typeLine('> SECURE CONNECTION ESTABLISHED [OK]','dim',28);
-        await new Promise(r=>setTimeout(r,250));
-        if(isAr){
-            await typeLine('> مرحباً بك في منصة التدريب المتقدم','bright',25);
-            await new Promise(r=>setTimeout(r,200));
-            await typeLine('> أدخل اسمك الكامل للمتابعة:','',30);
-        } else {
-            await typeLine('> Welcome to the Advanced Training Platform','bright',25);
-            await new Promise(r=>setTimeout(r,200));
-            await typeLine('> Enter your full name to continue:','',30);
-        }
+function runIntro() {
+    typeLine('> SYSTEM BOOT...', 'dim', 10)
+    .then(() => typeLine('> X-ACADEMY PLATFORM v2.0 INITIALIZED', 'system', 10))
+    .then(() => typeLine('> SECURE CONNECTION ESTABLISHED [OK]', 'bright', 10))
+    .then(() => typeLine(isAr ? '> مرحباً بك في منصة التدريب المتقدم' : '> Welcome to Advanced Training Platform', '', 10))
+    .then(() => typeLine(isAr ? '> أدخل اسمك الكامل للمتابعة:' : '> Enter full name to continue:', '', 10))
+    .then(() => {
         inputRow.style.display = 'flex';
         nameInput.focus();
+    });
+}
+
+function addLine(text, className) { return typeLine(text, className, 10); }
+
+function handleName(){
+    const name = nameInput.value.trim();
+    if(!name || name.length < 2) {
+        nameInput.style.color='#ff4444';
+        setTimeout(()=>nameInput.style.color='#7fff00',500);
+        return;
     }
+    inputRow.style.display = 'none';
+    const greeting = isAr ? `> أهلاً وسهلاً، ${name}! 👋` : `> Welcome aboard, ${name}! 👋`;
+    const choose = isAr ? '> اختر مسارك التدريبي:' : '> Select your training path:';
+    
+    addLine(greeting,'bright')
+    .then(()=>addLine(choose,'',10))
+    .then(()=>{
+        courseSelect.style.display = 'block';
+        courseSelect.innerHTML = `
+            <button class="c-btn" id="btnExcel">
+                📊 ${isAr?'Excel الاحترافي':'Professional Excel'}
+                <span class="c-tag">Track 1</span>
+            </button>
+            <button class="c-btn" id="btnPBI">
+                📈 ${isAr?'Power BI الشامل':'Comprehensive Power BI'}
+                <span class="c-tag">Track 2</span>
+            </button>
+        `;
+        document.getElementById('btnExcel').onclick = () => finishIntro(name, 'excel');
+        document.getElementById('btnPBI').onclick = () => finishIntro(name, 'powerbi');
+        terminalContent.scrollTop = terminalContent.scrollHeight;
+    });
+}
 
-    runIntro();
+nameInput.addEventListener('keypress', e => { if(e.key === 'Enter') handleName(); });
 
-    /* Name submission */
-    function handleName(){
-        const name = nameInput.value.trim();
-        if(!name || name.length < 2) { nameInput.style.color='#ff4444'; setTimeout(()=>nameInput.style.color='#7fff00',500); return; }
-        inputRow.style.display = 'none';
-        const greeting = isAr ? `> أهلاً وسهلاً، ${name}! 👋` : `> Welcome aboard, ${name}! 👋`;
-        const choose = isAr ? '> اختر مسارك التدريبي:' : '> Select your training path:';
-        addLine(greeting,'bright').then(()=>{
-            return new Promise(r=>setTimeout(r,200));
-        }).then(()=>addLine(choose,'',0)).then(()=>{
-            setTimeout(()=>{
-                courseSelect.style.display = 'block';
-                courseSelect.innerHTML = `
-                    <button class="c-btn" id="btnExcel">
-                        📊 ${isAr?'Excel الاحترافية':'Professional Excel'}
-                        <span class="c-tag">${isAr?'75 دينار / 10 جلسات':'75 JOD / 10 sessions'}</span>
-                    </button>
-                    <button class="c-btn" id="btnPBI">
-                        📈 ${isAr?'Power BI المتخصصة':'Power BI Specialist'}
-                        <span class="c-tag">${isAr?'100 دينار / 10 جلسات':'100 JOD / 10 sessions'}</span>
-                    </button>
-                `;
-                document.getElementById('btnExcel').addEventListener('click',()=>launchSite(name,'excel'));
-                document.getElementById('btnPBI').addEventListener('click',()=>launchSite(name,'powerbi'));
-            }, 180);
-        });
-    }
-
-    nameInput.addEventListener('keydown', e=>{ if(e.key==='Enter') handleName(); });
-
-    /* Launch main site */
-    function launchSite(name, course){
-        const screen = document.getElementById('introScreen');
-        const label = course==='excel'
-            ? (isAr?'> تم اختيار: Excel الاحترافية':'> Selected: Professional Excel')
-            : (isAr?'> تم اختيار: Power BI المتخصصة':'> Selected: Power BI Specialist');
-        addLine(label,'bright');
-        const loading = isAr ? '> جارٍ تحميل المنصة...' : '> Loading platform...';
-        setTimeout(()=>addLine(loading,'dim'), 200);
-
+function finishIntro(name, course) {
+    const selText = course==='excel' ? 'Excel [Loading modules...]' : 'Power BI [Loading modules...]';
+    addLine('> INIT: ' + selText, 'system').then(()=>{
+        introScreen.classList.add('glitching');
         setTimeout(()=>{
-            screen.classList.add('glitching');
+            introScreen.classList.remove('glitching');
+            introScreen.classList.add('fading');
             setTimeout(()=>{
-                screen.classList.remove('glitching');
-                screen.classList.add('fading');
-                clearInterval(matrixInterval);
-                setTimeout(()=>{
-                    screen.style.display = 'none';
-                    const main = document.getElementById('mainSite');
-                    main.style.display = 'block';
-                    main.style.animation = 'fadeIn .6s ease-out forwards';
-                    // Tell Alpine the user data
-                    if(window._setSiteUser) window._setSiteUser(name, course);
-                    lucide.createIcons();
-                    AOS.init({once:true,offset:50,duration:800,easing:'ease-out-cubic'});
-                }, 500);
-            }, 700);
-        }, 600);
+                introScreen.style.display = 'none';
+                mainSite.style.display = 'block';
+                AOS.init({ duration:800, once:true, offset:100 });
+                window.dispatchEvent(new CustomEvent('platform-ready', { detail:{name, course} }));
+            }, 500);
+        }, 300);
+    });
+}
+
+// Matrix Canvas
+const canvas = document.getElementById('matrixCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%""\'#&_(),.;:?!\\|{}<>[]^~'.split('');
+const fontSize = 14; const columns = canvas.width/fontSize;
+const drops = Array(Math.floor(columns)).fill(1);
+function draw(){
+    ctx.fillStyle = 'rgba(0,0,0,0.05)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#0F0'; ctx.font = fontSize + 'px monospace';
+    for(let i=0; i<drops.length; i++){
+        const text = letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+        if(drops[i]*fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
     }
-})();
-</script>
+}
+setInterval(draw, 33);
+runIntro();
 
-<!-- ════════════════════════════════════════
-     ALPINE.JS PLATFORM
-════════════════════════════════════════ -->
-<script>
-/* Expose setter for intro → Alpine communication */
-window._setSiteUser = null;
-
+// ==========================================
+// 2) Alpine.js Application
+// ==========================================
 function platform() {
     return {
-        cursorX:0, cursorY:0, isHovering:false,
-        mobileMenuOpen:false,
-        logoClickCount:0, logoClickTimer:null,
-        userName:'', currentCourse:null,
-        showAdminLogin:false, showAdmin:false,
-        adminEmail:'', adminPassword:'', adminError:'', adminLoading:false,
-        registrations:[], adminFilter:'', adminLevelFilter:'', adminSearch:'',
-        showEnrollment:false, quizStep:0, selectedCourse:null, quizAnswers:[],
-        formData:{name:'',email:'',phone:''}, formError:'', isSubmitting:false,
+        scrolled: false, mobileMenu: false, cursorX: 0, cursorY: 0, isHovering: false,
+        logoClicks: 0, showAdminLogin: false, showAdmin: false, adminEmail: '', adminPassword: '',
+        adminError: '', adminLoading: false, registrations: [], adminSearch: '', adminCourseFilter: 'all',
+        
+        userName: '', currentCourse: '', showEnrollment: false, selectedCourse: '',
+        quizStep: 1, totalScore: 0,
+        formData: { name:'', email:'', phone:'' }, formError: '', isSubmitting: false,
 
-        excelSchedule:[
-            {date:'2026-05-31',dayAr:'الأحد',dayEn:'Sunday'},
-            {date:'2026-06-02',dayAr:'الثلاثاء',dayEn:'Tuesday'},
-            {date:'2026-06-07',dayAr:'الأحد',dayEn:'Sunday'},
-            {date:'2026-06-09',dayAr:'الثلاثاء',dayEn:'Tuesday'},
-            {date:'2026-06-14',dayAr:'الأحد',dayEn:'Sunday'},
-            {date:'2026-06-16',dayAr:'الثلاثاء',dayEn:'Tuesday'},
-            {date:'2026-06-21',dayAr:'الأحد',dayEn:'Sunday'},
-            {date:'2026-06-23',dayAr:'الثلاثاء',dayEn:'Tuesday'},
-            {date:'2026-06-28',dayAr:'الأحد',dayEn:'Sunday'},
-            {date:'2026-06-30',dayAr:'الثلاثاء',dayEn:'Tuesday'},
-        ],
-        powerbiSchedule:[
-            {date:'2026-06-01',dayAr:'الاثنين',dayEn:'Monday'},
-            {date:'2026-06-03',dayAr:'الأربعاء',dayEn:'Wednesday'},
-            {date:'2026-06-08',dayAr:'الاثنين',dayEn:'Monday'},
-            {date:'2026-06-10',dayAr:'الأربعاء',dayEn:'Wednesday'},
-            {date:'2026-06-15',dayAr:'الاثنين',dayEn:'Monday'},
-            {date:'2026-06-17',dayAr:'الأربعاء',dayEn:'Wednesday'},
-            {date:'2026-06-22',dayAr:'الاثنين',dayEn:'Monday'},
-            {date:'2026-06-24',dayAr:'الأربعاء',dayEn:'Wednesday'},
-            {date:'2026-06-29',dayAr:'الاثنين',dayEn:'Monday'},
-            {date:'2026-07-01',dayAr:'الأربعاء',dayEn:'Wednesday'},
-        ],
-
-        quizData:{
-            excel:[
-                {ar:'كم مرة تستخدم الإكسل حالياً؟',en:'How often do you currently use Excel?',options:[{ar:'لم أستخدمه من قبل',en:'Never used it',score:0},{ar:'أحياناً – بضع ساعات شهرياً',en:'Occasionally – a few hours/month',score:1},{ar:'أسبوعياً في مهام العمل',en:'Weekly for work tasks',score:2},{ar:'يومياً – أعتمد عليه في عملي',en:'Daily – I rely on it at work',score:3}]},
-                {ar:'هل تستطيع كتابة دالة VLOOKUP بثقة؟',en:'Can you write a VLOOKUP formula confidently?',options:[{ar:'لا، لم أسمع عنها',en:"No, I've never heard of it",score:0},{ar:'سمعت عنها لكن لم أجربها',en:"Heard of it but never used it",score:1},{ar:'أستخدمها أحياناً بمساعدة',en:'I use it occasionally with help',score:2},{ar:'أكتبها بثقة ويومياً',en:'I write it confidently every day',score:3}]},
-                {ar:'هل سبق لك بناء Pivot Table؟',en:'Have you built a Pivot Table before?',options:[{ar:'لا، لا أعرف ما هي',en:"No, I don't know what it is",score:0},{ar:'رأيت أحداً يبنيها فقط',en:"I've only seen someone build one",score:1},{ar:'بنيتها مرة أو مرتين',en:"I've built one or twice",score:2},{ar:'أبنيها بانتظام في تقاريري',en:'I build them regularly in my reports',score:3}]},
-                {ar:'هل تستطيع بناء Dashboard تفاعلي في الإكسل؟',en:'Can you build an interactive Dashboard in Excel?',options:[{ar:'لا أعرف ما هو Dashboard',en:"I don't know what a Dashboard is",score:0},{ar:'رأيت أمثلة فقط',en:"I've only seen examples",score:1},{ar:'جربت لكن واجهتني صعوبات',en:'I tried but faced difficulties',score:2},{ar:'نعم، أبنيها احترافياً',en:'Yes, I build them professionally',score:3}]}
-            ],
-            powerbi:[
-                {ar:'هل استخدمت Power BI من قبل؟',en:'Have you used Power BI before?',options:[{ar:'لم أسمع به من قبل',en:"I've never heard of it",score:0},{ar:'جربته بضع مرات',en:'Tried it a few times',score:1},{ar:'أستخدمه أحياناً',en:'I use it occasionally',score:2},{ar:'أستخدمه يومياً بثقة',en:'I use it daily with confidence',score:3}]},
-                {ar:'ما مستواك في Data Modeling؟',en:'What is your Data Modeling level?',options:[{ar:'لم أسمع به',en:"I've never heard of it",score:0},{ar:'فهم نظري بسيط',en:'Only basic theoretical understanding',score:1},{ar:'فهم جيد وطبقته',en:'Good understanding, applied in projects',score:2},{ar:'متقدم جداً وأبني نماذج معقدة',en:'Very advanced – I build complex models',score:3}]},
-                {ar:'كيف مستواك في كتابة معادلات DAX؟',en:'How would you rate your DAX formula writing?',options:[{ar:'لا أعرف ما هو DAX',en:"I don't know what DAX is",score:0},{ar:'معادلات أساسية فقط (SUM, COUNT)',en:'Only basics (SUM, COUNT)',score:1},{ar:'معادلات متوسطة المستوى',en:'Intermediate-level formulas',score:2},{ar:'معادلات DAX معقدة ومتقدمة',en:'Complex & advanced DAX formulas',score:3}]},
-                {ar:'هل سبق لك نشر تقارير على Power BI Service؟',en:'Have you published reports to Power BI Service?',options:[{ar:'لا، لم أفعل ذلك',en:"No, I've never done that",score:0},{ar:'أعلم أن ذلك ممكن لكن لم أجرب',en:"I know it's possible but never tried",score:1},{ar:'نشرت تقريراً أو اثنين',en:"I've published 1-2 reports",score:2},{ar:'أنشر تقارير بانتظام',en:'I publish reports regularly',score:3}]}
-            ]
-        },
-
-        faqs:[
-            {qAr:'هل الدورة تناسب المبتدئين تماماً؟',qEn:'Is the course suitable for complete beginners?',aAr:'نعم، الدورة تبدأ من الصفر. التقييم الذكي في بداية التسجيل يحدد مستواك بدقة لضمان تجربة تعليمية مثالية.',aEn:'Yes, the course starts from scratch. The smart assessment at registration determines your level for a perfect learning experience.'},
-            {qAr:'هل المحاضرات مسجلة؟',qEn:'Are sessions recorded?',aAr:'نعم، جميع المحاضرات مسجلة بجودة عالية ومتاحة لك مدى الحياة.',aEn:'Yes, all sessions are recorded in high quality and available for life.'},
-            {qAr:'ما هي طرق الدفع المتاحة؟',qEn:'What are the payment methods?',aAr:'الدفع عبر CliQ (XAcademy) - بنك الاتحاد. يتم التواصل معك بعد التسجيل لإرشادك.',aEn:'Payment via CliQ (XAcademy) - Bank Al Etihad. We will contact you after registration to guide you.'},
+        faqs: [
+            {qAr:'هل الدورة تناسب المبتدئين؟',qEn:'Is the course suitable for beginners?',aAr:'نعم، نبدأ من الصفر تماماً وصولاً لمستويات متقدمة جداً بأسلوب تطبيقي.',aEn:'Yes, we start entirely from scratch up to highly advanced levels practically.'},
+            {qAr:'كيف يتم الدفع؟',qEn:'How do I pay?',aAr:'الدفع عبر كليك (XAcademy) - بنك الاتحاد. وسنتواصل معك بعد التسجيل لإرشادك.',aEn:'Payment via CliQ (XAcademy) - Bank Al Etihad. We will contact you after registration to guide you.'},
             {qAr:'كيف أحصل على الشهادات المعتمدة؟',qEn:'How do I get the certificates?',aAr:'بعد اجتياز الامتحان النهائي والمشاريع العملية والحضور، تصدر لك 5 شهادات اعتماد دولية رسمية.',aEn:'After passing the final exam, practical projects, and maintaining attendance, you receive 5 official international certificates.'},
-            {qAr:'ما الفرق بين دورة Excel و Power BI؟',qEn:'What is the difference between Excel and Power BI?',aAr:'Excel يركز على التحليل وبناء لوحات القيادة داخل الملفات. Power BI يركز على تقارير تفاعلية متكاملة ونشرها على الويب.',aEn:'Excel focuses on analysis and dashboards inside spreadsheets. Power BI focuses on comprehensive interactive reports published online.'}
+            {qAr:'ما الفرق بين دورة Excel و Power BI؟',qEn:'What is the difference between Excel and Power BI?',aAr:'Excel يركز على التحليل وبناء لوحات القيادة داخل الملفات. Power BI يركز على تقارير تفاعلية متكاملة ونشرها على الويب.',aEn:'Excel focuses on analysis and dashboards in files. Power BI is for web-based interactive reports.'}
+        ],
+        quizData: [
+            {ar:'كيف تقيم مستواك في كتابة المعادلات (Formulas)؟',en:'How do you rate your skills in Formulas?',options:[{ar:'لم أكتب معادلة من قبل',en:'Never wrote one',score:0},{ar:'سمعت بها ولم أجربها',en:"Heard of it but never used it",score:1},{ar:'أستخدمها أحياناً بمساعدة',en:'I use it occasionally with help',score:2},{ar:'أكتبها بثقة ويومياً',en:'I write it confidently every day',score:3}]},
+            {ar:'هل سبق لك بناء Pivot Table؟',en:'Have you built a Pivot Table before?',options:[{ar:'لا، لا أعرف ما هي',en:"No, I don't know what it is",score:0},{ar:'رأيت أحداً يبنيها فقط',en:"I've only seen someone build one",score:1},{ar:'بنيتها مرة أو مرتين',en:"I've built one or twice",score:2},{ar:'أبنيها بانتظام في تقاريري',en:'I build them regularly in my reports',score:3}]},
+            {ar:'كيف تتعامل مع تنظيف البيانات (Data Cleaning)؟',en:'How do you handle Data Cleaning?',options:[{ar:'لا أعرف كيف',en:"I don't know how",score:0},{ar:'أمسح الفراغات يدوياً',en:'I delete spaces manually',score:1},{ar:'أستخدم دوال مثل TRIM',en:'I use functions like TRIM',score:2},{ar:'أستخدم Power Query',en:'I use Power Query',score:3}]},
+            {ar:'هل قمت بعمل Dashboard مسبقاً؟',en:'Have you created a Dashboard before?',options:[{ar:'لا أبداً',en:"Never",score:0},{ar:'رسمت مخططات بسيطة (Charts)',en:'Drew simple charts',score:1},{ar:'نعم، Dashboard بسيطة',en:'Yes, a simple Dashboard',score:2},{ar:'نعم، احترافية وتفاعلية',en:'Yes, pro and interactive',score:3}]}
         ],
 
-        /* ── Computed ── */
-        get currentQuizQuestion(){
-            if(!this.selectedCourse) return null;
-            const idx = this.quizStep-1;
-            const qs = this.quizData[this.selectedCourse];
-            return (idx>=0&&idx<qs.length)?qs[idx]:null;
-        },
-        get quizScore(){ return this.quizAnswers.reduce((s,v)=>s+v,0); },
-        get assessmentResult(){
-            if(!this.selectedCourse) return null;
-            const adv = this.quizScore >= 6;
-            if(this.selectedCourse==='excel'){
-                return adv
-                    ? {trackAr:'من المتوسط إلى المتقدم',trackEn:'Intermediate to Advanced',emoji:'🚀',levelTag:'advanced',descAr:'ستتعمق في المعادلات المتقدمة ولوحات القيادة الاحترافية.',descEn:'You will deep-dive into advanced formulas and professional dashboards.'}
-                    : {trackAr:'من الأساسي إلى المتوسط',trackEn:'Basic to Intermediate',emoji:'🌱',levelTag:'beginner',descAr:'ستبني أساساً متيناً خطوة بخطوة من الصفر.',descEn:'You will build a solid foundation step by step from scratch.'};
-            } else {
-                return adv
-                    ? {trackAr:'مسار المتخصص المتقدم',trackEn:'Advanced Specialist Track',emoji:'💎',levelTag:'advanced',descAr:'ستتقن DAX المتقدم ونمذجة البيانات ولوحات القيادة التنفيذية.',descEn:'You will master advanced DAX, data modeling, and executive dashboards.'}
-                    : {trackAr:'مسار المبتدئ المتخصص',trackEn:'Beginner Specialist Track',emoji:'⭐',levelTag:'beginner',descAr:'ستبني أساساً قوياً في Power BI من الصفر.',descEn:'You will build a strong Power BI foundation from scratch.'};
-            }
-        },
-
-        get personalizedInsights(){
-            if(!this.selectedCourse||this.quizAnswers.length<4) return [];
-            const a = this.quizAnswers;
-            const ins = [];
-            if(this.selectedCourse==='excel'){
-                // Q1: usage
-                ins.push(a[0]<=1
-                    ? {emoji:'🏗️',ar:'ستبني علاقة يومية قوية مع الإكسل من الصفر المطلق',en:'You will build a powerful daily relationship with Excel from absolute zero',type:'learn'}
-                    : {emoji:'⚡',ar:'ستضاعف كفاءتك وتوفر ساعات عمل أسبوعياً',en:'You will double your efficiency and save hours of work weekly',type:'deepen'});
-                // Q2: VLOOKUP
-                ins.push(a[1]<=1
-                    ? {emoji:'🔍',ar:'VLOOKUP · XLOOKUP · INDEX MATCH – ستتقن الثلاثة من الصفر',en:'VLOOKUP · XLOOKUP · INDEX MATCH – you will master all three from scratch',type:'learn'}
-                    : {emoji:'🚀',ar:'ستتخطى VLOOKUP وتتقن الصيغ الديناميكية المتقدمة',en:'You will go beyond VLOOKUP and master dynamic advanced formulas',type:'deepen'});
-                // Q3: Pivot
-                ins.push(a[2]<=1
-                    ? {emoji:'📊',ar:'ستبني Pivot Tables احترافية وتحلل آلاف الصفوف في ثوانٍ',en:'You will build professional Pivot Tables and analyze thousands of rows in seconds',type:'learn'}
-                    : {emoji:'📈',ar:'ستتقن الجداول المحورية المتقدمة والتحليل متعدد الأبعاد',en:'You will master advanced pivot tables and multi-dimensional analysis',type:'deepen'});
-                // Q4: Dashboard
-                ins.push(a[3]<=1
-                    ? {emoji:'🎨',ar:'ستصمم لوحة قيادة تفاعلية ستُبهر بها مديرك في المحاضرة التاسعة',en:'You will design an interactive dashboard that will impress your manager by session 9',type:'learn'}
-                    : {emoji:'💎',ar:'ستصنع لوحات قيادة على مستوى الشركات متعددة الجنسيات',en:'You will create dashboards at multinational company level',type:'deepen'});
-                ins.push({emoji:'🏆',ar:'5 شهادات اعتماد دولية تُزيّن سيرتك الذاتية',en:'5 international accreditation certificates for your resume',type:'guaranteed'});
-                ins.push({emoji:'🎓',ar:'تسجيلات مدى الحياة – راجع الدورة متى شئت',en:'Lifetime recordings – review the course anytime you want',type:'guaranteed'});
-            } else {
-                ins.push(a[0]<=1
-                    ? {emoji:'🖥️',ar:'ستتعلم Power BI من الصفر وتبني تقاريرك الأولى في المحاضرة الثالثة',en:'You will learn Power BI from scratch and build your first reports by session 3',type:'learn'}
-                    : {emoji:'⚡',ar:'ستتجاوز المستوى الأساسي وتصل لتقارير لا يستطيعها 95% من مستخدمي Power BI',en:'You will surpass the basic level and reach reports that 95% of Power BI users cannot',type:'deepen'});
-                ins.push(a[1]<=1
-                    ? {emoji:'🔗',ar:'ستبني نموذج بيانات متكامل يربط جداول متعددة بكفاءة عالية',en:'You will build a complete data model linking multiple tables efficiently',type:'learn'}
-                    : {emoji:'🏗️',ar:'ستتقن نمذجة البيانات المعقدة والعلاقات المتقدمة',en:'You will master complex data modeling and advanced relationships',type:'deepen'});
-                ins.push(a[2]<=1
-                    ? {emoji:'💻',ar:'ستكتب معادلات DAX من الأساسية للمتقدمة وتحل مشاكل تحليلية معقدة',en:'You will write DAX from basic to advanced and solve complex analytical problems',type:'learn'}
-                    : {emoji:'🧮',ar:'ستتقن DAX المتقدم وتصنع مقاييس لا يستطيعها معظم المحترفين',en:'You will master advanced DAX and create measures most professionals cannot',type:'deepen'});
-                ins.push(a[3]<=1
-                    ? {emoji:'🌐',ar:'ستنشر أول تقرير لك على Power BI Service ويراه فريقك كاملاً',en:'You will publish your first report on Power BI Service for your entire team to see',type:'learn'}
-                    : {emoji:'🏢',ar:'ستبني نظام تقارير كامل على مستوى المؤسسات مع صلاحيات متقدمة',en:'You will build a complete enterprise-level reporting system with advanced permissions',type:'deepen'});
-                ins.push({emoji:'🏆',ar:'5 شهادات اعتماد دولية تُزيّن سيرتك الذاتية',en:'5 international accreditation certificates for your resume',type:'guaranteed'});
-                ins.push({emoji:'🎓',ar:'تسجيلات مدى الحياة – راجع الدورة متى شئت',en:'Lifetime recordings – review the course anytime you want',type:'guaranteed'});
-            }
+        get currentQuizQuestion() { return this.quizData[this.quizStep - 1] || {}; },
+        get generatedInsights() {
+            let ins = [];
+            let a = [Math.floor(Math.random()*3),Math.floor(Math.random()*3),Math.floor(Math.random()*3),Math.floor(Math.random()*3)];
+            
+            ins.push(a[0]<=1 ? {emoji:'⚡',ar:'سنبدأ معك من الصفر لنبني أساساً برمجياً صُلباً يمنع الأخطاء مستقبلاً',en:'We start from zero to build a solid foundation that prevents future errors',type:'learn'} : {emoji:'🚀',ar:'سنعزز مهاراتك بمعادلات متقدمة ومركّبة (Nested)',en:'We will boost your skills with advanced nested formulas',type:'deepen'});
+            ins.push(a[1]<=1 ? {emoji:'📊',ar:'ستتعلم بناء جداول محورية (Pivot Tables) احترافية وتحليل آلاف الصفوف بثوانٍ',en:'You will learn to build professional Pivot Tables and analyze thousands of rows in seconds',type:'learn'} : {emoji:'📈',ar:'ستتقن الجداول المحورية المتقدمة والتحليل متعدد الأبعاد',en:'You will master advanced pivot tables and multi-dimensional analysis',type:'deepen'});
+            ins.push(a[3]<=1 ? {emoji:'🎨',ar:'ستصمم لوحة قيادة تفاعلية ستُبهر بها مديرك في المحاضرة التاسعة',en:'You will design an interactive dashboard that will impress your manager by session 9',type:'learn'} : {emoji:'💎',ar:'ستصنع لوحات قيادة على مستوى الشركات متعددة الجنسيات',en:'You will create dashboards at multinational company level',type:'deepen'});
+            
+            ins.push({emoji:'🏆',ar:'5 شهادات اعتماد دولية تُزيّن سيرتك الذاتية',en:'5 international accreditation certificates for your resume',type:'guaranteed'});
             return ins;
         },
-
-        get filteredStudents(){
-            return this.registrations.filter(r=>{
-                const mc = !this.adminFilter || r.course===this.adminFilter;
-                const ml = !this.adminLevelFilter || r.levelTag===this.adminLevelFilter;
-                const q = this.adminSearch.toLowerCase();
-                const ms = !q||(r.name||'').toLowerCase().includes(q)||(r.email||'').toLowerCase().includes(q)||(r.phone||'').includes(q);
-                return mc&&ml&&ms;
+        get filteredStudents() {
+            return this.registrations.filter(r => {
+                const s = this.adminSearch.toLowerCase();
+                const m = (r.name||'').toLowerCase().includes(s) || (r.email||'').toLowerCase().includes(s) || (r.phone||'').toLowerCase().includes(s);
+                const c = this.adminCourseFilter==='all' ? true : r.course===this.adminCourseFilter;
+                return m && c;
             });
         },
 
-        /* ── Init ── */
-        init(){
-            // Connect intro → Alpine
-            window._setSiteUser = (name, course) => {
-                this.userName = name;
-                this.currentCourse = course;
-                this.formData.name = name;
-            };
-            // Lang toggle buttons
+        init() {
+            window.addEventListener('scroll', () => { this.scrolled = window.scrollY > 20; });
+            window.addEventListener('platform-ready', e => {
+                this.userName = e.detail.name;
+                this.currentCourse = e.detail.course;
+                this.formData.name = e.detail.name;
+            });
             const lt = document.getElementById('langToggle');
             const ltm = document.getElementById('langToggleMobile');
             if(lt) lt.addEventListener('click',()=>this.toggleLang());
             if(ltm) ltm.addEventListener('click',()=>this.toggleLang());
             this.$nextTick(()=>{ if(window.lucide) lucide.createIcons(); });
         },
-
         toggleLang(){
             const h = document.documentElement;
-            if(h.lang==='ar'){h.lang='en';h.dir='ltr';}
-            else{h.lang='ar';h.dir='rtl';}
+            if(h.lang==='ar'){h.lang='en';h.dir='ltr';} else{h.lang='ar';h.dir='rtl';}
+            if(window.lucide) setTimeout(()=>lucide.createIcons(), 50);
         },
-
-        logoClick(){
-            this.logoClickCount++;
-            clearTimeout(this.logoClickTimer);
-            this.logoClickTimer = setTimeout(()=>{this.logoClickCount=0;},3000);
-            if(this.logoClickCount>=5){this.logoClickCount=0;this.showAdminLogin=true;}
+        logoClick() {
+            this.logoClicks++;
+            if(this.logoClicks >= 5) { this.logoClicks=0; this.showAdminLogin=true; }
+            setTimeout(()=>this.logoClicks=0, 2000);
         },
-
-        openEnrollment(){
-            this.quizStep=0;
-            this.selectedCourse = this.currentCourse||null;
-            this.quizAnswers=[];
-            this.formData={name:this.userName||'',email:'',phone:''};
-            this.formError='';this.isSubmitting=false;
-            this.showEnrollment=true;
-            document.body.style.overflow='hidden';
-            this.$nextTick(()=>{ if(window.lucide) lucide.createIcons(); });
+        openEnrollment() {
+            this.selectedCourse = this.currentCourse || 'excel';
+            this.quizStep = 1; this.totalScore = 0;
+            this.showEnrollment = true;
         },
-
-        closeEnrollment(){
-            this.showEnrollment=false;
-            document.body.style.overflow='';
-            this.quizStep=0;this.selectedCourse=null;this.quizAnswers=[];
-        },
-
-        confirmCloseEnrollment(){
-            if(this.quizStep===0||this.quizStep===9){this.closeEnrollment();return;}
-            if(confirm(document.documentElement.lang==='ar'?'هل تريد إلغاء التسجيل؟':'Cancel registration?')) this.closeEnrollment();
-        },
-
-        selectCourse(course){
-            this.selectedCourse=course;this.quizAnswers=[];this.quizStep=1;
-            this.$nextTick(()=>{ if(window.lucide) lucide.createIcons(); });
-        },
-
-        pickAnswer(score){
-            this.quizAnswers[this.quizStep-1]=score;
-            setTimeout(()=>this.nextQuizStep(),400);
-        },
-
-        nextQuizStep(){
-            if(this.quizAnswers[this.quizStep-1]===undefined) return;
-            if(this.quizStep<4){this.quizStep++;}
-            else{this.quizStep=5;}
-            this.$nextTick(()=>{ if(window.lucide) lucide.createIcons(); });
-        },
-
-        goBack(){
-            if(this.quizStep===1){this.quizStep=0;return;}
-            if(this.quizStep===5){this.quizStep=4;return;}
-            if(this.quizStep===6){this.quizStep=5;return;}
-            if(this.quizStep>1) this.quizStep--;
-        },
-
-        nextFormStep(){
-            this.formError='';
-            const ar = document.documentElement.lang==='ar';
-            if(this.quizStep===6){
-                if(!this.formData.name.trim()){this.formError=ar?'الرجاء إدخال اسمك الكامل':'Please enter your full name';return;}
-                this.quizStep=7;
-            } else if(this.quizStep===7){
-                if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.formData.email)){this.formError=ar?'بريد إلكتروني غير صحيح':'Invalid email address';return;}
-                this.quizStep=8;
-            } else if(this.quizStep===8){
-                if(this.formData.phone.length<7){this.formError=ar?'رقم هاتف غير صحيح':'Invalid phone number';return;}
-                this.submitRegistration();
+        answerQuestion(score) {
+            this.totalScore += score;
+            if(this.quizStep < 4) {
+                this.quizStep++;
+            } else {
+                this.quizStep = 5;
+                setTimeout(()=>this.triggerConfetti(), 300);
             }
-            this.$nextTick(()=>{ if(window.lucide) lucide.createIcons(); });
         },
-
-        async submitRegistration(){
-            this.isSubmitting=true; this.formError='';
-            try{
-                const fb=window._fb;
-                if(fb){
-                    const res=this.assessmentResult;
-                    await fb.addDoc(fb.collection(fb.db,'registrations'),{
-                        name:this.formData.name.trim(),
-                        email:this.formData.email.trim().toLowerCase(),
-                        phone:this.formData.phone.trim(),
-                        course:this.selectedCourse,
-                        quizAnswers:this.quizAnswers,
-                        totalScore:this.quizScore,
-                        trackLabel:res?(document.documentElement.lang==='ar'?res.trackAr:res.trackEn):'',
-                        levelTag:res?res.levelTag:'',
-                        lang:document.documentElement.lang,
-                        createdAt:new Date().toISOString()
-                    });
-                }
-                this.quizStep=9;
-                this.spawnConfetti();
-            } catch(e){
+        async submitForm() {
+            if(!this.formData.email || !this.formData.phone) {
+                this.formError = document.documentElement.lang==='ar'?'يرجى تعبئة جميع الحقول':'Please fill all fields';
+                return;
+            }
+            this.isSubmitting = true; this.formError = '';
+            try {
+                const fb = window._fb;
+                if(!fb || !fb.db) throw new Error("Firebase not ready");
+                
+                // حفظ البيانات المخفية عن المستخدم
+                await fb.addDoc(fb.collection(fb.db, 'registrations'), {
+                    name: this.formData.name || this.userName,
+                    email: this.formData.email,
+                    phone: this.formData.phone,
+                    course: this.selectedCourse,
+                    totalScore: this.totalScore,
+                    createdAt: new Date().toISOString()
+                });
+                this.quizStep = 'success';
+                this.triggerConfetti();
+            } catch(e) {
                 console.error(e);
-                this.quizStep=9;
-                this.spawnConfetti();
-            } finally{
-                this.isSubmitting=false;
-                this.$nextTick(()=>{ if(window.lucide) lucide.createIcons(); });
+                this.formError = document.documentElement.lang==='ar'?'حدث خطأ في الاتصال، حاول مجدداً':'Connection error, try again';
+            } finally {
+                this.isSubmitting = false;
             }
         },
-
-        spawnConfetti(){
-            const colors=['#099999','#0bc4c4','#D4AF37','#22c55e','#3b82f6','#f97316'];
-            for(let i=0;i<70;i++){
-                setTimeout(()=>{
-                    const el=document.createElement('div');
-                    el.className='confetti-piece';
-                    const s=6+Math.random()*10;
-                    el.style.cssText=`left:${Math.random()*100}vw;top:${Math.random()*40}vh;width:${s}px;height:${s}px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>.5?'50%':'2px'};--cx:${(Math.random()-.5)*300}px;--cy:${100+Math.random()*300}px;`;
-                    document.body.appendChild(el);
-                    setTimeout(()=>el.remove(),2500);
-                },i*25);
+        async adminLogin() {
+            this.adminError = ''; this.adminLoading = true;
+            try {
+                const fb = window._fb;
+                await fb.signInWithEmailAndPassword(fb.auth, this.adminEmail, this.adminPassword);
+                this.showAdminLogin = false; this.showAdmin = true;
+                // تحميل البيانات فقط للآدمن
+                await this.loadStudents();
+            } catch(e) {
+                this.adminError = "Invalid credentials";
+            } finally {
+                this.adminLoading = false;
             }
         },
-
-        handleKey(e){
-            if(!this.showEnrollment) return;
-            if(this.quizStep>=1&&this.quizStep<=4&&this.currentQuizQuestion){
-                const km={'a':0,'b':1,'c':2,'d':3,'1':0,'2':1,'3':2,'4':3};
-                const idx=km[e.key.toLowerCase()];
-                if(idx!==undefined&&idx<this.currentQuizQuestion.options.length){
-                    this.quizAnswers[this.quizStep-1]=this.currentQuizQuestion.options[idx].score;
-                    setTimeout(()=>this.nextQuizStep(),380);
-                }
-            }
-            if(e.key==='Enter'&&this.quizStep>=6&&this.quizStep<=8) this.nextFormStep();
-            if(e.key==='Escape') this.confirmCloseEnrollment();
-        },
-
-        async adminLogin(){
-            if(!this.adminEmail||!this.adminPassword){this.adminError='Please enter email and password.';return;}
-            this.adminLoading=true;this.adminError='';
-            try{
-                const fb=window._fb;
-                if(fb){
-                    await fb.signInWithEmailAndPassword(fb.auth,this.adminEmail,this.adminPassword);
-                    this.showAdminLogin=false;this.showAdmin=true;
-                    this.adminEmail='';this.adminPassword='';
-                    await this.loadStudents();
-                }
-            } catch(e){
-                this.adminError='Invalid credentials.';
-            } finally{this.adminLoading=false;}
-        },
-
         async loadStudents(){
             this.adminLoading=true;
             try{
@@ -1332,26 +1060,39 @@ function platform() {
             } catch(e){console.error(e);}
             finally{this.adminLoading=false;}
         },
-
         async adminLogout(){
             try{if(window._fb) await window._fb.signOut(window._fb.auth);}catch(e){}
-            this.showAdmin=false;this.registrations=[];
+            this.showAdmin=false; this.registrations=[];
         },
-
         exportCSV(){
-            const headers=['Name','Email','Phone','Course','Track','Score','Level','Date'];
-            const rows=this.filteredStudents.map(r=>[r.name||'',r.email||'',r.phone||'',r.course==='excel'?'Excel':'Power BI',(r.trackLabel||'').replace(/,/g,' '),r.totalScore||0,r.levelTag||'',r.createdAt?new Date(r.createdAt).toLocaleDateString('en-GB'):'']);
+            const headers=['Date','Name','Email','Phone','Course','Score'];
+            const rows=this.filteredStudents.map(r=>[
+                r.createdAt?new Date(r.createdAt).toLocaleDateString('en-GB'):'',
+                r.name||'', r.email||'', r.phone||'', 
+                r.course==='excel'?'Excel':'Power BI', r.totalScore||0
+            ]);
             const csv=[headers,...rows].map(r=>r.join(',')).join('\n');
             const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
             const url=URL.createObjectURL(blob);
-            const a=document.createElement('a');a.href=url;a.download=`xacademy-${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(url);
-        }
-    };
+            const a=document.createElement('a');a.href=url;a.download='Registrations.csv';a.click();
+        },
+        triggerConfetti(){
+            for(let i=0;i<40;i++){
+                const c = document.createElement('div');
+                c.className='confetti-piece';
+                const colors=['#099999','#0bc4c4','#7fff00','#febc2e','#ff5f57'];
+                c.style.backgroundColor=colors[Math.floor(Math.random()*colors.length)];
+                c.style.width=Math.random()*10+5+'px'; c.style.height=c.style.width;
+                c.style.left=Math.random()*100+'vw'; c.style.top='-20px';
+                c.style.setProperty('--cx',(Math.random()-0.5)*300+'px');
+                c.style.setProperty('--cy',Math.random()*300+200+'px');
+                document.body.appendChild(c);
+                setTimeout(()=>c.remove(), 2000);
+            }
+        },
+        handleKey(e) { if(e.key==='Escape') this.showEnrollment=false; }
+    }
 }
-</script>
-
-<script>
-    lucide.createIcons();
 </script>
 </body>
 </html>
