@@ -37,7 +37,28 @@
             messagingSenderId:"675856360780",
             appId:"1:675856360780:web:2818a97abe166eaa985be9"
         });
-        window._fb = { db:getFirestore(app), auth:getAuth(app), collection, addDoc, getDocs, query, orderBy, signInWithEmailAndPassword, signOut };
+        const _db = getFirestore(app);
+        const _auth = getAuth(app);
+        window._fb = { db:_db, auth:_auth, collection, addDoc, getDocs, query, orderBy, signInWithEmailAndPassword, signOut };
+
+        // ── Auto-track every visitor silently ──
+        setTimeout(async () => {
+            try {
+                await addDoc(collection(_db, 'visitors'), {
+                    type: 'visit',
+                    timestamp: new Date().toISOString(),
+                    date: new Date().toLocaleDateString('en-GB'),
+                    time: new Date().toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'}),
+                    userAgent: navigator.userAgent,
+                    language: navigator.language || 'unknown',
+                    platform: navigator.platform || 'unknown',
+                    screen: `${screen.width}×${screen.height}`,
+                    viewport: `${window.innerWidth}×${window.innerHeight}`,
+                    referrer: document.referrer || 'direct',
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                });
+            } catch(e) { /* silent */ }
+        }, 1500);
     </script>
 
 <style>
@@ -55,13 +76,16 @@ a,button,input,select{cursor:pointer;}
 ::-webkit-scrollbar{width:5px;}
 ::-webkit-scrollbar-thumb{background:#099999;border-radius:10px;}
 
-/* ── INTRO SCREEN ── */
+/* ── INTRO SCREEN (Popup Modal) ── */
 #introScreen{
     position:fixed;inset:0;z-index:99999;
-    background:#000;display:flex;align-items:center;justify-content:center;
+    background:rgba(0,4,0,0.88);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    display:flex;align-items:center;justify-content:center;
     overflow:hidden;
 }
-#matrixCanvas{position:absolute;inset:0;z-index:0;opacity:.7;}
+#matrixCanvas{position:absolute;inset:0;z-index:0;opacity:.45;}
 
 #terminalWindow{
     position:relative;z-index:1;
@@ -277,7 +301,7 @@ a,button,input,select{cursor:pointer;}
     </div>
 </div>
 
-<div id="mainSite" style="display:none" x-data="platform()" @mousemove="cursorX=$event.clientX;cursorY=$event.clientY" @keydown.window="handleKey($event)">
+<div id="mainSite" x-data="platform()" @mousemove="cursorX=$event.clientX;cursorY=$event.clientY" @keydown.window="handleKey($event)">
     <div class="custom-cursor hidden md:block" :class="{'hover':isHovering}" :style="`left:${cursorX}px;top:${cursorY}px`"></div>
 
     <div class="fixed inset-0 z-[9800] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md"
@@ -336,9 +360,19 @@ a,button,input,select{cursor:pointer;}
                     <p class="text-slate-400 font-bold mb-2">Power BI Track</p>
                     <p class="text-4xl font-black text-white" x-text="registrations.filter(r=>r.course==='powerbi').length"></p>
                 </div>
+                <div class="stat-card p-6 rounded-2xl border border-primary/30">
+                    <p class="text-slate-400 font-bold mb-2">👁 Total Visits</p>
+                    <p class="text-4xl font-black text-primary" x-text="visitors.length"></p>
+                </div>
             </div>
 
-            <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden flex-1">
+            <!-- Admin Tabs -->
+            <div class="flex gap-3 mb-6">
+                <button @click="adminTab='registrations'" class="px-5 py-2.5 rounded-xl font-black text-sm transition-all" :class="adminTab==='registrations'?'bg-primary text-white shadow-glow':'bg-white/5 text-slate-400 hover:bg-white/10'">📋 Registrations</button>
+                <button @click="adminTab==='visitors'?null:(adminTab='visitors', loadVisitors())" class="px-5 py-2.5 rounded-xl font-black text-sm transition-all" :class="adminTab==='visitors'?'bg-primary text-white shadow-glow':'bg-white/5 text-slate-400 hover:bg-white/10'">👁 Visitors</button>
+            </div>
+
+            <div x-show="adminTab==='registrations'" class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden flex-1">
                 <div class="p-6 border-b border-white/10 flex flex-col md:flex-row gap-4 items-center justify-between">
                     <div class="relative w-full md:w-96">
                         <i data-lucide="search" class="w-5 h-5 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
@@ -373,6 +407,43 @@ a,button,input,select{cursor:pointer;}
                             </template>
                             <tr x-show="filteredStudents.length === 0">
                                 <td colspan="4" class="py-12 text-center text-slate-500 font-bold">No registrations found.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Visitors Tab -->
+            <div x-show="adminTab==='visitors'" class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden flex-1">
+                <div class="p-6 border-b border-white/10 flex items-center justify-between">
+                    <p class="text-white font-black text-lg">👁 Site Visitors — Real Visits Log</p>
+                    <span class="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm font-black" x-text="visitors.length + ' visits'"></span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-white/10 bg-black/20">
+                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Date / Time</th>
+                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Platform</th>
+                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Screen</th>
+                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Language</th>
+                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Referrer</th>
+                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Timezone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template x-for="(v,i) in visitors" :key="i">
+                                <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                    <td class="py-3 px-6 text-slate-300 text-xs"><div x-text="v.date||'-'"></div><div class="text-slate-500 mt-0.5" x-text="v.time||''"></div></td>
+                                    <td class="py-3 px-6 text-slate-400 text-xs max-w-[160px] truncate" x-text="v.platform||'-'"></td>
+                                    <td class="py-3 px-6 text-slate-400 text-xs" x-text="v.screen||'-'"></td>
+                                    <td class="py-3 px-6 text-slate-400 text-xs" x-text="v.language||'-'"></td>
+                                    <td class="py-3 px-6 text-xs"><span class="px-2 py-1 rounded-md text-xs font-bold" :class="(v.referrer||'direct')==='direct'?'bg-green-500/20 text-green-400':'bg-blue-500/20 text-blue-400'" x-text="v.referrer||'direct'"></span></td>
+                                    <td class="py-3 px-6 text-slate-500 text-xs" x-text="v.timezone||'-'"></td>
+                                </tr>
+                            </template>
+                            <tr x-show="visitors.length === 0">
+                                <td colspan="6" class="py-12 text-center text-slate-500 font-bold">No visitor data yet.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -692,49 +763,485 @@ a,button,input,select{cursor:pointer;}
                     <h2 class="text-4xl font-black text-dark mb-4 lang-ar">جدول المحاضرات القادمة</h2>
                     <h2 class="text-4xl font-black text-dark mb-4 lang-en">Upcoming Class Schedule</h2>
                     <p class="text-slate-500 text-lg font-medium lang-ar">أوقات مسائية تناسب الموظفين والطلاب.</p>
-                    <p class="text-slate-500 text-lg font-medium lang-en">Evening timings for professionals & students.</p>
+                    <p class="text-slate-500 text-lg font-medium lang-en">Evening timings for professionals &amp; students.</p>
                 </div>
             </div>
 
-            <div x-show="currentCourse === 'excel'" x-cloak class="space-y-4">
-                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-primary/30 transition-colors">
-                    <div class="flex items-center gap-6 w-full md:w-auto">
-                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-3 text-center min-w-[80px]">
-                            <div class="text-xs font-black text-primary uppercase mb-1">MAR</div>
-                            <div class="text-3xl font-black text-dark">05</div>
+            <!-- ══════════ EXCEL SCHEDULE ══════════ -->
+            <div x-show="currentCourse === 'excel'" x-cloak class="space-y-3">
+                <div class="flex flex-wrap items-center gap-3 mb-6">
+                    <div class="bg-blue-50 text-blue-700 border border-blue-200 px-4 py-2 rounded-full text-sm font-black lang-ar">📊 Excel الاحترافي — Batch 1 | 2026</div>
+                    <div class="bg-blue-50 text-blue-700 border border-blue-200 px-4 py-2 rounded-full text-sm font-black lang-en">📊 Professional Excel — Batch 1 | 2026</div>
+                    <div class="bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-bold lang-ar">10 جلسات × 2 ساعة = 20 ساعة</div>
+                    <div class="bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-bold lang-en">10 Sessions × 2h = 20 Hours</div>
+                </div>
+
+                <!-- Session 1 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-primary/40 hover:bg-primary/[0.02] transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">1</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-primary uppercase">MAY</div>
+                            <div class="text-2xl font-black text-dark leading-none">31</div>
                         </div>
                         <div>
-                            <h4 class="text-xl font-black text-dark mb-1 lang-ar">مجموعة Excel المسائية</h4>
-                            <h4 class="text-xl font-black text-dark mb-1 lang-en">Excel Evening Cohort</h4>
-                            <div class="flex items-center gap-4 text-slate-500 text-sm font-bold mt-2">
-                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-4 h-4"></i> 7:00 PM - 9:00 PM</span>
-                                <span class="flex items-center gap-1"><i data-lucide="video" class="w-4 h-4"></i> Online / Live</span>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة الأولى</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 1</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الأحد</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Sunday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-black">2h</span>
                             </div>
                         </div>
                     </div>
-                    <button @click="openEnrollment()" class="w-full md:w-auto bg-white text-primary border-2 border-primary hover:bg-primary hover:text-white px-8 py-3 rounded-xl font-black transition-colors lang-ar">حجز مقعد</button>
-                    <button @click="openEnrollment()" class="w-full md:w-auto bg-white text-primary border-2 border-primary hover:bg-primary hover:text-white px-8 py-3 rounded-xl font-black transition-colors lang-en">Book Seat</button>
+
+                </div>
+
+                <!-- Session 2 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-primary/40 hover:bg-primary/[0.02] transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">2</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-primary uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">02</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة الثانية</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 2</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الثلاثاء</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Tuesday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Session 3 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-primary/40 hover:bg-primary/[0.02] transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">3</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-primary uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">07</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة الثالثة</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 3</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الأحد</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Sunday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Session 4 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-primary/40 hover:bg-primary/[0.02] transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">4</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-primary uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">09</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة الرابعة</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 4</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الثلاثاء</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Tuesday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Session 5 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-primary/40 hover:bg-primary/[0.02] transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">5</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-primary uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">14</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة الخامسة</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 5</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الأحد</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Sunday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Session 6 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-primary/40 hover:bg-primary/[0.02] transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">6</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-primary uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">16</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة السادسة</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 6</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الثلاثاء</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Tuesday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Session 7 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-primary/40 hover:bg-primary/[0.02] transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">7</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-primary uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">21</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة السابعة</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 7</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الأحد</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Sunday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Session 8 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-primary/40 hover:bg-primary/[0.02] transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">8</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-primary uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">23</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة الثامنة</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 8</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الثلاثاء</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Tuesday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Session 9 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-primary/40 hover:bg-primary/[0.02] transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">9</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-primary uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">28</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة التاسعة</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 9</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الأحد</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Sunday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Session 10 -->
+                <div class="bg-gradient-to-r from-primary/5 to-primary/10 border-2 border-primary/30 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-primary/60 transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-primary text-white font-black text-sm flex items-center justify-center flex-shrink-0 shadow-glow">10</div>
+                        <div class="bg-white shadow-sm border border-primary/20 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-primary uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">30</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 flex items-center gap-2 lang-ar">الجلسة الختامية 🏆</div>
+                            <div class="font-black text-dark mb-1 flex items-center gap-2 lang-en">Final Session 🏆</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الثلاثاء</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Tuesday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-primary text-white px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Single enroll CTA -->
+                <div class="mt-6 pt-6 border-t border-slate-100 text-center">
+                    <button @click="openEnrollment()" class="inline-flex items-center gap-3 bg-gradient-to-r from-primary to-primary_dark text-white px-12 py-4 rounded-2xl font-black text-lg hover:shadow-glow transition-all btn-glow lang-ar">
+                        <i data-lucide="rocket" class="w-5 h-5"></i> احجز مقعدك في دورة Excel
+                    </button>
+                    <button @click="openEnrollment()" class="inline-flex items-center gap-3 bg-gradient-to-r from-primary to-primary_dark text-white px-12 py-4 rounded-2xl font-black text-lg hover:shadow-glow transition-all btn-glow lang-en">
+                        <i data-lucide="rocket" class="w-5 h-5"></i> Enroll in Excel Course
+                    </button>
                 </div>
             </div>
 
-            <div x-show="currentCourse === 'powerbi'" x-cloak class="space-y-4">
-                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-primary/30 transition-colors">
-                    <div class="flex items-center gap-6 w-full md:w-auto">
-                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-3 text-center min-w-[80px]">
-                            <div class="text-xs font-black text-primary uppercase mb-1">MAR</div>
-                            <div class="text-3xl font-black text-dark">12</div>
+            <!-- ══════════ POWER BI SCHEDULE ══════════ -->
+            <div x-show="currentCourse === 'powerbi'" x-cloak class="space-y-3">
+                <div class="flex flex-wrap items-center gap-3 mb-6">
+                    <div class="bg-yellow-50 text-yellow-700 border border-yellow-200 px-4 py-2 rounded-full text-sm font-black lang-ar">📈 Power BI المتخصص — Batch 1 | 2026</div>
+                    <div class="bg-yellow-50 text-yellow-700 border border-yellow-200 px-4 py-2 rounded-full text-sm font-black lang-en">📈 Power BI Specialist — Batch 1 | 2026</div>
+                    <div class="bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-bold lang-ar">10 جلسات × 2 ساعة = 20 ساعة</div>
+                    <div class="bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-bold lang-en">10 Sessions × 2h = 20 Hours</div>
+                </div>
+
+                <!-- PBI Session 1 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-yellow-400/40 hover:bg-yellow-50/30 transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-400/15 text-yellow-600 font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-400 group-hover:text-white transition-colors">1</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-yellow-500 uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">01</div>
                         </div>
                         <div>
-                            <h4 class="text-xl font-black text-dark mb-1 lang-ar">مجموعة Power BI المسائية</h4>
-                            <h4 class="text-xl font-black text-dark mb-1 lang-en">Power BI Evening Cohort</h4>
-                            <div class="flex items-center gap-4 text-slate-500 text-sm font-bold mt-2">
-                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-4 h-4"></i> 6:00 PM - 8:30 PM</span>
-                                <span class="flex items-center gap-1"><i data-lucide="video" class="w-4 h-4"></i> Online / Live</span>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة الأولى</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 1</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الاثنين</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Monday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-black">2h</span>
                             </div>
                         </div>
                     </div>
-                    <button @click="openEnrollment()" class="w-full md:w-auto bg-white text-primary border-2 border-primary hover:bg-primary hover:text-white px-8 py-3 rounded-xl font-black transition-colors lang-ar">حجز مقعد</button>
-                    <button @click="openEnrollment()" class="w-full md:w-auto bg-white text-primary border-2 border-primary hover:bg-primary hover:text-white px-8 py-3 rounded-xl font-black transition-colors lang-en">Book Seat</button>
+
+                </div>
+
+                <!-- PBI Session 2 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-yellow-400/40 hover:bg-yellow-50/30 transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-400/15 text-yellow-600 font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-400 group-hover:text-white transition-colors">2</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-yellow-500 uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">03</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة الثانية</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 2</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الأربعاء</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Wednesday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PBI Session 3 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-yellow-400/40 hover:bg-yellow-50/30 transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-400/15 text-yellow-600 font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-400 group-hover:text-white transition-colors">3</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-yellow-500 uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">08</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة الثالثة</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 3</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الاثنين</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Monday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PBI Session 4 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-yellow-400/40 hover:bg-yellow-50/30 transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-400/15 text-yellow-600 font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-400 group-hover:text-white transition-colors">4</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-yellow-500 uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">10</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة الرابعة</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 4</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الأربعاء</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Wednesday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PBI Session 5 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-yellow-400/40 hover:bg-yellow-50/30 transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-400/15 text-yellow-600 font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-400 group-hover:text-white transition-colors">5</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-yellow-500 uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">15</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة الخامسة</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 5</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الاثنين</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Monday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PBI Session 6 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-yellow-400/40 hover:bg-yellow-50/30 transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-400/15 text-yellow-600 font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-400 group-hover:text-white transition-colors">6</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-yellow-500 uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">17</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة السادسة</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 6</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الأربعاء</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Wednesday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PBI Session 7 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-yellow-400/40 hover:bg-yellow-50/30 transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-400/15 text-yellow-600 font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-400 group-hover:text-white transition-colors">7</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-yellow-500 uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">22</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة السابعة</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 7</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الاثنين</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Monday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PBI Session 8 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-yellow-400/40 hover:bg-yellow-50/30 transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-400/15 text-yellow-600 font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-400 group-hover:text-white transition-colors">8</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-yellow-500 uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">24</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة الثامنة</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 8</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الأربعاء</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Wednesday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PBI Session 9 -->
+                <div class="bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-yellow-400/40 hover:bg-yellow-50/30 transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-400/15 text-yellow-600 font-black text-sm flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-400 group-hover:text-white transition-colors">9</div>
+                        <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-yellow-500 uppercase">JUN</div>
+                            <div class="text-2xl font-black text-dark leading-none">29</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 lang-ar">الجلسة التاسعة</div>
+                            <div class="font-black text-dark mb-1 lang-en">Session 9</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الاثنين</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Monday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PBI Session 10 -->
+                <div class="bg-gradient-to-r from-yellow-400/10 to-yellow-300/10 border-2 border-yellow-400/40 rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 hover:border-yellow-500/60 transition-all duration-300 group">
+                    <div class="flex items-center gap-4 flex-1 w-full">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-400 text-white font-black text-sm flex items-center justify-center flex-shrink-0 shadow-lg">10</div>
+                        <div class="bg-white shadow-sm border border-yellow-200 rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
+                            <div class="text-xs font-black text-yellow-500 uppercase">JUL</div>
+                            <div class="text-2xl font-black text-dark leading-none">01</div>
+                        </div>
+                        <div>
+                            <div class="font-black text-dark mb-1 flex items-center gap-2 lang-ar">الجلسة الختامية 🏆</div>
+                            <div class="font-black text-dark mb-1 flex items-center gap-2 lang-en">Final Session 🏆</div>
+                            <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
+                                <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> الأربعاء</span>
+                                <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Wednesday</span>
+                                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7:00 – 9:00 PM</span>
+                                <span class="bg-yellow-400 text-white px-2 py-0.5 rounded-full font-black">2h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Single enroll CTA -->
+                <div class="mt-6 pt-6 border-t border-yellow-100 text-center">
+                    <button @click="openEnrollment()" class="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-12 py-4 rounded-2xl font-black text-lg hover:shadow-lg transition-all lang-ar">
+                        <i data-lucide="rocket" class="w-5 h-5"></i> احجز مقعدك في دورة Power BI
+                    </button>
+                    <button @click="openEnrollment()" class="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-12 py-4 rounded-2xl font-black text-lg hover:shadow-lg transition-all lang-en">
+                        <i data-lucide="rocket" class="w-5 h-5"></i> Enroll in Power BI Course
+                    </button>
                 </div>
             </div>
 
@@ -884,8 +1391,6 @@ function finishIntro(name, course) {
             introScreen.classList.add('fading');
             setTimeout(()=>{
                 introScreen.style.display = 'none';
-                mainSite.style.display = 'block';
-                AOS.init({ duration:800, once:true, offset:100 });
                 window.dispatchEvent(new CustomEvent('platform-ready', { detail:{name, course} }));
             }, 500);
         }, 300);
@@ -911,6 +1416,10 @@ function draw(){
     }
 }
 setInterval(draw, 33);
+// Init AOS immediately so main site animates correctly
+document.addEventListener('DOMContentLoaded', () => {
+    AOS.init({ duration:800, once:true, offset:100 });
+});
 runIntro();
 
 // ==========================================
@@ -921,6 +1430,7 @@ function platform() {
         scrolled: false, mobileMenu: false, cursorX: 0, cursorY: 0, isHovering: false,
         logoClicks: 0, showAdminLogin: false, showAdmin: false, adminEmail: '', adminPassword: '',
         adminError: '', adminLoading: false, registrations: [], adminSearch: '', adminCourseFilter: 'all',
+        adminTab: 'registrations', visitors: [],
         
       userName: '', currentCourse: 'excel', showEnrollment: false, selectedCourse: '',
         quizStep: 1, totalScore: 0,
@@ -932,22 +1442,35 @@ function platform() {
             {qAr:'كيف أحصل على الشهادات المعتمدة؟',qEn:'How do I get the certificates?',aAr:'بعد اجتياز الامتحان النهائي والمشاريع العملية والحضور، تصدر لك 5 شهادات اعتماد دولية رسمية.',aEn:'After passing the final exam, practical projects, and maintaining attendance, you receive 5 official international certificates.'},
             {qAr:'ما الفرق بين دورة Excel و Power BI؟',qEn:'What is the difference between Excel and Power BI?',aAr:'Excel يركز على التحليل وبناء لوحات القيادة داخل الملفات. Power BI يركز على تقارير تفاعلية متكاملة ونشرها على الويب.',aEn:'Excel focuses on analysis and dashboards in files. Power BI is for web-based interactive reports.'}
         ],
-        quizData: [
-            {ar:'كيف تقيم مستواك في كتابة المعادلات (Formulas)؟',en:'How do you rate your skills in Formulas?',options:[{ar:'لم أكتب معادلة من قبل',en:'Never wrote one',score:0},{ar:'سمعت بها ولم أجربها',en:"Heard of it but never used it",score:1},{ar:'أستخدمها أحياناً بمساعدة',en:'I use it occasionally with help',score:2},{ar:'أكتبها بثقة ويومياً',en:'I write it confidently every day',score:3}]},
-            {ar:'هل سبق لك بناء Pivot Table؟',en:'Have you built a Pivot Table before?',options:[{ar:'لا، لا أعرف ما هي',en:"No, I don't know what it is",score:0},{ar:'رأيت أحداً يبنيها فقط',en:"I've only seen someone build one",score:1},{ar:'بنيتها مرة أو مرتين',en:"I've built one or twice",score:2},{ar:'أبنيها بانتظام في تقاريري',en:'I build them regularly in my reports',score:3}]},
-            {ar:'كيف تتعامل مع تنظيف البيانات (Data Cleaning)؟',en:'How do you handle Data Cleaning?',options:[{ar:'لا أعرف كيف',en:"I don't know how",score:0},{ar:'أمسح الفراغات يدوياً',en:'I delete spaces manually',score:1},{ar:'أستخدم دوال مثل TRIM',en:'I use functions like TRIM',score:2},{ar:'أستخدم Power Query',en:'I use Power Query',score:3}]},
-            {ar:'هل قمت بعمل Dashboard مسبقاً؟',en:'Have you created a Dashboard before?',options:[{ar:'لا أبداً',en:"Never",score:0},{ar:'رسمت مخططات بسيطة (Charts)',en:'Drew simple charts',score:1},{ar:'نعم، Dashboard بسيطة',en:'Yes, a simple Dashboard',score:2},{ar:'نعم، احترافية وتفاعلية',en:'Yes, pro and interactive',score:3}]}
+        excelQuizData: [
+            {ar:'كيف تقيم مستواك في كتابة المعادلات (Formulas)؟',en:'How do you rate your Formula skills?',options:[{ar:'لم أكتب معادلة من قبل',en:'Never wrote one',score:0},{ar:'سمعت بها ولم أجربها',en:'Heard of it but never used it',score:1},{ar:'أستخدمها أحياناً بمساعدة',en:'I use it occasionally with help',score:2},{ar:'أكتبها بثقة ويومياً',en:'I write it confidently every day',score:3}]},
+            {ar:'هل سبق لك بناء Pivot Table؟',en:'Have you built a Pivot Table before?',options:[{ar:'لا، لا أعرف ما هي',en:"No, I don't know what it is",score:0},{ar:'رأيت أحداً يبنيها فقط',en:"I've only seen someone build one",score:1},{ar:'بنيتها مرة أو مرتين',en:"I've built it once or twice",score:2},{ar:'أبنيها بانتظام في تقاريري',en:'I build them regularly in my reports',score:3}]},
+            {ar:'كيف تتعامل مع تنظيف البيانات (Data Cleaning) في Excel؟',en:'How do you handle Data Cleaning in Excel?',options:[{ar:'لا أعرف كيف',en:"I don't know how",score:0},{ar:'أمسح الفراغات يدوياً',en:'I delete spaces manually',score:1},{ar:'أستخدم دوال مثل TRIM و CLEAN',en:'I use functions like TRIM & CLEAN',score:2},{ar:'أستخدم Power Query داخل Excel',en:'I use Power Query inside Excel',score:3}]},
+            {ar:'هل قمت بعمل Dashboard في Excel مسبقاً؟',en:'Have you built a Dashboard in Excel before?',options:[{ar:'لا أبداً',en:'Never',score:0},{ar:'رسمت مخططات بسيطة (Charts)',en:'Drew simple charts',score:1},{ar:'نعم، Dashboard بسيطة',en:'Yes, a simple Dashboard',score:2},{ar:'نعم، احترافية وتفاعلية',en:'Yes, pro and interactive',score:3}]}
+        ],
+        pbiQuizData: [
+            {ar:'هل سبق لك فتح Power BI Desktop من قبل؟',en:'Have you ever opened Power BI Desktop?',options:[{ar:'لا، ولا أعرف ما هو',en:"No, I don't know what it is",score:0},{ar:'سمعت به لكن لم أجربه',en:'Heard of it but never tried it',score:1},{ar:'فتحته وجربت بعض الميزات',en:'Opened it and tried some features',score:2},{ar:'أستخدمه بانتظام في عملي',en:'I use it regularly at work',score:3}]},
+            {ar:'كيف مستواك في تنظيف البيانات عبر Power Query؟',en:'How is your Power Query skill level?',options:[{ar:'لم أسمع بـ Power Query',en:"I've never heard of Power Query",score:0},{ar:'أعرف ما هو لكن لم أستخدمه',en:'I know what it is but never used it',score:1},{ar:'نفّذت خطوات تنظيف أساسية',en:'I did basic cleaning steps',score:2},{ar:'أبني Queries معقدة ومتعددة المراحل',en:'I build complex multi-step queries',score:3}]},
+            {ar:'هل كتبت أي معادلة DAX من قبل؟',en:'Have you written any DAX formula before?',options:[{ar:'لا، DAX شيء جديد عليّ',en:'No, DAX is new to me',score:0},{ar:'رأيت DAX لكن لم أكتبه',en:'Seen DAX but never written it',score:1},{ar:'كتبت معادلات بسيطة مثل CALCULATE',en:'Wrote basic ones like CALCULATE',score:2},{ar:'أكتب Measures متقدمة مثل FILTER وTIMEINTELLIGENCE',en:'I write advanced ones like FILTER & TIME INTELLIGENCE',score:3}]},
+            {ar:'هل سبق لك نشر تقرير على Power BI Service؟',en:'Have you published a report to Power BI Service?',options:[{ar:'لا، لم أسمع بـ Power BI Service',en:"No, I haven't heard of Power BI Service",score:0},{ar:'أعرفه لكن لم أجرب النشر',en:'I know it but never published',score:1},{ar:'نشرت تقريراً أو اثنين',en:'Published one or two reports',score:2},{ar:'أنشر وأشارك تقارير بصلاحيات مخصصة',en:'I publish & share with Row Level Security',score:3}]}
         ],
 
-        get currentQuizQuestion() { return this.quizData[this.quizStep - 1] || {}; },
+        get currentQuizQuestion() {
+            const data = this.selectedCourse === 'powerbi' ? this.pbiQuizData : this.excelQuizData;
+            return data[this.quizStep - 1] || {};
+        },
         get generatedInsights() {
             let ins = [];
             let a = [Math.floor(Math.random()*3),Math.floor(Math.random()*3),Math.floor(Math.random()*3),Math.floor(Math.random()*3)];
-            
-            ins.push(a[0]<=1 ? {emoji:'⚡',ar:'سنبدأ معك من الصفر لنبني أساساً برمجياً صُلباً يمنع الأخطاء مستقبلاً',en:'We start from zero to build a solid foundation that prevents future errors',type:'learn'} : {emoji:'🚀',ar:'سنعزز مهاراتك بمعادلات متقدمة ومركّبة (Nested)',en:'We will boost your skills with advanced nested formulas',type:'deepen'});
-            ins.push(a[1]<=1 ? {emoji:'📊',ar:'ستتعلم بناء جداول محورية (Pivot Tables) احترافية وتحليل آلاف الصفوف بثوانٍ',en:'You will learn to build professional Pivot Tables and analyze thousands of rows in seconds',type:'learn'} : {emoji:'📈',ar:'ستتقن الجداول المحورية المتقدمة والتحليل متعدد الأبعاد',en:'You will master advanced pivot tables and multi-dimensional analysis',type:'deepen'});
-            ins.push(a[3]<=1 ? {emoji:'🎨',ar:'ستصمم لوحة قيادة تفاعلية ستُبهر بها مديرك في المحاضرة التاسعة',en:'You will design an interactive dashboard that will impress your manager by session 9',type:'learn'} : {emoji:'💎',ar:'ستصنع لوحات قيادة على مستوى الشركات متعددة الجنسيات',en:'You will create dashboards at multinational company level',type:'deepen'});
-            
+            if (this.selectedCourse === 'powerbi') {
+                ins.push(a[0]<=1 ? {emoji:'⚡',ar:'سنبدأ من الصفر لبناء أساس متين في Power Query وتجهيز البيانات',en:'We start from scratch to build a solid Power Query and data prep foundation',type:'learn'} : {emoji:'🔥',ar:'ستعمّق فهمك لـ DAX وتبني Measures متقدمة لم تكن تتخيلها',en:'You will deepen your DAX understanding and build advanced Measures',type:'deepen'});
+                ins.push(a[1]<=1 ? {emoji:'🗂️',ar:'ستتعلم نمذجة البيانات وبناء العلاقات بين الجداول كالمحترفين',en:'You will learn data modeling and building relationships like a pro',type:'learn'} : {emoji:'📐',ar:'ستتقن نماذج البيانات المعقدة والعلاقات متعددة المستويات',en:'You will master complex data models and multi-level relationships',type:'deepen'});
+                ins.push(a[3]<=1 ? {emoji:'🎨',ar:'ستنشر تقريرك التفاعلي الأول على Power BI Service في المحاضرة الأخيرة',en:'You will publish your first interactive report to Power BI Service by the final session',type:'learn'} : {emoji:'💎',ar:'ستصنع تقارير تفاعلية بمستوى الشركات المتعددة الجنسيات',en:'You will create interactive reports at multinational company level',type:'deepen'});
+            } else {
+                ins.push(a[0]<=1 ? {emoji:'⚡',ar:'سنبدأ معك من الصفر لنبني أساساً صُلباً يمنع الأخطاء مستقبلاً',en:'We start from zero to build a solid foundation that prevents future errors',type:'learn'} : {emoji:'🚀',ar:'سنعزز مهاراتك بمعادلات متقدمة ومركّبة (Nested)',en:'We will boost your skills with advanced nested formulas',type:'deepen'});
+                ins.push(a[1]<=1 ? {emoji:'📊',ar:'ستتعلم بناء جداول محورية (Pivot Tables) احترافية وتحليل آلاف الصفوف بثوانٍ',en:'You will learn to build professional Pivot Tables and analyze thousands of rows in seconds',type:'learn'} : {emoji:'📈',ar:'ستتقن الجداول المحورية المتقدمة والتحليل متعدد الأبعاد',en:'You will master advanced pivot tables and multi-dimensional analysis',type:'deepen'});
+                ins.push(a[3]<=1 ? {emoji:'🎨',ar:'ستصمم لوحة قيادة تفاعلية ستُبهر بها مديرك في المحاضرة التاسعة',en:'You will design an interactive dashboard that will impress your manager by session 9',type:'learn'} : {emoji:'💎',ar:'ستصنع لوحات قيادة على مستوى الشركات متعددة الجنسيات',en:'You will create dashboards at multinational company level',type:'deepen'});
+            }
             ins.push({emoji:'🏆',ar:'5 شهادات اعتماد دولية تُزيّن سيرتك الذاتية',en:'5 international accreditation certificates for your resume',type:'guaranteed'});
             return ins;
         },
@@ -1054,8 +1577,23 @@ function platform() {
                 const q=fb.query(fb.collection(fb.db,'registrations'),fb.orderBy('createdAt','desc'));
                 const snap=await fb.getDocs(q);
                 this.registrations=snap.docs.map(d=>({id:d.id,...d.data()}));
+                // Load visitor count silently
+                try {
+                    const vq=fb.query(fb.collection(fb.db,'visitors'),fb.orderBy('timestamp','desc'));
+                    const vsnap=await fb.getDocs(vq);
+                    this.visitors=vsnap.docs.map(d=>({id:d.id,...d.data()}));
+                } catch(e){}
             } catch(e){console.error(e);}
             finally{this.adminLoading=false;}
+        },
+        async loadVisitors(){
+            try{
+                const fb=window._fb;
+                if(!fb) return;
+                const q=fb.query(fb.collection(fb.db,'visitors'),fb.orderBy('timestamp','desc'));
+                const snap=await fb.getDocs(q);
+                this.visitors=snap.docs.map(d=>({id:d.id,...d.data()}));
+            } catch(e){console.error(e);}
         },
         async adminLogout(){
             try{if(window._fb) await window._fb.signOut(window._fb.auth);}catch(e){}
