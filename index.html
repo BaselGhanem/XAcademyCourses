@@ -434,19 +434,7 @@ a,button,input,select{cursor:pointer;}
                     </div>
                 </div>
 
-                <div class="mb-8" x-show="selectedCourse === 'powerbi' && quizStep === 5" x-transition x-cloak>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="h-px flex-1 bg-slate-200"></div>
-                        <p class="text-sm font-black text-slate-500 text-center lang-ar">🖥️ هذا ما ستبنيه أنت عند إتمام الدورة</p>
-                        <p class="text-sm font-black text-slate-500 text-center lang-en">🖥️ This is what YOU will build upon completion</p>
-                        <div class="h-px flex-1 bg-slate-200"></div>
-                    </div>
-                   
-                      
-                    </div>
-                </div>
-
-                <button @click="quizStep = 6" class="w-full bg-gradient-to-r from-primary to-primary_dark text-white font-black py-4 rounded-2xl text-xl hover:shadow-glow transition-all flex items-center justify-center gap-3">
+                           <button @click="quizStep = 6" class="w-full bg-gradient-to-r from-primary to-primary_dark text-white font-black py-4 rounded-2xl text-xl hover:shadow-glow transition-all flex items-center justify-center gap-3">
                     <span class="lang-ar">الخطوة الأخيرة: حجز المقعد</span><span class="lang-en">Final Step: Secure Your Seat</span><i data-lucide="arrow-left" class="w-6 h-6 rtl:hidden"></i><i data-lucide="arrow-right" class="w-6 h-6 ltr:hidden"></i>
                 </button>
             </div>
