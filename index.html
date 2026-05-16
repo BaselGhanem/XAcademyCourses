@@ -379,11 +379,12 @@ a,button,input,select{cursor:pointer;}
         </div>
     </div>
 
-    <div class="enrollment-overlay" x-show="showEnrollment" x-cloak>
+        <div class="enrollment-overlay overflow-y-auto" x-show="showEnrollment" x-cloak>
         <div class="w-full h-1 bg-slate-100 sticky top-0 z-50">
             <div class="h-full bg-primary progress-bar-fill" :style="`width:${(quizStep/7)*100}%`"></div>
         </div>
-        <div class="max-w-2xl mx-auto px-6 py-12 md:py-20 h-full flex flex-col justify-center">
+        <div class="max-w-2xl mx-auto px-6 py-12 md:py-20 min-h-screen flex flex-col justify-center">
+
             
             <button @click="showEnrollment=false; quizStep=1; totalScore=0; formData={name:'',email:'',phone:''}" class="absolute top-6 left-6 w-12 h-12 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-all">
                 <i data-lucide="x" class="w-6 h-6"></i>
