@@ -547,10 +547,19 @@ a,button,input,select{cursor:pointer;}
                 <a href="#syllabus" class="w-full sm:w-auto bg-white text-dark px-10 py-4 rounded-2xl font-black text-lg border-2 border-slate-100 hover:border-slate-300 transition-colors lang-en">View Syllabus</a>
             </div>
             
-        <div class="mt-16 pt-10 border-t border-slate-200 flex flex-wrap justify-center gap-8 md:gap-16 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-    <img src="https://api.iconify.design/logos:microsoft-excel.svg" alt="Excel" class="h-10">
-    <img src="https://api.iconify.design/logos:microsoft-power-bi.svg" alt="Power BI" class="h-10">
-    <img src="https://api.iconify.design/logos:microsoft.svg" alt="Microsoft" class="h-8 object-contain">
+ <div class="mt-16 pt-10 border-t border-slate-200 flex flex-wrap justify-center items-center gap-8 md:gap-16 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+    <!-- أيقونة الإكسل -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 256 256">
+        <path fill="#21A366" d="M141.6 15.4L44.8 30.5c-4.9.8-8.8 4.7-8.8 9.6v175.8c0 4.9 3.9 8.8 8.8 9.6l96.8 15.1c6.5 1 12.4-4.2 12.4-10.8V26.2c0-6.6-5.9-11.8-12.4-10.8z"/>
+        <path fill="#107C41" d="M154 26.2v203.6c0 6.6-5.9 11.8-12.4 10.8L241.2 225c5.3-.8 9.4-5.1 9.4-10.4V41.4c0-5.3-4.1-9.6-9.4-10.4L141.6 15.4c6.5-1 12.4 4.2 12.4 10.8z"/>
+        <path fill="#fff" d="M207.8 174l-21.7-41l20.4-38.6h-21.6l-10.5 24.3c-1.3 3-2.4 5.9-3.4 8.7h-.3c-.9-2.9-2-5.7-3.4-8.7l-10.7-24.3h-20.7l20.5 38.3l-21.4 41.3h21.9l11.7-26.6c1.3-3 2.5-6.2 3.4-9.3h.3c1 3.1 2.2 6.3 3.5 9.3l12.2 26.6h20z"/>
+    </svg>
+    <!-- أيقونة Power BI -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 256 256">
+        <path fill="#F2C811" d="M84.4 224h87.2V96H84.4v128z"/>
+        <path fill="#D1A60D" d="M171.6 224v-128H240v128h-68.4z"/>
+        <path fill="#E6B40D" d="M16 224h68.4v-64H16v64z"/>
+    </svg>
 </div>
         </div>
     </header>
@@ -673,7 +682,7 @@ a,button,input,select{cursor:pointer;}
         </div>
     </section>
 
-    <section id="schedule" class="py-24 bg-white" x-data="{ schedTab: currentCourse||'excel' }">
+<section id="schedule" class="py-24 bg-white">
         <div class="max-w-5xl mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6" data-aos="fade-up">
                 <div>
@@ -910,7 +919,7 @@ function platform() {
         logoClicks: 0, showAdminLogin: false, showAdmin: false, adminEmail: '', adminPassword: '',
         adminError: '', adminLoading: false, registrations: [], adminSearch: '', adminCourseFilter: 'all',
         
-        userName: '', currentCourse: '', showEnrollment: false, selectedCourse: '',
+      userName: '', currentCourse: 'excel', showEnrollment: false, selectedCourse: '',
         quizStep: 1, totalScore: 0,
         formData: { name:'', email:'', phone:'' }, formError: '', isSubmitting: false,
 
@@ -948,13 +957,20 @@ function platform() {
             });
         },
 
-        init() {
+     init() {
             window.addEventListener('scroll', () => { this.scrolled = window.scrollY > 20; });
             window.addEventListener('platform-ready', e => {
                 this.userName = e.detail.name;
                 this.currentCourse = e.detail.course;
                 this.formData.name = e.detail.name;
+                
+                // 🔥 هذا هو الحل السحري لتحديث الحركات والأيقونات بعد الاختيار
+                this.$nextTick(() => {
+                    if (window.lucide) lucide.createIcons();
+                    if (typeof AOS !== 'undefined') AOS.refresh();
+                });
             });
+
             const lt = document.getElementById('langToggle');
             const ltm = document.getElementById('langToggleMobile');
             if(lt) lt.addEventListener('click',()=>this.toggleLang());
