@@ -1245,15 +1245,12 @@ function platform() {
         logoClick() {
             this.logoClicks++;
             clearTimeout(this._logoTimer);
-            if(this.logoClicks >= 5) {
-                this.logoClicks = 0;
-                this._logoFlash = 0;
-                // دخول مباشر بلا كلمة سر — استدعاء Firebase بالبيانات الافتراضية
-                this.adminEmail = 'basel@x-academy.com';
-                this.adminPassword = 'xacademy2026';
-                this.adminLogin();
-                return;
-            }
+           if(this.logoClicks >= 5) {
+    this.logoClicks = 0;
+    this._logoFlash = 0;
+    this.showAdminLogin = true;
+    return;
+}
             this._logoFlash = this.logoClicks;
             this._logoTimer = setTimeout(() => { this.logoClicks = 0; this._logoFlash = 0; }, 2500);
         },
