@@ -1,1390 +1,1212 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="scroll-smooth">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="app-version" content="2.0.27">
+<meta charset="UTF-8">
+<meta name="app-version" content="3.0.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X Academy | Excel & Power BI – باسل غانم</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23099999%22/><text x=%2250%%22 y=%2250%%22 font-family=%22Arial%22 font-size=%2265%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22 dominant-baseline=%22central%22>X</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X Academy | Excel & Power BI – باسل غانم</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23099999%22/><text x=%2250%%22 y=%2250%%22 font-family=%22Arial%22 font-size=%2265%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22 dominant-baseline=%22central%22>X</text></svg>">
-
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Poppins:wght@400;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { primary:'#099999', primary_light:'#0bc4c4', primary_dark:'#066666', dark:'#0B1120' },
-                    fontFamily: { ar:['Cairo','sans-serif'], en:['Poppins','sans-serif'], mono:['Share Tech Mono','monospace'] },
-                    boxShadow: { premium:'0 25px 50px -12px rgba(9,153,153,.25)', glow:'0 0 20px rgba(9,153,153,.5)' }
-                }
-            }
-        }
-    </script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
-        import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
-        const app = initializeApp({
-            apiKey:"AIzaSyBBdAxS7_i24eoLqotOZaCQ5jMRmQImVms",
-            authDomain:"x-academy-registration.firebaseapp.com",
-            projectId:"x-academy-registration",
-            storageBucket:"x-academy-registration.firebasestorage.app",
-            messagingSenderId:"675856360780",
-            appId:"1:675856360780:web:2818a97abe166eaa985be9"
-        });
-        const _db = getFirestore(app);
-        const _auth = getAuth(app);
-        window._fb = { db:_db, auth:_auth, collection, addDoc, getDocs, query, orderBy, signInWithEmailAndPassword, signOut };
-
-        // ── Auto-track every visitor silently ──
-        setTimeout(async () => {
-            try {
-                await addDoc(collection(_db, 'visitors'), {
-                    type: 'visit',
-                    timestamp: new Date().toISOString(),
-                    date: new Date().toLocaleDateString('en-GB'),
-                    time: new Date().toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'}),
-                    userAgent: navigator.userAgent,
-                    language: navigator.language || 'unknown',
-                    platform: navigator.platform || 'unknown',
-                    screen: `${screen.width}×${screen.height}`,
-                    viewport: `${window.innerWidth}×${window.innerHeight}`,
-                    referrer: document.referrer || 'direct',
-                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
-                });
-            } catch(e) { /* silent */ }
-        }, 1500);
-    </script>
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, getDoc, setDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+const app = initializeApp({
+    apiKey:"AIzaSyBBdAxS7_i24eoLqotOZaCQ5jMRmQImVms",
+    authDomain:"x-academy-registration.firebaseapp.com",
+    projectId:"x-academy-registration",
+    storageBucket:"x-academy-registration.firebasestorage.app",
+    messagingSenderId:"675856360780",
+    appId:"1:675856360780:web:2818a97abe166eaa985be9"
+});
+const _db = getFirestore(app);
+const _auth = getAuth(app);
+window._fb = { db:_db, auth:_auth, collection, addDoc, getDocs, getDoc, setDoc, doc, query, orderBy, signInWithEmailAndPassword, signOut };
+// Track visitor
+setTimeout(async()=>{
+    try{ await addDoc(collection(_db,'visitors'),{type:'visit',timestamp:new Date().toISOString(),date:new Date().toLocaleDateString('en-GB'),time:new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),userAgent:navigator.userAgent,language:navigator.language||'unknown',platform:navigator.platform||'unknown',screen:`${screen.width}×${screen.height}`,viewport:`${window.innerWidth}×${window.innerHeight}`,referrer:document.referrer||'direct',timezone:Intl.DateTimeFormat().resolvedOptions().timeZone});}catch(e){}
+},1500);
+</script>
 
 <style>
-/* ── Base ── */
 *{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;font-family:'Cairo',sans-serif;background:#0B1120;}
 [x-cloak]{display:none!important;}
-html,body{overflow-x:hidden;max-width:100vw;}
-html[lang="ar"] .lang-en{display:none!important;}
-html[lang="en"] .lang-ar{display:none!important;}
-html[lang="ar"] body{font-family:'Cairo',sans-serif;}
+
+/* ── SLIDE ENGINE ── */
+.slide{
+  position:fixed;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:1.5rem;
+  transition:transform .55s cubic-bezier(.77,0,.175,1), opacity .45s ease;
+  will-change:transform,opacity;
+  overflow-y:auto;
+}
+.slide.active{transform:translateY(0);opacity:1;pointer-events:all;z-index:10;}
+.slide.above{transform:translateY(-100%);opacity:0;pointer-events:none;z-index:5;}
+.slide.below{transform:translateY(100%);opacity:0;pointer-events:none;z-index:5;}
+.slide.hidden-slide{transform:translateY(100%);opacity:0;pointer-events:none;z-index:1;}
+
+/* Dark slides */
+.slide-dark{background:linear-gradient(145deg,#0B1120 0%,#0f1e35 100%);}
+/* Light slides */
+.slide-light{background:#F8FAFC;}
+/* Teal accent slides */
+.slide-teal{background:linear-gradient(145deg,#066666 0%,#099999 100%);}
+
+/* ── PROGRESS BAR ── */
+#progressBar{
+  position:fixed;top:0;left:0;height:3px;
+  background:linear-gradient(90deg,#099999,#0bc4c4);
+  transition:width .4s ease;z-index:9999;
+}
+
+/* ── NAV DOTS ── */
+#navDots{
+  position:fixed;left:1.25rem;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:.6rem;z-index:9998;
+}
+.nav-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.25);cursor:pointer;
+  transition:all .3s;border:1.5px solid transparent;
+}
+.nav-dot.active{background:#099999;transform:scale(1.3);border-color:#0bc4c4;}
+.nav-dot:hover{background:rgba(9,153,153,.6);}
+@media(max-width:640px){#navDots{display:none;}}
+
+/* ── BACK BUTTON ── */
+#backBtn{
+  position:fixed;top:1rem;right:1.25rem;z-index:9998;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .25s;color:rgba(255,255,255,.6);
+  backdrop-filter:blur(8px);
+}
+#backBtn:hover{background:rgba(255,255,255,.15);color:#fff;}
+#backBtn.on-light{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.12);color:rgba(0,0,0,.4);}
+#backBtn.on-light:hover{background:rgba(0,0,0,.1);color:#0B1120;}
+
+/* ── LANG + STEP INDICATOR ── */
+#topBar{
+  position:fixed;top:1rem;left:1.25rem;z-index:9998;
+  display:flex;align-items:center;gap:.75rem;
+}
+.lang-btn{
+  padding:.3rem .8rem;border-radius:20px;font-size:.75rem;font-weight:700;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  color:rgba(255,255,255,.7);cursor:pointer;transition:all .25s;
+  backdrop-filter:blur(8px);
+}
+.lang-btn:hover{background:rgba(255,255,255,.2);color:#fff;}
+.lang-btn.on-light{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.12);color:rgba(0,0,0,.5);}
+.step-label{font-size:.72rem;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.05em;}
+.step-label.on-light{color:rgba(0,0,0,.35);}
+
+/* ── TYPOGRAPHY ── */
+.slide-tag{font-size:.72rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;}
+.slide-h1{font-size:clamp(1.9rem,5vw,3rem);font-weight:900;line-height:1.15;margin-bottom:1rem;}
+.slide-h2{font-size:clamp(1.4rem,4vw,2rem);font-weight:900;line-height:1.2;margin-bottom:.75rem;}
+.slide-body{font-size:clamp(.9rem,2vw,1.05rem);font-weight:600;line-height:1.75;opacity:.8;}
+.slide-card{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:1.25rem;padding:1.25rem 1.5rem;
+  transition:all .3s;
+}
+.slide-card:hover{background:rgba(255,255,255,.1);border-color:rgba(9,153,153,.4);}
+
+/* on light */
+.on-light .slide-card{background:#fff;border-color:#e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,.06);}
+.on-light .slide-card:hover{border-color:#099999;box-shadow:0 8px 30px rgba(9,153,153,.12);}
+.on-light .slide-body{color:#475569;}
+.on-light .slide-h1,.on-light .slide-h2{color:#0B1120;}
+.on-light .slide-tag{color:#099999;}
+
+/* ── BUTTONS ── */
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:linear-gradient(135deg,#099999,#066666);
+  color:#fff;font-weight:800;font-size:1rem;
+  padding:.9rem 2rem;border-radius:1rem;cursor:pointer;
+  transition:all .3s;border:none;
+  box-shadow:0 8px 24px rgba(9,153,153,.35);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(9,153,153,.5);}
+.btn-primary:active{transform:translateY(0);}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);
+  color:rgba(255,255,255,.8);font-weight:700;font-size:.9rem;
+  padding:.7rem 1.5rem;border-radius:.85rem;cursor:pointer;
+  transition:all .25s;
+}
+.btn-ghost:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);color:#fff;}
+.btn-pbi{background:linear-gradient(135deg,#F2C811,#b38f00);color:#0B1120;box-shadow:0 8px 24px rgba(242,200,17,.3);}
+.btn-pbi:hover{box-shadow:0 12px 32px rgba(242,200,17,.5);}
+
+/* ── QUIZ OPTIONS ── */
+.quiz-opt{
+  width:100%;padding:.9rem 1.2rem;border-radius:.9rem;
+  border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);
+  color:rgba(255,255,255,.85);font-weight:700;font-size:.95rem;
+  text-align:start;cursor:pointer;transition:all .25s;
+  display:flex;align-items:center;gap:.9rem;
+}
+.quiz-opt:hover{border-color:#099999;background:rgba(9,153,153,.1);transform:translateX(-4px);}
+.quiz-opt .opt-k{min-width:2rem;height:2rem;border-radius:.45rem;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:900;flex-shrink:0;}
+.quiz-opt:hover .opt-k{background:#099999;color:#fff;}
+
+/* ── FAQ ── */
+.faq-item{border-bottom:1px solid rgba(255,255,255,.08);overflow:hidden;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{width:100%;padding:1rem 0;display:flex;justify-content:space-between;align-items:center;gap:1rem;font-weight:800;font-size:.95rem;color:rgba(255,255,255,.9);cursor:pointer;background:none;border:none;text-align:start;}
+.faq-a{font-size:.88rem;font-weight:600;color:rgba(255,255,255,.6);line-height:1.7;padding-bottom:1rem;}
+.on-light .faq-item{border-color:#e2e8f0;}
+.on-light .faq-q{color:#0B1120;}
+.on-light .faq-a{color:#64748b;}
+
+/* ── SESSION PILL ── */
+.sess-row{display:flex;align-items:center;gap:.85rem;padding:.6rem .85rem;border-radius:.75rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);transition:all .25s;}
+.sess-row:hover{background:rgba(9,153,153,.08);border-color:rgba(9,153,153,.25);}
+.sess-num{width:32px;height:32px;border-radius:.5rem;background:rgba(9,153,153,.2);color:#0bc4c4;font-weight:900;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sess-date{text-align:center;min-width:44px;flex-shrink:0;}
+.sess-date .month{font-size:.65rem;font-weight:900;color:#099999;text-transform:uppercase;}
+.sess-date .day{font-size:1.15rem;font-weight:900;color:#fff;line-height:1;}
+
+/* ── CERT BADGE ── */
+.cert-badge{display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;border-radius:.85rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);}
+.cert-icon{width:36px;height:36px;border-radius:.6rem;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+
+/* ── INSIGHT CARD ── */
+.insight-card{display:flex;align-items:flex-start;gap:.9rem;padding:1rem;border-radius:1rem;background:rgba(9,153,153,.06);border:1px solid rgba(9,153,153,.15);}
+.ins-badge{font-size:.68rem;font-weight:900;padding:.25rem .6rem;border-radius:.4rem;margin-top:.25rem;display:inline-block;}
+
+/* ── ADMIN OVERLAY ── */
+#adminOverlay{position:fixed;inset:0;z-index:99999;background:#0B1120;overflow-y:auto;display:none;}
+#adminOverlay.open{display:block;}
+#adminLoginModal{position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:1rem;}
+#adminLoginModal.open{display:flex;}
+
+/* ── CONFETTI ── */
+@keyframes confDrop{0%{transform:translate(0,0) rotate(0);opacity:1;}100%{transform:translate(var(--cx),var(--cy)) rotate(720deg);opacity:0;}}
+.conf-p{position:fixed;pointer-events:none;z-index:99999;animation:confDrop 1.8s ease-out forwards;}
+
+/* ── SUCCESS ── */
+@keyframes popIn{from{transform:scale(.7);opacity:0;}to{transform:scale(1);opacity:1;}}
+.pop-in{animation:popIn .5s cubic-bezier(.34,1.56,.64,1) forwards;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:#099999;border-radius:4px;}
+
+/* ── LANG HIDE ── */
+html[lang="ar"] .en{display:none!important;}
+html[lang="en"] .ar{display:none!important;}
 html[lang="en"] body{font-family:'Poppins',sans-serif;}
-body{background:#FAFAFA;color:#1E293B;}
-a,button,input,select{cursor:pointer;}
-::selection{background:#099999;color:#fff;}
-::-webkit-scrollbar{width:5px;}
-::-webkit-scrollbar-thumb{background:#099999;border-radius:10px;}
 
-/* ── INTRO SCREEN (Popup Modal) ── */
-#introScreen{
-    position:fixed;inset:0;z-index:99999;
-    background:rgba(0,4,0,0.88);
-    backdrop-filter:blur(8px);
-    -webkit-backdrop-filter:blur(8px);
-    display:flex;align-items:center;justify-content:center;
-    overflow:hidden;
-}
-#matrixCanvas{position:absolute;inset:0;z-index:0;opacity:.45;}
+/* ── ADMIN TABLE ── */
+.admin-table{width:100%;border-collapse:collapse;font-size:.82rem;}
+.admin-table th{padding:.6rem 1rem;text-align:start;color:rgba(255,255,255,.4);font-weight:800;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid rgba(255,255,255,.08);}
+.admin-table td{padding:.65rem 1rem;border-bottom:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.8);vertical-align:middle;}
+.admin-table tr:hover td{background:rgba(255,255,255,.03);}
 
-#terminalWindow{
-    position:relative;z-index:1;
-    width:min(620px,95vw);
-    background:rgba(0,8,0,.92);
-    border:1.5px solid #00ff41;
-    border-radius:12px;
-    box-shadow:0 0 60px rgba(0,255,65,.2),0 0 120px rgba(0,255,65,.08),inset 0 0 40px rgba(0,255,65,.03);
-    overflow:hidden;
-    font-family:'Share Tech Mono',monospace;
-}
-
-#terminalBar{
-    background:#0a1a0a;
-    border-bottom:1px solid rgba(0,255,65,.2);
-    padding:.6rem 1rem;
-    display:flex;align-items:center;gap:.75rem;
-}
-.tb-dot{width:12px;height:12px;border-radius:50%;}
-.tb-title{flex:1;text-align:center;color:rgba(0,255,65,.5);font-size:.7rem;letter-spacing:.15em;}
-
-#terminalContent{
-    padding:1.25rem 1.5rem 1.5rem;
-    min-height:260px;max-height:75vh;overflow-y:auto;
-    scrollbar-width:thin;scrollbar-color:#00ff41 transparent;
-}
-
-.t-line{
-    color:#00ff41;font-size:.82rem;line-height:1.8;
-    margin-bottom:.1rem;white-space:pre-wrap;word-break:break-all;
-}
-.t-line.dim{color:rgba(0,255,65,.45);}
-.t-line.bright{color:#7fff00;font-weight:bold;}
-.t-line.error{color:#ff4444;}
-.t-line.system{color:#00ccff;}
-
-#inputRow{
-    display:none;align-items:center;gap:.5rem;
-    margin-top:.5rem;padding:.25rem 0;
-    border-top:1px solid rgba(0,255,65,.1);
-}
-.t-prompt{color:#00ff41;font-size:.82rem;flex-shrink:0;}
-#nameInput{
-    flex:1;background:transparent;border:none;outline:none;
-    color:#7fff00;font-family:'Share Tech Mono',monospace;font-size:.82rem;
-    caret-color:#00ff41;
-}
-.t-cursor{
-    width:8px;height:14px;background:#00ff41;
-    animation:blink .7s step-end infinite;flex-shrink:0;
-    align-self:center;
-}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-
-#courseSelect{display:none;margin-top:1.25rem;}
-.c-btn{
-    display:block;width:100%;margin-bottom:.75rem;
-    border:1.5px solid rgba(0,255,65,.35);border-radius:8px;
-    padding:.85rem 1.25rem;
-    background:rgba(0,255,65,.04);
-    color:#00ff41;font-family:'Share Tech Mono',monospace;font-size:.85rem;
-    text-align:start;cursor:pointer;
-    transition:all .25s;position:relative;overflow:hidden;
-}
-.c-btn::before{
-    content:'';position:absolute;inset:0;
-    background:linear-gradient(90deg,transparent,rgba(0,255,65,.08),transparent);
-    transform:translateX(-100%);transition:transform .5s;
-}
-.c-btn:hover::before{transform:translateX(100%);}
-.c-btn:hover{border-color:#00ff41;background:rgba(0,255,65,.08);box-shadow:0 0 20px rgba(0,255,65,.15);}
-.c-btn .c-tag{float:right;color:rgba(0,255,65,.4);font-size:.7rem;}
-
-/* Intro glitch + transition */
-@keyframes glitch1{
-    0%,100%{clip-path:inset(0 0 98% 0);transform:translateX(0);}
-    25%{clip-path:inset(30% 0 60% 0);transform:translateX(-4px);}
-    50%{clip-path:inset(60% 0 30% 0);transform:translateX(4px);}
-    75%{clip-path:inset(80% 0 10% 0);transform:translateX(-2px);}
-}
-@keyframes glitch2{
-    0%,100%{clip-path:inset(98% 0 0 0);transform:translateX(0);}
-    25%{clip-path:inset(50% 0 40% 0);transform:translateX(4px);}
-    50%{clip-path:inset(20% 0 70% 0);transform:translateX(-4px);}
-    75%{clip-path:inset(70% 0 20% 0);transform:translateX(2px);}
-}
-#introScreen.glitching::before{
-    content:'';position:absolute;inset:0;z-index:2;
-    background:rgba(0,255,65,.03);
-    animation:glitch1 .15s infinite;
-}
-#introScreen.glitching::after{
-    content:'';position:absolute;inset:0;z-index:3;
-    background:rgba(255,0,68,.03);
-    animation:glitch2 .15s infinite;
-}
-#introScreen.fading{animation:fadeToBlack .5s ease-in forwards;}
-@keyframes fadeToBlack{to{opacity:0;}}
-
-/* ── Main site animations ── */
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-@keyframes slideUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-@keyframes float{0%,100%{transform:translateY(0) rotate(0);}50%{transform:translateY(-18px) rotate(2deg);}}
-
-.glass-nav{background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(9,153,153,.1);}
-.glass-card{
-    background:linear-gradient(145deg,#fff,#f8fafc);
-    border:1px solid rgba(9,153,153,.1);
-    box-shadow:0 10px 30px -10px rgba(0,0,0,.05);
-    transition:all .4s cubic-bezier(.4,0,.2,1);
-    position:relative;overflow:visible;
-}
-.glass-card::before{
-    content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
-    background:linear-gradient(to right,transparent,rgba(255,255,255,.8),transparent);
-    transform:skewX(-20deg);transition:.5s;
-}
-.glass-card:hover::before{left:150%;}
-.glass-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 25px 50px -12px rgba(9,153,153,.15);border-color:rgba(9,153,153,.3);}
-
-.animate-float{animation:float 7s ease-in-out infinite;}
-.gradient-text{background:linear-gradient(135deg,#099999 0%,#066666 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.premium-gradient-bg{background:linear-gradient(135deg,#0B1120 0%,#152336 100%);}
-.btn-glow:hover{box-shadow:0 0 28px rgba(9,153,153,.65);transform:translateY(-2px);}
-
-/* ── Enrollment ── */
-.enrollment-overlay{position:fixed;inset:0;z-index:9000;background:#fff;animation:fadeIn .3s ease-out;}
-
-@keyframes slideInRight{from{opacity:0;transform:translateX(48px);}to{opacity:1;transform:translateX(0);}}
-@keyframes slideInLeft{from{opacity:0;transform:translateX(-48px);}to{opacity:1;transform:translateX(0);}}
-.slide-in{animation:slideInRight .45s cubic-bezier(.34,1.56,.64,1) forwards;}
-
-.quiz-option{
-    border:2px solid #e2e8f0;border-radius:1rem;padding:.9rem 1.2rem;width:100%;
-    display:flex;align-items:center;gap:1rem;
-    transition:all .25s cubic-bezier(.34,1.56,.64,1);background:#fff;cursor:pointer;text-align:start;
-}
-.quiz-option:hover{border-color:#099999;transform:translateY(-3px);box-shadow:0 8px 24px -8px rgba(9,153,153,.25);}
-.quiz-option.selected{border-color:#099999;background:rgba(9,153,153,.06);transform:translateY(-3px);}
-.opt-key{
-    min-width:2.1rem;height:2.1rem;border-radius:.5rem;background:#f1f5f9;
-    display:flex;align-items:center;justify-content:center;
-    font-weight:900;font-size:.8rem;color:#64748b;flex-shrink:0;transition:all .25s;
-}
-.quiz-option.selected .opt-key{background:#099999;color:#fff;}
-.progress-bar-fill{transition:width .5s cubic-bezier(.4,0,.2,1);}
-
-.tf-input{
-    width:100%;background:transparent;border:none;border-bottom:2px solid #cbd5e1;
-    padding:.75rem 0;font-size:1.5rem;font-weight:700;color:#0B1120;outline:none;transition:border-color .3s;
-}
-.tf-input:focus{border-color:#099999;}
-.tf-input::placeholder{color:#94a3b8;font-weight:400;font-size:1.1rem;}
-
-/* ── Insight cards ── */
-.insight-card{
-    background:linear-gradient(135deg,rgba(9,153,153,.06),rgba(9,153,153,.02));
-    border:1px solid rgba(9,153,153,.15);border-radius:1.25rem;padding:1.25rem;
-    display:flex;align-items:flex-start;gap:1rem;
-    transition:all .3s;
-}
-.insight-card:hover{border-color:rgba(9,153,153,.3);transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(9,153,153,.15);}
-
-/* ── PBI Preview window ── */
-.pbi-window{border-radius:1.5rem;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 25px 60px -12px rgba(0,0,0,.12);}
-.pbi-titlebar{background:#1e293b;padding:.75rem 1rem;display:flex;align-items:center;gap:.75rem;}
-.pbi-dot{width:12px;height:12px;border-radius:50%;}
-
-/* ── Admin ── */
-.admin-overlay{position:fixed;inset:0;z-index:9500;background:#0B1120;overflow-y:auto;}
-.stat-card{background:linear-gradient(135deg,rgba(9,153,153,.15),rgba(9,153,153,.05));border:1px solid rgba(9,153,153,.2);}
-
-/* ── Tab ── */
-.tab-btn.active{background:linear-gradient(135deg,#099999,#066666);color:#fff;box-shadow:0 4px 16px rgba(9,153,153,.35);}
-
-/* ── Custom cursor ── */
-.custom-cursor{
-    width:20px;height:20px;border-radius:50%;position:fixed;pointer-events:none;z-index:9999;
-    transform:translate(-50%,-50%);mix-blend-mode:difference;background:#fff;transition:transform .15s;
-}
-.custom-cursor.hover{transform:translate(-50%,-50%) scale(1.8);background:rgba(9,153,153,.6);}
-
-/* ── Confetti ── */
-@keyframes confettiDrop{0%{transform:translate(0,0) rotate(0);opacity:1;}100%{transform:translate(var(--cx),var(--cy)) rotate(720deg);opacity:0;}}
-.confetti-piece{position:fixed;pointer-events:none;z-index:99999;animation:confettiDrop 1.8s ease-out forwards;}
-
-/* ── Spinner ── */
-@keyframes spin360{to{transform:rotate(360deg);}}
-.spinner{animation:spin360 .8s linear infinite;}
+/* ── SCHEDULE EDITOR ── */
+.sched-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:.5rem;padding:.4rem .7rem;color:#fff;font-size:.8rem;font-weight:600;outline:none;transition:border .2s;}
+.sched-input:focus{border-color:#099999;}
 </style>
 </head>
-
 <body>
-<div id="introScreen">
-    <canvas id="matrixCanvas"></canvas>
-    <div id="terminalWindow">
-        <div id="terminalBar">
-            <div class="tb-dot" style="background:#ff5f57"></div>
-            <div class="tb-dot" style="background:#febc2e"></div>
-            <div class="tb-dot" style="background:#28c840"></div>
-            <div class="tb-title">X-ACADEMY-TERMINAL — v2.0.27</div>
-            <div style="width:36px"></div>
-        </div>
-        <div id="terminalContent">
-            <div id="terminalLines"></div>
-            <div id="inputRow">
-                <span class="t-prompt">&gt;&nbsp;</span>
-                <input id="nameInput" autocomplete="off" spellcheck="false" maxlength="40">
-                <div class="t-cursor"></div>
-            </div>
-            <div id="courseSelect"></div>
-        </div>
-    </div>
+
+<!-- ═══════════════════════════════
+     PROGRESS + NAV + BACK + TOPBAR
+════════════════════════════════ -->
+<div id="progressBar" style="width:0%"></div>
+
+<div id="navDots"></div>
+
+<button id="backBtn" onclick="goBack()" title="رجوع" style="display:none">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+</button>
+
+<div id="topBar">
+  <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
+  <span class="step-label" id="stepLabel"></span>
 </div>
 
-<div id="mainSite" x-data="platform()" @mousemove="cursorX=$event.clientX;cursorY=$event.clientY" @keydown.window="handleKey($event)">
-    <div class="custom-cursor hidden md:block" :class="{'hover':isHovering}" :style="`left:${cursorX}px;top:${cursorY}px`"></div>
-
-    <div class="fixed inset-0 z-[9800] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md"
-         x-show="showAdminLogin" x-cloak
-         x-transition:enter="transition duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
-        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md p-10" @click.stop>
-            <div class="flex items-center gap-3 mb-8">
-                <div class="bg-gradient-to-br from-primary to-primary_dark p-2.5 rounded-xl text-white"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
-                <div><p class="font-black text-dark text-lg">Admin Access</p><p class="text-sm text-slate-500">X Academy Trainer Dashboard</p></div>
-            </div>
-            <div class="space-y-5">
-                <div>
-                    <label class="text-xs font-black text-slate-500 uppercase tracking-widest block mb-2">Email</label>
-                    <input type="email" x-model="adminEmail" placeholder="trainer@x-academy.com" class="w-full px-5 py-3.5 border-2 border-slate-200 rounded-xl focus:border-primary outline-none transition font-bold text-dark" @keyup.enter="adminLogin()">
-                </div>
-                <div>
-                    <label class="text-xs font-black text-slate-500 uppercase tracking-widest block mb-2">Password</label>
-                    <input type="password" x-model="adminPassword" placeholder="••••••••" class="w-full px-5 py-3.5 border-2 border-slate-200 rounded-xl focus:border-primary outline-none transition font-bold text-dark" @keyup.enter="adminLogin()">
-                </div>
-                <p class="text-red-500 text-sm font-bold" x-show="adminError" x-text="adminError"></p>
-                <button @click="adminLogin()" class="w-full bg-gradient-to-r from-primary to-primary_dark text-white font-black py-4 rounded-2xl hover:shadow-glow transition-all flex items-center justify-center gap-3">
-                    <span x-show="!adminLoading">Enter Dashboard</span>
-                    <span x-show="adminLoading" class="flex items-center gap-2"><svg class="spinner w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10" opacity=".25"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>Authenticating</span>
-                </button>
-            </div>
-            <button @click="showAdminLogin=false" class="mt-6 w-full py-3 text-slate-400 hover:text-dark font-bold transition-colors">Cancel</button>
-        </div>
+<!-- ═══════════════════════════════════════════════════
+     ADMIN LOGIN MODAL
+════════════════════════════════════════════════════ -->
+<div id="adminLoginModal">
+  <div style="background:#111827;border:1px solid rgba(255,255,255,.1);border-radius:1.5rem;width:min(420px,95vw);padding:2.5rem;">
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:2rem;">
+      <div style="background:linear-gradient(135deg,#099999,#066666);padding:.6rem;border-radius:.75rem;color:#fff;display:flex;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div>
+        <div style="font-weight:900;color:#fff;font-size:1.05rem;">Admin Access</div>
+        <div style="font-size:.78rem;color:rgba(255,255,255,.4);">X Academy Trainer Dashboard</div>
+      </div>
     </div>
-
-    <div class="admin-overlay" x-show="showAdmin" x-cloak x-transition:enter="transition duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
-        <div class="max-w-7xl mx-auto p-6 min-h-screen flex flex-col">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-10 bg-white/5 border border-white/10 p-6 rounded-3xl backdrop-blur-md">
-                <div class="flex items-center gap-4">
-                    <div class="bg-gradient-to-br from-primary to-primary_dark p-3 rounded-2xl text-white shadow-glow"><i data-lucide="shield" class="w-8 h-8"></i></div>
-                    <div>
-                        <h1 class="text-3xl font-black text-white mb-1">Trainer Command Center</h1>
-                        <p class="text-slate-400 font-medium">Real-time Registration Data</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-4">
-                    <button @click="exportExcel()" class="bg-white/10 hover:bg-white/20 text-white px-5 py-3 rounded-xl transition-all font-bold flex items-center gap-2 border border-white/10"><i data-lucide="download" class="w-5 h-5"></i> Export Excel</button>
-                    <button @click="adminLogout()" class="bg-red-500/20 hover:bg-red-500/30 text-red-400 px-5 py-3 rounded-xl transition-all font-bold border border-red-500/20">Sign Out</button>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-                <div class="stat-card p-6 rounded-2xl">
-                    <p class="text-slate-400 font-bold mb-2">Total Students</p>
-                    <p class="text-4xl font-black text-white" x-text="registrations.length"></p>
-                </div>
-                <div class="stat-card p-6 rounded-2xl">
-                    <p class="text-slate-400 font-bold mb-2">Excel Track</p>
-                    <p class="text-4xl font-black text-white" x-text="registrations.filter(r=>r.course==='excel').length"></p>
-                </div>
-                <div class="stat-card p-6 rounded-2xl">
-                    <p class="text-slate-400 font-bold mb-2">Power BI Track</p>
-                    <p class="text-4xl font-black text-white" x-text="registrations.filter(r=>r.course==='powerbi').length"></p>
-                </div>
-                <div class="stat-card p-6 rounded-2xl border border-primary/30">
-                    <p class="text-slate-400 font-bold mb-2">👁 Total Visits</p>
-                    <p class="text-4xl font-black text-primary" x-text="visitors.length"></p>
-                </div>
-            </div>
-
-            <!-- Admin Tabs -->
-            <div class="flex gap-3 mb-6 flex-wrap">
-                <button @click="adminTab='registrations'" class="px-5 py-2.5 rounded-xl font-black text-sm transition-all" :class="adminTab==='registrations'?'bg-primary text-white shadow-glow':'bg-white/5 text-slate-400 hover:bg-white/10'">📋 Registrations</button>
-                <button @click="adminTab==='visitors'?null:(adminTab='visitors', loadVisitors())" class="px-5 py-2.5 rounded-xl font-black text-sm transition-all" :class="adminTab==='visitors'?'bg-primary text-white shadow-glow':'bg-white/5 text-slate-400 hover:bg-white/10'">👁 Visitors</button>
-                <button @click="adminTab='schedule'" class="px-5 py-2.5 rounded-xl font-black text-sm transition-all" :class="adminTab==='schedule'?'bg-primary text-white shadow-glow':'bg-white/5 text-slate-400 hover:bg-white/10'">📅 Edit Schedule</button>
-            </div>
-
-            <div x-show="adminTab==='registrations'" class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden flex-1">
-                <div class="p-4 md:p-6 border-b border-white/10 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-                    <div class="relative w-full md:w-96">
-                        <i data-lucide="search" class="w-5 h-5 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
-                        <input type="text" x-model="adminSearch" placeholder="Search by name, email, phone..." class="w-full bg-black/40 border border-white/10 text-white px-12 py-3 rounded-xl focus:border-primary outline-none transition placeholder-slate-500 text-sm">
-                    </div>
-                    <div class="flex gap-2 flex-wrap">
-                        <button class="px-4 py-2 rounded-lg font-bold transition-all text-sm" :class="adminCourseFilter==='all'?'bg-primary text-white':'bg-white/5 text-slate-400 hover:bg-white/10'" @click="adminCourseFilter='all'">All</button>
-                        <button class="px-4 py-2 rounded-lg font-bold transition-all text-sm" :class="adminCourseFilter==='excel'?'bg-primary text-white':'bg-white/5 text-slate-400 hover:bg-white/10'" @click="adminCourseFilter='excel'">Excel</button>
-                        <button class="px-4 py-2 rounded-lg font-bold transition-all text-sm" :class="adminCourseFilter==='powerbi'?'bg-primary text-white':'bg-white/5 text-slate-400 hover:bg-white/10'" @click="adminCourseFilter='powerbi'">Power BI</button>
-                    </div>
-                </div>
-                <div class="overflow-x-auto -webkit-overflow-scrolling-touch">
-                    <table class="w-full text-sm">
-                        <thead>
-                            <tr class="border-b border-white/10 bg-black/20">
-                                <th class="text-start py-4 px-4 text-slate-400 font-black uppercase tracking-wider text-xs">#</th>
-                                <th class="text-start py-4 px-4 text-slate-400 font-black uppercase tracking-wider text-xs">Date</th>
-                                <th class="text-start py-4 px-4 text-slate-400 font-black uppercase tracking-wider text-xs">Name</th>
-                                <th class="text-start py-4 px-4 text-slate-400 font-black uppercase tracking-wider text-xs">Email</th>
-                                <th class="text-start py-4 px-4 text-slate-400 font-black uppercase tracking-wider text-xs">WhatsApp</th>
-                                <th class="text-start py-4 px-4 text-slate-400 font-black uppercase tracking-wider text-xs">Course</th>
-                                <th class="text-start py-4 px-4 text-slate-400 font-black uppercase tracking-wider text-xs">Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template x-for="(r,ri) in filteredStudents" :key="r.id">
-                                <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
-                                    <td class="py-3 px-4 text-slate-500 text-xs" x-text="ri+1"></td>
-                                    <td class="py-3 px-4 text-slate-400 text-xs" x-text="r.createdAt ? new Date(r.createdAt).toLocaleDateString('en-GB') : '-'"></td>
-                                    <td class="py-3 px-4 font-bold text-white text-sm" x-text="r.name||'-'"></td>
-                                    <td class="py-3 px-4 text-slate-300 text-xs" x-text="r.email||'-'"></td>
-                                    <td class="py-3 px-4">
-                                        <button @click="openWhatsApp(r.phone)" class="flex items-center gap-1.5 text-green-400 hover:text-green-300 font-bold text-xs transition-colors group">
-                                            <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-                                            <span x-text="r.phone||'-'"></span>
-                                        </button>
-                                    </td>
-                                    <td class="py-3 px-4">
-                                        <span class="px-2.5 py-1 rounded-full text-xs font-bold" :class="r.course==='excel'?'bg-blue-500/20 text-blue-400':'bg-yellow-500/20 text-yellow-400'" x-text="r.course==='excel'?'Excel':'Power BI'"></span>
-                                    </td>
-                                    <td class="py-3 px-4 text-slate-400 text-xs font-bold" x-text="r.totalScore||0"></td>
-                                </tr>
-                            </template>
-                            <tr x-show="filteredStudents.length === 0">
-                                <td colspan="4" class="py-12 text-center text-slate-500 font-bold">No registrations found.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Visitors Tab -->
-            <div x-show="adminTab==='visitors'" class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden flex-1">
-                <div class="p-6 border-b border-white/10 flex items-center justify-between">
-                    <p class="text-white font-black text-lg">👁 Site Visitors — Real Visits Log</p>
-                    <span class="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm font-black" x-text="visitors.length + ' visits'"></span>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead>
-                            <tr class="border-b border-white/10 bg-black/20">
-                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Date / Time</th>
-                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Platform</th>
-                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Screen</th>
-                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Language</th>
-                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Referrer</th>
-                                <th class="text-start py-4 px-6 text-slate-400 font-black uppercase tracking-wider text-xs">Timezone</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template x-for="(v,i) in visitors" :key="i">
-                                <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
-                                    <td class="py-3 px-6 text-slate-300 text-xs"><div x-text="v.date||'-'"></div><div class="text-slate-500 mt-0.5" x-text="v.time||''"></div></td>
-                                    <td class="py-3 px-6 text-slate-400 text-xs max-w-[160px] truncate" x-text="v.platform||'-'"></td>
-                                    <td class="py-3 px-6 text-slate-400 text-xs" x-text="v.screen||'-'"></td>
-                                    <td class="py-3 px-6 text-slate-400 text-xs" x-text="v.language||'-'"></td>
-                                    <td class="py-3 px-6 text-xs"><span class="px-2 py-1 rounded-md text-xs font-bold" :class="(v.referrer||'direct')==='direct'?'bg-green-500/20 text-green-400':'bg-blue-500/20 text-blue-400'" x-text="v.referrer||'direct'"></span></td>
-                                    <td class="py-3 px-6 text-slate-500 text-xs" x-text="v.timezone||'-'"></td>
-                                </tr>
-                            </template>
-                            <tr x-show="visitors.length === 0">
-                                <td colspan="6" class="py-12 text-center text-slate-500 font-bold">No visitor data yet.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Schedule Editor Tab -->
-            <div x-show="adminTab==='schedule'" class="bg-white/5 border border-white/10 rounded-2xl p-6 flex-1">
-                <p class="text-white font-black text-lg mb-2">📅 Schedule Editor</p>
-                <p class="text-slate-400 text-sm mb-6 font-medium">عدّل التواريخ والأيام هنا مباشرة — التغييرات تظهر فوراً على الموقع دون الحاجة لأي تعديل في الكود. الحقول: الشهر (MAY/JUN/JUL)، اليوم (01-31)، اسم اليوم.</p>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Excel Sessions -->
-                    <div>
-                        <h3 class="text-primary font-black mb-4 flex items-center gap-2"><span class="text-blue-400">📊</span> Excel Sessions</h3>
-                        <div class="space-y-2">
-                            <template x-for="s in excelSessions" :key="s.num">
-                                <div class="bg-black/20 rounded-xl p-3 border border-white/5">
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span class="w-6 h-6 bg-primary/20 text-primary rounded-md text-xs font-black flex items-center justify-center" x-text="s.num"></span>
-                                        <span class="text-white font-bold text-sm" x-text="s.final ? 'Final Session 🏆' : 'Session ' + s.num"></span>
-                                    </div>
-                                    <div class="grid grid-cols-3 gap-2">
-                                        <div>
-                                            <label class="text-slate-500 text-xs font-bold block mb-1">Month</label>
-                                            <input x-model="s.month" class="w-full bg-black/40 text-white border border-white/10 rounded-lg px-2 py-1.5 text-xs font-mono focus:border-primary outline-none uppercase" placeholder="JUN">
-                                        </div>
-                                        <div>
-                                            <label class="text-slate-500 text-xs font-bold block mb-1">Day</label>
-                                            <input x-model="s.day" class="w-full bg-black/40 text-white border border-white/10 rounded-lg px-2 py-1.5 text-xs font-mono focus:border-primary outline-none" placeholder="01">
-                                        </div>
-                                        <div>
-                                            <label class="text-slate-500 text-xs font-bold block mb-1">اليوم (AR)</label>
-                                            <input x-model="s.dayAr" class="w-full bg-black/40 text-white border border-white/10 rounded-lg px-2 py-1.5 text-xs font-mono focus:border-primary outline-none" dir="rtl">
-                                        </div>
-                                        <div class="col-span-3">
-                                            <label class="text-slate-500 text-xs font-bold block mb-1">Day (EN)</label>
-                                            <input x-model="s.dayEn" class="w-full bg-black/40 text-white border border-white/10 rounded-lg px-2 py-1.5 text-xs font-mono focus:border-primary outline-none">
-                                        </div>
-                                    </div>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                    <!-- PBI Sessions -->
-                    <div>
-                        <h3 class="text-yellow-400 font-black mb-4 flex items-center gap-2"><span>📈</span> Power BI Sessions</h3>
-                        <div class="space-y-2">
-                            <template x-for="s in pbiSessions" :key="s.num">
-                                <div class="bg-black/20 rounded-xl p-3 border border-white/5">
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span class="w-6 h-6 bg-yellow-400/20 text-yellow-400 rounded-md text-xs font-black flex items-center justify-center" x-text="s.num"></span>
-                                        <span class="text-white font-bold text-sm" x-text="s.final ? 'Final Session 🏆' : 'Session ' + s.num"></span>
-                                    </div>
-                                    <div class="grid grid-cols-3 gap-2">
-                                        <div>
-                                            <label class="text-slate-500 text-xs font-bold block mb-1">Month</label>
-                                            <input x-model="s.month" class="w-full bg-black/40 text-white border border-white/10 rounded-lg px-2 py-1.5 text-xs font-mono focus:border-yellow-400 outline-none uppercase" placeholder="JUN">
-                                        </div>
-                                        <div>
-                                            <label class="text-slate-500 text-xs font-bold block mb-1">Day</label>
-                                            <input x-model="s.day" class="w-full bg-black/40 text-white border border-white/10 rounded-lg px-2 py-1.5 text-xs font-mono focus:border-yellow-400 outline-none" placeholder="01">
-                                        </div>
-                                        <div>
-                                            <label class="text-slate-500 text-xs font-bold block mb-1">اليوم (AR)</label>
-                                            <input x-model="s.dayAr" class="w-full bg-black/40 text-white border border-white/10 rounded-lg px-2 py-1.5 text-xs font-mono focus:border-yellow-400 outline-none" dir="rtl">
-                                        </div>
-                                        <div class="col-span-3">
-                                            <label class="text-slate-500 text-xs font-bold block mb-1">Day (EN)</label>
-                                            <input x-model="s.dayEn" class="w-full bg-black/40 text-white border border-white/10 rounded-lg px-2 py-1.5 text-xs font-mono focus:border-yellow-400 outline-none">
-                                        </div>
-                                    </div>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-6 p-4 bg-primary/10 border border-primary/20 rounded-xl">
-                    <p class="text-primary text-sm font-bold">✅ التغييرات تنعكس فوراً على الصفحة. لحفظها بشكل دائم، انسخ القيم الجديدة في <code class="bg-black/40 px-1 rounded text-xs">excelSessions</code> و <code class="bg-black/40 px-1 rounded text-xs">pbiSessions</code> داخل الكود.</p>
-                </div>
-            </div>
-        </div>
+    <div style="margin-bottom:1rem;">
+      <label style="font-size:.72rem;font-weight:800;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.4rem;">Email</label>
+      <input type="email" id="adminEmail" placeholder="trainer@x-academy.com" style="width:100%;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:.75rem;padding:.75rem 1rem;color:#fff;font-size:.9rem;outline:none;" onkeyup="if(event.key==='Enter')doAdminLogin()">
     </div>
-
-        <div class="enrollment-overlay overflow-y-auto" x-show="showEnrollment" x-cloak>
-        <div class="w-full h-1 bg-slate-100 sticky top-0 z-50">
-            <div class="h-full bg-primary progress-bar-fill" :style="`width:${typeof quizStep==='number'?(quizStep/6)*100:100}%`"></div>
-        </div>
-        <div class="max-w-2xl mx-auto px-6 py-12 md:py-20 min-h-screen flex flex-col justify-center">
-
-            
-            <button @click="showEnrollment=false; quizStep=1; totalScore=0; formData={name:'',email:'',phone:''}" class="absolute top-6 left-6 w-12 h-12 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-all">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-
-            <div x-show="typeof quizStep === 'number' && quizStep <= 4" x-transition.opacity.duration.300ms class="slide-in">
-                <div class="flex items-center gap-3 mb-8">
-                    <div class="w-12 h-12 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg" :class="selectedCourse==='excel'?'bg-gradient-to-br from-blue-500 to-cyan-500':'bg-gradient-to-br from-primary to-primary_dark'"><span x-text="quizStep"></span></div>
-                    <span class="text-slate-400 font-bold text-sm lang-ar" x-text="selectedCourse==='excel'?'تقييم مستوى Excel':'تقييم مستوى Power BI'"></span>
-                    <span class="text-slate-400 font-bold text-sm lang-en" x-text="selectedCourse==='excel'?'Excel Level Assessment':'Power BI Level Assessment'"></span>
-                </div>
-                <h2 class="text-3xl md:text-4xl font-black text-dark mb-10 leading-tight" x-text="document.documentElement.lang==='ar'?currentQuizQuestion.ar:currentQuizQuestion.en"></h2>
-                
-                <div class="space-y-4">
-                    <template x-for="(opt,oi) in currentQuizQuestion.options" :key="oi">
-                        <button @click="answerQuestion(opt.score)" class="quiz-option text-lg font-bold text-slate-700">
-                            <div class="opt-key" x-text="['A','B','C','D'][oi]"></div>
-                            <span x-text="document.documentElement.lang==='ar'?opt.ar:opt.en"></span>
-                        </button>
-                    </template>
-                </div>
-            </div>
-
-            <div x-show="quizStep === 5" x-cloak class="slide-in w-full pb-20">
-                <div class="text-center mb-10">
-                    <div class="inline-flex bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-black mb-4 lang-ar">تم التقييم بنجاح ✅</div>
-                    <div class="inline-flex bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-black mb-4 lang-en">Assessment Complete ✅</div>
-                    <h2 class="text-4xl font-black text-dark mb-3 lang-ar">خطتك التدريبية جاهزة، <span x-text="userName"></span></h2>
-                    <h2 class="text-4xl font-black text-dark mb-3 lang-en">Your Plan is Ready, <span x-text="userName"></span></h2>
-                    <p class="text-slate-500 text-lg font-medium lang-ar">بناءً على مستواك، صممنا لك مساراً يختصر عليك سنوات من التجربة.</p>
-                    <p class="text-slate-500 text-lg font-medium lang-en">Based on your level, we've designed a track to save you years of trial and error.</p>
-                </div>
-
-                <div class="bg-white border-2 border-primary/20 rounded-[2rem] p-6 md:p-10 shadow-2xl relative overflow-hidden mb-8">
-                    <div class="absolute -top-16 -right-16 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
-                    <div class="space-y-4 relative z-10">
-                        <template x-for="(ins, i) in generatedInsights" :key="i">
-                            <div class="insight-card">
-                                <div class="text-2xl" x-text="ins.emoji"></div>
-                                <div>
-                                    <p class="font-bold text-dark text-lg mb-1" x-text="document.documentElement.lang==='ar'?ins.ar:ins.en"></p>
-                                    <span class="text-xs font-black px-2 py-1 rounded-md" :class="ins.type==='learn'?'bg-blue-100 text-blue-700':ins.type==='deepen'?'bg-purple-100 text-purple-700':'bg-green-100 text-green-700'">
-                                        <span x-text="ins.type==='learn'?(document.documentElement.lang==='ar'?'ستتعلمه':'You will learn it'):ins.type==='deepen'?(document.documentElement.lang==='ar'?'ستعمّقه':'You will deepen it'):(document.documentElement.lang==='ar'?'مضمون':'Guaranteed')"></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-
-                           <button @click="quizStep = 6" class="w-full bg-gradient-to-r from-primary to-primary_dark text-white font-black py-4 rounded-2xl text-xl hover:shadow-glow transition-all flex items-center justify-center gap-3">
-                    <span class="lang-ar">الخطوة الأخيرة: حجز المقعد</span><span class="lang-en">Final Step: Secure Your Seat</span><i data-lucide="arrow-left" class="w-6 h-6 rtl:hidden"></i><i data-lucide="arrow-right" class="w-6 h-6 ltr:hidden"></i>
-                </button>
-            </div>
-
-            <div x-show="quizStep === 6" x-cloak class="slide-in w-full">
-                <div class="mb-10 text-center">
-                    <h2 class="text-4xl font-black text-dark mb-3 lang-ar">تفاصيل التواصل</h2>
-                    <h2 class="text-4xl font-black text-dark mb-3 lang-en">Contact Details</h2>
-                    <p class="text-slate-500 text-lg lang-ar">لنرسل لك التفاصيل المالية وتأكيد التسجيل.</p>
-                    <p class="text-slate-500 text-lg lang-en">To send you payment details and confirm registration.</p>
-                </div>
-                <div class="space-y-8 bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
-                    <div>
-                        <label class="text-sm font-black text-slate-500 uppercase tracking-wider block mb-2 lang-ar">الإيميل الشخصي</label>
-                        <label class="text-sm font-black text-slate-500 uppercase tracking-wider block mb-2 lang-en">Email Address</label>
-                        <input type="email" x-model="formData.email" placeholder="example@gmail.com" class="tf-input">
-                    </div>
-                    <div>
-                        <label class="text-sm font-black text-slate-500 uppercase tracking-wider block mb-2 lang-ar">رقم الواتساب (للتواصل السريع)</label>
-                        <label class="text-sm font-black text-slate-500 uppercase tracking-wider block mb-2 lang-en">WhatsApp Number</label>
-                        <input type="tel" x-model="formData.phone" dir="ltr" placeholder="+962 7X XXX XXXX" class="tf-input">
-                    </div>
-                    <p class="text-red-500 text-sm font-bold mt-4" x-show="formError" x-text="formError"></p>
-                    <button @click="submitForm()" :disabled="isSubmitting" class="flex-1 w-full mt-10 bg-gradient-to-r from-primary to-primary_dark text-white font-black py-4 rounded-2xl hover:shadow-glow transition-all disabled:opacity-60 flex items-center justify-center gap-3">
-                        <template x-if="isSubmitting"><span class="flex items-center gap-2"><svg class="spinner w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10" opacity=".25"/><path d="M12 2a10 10 0 0 1 10 10"/></svg><span class="lang-ar">جاري الحفظ...</span><span class="lang-en">Saving...</span></span></template>
-                        <template x-if="!isSubmitting"><span><span class="lang-ar">تأكيد التسجيل 🚀</span><span class="lang-en">Confirm Registration 🚀</span></span></template>
-                    </button>
-                </div>
-            </div>
-
-            <div x-show="quizStep === 'success'" x-cloak class="slide-in text-center">
-                <div class="w-24 h-24 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="check" class="w-12 h-12"></i></div>
-                <h2 class="text-4xl font-black text-dark mb-4 lang-ar">تم تسجيل بياناتك بنجاح!</h2>
-                <h2 class="text-4xl font-black text-dark mb-4 lang-en">Registration Successful!</h2>
-                <p class="text-xl text-slate-600 mb-8 lang-ar">تم حجز مقعدك المبدئي. سنتواصل معك عبر الواتساب في أقرب وقت لتأكيد الدفع وإتمام الإجراءات.</p>
-                <p class="text-xl text-slate-600 mb-8 lang-en">Your seat is reserved. We will contact you via WhatsApp shortly to confirm payment and finalize details.</p>
-                <button @click="showEnrollment=false; quizStep=1;" class="bg-slate-100 hover:bg-slate-200 text-dark font-black px-8 py-3 rounded-xl transition-colors lang-ar">العودة للموقع</button>
-                <button @click="showEnrollment=false; quizStep=1;" class="bg-slate-100 hover:bg-slate-200 text-dark font-black px-8 py-3 rounded-xl transition-colors lang-en">Back to Home</button>
-            </div>
-        </div>
+    <div style="margin-bottom:1.5rem;">
+      <label style="font-size:.72rem;font-weight:800;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.4rem;">Password</label>
+      <input type="password" id="adminPass" placeholder="••••••••" style="width:100%;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:.75rem;padding:.75rem 1rem;color:#fff;font-size:.9rem;outline:none;" onkeyup="if(event.key==='Enter')doAdminLogin()">
     </div>
-
-    <nav class="fixed top-0 w-full z-40 glass-nav transition-all duration-300" :class="{'py-2':scrolled,'py-4':!scrolled}">
-        <div class="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center">
-            <div class="flex items-center gap-3 relative z-50">
-                <div class="bg-gradient-to-br from-primary to-primary_dark p-2.5 rounded-xl text-white shadow-glow transform hover:rotate-12 transition-transform duration-500 cursor-pointer relative" @click="logoClick()">
-                    <i data-lucide="bar-chart-2" class="w-6 h-6"></i>
-                    <span x-show="_logoFlash > 0" x-cloak class="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-xs font-black rounded-full flex items-center justify-center" x-text="_logoFlash"></span>
-                </div>
-                <div class="font-black text-xl tracking-tight text-dark"><span class="text-primary">X</span> Academy</div>
-            </div>
-            
-            <div class="hidden md:flex items-center gap-8 font-bold text-slate-600">
-                <a href="#about" class="hover:text-primary transition-colors lang-ar">المدرب</a>
-                <a href="#about" class="hover:text-primary transition-colors lang-en">Instructor</a>
-                <a href="#syllabus" class="hover:text-primary transition-colors lang-ar">المحاور</a>
-                <a href="#syllabus" class="hover:text-primary transition-colors lang-en">Syllabus</a>
-                <a href="#schedule" class="hover:text-primary transition-colors lang-ar">المواعيد</a>
-                <a href="#schedule" class="hover:text-primary transition-colors lang-en">Schedule</a>
-                <a href="#faq" class="hover:text-primary transition-colors lang-ar">الأسئلة</a>
-                <a href="#faq" class="hover:text-primary transition-colors lang-en">FAQ</a>
-                <button @click="openEnrollment()" class="bg-dark text-white px-7 py-2.5 rounded-full hover:bg-primary transition-all shadow-lg hover:shadow-glow lang-ar flex items-center gap-2">احجز مقعدك <i data-lucide="arrow-left" class="w-4 h-4"></i></button>
-                <button @click="openEnrollment()" class="bg-dark text-white px-7 py-2.5 rounded-full hover:bg-primary transition-all shadow-lg hover:shadow-glow lang-en flex items-center gap-2">Enroll Now <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
-                <button id="langToggle" class="text-slate-400 hover:text-dark font-black flex items-center gap-1 transition-colors"><i data-lucide="globe" class="w-4 h-4"></i> <span x-text="document.documentElement.lang==='ar'?'EN':'AR'"></span></button>
-            </div>
-            
-            <button @click="mobileMenu=!mobileMenu" class="md:hidden text-dark p-2 relative z-50">
-                <i :data-lucide="mobileMenu?'x':'menu'" class="w-7 h-7"></i>
-            </button>
-        </div>
-        
-        <div x-show="mobileMenu" x-collapse class="md:hidden bg-white border-b border-slate-100 absolute w-full left-0 top-full shadow-2xl">
-            <div class="flex flex-col p-6 gap-4 font-bold text-center text-lg">
-                <a @click="mobileMenu=false" href="#about" class="py-2 text-slate-600 lang-ar">المدرب</a>
-                <a @click="mobileMenu=false" href="#about" class="py-2 text-slate-600 lang-en">Instructor</a>
-                <a @click="mobileMenu=false" href="#syllabus" class="py-2 text-slate-600 lang-ar">المحاور</a>
-                <a @click="mobileMenu=false" href="#syllabus" class="py-2 text-slate-600 lang-en">Syllabus</a>
-                <button @click="mobileMenu=false; openEnrollment();" class="mt-4 bg-primary text-white py-3 rounded-xl lang-ar">سجل الآن</button>
-                <button @click="mobileMenu=false; openEnrollment();" class="mt-4 bg-primary text-white py-3 rounded-xl lang-en">Register Now</button>
-                <button id="langToggleMobile" class="py-2 text-slate-400 flex justify-center items-center gap-2"><i data-lucide="globe" class="w-5 h-5"></i> <span x-text="document.documentElement.lang==='ar'?'Switch to English':'التبديل للعربية'"></span></button>
-            </div>
-        </div>
-    </nav>
-
-    <header class="pt-32 pb-20 md:pt-40 md:pb-28 px-4 relative overflow-hidden">
-        <div class="absolute top-1/4 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float"></div>
-        <div class="absolute bottom-0 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
-        
-        <div class="max-w-6xl mx-auto text-center relative z-10" data-aos="fade-up">
-            <div class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-100 mb-8">
-                <span class="flex h-3 w-3 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span></span>
-                <span class="text-sm font-bold text-slate-600 lang-ar">التسجيل مفتوح للدفعات الجديدة</span>
-                <span class="text-sm font-bold text-slate-600 lang-en">Registration Open for 2026 Cohorts</span>
-            </div>
-            
-            <h1 class="text-5xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight text-dark lang-ar">المخطط الشامل<br>لاحتراف <span class="gradient-text">البيانات</span></h1>
-            <h1 class="text-5xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight text-dark lang-en">The Ultimate<br><span class="gradient-text">Data Mastery</span></h1>
-            
-            <div x-show="currentCourse === 'excel'" x-cloak>
-                <p class="text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed font-medium lang-ar">انضم لأقوى تجربة تدريبية في <strong class="text-dark">Excel</strong> بقيادة الخبير <strong class="text-dark">باسل غانم</strong>. من الصفر إلى لوحات قيادة احترافية + 5 اعتمادات دولية.</p>
-                <p class="text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed font-medium lang-en">Join the most powerful <strong class="text-dark">Excel</strong> bootcamp led by expert <strong class="text-dark">Basel Ghanem</strong>. From zero to pro dashboards + 5 global accreditations.</p>
-            </div>
-            
-            <div x-show="currentCourse === 'powerbi'" x-cloak>
-                <p class="text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed font-medium lang-ar">احتراف حقيقي لـ <strong class="text-dark">Power BI</strong>. صمم تقارير تفاعلية، اربط قواعد البيانات، وكن خبير ذكاء الأعمال المعتمد.</p>
-                <p class="text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed font-medium lang-en">Master <strong class="text-dark">Power BI</strong> completely. Build interactive reports, connect databases, and become a certified BI expert.</p>
-            </div>
-
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <button @click="openEnrollment()" class="w-full sm:w-auto bg-gradient-to-r from-primary to-primary_dark text-white px-10 py-4 rounded-2xl font-black text-lg hover:shadow-glow transition-all btn-glow lang-ar">قيّم مستواك وابدأ <i data-lucide="rocket" class="inline w-5 h-5 mr-2"></i></button>
-                <button @click="openEnrollment()" class="w-full sm:w-auto bg-gradient-to-r from-primary to-primary_dark text-white px-10 py-4 rounded-2xl font-black text-lg hover:shadow-glow transition-all btn-glow lang-en"><i data-lucide="rocket" class="inline w-5 h-5 mr-2"></i> Assess & Start</button>
-                <a href="#syllabus" class="w-full sm:w-auto bg-white text-dark px-10 py-4 rounded-2xl font-black text-lg border-2 border-slate-100 hover:border-slate-300 transition-colors lang-ar">استكشف المنهج</a>
-                <a href="#syllabus" class="w-full sm:w-auto bg-white text-dark px-10 py-4 rounded-2xl font-black text-lg border-2 border-slate-100 hover:border-slate-300 transition-colors lang-en">View Syllabus</a>
-            </div>
-            
- <div class="mt-16 pt-10 border-t border-slate-200 flex flex-wrap justify-center items-center gap-8 md:gap-16 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-    <!-- أيقونة الإكسل -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 256 256">
-        <path fill="#21A366" d="M141.6 15.4L44.8 30.5c-4.9.8-8.8 4.7-8.8 9.6v175.8c0 4.9 3.9 8.8 8.8 9.6l96.8 15.1c6.5 1 12.4-4.2 12.4-10.8V26.2c0-6.6-5.9-11.8-12.4-10.8z"/>
-        <path fill="#107C41" d="M154 26.2v203.6c0 6.6-5.9 11.8-12.4 10.8L241.2 225c5.3-.8 9.4-5.1 9.4-10.4V41.4c0-5.3-4.1-9.6-9.4-10.4L141.6 15.4c6.5-1 12.4 4.2 12.4 10.8z"/>
-        <path fill="#fff" d="M207.8 174l-21.7-41l20.4-38.6h-21.6l-10.5 24.3c-1.3 3-2.4 5.9-3.4 8.7h-.3c-.9-2.9-2-5.7-3.4-8.7l-10.7-24.3h-20.7l20.5 38.3l-21.4 41.3h21.9l11.7-26.6c1.3-3 2.5-6.2 3.4-9.3h.3c1 3.1 2.2 6.3 3.5 9.3l12.2 26.6h20z"/>
-    </svg>
-    <!-- أيقونة Power BI -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 256 256">
-        <path fill="#F2C811" d="M84.4 224h87.2V96H84.4v128z"/>
-        <path fill="#D1A60D" d="M171.6 224v-128H240v128h-68.4z"/>
-        <path fill="#E6B40D" d="M16 224h68.4v-64H16v64z"/>
-    </svg>
+    <div id="adminErr" style="color:#f87171;font-size:.82rem;font-weight:700;margin-bottom:1rem;display:none;"></div>
+    <button onclick="doAdminLogin()" style="width:100%;background:linear-gradient(135deg,#099999,#066666);color:#fff;font-weight:800;padding:.85rem;border-radius:.85rem;border:none;cursor:pointer;font-size:.95rem;" id="adminLoginBtn">Enter Dashboard</button>
+    <button onclick="document.getElementById('adminLoginModal').classList.remove('open')" style="width:100%;margin-top:.75rem;padding:.7rem;background:none;border:none;color:rgba(255,255,255,.3);cursor:pointer;font-weight:700;">Cancel</button>
+  </div>
 </div>
+
+<!-- ═══════════════════════════════════════════════════
+     ADMIN OVERLAY
+════════════════════════════════════════════════════ -->
+<div id="adminOverlay">
+  <div style="max-width:1100px;margin:0 auto;padding:1.5rem;">
+    <!-- Header -->
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1.5rem;padding:1.25rem 1.5rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1.25rem;">
+      <div style="display:flex;align-items:center;gap:.85rem;">
+        <div style="background:linear-gradient(135deg,#099999,#066666);padding:.7rem;border-radius:1rem;color:#fff;display:flex;box-shadow:0 0 20px rgba(9,153,153,.4);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-    </header>
-
-    <section id="about" class="py-20 bg-white relative">
-        <div class="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
-            <div class="relative" data-aos="fade-left">
-                <div class="absolute inset-0 bg-primary/10 rounded-full blur-3xl transform -rotate-12 translate-x-10"></div>
-                <div class="relative z-10 glass-card rounded-[3rem] p-4 transform rotate-3 hover:rotate-0 transition-transform duration-500">
-                    <img src="https://raw.githubusercontent.com/BaselGhanem/Portfolio/refs/heads/main/BaselGhanem.jpg" alt="Basel Ghanem" class="rounded-[2.5rem] w-full h-[500px] object-cover">
-                    <div class="absolute bottom-6 right-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-4 z-20">
-                        <div class="bg-yellow-100 p-2 rounded-lg text-yellow-600"><i data-lucide="award" class="w-8 h-8"></i></div>
-                        <div><p class="font-black text-3xl text-dark">5</p><p class="text-sm text-slate-500 font-bold lang-ar">اعتمادات دولية</p><p class="text-sm text-slate-500 font-bold lang-en">Global Accreditations</p></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div data-aos="fade-right">
-                <h2 class="text-primary font-black tracking-widest uppercase mb-4 text-sm lang-ar">الخبير والمدرب</h2>
-                <h2 class="text-primary font-black tracking-widest uppercase mb-4 text-sm lang-en">Instructor & Expert</h2>
-                <h3 class="text-4xl md:text-5xl font-black mb-6 text-dark lang-ar">باسل غانم</h3>
-                <h3 class="text-4xl md:text-5xl font-black mb-6 text-dark lang-en">Basel Ghanem</h3>
-                <p class="text-xl text-slate-600 mb-8 leading-relaxed lang-ar font-medium">محلل مبيعات أول وخبير استراتيجي في البيانات بخبرة تتجاوز الـ <strong class="text-primary font-black">15 عاماً</strong>. معتمد كخبير من مايكروسوفت. درّب آلاف المحترفين على تحويل البيانات إلى قرارات استراتيجية. مؤسس X Academy في عمّان، الأردن.</p>
-                <p class="text-xl text-slate-600 mb-8 leading-relaxed lang-en font-medium">Senior Sales Analyst & Data Strategist with <strong class="text-primary font-black">15+ years</strong> of experience. Microsoft Certified Expert. Trained thousands of professionals to transform data into strategic decisions. Founder of X Academy, Amman, Jordan.</p>
-            </div>
+        <div>
+          <div style="font-weight:900;color:#fff;font-size:1.15rem;">Trainer Command Center</div>
+          <div style="font-size:.78rem;color:rgba(255,255,255,.4);">X Academy · Real-time Data</div>
         </div>
-    </section>
+      </div>
+      <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
+        <button onclick="exportExcel()" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:#fff;padding:.6rem 1.25rem;border-radius:.75rem;font-weight:700;cursor:pointer;font-size:.85rem;display:flex;align-items:center;gap:.5rem;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export Excel
+        </button>
+        <button onclick="doAdminLogout()" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.2);color:#f87171;padding:.6rem 1.25rem;border-radius:.75rem;font-weight:700;cursor:pointer;font-size:.85rem;">Sign Out</button>
+      </div>
+    </div>
 
-    <section id="syllabus" class="py-24 bg-slate-50">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-primary font-black tracking-widest uppercase mb-4 text-sm lang-ar">ماذا ستتعلم؟</h2>
-                <h2 class="text-primary font-black tracking-widest uppercase mb-4 text-sm lang-en">What will you learn?</h2>
-                <h3 class="text-4xl md:text-5xl font-black text-dark lang-ar">رحلة المنهج التدريبي</h3>
-                <h3 class="text-4xl md:text-5xl font-black text-dark lang-en">Course Syllabus Journey</h3>
-            </div>
+    <!-- Stats -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.85rem;margin-bottom:1.5rem;" id="adminStats"></div>
 
-            <div class="grid md:grid-cols-3 gap-8" x-show="currentCourse === 'excel'" x-cloak>
-                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:shadow-xl transition-all duration-500" data-aos="fade-up">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">الأساسيات القوية</div>
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">Strong Basics</div>
-                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2"><i data-lucide="layout-grid" class="w-8 h-8"></i></div>
-                    <h4 class="text-2xl font-black text-dark mb-6 lang-ar">1. واجهة البرنامج</h4>
-                    <h4 class="text-2xl font-black text-dark mb-6 lang-en">1. UI & Basics</h4>
-                    <ul class="space-y-4 text-slate-600 font-bold">
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">فهم بيئة العمل والأشرطة</span><span class="lang-en">Understanding environment & ribbons</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">إدخال البيانات والتنسيق الشرطي</span><span class="lang-en">Data entry & Conditional Formatting</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">الطباعة وإعداد الصفحات</span><span class="lang-en">Printing & page setup</span></li>
-                    </ul>
-                </div>
+    <!-- Tabs -->
+    <div style="display:flex;gap:.6rem;margin-bottom:1rem;flex-wrap:wrap;">
+      <button onclick="setAdminTab('reg')" id="tab-reg" style="padding:.55rem 1.2rem;border-radius:.7rem;font-weight:800;font-size:.82rem;cursor:pointer;transition:all .2s;" class="admin-tab-active">📋 Registrations</button>
+      <button onclick="setAdminTab('vis')" id="tab-vis" style="padding:.55rem 1.2rem;border-radius:.7rem;font-weight:800;font-size:.82rem;cursor:pointer;transition:all .2s;" class="admin-tab-idle">👁 Visitors</button>
+      <button onclick="setAdminTab('sched')" id="tab-sched" style="padding:.55rem 1.2rem;border-radius:.7rem;font-weight:800;font-size:.82rem;cursor:pointer;transition:all .2s;" class="admin-tab-idle">📅 Schedule Editor</button>
+    </div>
 
-                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:shadow-xl transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">جوهر التحليل</div>
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">Core Analysis</div>
-                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2"><i data-lucide="function-square" class="w-8 h-8"></i></div>
-                    <h4 class="text-2xl font-black text-dark mb-6 lang-ar">2. الدوال والمعادلات</h4>
-                    <h4 class="text-2xl font-black text-dark mb-6 lang-en">2. Formulas & Functions</h4>
-                    <ul class="space-y-4 text-slate-600 font-bold">
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">دوال البحث (VLOOKUP, XLOOKUP)</span><span class="lang-en">Lookup Functions (VLOOKUP, XLOOKUP)</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">الدوال المنطقية (IF, AND, OR)</span><span class="lang-en">Logical Functions (IF, AND, OR)</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">دوال النصوص والتاريخ</span><span class="lang-en">Text & Date Functions</span></li>
-                    </ul>
-                </div>
-
-                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:shadow-xl transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">الاحترافية والتصور</div>
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">Pro Visualization</div>
-                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2"><i data-lucide="pie-chart" class="w-8 h-8"></i></div>
-                    <h4 class="text-2xl font-black text-dark mb-6 lang-ar">3. التقارير الذكية</h4>
-                    <h4 class="text-2xl font-black text-dark mb-6 lang-en">3. Smart Reports</h4>
-                    <ul class="space-y-4 text-slate-600 font-bold">
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">الجداول المحورية (Pivot Tables)</span><span class="lang-en">Advanced Pivot Tables</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">بناء لوحات القيادة (Dashboards)</span><span class="lang-en">Building Dashboards</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">المخططات البيانية التفاعلية</span><span class="lang-en">Interactive Charts</span></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8" x-show="currentCourse === 'powerbi'" x-cloak>
-                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:shadow-xl transition-all duration-500" data-aos="fade-up">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">تجهيز البيانات</div>
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">Data Prep</div>
-                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2"><i data-lucide="database" class="w-8 h-8"></i></div>
-                    <h4 class="text-2xl font-black text-dark mb-6 lang-ar">1. Power Query</h4>
-                    <h4 class="text-2xl font-black text-dark mb-6 lang-en">1. Power Query</h4>
-                    <ul class="space-y-4 text-slate-600 font-bold">
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">جلب البيانات من مصادر متعددة</span><span class="lang-en">Get data from various sources</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">تنظيف وتحويل البيانات</span><span class="lang-en">Data cleaning & transformation</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">التعامل مع الأخطاء والقيم الفارغة</span><span class="lang-en">Handling errors & nulls</span></li>
-                    </ul>
-                </div>
-
-                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:shadow-xl transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">نمذجة البيانات</div>
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">Data Modeling</div>
-                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2"><i data-lucide="network" class="w-8 h-8"></i></div>
-                    <h4 class="text-2xl font-black text-dark mb-6 lang-ar">2. DAX & Modeling</h4>
-                    <h4 class="text-2xl font-black text-dark mb-6 lang-en">2. DAX & Modeling</h4>
-                    <ul class="space-y-4 text-slate-600 font-bold">
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">بناء العلاقات (Relationships)</span><span class="lang-en">Building Relationships</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">مقدمة لمعادلات DAX</span><span class="lang-en">Intro to DAX functions</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">بناء الـ Measures المتقدمة</span><span class="lang-en">Advanced Measures creation</span></li>
-                    </ul>
-                </div>
-
-                <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] border-primary border-2 relative group hover:shadow-xl transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-ar">العرض والنشر</div>
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg lang-en">Viz & Publish</div>
-                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-2"><i data-lucide="bar-chart-2" class="w-8 h-8"></i></div>
-                    <h4 class="text-2xl font-black text-dark mb-6 lang-ar">3. Visualization</h4>
-                    <h4 class="text-2xl font-black text-dark mb-6 lang-en">3. Visualization</h4>
-                    <ul class="space-y-4 text-slate-600 font-bold">
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">تصميم لوحات تفاعلية</span><span class="lang-en">Interactive dashboard design</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">النشر على Power BI Service</span><span class="lang-en">Publish to Power BI Service</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-6 h-6 text-primary shrink-0 mt-0.5"></i><span class="lang-ar">مشاركة التقارير والصلاحيات</span><span class="lang-en">Sharing & Row Level Security</span></li>
-                    </ul>
-                </div>
-            </div>
-
+    <!-- Registrations Tab -->
+    <div id="pane-reg" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1rem;overflow:hidden;">
+      <div style="padding:1rem 1.25rem;border-bottom:1px solid rgba(255,255,255,.07);display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;">
+        <input type="text" id="adminSearch" placeholder="Search name, email, phone..." oninput="renderRegistrations()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:.7rem;padding:.55rem 1rem;color:#fff;font-size:.83rem;outline:none;width:min(280px,100%);">
+        <div style="display:flex;gap:.5rem;">
+          <button onclick="setRegFilter('all')" id="rf-all" class="rf-btn rf-active">All</button>
+          <button onclick="setRegFilter('excel')" id="rf-excel" class="rf-btn rf-idle">Excel</button>
+          <button onclick="setRegFilter('powerbi')" id="rf-pbi" class="rf-btn rf-idle">Power BI</button>
         </div>
-    </section>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="admin-table"><thead><tr>
+          <th>#</th><th>Date</th><th>Name</th><th>Email</th><th>WhatsApp</th><th>Course</th><th>Score</th>
+        </tr></thead>
+        <tbody id="regBody"></tbody></table>
+      </div>
+    </div>
 
-<section id="schedule" class="py-24 bg-white">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6" data-aos="fade-up">
-                <div>
-                    <h2 class="text-4xl font-black text-dark mb-4 lang-ar">جدول المحاضرات القادمة</h2>
-                    <h2 class="text-4xl font-black text-dark mb-4 lang-en">Upcoming Class Schedule</h2>
-                    <p class="text-slate-500 text-lg font-medium lang-ar">أوقات مسائية تناسب الموظفين والطلاب.</p>
-                    <p class="text-slate-500 text-lg font-medium lang-en">Evening timings for professionals &amp; students.</p>
-                </div>
-            </div>
+    <!-- Visitors Tab -->
+    <div id="pane-vis" style="display:none;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1rem;overflow:hidden;">
+      <div style="overflow-x:auto;">
+        <table class="admin-table"><thead><tr>
+          <th>Date/Time</th><th>Platform</th><th>Screen</th><th>Language</th><th>Referrer</th><th>Timezone</th>
+        </tr></thead>
+        <tbody id="visBody"></tbody></table>
+      </div>
+    </div>
 
-            <!-- ══════════ EXCEL SCHEDULE ══════════ -->
-            <div x-show="currentCourse === 'excel'" x-cloak class="space-y-3">
-                <div class="flex flex-wrap items-center gap-3 mb-6">
-                    <div class="bg-blue-50 text-blue-700 border border-blue-200 px-4 py-2 rounded-full text-sm font-black lang-ar">📊 Excel الاحترافي — Batch 1 | 2026</div>
-                    <div class="bg-blue-50 text-blue-700 border border-blue-200 px-4 py-2 rounded-full text-sm font-black lang-en">📊 Professional Excel — Batch 1 | 2026</div>
-                    <div class="bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-bold lang-ar">10 جلسات × 2 ساعة = 20 ساعة</div>
-                    <div class="bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-bold lang-en">10 Sessions × 2h = 20 Hours</div>
-                </div>
-
-                <template x-for="s in excelSessions" :key="s.num">
-                    <div :class="s.final ? 'bg-gradient-to-r from-primary/5 to-primary/10 border-2 border-primary/30 hover:border-primary/60' : 'bg-slate-50 border-2 border-slate-100 hover:border-primary/40 hover:bg-primary/[0.02]'"
-                         class="rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 transition-all duration-300 group">
-                        <div class="flex items-center gap-4 flex-1 w-full">
-                            <div :class="s.final ? 'bg-primary text-white shadow-glow' : 'bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white'"
-                                 class="w-10 h-10 rounded-xl font-black text-sm flex items-center justify-center flex-shrink-0 transition-colors" x-text="s.num"></div>
-                            <div :class="s.final ? 'border-primary/20' : 'border-slate-200'"
-                                 class="bg-white shadow-sm border rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
-                                <div class="text-xs font-black text-primary uppercase" x-text="s.month"></div>
-                                <div class="text-2xl font-black text-dark leading-none" x-text="s.day"></div>
-                            </div>
-                            <div>
-                                <div class="font-black text-dark mb-1 lang-ar" x-text="s.final ? 'الجلسة الختامية 🏆' : 'الجلسة ' + sessionNumAr(s.num)"></div>
-                                <div class="font-black text-dark mb-1 lang-en" x-text="s.final ? 'Final Session 🏆' : 'Session ' + s.num"></div>
-                                <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
-                                    <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> <span x-text="s.dayAr"></span></span>
-                                    <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> <span x-text="s.dayEn"></span></span>
-                                    <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> <span x-text="s.time"></span></span>
-                                    <span :class="s.final ? 'bg-primary text-white' : 'bg-primary/10 text-primary'" class="px-2 py-0.5 rounded-full font-black">2h</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-
-                <div class="mt-6 pt-6 border-t border-slate-100 text-center">
-                    <button @click="openEnrollment()" class="inline-flex items-center gap-3 bg-gradient-to-r from-primary to-primary_dark text-white px-12 py-4 rounded-2xl font-black text-lg hover:shadow-glow transition-all btn-glow lang-ar">
-                        <i data-lucide="rocket" class="w-5 h-5"></i> احجز مقعدك في دورة Excel
-                    </button>
-                    <button @click="openEnrollment()" class="inline-flex items-center gap-3 bg-gradient-to-r from-primary to-primary_dark text-white px-12 py-4 rounded-2xl font-black text-lg hover:shadow-glow transition-all btn-glow lang-en">
-                        <i data-lucide="rocket" class="w-5 h-5"></i> Enroll in Excel Course
-                    </button>
-                </div>
-            </div>
-
-            <!-- ══════════ POWER BI SCHEDULE ══════════ -->
-            <div x-show="currentCourse === 'powerbi'" x-cloak class="space-y-3">
-                <div class="flex flex-wrap items-center gap-3 mb-6">
-                    <div class="bg-yellow-50 text-yellow-700 border border-yellow-200 px-4 py-2 rounded-full text-sm font-black lang-ar">📈 Power BI المتخصص — Batch 1 | 2026</div>
-                    <div class="bg-yellow-50 text-yellow-700 border border-yellow-200 px-4 py-2 rounded-full text-sm font-black lang-en">📈 Power BI Specialist — Batch 1 | 2026</div>
-                    <div class="bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-bold lang-ar">10 جلسات × 2 ساعة = 20 ساعة</div>
-                    <div class="bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-bold lang-en">10 Sessions × 2h = 20 Hours</div>
-                </div>
-
-                <template x-for="s in pbiSessions" :key="s.num">
-                    <div :class="s.final ? 'bg-gradient-to-r from-yellow-400/10 to-yellow-300/10 border-2 border-yellow-400/40 hover:border-yellow-500/60' : 'bg-slate-50 border-2 border-slate-100 hover:border-yellow-400/40 hover:bg-yellow-50/30'"
-                         class="rounded-2xl p-5 flex flex-col md:flex-row items-center gap-4 transition-all duration-300 group">
-                        <div class="flex items-center gap-4 flex-1 w-full">
-                            <div :class="s.final ? 'bg-yellow-400 text-white shadow-lg' : 'bg-yellow-400/15 text-yellow-600 group-hover:bg-yellow-400 group-hover:text-white'"
-                                 class="w-10 h-10 rounded-xl font-black text-sm flex items-center justify-center flex-shrink-0 transition-colors" x-text="s.num"></div>
-                            <div :class="s.final ? 'border-yellow-200' : 'border-slate-200'"
-                                 class="bg-white shadow-sm border rounded-xl p-2.5 text-center min-w-[60px] flex-shrink-0">
-                                <div class="text-xs font-black text-yellow-500 uppercase" x-text="s.month"></div>
-                                <div class="text-2xl font-black text-dark leading-none" x-text="s.day"></div>
-                            </div>
-                            <div>
-                                <div class="font-black text-dark mb-1 lang-ar" x-text="s.final ? 'الجلسة الختامية 🏆' : 'الجلسة ' + sessionNumAr(s.num)"></div>
-                                <div class="font-black text-dark mb-1 lang-en" x-text="s.final ? 'Final Session 🏆' : 'Session ' + s.num"></div>
-                                <div class="flex flex-wrap items-center gap-3 text-slate-500 text-xs font-bold">
-                                    <span class="flex items-center gap-1 lang-ar"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> <span x-text="s.dayAr"></span></span>
-                                    <span class="flex items-center gap-1 lang-en"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> <span x-text="s.dayEn"></span></span>
-                                    <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> <span x-text="s.time"></span></span>
-                                    <span :class="s.final ? 'bg-yellow-400 text-white' : 'bg-yellow-100 text-yellow-700'" class="px-2 py-0.5 rounded-full font-black">2h</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-
-                <div class="mt-6 pt-6 border-t border-yellow-100 text-center">
-                    <button @click="openEnrollment()" class="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-12 py-4 rounded-2xl font-black text-lg hover:shadow-lg transition-all lang-ar">
-                        <i data-lucide="rocket" class="w-5 h-5"></i> احجز مقعدك في دورة Power BI
-                    </button>
-                    <button @click="openEnrollment()" class="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-12 py-4 rounded-2xl font-black text-lg hover:shadow-lg transition-all lang-en">
-                        <i data-lucide="rocket" class="w-5 h-5"></i> Enroll in Power BI Course
-                    </button>
-                </div>
-            </div>
-
-
+    <!-- Schedule Editor Tab -->
+    <div id="pane-sched" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+        <div>
+          <div style="font-weight:900;color:#0bc4c4;margin-bottom:1rem;font-size:.9rem;">📊 Excel Sessions</div>
+          <div id="excelSchedEditor" style="display:flex;flex-direction:column;gap:.6rem;"></div>
+          <button onclick="saveSchedule('excel')" style="margin-top:1rem;background:linear-gradient(135deg,#099999,#066666);color:#fff;font-weight:800;padding:.65rem 1.5rem;border-radius:.75rem;border:none;cursor:pointer;font-size:.85rem;">💾 Save Excel Schedule</button>
         </div>
-    </section>
-
-    <section id="faq" class="py-24 bg-slate-50">
-        <div class="max-w-3xl mx-auto px-4">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-primary font-black tracking-widest uppercase mb-4 text-sm lang-ar">دعم فوري</h2>
-                <h2 class="text-primary font-black tracking-widest uppercase mb-4 text-sm lang-en">Instant Support</h2>
-                <h2 class="text-4xl md:text-5xl font-black text-dark lang-ar">الأسئلة الشائعة</h2>
-                <h2 class="text-4xl md:text-5xl font-black text-dark lang-en">Frequently Asked Questions</h2>
-            </div>
-            
-            <div class="space-y-4" data-aos="fade-up" data-aos-delay="100">
-                <template x-for="(faq,i) in faqs" :key="i">
-                    <div x-data="{open:false}" class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                        <button @click="open=!open" class="w-full px-6 py-5 text-start font-black text-lg flex justify-between items-center text-dark hover:text-primary transition-colors">
-                            <span class="lang-ar" x-text="faq.qAr"></span><span class="lang-en" x-text="faq.qEn"></span>
-                            <div class="p-2 rounded-full shrink-0 ms-4" :class="open?'bg-primary/10 text-primary':'bg-slate-50 text-slate-400'">
-                                <i :data-lucide="open?'minus':'plus'" class="w-5 h-5"></i>
-                            </div>
-                        </button>
-                        <div x-show="open" x-collapse>
-                            <div class="px-6 pb-6 pt-2 text-slate-600 leading-relaxed font-medium">
-                                <span class="lang-ar" x-text="faq.aAr"></span><span class="lang-en" x-text="faq.aEn"></span>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-            </div>
+        <div>
+          <div style="font-weight:900;color:#F2C811;margin-bottom:1rem;font-size:.9rem;">📈 Power BI Sessions</div>
+          <div id="pbiSchedEditor" style="display:flex;flex-direction:column;gap:.6rem;"></div>
+          <button onclick="saveSchedule('powerbi')" style="margin-top:1rem;background:linear-gradient(135deg,#F2C811,#b38f00);color:#0B1120;font-weight:800;padding:.65rem 1.5rem;border-radius:.75rem;border:none;cursor:pointer;font-size:.85rem;">💾 Save PBI Schedule</button>
         </div>
-    </section>
-
-    <footer class="premium-gradient-bg pt-20 pb-10 border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="flex justify-center mb-10">
-                <div class="bg-gradient-to-br from-primary to-primary_dark p-4 rounded-2xl text-white shadow-glow transform hover:rotate-12 transition-transform duration-500 cursor-pointer" @click="logoClick()"><i data-lucide="bar-chart-2" class="w-10 h-10"></i></div>
-            </div>
-            <div class="flex flex-wrap justify-center gap-8 mb-10">
-                <a href="https://www.linkedin.com/in/baselghanem/" target="_blank" class="text-slate-400 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all flex items-center gap-2 font-bold"><i data-lucide="linkedin" class="w-5 h-5 text-[#0A66C2]"></i>LinkedIn</a>
-                <a href="http://wa.me/962788458787" target="_blank" class="text-slate-400 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all flex items-center gap-2 font-bold"><i data-lucide="message-circle" class="w-5 h-5 text-[#25D366]"></i>WhatsApp</a>
-                <a href="mailto:info@x-academy.com" class="text-slate-400 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all flex items-center gap-2 font-bold"><i data-lucide="mail" class="w-5 h-5"></i>Email</a>
-            </div>
-            <div class="border-t border-white/10 pt-8 text-slate-500 text-sm font-bold flex flex-col md:flex-row justify-center gap-2">
-                <span>© X Academy. All rights reserved.</span>
-                <span class="hidden md:inline text-slate-700">|</span>
-                <span class="lang-ar">عمّان، الأردن</span><span class="lang-en">Amman, Jordan</span>
-            </div>
-        </div>
-    </footer>
-
+      </div>
+      <div id="schedSaveMsg" style="margin-top:1rem;display:none;padding:.75rem 1rem;background:rgba(9,153,153,.15);border:1px solid rgba(9,153,153,.3);border-radius:.75rem;color:#0bc4c4;font-weight:700;font-size:.85rem;"></div>
+    </div>
+  </div>
 </div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDES CONTAINER
+════════════════════════════════════════════════════ -->
+<div id="slides">
+
+<!-- ════ SLIDE 0: CHOOSE COURSE ════ -->
+<div class="slide slide-dark active" id="slide-0" data-theme="dark">
+  <div style="text-align:center;max-width:580px;width:100%;">
+    <!-- Hidden admin trigger -->
+    <div style="position:absolute;top:0;left:0;width:60px;height:60px;cursor:default;" id="adminTrigger" onclick="adminTriggerClick()" title=""></div>
+
+    <div style="margin-bottom:2rem;">
+      <div style="display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#099999,#066666);margin-bottom:1.25rem;box-shadow:0 0 40px rgba(9,153,153,.4);">
+        <span style="font-size:2rem;font-weight:900;color:#fff;">X</span>
+      </div>
+      <div class="slide-tag" style="color:#099999;">X Academy · 2026</div>
+      <div class="slide-h1" style="color:#fff;">
+        <span class="ar">اختر مسارك</span>
+        <span class="en">Choose Your Track</span>
+      </div>
+      <div class="slide-body" style="color:rgba(255,255,255,.55);margin-bottom:2rem;">
+        <span class="ar">مسار مخصص لك خطوة بخطوة حسب اختيارك</span>
+        <span class="en">A personalized step-by-step journey based on your choice</span>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:480px;margin:0 auto;">
+      <!-- Excel -->
+      <div onclick="chooseCourse('excel')" style="border:2px solid rgba(255,255,255,.1);border-radius:1.25rem;padding:1.75rem 1.25rem;cursor:pointer;text-align:center;background:rgba(255,255,255,.03);transition:all .3s;" onmouseover="this.style.borderColor='#099999';this.style.background='rgba(9,153,153,.08)'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)';this.style.background='rgba(255,255,255,.03)'">
+        <div style="font-size:2.2rem;margin-bottom:.75rem;">📊</div>
+        <div style="font-weight:900;color:#fff;font-size:1rem;margin-bottom:.4rem;"><span class="ar">Excel الاحترافي</span><span class="en">Professional Excel</span></div>
+        <div style="font-size:.75rem;color:rgba(255,255,255,.4);font-weight:600;"><span class="ar">10 جلسات · 20 ساعة</span><span class="en">10 Sessions · 20h</span></div>
+        <div style="margin-top:1rem;display:inline-block;background:rgba(9,153,153,.2);color:#0bc4c4;font-size:.7rem;font-weight:900;padding:.25rem .75rem;border-radius:20px;">Track 1</div>
+      </div>
+      <!-- PBI -->
+      <div onclick="chooseCourse('powerbi')" style="border:2px solid rgba(255,255,255,.1);border-radius:1.25rem;padding:1.75rem 1.25rem;cursor:pointer;text-align:center;background:rgba(255,255,255,.03);transition:all .3s;" onmouseover="this.style.borderColor='#F2C811';this.style.background='rgba(242,200,17,.06)'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)';this.style.background='rgba(255,255,255,.03)'">
+        <div style="font-size:2.2rem;margin-bottom:.75rem;">📈</div>
+        <div style="font-weight:900;color:#fff;font-size:1rem;margin-bottom:.4rem;"><span class="ar">Power BI المتخصص</span><span class="en">Power BI Specialist</span></div>
+        <div style="font-size:.75rem;color:rgba(255,255,255,.4);font-weight:600;"><span class="ar">10 جلسات · 20 ساعة</span><span class="en">10 Sessions · 20h</span></div>
+        <div style="margin-top:1rem;display:inline-block;background:rgba(242,200,17,.2);color:#F2C811;font-size:.7rem;font-weight:900;padding:.25rem .75rem;border-radius:20px;">Track 2</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ SLIDE 1: ABOUT BASEL ════ -->
+<div class="slide slide-dark hidden-slide" id="slide-1" data-theme="dark">
+  <div style="max-width:700px;width:100%;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;">
+    <div style="flex-shrink:0;">
+      <div style="width:120px;height:120px;border-radius:50%;overflow:hidden;border:3px solid rgba(9,153,153,.5);box-shadow:0 0 30px rgba(9,153,153,.3);">
+        <img src="https://raw.githubusercontent.com/BaselGhanem/Portfolio/refs/heads/main/BaselGhanem.jpg" alt="Basel" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </div>
+    <div>
+      <div class="slide-tag" style="color:#099999;"><span class="ar">المدرب والخبير</span><span class="en">Your Instructor</span></div>
+      <div class="slide-h2" style="color:#fff;">باسل غانم <span class="en" style="font-size:1.4rem;">Basel Ghanem</span></div>
+      <div class="slide-body" style="color:rgba(255,255,255,.65);margin-bottom:1.25rem;">
+        <span class="ar">محلل مبيعات أول وخبير بيانات بخبرة تجاوز <strong style="color:#0bc4c4;">15 عاماً</strong>. خبير معتمد من Microsoft. درّب آلاف المحترفين في الأردن والمنطقة.</span>
+        <span class="en">Senior Sales Analyst & Data Expert with over <strong style="color:#0bc4c4;">15 years</strong> of experience. Microsoft Certified. Trained thousands of professionals across the region.</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.75rem;">
+        <span style="background:rgba(9,153,153,.15);border:1px solid rgba(9,153,153,.3);color:#0bc4c4;padding:.3rem .85rem;border-radius:20px;font-size:.78rem;font-weight:800;">🏆 Microsoft Certified</span>
+        <span style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);padding:.3rem .85rem;border-radius:20px;font-size:.78rem;font-weight:800;">📍 <span class="ar">عمّان، الأردن</span><span class="en">Amman, Jordan</span></span>
+        <span style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);padding:.3rem .85rem;border-radius:20px;font-size:.78rem;font-weight:800;">👥 <span class="ar">+1000 متدرب</span><span class="en">+1000 Trainees</span></span>
+      </div>
+      <button class="btn-primary" id="nextFromAbout" onclick="goNext()">
+        <span class="ar">التالي: المنهج التدريبي</span>
+        <span class="en">Next: Course Syllabus</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ SLIDE 2: SYLLABUS ════ -->
+<div class="slide slide-light on-light hidden-slide" id="slide-2" data-theme="light">
+  <div style="max-width:680px;width:100%;">
+    <div class="slide-tag ar" style="color:#099999;">ماذا ستتعلم؟</div>
+    <div class="slide-tag en" style="color:#099999;">What You'll Learn</div>
+    <div class="slide-h2 ar">المنهج التدريبي</div>
+    <div class="slide-h2 en">Course Syllabus</div>
+    <div id="syllabusContent" style="margin:1.5rem 0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.9rem;"></div>
+    <button class="btn-primary" onclick="goNext()" style="margin-top:.5rem;">
+      <span class="ar">التالي: المواعيد</span>
+      <span class="en">Next: Schedule</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ════ SLIDE 3: SCHEDULE ════ -->
+<div class="slide slide-dark hidden-slide" id="slide-3" data-theme="dark">
+  <div style="max-width:680px;width:100%;max-height:90vh;display:flex;flex-direction:column;">
+    <div>
+      <div class="slide-tag" style="color:#099999;"><span class="ar">المواعيد</span><span class="en">Schedule</span></div>
+      <div class="slide-h2" style="color:#fff;margin-bottom:.35rem;" id="schedTitle"></div>
+      <div style="font-size:.8rem;font-weight:700;color:rgba(255,255,255,.4);margin-bottom:1.25rem;">
+        <span class="ar">10 جلسات × 2 ساعة = 20 ساعة تدريبية</span>
+        <span class="en">10 Sessions × 2h = 20 Training Hours · 7:00–9:00 PM</span>
+      </div>
+    </div>
+    <div id="schedList" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:.5rem;padding-left:.25rem;"></div>
+    <button class="btn-primary" onclick="goNext()" style="margin-top:1.25rem;align-self:flex-start;">
+      <span class="ar">التالي: الشهادات</span>
+      <span class="en">Next: Certificates</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ════ SLIDE 4: CERTIFICATES ════ -->
+<div class="slide slide-teal hidden-slide" id="slide-4" data-theme="teal">
+  <div style="max-width:640px;width:100%;text-align:center;">
+    <div class="slide-tag" style="color:rgba(255,255,255,.7);">
+      <span class="ar">اعتمادات دولية</span><span class="en">International Accreditations</span>
+    </div>
+    <div class="slide-h1" style="color:#fff;">
+      <span class="ar">5 شهادات معتمدة دولياً 🏆</span>
+      <span class="en">5 Internationally Accredited Certificates 🏆</span>
+    </div>
+    <div class="slide-body" style="color:rgba(255,255,255,.75);margin-bottom:2rem;max-width:440px;margin-left:auto;margin-right:auto;">
+      <span class="ar">تُصدر عند اجتياز الامتحان النهائي والمشاريع العملية. معترف بها دولياً وتُضاف لـ LinkedIn.</span>
+      <span class="en">Issued upon passing the final exam and practical projects. Internationally recognized and LinkedIn-ready.</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-bottom:2rem;text-align:start;">
+      <div class="cert-badge" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);">
+        <div class="cert-icon" style="background:rgba(255,255,255,.15);">🎓</div>
+        <div style="font-size:.82rem;font-weight:800;color:#fff;">LPCIS</div>
+      </div>
+      <div class="cert-badge" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);">
+        <div class="cert-icon" style="background:rgba(255,255,255,.15);">📜</div>
+        <div style="font-size:.82rem;font-weight:800;color:#fff;">CPD Certified</div>
+      </div>
+      <div class="cert-badge" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);">
+        <div class="cert-icon" style="background:rgba(255,255,255,.15);">✅</div>
+        <div style="font-size:.82rem;font-weight:800;color:#fff;">ISO 9001:2015</div>
+      </div>
+      <div class="cert-badge" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);">
+        <div class="cert-icon" style="background:rgba(255,255,255,.15);">🌐</div>
+        <div style="font-size:.82rem;font-weight:800;color:#fff;">QCET-UK</div>
+      </div>
+      <div class="cert-badge" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);grid-column:span 2;">
+        <div class="cert-icon" style="background:rgba(255,255,255,.15);">🏅</div>
+        <div style="font-size:.82rem;font-weight:800;color:#fff;">ETDD Certified</div>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="goNext()" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);box-shadow:none;">
+      <span class="ar">التالي: السعر</span><span class="en">Next: Pricing</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ════ SLIDE 5: PRICING ════ -->
+<div class="slide slide-light on-light hidden-slide" id="slide-5" data-theme="light">
+  <div style="max-width:520px;width:100%;text-align:center;">
+    <div class="slide-tag ar" style="color:#099999;">الاستثمار</div>
+    <div class="slide-tag en" style="color:#099999;">Investment</div>
+    <div class="slide-h1" style="color:#0B1120;">
+      <span id="priceAmount" style="font-size:3.5rem;font-weight:900;background:linear-gradient(135deg,#099999,#066666);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">100</span>
+      <span style="font-size:1.5rem;font-weight:700;color:#64748b;"> JOD</span>
+    </div>
+    <div style="color:#64748b;font-size:.88rem;font-weight:700;margin-bottom:2rem;">
+      <span class="ar">للدورة كاملة · 20 ساعة تدريبية</span>
+      <span class="en">Full course · 20 training hours</span>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(9,153,153,.08),rgba(9,153,153,.03));border:1.5px solid rgba(9,153,153,.2);border-radius:1.25rem;padding:1.5rem;margin-bottom:1.75rem;text-align:start;">
+      <div style="font-weight:900;color:#099999;margin-bottom:1rem;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;">
+        <span class="ar">طريقة الدفع</span><span class="en">Payment Method</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
+        <div style="width:36px;height:36px;border-radius:.6rem;background:rgba(9,153,153,.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">💳</div>
+        <div>
+          <div style="font-weight:800;color:#0B1120;font-size:.9rem;">CliQ</div>
+          <div style="font-size:.78rem;color:#64748b;font-weight:600;"><span class="ar">XAcademy · بنك الاتحاد</span><span class="en">XAcademy · Bank Al Etihad</span></div>
+        </div>
+      </div>
+      <div style="font-size:.8rem;font-weight:700;color:#64748b;">
+        <span class="ar">سيتواصل معك المدرب بعد التسجيل لتأكيد الدفع وإتمام الإجراءات.</span>
+        <span class="en">The instructor will contact you after registration to confirm payment and finalize everything.</span>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="goNext()">
+      <span class="ar">التالي: الأسئلة الشائعة</span><span class="en">Next: FAQ</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ════ SLIDE 6: FAQ ════ -->
+<div class="slide slide-dark hidden-slide" id="slide-6" data-theme="dark">
+  <div style="max-width:620px;width:100%;">
+    <div class="slide-tag" style="color:#099999;"><span class="ar">أسئلة شائعة</span><span class="en">FAQ</span></div>
+    <div class="slide-h2" style="color:#fff;margin-bottom:1.5rem;">
+      <span class="ar">كل أسئلتك هنا</span><span class="en">All Your Questions Answered</span>
+    </div>
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1.25rem;overflow:hidden;margin-bottom:1.75rem;">
+      <div class="faq-item" x-data="{o:false}" style="padding:0 1.25rem;">
+        <button class="faq-q ar" onclick="toggleFaq(this)">هل الدورة تناسب المبتدئين؟ <span style="opacity:.4;font-size:.85em;">+</span></button>
+        <button class="faq-q en" onclick="toggleFaq(this)">Is the course suitable for beginners? <span style="opacity:.4;font-size:.85em;">+</span></button>
+        <div class="faq-a" style="display:none;"><span class="ar">نعم، نبدأ من الصفر تماماً وصولاً لمستويات متقدمة جداً بأسلوب تطبيقي.</span><span class="en">Yes, we start entirely from scratch up to very advanced levels with a practical approach.</span></div>
+      </div>
+      <div class="faq-item" style="padding:0 1.25rem;">
+        <button class="faq-q ar" onclick="toggleFaq(this)">كيف يتم الدفع؟ <span style="opacity:.4;font-size:.85em;">+</span></button>
+        <button class="faq-q en" onclick="toggleFaq(this)">How do I pay? <span style="opacity:.4;font-size:.85em;">+</span></button>
+        <div class="faq-a" style="display:none;"><span class="ar">الدفع عبر كليك (XAcademy) - بنك الاتحاد. سنتواصل معك بعد التسجيل.</span><span class="en">Payment via CliQ (XAcademy) - Bank Al Etihad. We'll contact you after registration.</span></div>
+      </div>
+      <div class="faq-item" style="padding:0 1.25rem;">
+        <button class="faq-q ar" onclick="toggleFaq(this)">كيف أحصل على الشهادات؟ <span style="opacity:.4;font-size:.85em;">+</span></button>
+        <button class="faq-q en" onclick="toggleFaq(this)">How do I get the certificates? <span style="opacity:.4;font-size:.85em;">+</span></button>
+        <div class="faq-a" style="display:none;"><span class="ar">بعد اجتياز الامتحان والمشاريع العملية والحضور تصدر لك 5 شهادات دولية.</span><span class="en">After passing the final exam, practical projects and maintaining attendance, you receive 5 international certificates.</span></div>
+      </div>
+      <div class="faq-item" style="padding:0 1.25rem;">
+        <button class="faq-q ar" onclick="toggleFaq(this)">ما الفرق بين Excel و Power BI؟ <span style="opacity:.4;font-size:.85em;">+</span></button>
+        <button class="faq-q en" onclick="toggleFaq(this)">What's the difference between Excel & Power BI? <span style="opacity:.4;font-size:.85em;">+</span></button>
+        <div class="faq-a" style="display:none;"><span class="ar">Excel يركز على التحليل داخل الملفات. Power BI يركز على تقارير تفاعلية ونشرها على الويب.</span><span class="en">Excel focuses on file-based analysis. Power BI focuses on interactive reports published to the web.</span></div>
+      </div>
+      <div class="faq-item" style="padding:0 1.25rem;">
+        <button class="faq-q ar" onclick="toggleFaq(this)">هل الدورة أونلاين؟ <span style="opacity:.4;font-size:.85em;">+</span></button>
+        <button class="faq-q en" onclick="toggleFaq(this)">Is the course online? <span style="opacity:.4;font-size:.85em;">+</span></button>
+        <div class="faq-a" style="display:none;"><span class="ar">نعم، الجلسات تُعقد عبر Microsoft Teams مساءً من 7 إلى 9.</span><span class="en">Yes, sessions are held via Microsoft Teams, evenings from 7 to 9 PM.</span></div>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="goNext()">
+      <span class="ar">التالي: تقييم مستواك</span><span class="en">Next: Level Assessment</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ════ SLIDES 7–10: QUIZ (4 Questions) ════ -->
+<div class="slide slide-light on-light hidden-slide" id="slide-7" data-theme="light" data-quiz="0">
+  <div style="max-width:580px;width:100%;" id="quizSlide7"></div>
+</div>
+<div class="slide slide-light on-light hidden-slide" id="slide-8" data-theme="light" data-quiz="1">
+  <div style="max-width:580px;width:100%;" id="quizSlide8"></div>
+</div>
+<div class="slide slide-light on-light hidden-slide" id="slide-9" data-theme="light" data-quiz="2">
+  <div style="max-width:580px;width:100%;" id="quizSlide9"></div>
+</div>
+<div class="slide slide-light on-light hidden-slide" id="slide-10" data-theme="light" data-quiz="3">
+  <div style="max-width:580px;width:100%;" id="quizSlide10"></div>
+</div>
+
+<!-- ════ SLIDE 11: QUIZ RESULTS ════ -->
+<div class="slide slide-dark hidden-slide" id="slide-11" data-theme="dark">
+  <div style="max-width:600px;width:100%;">
+    <div class="slide-tag" style="color:#099999;"><span class="ar">نتيجة التقييم</span><span class="en">Assessment Result</span></div>
+    <div class="slide-h2" style="color:#fff;margin-bottom:.5rem;">
+      <span class="ar">خطتك التدريبية جاهزة ✅</span>
+      <span class="en">Your Training Plan is Ready ✅</span>
+    </div>
+    <div style="font-size:.85rem;color:rgba(255,255,255,.5);font-weight:700;margin-bottom:1.5rem;" id="levelLabel"></div>
+    <div id="insightsContent" style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.75rem;"></div>
+    <button class="btn-primary" onclick="goNext()">
+      <span class="ar">سجّل الآن — احجز مقعدك</span><span class="en">Register Now — Secure Your Seat</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ════ SLIDE 12: REGISTRATION ════ -->
+<div class="slide slide-light on-light hidden-slide" id="slide-12" data-theme="light">
+  <div style="max-width:480px;width:100%;">
+    <div class="slide-tag ar" style="color:#099999;">التسجيل</div>
+    <div class="slide-tag en" style="color:#099999;">Registration</div>
+    <div class="slide-h2" style="color:#0B1120;margin-bottom:.4rem;">
+      <span class="ar">احجز مقعدك الآن</span><span class="en">Secure Your Seat</span>
+    </div>
+    <div style="font-size:.82rem;color:#64748b;font-weight:700;margin-bottom:1.75rem;">
+      <span class="ar">سنتواصل معك فوراً لتأكيد الحجز وتفاصيل الدفع</span>
+      <span class="en">We'll contact you immediately to confirm and share payment details</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1.1rem;margin-bottom:1.5rem;">
+      <div>
+        <label style="font-size:.75rem;font-weight:900;color:#64748b;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:.4rem;"><span class="ar">الاسم الكامل</span><span class="en">Full Name</span></label>
+        <input type="text" id="regName" placeholder="Basel Ghanem" style="width:100%;border:2px solid #e2e8f0;border-radius:.85rem;padding:.85rem 1rem;font-size:.95rem;font-weight:700;color:#0B1120;outline:none;transition:border .2s;" onfocus="this.style.borderColor='#099999'" onblur="this.style.borderColor='#e2e8f0'">
+      </div>
+      <div>
+        <label style="font-size:.75rem;font-weight:900;color:#64748b;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:.4rem;"><span class="ar">البريد الإلكتروني</span><span class="en">Email Address</span></label>
+        <input type="email" id="regEmail" placeholder="you@example.com" style="width:100%;border:2px solid #e2e8f0;border-radius:.85rem;padding:.85rem 1rem;font-size:.95rem;font-weight:700;color:#0B1120;outline:none;transition:border .2s;" onfocus="this.style.borderColor='#099999'" onblur="this.style.borderColor='#e2e8f0'">
+      </div>
+      <div>
+        <label style="font-size:.75rem;font-weight:900;color:#64748b;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:.4rem;"><span class="ar">رقم الواتساب</span><span class="en">WhatsApp Number</span></label>
+        <input type="tel" id="regPhone" placeholder="+962 7X XXX XXXX" dir="ltr" style="width:100%;border:2px solid #e2e8f0;border-radius:.85rem;padding:.85rem 1rem;font-size:.95rem;font-weight:700;color:#0B1120;outline:none;transition:border .2s;" onfocus="this.style.borderColor='#099999'" onblur="this.style.borderColor='#e2e8f0'">
+      </div>
+    </div>
+    <div id="regErr" style="display:none;color:#ef4444;font-size:.82rem;font-weight:700;margin-bottom:.85rem;padding:.6rem .9rem;background:rgba(239,68,68,.08);border-radius:.6rem;border:1px solid rgba(239,68,68,.2);"></div>
+    <button class="btn-primary" id="regBtn" onclick="submitRegistration()" style="width:100%;justify-content:center;">
+      <span class="ar">تأكيد التسجيل 🚀</span><span class="en">Confirm Registration 🚀</span>
+    </button>
+  </div>
+</div>
+
+<!-- ════ SLIDE 13: SUCCESS ════ -->
+<div class="slide slide-teal hidden-slide" id="slide-13" data-theme="teal">
+  <div style="text-align:center;max-width:500px;width:100%;">
+    <div class="pop-in" style="width:100px;height:100px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.75rem;font-size:2.5rem;">✅</div>
+    <div class="slide-h1" style="color:#fff;margin-bottom:.75rem;">
+      <span class="ar">تم التسجيل بنجاح!</span><span class="en">Registration Successful!</span>
+    </div>
+    <div style="font-size:1rem;color:rgba(255,255,255,.8);font-weight:600;line-height:1.7;margin-bottom:2rem;">
+      <span class="ar">تم حجز مقعدك المبدئي. سنتواصل معك عبر الواتساب قريباً لتأكيد الدفع وإتمام التسجيل.</span>
+      <span class="en">Your seat is reserved. We'll contact you via WhatsApp shortly to confirm payment and finalize your registration.</span>
+    </div>
+    <a href="http://wa.me/962788458787" target="_blank" style="display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:#fff;font-weight:800;padding:.85rem 1.75rem;border-radius:1rem;text-decoration:none;transition:all .3s;" onmouseover="this.style.background='rgba(255,255,255,.25)'" onmouseout="this.style.background='rgba(255,255,255,.15)'">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.172-.01-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span class="ar">تواصل على واتساب</span><span class="en">Contact on WhatsApp</span>
+    </a>
+  </div>
+</div>
+
+</div><!-- /slides -->
+
+<!-- ═══════════════════════════════
+     JAVASCRIPT
+════════════════════════════════ -->
+<style>
+.admin-tab-active{background:linear-gradient(135deg,#099999,#066666);color:#fff;border:none;}
+.admin-tab-idle{background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.08);}
+.rf-btn{padding:.4rem .9rem;border-radius:.55rem;font-weight:800;font-size:.78rem;cursor:pointer;transition:all .2s;}
+.rf-active{background:#099999;color:#fff;border:none;}
+.rf-idle{background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.08);}
+</style>
 
 <script>
-// ==========================================
-// 1) Vanilla JS INTRO SCREEN
-// ==========================================
-const isAr = document.documentElement.lang === 'ar';
-const introScreen = document.getElementById('introScreen');
-const mainSite = document.getElementById('mainSite');
-const linesContainer = document.getElementById('terminalLines');
-const inputRow = document.getElementById('inputRow');
-const nameInput = document.getElementById('nameInput');
-const courseSelect = document.getElementById('courseSelect');
-const terminalContent = document.getElementById('terminalContent');
+// ═══ STATE ═══
+let currentSlide = 0;
+let currentCourse = 'excel';
+let totalScore = 0;
+let quizAnswers = [];
+let adminTriggerCount = 0;
+let adminTriggerTimer = null;
+let registrations = [];
+let visitors = [];
+let regFilter = 'all';
 
-// تسريع الكتابة هنا بتخفيض قيمة delay
-const typeSpeed = 2; // أسرع بكثير
-function typeLine(text, className, delay=0) {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            const line = document.createElement('div');
-            line.className = 't-line ' + className;
-            linesContainer.appendChild(line);
-            terminalContent.scrollTop = terminalContent.scrollHeight;
-            
-            let i = 0;
-            function type() {
-                if(i < text.length) {
-                    line.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(type, typeSpeed);
-                } else {
-                    resolve();
-                }
-            }
-            type();
-        }, delay); // الأوقات أصبحت قصيرة جداً (10 ملي ثانية مثلاً في الاستدعاء)
-    });
+// Default schedules
+const defaultSessions = {
+  excel:[
+    {num:1,month:'JUN',day:'15',dayAr:'الاثنين',dayEn:'Monday'},
+    {num:2,month:'JUN',day:'17',dayAr:'الأربعاء',dayEn:'Wednesday'},
+    {num:3,month:'JUN',day:'22',dayAr:'الاثنين',dayEn:'Monday'},
+    {num:4,month:'JUN',day:'24',dayAr:'الأربعاء',dayEn:'Wednesday'},
+    {num:5,month:'JUN',day:'29',dayAr:'الاثنين',dayEn:'Monday'},
+    {num:6,month:'JUL',day:'01',dayAr:'الأربعاء',dayEn:'Wednesday'},
+    {num:7,month:'JUL',day:'06',dayAr:'الاثنين',dayEn:'Monday'},
+    {num:8,month:'JUL',day:'08',dayAr:'الأربعاء',dayEn:'Wednesday'},
+    {num:9,month:'JUL',day:'13',dayAr:'الاثنين',dayEn:'Monday'},
+    {num:10,month:'JUL',day:'15',dayAr:'الأربعاء',dayEn:'Wednesday'},
+  ],
+  powerbi:[
+    {num:1,month:'JUN',day:'16',dayAr:'الثلاثاء',dayEn:'Tuesday'},
+    {num:2,month:'JUN',day:'18',dayAr:'الخميس',dayEn:'Thursday'},
+    {num:3,month:'JUN',day:'23',dayAr:'الثلاثاء',dayEn:'Tuesday'},
+    {num:4,month:'JUN',day:'25',dayAr:'الخميس',dayEn:'Thursday'},
+    {num:5,month:'JUN',day:'30',dayAr:'الثلاثاء',dayEn:'Tuesday'},
+    {num:6,month:'JUL',day:'02',dayAr:'الخميس',dayEn:'Thursday'},
+    {num:7,month:'JUL',day:'07',dayAr:'الثلاثاء',dayEn:'Tuesday'},
+    {num:8,month:'JUL',day:'09',dayAr:'الخميس',dayEn:'Thursday'},
+    {num:9,month:'JUL',day:'14',dayAr:'الثلاثاء',dayEn:'Tuesday'},
+    {num:10,month:'JUL',day:'16',dayAr:'الخميس',dayEn:'Thursday'},
+  ]
+};
+let liveSessions = JSON.parse(JSON.stringify(defaultSessions));
+
+const syllabusData = {
+  excel:[
+    {icon:'🖥️',ar:'واجهة البرنامج',en:'UI & Basics',items:{ar:'بيئة العمل · التنسيق الشرطي · الطباعة',en:'Environment · Conditional Formatting · Printing'}},
+    {icon:'🔢',ar:'الدوال والمعادلات',en:'Formulas & Functions',items:{ar:'VLOOKUP · XLOOKUP · IF · AND · OR · نصوص وتواريخ',en:'VLOOKUP · XLOOKUP · IF · AND · OR · Text & Date'}},
+    {icon:'📊',ar:'التقارير الذكية',en:'Smart Reports',items:{ar:'Pivot Tables · Dashboards · المخططات التفاعلية',en:'Pivot Tables · Dashboards · Interactive Charts'}},
+  ],
+  powerbi:[
+    {icon:'🗄️',ar:'Power Query',en:'Power Query',items:{ar:'ربط مصادر البيانات · التنظيف · معالجة الأخطاء',en:'Connect sources · Clean data · Handle errors'}},
+    {icon:'🔗',ar:'DAX & Modeling',en:'DAX & Modeling',items:{ar:'بناء العلاقات · Measures متقدمة · CALCULATE',en:'Relationships · Advanced Measures · CALCULATE'}},
+    {icon:'🎨',ar:'Visualization',en:'Visualization',items:{ar:'لوحات تفاعلية · نشر على Power BI Service · RLS',en:'Interactive dashboards · Publish to Service · RLS'}},
+  ]
+};
+
+const quizData = {
+  excel:[
+    {ar:'كيف تقيم مستواك في كتابة المعادلات؟',en:'How do you rate your Formula skills?',opts:[{ar:'لم أكتب معادلة من قبل',en:'Never wrote one',s:0},{ar:'سمعت بها ولم أجربها',en:'Heard of it but never used it',s:1},{ar:'أستخدمها أحياناً بمساعدة',en:'I use it occasionally with help',s:2},{ar:'أكتبها بثقة ويومياً',en:'I write them confidently daily',s:3}]},
+    {ar:'هل سبق لك بناء Pivot Table؟',en:'Have you built a Pivot Table before?',opts:[{ar:'لا، لا أعرف ما هي',en:"No, I don't know what it is",s:0},{ar:'رأيت أحداً يبنيها فقط',en:"I've only seen someone build one",s:1},{ar:'بنيتها مرة أو مرتين',en:"I've built one or twice",s:2},{ar:'أبنيها بانتظام في تقاريري',en:'I build them regularly',s:3}]},
+    {ar:'كيف تتعامل مع تنظيف البيانات في Excel؟',en:'How do you handle Data Cleaning in Excel?',opts:[{ar:'لا أعرف كيف',en:"I don't know how",s:0},{ar:'أمسح الفراغات يدوياً',en:'I delete spaces manually',s:1},{ar:'أستخدم TRIM و CLEAN',en:'I use TRIM & CLEAN',s:2},{ar:'أستخدم Power Query',en:'I use Power Query',s:3}]},
+    {ar:'هل بنيت Dashboard في Excel مسبقاً؟',en:'Have you built an Excel Dashboard before?',opts:[{ar:'لا أبداً',en:'Never',s:0},{ar:'رسمت مخططات بسيطة',en:'Drew simple charts',s:1},{ar:'نعم، Dashboard بسيطة',en:'Yes, a simple one',s:2},{ar:'نعم، احترافية وتفاعلية',en:'Yes, professional & interactive',s:3}]},
+  ],
+  powerbi:[
+    {ar:'هل سبق لك فتح Power BI Desktop؟',en:'Have you ever opened Power BI Desktop?',opts:[{ar:'لا، ولا أعرف ما هو',en:"No, I don't know what it is",s:0},{ar:'سمعت به لكن لم أجربه',en:'Heard of it, never tried it',s:1},{ar:'فتحته وجربت بعض الميزات',en:'Opened it and tried some features',s:2},{ar:'أستخدمه بانتظام في عملي',en:'I use it regularly at work',s:3}]},
+    {ar:'كيف مستواك في Power Query؟',en:'How is your Power Query skill level?',opts:[{ar:'لم أسمع بـ Power Query',en:"I've never heard of Power Query",s:0},{ar:'أعرف ما هو لكن لم أستخدمه',en:'I know it but never used it',s:1},{ar:'نفّذت خطوات تنظيف أساسية',en:'I did basic cleaning steps',s:2},{ar:'أبني Queries معقدة',en:'I build complex queries',s:3}]},
+    {ar:'هل كتبت أي معادلة DAX؟',en:'Have you written any DAX formula?',opts:[{ar:'لا، DAX شيء جديد',en:'No, DAX is new to me',s:0},{ar:'رأيت DAX لكن لم أكتبه',en:'Seen DAX but never written it',s:1},{ar:'كتبت معادلات بسيطة مثل CALCULATE',en:'Wrote basic ones like CALCULATE',s:2},{ar:'أكتب Measures متقدمة',en:'I write advanced Measures',s:3}]},
+    {ar:'هل نشرت تقرير على Power BI Service؟',en:'Have you published to Power BI Service?',opts:[{ar:'لا، لم أسمع بـ Service',en:"No, I haven't heard of it",s:0},{ar:'أعرفه لكن لم أجرب',en:'I know it but never tried',s:1},{ar:'نشرت تقريراً أو اثنين',en:'Published one or two reports',s:2},{ar:'أنشر بصلاحيات RLS',en:'I publish with Row Level Security',s:3}]},
+  ]
+};
+
+const TOTAL_SLIDES = 14; // 0-13
+const SESSION_NAMES_AR = ['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','الختامية 🏆'];
+const isAr = () => document.documentElement.lang === 'ar';
+
+// ═══ SLIDE NAVIGATION ═══
+function goTo(n, skipHistory = false) {
+  const slides = document.querySelectorAll('.slide');
+  const prev = currentSlide;
+  currentSlide = Math.max(0, Math.min(n, TOTAL_SLIDES - 1));
+
+  slides.forEach((s, i) => {
+    s.classList.remove('active','above','below','hidden-slide');
+    if(i === currentSlide) s.classList.add('active');
+    else if(i < currentSlide) s.classList.add('above');
+    else s.classList.add('hidden-slide');
+  });
+
+  updateUI();
+  // Render dynamic content
+  if(currentSlide === 2) renderSyllabus();
+  if(currentSlide === 3) renderSchedule();
+  if(currentSlide >= 7 && currentSlide <= 10) renderQuizSlide(currentSlide - 7);
+  if(currentSlide === 11) renderInsights();
 }
 
-function runIntro() {
-    typeLine('> SYSTEM BOOT...', 'dim', 10)
-    .then(() => typeLine('> X-ACADEMY PLATFORM v2.0 INITIALIZED', 'system', 10))
-    .then(() => typeLine('> SECURE CONNECTION ESTABLISHED [OK]', 'bright', 10))
-    .then(() => typeLine(isAr ? '> مرحباً بك في منصة التدريب المتقدم' : '> Welcome to Advanced Training Platform', '', 10))
-    .then(() => typeLine(isAr ? '> أدخل اسمك الكامل للمتابعة:' : '> Enter full name to continue:', '', 10))
-    .then(() => {
-        inputRow.style.display = 'flex';
-        nameInput.focus();
-    });
+function goNext() { goTo(currentSlide + 1); }
+function goBack() { if(currentSlide > 0) goTo(currentSlide - 1); }
+
+function updateUI() {
+  const pct = currentSlide === 0 ? 0 : (currentSlide / (TOTAL_SLIDES - 1)) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+
+  const backBtn = document.getElementById('backBtn');
+  backBtn.style.display = currentSlide > 0 ? 'flex' : 'none';
+
+  // Theme of current slide
+  const slide = document.getElementById('slide-' + currentSlide);
+  const theme = slide ? slide.dataset.theme : 'dark';
+  const isLight = theme === 'light';
+  backBtn.className = isLight ? 'on-light' : '';
+  const langBtn = document.getElementById('langBtn');
+  langBtn.className = 'lang-btn' + (isLight ? ' on-light' : '');
+  const stepLabel = document.getElementById('stepLabel');
+  stepLabel.className = 'step-label' + (isLight ? ' on-light' : '');
+  stepLabel.style.color = isLight ? 'rgba(0,0,0,.35)' : 'rgba(255,255,255,.4)';
+
+  // Step label (skip slide 0 and 13)
+  if(currentSlide > 0 && currentSlide < 13) {
+    stepLabel.textContent = currentSlide + ' / ' + (TOTAL_SLIDES - 2);
+  } else {
+    stepLabel.textContent = '';
+  }
+
+  // Lang button text
+  langBtn.textContent = isAr() ? 'EN' : 'AR';
+
+  // Nav dots
+  renderNavDots();
 }
 
-function addLine(text, className) { return typeLine(text, className, 10); }
+function renderNavDots() {
+  const container = document.getElementById('navDots');
+  container.innerHTML = '';
+  for(let i = 1; i < TOTAL_SLIDES - 1; i++) {
+    const d = document.createElement('div');
+    d.className = 'nav-dot' + (i === currentSlide ? ' active' : '');
+    d.onclick = () => { if(i <= currentSlide) goTo(i); };
+    d.title = i;
+    container.appendChild(d);
+  }
+}
 
-function handleName(){
-    const name = nameInput.value.trim();
-    if(!name || name.length < 2) {
-        nameInput.style.color='#ff4444';
-        setTimeout(()=>nameInput.style.color='#7fff00',500);
-        return;
+// ═══ COURSE SELECTION ═══
+function chooseCourse(course) {
+  currentCourse = course;
+  totalScore = 0;
+  quizAnswers = [];
+  goTo(1);
+}
+
+// ═══ SYLLABUS ═══
+function renderSyllabus() {
+  const data = syllabusData[currentCourse];
+  const ar = isAr();
+  const color = currentCourse === 'excel' ? '#099999' : '#F2C811';
+  document.getElementById('syllabusContent').innerHTML = data.map(s => `
+    <div class="slide-card on-light" style="border-radius:1.25rem;padding:1.25rem;">
+      <div style="font-size:1.75rem;margin-bottom:.75rem;">${s.icon}</div>
+      <div style="font-weight:900;color:#0B1120;font-size:.95rem;margin-bottom:.5rem;">${ar ? s.ar : s.en}</div>
+      <div style="font-size:.78rem;color:#64748b;font-weight:600;line-height:1.6;">${ar ? s.items.ar : s.items.en}</div>
+    </div>
+  `).join('');
+}
+
+// ═══ SCHEDULE ═══
+async function loadScheduleFromFirebase() {
+  const fb = window._fb;
+  if(!fb) return;
+  try {
+    for(const course of ['excel','powerbi']) {
+      const ref = fb.doc(fb.db,'schedules',course);
+      const snap = await fb.getDoc(ref);
+      if(snap.exists()) liveSessions[course] = snap.data().sessions;
     }
-    inputRow.style.display = 'none';
-    const greeting = isAr ? `> أهلاً وسهلاً، ${name}! 👋` : `> Welcome aboard, ${name}! 👋`;
-    const choose = isAr ? '> اختر مسارك التدريبي:' : '> Select your training path:';
-    
-    addLine(greeting,'bright')
-    .then(()=>addLine(choose,'',10))
-    .then(()=>{
-        courseSelect.style.display = 'block';
-        courseSelect.innerHTML = `
-            <button class="c-btn" id="btnExcel">
-                📊 ${isAr?'Excel الاحترافي':'Professional Excel'}
-                <span class="c-tag">Track 1</span>
-            </button>
-            <button class="c-btn" id="btnPBI">
-                📈 ${isAr?'Power BI الشامل':'Comprehensive Power BI'}
-                <span class="c-tag">Track 2</span>
-            </button>
-        `;
-        document.getElementById('btnExcel').onclick = () => finishIntro(name, 'excel');
-        document.getElementById('btnPBI').onclick = () => finishIntro(name, 'powerbi');
-        terminalContent.scrollTop = terminalContent.scrollHeight;
+  } catch(e) { console.log('Using default schedule'); }
+}
+
+function renderSchedule() {
+  const sessions = liveSessions[currentCourse];
+  const ar = isAr();
+  const isPbi = currentCourse === 'powerbi';
+  document.getElementById('schedTitle').innerHTML =
+    `<span class="ar">${isPbi ? 'Power BI المتخصص' : 'Excel الاحترافي'} — جدول المحاضرات</span>
+     <span class="en">${isPbi ? 'Power BI Specialist' : 'Professional Excel'} — Class Schedule</span>`;
+  document.getElementById('schedList').innerHTML = sessions.map((s,i) => `
+    <div class="sess-row" style="${i===9?'background:rgba(9,153,153,.12);border-color:rgba(9,153,153,.35);':''}">
+      <div class="sess-num" style="${i===9?'background:#099999;color:#fff;':''}">${s.num}</div>
+      <div class="sess-date">
+        <div class="month">${s.month}</div>
+        <div class="day" style="color:${i===9?'#0bc4c4':'#fff'}">${s.day}</div>
+      </div>
+      <div style="flex:1;">
+        <div style="font-weight:800;font-size:.88rem;color:${i===9?'#0bc4c4':'rgba(255,255,255,.9)'};">
+          ${ar ? (i===9?'الجلسة الختامية 🏆':'الجلسة '+SESSION_NAMES_AR[i]) : (i===9?'Final Session 🏆':'Session '+(i+1))}
+        </div>
+        <div style="font-size:.75rem;color:rgba(255,255,255,.4);font-weight:600;">${ar ? s.dayAr : s.dayEn} · 7:00 – 9:00 PM</div>
+      </div>
+      ${i===9?'<span style="background:#099999;color:#fff;font-size:.65rem;font-weight:900;padding:.2rem .5rem;border-radius:.4rem;">FINAL</span>':''}
+    </div>
+  `).join('');
+}
+
+// ═══ QUIZ ═══
+function renderQuizSlide(qIndex) {
+  const data = quizData[currentCourse][qIndex];
+  const ar = isAr();
+  const el = document.getElementById('quizSlide' + (7 + qIndex));
+  if(!el || !data) return;
+  el.innerHTML = `
+    <div class="slide-tag ar" style="color:#099999;">${ar?'سؤال':'Question'} ${qIndex+1} ${ar?'من':'of'} 4</div>
+    <div class="slide-h2" style="color:#0B1120;margin-bottom:1.5rem;">${ar ? data.ar : data.en}</div>
+    <div style="display:flex;flex-direction:column;gap:.75rem;">
+      ${data.opts.map((o,i) => `
+        <button class="quiz-opt" style="border-color:#e2e8f0;color:#1E293B;background:#fff;" onclick="answerQuiz(${qIndex},${o.s})"
+          onmouseover="this.style.borderColor='#099999';this.style.background='rgba(9,153,153,.06)'"
+          onmouseout="this.style.borderColor='#e2e8f0';this.style.background='#fff'">
+          <div class="opt-k" style="background:#f1f5f9;color:#64748b;">${['A','B','C','D'][i]}</div>
+          <span>${ar ? o.ar : o.en}</span>
+        </button>
+      `).join('')}
+    </div>
+  `;
+}
+
+function answerQuiz(qIndex, score) {
+  totalScore += score;
+  quizAnswers[qIndex] = score;
+  goTo(currentSlide + 1);
+}
+
+// ═══ INSIGHTS ═══
+function renderInsights() {
+  const ar = isAr();
+  const isNovice = totalScore <= 4;
+  const isInterm = totalScore > 4 && totalScore <= 8;
+  const isPbi = currentCourse === 'powerbi';
+  const level = isNovice ? (ar?'مستوى مبتدئ':'Beginner Level') : isInterm ? (ar?'مستوى متوسط':'Intermediate Level') : (ar?'مستوى متقدم':'Advanced Level');
+  document.getElementById('levelLabel').textContent = level + ' · Score: ' + totalScore + '/12';
+  const ins = [];
+  if(isPbi){
+    ins.push(isNovice?{e:'⚡',ar:'سنبدأ من الصفر لبناء أساس متين في Power Query',en:'We start from scratch to build a solid Power Query foundation',t:'learn'}:{e:'🔥',ar:'ستعمّق فهمك لـ DAX وتبني Measures متقدمة',en:'You will deepen your DAX understanding and build advanced Measures',t:'deepen'});
+    ins.push((isNovice||isInterm)?{e:'🗂️',ar:'ستتعلم نمذجة البيانات وبناء العلاقات',en:'You will learn data modeling and building relationships like a pro',t:'learn'}:{e:'📐',ar:'ستتقن نماذج البيانات المعقدة',en:'You will master complex data models',t:'deepen'});
+    ins.push(isNovice?{e:'🎨',ar:'ستنشر تقريرك التفاعلي الأول على Power BI Service',en:'You will publish your first interactive report to Power BI Service',t:'learn'}:{e:'💎',ar:'ستصنع تقارير بمستوى الشركات المتعددة الجنسيات',en:'You will create reports at multinational company level',t:'deepen'});
+  } else {
+    ins.push(isNovice?{e:'⚡',ar:'سنبدأ من الصفر لنبني أساساً صُلباً',en:'We start from zero to build a solid foundation',t:'learn'}:{e:'🚀',ar:'سنعزز مهاراتك بمعادلات متقدمة ومركّبة',en:'We will boost your skills with advanced nested formulas',t:'deepen'});
+    ins.push((isNovice||isInterm)?{e:'📊',ar:'ستبني Pivot Tables احترافية وتحلل آلاف الصفوف',en:'You will build professional Pivot Tables and analyze thousands of rows',t:'learn'}:{e:'📈',ar:'ستتقن الجداول المحورية المتقدمة',en:'You will master advanced pivot tables',t:'deepen'});
+    ins.push(isNovice?{e:'🎨',ar:'ستصمم لوحة قيادة ستُبهر بها مديرك',en:'You will design a dashboard that will impress your manager',t:'learn'}:{e:'💎',ar:'ستصنع لوحات قيادة على مستوى احترافي عالٍ',en:'You will create dashboards at a high professional level',t:'deepen'});
+  }
+  ins.push({e:'🏆',ar:'5 شهادات اعتماد دولية تُزيّن سيرتك الذاتية',en:'5 international certificates for your resume',t:'guaranteed'});
+  const typeColors={learn:'background:rgba(59,130,246,.15);color:#60a5fa',deepen:'background:rgba(139,92,246,.15);color:#a78bfa',guaranteed:'background:rgba(34,197,94,.15);color:#4ade80'};
+  const typeLabels={learn:{ar:'ستتعلمه',en:'You will learn'},deepen:{ar:'ستعمّقه',en:'You will deepen'},guaranteed:{ar:'مضمون',en:'Guaranteed'}};
+  document.getElementById('insightsContent').innerHTML = ins.map(i => `
+    <div class="insight-card">
+      <div style="font-size:1.6rem;flex-shrink:0;">${i.e}</div>
+      <div>
+        <div style="font-weight:700;color:rgba(255,255,255,.9);font-size:.9rem;margin-bottom:.3rem;">${ar ? i.ar : i.en}</div>
+        <span class="ins-badge" style="${typeColors[i.t]}">${ar ? typeLabels[i.t].ar : typeLabels[i.t].en}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══ REGISTRATION ═══
+async function submitRegistration() {
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const err = document.getElementById('regErr');
+  const btn = document.getElementById('regBtn');
+  if(!email || !phone) {
+    err.textContent = isAr() ? 'يرجى تعبئة البريد الإلكتروني والواتساب على الأقل' : 'Please fill email and WhatsApp at minimum';
+    err.style.display = 'block'; return;
+  }
+  err.style.display = 'none';
+  btn.innerHTML = '<svg class="spinner" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10" opacity=".25"/><path d="M12 2a10 10 0 0 1 10 10"/></svg> ' + (isAr()?'جاري الحفظ...':'Saving...');
+  btn.style.opacity = '.7'; btn.disabled = true;
+  try {
+    const fb = window._fb;
+    if(!fb || !fb.db) throw new Error('Firebase not ready');
+    await fb.addDoc(fb.collection(fb.db,'registrations'),{
+      name, email, phone, course: currentCourse,
+      totalScore, createdAt: new Date().toISOString()
     });
+    triggerConfetti();
+    goTo(13);
+  } catch(e) {
+    err.textContent = isAr() ? 'حدث خطأ، حاول مجدداً' : 'Connection error, try again';
+    err.style.display = 'block';
+  } finally {
+    btn.innerHTML = '<span class="ar">تأكيد التسجيل 🚀</span><span class="en">Confirm Registration 🚀</span>';
+    btn.style.opacity = '1'; btn.disabled = false;
+  }
 }
 
-nameInput.addEventListener('keypress', e => { if(e.key === 'Enter') handleName(); });
-
-function finishIntro(name, course) {
-    const selText = course==='excel' ? 'Excel [Loading modules...]' : 'Power BI [Loading modules...]';
-    addLine('> INIT: ' + selText, 'system').then(()=>{
-        introScreen.classList.add('glitching');
-        setTimeout(()=>{
-            introScreen.classList.remove('glitching');
-            introScreen.classList.add('fading');
-            setTimeout(()=>{
-                introScreen.style.display = 'none';
-                window.dispatchEvent(new CustomEvent('platform-ready', { detail:{name, course} }));
-            }, 500);
-        }, 300);
-    });
+// ═══ CONFETTI ═══
+function triggerConfetti() {
+  for(let i=0;i<45;i++){
+    const c=document.createElement('div');c.className='conf-p';
+    const cols=['#099999','#0bc4c4','#F2C811','#febc2e','#ff5f57'];
+    c.style.cssText=`background:${cols[Math.floor(Math.random()*cols.length)]};width:${Math.random()*10+5}px;height:${Math.random()*10+5}px;left:${Math.random()*100}vw;top:-20px;border-radius:${Math.random()>0.5?'50%':'2px'};--cx:${(Math.random()-.5)*300}px;--cy:${Math.random()*300+200}px;`;
+    document.body.appendChild(c);setTimeout(()=>c.remove(),2000);
+  }
 }
 
-// Matrix Canvas
-const canvas = document.getElementById('matrixCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%""\'#&_(),.;:?!\\|{}<>[]^~'.split('');
-const fontSize = 14; const columns = canvas.width/fontSize;
-const drops = Array(Math.floor(columns)).fill(1);
-function draw(){
-    ctx.fillStyle = 'rgba(0,0,0,0.05)';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle = '#0F0'; ctx.font = fontSize + 'px monospace';
-    for(let i=0; i<drops.length; i++){
-        const text = letters[Math.floor(Math.random()*letters.length)];
-        ctx.fillText(text, i*fontSize, drops[i]*fontSize);
-        if(drops[i]*fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-        drops[i]++;
-    }
+// ═══ FAQ ═══
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const answers = item.querySelectorAll('.faq-a');
+  const isOpen = answers[0].style.display !== 'none';
+  // Close all
+  document.querySelectorAll('.faq-a').forEach(a => a.style.display='none');
+  document.querySelectorAll('.faq-q span').forEach(s => s.textContent='+');
+  if(!isOpen) {
+    answers.forEach(a => a.style.display='block');
+    btn.querySelectorAll('span').forEach(s => s.textContent='−');
+  }
 }
-setInterval(draw, 33);
-// Init AOS immediately so main site animates correctly
-document.addEventListener('DOMContentLoaded', () => {
-    AOS.init({ duration:800, once:true, offset:100 });
-});
-runIntro();
 
-// ==========================================
-// 2) Alpine.js Application
-// ==========================================
-function platform() {
-    return {
-        scrolled: false, mobileMenu: false, cursorX: 0, cursorY: 0, isHovering: false,
-        logoClicks: 0, _logoFlash: 0, _logoTimer: null, showAdminLogin: false, showAdmin: false, adminEmail: '', adminPassword: '',
-        adminError: '', adminLoading: false, registrations: [], adminSearch: '', adminCourseFilter: 'all',
-        adminTab: 'registrations', visitors: [],
-        
-      userName: '', currentCourse: 'excel', showEnrollment: false, selectedCourse: '',
-        quizStep: 1, totalScore: 0,
-        formData: { name:'', email:'', phone:'' }, formError: '', isSubmitting: false,
+// ═══ LANG ═══
+function toggleLang() {
+  const h = document.documentElement;
+  if(h.lang==='ar'){h.lang='en';h.dir='ltr';}else{h.lang='ar';h.dir='rtl';}
+  document.getElementById('langBtn').textContent = h.lang==='ar'?'EN':'AR';
+  if(window.lucide) lucide.createIcons();
+  // Re-render current dynamic slide
+  if(currentSlide===2) renderSyllabus();
+  if(currentSlide===3) renderSchedule();
+  if(currentSlide>=7&&currentSlide<=10) renderQuizSlide(currentSlide-7);
+  if(currentSlide===11) renderInsights();
+}
 
-        // ══ SCHEDULE DATA — عدّل هنا فقط لتغيير المواعيد ══
-    excelSessions: [
-            { num:1,  month:'JUN', day:'15', dayAr:'الاثنين',    dayEn:'Monday',    time:'7:00 – 9:00 PM', final:false },
-            { num:2,  month:'JUN', day:'17', dayAr:'الأربعاء', dayEn:'Wednesday',   time:'7:00 – 9:00 PM', final:false },
-            { num:3,  month:'JUN', day:'22', dayAr:'الاثنين',    dayEn:'Monday',    time:'7:00 – 9:00 PM', final:false },
-            { num:4,  month:'JUN', day:'24', dayAr:'الأربعاء', dayEn:'Wednesday',   time:'7:00 – 9:00 PM', final:false },
-            { num:5,  month:'JUN', day:'29', dayAr:'الاثنين',    dayEn:'Monday',    time:'7:00 – 9:00 PM', final:false },
-            { num:6,  month:'JUL', day:'01', dayAr:'الأربعاء', dayEn:'Wednesday',   time:'7:00 – 9:00 PM', final:false },
-            { num:7,  month:'JUL', day:'06', dayAr:'الاثنين',    dayEn:'Monday',    time:'7:00 – 9:00 PM', final:false },
-            { num:8,  month:'JUL', day:'08', dayAr:'الأربعاء', dayEn:'Wednesday',   time:'7:00 – 9:00 PM', final:false },
-            { num:9,  month:'JUL', day:'13', dayAr:'الاثنين',    dayEn:'Monday',    time:'7:00 – 9:00 PM', final:false },
-            { num:10, month:'JUL', day:'15', dayAr:'الأربعاء', dayEn:'Wednesday',   time:'7:00 – 9:00 PM', final:true  },
-        ],
-        pbiSessions: [
-            { num:1,  month:'JUN', day:'01', dayAr:'الاثنين',  dayEn:'Monday',    time:'7:00 – 9:00 PM', final:false },
-            { num:2,  month:'JUN', day:'03', dayAr:'الأربعاء', dayEn:'Wednesday', time:'7:00 – 9:00 PM', final:false },
-            { num:3,  month:'JUN', day:'08', dayAr:'الاثنين',  dayEn:'Monday',    time:'7:00 – 9:00 PM', final:false },
-            { num:4,  month:'JUN', day:'10', dayAr:'الأربعاء', dayEn:'Wednesday', time:'7:00 – 9:00 PM', final:false },
-            { num:5,  month:'JUN', day:'15', dayAr:'الاثنين',  dayEn:'Monday',    time:'7:00 – 9:00 PM', final:false },
-            { num:6,  month:'JUN', day:'17', dayAr:'الأربعاء', dayEn:'Wednesday', time:'7:00 – 9:00 PM', final:false },
-            { num:7,  month:'JUN', day:'22', dayAr:'الاثنين',  dayEn:'Monday',    time:'7:00 – 9:00 PM', final:false },
-            { num:8,  month:'JUN', day:'24', dayAr:'الأربعاء', dayEn:'Wednesday', time:'7:00 – 9:00 PM', final:false },
-            { num:9,  month:'JUN', day:'29', dayAr:'الاثنين',  dayEn:'Monday',    time:'7:00 – 9:00 PM', final:false },
-            { num:10, month:'JUL', day:'01', dayAr:'الأربعاء', dayEn:'Wednesday', time:'7:00 – 9:00 PM', final:true  },
-        ],
-
-        sessionNumAr(n){ return ['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','الختامية 🏆'][n-1]||''; },
-
-        faqs: [
-            {qAr:'هل الدورة تناسب المبتدئين؟',qEn:'Is the course suitable for beginners?',aAr:'نعم، نبدأ من الصفر تماماً وصولاً لمستويات متقدمة جداً بأسلوب تطبيقي.',aEn:'Yes, we start entirely from scratch up to highly advanced levels practically.'},
-            {qAr:'كيف يتم الدفع؟',qEn:'How do I pay?',aAr:'الدفع عبر كليك (XAcademy) - بنك الاتحاد. وسنتواصل معك بعد التسجيل لإرشادك.',aEn:'Payment via CliQ (XAcademy) - Bank Al Etihad. We will contact you after registration to guide you.'},
-            {qAr:'كيف أحصل على الشهادات المعتمدة؟',qEn:'How do I get the certificates?',aAr:'بعد اجتياز الامتحان النهائي والمشاريع العملية والحضور، تصدر لك 5 شهادات اعتماد دولية رسمية.',aEn:'After passing the final exam, practical projects, and maintaining attendance, you receive 5 official international certificates.'},
-            {qAr:'ما الفرق بين دورة Excel و Power BI؟',qEn:'What is the difference between Excel and Power BI?',aAr:'Excel يركز على التحليل وبناء لوحات القيادة داخل الملفات. Power BI يركز على تقارير تفاعلية متكاملة ونشرها على الويب.',aEn:'Excel focuses on analysis and dashboards in files. Power BI is for web-based interactive reports.'}
-        ],
-        excelQuizData: [
-            {ar:'كيف تقيم مستواك في كتابة المعادلات (Formulas)؟',en:'How do you rate your Formula skills?',options:[{ar:'لم أكتب معادلة من قبل',en:'Never wrote one',score:0},{ar:'سمعت بها ولم أجربها',en:'Heard of it but never used it',score:1},{ar:'أستخدمها أحياناً بمساعدة',en:'I use it occasionally with help',score:2},{ar:'أكتبها بثقة ويومياً',en:'I write it confidently every day',score:3}]},
-            {ar:'هل سبق لك بناء Pivot Table؟',en:'Have you built a Pivot Table before?',options:[{ar:'لا، لا أعرف ما هي',en:"No, I don't know what it is",score:0},{ar:'رأيت أحداً يبنيها فقط',en:"I've only seen someone build one",score:1},{ar:'بنيتها مرة أو مرتين',en:"I've built it once or twice",score:2},{ar:'أبنيها بانتظام في تقاريري',en:'I build them regularly in my reports',score:3}]},
-            {ar:'كيف تتعامل مع تنظيف البيانات (Data Cleaning) في Excel؟',en:'How do you handle Data Cleaning in Excel?',options:[{ar:'لا أعرف كيف',en:"I don't know how",score:0},{ar:'أمسح الفراغات يدوياً',en:'I delete spaces manually',score:1},{ar:'أستخدم دوال مثل TRIM و CLEAN',en:'I use functions like TRIM & CLEAN',score:2},{ar:'أستخدم Power Query داخل Excel',en:'I use Power Query inside Excel',score:3}]},
-            {ar:'هل قمت بعمل Dashboard في Excel مسبقاً؟',en:'Have you built a Dashboard in Excel before?',options:[{ar:'لا أبداً',en:'Never',score:0},{ar:'رسمت مخططات بسيطة (Charts)',en:'Drew simple charts',score:1},{ar:'نعم، Dashboard بسيطة',en:'Yes, a simple Dashboard',score:2},{ar:'نعم، احترافية وتفاعلية',en:'Yes, pro and interactive',score:3}]}
-        ],
-        pbiQuizData: [
-            {ar:'هل سبق لك فتح Power BI Desktop من قبل؟',en:'Have you ever opened Power BI Desktop?',options:[{ar:'لا، ولا أعرف ما هو',en:"No, I don't know what it is",score:0},{ar:'سمعت به لكن لم أجربه',en:'Heard of it but never tried it',score:1},{ar:'فتحته وجربت بعض الميزات',en:'Opened it and tried some features',score:2},{ar:'أستخدمه بانتظام في عملي',en:'I use it regularly at work',score:3}]},
-            {ar:'كيف مستواك في تنظيف البيانات عبر Power Query؟',en:'How is your Power Query skill level?',options:[{ar:'لم أسمع بـ Power Query',en:"I've never heard of Power Query",score:0},{ar:'أعرف ما هو لكن لم أستخدمه',en:'I know what it is but never used it',score:1},{ar:'نفّذت خطوات تنظيف أساسية',en:'I did basic cleaning steps',score:2},{ar:'أبني Queries معقدة ومتعددة المراحل',en:'I build complex multi-step queries',score:3}]},
-            {ar:'هل كتبت أي معادلة DAX من قبل؟',en:'Have you written any DAX formula before?',options:[{ar:'لا، DAX شيء جديد عليّ',en:'No, DAX is new to me',score:0},{ar:'رأيت DAX لكن لم أكتبه',en:'Seen DAX but never written it',score:1},{ar:'كتبت معادلات بسيطة مثل CALCULATE',en:'Wrote basic ones like CALCULATE',score:2},{ar:'أكتب Measures متقدمة مثل FILTER وTIMEINTELLIGENCE',en:'I write advanced ones like FILTER & TIME INTELLIGENCE',score:3}]},
-            {ar:'هل سبق لك نشر تقرير على Power BI Service؟',en:'Have you published a report to Power BI Service?',options:[{ar:'لا، لم أسمع بـ Power BI Service',en:"No, I haven't heard of Power BI Service",score:0},{ar:'أعرفه لكن لم أجرب النشر',en:'I know it but never published',score:1},{ar:'نشرت تقريراً أو اثنين',en:'Published one or two reports',score:2},{ar:'أنشر وأشارك تقارير بصلاحيات مخصصة',en:'I publish & share with Row Level Security',score:3}]}
-        ],
-
-        get currentQuizQuestion() {
-            const data = this.selectedCourse === 'powerbi' ? this.pbiQuizData : this.excelQuizData;
-            return data[this.quizStep - 1] || {};
-        },
-        get generatedInsights() {
-            let ins = [];
-            // بناء النتائج على totalScore الفعلي (0-12) بدل عشوائي
-            const level = this.totalScore; // 0-3 مبتدئ, 4-7 متوسط, 8-12 متقدم
-            const isNovice = level <= 4;
-            const isInterm = level > 4 && level <= 8;
-            if (this.selectedCourse === 'powerbi') {
-                ins.push(isNovice ? {emoji:'⚡',ar:'سنبدأ من الصفر لبناء أساس متين في Power Query وتجهيز البيانات',en:'We start from scratch to build a solid Power Query and data prep foundation',type:'learn'} : {emoji:'🔥',ar:'ستعمّق فهمك لـ DAX وتبني Measures متقدمة لم تكن تتخيلها',en:'You will deepen your DAX understanding and build advanced Measures',type:'deepen'});
-                ins.push(isNovice || isInterm ? {emoji:'🗂️',ar:'ستتعلم نمذجة البيانات وبناء العلاقات بين الجداول كالمحترفين',en:'You will learn data modeling and building relationships like a pro',type:'learn'} : {emoji:'📐',ar:'ستتقن نماذج البيانات المعقدة والعلاقات متعددة المستويات',en:'You will master complex data models and multi-level relationships',type:'deepen'});
-                ins.push(isNovice ? {emoji:'🎨',ar:'ستنشر تقريرك التفاعلي الأول على Power BI Service في المحاضرة الأخيرة',en:'You will publish your first interactive report to Power BI Service by the final session',type:'learn'} : {emoji:'💎',ar:'ستصنع تقارير تفاعلية بمستوى الشركات المتعددة الجنسيات',en:'You will create interactive reports at multinational company level',type:'deepen'});
-            } else {
-                ins.push(isNovice ? {emoji:'⚡',ar:'سنبدأ معك من الصفر لنبني أساساً صُلباً يمنع الأخطاء مستقبلاً',en:'We start from zero to build a solid foundation that prevents future errors',type:'learn'} : {emoji:'🚀',ar:'سنعزز مهاراتك بمعادلات متقدمة ومركّبة (Nested)',en:'We will boost your skills with advanced nested formulas',type:'deepen'});
-                ins.push(isNovice || isInterm ? {emoji:'📊',ar:'ستتعلم بناء جداول محورية (Pivot Tables) احترافية وتحليل آلاف الصفوف بثوانٍ',en:'You will learn to build professional Pivot Tables and analyze thousands of rows in seconds',type:'learn'} : {emoji:'📈',ar:'ستتقن الجداول المحورية المتقدمة والتحليل متعدد الأبعاد',en:'You will master advanced pivot tables and multi-dimensional analysis',type:'deepen'});
-                ins.push(isNovice ? {emoji:'🎨',ar:'ستصمم لوحة قيادة تفاعلية ستُبهر بها مديرك في المحاضرة التاسعة',en:'You will design an interactive dashboard that will impress your manager by session 9',type:'learn'} : {emoji:'💎',ar:'ستصنع لوحات قيادة على مستوى الشركات متعددة الجنسيات',en:'You will create dashboards at multinational company level',type:'deepen'});
-            }
-            ins.push({emoji:'🏆',ar:'5 شهادات اعتماد دولية تُزيّن سيرتك الذاتية',en:'5 international accreditation certificates for your resume',type:'guaranteed'});
-            return ins;
-        },
-        get filteredStudents() {
-            return this.registrations.filter(r => {
-                const s = this.adminSearch.toLowerCase();
-                const m = (r.name||'').toLowerCase().includes(s) || (r.email||'').toLowerCase().includes(s) || (r.phone||'').toLowerCase().includes(s);
-                const c = this.adminCourseFilter==='all' ? true : r.course===this.adminCourseFilter;
-                return m && c;
-            });
-        },
-
-     init() {
-            window.addEventListener('scroll', () => { this.scrolled = window.scrollY > 20; });
-            window.addEventListener('platform-ready', e => {
-                this.userName = e.detail.name;
-                this.currentCourse = e.detail.course;
-                this.formData.name = e.detail.name;
-                
-                // 🔥 هذا هو الحل السحري لتحديث الحركات والأيقونات بعد الاختيار
-                this.$nextTick(() => {
-                    if (window.lucide) lucide.createIcons();
-                    if (typeof AOS !== 'undefined') AOS.refresh();
-                });
-            });
-
-            const lt = document.getElementById('langToggle');
-            const ltm = document.getElementById('langToggleMobile');
-            if(lt) lt.addEventListener('click',()=>this.toggleLang());
-            if(ltm) ltm.addEventListener('click',()=>this.toggleLang());
-            this.$nextTick(()=>{ if(window.lucide) lucide.createIcons(); });
-        },
-        toggleLang(){
-            const h = document.documentElement;
-            if(h.lang==='ar'){h.lang='en';h.dir='ltr';} else{h.lang='ar';h.dir='rtl';}
-            if(window.lucide) setTimeout(()=>lucide.createIcons(), 50);
-        },
-        logoClick() {
-            this.logoClicks++;
-            clearTimeout(this._logoTimer);
-           if(this.logoClicks >= 5) {
-    this.logoClicks = 0;
-    this._logoFlash = 0;
-    this.showAdminLogin = true;
+// ═══ ADMIN TRIGGER (top-left corner, 5 clicks) ═══
+function adminTriggerClick() {
+  adminTriggerCount++;
+  clearTimeout(adminTriggerTimer);
+  if(adminTriggerCount >= 5) {
+    adminTriggerCount = 0;
+    document.getElementById('adminLoginModal').classList.add('open');
+    document.getElementById('adminEmail').focus();
     return;
+  }
+  adminTriggerTimer = setTimeout(()=>adminTriggerCount=0, 2500);
 }
-            this._logoFlash = this.logoClicks;
-            this._logoTimer = setTimeout(() => { this.logoClicks = 0; this._logoFlash = 0; }, 2500);
-        },
-        openEnrollment() {
-            this.selectedCourse = this.currentCourse || 'excel';
-            this.quizStep = 1; this.totalScore = 0;
-            this.showEnrollment = true;
-        },
-        answerQuestion(score) {
-            this.totalScore += score;
-            if(this.quizStep < 4) {
-                this.quizStep++;
-            } else {
-                this.quizStep = 5;
-                setTimeout(()=>this.triggerConfetti(), 300);
-            }
-        },
-        async submitForm() {
-            if(!this.formData.email || !this.formData.phone) {
-                this.formError = document.documentElement.lang==='ar'?'يرجى تعبئة جميع الحقول':'Please fill all fields';
-                return;
-            }
-            this.isSubmitting = true; this.formError = '';
-            try {
-                const fb = window._fb;
-                if(!fb || !fb.db) throw new Error("Firebase not ready");
-                
-                // حفظ البيانات المخفية عن المستخدم
-                await fb.addDoc(fb.collection(fb.db, 'registrations'), {
-                    name: this.formData.name || this.userName,
-                    email: this.formData.email,
-                    phone: this.formData.phone,
-                    course: this.selectedCourse,
-                    totalScore: this.totalScore,
-                    createdAt: new Date().toISOString()
-                });
-                this.quizStep = 'success';
-                this.triggerConfetti();
-            } catch(e) {
-                console.error(e);
-                this.formError = document.documentElement.lang==='ar'?'حدث خطأ في الاتصال، حاول مجدداً':'Connection error, try again';
-            } finally {
-                this.isSubmitting = false;
-            }
-        },
-        async adminLogin() {
-            this.adminError = ''; this.adminLoading = true;
-            try {
-                const fb = window._fb;
-                await fb.signInWithEmailAndPassword(fb.auth, this.adminEmail, this.adminPassword);
-                this.showAdminLogin = false; this.showAdmin = true;
-                // تحميل البيانات فقط للآدمن
-                await this.loadStudents();
-            } catch(e) {
-                this.adminError = "Invalid credentials";
-            } finally {
-                this.adminLoading = false;
-            }
-        },
-        async loadStudents(){
-            this.adminLoading=true;
-            try{
-                const fb=window._fb;
-                if(!fb) return;
-                const q=fb.query(fb.collection(fb.db,'registrations'),fb.orderBy('createdAt','desc'));
-                const snap=await fb.getDocs(q);
-                this.registrations=snap.docs.map(d=>({id:d.id,...d.data()}));
-                // Load visitor count silently
-                try {
-                    const vq=fb.query(fb.collection(fb.db,'visitors'),fb.orderBy('timestamp','desc'));
-                    const vsnap=await fb.getDocs(vq);
-                    this.visitors=vsnap.docs.map(d=>({id:d.id,...d.data()}));
-                } catch(e){}
-            } catch(e){console.error(e);}
-            finally{this.adminLoading=false;}
-        },
-        async loadVisitors(){
-            try{
-                const fb=window._fb;
-                if(!fb) return;
-                const q=fb.query(fb.collection(fb.db,'visitors'),fb.orderBy('timestamp','desc'));
-                const snap=await fb.getDocs(q);
-                this.visitors=snap.docs.map(d=>({id:d.id,...d.data()}));
-            } catch(e){console.error(e);}
-        },
-        async adminLogout(){
-            try{if(window._fb) await window._fb.signOut(window._fb.auth);}catch(e){}
-            this.showAdmin=false; this.registrations=[];
-        },
-        exportExcel(){
-            // SheetJS — تصدير xlsx حقيقي
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
-            script.onload = () => {
-                const data = this.filteredStudents.map((r,i) => ({
-                    '#': i+1,
-                    'Date': r.createdAt ? new Date(r.createdAt).toLocaleDateString('en-GB') : '-',
-                    'Name': r.name || '',
-                    'Email': r.email || '',
-                    'WhatsApp': r.phone || '',
-                    'Course': r.course==='excel' ? 'Professional Excel' : 'Power BI Specialist',
-                    'Score': r.totalScore || 0,
-                }));
-                const ws = XLSX.utils.json_to_sheet(data);
-                ws['!cols'] = [{wch:4},{wch:12},{wch:22},{wch:28},{wch:16},{wch:22},{wch:8}];
-                const wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, 'Registrations');
-                XLSX.writeFile(wb, `X-Academy-Registrations-${new Date().toISOString().slice(0,10)}.xlsx`);
-            };
-            if(window.XLSX){ script.onload(); } else { document.head.appendChild(script); }
-        },
-        openWhatsApp(phone){
-            if(!phone) return;
-            const clean = phone.replace(/[^0-9]/g,'');
-            const num = clean.startsWith('0') ? '962' + clean.slice(1) : clean;
-            window.open('https://wa.me/' + num, '_blank');
-        },
-        triggerConfetti(){
-            for(let i=0;i<40;i++){
-                const c = document.createElement('div');
-                c.className='confetti-piece';
-                const colors=['#099999','#0bc4c4','#7fff00','#febc2e','#ff5f57'];
-                c.style.backgroundColor=colors[Math.floor(Math.random()*colors.length)];
-                c.style.width=Math.random()*10+5+'px'; c.style.height=c.style.width;
-                c.style.left=Math.random()*100+'vw'; c.style.top='-20px';
-                c.style.setProperty('--cx',(Math.random()-0.5)*300+'px');
-                c.style.setProperty('--cy',Math.random()*300+200+'px');
-                document.body.appendChild(c);
-                setTimeout(()=>c.remove(), 2000);
-            }
-        },
-        handleKey(e) { if(e.key==='Escape') this.showEnrollment=false; }
-    }
+
+// ═══ ADMIN LOGIN ═══
+async function doAdminLogin() {
+  const email = document.getElementById('adminEmail').value.trim();
+  const pass = document.getElementById('adminPass').value;
+  const err = document.getElementById('adminErr');
+  const btn = document.getElementById('adminLoginBtn');
+  err.style.display='none';
+  btn.textContent='Authenticating...';btn.disabled=true;
+  try {
+    const fb = window._fb;
+    await fb.signInWithEmailAndPassword(fb.auth, email, pass);
+    document.getElementById('adminLoginModal').classList.remove('open');
+    document.getElementById('adminOverlay').classList.add('open');
+    await loadAdminData();
+  } catch(e) {
+    err.textContent='Invalid credentials';err.style.display='block';
+  } finally {
+    btn.textContent='Enter Dashboard';btn.disabled=false;
+  }
 }
+
+async function doAdminLogout() {
+  try{ await window._fb.signOut(window._fb.auth); }catch(e){}
+  document.getElementById('adminOverlay').classList.remove('open');
+  registrations=[];visitors=[];
+}
+
+async function loadAdminData() {
+  const fb = window._fb;
+  if(!fb) return;
+  try {
+    const q = fb.query(fb.collection(fb.db,'registrations'),fb.orderBy('createdAt','desc'));
+    const snap = await fb.getDocs(q);
+    registrations = snap.docs.map(d=>({id:d.id,...d.data()}));
+  } catch(e){}
+  try {
+    const vq = fb.query(fb.collection(fb.db,'visitors'),fb.orderBy('timestamp','desc'));
+    const vs = await fb.getDocs(vq);
+    visitors = vs.docs.map(d=>({id:d.id,...d.data()}));
+  } catch(e){}
+  renderStats();
+  renderRegistrations();
+  renderScheduleEditor();
+  await loadScheduleFromFirebase();
+}
+
+function renderStats() {
+  const excel = registrations.filter(r=>r.course==='excel').length;
+  const pbi = registrations.filter(r=>r.course==='powerbi').length;
+  document.getElementById('adminStats').innerHTML = [
+    {label:'Total Students',val:registrations.length,color:'#0bc4c4'},
+    {label:'Excel Track',val:excel,color:'#60a5fa'},
+    {label:'Power BI Track',val:pbi,color:'#F2C811'},
+    {label:'Total Visits',val:visitors.length,color:'#a78bfa'},
+  ].map(s=>`
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:.85rem;padding:1rem 1.25rem;">
+      <div style="font-size:.75rem;font-weight:800;color:rgba(255,255,255,.4);margin-bottom:.35rem;">${s.label}</div>
+      <div style="font-size:2rem;font-weight:900;color:${s.color};">${s.val}</div>
+    </div>
+  `).join('');
+}
+
+// Admin tabs
+function setAdminTab(tab) {
+  ['reg','vis','sched'].forEach(t=>{
+    document.getElementById('pane-'+t).style.display = t===tab?'block':'none';
+    document.getElementById('tab-'+t).className = t===tab?'admin-tab-active':'admin-tab-idle';
+  });
+}
+
+// Filter
+function setRegFilter(f) {
+  regFilter=f;
+  ['all','excel','pbi'].forEach(x => {
+    document.getElementById('rf-'+x).className='rf-btn '+(x===f||( f==='powerbi'&&x==='pbi')?'rf-active':'rf-idle');
+  });
+  renderRegistrations();
+}
+
+function renderRegistrations() {
+  const search = document.getElementById('adminSearch').value.toLowerCase();
+  const filtered = registrations.filter(r=>{
+    const m = (r.name||'').toLowerCase().includes(search)||(r.email||'').toLowerCase().includes(search)||(r.phone||'').toLowerCase().includes(search);
+    const c = regFilter==='all' ? true : r.course===regFilter;
+    return m && c;
+  });
+  document.getElementById('regBody').innerHTML = filtered.length ? filtered.map((r,i)=>`
+    <tr>
+      <td style="color:rgba(255,255,255,.35);">${i+1}</td>
+      <td style="color:rgba(255,255,255,.5);font-size:.78rem;">${r.createdAt?new Date(r.createdAt).toLocaleDateString('en-GB'):'-'}</td>
+      <td style="font-weight:800;color:#fff;">${r.name||'-'}</td>
+      <td style="color:rgba(255,255,255,.6);font-size:.8rem;">${r.email||'-'}</td>
+      <td>
+        <button onclick="window.open('https://wa.me/${encodeURIComponent('+962')}'+('${r.phone||''}'.replace(/[^0-9]/g,'').replace(/^0/,'')),'_blank')"
+          style="background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.25);color:#4ade80;padding:.25rem .7rem;border-radius:.5rem;font-size:.75rem;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:.35rem;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+          ${r.phone||'-'}
+        </button>
+      </td>
+      <td><span style="padding:.25rem .7rem;border-radius:20px;font-size:.72rem;font-weight:900;${r.course==='excel'?'background:rgba(96,165,250,.15);color:#60a5fa':'background:rgba(242,200,17,.15);color:#F2C811'}">${r.course==='excel'?'Excel':'Power BI'}</span></td>
+      <td style="color:rgba(255,255,255,.5);font-size:.82rem;">${r.totalScore||0}</td>
+    </tr>
+  `).join('') : '<tr><td colspan="7" style="text-align:center;padding:2rem;color:rgba(255,255,255,.3);font-weight:700;">No results</td></tr>';
+}
+
+document.getElementById('pane-vis').querySelector('tbody') && null; // placeholder
+function renderVisitors() {
+  const tbody = document.getElementById('visBody');
+  tbody.innerHTML = visitors.map(v=>`
+    <tr>
+      <td style="font-size:.78rem;color:rgba(255,255,255,.6);">${v.date||'-'}<br><span style="color:rgba(255,255,255,.3);font-size:.72rem;">${v.time||''}</span></td>
+      <td style="font-size:.78rem;color:rgba(255,255,255,.5);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${v.platform||'-'}</td>
+      <td style="font-size:.78rem;color:rgba(255,255,255,.4);">${v.screen||'-'}</td>
+      <td style="font-size:.78rem;color:rgba(255,255,255,.4);">${v.language||'-'}</td>
+      <td><span style="padding:.2rem .6rem;border-radius:.4rem;font-size:.7rem;font-weight:800;${(v.referrer||'direct')==='direct'?'background:rgba(34,197,94,.15);color:#4ade80':'background:rgba(96,165,250,.15);color:#60a5fa'}">${v.referrer||'direct'}</span></td>
+      <td style="font-size:.72rem;color:rgba(255,255,255,.35);">${v.timezone||'-'}</td>
+    </tr>
+  `).join('') || '<tr><td colspan="6" style="text-align:center;padding:2rem;color:rgba(255,255,255,.3);">No data</td></tr>';
+}
+
+// Override tab click for visitors to render
+const origSetTab = setAdminTab;
+window.setAdminTab = function(tab) {
+  origSetTab(tab);
+  if(tab==='vis') renderVisitors();
+};
+
+// ═══ SCHEDULE EDITOR ═══
+function renderScheduleEditor() {
+  ['excel','powerbi'].forEach(course => {
+    const isPbi = course === 'powerbi';
+    const containerId = isPbi ? 'pbiSchedEditor' : 'excelSchedEditor';
+    const sessions = liveSessions[course];
+    document.getElementById(containerId).innerHTML = sessions.map((s,i) => `
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:.75rem;padding:.75rem 1rem;display:grid;grid-template-columns:auto 1fr 1fr 1fr 1fr;gap:.5rem;align-items:center;">
+        <div style="width:28px;height:28px;border-radius:.4rem;background:${isPbi?'rgba(242,200,17,.15)':'rgba(9,153,153,.15)'};color:${isPbi?'#F2C811':'#0bc4c4'};font-weight:900;font-size:.75rem;display:flex;align-items:center;justify-content:center;">${s.num}</div>
+        <input class="sched-input" value="${s.month}" placeholder="JUN" oninput="liveSessions['${course}'][${i}].month=this.value.toUpperCase()" style="text-transform:uppercase;">
+        <input class="sched-input" value="${s.day}" placeholder="01" oninput="liveSessions['${course}'][${i}].day=this.value">
+        <input class="sched-input" value="${s.dayAr}" placeholder="الاثنين" oninput="liveSessions['${course}'][${i}].dayAr=this.value" dir="rtl">
+        <input class="sched-input" value="${s.dayEn}" placeholder="Monday" oninput="liveSessions['${course}'][${i}].dayEn=this.value">
+      </div>
+    `).join('');
+  });
+}
+
+async function saveSchedule(course) {
+  const fb = window._fb;
+  if(!fb) return;
+  const msg = document.getElementById('schedSaveMsg');
+  try {
+    await fb.setDoc(fb.doc(fb.db,'schedules',course), { sessions: liveSessions[course] });
+    msg.textContent = `✅ ${course === 'excel' ? 'Excel' : 'Power BI'} schedule saved to Firebase!`;
+    msg.style.display = 'block';
+    setTimeout(()=>msg.style.display='none', 3000);
+  } catch(e) {
+    msg.textContent = '❌ Error saving: ' + e.message;
+    msg.style.borderColor='rgba(239,68,68,.3)';
+    msg.style.color='#f87171';
+    msg.style.background='rgba(239,68,68,.1)';
+    msg.style.display='block';
+  }
+}
+
+// ═══ EXPORT EXCEL ═══
+function exportExcel() {
+  const s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+  s.onload = () => {
+    const data = registrations.map((r,i)=>({'#':i+1,'Date':r.createdAt?new Date(r.createdAt).toLocaleDateString('en-GB'):'-','Name':r.name||'','Email':r.email||'','WhatsApp':r.phone||'','Course':r.course==='excel'?'Professional Excel':'Power BI Specialist','Score':r.totalScore||0}));
+    const ws = XLSX.utils.json_to_sheet(data);
+    ws['!cols']=[{wch:4},{wch:12},{wch:22},{wch:28},{wch:16},{wch:22},{wch:8}];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,ws,'Registrations');
+    XLSX.writeFile(wb,`X-Academy-${new Date().toISOString().slice(0,10)}.xlsx`);
+  };
+  if(window.XLSX) s.onload(); else document.head.appendChild(s);
+}
+
+// ═══ KEYBOARD ═══
+document.addEventListener('keydown', e => {
+  if(e.key==='ArrowDown'||e.key==='ArrowRight') goNext();
+  if(e.key==='ArrowUp'||e.key==='ArrowLeft') goBack();
+});
+
+// ═══ INIT ═══
+window.addEventListener('DOMContentLoaded', () => {
+  if(window.lucide) lucide.createIcons();
+  updateUI();
+  // Load schedule from Firebase silently
+  loadScheduleFromFirebase();
+});
 </script>
 </body>
 </html>
