@@ -25,8 +25,10 @@ const app = initializeApp({
 });
 const _db = getFirestore(app);
 const _auth = getAuth(app);
-window._fb = { db:_db, auth:_auth, collection, addDoc, getDocs, getDoc, setDoc, doc, query, orderBy, signInWithEmailAndPassword, signOut, deleteDoc };
-    // Track visitor
+window._fb = { 
+    db:_db, auth:_auth, collection, addDoc, getDocs, getDoc, setDoc, doc, query, orderBy, 
+    signInWithEmailAndPassword, signOut, deleteDoc // تأكد من إضافتها هنا
+};    // Track visitor
 setTimeout(async()=>{
     try{ await addDoc(collection(_db,'visitors'),{type:'visit',timestamp:new Date().toISOString(),date:new Date().toLocaleDateString('en-GB'),time:new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),userAgent:navigator.userAgent,language:navigator.language||'unknown',platform:navigator.platform||'unknown',screen:`${screen.width}×${screen.height}`,viewport:`${window.innerWidth}×${window.innerHeight}`,referrer:document.referrer||'direct',timezone:Intl.DateTimeFormat().resolvedOptions().timeZone});}catch(e){}
 },1500);
