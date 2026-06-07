@@ -1138,9 +1138,11 @@ async function deleteRegistration(id) {
   if (!confirm('هل أنت متأكد من حذف هذا التسجيل؟')) return;
 
   try {
+    // استخدم الكائن الذي يحتوي على الدوال المستوردة
     const fb = window._fb;
-    // استخدام deleteDoc مباشرة من Firebase (لأنك استوردتها في الأعلى)
-    await deleteDoc(doc(fb.db, 'registrations', id));
+    
+    // استدعاء deleteDoc من داخل fb وليس مباشرة
+    await fb.deleteDoc(fb.doc(fb.db, 'registrations', id));
     
     registrations = registrations.filter(r => r.id !== id);
     renderRegistrations();
