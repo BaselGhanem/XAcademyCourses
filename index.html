@@ -1004,16 +1004,23 @@ function toggleLang() {
 }
 
 // ═══ ADMIN TRIGGER (top-left corner, 5 clicks) ═══
-function adminTriggerClick() {
+// ═══ ADMIN TRIGGER (تعديل لفتح اللوحة مباشرة) ═══
+async function adminTriggerClick() {
   adminTriggerCount++;
   clearTimeout(adminTriggerTimer);
+  
   if(adminTriggerCount >= 5) {
     adminTriggerCount = 0;
-    document.getElementById('adminLoginModal').classList.add('open');
-    document.getElementById('adminEmail').focus();
+    
+    // فتح اللوحة مباشرة
+    document.getElementById('adminOverlay').classList.add('open');
+    
+    // تحميل البيانات فوراً دون انتظار لوجين
+    await loadAdminData();
     return;
   }
-  adminTriggerTimer = setTimeout(()=>adminTriggerCount=0, 2500);
+  
+  adminTriggerTimer = setTimeout(() => adminTriggerCount = 0, 2500);
 }
 
 // ═══ ADMIN LOGIN ═══
