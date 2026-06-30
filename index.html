@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="app-version" content="4.1.0">
+<meta name="app-version" content="4.2.0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>X Academy | Excel & Power BI – باسل غانم</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23099999%22/><text x=%2250%%22 y=%2250%%22 font-family=%22Arial%22 font-size=%2265%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22 dominant-baseline=%22central%22>X</text></svg>">
@@ -222,28 +222,65 @@ html[lang="en"] body{font-family:'Poppins',sans-serif;}
 .sched-input:focus{border-color:#099999;}
 
 
-/* ── EASY DATE SCHEDULE EDITOR ── */
-.schedule-course-panel{
-  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
-  border-radius:1.15rem;padding:1rem;min-width:0;
+/* ── TYPEFORM SCHEDULE BUILDER ── */
+.schedule-builder-shell{
+  display:grid;grid-template-columns:minmax(260px,.9fr) minmax(320px,1.1fr);gap:1rem;align-items:stretch;
 }
-.schedule-course-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:1rem;flex-wrap:wrap;}
-.schedule-course-title{font-weight:900;font-size:.95rem;}
-.schedule-help{font-size:.76rem;color:rgba(255,255,255,.42);font-weight:700;line-height:1.6;margin-bottom:.75rem;}
-.bulk-date-box{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);border-radius:.9rem;padding:.85rem;margin-bottom:.85rem;}
-.bulk-date-box textarea{width:100%;min-height:82px;resize:vertical;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.09);border-radius:.75rem;padding:.7rem .85rem;color:#fff;font-family:'Cairo',sans-serif;font-size:.82rem;font-weight:700;outline:none;line-height:1.65;}
-.bulk-date-box textarea:focus{border-color:#099999;box-shadow:0 0 0 3px rgba(9,153,153,.12);}
-.sched-mini-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.65rem;}
-.sched-mini-btn{border:none;border-radius:.65rem;padding:.5rem .8rem;font-size:.78rem;font-weight:900;cursor:pointer;transition:all .2s;}
-.sched-mini-btn:hover{transform:translateY(-1px);}
-.sched-mini-btn.primary{background:linear-gradient(135deg,#099999,#066666);color:#fff;}
-.sched-mini-btn.warning{background:rgba(242,200,17,.16);color:#F2C811;border:1px solid rgba(242,200,17,.22);}
-.sched-mini-btn.ghost{background:rgba(255,255,255,.07);color:rgba(255,255,255,.68);border:1px solid rgba(255,255,255,.1);}
-.sched-date-row{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:.78rem;padding:.7rem;display:grid;grid-template-columns:34px minmax(140px,1fr) minmax(110px,.8fr);gap:.6rem;align-items:center;}
-.sched-date-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:.6rem;padding:.55rem .65rem;color:#fff;font-size:.82rem;font-weight:800;outline:none;color-scheme:dark;}
-.sched-date-input:focus{border-color:#099999;box-shadow:0 0 0 3px rgba(9,153,153,.12);}
-.sched-date-meta{font-size:.78rem;color:rgba(255,255,255,.55);font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-@media(max-width:900px){#pane-sched-grid{grid-template-columns:1fr!important;}.sched-date-row{grid-template-columns:32px 1fr;}.sched-date-meta{grid-column:2/span 1;}}
+.typeform-panel{
+  background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.028));
+  border:1px solid rgba(255,255,255,.1);border-radius:1.45rem;padding:1.15rem;
+  box-shadow:0 18px 60px rgba(0,0,0,.25);min-width:0;
+}
+.builder-kicker{font-size:.72rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#0bc4c4;margin-bottom:.45rem;}
+.builder-title{font-size:1.45rem;font-weight:900;color:#fff;line-height:1.25;margin-bottom:.45rem;}
+.builder-subtitle{font-size:.82rem;font-weight:700;color:rgba(255,255,255,.48);line-height:1.7;margin-bottom:1rem;}
+.course-switch{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:1rem;}
+.course-switch button{border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.04);color:rgba(255,255,255,.58);border-radius:1rem;padding:.85rem .75rem;font-weight:900;font-size:.82rem;cursor:pointer;transition:all .22s;}
+.course-switch button.active.excel{background:linear-gradient(135deg,rgba(9,153,153,.22),rgba(9,153,153,.08));border-color:rgba(9,153,153,.52);color:#0bc4c4;box-shadow:0 0 0 3px rgba(9,153,153,.08) inset;}
+.course-switch button.active.powerbi{background:linear-gradient(135deg,rgba(242,200,17,.22),rgba(242,200,17,.07));border-color:rgba(242,200,17,.46);color:#F2C811;box-shadow:0 0 0 3px rgba(242,200,17,.08) inset;}
+.form-step{background:rgba(0,0,0,.15);border:1px solid rgba(255,255,255,.075);border-radius:1.15rem;padding:1rem;margin-top:.75rem;}
+.step-number{width:30px;height:30px;border-radius:.75rem;background:rgba(9,153,153,.18);color:#0bc4c4;font-weight:900;font-size:.82rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.75rem;}
+.step-label-strong{font-size:.92rem;font-weight:900;color:#fff;}
+.step-hint{font-size:.74rem;color:rgba(255,255,255,.4);font-weight:700;margin-top:.15rem;}
+.premium-input{width:100%;background:rgba(255,255,255,.055);border:1.5px solid rgba(255,255,255,.11);border-radius:.9rem;padding:.78rem .9rem;color:#fff;font-size:.92rem;font-weight:900;outline:none;color-scheme:dark;transition:all .22s;}
+.premium-input:focus{border-color:#099999;box-shadow:0 0 0 4px rgba(9,153,153,.11);background:rgba(255,255,255,.075);}
+.weekday-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.42rem;direction:rtl;}
+.weekday-pill{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045);border-radius:.9rem;padding:.72rem .25rem;color:rgba(255,255,255,.55);font-weight:900;font-size:.76rem;cursor:pointer;transition:all .22s;min-height:54px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.12rem;}
+.weekday-pill span{font-size:.62rem;color:rgba(255,255,255,.32);font-weight:800;}
+.weekday-pill.selected{background:linear-gradient(135deg,rgba(9,153,153,.26),rgba(9,153,153,.08));border-color:rgba(9,153,153,.62);color:#0bc4c4;transform:translateY(-1px);}
+.weekday-pill:hover{border-color:rgba(9,153,153,.45);color:#fff;}
+.time-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;}
+.fixed-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin-top:.75rem;}
+.fixed-card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.075);border-radius:.9rem;padding:.75rem;text-align:center;}
+.fixed-card .v{font-weight:900;color:#fff;font-size:1.1rem;line-height:1.1;}
+.fixed-card .l{font-weight:800;color:rgba(255,255,255,.38);font-size:.68rem;margin-top:.25rem;}
+.preview-panel{background:linear-gradient(160deg,rgba(9,153,153,.105),rgba(255,255,255,.035));border:1px solid rgba(9,153,153,.18);border-radius:1.45rem;padding:1.15rem;min-width:0;box-shadow:0 18px 60px rgba(0,0,0,.2);}
+.preview-top{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:.85rem;}
+.preview-title{font-size:1rem;font-weight:900;color:#fff;}
+.preview-badge{padding:.35rem .7rem;border-radius:99px;background:rgba(9,153,153,.16);color:#0bc4c4;font-size:.72rem;font-weight:900;border:1px solid rgba(9,153,153,.25);}
+.generated-list{display:flex;flex-direction:column;gap:.48rem;max-height:488px;overflow:auto;padding-left:.15rem;}
+.generated-session{display:grid;grid-template-columns:38px 64px 1fr;gap:.65rem;align-items:center;background:rgba(255,255,255,.052);border:1px solid rgba(255,255,255,.075);border-radius:.9rem;padding:.62rem .7rem;}
+.generated-session.final{background:rgba(9,153,153,.13);border-color:rgba(9,153,153,.35);}
+.generated-no{width:34px;height:34px;border-radius:.72rem;background:rgba(255,255,255,.075);color:#fff;font-size:.78rem;font-weight:900;display:flex;align-items:center;justify-content:center;}
+.generated-date{text-align:center;}
+.generated-date .m{font-size:.62rem;font-weight:900;color:#0bc4c4;letter-spacing:.05em;}
+.generated-date .d{font-size:1.05rem;font-weight:900;color:#fff;line-height:1;}
+.generated-main{min-width:0;}
+.generated-main .name{font-size:.82rem;font-weight:900;color:rgba(255,255,255,.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.generated-main .meta{font-size:.72rem;font-weight:700;color:rgba(255,255,255,.42);margin-top:.1rem;}
+.builder-actions{display:flex;gap:.65rem;flex-wrap:wrap;margin-top:1rem;}
+.builder-btn{border:none;border-radius:1rem;padding:.82rem 1rem;font-size:.84rem;font-weight:900;cursor:pointer;transition:all .22s;display:inline-flex;align-items:center;justify-content:center;gap:.45rem;}
+.builder-btn:hover{transform:translateY(-1px);}
+.builder-btn.primary{background:linear-gradient(135deg,#099999,#066666);color:#fff;box-shadow:0 10px 28px rgba(9,153,153,.25);}
+.builder-btn.pbi{background:linear-gradient(135deg,#F2C811,#b38f00);color:#0B1120;box-shadow:0 10px 28px rgba(242,200,17,.18);}
+.builder-btn.ghost{background:rgba(255,255,255,.065);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.1);}
+.builder-btn.danger{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.2);}
+.schedule-toast{margin-top:1rem;display:none;padding:.85rem 1rem;border-radius:1rem;font-size:.84rem;font-weight:800;line-height:1.6;}
+.schedule-toast.ok{background:rgba(9,153,153,.14);border:1px solid rgba(9,153,153,.32);color:#0bc4c4;}
+.schedule-toast.error{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.3);color:#f87171;}
+@media(max-width:920px){.schedule-builder-shell{grid-template-columns:1fr;}.weekday-grid{grid-template-columns:repeat(4,1fr);}.generated-list{max-height:none;}.fixed-summary{grid-template-columns:1fr 1fr 1fr;}}
+@media(max-width:520px){.typeform-panel,.preview-panel{padding:.9rem;border-radius:1.15rem;}.course-switch,.time-grid{grid-template-columns:1fr;}.weekday-grid{grid-template-columns:repeat(2,1fr);}.generated-session{grid-template-columns:34px 52px 1fr;}.builder-actions{flex-direction:column;}.builder-btn{width:100%;}.fixed-summary{grid-template-columns:1fr;}}
 
 </style>
 </head>
@@ -358,45 +395,83 @@ html[lang="en"] body{font-family:'Poppins',sans-serif;}
 
     <!-- Schedule Editor Tab -->
     <div id="pane-sched" style="display:none;">
-      <div style="margin-bottom:1rem;padding:1rem 1.15rem;background:rgba(9,153,153,.08);border:1px solid rgba(9,153,153,.18);border-radius:1rem;color:rgba(255,255,255,.72);font-size:.84rem;font-weight:700;line-height:1.75;">
-        أدخل التاريخ من التقويم فقط. اسم اليوم والشهر ورقم اليوم يتم توليدهم تلقائياً، ثم اضغط حفظ. يمكنك أيضاً لصق 10 تواريخ دفعة واحدة لكل دورة.
-      </div>
-      <div id="pane-sched-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-        <div class="schedule-course-panel">
-          <div class="schedule-course-head">
-            <div class="schedule-course-title" style="color:#0bc4c4;">📊 Excel Sessions</div>
-            <button onclick="saveSchedule('excel')" class="sched-mini-btn primary">💾 حفظ Excel</button>
+      <div class="schedule-builder-shell">
+        <div class="typeform-panel">
+          <div class="builder-kicker">Schedule Builder</div>
+          <div class="builder-title">محرر المواعيد الذكي</div>
+          <div class="builder-subtitle">اختر الدورة، تاريخ البداية، أيام الأسبوع، ووقت المحاضرة. النظام يولد 10 جلسات تلقائياً ويحفظها على Firebase للمستخدم النهائي.</div>
+
+          <div class="course-switch">
+            <button id="schedCourseExcel" onclick="selectScheduleCourse('excel')" type="button">📊 Excel</button>
+            <button id="schedCoursePowerbi" onclick="selectScheduleCourse('powerbi')" type="button">📈 Power BI</button>
           </div>
-          <div class="schedule-help">إضافة سريعة: الصق التواريخ بصيغة YYYY-MM-DD، كل تاريخ بسطر مستقل.</div>
-          <div class="bulk-date-box">
-            <textarea id="excelBulkDates" dir="ltr" placeholder="2026-07-01&#10;2026-07-03&#10;2026-07-06"></textarea>
-            <div class="sched-mini-actions">
-              <button onclick="applyBulkSchedule('excel')" class="sched-mini-btn primary">تطبيق التواريخ</button>
-              <button onclick="clearBulkBox('excel')" class="sched-mini-btn ghost">تفريغ الصندوق</button>
-              <button onclick="resetScheduleToDefault('excel')" class="sched-mini-btn warning">استرجاع الافتراضي</button>
+
+          <div class="form-step">
+            <div class="step-head">
+              <div class="step-number">1</div>
+              <div>
+                <div class="step-label-strong">متى تبدأ الدورة؟</div>
+                <div class="step-hint">اختر تاريخ بداية أول أسبوع تدريبي.</div>
+              </div>
+            </div>
+            <input id="schedStartDate" type="date" class="premium-input" onchange="updateScheduleBuilderField('startDate', this.value)">
+          </div>
+
+          <div class="form-step">
+            <div class="step-head">
+              <div class="step-number">2</div>
+              <div>
+                <div class="step-label-strong">أي أيام بالأسبوع؟</div>
+                <div class="step-hint">اختر يوم أو أكثر. سيتم احتساب 10 جلسات بالترتيب.</div>
+              </div>
+            </div>
+            <div class="weekday-grid" id="weekdayPicker"></div>
+          </div>
+
+          <div class="form-step">
+            <div class="step-head">
+              <div class="step-number">3</div>
+              <div>
+                <div class="step-label-strong">وقت المحاضرة</div>
+                <div class="step-hint">مدة كل Session ثابتة: ساعتان. تغيير وقت البداية يحدّث وقت النهاية تلقائياً.</div>
+              </div>
+            </div>
+            <div class="time-grid">
+              <input id="schedStartTime" type="time" class="premium-input" onchange="updateScheduleBuilderField('startTime', this.value)">
+              <input id="schedEndTime" type="time" class="premium-input" onchange="updateScheduleBuilderField('endTime', this.value)">
+            </div>
+            <div class="fixed-summary">
+              <div class="fixed-card"><div class="v">20</div><div class="l">ساعة</div></div>
+              <div class="fixed-card"><div class="v">2</div><div class="l">ساعة / يوم</div></div>
+              <div class="fixed-card"><div class="v">10</div><div class="l">Sessions</div></div>
             </div>
           </div>
-          <div id="excelSchedEditor" style="display:flex;flex-direction:column;gap:.6rem;"></div>
+
+          <div class="builder-actions">
+            <button id="saveGeneratedScheduleBtn" onclick="saveGeneratedSchedule()" class="builder-btn primary" type="button">Sync to Firebase</button>
+            <button onclick="saveGeneratedSchedule('both')" class="builder-btn ghost" type="button">حفظ نفس الإعداد للدورتين</button>
+            <button onclick="resetBuilderFromSaved()" class="builder-btn danger" type="button">استرجاع المحفوظ</button>
+          </div>
+          <div id="schedSaveMsg" class="schedule-toast"></div>
         </div>
-        <div class="schedule-course-panel">
-          <div class="schedule-course-head">
-            <div class="schedule-course-title" style="color:#F2C811;">📈 Power BI Sessions</div>
-            <button onclick="saveSchedule('powerbi')" class="sched-mini-btn primary" style="background:linear-gradient(135deg,#F2C811,#b38f00);color:#0B1120;">💾 حفظ Power BI</button>
-          </div>
-          <div class="schedule-help">إضافة سريعة: الصق التواريخ بصيغة YYYY-MM-DD، كل تاريخ بسطر مستقل.</div>
-          <div class="bulk-date-box">
-            <textarea id="powerbiBulkDates" dir="ltr" placeholder="2026-07-02&#10;2026-07-05&#10;2026-07-09"></textarea>
-            <div class="sched-mini-actions">
-              <button onclick="applyBulkSchedule('powerbi')" class="sched-mini-btn primary" style="background:linear-gradient(135deg,#F2C811,#b38f00);color:#0B1120;">تطبيق التواريخ</button>
-              <button onclick="clearBulkBox('powerbi')" class="sched-mini-btn ghost">تفريغ الصندوق</button>
-              <button onclick="resetScheduleToDefault('powerbi')" class="sched-mini-btn warning">استرجاع الافتراضي</button>
+
+        <div class="preview-panel">
+          <div class="preview-top">
+            <div>
+              <div class="preview-title" id="schedulePreviewTitle">Preview</div>
+              <div style="font-size:.75rem;color:rgba(255,255,255,.42);font-weight:700;margin-top:.15rem;" id="schedulePreviewMeta"></div>
             </div>
+            <div class="preview-badge" id="schedulePreviewBadge">10 Sessions</div>
           </div>
-          <div id="pbiSchedEditor" style="display:flex;flex-direction:column;gap:.6rem;"></div>
+          <div id="generatedSchedulePreview" class="generated-list"></div>
         </div>
       </div>
-      <div id="schedSaveMsg" style="margin-top:1rem;display:none;padding:.75rem 1rem;background:rgba(9,153,153,.15);border:1px solid rgba(9,153,153,.3);border-radius:.75rem;color:#0bc4c4;font-weight:700;font-size:.85rem;"></div>
     </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDES CONTAINER    </div>
   </div>
 </div>
 
@@ -920,7 +995,7 @@ function renderSchedule() {
         <div style="font-weight:800;font-size:.88rem;color:${i===9?'#0bc4c4':'rgba(255,255,255,.9)'};">
           ${ar ? (i===9?'الجلسة الختامية 🏆':'الجلسة '+SESSION_NAMES_AR[i]) : (i===9?'Final Session 🏆':'Session '+(i+1))}
         </div>
-        <div style="font-size:.75rem;color:rgba(255,255,255,.4);font-weight:600;">${ar ? s.dayAr : s.dayEn} · 7:00 – 9:00 PM</div>
+        <div style="font-size:.75rem;color:rgba(255,255,255,.4);font-weight:600;">${ar ? s.dayAr : s.dayEn} · ${s.startTime || '19:00'} – ${s.endTime || '21:00'}</div>
       </div>
       ${i===9?'<span style="background:#099999;color:#fff;font-size:.65rem;font-weight:900;padding:.2rem .5rem;border-radius:.4rem;">FINAL</span>':''}
     </div>
@@ -1218,17 +1293,35 @@ async function deleteRegistration(id) {
   `).join('') || '<tr><td colspan="6" style="text-align:center;padding:2rem;color:rgba(255,255,255,.3);">No data</td></tr>';
 }
 
-// Override tab click for visitors to render
+// Override tab click for schedule/visitors rendering
 const origSetTab = setAdminTab;
 window.setAdminTab = function(tab) {
   origSetTab(tab);
-  if(tab==='vis') renderVisitors();
+  if(tab === 'vis') renderVisitors();
+  if(tab === 'sched') renderScheduleEditor();
 };
 
-// ═══ SCHEDULE EDITOR ═══
+// ═══ TYPEFORM SCHEDULE BUILDER ═══
 const MONTHS_EN = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 const DAYS_AR = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
 const DAYS_EN = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const WEEKDAY_OPTIONS = [
+  {value:0, ar:'الأحد', short:'Sun'},
+  {value:1, ar:'الاثنين', short:'Mon'},
+  {value:2, ar:'الثلاثاء', short:'Tue'},
+  {value:3, ar:'الأربعاء', short:'Wed'},
+  {value:4, ar:'الخميس', short:'Thu'},
+  {value:5, ar:'الجمعة', short:'Fri'},
+  {value:6, ar:'السبت', short:'Sat'}
+];
+
+let scheduleBuilder = {
+  course: 'excel',
+  startDate: '',
+  weekdays: [1, 3],
+  startTime: '19:00',
+  endTime: '21:00'
+};
 
 function normalizeSessionDates(course) {
   const currentYear = new Date().getFullYear();
@@ -1245,7 +1338,20 @@ function normalizeSessionDates(course) {
 function isValidISODate(value) {
   if(!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ''))) return false;
   const d = new Date(`${value}T00:00:00`);
-  return !Number.isNaN(d.getTime()) && value === d.toISOString().slice(0,10);
+  return !Number.isNaN(d.getTime()) && value === toISODate(d);
+}
+
+function toISODate(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+function addDaysISO(iso, days) {
+  const d = new Date(`${iso}T00:00:00`);
+  d.setDate(d.getDate() + days);
+  return toISODate(d);
 }
 
 function buildSessionFromISO(iso, num, old = {}) {
@@ -1258,113 +1364,189 @@ function buildSessionFromISO(iso, num, old = {}) {
     month: MONTHS_EN[d.getMonth()],
     day: String(d.getDate()).padStart(2, '0'),
     dayAr: DAYS_AR[d.getDay()],
-    dayEn: DAYS_EN[d.getDay()]
+    dayEn: DAYS_EN[d.getDay()],
+    startTime: old.startTime || scheduleBuilder.startTime || '19:00',
+    endTime: old.endTime || scheduleBuilder.endTime || '21:00',
+    hours: 2
   };
+}
+
+function timeToMinutes(t) {
+  const [h,m] = String(t || '00:00').split(':').map(Number);
+  return (h * 60) + (m || 0);
+}
+
+function minutesToTime(total) {
+  const safe = ((total % 1440) + 1440) % 1440;
+  return `${String(Math.floor(safe / 60)).padStart(2,'0')}:${String(safe % 60).padStart(2,'0')}`;
+}
+
+function deriveBuilderFromSaved(course) {
+  normalizeSessionDates(course);
+  const sessions = liveSessions[course] || [];
+  const first = sessions[0] || {};
+  const weekdays = [...new Set(sessions.map(s => new Date(`${s.date}T00:00:00`).getDay()).filter(x => Number.isInteger(x)))];
+  return {
+    course,
+    startDate: first.date || toISODate(new Date()),
+    weekdays: weekdays.length ? weekdays : (course === 'excel' ? [1,3] : [2,4]),
+    startTime: first.startTime || '19:00',
+    endTime: first.endTime || '21:00'
+  };
+}
+
+function selectScheduleCourse(course) {
+  scheduleBuilder = deriveBuilderFromSaved(course);
+  renderScheduleEditor();
+}
+
+function renderScheduleEditor() {
+  const course = scheduleBuilder.course || 'excel';
+  const excelBtn = document.getElementById('schedCourseExcel');
+  const pbiBtn = document.getElementById('schedCoursePowerbi');
+  if(excelBtn) excelBtn.className = course === 'excel' ? 'active excel' : '';
+  if(pbiBtn) pbiBtn.className = course === 'powerbi' ? 'active powerbi' : '';
+
+  const startDate = document.getElementById('schedStartDate');
+  const startTime = document.getElementById('schedStartTime');
+  const endTime = document.getElementById('schedEndTime');
+  if(startDate) startDate.value = scheduleBuilder.startDate || toISODate(new Date());
+  if(startTime) startTime.value = scheduleBuilder.startTime || '19:00';
+  if(endTime) endTime.value = scheduleBuilder.endTime || minutesToTime(timeToMinutes(scheduleBuilder.startTime || '19:00') + 120);
+
+  const picker = document.getElementById('weekdayPicker');
+  if(picker) {
+    picker.innerHTML = WEEKDAY_OPTIONS.map(d => {
+      const selected = scheduleBuilder.weekdays.includes(d.value);
+      return `<button type="button" class="weekday-pill ${selected ? 'selected' : ''}" onclick="toggleScheduleWeekday(${d.value})">${d.ar}<span>${d.short}</span></button>`;
+    }).join('');
+  }
+  renderGeneratedSchedulePreview();
+}
+
+function updateScheduleBuilderField(field, value) {
+  if(field === 'startTime') {
+    scheduleBuilder.startTime = value || '19:00';
+    scheduleBuilder.endTime = minutesToTime(timeToMinutes(scheduleBuilder.startTime) + 120);
+  } else if(field === 'endTime') {
+    scheduleBuilder.endTime = value || '21:00';
+  } else {
+    scheduleBuilder[field] = value;
+  }
+  renderScheduleEditor();
+}
+
+function toggleScheduleWeekday(dayValue) {
+  const set = new Set(scheduleBuilder.weekdays || []);
+  if(set.has(dayValue)) set.delete(dayValue); else set.add(dayValue);
+  scheduleBuilder.weekdays = [...set].sort((a,b)=>a-b);
+  renderScheduleEditor();
+}
+
+function buildGeneratedSchedule() {
+  const start = scheduleBuilder.startDate;
+  const weekdays = scheduleBuilder.weekdays || [];
+  if(!isValidISODate(start) || !weekdays.length) return [];
+  const sessions = [];
+  let cursor = start;
+  let safety = 0;
+  while(sessions.length < 10 && safety < 120) {
+    const d = new Date(`${cursor}T00:00:00`);
+    if(weekdays.includes(d.getDay())) {
+      sessions.push(buildSessionFromISO(cursor, sessions.length + 1, {
+        startTime: scheduleBuilder.startTime,
+        endTime: scheduleBuilder.endTime,
+        hours: 2
+      }));
+    }
+    cursor = addDaysISO(cursor, 1);
+    safety++;
+  }
+  return sessions;
+}
+
+function renderGeneratedSchedulePreview() {
+  const title = document.getElementById('schedulePreviewTitle');
+  const meta = document.getElementById('schedulePreviewMeta');
+  const badge = document.getElementById('schedulePreviewBadge');
+  const list = document.getElementById('generatedSchedulePreview');
+  const sessions = buildGeneratedSchedule();
+  const courseLabel = scheduleBuilder.course === 'powerbi' ? 'Power BI' : 'Excel';
+  const startDate = sessions[0]?.date || scheduleBuilder.startDate || '—';
+  const endDate = sessions[9]?.date || '—';
+  if(title) title.textContent = `${courseLabel} · الجدول النهائي`;
+  if(meta) meta.textContent = `${startDate} → ${endDate} · ${scheduleBuilder.startTime} – ${scheduleBuilder.endTime}`;
+  if(badge) badge.textContent = `${sessions.length}/10 Sessions`;
+  if(!list) return;
+  if(!sessions.length) {
+    list.innerHTML = `<div style="padding:1rem;border-radius:1rem;background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.22);color:#f87171;font-weight:800;line-height:1.7;">اختر تاريخ بداية صحيح ويوم واحد على الأقل.</div>`;
+    return;
+  }
+  list.innerHTML = sessions.map((s, i) => `
+    <div class="generated-session ${i === 9 ? 'final' : ''}">
+      <div class="generated-no">${s.num}</div>
+      <div class="generated-date"><div class="m">${s.month}</div><div class="d">${s.day}</div></div>
+      <div class="generated-main">
+        <div class="name">${i === 9 ? 'الجلسة الختامية 🏆' : 'Session ' + s.num}</div>
+        <div class="meta">${s.dayAr} · ${s.date} · ${s.startTime} – ${s.endTime}</div>
+      </div>
+    </div>
+  `).join('');
 }
 
 function setScheduleMessage(text, type = 'ok') {
   const msg = document.getElementById('schedSaveMsg');
   if(!msg) return;
   msg.textContent = text;
+  msg.className = `schedule-toast ${type === 'error' ? 'error' : 'ok'}`;
   msg.style.display = 'block';
-  if(type === 'error') {
-    msg.style.borderColor='rgba(239,68,68,.3)';
-    msg.style.color='#f87171';
-    msg.style.background='rgba(239,68,68,.1)';
-  } else {
-    msg.style.borderColor='rgba(9,153,153,.3)';
-    msg.style.color='#0bc4c4';
-    msg.style.background='rgba(9,153,153,.15)';
-  }
   clearTimeout(window.__schedMsgTimer);
-  window.__schedMsgTimer = setTimeout(()=>msg.style.display='none', 3500);
+  window.__schedMsgTimer = setTimeout(()=>msg.style.display='none', 4500);
 }
 
-function renderScheduleEditor() {
-  ['excel','powerbi'].forEach(course => {
-    normalizeSessionDates(course);
-    const isPbi = course === 'powerbi';
-    const containerId = isPbi ? 'pbiSchedEditor' : 'excelSchedEditor';
-    const container = document.getElementById(containerId);
-    if(!container) return;
-    const sessions = liveSessions[course];
-    container.innerHTML = sessions.map((s,i) => `
-      <div class="sched-date-row">
-        <div style="width:30px;height:30px;border-radius:.5rem;background:${isPbi?'rgba(242,200,17,.15)':'rgba(9,153,153,.15)'};color:${isPbi?'#F2C811':'#0bc4c4'};font-weight:900;font-size:.78rem;display:flex;align-items:center;justify-content:center;">${s.num}</div>
-        <input type="date" class="sched-date-input" value="${s.date}" onchange="setSessionDate('${course}',${i},this.value)">
-        <div class="sched-date-meta">${s.dayAr} · ${s.dayEn} · ${s.day} ${s.month}</div>
-      </div>
-    `).join('');
-  });
+function validateGeneratedSchedule() {
+  const sessions = buildGeneratedSchedule();
+  if(sessions.length !== 10) return {ok:false, msg:'يجب توليد 10 جلسات كاملة.'};
+  const duration = timeToMinutes(scheduleBuilder.endTime) - timeToMinutes(scheduleBuilder.startTime);
+  if(duration !== 120) return {ok:false, msg:'مدة المحاضرة يجب أن تكون ساعتين بالضبط. عدّل وقت البداية أو النهاية.'};
+  return {ok:true, sessions};
 }
 
-function setSessionDate(course, index, isoDate) {
-  if(!isValidISODate(isoDate)) {
-    setScheduleMessage('❌ التاريخ غير صحيح. استخدم صيغة YYYY-MM-DD.', 'error');
-    renderScheduleEditor();
-    return;
-  }
-  liveSessions[course][index] = buildSessionFromISO(isoDate, index + 1, liveSessions[course][index]);
+function resetBuilderFromSaved() {
+  scheduleBuilder = deriveBuilderFromSaved(scheduleBuilder.course || 'excel');
   renderScheduleEditor();
-  if(currentSlide === 3) renderSchedule();
+  setScheduleMessage('تم استرجاع آخر جدول محفوظ لهذه الدورة.');
 }
 
-function parseBulkDates(text) {
-  return String(text || '')
-    .split(/[\n,،;\t]+/)
-    .map(x => x.trim())
-    .filter(Boolean);
-}
-
-function applyBulkSchedule(course) {
-  const box = document.getElementById(`${course}BulkDates`);
-  const dates = parseBulkDates(box ? box.value : '');
-  if(!dates.length) {
-    setScheduleMessage('❌ أدخل تاريخاً واحداً على الأقل.', 'error');
-    return;
-  }
-  const invalid = dates.filter(d => !isValidISODate(d));
-  if(invalid.length) {
-    setScheduleMessage(`❌ تواريخ غير صحيحة: ${invalid.join(', ')}`, 'error');
-    return;
-  }
-  liveSessions[course] = dates.slice(0, 10).map((d, i) => buildSessionFromISO(d, i + 1, liveSessions[course]?.[i] || {}));
-  while(liveSessions[course].length < 10) {
-    const i = liveSessions[course].length;
-    liveSessions[course].push(buildSessionFromISO(defaultSessions[course][i].date || `${new Date().getFullYear()}-${String(MONTHS_EN.indexOf(defaultSessions[course][i].month)+1).padStart(2,'0')}-${defaultSessions[course][i].day}`, i + 1, defaultSessions[course][i]));
-  }
-  renderScheduleEditor();
-  if(currentSlide === 3) renderSchedule();
-  setScheduleMessage(`✅ تم تطبيق ${Math.min(dates.length,10)} تاريخ. اضغط حفظ لتثبيتها في Firebase.`);
-}
-
-function clearBulkBox(course) {
-  const box = document.getElementById(`${course}BulkDates`);
-  if(box) box.value = '';
-}
-
-function resetScheduleToDefault(course) {
-  liveSessions[course] = JSON.parse(JSON.stringify(defaultSessions[course]));
-  normalizeSessionDates(course);
-  renderScheduleEditor();
-  if(currentSlide === 3) renderSchedule();
-  setScheduleMessage('تم استرجاع المواعيد الافتراضية. اضغط حفظ لتثبيتها في Firebase.');
-}
-
-async function saveSchedule(course) {
+async function saveGeneratedSchedule(mode) {
   const fb = window._fb;
-  if(!fb) return;
-  normalizeSessionDates(course);
+  if(!fb) return setScheduleMessage('Firebase غير جاهز حالياً.', 'error');
+  const validation = validateGeneratedSchedule();
+  if(!validation.ok) return setScheduleMessage(validation.msg, 'error');
+  const courses = mode === 'both' ? ['excel','powerbi'] : [scheduleBuilder.course];
   try {
-    await fb.setDoc(fb.doc(fb.db,'schedules',course), {
-      sessions: liveSessions[course],
-      updatedAt: new Date().toISOString(),
-      updatedBy: fb.auth?.currentUser?.email || 'admin'
-    });
-    setScheduleMessage(`✅ تم حفظ مواعيد ${course === 'excel' ? 'Excel' : 'Power BI'} في Firebase.`);
+    for(const course of courses) {
+      const sessions = validation.sessions.map((s, i) => ({...s, num:i+1}));
+      liveSessions[course] = JSON.parse(JSON.stringify(sessions));
+      await fb.setDoc(fb.doc(fb.db,'schedules',course), {
+        sessions,
+        config: {
+          startDate: scheduleBuilder.startDate,
+          weekdays: scheduleBuilder.weekdays,
+          startTime: scheduleBuilder.startTime,
+          endTime: scheduleBuilder.endTime,
+          sessionHours: 2,
+          totalHours: 20,
+          totalSessions: 10
+        },
+        updatedAt: new Date().toISOString(),
+        updatedBy: fb.auth?.currentUser?.email || 'admin'
+      });
+    }
     if(currentSlide === 3) renderSchedule();
+    setScheduleMessage(`تمت المزامنة مع Firebase واعتماد الجدول للمستخدم النهائي${mode === 'both' ? ' للدورتين' : ''}.`);
   } catch(e) {
-    setScheduleMessage('❌ Error saving: ' + e.message, 'error');
+    setScheduleMessage('فشل الحفظ: ' + e.message, 'error');
   }
 }
 
