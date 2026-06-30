@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="app-version" content="4.2.0">
+<meta name="app-version" content="4.2.1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>X Academy | Excel & Power BI – باسل غانم</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23099999%22/><text x=%2250%%22 y=%2250%%22 font-family=%22Arial%22 font-size=%2265%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22 dominant-baseline=%22central%22>X</text></svg>">
@@ -1132,19 +1132,26 @@ function toggleLang() {
 }
 
 // ═══ ADMIN TRIGGER (top-left corner, 5 clicks) ═══
-// ═══ ADMIN TRIGGER (تعديل لفتح اللوحة مباشرة) ═══
+async function openAdminArea() {
+  const fb = window._fb;
+  if(fb?.auth?.currentUser) {
+    document.getElementById('adminLoginModal').classList.remove('open');
+    document.getElementById('adminOverlay').classList.add('open');
+    await loadAdminData();
+    return;
+  }
+  document.getElementById('adminOverlay').classList.remove('open');
+  document.getElementById('adminLoginModal').classList.add('open');
+  setTimeout(()=>document.getElementById('adminEmail')?.focus(), 120);
+}
+
 async function adminTriggerClick() {
   adminTriggerCount++;
   clearTimeout(adminTriggerTimer);
   
   if(adminTriggerCount >= 5) {
     adminTriggerCount = 0;
-    
-    // فتح اللوحة مباشرة
-    document.getElementById('adminOverlay').classList.add('open');
-    
-    // تحميل البيانات فوراً دون انتظار لوجين
-    await loadAdminData();
+    await openAdminArea();
     return;
   }
   
@@ -1521,6 +1528,11 @@ function resetBuilderFromSaved() {
 async function saveGeneratedSchedule(mode) {
   const fb = window._fb;
   if(!fb) return setScheduleMessage('Firebase غير جاهز حالياً.', 'error');
+  if(!fb.auth?.currentUser) {
+    document.getElementById('adminOverlay').classList.remove('open');
+    document.getElementById('adminLoginModal').classList.add('open');
+    return setScheduleMessage('يجب تسجيل دخول الأدمن قبل حفظ المواعيد على Firebase.', 'error');
+  }
   const validation = validateGeneratedSchedule();
   if(!validation.ok) return setScheduleMessage(validation.msg, 'error');
   const courses = mode === 'both' ? ['excel','powerbi'] : [scheduleBuilder.course];
@@ -1546,7 +1558,10 @@ async function saveGeneratedSchedule(mode) {
     if(currentSlide === 3) renderSchedule();
     setScheduleMessage(`تمت المزامنة مع Firebase واعتماد الجدول للمستخدم النهائي${mode === 'both' ? ' للدورتين' : ''}.`);
   } catch(e) {
-    setScheduleMessage('فشل الحفظ: ' + e.message, 'error');
+    const msg = e?.code === 'permission-denied'
+      ? 'فشل الحفظ: صلاحيات Firestore لا تسمح بالكتابة داخل schedules. انشر القواعد المرفقة بالرد.'
+      : 'فشل الحفظ: ' + (e?.message || e);
+    setScheduleMessage(msg, 'error');
   }
 }
 
