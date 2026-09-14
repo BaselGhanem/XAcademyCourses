@@ -323,6 +323,52 @@ function durationHours() {
   return values.reduce((sum, value) => sum + value, 0);
 }
 
+
+function formatScheduleDate(date) {
+  if (!(date instanceof Date) || Number.isNaN(date.getTime())) return '';
+  return new Intl.DateTimeFormat(state.lang === 'ar' ? 'ar-JO-u-nu-latn' : 'en-GB', {
+    day: '2-digit', month: '2-digit', year: 'numeric'
+  }).format(date);
+}
+
+function scheduleDayName(date) {
+  if (!(date instanceof Date) || Number.isNaN(date.getTime())) return '';
+  return new Intl.DateTimeFormat(state.lang === 'ar' ? 'ar-JO' : 'en-GB', { weekday: 'long' }).format(date);
+}
+
+function scheduleTimeSummary(sessions) {
+  const times = [...new Set((sessions || []).map((session) => String(session.time || '').trim()).filter(Boolean))];
+  if (times.length !== 1) return '';
+  const raw = times[0];
+  const parts = raw.split(/\s+-\s+/);
+  if (parts.length !== 2) return state.lang === 'ar' ? `من الساعة ${raw}` : `at ${raw}`;
+  const start = parts[0].trim();
+  const end = parts[1].trim();
+  return state.lang === 'ar' ? `من الساعة ${start} إلى ${end}` : `from ${start} to ${end}`;
+}
+
+function scheduleNarrative(run) {
+  const sessions = datedSessions(run);
+  if (!sessions.length) return '';
+  const first = sessions[0];
+  const last = sessions[sessions.length - 1];
+  const uniqueDays = [];
+  sessions.forEach((session) => {
+    const day = scheduleDayName(session.parsedDate);
+    if (day && !uniqueDays.includes(day)) uniqueDays.push(day);
+  });
+  const joinDays = (days) => {
+    if (days.length <= 1) return days[0] || '';
+    if (state.lang === 'ar') return days.length === 2 ? `${days[0]} و${days[1]}` : `${days.slice(0, -1).join('، ')} و${days.at(-1)}`;
+    return days.length === 2 ? `${days[0]} and ${days[1]}` : `${days.slice(0, -1).join(', ')}, and ${days.at(-1)}`;
+  };
+  const time = scheduleTimeSummary(sessions);
+  if (state.lang === 'ar') {
+    return `تبدأ يوم ${scheduleDayName(first.parsedDate)} ${formatScheduleDate(first.parsedDate)} وتنتهي يوم ${scheduleDayName(last.parsedDate)} ${formatScheduleDate(last.parsedDate)}، أيام ${joinDays(uniqueDays)}${time ? `، ${time}` : ''}.`;
+  }
+  return `Starts ${scheduleDayName(first.parsedDate)}, ${formatScheduleDate(first.parsedDate)} and ends ${scheduleDayName(last.parsedDate)}, ${formatScheduleDate(last.parsedDate)}. Sessions are on ${joinDays(uniqueDays)}${time ? `, ${time}` : ''}.`;
+}
+
 function offerIsActive(cohort) {
   if (!cohort?.offer?.enabled || !(Number(cohort.offer.price) >= 0)) return false;
   if (!cohort.offer.endsAt) return true;
@@ -660,7 +706,10 @@ function stageContent(key) {
       <h2>${txt('scheduleInvestment')}</h2>
       ${cohort ? `
         <div class="schedule-summary">
-          <p class="lead">${localized(cohort.name)} · ${cohort.sessions?.length || 0} ${txt('sessions')}${durationHours() != null ? ` · ${durationHours()} ${txt('hours')}` : ''}</p>
+          <div class="schedule-copy">
+            <p class="lead">${localized(cohort.name)} · ${cohort.sessions?.length || 0} ${txt('sessions')}${durationHours() != null ? ` · ${durationHours()} ${txt('hours')}` : ''}</p>
+            <p class="schedule-narrative"><b>${state.lang === 'ar' ? 'الخلاصة:' : 'Summary:'}</b> ${scheduleNarrative(cohort)}</p>
+          </div>
           ${feeMarkup(cohort, true)}
         </div>
         <div class="sessions">
@@ -824,10 +873,66 @@ function journeyView() {
   `);
 }
 
+
+function fitElementInside(element, container) {
+  if (!element || !container) return;
+
+  element.style.setProperty('--fit-scale', '1');
+
+  // The element is absolutely positioned, so its natural dimensions can be
+  // measured without affecting the stage layout or creating an internal scroll area.
+  const style = getComputedStyle(element);
+  const top = parseFloat(style.top) || 0;
+  const naturalW = Math.max(1, element.scrollWidth);
+  const naturalH = Math.max(1, element.scrollHeight);
+
+  const availableW = Math.max(1, container.clientWidth);
+  const availableH = Math.max(1, container.clientHeight - top - 8);
+
+  const scaleW = availableW / naturalW;
+  const scaleH = availableH / naturalH;
+  const scale = Math.max(0.02, Math.min(1, scaleW, scaleH) * 0.975);
+
+  element.style.setProperty('--fit-scale', scale.toFixed(4));
+}
+
+function fitCurrentScreen() {
+  const stage = document.querySelector('.stage');
+  const stageInner = stage?.querySelector('.stage-inner');
+  if (stage && stageInner) fitElementInside(stageInner, stage);
+
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    hero.style.transformOrigin = 'top center';
+    hero.style.transform = 'scale(1)';
+    const screen = hero.closest('.screen');
+    const topbar = screen?.querySelector('.topbar');
+    const availableH = Math.max(1, window.innerHeight - (topbar?.offsetHeight || 0));
+    const availableW = Math.max(1, window.innerWidth);
+    const neededH = Math.max(1, hero.scrollHeight);
+    const neededW = Math.max(1, hero.scrollWidth);
+    const scale = Math.max(0.02, Math.min(1, availableH / neededH, availableW / neededW) * 0.985);
+    hero.style.transform = `scale(${scale})`;
+  }
+}
+
+let fitResizeFrame = 0;
+window.addEventListener('resize', () => {
+  cancelAnimationFrame(fitResizeFrame);
+  fitResizeFrame = requestAnimationFrame(fitCurrentScreen);
+});
+window.visualViewport?.addEventListener('resize', () => {
+  cancelAnimationFrame(fitResizeFrame);
+  fitResizeFrame = requestAnimationFrame(fitCurrentScreen);
+});
+window.addEventListener('load', () => requestAnimationFrame(fitCurrentScreen));
+document.fonts?.ready.then(() => requestAnimationFrame(fitCurrentScreen));
+
 function renderMain() {
   const main = document.getElementById('main') || app;
   main.innerHTML = state.view === 'home' ? homeView() : state.view === 'courses' ? coursesView() : journeyView();
   bind();
+  requestAnimationFrame(() => requestAnimationFrame(() => { fitCurrentScreen(); setTimeout(fitCurrentScreen, 80); setTimeout(fitCurrentScreen, 220); }));
 }
 
 function render() {

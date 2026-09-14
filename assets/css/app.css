@@ -368,9 +368,14 @@ img { display: block; max-width: 100%; }
 }
 
 /* 2026 experience refinement: evidence first, fewer steps, clearer registration */
-.stage { overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(9,153,153,.25) transparent; }
-.stage-inner { animation: stage-in .32s cubic-bezier(.22,1,.36,1) both; }
-@keyframes stage-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.stage { overflow: hidden; }
+.stage-inner {
+  animation: stage-fade .26s cubic-bezier(.22,1,.36,1) both;
+  transform-origin: top center;
+  transform: scale(var(--fit-scale, 1));
+  will-change: transform;
+}
+@keyframes stage-fade { from { opacity: 0; } to { opacity: 1; } }
 
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
   outline: 3px solid rgba(9,153,153,.22);
@@ -464,12 +469,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 
 @media (max-width: 800px) {
-  body { overflow: auto; }
-  .screen { height: auto; min-height: 100dvh; }
-  .journey { min-height: calc(100dvh - 64px); padding: 0; }
-  .journey-card { height: auto; min-height: calc(100dvh - 64px); overflow: visible; }
-  .stage { overflow: visible; align-items: flex-start; padding-top: 22px; }
-  .stage-inner { padding-bottom: 10px; }
+  body { overflow: hidden; }
+  .screen { height: 100dvh; min-height: 100dvh; overflow: hidden; }
+  .journey { min-height: 0; padding: 0; }
+  .journey-card { height: calc(100dvh - 64px); min-height: 0; overflow: hidden; }
+  .stage { overflow: hidden; align-items: center; padding-top: 18px; }
+  .stage-inner { padding-bottom: 0; }
   .hero { min-height: calc(100dvh - 64px); }
   .hero-proof { margin-top: 22px; padding-top: 18px; gap: 12px; }
   .hero-proof span { min-width: 100%; }
@@ -480,4 +485,83 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .review-layout { gap: 14px; }
   .fee-card { border-radius: 16px; }
   .fee-card strong { font-size: 30px; }
+}
+
+
+.schedule-copy { min-width: 0; }
+.schedule-narrative {
+  margin: 8px 0 0; max-width: 760px; color: var(--ink);
+  font-size: 13px; line-height: 1.8;
+}
+.schedule-narrative b { color: var(--teal); }
+
+/* No-scroll adaptive viewport: every journey stage is scaled into the available viewport. */
+html, body {
+  width: 100%; height: 100%; margin: 0; overflow: hidden !important; overscroll-behavior: none;
+}
+body { position: fixed; inset: 0; }
+#app, .screen { width: 100%; height: 100dvh; overflow: hidden !important; }
+.journey { min-height: 0; overflow: hidden !important; }
+.journey-card { overflow: hidden !important; }
+.stage {
+  overflow: hidden !important;
+  align-items: flex-start !important;
+  justify-content: center;
+  min-height: 0;
+}
+.stage-inner {
+  max-height: none;
+  flex: 0 0 auto;
+  transform-origin: top center !important;
+}
+/* Never expose a stage scrollbar; dropdowns may still scroll independently. */
+.stage::-webkit-scrollbar, .journey-card::-webkit-scrollbar, .screen::-webkit-scrollbar { display: none; }
+.stage, .journey-card, .screen { scrollbar-width: none; }
+
+@media (max-height: 760px) {
+  .journey-head { padding-top: 14px; padding-bottom: 7px; }
+  .stage { padding-top: 14px; }
+  .navrow { padding-top: 9px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+  .schedule-narrative { line-height: 1.55; }
+}
+@media (max-height: 620px) {
+  .topbar { height: 56px; flex-basis: 56px; }
+  .journey-card { height: calc(100dvh - 56px); }
+  .journey-head { padding-top: 10px; padding-bottom: 5px; }
+  .stage { padding-top: 10px; padding-bottom: 4px; }
+  .navrow { padding-top: 6px; padding-bottom: calc(7px + env(safe-area-inset-bottom)); }
+}
+
+
+/* V5 hard no-scroll fit: stage content is absolutely positioned and scaled inside the true free area. */
+.stage {
+  position: relative !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  display: block !important;
+}
+.stage-inner {
+  position: absolute !important;
+  top: var(--fit-top, 18px) !important;
+  left: 50% !important;
+  width: min(960px, calc(100% - (var(--fit-side, 56px) * 2))) !important;
+  max-width: none !important;
+  margin: 0 !important;
+  transform-origin: top center !important;
+  transform: translateX(-50%) scale(var(--fit-scale, 1)) !important;
+  overflow: visible !important;
+}
+@media (max-width: 800px) {
+  .stage-inner {
+    --fit-side: 18px;
+    --fit-top: 14px;
+    width: calc(100% - 36px) !important;
+  }
+}
+@media (max-width: 420px) {
+  .stage-inner {
+    --fit-side: 14px;
+    --fit-top: 10px;
+    width: calc(100% - 28px) !important;
+  }
 }
