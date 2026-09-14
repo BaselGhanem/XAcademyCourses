@@ -36,3 +36,12 @@ The first admin dashboard provides **تهيئة البيانات الحالية*
 
 ## Hosting
 All public files are static and suitable for GitHub Pages/Firebase Hosting. Serve over HTTP(S); do not open `index.html` directly with the `file://` protocol because ES modules require a web server.
+
+## Course-state logic
+- `قريبًا` (`information` internally): course content remains visible, but schedule, price, payment and registration are never exposed publicly.
+- `مفتوحة للتسجيل`: requires a future schedule whose first session has not started.
+- `مغلقة`: course content remains visible, operational schedule/pricing/registration remain hidden.
+- `مخفية`: course is removed from the public experience and direct course selection.
+- Public registration re-checks the latest course and schedule state before submitting.
+- A schedule with zero remaining seats behaves as Full.
+- Expired offers stop appearing automatically.

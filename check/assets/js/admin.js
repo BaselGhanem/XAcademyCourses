@@ -40,7 +40,7 @@ const lines = (text) => text.split('\n').map((x) => x.trim()).filter(Boolean);
 function visibilityLabel(value) {
   return {
     open: 'مفتوحة للتسجيل',
-    information: 'معلومات فقط',
+    information: 'قريبًا',
     closed: 'مغلقة',
     hidden: 'مخفية'
   }[value] || value;
@@ -52,6 +52,48 @@ function runStatusLabel(value) {
     full: 'المقاعد مكتملة',
     closed: 'مغلق'
   }[value] || value;
+}
+
+function parseScheduleDate(value) {
+  const text = String(value || '').trim();
+  let day, month, year;
+  let match = text.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+  if (match) { day = Number(match[1]); month = Number(match[2]); year = Number(match[3]); }
+  else {
+    match = text.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!match) return null;
+    year = Number(match[1]); month = Number(match[2]); day = Number(match[3]);
+  }
+  const date = new Date(year, month - 1, day, 23, 59, 59, 999);
+  if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) return null;
+  return date;
+}
+
+function todayStart() {
+  const now = new Date();
+  return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+}
+
+function datedSessions(run) {
+  return (run?.sessions || [])
+    .map((session) => ({ ...session, parsedDate: parseScheduleDate(session.date) }))
+    .filter((session) => session.parsedDate)
+    .sort((a, b) => a.parsedDate - b.parsedDate);
+}
+
+function effectiveRunStatus(run) {
+  if (!run) return 'closed';
+  if (run.status === 'open' && run.seatsRemaining !== null && run.seatsRemaining !== '' && Number(run.seatsRemaining) === 0) return 'full';
+  return run.status;
+}
+
+function isPublicRun(run) {
+  const sessions = datedSessions(run);
+  return Boolean(run && ['open', 'full'].includes(effectiveRunStatus(run)) && sessions.length && sessions[0].parsedDate >= todayStart());
+}
+
+function hasPublicRun(courseId) {
+  return A.cohorts.some((run) => run.courseId === courseId && isPublicRun(run));
 }
 
 async function log(action, details = {}) {
@@ -298,12 +340,10 @@ function newCourseForm() {
         <label>
           حالة الظهور
           <select id="new-visibility">
-            <option value="information">معلومات فقط</option>
-            <option value="open">مفتوحة للتسجيل</option>
-            <option value="closed">مغلقة</option>
+            <option value="information">قريبًا</option>
             <option value="hidden">مخفية</option>
           </select>
-          <small class="field-help">ابدأ بـ “معلومات فقط” إذا لم تحدد موعدًا بعد.</small>
+          <small class="field-help">ابدأ بـ “قريبًا” إذا لم تحدد موعدًا بعد. هذه الحالة تعرض محتوى الدورة فقط بدون مواعيد أو تسجيل.</small>
         </label>
         <label>
           اسم الدورة بالعربي
@@ -356,11 +396,11 @@ function courseEditorForm(course) {
           حالة ظهور الدورة
           <select id="c-visibility">
             <option value="open" ${course.visibility === 'open' ? 'selected' : ''}>مفتوحة للتسجيل</option>
-            <option value="information" ${course.visibility === 'information' ? 'selected' : ''}>معلومات فقط</option>
+            <option value="information" ${course.visibility === 'information' ? 'selected' : ''}>قريبًا</option>
             <option value="closed" ${course.visibility === 'closed' ? 'selected' : ''}>مغلقة</option>
             <option value="hidden" ${course.visibility === 'hidden' ? 'selected' : ''}>مخفية تمامًا</option>
           </select>
-          <small class="field-help">“معلومات فقط” تُظهر الدورة بدون تسجيل. “مخفية” لا تظهر للزائر.</small>
+          <small class="field-help">“قريبًا” تعرض محتوى الدورة فقط بدون مواعيد أو سعر أو تسجيل. “مخفية” لا تظهر للزائر.</small>
         </label>
 
         <div class="section-title">الاسم والرسالة</div>
@@ -415,6 +455,14 @@ function courseEditorForm(course) {
         </label>
 
         <div class="section-title">الشهادة</div>
+        <label>
+          هل تظهر مرحلة الشهادة؟
+          <select id="c-cert-enabled">
+            <option value="true" ${course.certificate?.enabled !== false ? 'selected' : ''}>نعم</option>
+            <option value="false" ${course.certificate?.enabled === false ? 'selected' : ''}>لا</option>
+          </select>
+          <small class="field-help">إذا اخترت “لا” فلن تظهر مرحلة الشهادة نهائيًا للمتدرب.</small>
+        </label>
         <label class="full">
           رابط صورة الشهادة
           <input id="c-cert-img" value="${esc(course.certificate?.imageUrl)}" dir="ltr" placeholder="https://...">
@@ -435,6 +483,16 @@ function courseRuns(courseId) {
 
 function runSelector(course) {
   const runs = courseRuns(course.id);
+  const publicRunAvailable = hasPublicRun(course.id);
+  const visibilityNotice = course.visibility === 'information'
+    ? '<div class="logic-note"><b>الدورة حالتها “قريبًا”.</b><p>أي مواعيد محفوظة هنا تبقى للإدارة فقط، ولن تظهر للمتدرب إلا بعد تحويل حالة الدورة إلى “مفتوحة للتسجيل”.</p></div>'
+    : course.visibility === 'closed'
+      ? '<div class="logic-note"><b>الدورة مغلقة.</b><p>لن تظهر المواعيد أو السعر أو التسجيل للمتدرب ما دامت الدورة مغلقة.</p></div>'
+      : course.visibility === 'hidden'
+        ? '<div class="logic-note"><b>الدورة مخفية.</b><p>لن تظهر الدورة أو مواعيدها للمتدرب.</p></div>'
+        : !publicRunAvailable
+          ? '<div class="logic-note warning"><b>الدورة مفتوحة لكن لا يوجد موعد مستقبلي متاح.</b><p>سيظهر للمتدرب أنها “قريبًا” ولن يستطيع التسجيل حتى تضيف موعدًا مستقبليًا وتجعله مفتوحًا.</p></div>'
+          : '';
   return `
     <section class="panel run-panel">
       <div class="panel-head">
@@ -444,6 +502,7 @@ function runSelector(course) {
         </div>
         <button class="btn" id="new-run">+ إضافة موعد للدورة</button>
       </div>
+      ${visibilityNotice}
 
       ${runs.length ? `
         <div class="run-tabs">
@@ -458,7 +517,7 @@ function runSelector(course) {
       ` : `
         <div class="empty-card">
           <b>لا يوجد موعد لهذه الدورة بعد.</b>
-          <p>إذا كانت الدورة للعرض فقط، لا تحتاج لإضافة شيء. عندما تقرر طرحها للتسجيل اضغط “إضافة موعد للدورة”.</p>
+          <p>إذا كانت الدورة “قريبًا”، لا تحتاج لإضافة موعد ظاهر للمتدرب. عندما تقرر فتح التسجيل أضف موعدًا مستقبليًا ثم غيّر حالة الدورة إلى “مفتوحة للتسجيل”.</p>
         </div>
       `}
     </section>
@@ -481,7 +540,7 @@ function runEditor(run) {
         <label>
           اسم الموعد بالعربي
           <input id="h-name-ar" value="${esc(run.name?.ar)}" placeholder="مثال: مجموعة أكتوبر 2026">
-          <small class="field-help">اسم داخلي/وصفي لتمييز هذا الطرح عن غيره.</small>
+          <small class="field-help">يظهر للمتدرب، مثل: مجموعة أكتوبر 2026.</small>
         </label>
         <label>Schedule name in English<input id="h-name-en" value="${esc(run.name?.en)}" dir="ltr" placeholder="October 2026 Schedule"></label>
         <label>
@@ -504,7 +563,7 @@ function runEditor(run) {
         <label>
           المقاعد المتبقية
           <input id="h-seats" type="number" min="0" value="${esc(run.seatsRemaining ?? '')}" placeholder="اختياري">
-          <small class="field-help">اتركه فارغًا إذا لا تريد إظهار/إدارة رقم يدوي.</small>
+          <small class="field-help">اختياري. إذا أدخلت رقمًا، سيتم إنقاصه تلقائيًا عند تأكيد الدفع، وعند وصوله إلى صفر يصبح الموعد ممتلئًا.</small>
         </label>
 
         <div class="section-title">العرض</div>
@@ -536,13 +595,13 @@ function runEditor(run) {
         <div class="full schedule-builder">
           <h4>توليد جدول المواعيد تلقائيًا</h4>
           <div class="form-grid compact-grid">
-            <label>تاريخ أول جلسة<input id="g-date" type="date"></label>
+            <label>ابتداءً من تاريخ<input id="g-date" type="date"></label>
             <label>عدد الجلسات<input id="g-count" type="number" min="1" max="60" value="${run.sessions?.length || 10}"></label>
             <label>من الساعة<input id="g-start" type="time" value="19:00"></label>
             <label>إلى الساعة<input id="g-end" type="time" value="21:00"></label>
           </div>
           <div class="weekdays">
-            ${days.map((day, index) => `<button type="button" data-day="${index}" class="${[0,1,3].includes(index) ? 'active' : ''}">${day}</button>`).join('')}
+            ${days.map((day, index) => `<button type="button" data-day="${index}" class="">${day}</button>`).join('')}
           </div>
           <button class="btn ghost" id="generate">إنشاء / استبدال الجدول</button>
         </div>
@@ -585,7 +644,7 @@ function courseEditor() {
     <div class="editor-layout">
       ${courseList()}
       <div class="course-workspace">
-        ${course ? `${courseEditorForm(course)}${runSelector(course)}<section class="panel destructive-panel"><button class="btn danger" id="delete-course">حذف الدورة نهائيًا</button><p>يحذف تعريف الدورة. مواعيدها تُحذف بشكل منفصل.</p></section>` : '<div class="empty">اختر دورة أو أنشئ دورة جديدة.</div>'}
+        ${course ? `${courseEditorForm(course)}${runSelector(course)}<section class="panel destructive-panel"><button class="btn danger" id="delete-course">حذف الدورة نهائيًا</button><p>إذا لم يكن عليها تسجيلات، سيتم حذف الدورة ومواعيدها معًا.</p></section>` : '<div class="empty">اختر دورة أو أنشئ دورة جديدة.</div>'}
       </div>
     </div>
   `;
@@ -643,9 +702,15 @@ async function saveCourse() {
   const course = A.courses.find((item) => item.id === A.courseId);
   if (!course) return;
 
+  const nextVisibility = val('c-visibility');
+  if (nextVisibility === 'open' && !hasPublicRun(course.id)) {
+    alert('قبل فتح الدورة للتسجيل: أضف موعدًا مستقبليًا، أكمل جلساته، واجعل حالة الموعد “التسجيل مفتوح” أو “المقاعد مكتملة”.');
+    return;
+  }
+
   const data = {
     ...course,
-    visibility: val('c-visibility'),
+    visibility: nextVisibility,
     title: { ar: val('c-title-ar'), en: val('c-title-en') },
     shortTitle: { ar: val('c-title-ar'), en: val('c-title-en') },
     logo: val('c-logo'),
@@ -656,7 +721,7 @@ async function saveCourse() {
     outcomes: { ar: lines(val('c-out-ar')), en: lines(val('c-out-en')) },
     modules: { ar: parseModules(val('c-mod-ar')), en: parseModules(val('c-mod-en')) },
     certificate: {
-      enabled: true,
+      enabled: val('c-cert-enabled') === 'true',
       imageUrl: val('c-cert-img'),
       title: { ar: val('c-cert-title-ar'), en: val('c-cert-title-en') },
       note: { ar: val('c-cert-note-ar'), en: val('c-cert-note-en') }
@@ -706,23 +771,67 @@ async function saveRun() {
   const run = A.cohorts.find((item) => item.id === A.cohortId);
   if (!run) return;
 
+  const sessions = readSessions();
+  const requestedStatus = val('h-status');
+  const capacity = Number(val('h-capacity') || 0);
+  const seatsRaw = val('h-seats');
+  const seatsRemaining = seatsRaw === '' ? null : Number(seatsRaw);
+  const offerEnabled = val('h-offer-enabled') === 'true';
+  const regularPrice = Number(val('h-price') || 0);
+  const offerPrice = val('h-offer-price') === '' ? null : Number(val('h-offer-price'));
+
+  if (capacity < 1) {
+    alert('عدد المقاعد يجب أن يكون 1 على الأقل.');
+    return;
+  }
+  if (seatsRemaining !== null && (seatsRemaining < 0 || seatsRemaining > capacity)) {
+    alert('المقاعد المتبقية يجب أن تكون بين 0 وعدد المقاعد الكلي.');
+    return;
+  }
+  if (['open', 'full'].includes(requestedStatus)) {
+    if (!sessions.length) {
+      alert('لا يمكن فتح التسجيل بدون مواعيد جلسات. أضف المواعيد أولًا.');
+      return;
+    }
+    if (sessions.some((session) => !session.day || !session.date || !session.time || !parseScheduleDate(session.date))) {
+      alert('أكمل اليوم والتاريخ والوقت لكل جلسة، وتأكد أن التاريخ بصيغة صحيحة.');
+      return;
+    }
+    const dated = datedSessions({ sessions });
+    if (!dated.length || dated[0].parsedDate < todayStart()) {
+      alert('لا يمكن فتح التسجيل لموعد بدأت أول جلسة فيه أو انتهى. أنشئ موعدًا قادمًا جديدًا.');
+      return;
+    }
+  }
+  if (offerEnabled) {
+    if (offerPrice === null || offerPrice < 0) {
+      alert('أدخل سعر العرض.');
+      return;
+    }
+    if (offerPrice >= regularPrice) {
+      alert('سعر العرض يجب أن يكون أقل من السعر الأساسي.');
+      return;
+    }
+  }
+
+  const finalStatus = requestedStatus === 'open' && seatsRemaining === 0 ? 'full' : requestedStatus;
   const data = {
     ...run,
     courseId: A.courseId,
-    status: val('h-status'),
+    status: finalStatus,
     name: { ar: val('h-name-ar'), en: val('h-name-en') },
-    price: Number(val('h-price') || 0),
+    price: regularPrice,
     currency: val('h-currency') || 'JOD',
-    capacity: Number(val('h-capacity') || 0),
-    seatsRemaining: val('h-seats') === '' ? null : Number(val('h-seats')),
+    capacity,
+    seatsRemaining,
     offer: {
-      enabled: val('h-offer-enabled') === 'true',
-      price: val('h-offer-price') === '' ? null : Number(val('h-offer-price')),
+      enabled: offerEnabled,
+      price: offerPrice,
       title: { ar: val('h-offer-ar'), en: val('h-offer-en') },
       endsAt: val('h-offer-end')
     },
     paymentInstructions: { ar: val('h-pay-ar'), en: val('h-pay-en') },
-    sessions: readSessions()
+    sessions
   };
 
   await setDoc(doc(db, 'cohorts', run.id), data, { merge: true });
@@ -771,7 +880,7 @@ function registrations() {
                   </select>
                 </td>
                 <td><span class="chip ${reg.paymentStatus === 'paid' ? 'teal' : ''}">${esc(reg.paymentStatus || 'waiting-payment')}</span></td>
-                <td><button class="btn ghost" data-paid="${reg.id}">Mark Paid</button></td>
+                <td>${reg.paymentStatus === 'waiting-payment' ? `<button class="btn ghost" data-paid="${reg.id}">Mark Paid</button>` : reg.paymentStatus === 'paid' ? '<span class="chip teal">Paid</span>' : '<span class="chip">—</span>'}</td>
               </tr>
             `).join('') || '<tr><td colspan="6" class="empty">لا توجد نتائج.</td></tr>'}
           </tbody>
@@ -896,16 +1005,29 @@ function bind() {
   document.getElementById('delete-course')?.addEventListener('click', async () => {
     const course = A.courses.find((item) => item.id === A.courseId);
     if (!course) return;
-    if (!confirm(`حذف دورة “${loc(course.title)}” نهائيًا؟ يمكنك استخدام “مخفية” بدل الحذف إذا أردت الاحتفاظ بها.`)) return;
+    const relatedRegistrations = A.regs.filter((reg) => (reg.courseId || reg.course) === A.courseId);
+    if (relatedRegistrations.length) {
+      alert('لا يمكن حذف دورة عليها تسجيلات محفوظة. غيّر حالتها إلى “مخفية” للحفاظ على سجل المتدربين.');
+      return;
+    }
+    if (!confirm(`حذف دورة “${loc(course.title)}” نهائيًا مع جميع مواعيدها؟ يمكنك استخدام “مخفية” بدل الحذف إذا أردت الاحتفاظ بها.`)) return;
+    const relatedRuns = courseRuns(A.courseId);
+    for (const run of relatedRuns) await deleteDoc(doc(db, 'cohorts', run.id));
     await deleteDoc(doc(db, 'courses', A.courseId));
-    await log('course_deleted', { courseId: A.courseId });
+    await log('course_deleted', { courseId: A.courseId, deletedSchedules: relatedRuns.map((run) => run.id) });
     A.courseId = '';
     A.cohortId = '';
     await load();
   });
 
   document.getElementById('delete-run')?.addEventListener('click', async () => {
-    if (!A.cohortId || !confirm('حذف هذا الموعد فقط؟ لن يتم حذف الدورة نفسها.')) return;
+    if (!A.cohortId) return;
+    const relatedRegistrations = A.regs.filter((reg) => reg.cohortId === A.cohortId);
+    if (relatedRegistrations.length) {
+      alert('لا يمكن حذف موعد عليه تسجيلات. غيّر حالته إلى “مغلق” بدل الحذف حتى يبقى سجل المتدربين صحيحًا.');
+      return;
+    }
+    if (!confirm('حذف هذا الموعد فقط؟ لن يتم حذف الدورة نفسها.')) return;
     await deleteDoc(doc(db, 'cohorts', A.cohortId));
     await log('schedule_deleted', { cohortId: A.cohortId, courseId: A.courseId });
     A.cohortId = '';
@@ -941,13 +1063,26 @@ function bind() {
 
   document.querySelectorAll('[data-paid]').forEach((button) => {
     button.onclick = async () => {
-      await updateDoc(doc(db, 'registrations', button.dataset.paid), {
+      const registration = A.regs.find((item) => item.id === button.dataset.paid);
+      if (!registration || registration.paymentStatus === 'paid') return;
+
+      await updateDoc(doc(db, 'registrations', registration.id), {
         paymentStatus: 'paid',
         registrationStatus: 'confirmed',
         paymentVerifiedAt: new Date().toISOString(),
         paymentVerifiedBy: A.user.email
       });
-      await log('payment_marked_paid', { registrationId: button.dataset.paid });
+
+      const run = A.cohorts.find((item) => item.id === registration.cohortId);
+      if (run && run.seatsRemaining !== null && run.seatsRemaining !== '') {
+        const currentSeats = Math.max(0, Number(run.seatsRemaining) || 0);
+        const nextSeats = Math.max(0, currentSeats - 1);
+        const runUpdate = { seatsRemaining: nextSeats };
+        if (nextSeats === 0 && run.status === 'open') runUpdate.status = 'full';
+        await updateDoc(doc(db, 'cohorts', run.id), runUpdate);
+      }
+
+      await log('payment_marked_paid', { registrationId: registration.id, cohortId: registration.cohortId || '' });
       await load();
     };
   });
@@ -1012,6 +1147,16 @@ function generateSchedule() {
 
   const startTime = val('g-start');
   const endTime = val('g-end');
+  const toMinutes = (value) => {
+    const [hour, minute] = String(value || '').split(':').map(Number);
+    return Number.isFinite(hour) && Number.isFinite(minute) ? hour * 60 + minute : null;
+  };
+  const startMinutes = toMinutes(startTime);
+  const endMinutes = toMinutes(endTime);
+  if (startMinutes === null || endMinutes === null || endMinutes <= startMinutes) {
+    alert('تأكد أن وقت النهاية بعد وقت البداية.');
+    return;
+  }
   const formatTime = (value) => {
     const [hour, minute] = value.split(':').map(Number);
     return `${hour % 12 || 12}:${String(minute).padStart(2, '0')} ${hour >= 12 ? 'مساءً' : 'صباحًا'}`;

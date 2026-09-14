@@ -117,7 +117,7 @@ export const DEFAULT_COHORTS = [
   {
     id: `excel-default`,
     courseId: `excel`,
-    name: { ar: `المجموعة القادمة`, en: `Next Cohort` },
+    name: { ar: `الموعد القادم`, en: `Next Schedule` },
     status: `open`,
     price: 100,
     currency: `JOD`,
@@ -144,7 +144,7 @@ export const DEFAULT_COHORTS = [
   {
     id: `powerbi-default`,
     courseId: `powerbi`,
-    name: { ar: `المجموعة القادمة`, en: `Next Cohort` },
+    name: { ar: `الموعد القادم`, en: `Next Schedule` },
     status: `open`,
     price: 100,
     currency: `JOD`,

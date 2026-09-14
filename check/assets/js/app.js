@@ -14,7 +14,7 @@ const T = {
     choose: 'اختر دورتك',
     chooseSub: 'إذا وصلت لهنا، غالبًا أنت عارف شو بدك. اختر المسار ونبدأ مباشرة.',
     open: 'التسجيل مفتوح',
-    info: 'للمعرفة فقط',
+    info: 'قريبًا',
     full: 'المقاعد مكتملة',
     closed: 'التسجيل مغلق',
     upcoming: 'قريبًا',
@@ -64,7 +64,7 @@ const T = {
     waitingText: 'المقاعد الحالية مكتملة. اترك بياناتك وسنتواصل معك عند توفر مقعد.',
     waitingSuccess: 'تمت إضافتك إلى قائمة الانتظار.',
     course: 'الدورة',
-    cohort: 'المجموعة',
+    cohort: 'موعد الدورة',
     status: 'الحالة',
     phone: 'الموبايل',
     jobTitle: 'المسمى الوظيفي',
@@ -81,7 +81,7 @@ const T = {
     choose: 'Choose your course',
     chooseSub: 'You probably already know what you came for. Pick the course and go straight in.',
     open: 'Registration open',
-    info: 'Information only',
+    info: 'Coming soon',
     full: 'Full',
     closed: 'Registration closed',
     upcoming: 'Coming soon',
@@ -112,7 +112,7 @@ const T = {
     successText: 'We’ll contact you shortly to confirm your seat and share the next details.',
     whatsapp: 'Contact us on WhatsApp',
     registerClosed: 'Registration is not open right now',
-    registerClosedText: 'You can explore the course now, and the next registration step will appear here when a cohort opens.',
+    registerClosedText: 'You can explore the course now. Registration will appear here when a new schedule opens.',
     certMissing: 'An accredited certificate is issued after course completion and passing the exam.',
     awarded: 'Awarded after course completion and passing the exam.',
     sessions: 'sessions',
@@ -128,10 +128,10 @@ const T = {
     invalidEmail: 'Please enter a valid email address.',
     invalidPhone: 'Please enter a valid number.',
     waitingList: 'Waiting list',
-    waitingText: 'This cohort is currently full. Leave your details and we’ll contact you when a seat becomes available.',
+    waitingText: 'This schedule is currently full. Leave your details and we’ll contact you when a seat becomes available.',
     waitingSuccess: 'You’re on the waiting list.',
     course: 'Course',
-    cohort: 'Cohort',
+    cohort: 'Schedule',
     status: 'Status',
     phone: 'Mobile',
     jobTitle: 'Job title',
@@ -202,12 +202,54 @@ function statusLabel(status) {
   return txt('upcoming');
 }
 
-function activeCohort(courseId) {
-  return (
-    state.cohorts.find((c) => c.courseId === courseId && ['open', 'full'].includes(c.status)) ||
-    state.cohorts.find((c) => c.courseId === courseId) ||
-    null
+function parseSessionDate(value) {
+  const text = String(value || '').trim();
+  let day, month, year;
+  let match = text.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+  if (match) { day = Number(match[1]); month = Number(match[2]); year = Number(match[3]); }
+  else {
+    match = text.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!match) return null;
+    year = Number(match[1]); month = Number(match[2]); day = Number(match[3]);
+  }
+  const date = new Date(year, month - 1, day, 23, 59, 59, 999);
+  if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) return null;
+  return date;
+}
+
+function todayStart() {
+  const now = new Date();
+  return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+}
+
+function datedSessions(run) {
+  return (run?.sessions || [])
+    .map((session) => ({ ...session, parsedDate: parseSessionDate(session.date) }))
+    .filter((session) => session.parsedDate)
+    .sort((a, b) => a.parsedDate - b.parsedDate);
+}
+
+function effectiveRunStatus(run) {
+  if (!run || !['open', 'full'].includes(run.status)) return run?.status || 'closed';
+  if (Number(run.seatsRemaining) === 0 && run.seatsRemaining !== null && run.seatsRemaining !== '') return 'full';
+  return run.status;
+}
+
+function isPublicRun(run) {
+  const sessions = datedSessions(run);
+  return Boolean(
+    run &&
+    ['open', 'full'].includes(effectiveRunStatus(run)) &&
+    sessions.length &&
+    sessions[0].parsedDate >= todayStart()
   );
+}
+
+function activeCohort(courseId) {
+  const candidates = state.cohorts
+    .filter((run) => run.courseId === courseId && isPublicRun(run))
+    .sort((a, b) => datedSessions(a)[0].parsedDate - datedSessions(b)[0].parsedDate);
+  return candidates[0] || null;
 }
 
 function visibleCourses() {
@@ -217,22 +259,62 @@ function visibleCourses() {
 }
 
 function courseDisplayStatus(course) {
+  if (course.visibility === 'information') return 'information';
+  if (course.visibility === 'closed') return 'closed';
   if (course.visibility !== 'open') return course.visibility;
   const cohort = activeCohort(course.id);
-  return cohort?.status || 'upcoming';
+  return cohort ? effectiveRunStatus(cohort) : 'upcoming';
 }
 
 function isOpen() {
-  return state.course?.visibility === 'open' && state.cohort?.status === 'open';
+  return state.course?.visibility === 'open' && effectiveRunStatus(state.cohort) === 'open' && isPublicRun(state.cohort);
 }
 
 function isFull() {
-  return state.cohort?.status === 'full';
+  return state.course?.visibility === 'open' && effectiveRunStatus(state.cohort) === 'full' && isPublicRun(state.cohort);
+}
+
+function sessionHours(session) {
+  const raw = String(session?.time || '');
+  const parts = raw.split(/\s+-\s+/);
+  if (parts.length !== 2) return null;
+  const endHasPm = /مساء|pm/i.test(parts[1]);
+  const endHasAm = /صباح|am/i.test(parts[1]);
+  const toMinutes = (part, inferPm = false, inferAm = false) => {
+    const match = part.match(/(\d{1,2}):(\d{2})/);
+    if (!match) return null;
+    let hour = Number(match[1]);
+    const minute = Number(match[2]);
+    const pm = /مساء|pm/i.test(part) || (!/صباح|am/i.test(part) && inferPm);
+    const am = /صباح|am/i.test(part) || (!/مساء|pm/i.test(part) && inferAm);
+    if (pm && hour < 12) hour += 12;
+    if (am && hour === 12) hour = 0;
+    return hour * 60 + minute;
+  };
+  const start = toMinutes(parts[0], endHasPm, endHasAm);
+  const end = toMinutes(parts[1]);
+  if (start == null || end == null || end <= start) return null;
+  return (end - start) / 60;
 }
 
 function durationHours() {
-  const count = state.cohort?.sessions?.length || 0;
-  return count * 2;
+  const values = (state.cohort?.sessions || []).map(sessionHours);
+  if (!values.length || values.some((value) => value == null)) return null;
+  return values.reduce((sum, value) => sum + value, 0);
+}
+
+function offerIsActive(cohort) {
+  if (!cohort?.offer?.enabled || !(Number(cohort.offer.price) >= 0)) return false;
+  if (!cohort.offer.endsAt) return true;
+  const end = parseSessionDate(cohort.offer.endsAt) || new Date(`${cohort.offer.endsAt}T23:59:59`);
+  return !Number.isNaN(end?.getTime?.()) && end >= todayStart();
+}
+
+function publicPaymentMessage(cohort) {
+  const configured = localized(cohort?.paymentInstructions).trim();
+  if (!configured) return txt('paymentText');
+  if (/يدوي|manual|admin|الإدارة\s*(تتحقق|تؤكد)/i.test(configured)) return txt('paymentText');
+  return configured;
 }
 
 function saveDraft() {
@@ -251,20 +333,16 @@ async function loadRemoteData() {
     const remoteCohorts = cohortSnap.docs.map((item) => ({ id: item.id, ...item.data() }));
     const defaultsSeeded = settingsSnap.exists() && Number(settingsSnap.data()?.defaultsSeedVersion || 0) >= 2;
 
-    if (remoteCourses.length) {
-      if (defaultsSeeded) {
-        state.courses = remoteCourses;
-      } else {
+    if (defaultsSeeded) {
+      state.courses = remoteCourses;
+      state.cohorts = remoteCohorts;
+    } else {
+      if (remoteCourses.length) {
         const byId = new Map(DEFAULT_COURSES.map((course) => [course.id, course]));
         remoteCourses.forEach((course) => byId.set(course.id, course));
         state.courses = [...byId.values()];
       }
-    }
-
-    if (remoteCohorts.length) {
-      if (defaultsSeeded) {
-        state.cohorts = remoteCohorts;
-      } else {
+      if (remoteCohorts.length) {
         const byId = new Map(DEFAULT_COHORTS.map((cohort) => [cohort.id, cohort]));
         remoteCohorts.forEach((cohort) => byId.set(cohort.id, cohort));
         state.cohorts = [...byId.values()];
@@ -471,13 +549,21 @@ function coursesView() {
 }
 
 function buildSteps() {
-  const core = ['overview', 'outcomes', 'curriculum', 'schedule', 'certificate'];
-  if (state.course?.visibility === 'information' || state.course?.visibility === 'closed' || !state.cohort || !['open', 'full'].includes(state.cohort.status)) {
-    return [...core, 'availability'];
-  }
+  const course = state.course || {};
+  const contentSteps = ['overview'];
+  const outcomes = course.outcomes?.[state.lang] || course.outcomes?.ar || [];
+  const modules = course.modules?.[state.lang] || course.modules?.ar || [];
+  if (outcomes.length) contentSteps.push('outcomes');
+  if (modules.length) contentSteps.push('curriculum');
+
+  const registrationAvailable = course.visibility === 'open' && state.cohort && isPublicRun(state.cohort);
+  if (registrationAvailable) contentSteps.push('schedule');
+  if (course.certificate?.enabled !== false) contentSteps.push('certificate');
+  if (!registrationAvailable) return [...contentSteps, 'availability'];
+
   const formSteps = ['name', 'mobile', 'title', 'email', 'review'];
-  if (isFull()) return [...core, ...formSteps, 'waiting'];
-  return [...core, ...formSteps, 'price', 'payment', 'confirmation'];
+  if (isFull()) return [...contentSteps, ...formSteps, 'waiting'];
+  return [...contentSteps, ...formSteps, 'price', 'payment', 'confirmation'];
 }
 
 function stageContent(key) {
@@ -541,7 +627,7 @@ function stageContent(key) {
     return `
       <h2>${txt('schedule')}</h2>
       ${cohort ? `
-        <p class="lead">${localized(cohort.name)} · ${cohort.sessions?.length || 0} ${txt('sessions')} · ${durationHours()} ${txt('hours')}</p>
+        <p class="lead">${localized(cohort.name)} · ${cohort.sessions?.length || 0} ${txt('sessions')}${durationHours() != null ? ` · ${durationHours()} ${txt('hours')}` : ''}</p>
         <div class="sessions">
           ${(cohort.sessions || []).map((session, index) => `
             <div class="session">
@@ -579,9 +665,11 @@ function stageContent(key) {
   }
 
   if (key === 'availability') {
+    const comingSoon = course.visibility === 'information' || (course.visibility === 'open' && !state.cohort);
+    const title = comingSoon ? txt('upcoming') : txt('registerClosed');
     return `
       <div class="success">
-        <h2>${txt('registerClosed')}</h2>
+        <h2>${title}</h2>
         <p>${txt('registerClosedText')}</p>
         <a class="whatsapp" href="${brand.whatsapp}" target="_blank" rel="noreferrer">${txt('whatsapp')}</a>
       </div>
@@ -638,7 +726,7 @@ function stageContent(key) {
   }
 
   if (key === 'price') {
-    const offerOn = Boolean(cohort?.offer?.enabled && Number(cohort.offer.price) > 0);
+    const offerOn = offerIsActive(cohort);
     const amount = offerOn ? cohort.offer.price : cohort?.price;
     return `
       <h2>${txt('price')}</h2>
@@ -662,7 +750,7 @@ function stageContent(key) {
   }
 
   if (key === 'payment') {
-    const paymentMessage = localized(cohort?.paymentInstructions) || txt('paymentText');
+    const paymentMessage = publicPaymentMessage(cohort);
     return `
       <h2>${txt('payment')}</h2>
       <p class="lead">${paymentMessage}</p>
@@ -932,6 +1020,22 @@ async function submitRegistration(status) {
   render();
 
   try {
+    if (state.cohort?.id) {
+      const [latestCourseSnap, latestRunSnap] = await Promise.all([
+        getDoc(doc(db, 'courses', state.course.id)),
+        getDoc(doc(db, 'cohorts', state.cohort.id))
+      ]);
+      if (!latestCourseSnap.exists() || latestCourseSnap.data()?.visibility !== 'open') throw new Error('registration-closed');
+      if (!latestRunSnap.exists()) throw new Error('cohort-unavailable');
+      const latestRun = { id: latestRunSnap.id, ...latestRunSnap.data() };
+      const latestStatus = effectiveRunStatus(latestRun);
+      const expectedStatus = status === 'waiting-list' ? 'full' : 'open';
+      if (latestStatus !== expectedStatus || !isPublicRun(latestRun)) {
+        state.cohort = latestRun;
+        throw new Error('registration-closed');
+      }
+    }
+
     await addDoc(collection(db, 'registrations'), {
       name: state.form.name || '',
       phone: `${state.country.code}${state.form.mobile || ''}`,
@@ -959,9 +1063,15 @@ async function submitRegistration(status) {
     render();
   } catch (error) {
     state.submitting = false;
-    state.error = state.lang === 'ar'
-      ? 'تعذر إرسال الطلب الآن. تحقق من الاتصال وحاول مرة أخرى.'
-      : 'Could not submit right now. Check your connection and try again.';
+    if (error?.message === 'registration-closed' || error?.message === 'cohort-unavailable') {
+      state.error = state.lang === 'ar'
+        ? 'التسجيل على هذا الموعد لم يعد متاحًا. ارجع للبداية لاختيار الحالة المحدثة.'
+        : 'Registration for this schedule is no longer available. Return to the start to see the updated status.';
+    } else {
+      state.error = state.lang === 'ar'
+        ? 'تعذر إرسال الطلب الآن. تحقق من الاتصال وحاول مرة أخرى.'
+        : 'Could not submit right now. Check your connection and try again.';
+    }
     render();
   }
 }
