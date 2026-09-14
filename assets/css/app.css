@@ -97,15 +97,16 @@ img { display: block; max-width: 100%; }
   padding: 0 clamp(16px, 3vw, 34px) clamp(16px, 2vw, 22px);
 }
 .journey-card {
-  width: min(1220px, 100%); height: calc(100dvh - 92px);
-  background: rgba(255,255,255,.88); border: 1px solid rgba(170,169,164,.38);
-  border-radius: 34px; box-shadow: var(--shadow);
+  width: min(1240px, 100%); height: calc(100dvh - 92px);
+  background: linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.90) 100%); border: 1px solid rgba(170,169,164,.38);
+  border-radius: 34px; box-shadow: 0 24px 70px rgba(30, 38, 38, 0.07), inset 0 1px 0 rgba(255,255,255,.9);
   display: grid; grid-template-rows: auto auto 1fr auto; overflow: hidden;
 }
 .journey-head {
   display: flex; align-items: center; justify-content: space-between;
   padding: 22px 28px 10px; gap: 16px;
 }
+.journey-head .eyebrow { font-size: 12px; letter-spacing: .12em; }
 .progress-copy { font-size: 12px; color: var(--muted); font-family: var(--font-en); }
 .progress-line { height: 1px; margin: 0 28px; background: var(--line); }
 .progress-line i { display: block; height: 100%; background: var(--teal); }
@@ -300,6 +301,8 @@ img { display: block; max-width: 100%; }
 .navrow {
   display: flex; align-items: center; gap: 10px;
   padding: 14px 28px 26px;
+  border-top: 1px solid rgba(221,220,212,.75);
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.82) 35%, rgba(255,255,255,.94) 100%);
 }
 .navrow .primary { margin-inline-start: auto; }
 @media (max-width: 980px) {
@@ -564,4 +567,180 @@ body { position: fixed; inset: 0; }
     --fit-top: 10px;
     width: calc(100% - 28px) !important;
   }
+}
+
+
+/* 2026 v6 refinement: split learning flow, premium certificate stage, stronger mobile polish */
+.stage[data-step="outcomes"] .stage-inner,
+.stage[data-step="curriculum"] .stage-inner,
+.stage[data-step="certificate"] .stage-inner,
+.stage[data-step="schedule"] .stage-inner,
+.stage[data-step="review"] .stage-inner { max-width: 1120px; }
+
+.split-layout {
+  display: grid;
+  grid-template-columns: minmax(0,1.15fr) minmax(280px,.85fr);
+  gap: 24px;
+  margin-top: 26px;
+  align-items: start;
+}
+.curriculum-layout { grid-template-columns: minmax(0,1.22fr) minmax(260px,.78fr); }
+.spotlight-panel {
+  border: 1px solid rgba(9,153,153,.15);
+  background: linear-gradient(180deg, #f6fbfb 0%, #f0f8f7 100%);
+  border-radius: 22px;
+  padding: 22px;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  box-shadow: 0 10px 30px rgba(9,153,153,.06);
+}
+.spotlight-panel-soft {
+  background: linear-gradient(180deg, #fdfcf9 0%, #f7f5ef 100%);
+  border-color: rgba(24,32,36,.08);
+  box-shadow: none;
+}
+.panel-kicker {
+  color: var(--teal);
+  font: 800 11px/1 var(--font-en);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.spotlight-panel b {
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.35;
+}
+.spotlight-panel p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.mini-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.mini-points span,
+.recognition-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.88);
+  border: 1px solid rgba(9,153,153,.16);
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.curriculum-list .simple-row,
+.outcome-list .simple-row {
+  padding: 18px 20px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfaf7 100%);
+  box-shadow: 0 8px 22px rgba(24,32,36,.04);
+}
+.curriculum-list .simple-row b { font-size: 18px; line-height: 1.4; }
+
+.schedule-summary {
+  border: 1px solid rgba(9,153,153,.12);
+  background: linear-gradient(180deg, #fbfffe 0%, #f4fbfa 100%);
+  border-radius: 24px;
+  padding: 20px;
+}
+.schedule-copy .lead { font-size: clamp(16px, 1.4vw, 20px); }
+.sessions { margin-top: 16px; }
+.session {
+  background: linear-gradient(180deg, #ffffff 0%, #fcfbf8 100%);
+  box-shadow: 0 8px 18px rgba(24,32,36,.04);
+}
+
+.certificate-premium { margin-top: 26px; }
+.certificate-copy {
+  display: grid;
+  gap: 16px;
+}
+.certificate-meta,
+.certificate-box,
+.certificate-note {
+  border: 1px solid rgba(24,32,36,.08);
+  background: linear-gradient(180deg, #fff 0%, #fbfaf7 100%);
+  border-radius: 22px;
+  padding: 18px 20px;
+}
+.certificate-meta b {
+  display: block;
+  margin-top: 8px;
+  font-size: clamp(26px, 2.5vw, 38px);
+  line-height: 1.2;
+}
+.certificate-meta p,
+.certificate-note p { margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.recognition-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.certificate-note b { display: block; font-size: 18px; }
+.certificate-visual {
+  min-height: 340px;
+  background: linear-gradient(180deg, #fff 0%, #f8f4ea 100%);
+}
+.certificate-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+}
+
+.course-card {
+  position: relative;
+  overflow: hidden;
+}
+.course-card::after {
+  content: '';
+  position: absolute;
+  inset-inline: 24px;
+  bottom: 0;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(9,153,153,.08) 0%, rgba(9,153,153,.42) 100%);
+}
+.hero-media img { object-position: center; }
+
+@media (max-width: 980px) {
+  .split-layout,
+  .curriculum-layout,
+  .certificate { grid-template-columns: 1fr; }
+  .certificate-visual { order: -1; min-height: 280px; }
+}
+
+@media (max-width: 800px) {
+  .journey-head { padding-inline: 16px; }
+  .stage[data-step="certificate"] .stage-inner,
+  .stage[data-step="outcomes"] .stage-inner,
+  .stage[data-step="curriculum"] .stage-inner,
+  .stage[data-step="schedule"] .stage-inner,
+  .stage[data-step="review"] .stage-inner { max-width: 100%; }
+  .split-layout { gap: 14px; margin-top: 18px; }
+  .spotlight-panel,
+  .certificate-meta,
+  .certificate-box,
+  .certificate-note,
+  .schedule-summary { border-radius: 18px; padding: 16px; }
+  .spotlight-panel b { font-size: 22px; }
+  .mini-points,
+  .recognition-list { gap: 8px; }
+  .mini-points span,
+  .recognition-chip { min-height: 32px; font-size: 11px; padding-inline: 10px; }
+  .curriculum-list .simple-row,
+  .outcome-list .simple-row { padding: 14px 16px; border-radius: 18px; }
+  .sessions { grid-template-columns: 1fr 1fr; }
+  .certificate-visual { min-height: 220px; }
+  .navrow { padding-inline: 16px; }
+}
+
+@media (max-width: 520px) {
+  .journey-card { border-radius: 0; }
+  .course-card-title { font-size: 28px; }
+  .spotlight-panel b,
+  .certificate-meta b { font-size: 20px; }
+  .sessions { grid-template-columns: 1fr; }
 }

@@ -28,6 +28,16 @@ const T = {
     curriculum: 'المنهاج',
     schedule: 'المواعيد',
     certificate: 'الشهادة',
+    certificateSub: 'شهادة حضور دولية تعكس المشاركة وإتمام البرنامج التدريبي.',
+    outcomesSub: 'هذه هي القيمة العملية التي ستخرج بها بعد التطبيق داخل الدورة.',
+    curriculumStage: 'كيف تسير الدورة؟',
+    curriculumStageSub: 'محاور واضحة ومباشرة، مرتبة من الأساس إلى التطبيق العملي.',
+    certificateIssuer: 'تصدر الشهادة من',
+    certificateRecognitions: 'أبرز الأختام والاعتمادات الظاهرة على الشهادة',
+    certificateBenefit: 'قيمة الشهادة',
+    certificateBenefitText: 'إضافة قوية لملفك المهني، وتوثيق أن التدريب تم ضمن إطار دولي موضح على الشهادة نفسها.',
+    trainingStyleTitle: 'أسلوب التدريب',
+    trainingStyleText: 'شرح واضح، تطبيق مباشر، وربط دائم بين المهارة وبين استخدامها الحقيقي في العمل.',
     name: 'شو اسمك؟',
     mobile: 'رقم الموبايل',
     title: 'ما هو مسماك الوظيفي؟',
@@ -80,7 +90,7 @@ const T = {
     trainerName: 'Basel Ghanem',
     trainerRole: 'Excel • Power BI • Data Analytics',
     learningStyle: 'تطبيق عملي على سيناريوهات عمل',
-    certificateSimple: 'شهادة إتمام من X Academy',
+    certificateSimple: 'شهادة حضور دولية من LPCIS باعتمادات متعددة',
     privacy: 'تُستخدم بياناتك فقط للتواصل بخصوص التسجيل وتأكيد المقعد.',
     scheduleSub: 'مواعيد الجلسات القادمة',
     cardHint: 'اعرف إن كانت الدورة مناسبة لك',
@@ -105,6 +115,16 @@ const T = {
     curriculum: 'Curriculum',
     schedule: 'Schedule',
     certificate: 'Certificate',
+    certificateSub: 'An international attendance certificate that reflects participation and program completion.',
+    outcomesSub: 'These are the practical gains you should expect after applying the course content.',
+    curriculumStage: 'How does the course flow?',
+    curriculumStageSub: 'Clear learning blocks arranged from foundation to practical application.',
+    certificateIssuer: 'Issued by',
+    certificateRecognitions: 'Key seals and recognitions shown on the certificate',
+    certificateBenefit: 'Certificate value',
+    certificateBenefitText: 'A strong addition to your professional profile, documenting that the training was delivered within an international framework shown on the certificate itself.',
+    trainingStyleTitle: 'Training style',
+    trainingStyleText: 'Clear explanation, direct hands-on practice, and a constant link between the skill and its real use at work.',
     name: 'What’s your name?',
     mobile: 'Your mobile number',
     title: 'What’s your job title?',
@@ -157,7 +177,7 @@ const T = {
     trainerName: 'Basel Ghanem',
     trainerRole: 'Excel • Power BI • Data Analytics',
     learningStyle: 'Hands-on learning with realistic work scenarios',
-    certificateSimple: 'X Academy completion certificate',
+    certificateSimple: 'International LPCIS certificate with multiple recognitions',
     privacy: 'Your details are used only to contact you about registration and seat confirmation.',
     scheduleSub: 'Upcoming session dates',
     cardHint: 'See if this course fits your work',
@@ -381,6 +401,36 @@ function publicPaymentMessage(cohort) {
   if (!configured) return txt('paymentText');
   if (/يدوي|manual|admin|الإدارة\s*(تتحقق|تؤكد)/i.test(configured)) return txt('paymentText');
   return configured;
+}
+
+function certificateInfo(course = {}) {
+  const raw = course.certificate || {};
+  const title = localized(raw.title) && !/X Academy/i.test(localized(raw.title)) ? localized(raw.title) : 'International Attendance Certificate';
+  const note = localized(raw.note) || txt('certificateSub');
+  const issuer = localized(raw.issuer) || (state.lang === 'ar' ? 'تصدر من Liverpool College For International Studies (LPCIS).' : 'Issued by Liverpool College For International Studies (LPCIS).');
+  const imageUrl = raw.imageUrl || './assets/img/lpcis-certificate.png';
+  const recognitions = raw.recognitions?.[state.lang] || raw.recognitions?.ar || [
+    state.lang === 'ar' ? 'Liverpool College For International Studies (LPCIS)' : 'Liverpool College For International Studies (LPCIS)',
+    'CPD Approved Provider',
+    'QCET-UK',
+    'HCB UK',
+    'ISO',
+    state.lang === 'ar' ? 'وأختام اعتماد ومراجع دولية إضافية ظاهرة على الشهادة' : 'Additional international seals and references shown on the certificate'
+  ];
+  return {
+    enabled: raw.enabled !== false,
+    title,
+    note,
+    issuer,
+    imageUrl,
+    recognitions
+  };
+}
+
+function trainingPoints() {
+  return state.lang === 'ar'
+    ? ['تطبيق عملي داخل الجلسة', 'أمثلة مرتبطة بالعمل', 'انتقال واضح من الأساس إلى التطبيق']
+    : ['Hands-on practice inside the session', 'Examples tied to real work', 'A clear progression from foundation to application'];
 }
 
 function saveDraft() {
@@ -623,12 +673,18 @@ function buildSteps() {
   const steps = ['overview'];
   const outcomes = course.outcomes?.[state.lang] || course.outcomes?.ar || [];
   const modules = course.modules?.[state.lang] || course.modules?.ar || [];
-  if (outcomes.length || modules.length) steps.push('program');
+  const cert = certificateInfo(course);
+
+  if (outcomes.length) steps.push('outcomes');
+  if (modules.length) steps.push('curriculum');
 
   const registrationAvailable = course.visibility === 'open' && state.cohort && isPublicRun(state.cohort);
+  if (registrationAvailable) steps.push('schedule');
+  if (cert.enabled) steps.push('certificate');
+
   if (!registrationAvailable) return [...steps, 'availability'];
 
-  steps.push('schedule', 'register');
+  steps.push('register');
   if (isFull()) return [...steps, 'waiting'];
   return [...steps, 'review', 'confirmation'];
 }
@@ -678,25 +734,46 @@ function stageContent(key) {
     `;
   }
 
-  if (key === 'program') {
+  if (key === 'outcomes') {
     const outcomes = course.outcomes?.[state.lang] || course.outcomes?.ar || [];
-    const modules = course.modules?.[state.lang] || course.modules?.ar || [];
     return `
-      <h2>${txt('program')}</h2>
-      <p class="lead">${txt('curriculumSub')}</p>
-      <div class="program-grid">
+      <h2>${txt('outcomes')}</h2>
+      <p class="lead">${txt('outcomesSub')}</p>
+      <div class="split-layout">
         <div class="program-block">
-          <span class="section-kicker">${txt('outcomes')}</span>
           <div class="simple-list outcome-list">
             ${outcomes.map((item, index) => `<div class="simple-row"><b>${String(index + 1).padStart(2, '0')}</b><p>${item}</p></div>`).join('')}
           </div>
         </div>
+        <aside class="spotlight-panel">
+          <span class="panel-kicker">${txt('trainingStyleTitle')}</span>
+          <b>${txt('learningStyle')}</b>
+          <p>${txt('trainingStyleText')}</p>
+          <div class="mini-points">
+            ${trainingPoints().map((item) => `<span>${item}</span>`).join('')}
+          </div>
+        </aside>
+      </div>
+    `;
+  }
+
+  if (key === 'curriculum') {
+    const modules = course.modules?.[state.lang] || course.modules?.ar || [];
+    return `
+      <h2>${txt('curriculumStage')}</h2>
+      <p class="lead">${txt('curriculumStageSub')}</p>
+      <div class="split-layout curriculum-layout">
         <div class="program-block">
           <span class="section-kicker">${txt('curriculum')}</span>
-          <div class="simple-list">
+          <div class="simple-list curriculum-list">
             ${modules.map((module) => `<div class="simple-row"><b>${module.n} · ${module.title}</b><p>${module.detail}</p></div>`).join('')}
           </div>
         </div>
+        <aside class="spotlight-panel spotlight-panel-soft">
+          <span class="panel-kicker">${localized(course.shortTitle)}</span>
+          <b>${localized(course.intro)}</b>
+          <p>${txt('curriculumSub')}</p>
+        </aside>
       </div>
     `;
   }
@@ -721,6 +798,36 @@ function stageContent(key) {
           `).join('')}
         </div>
       ` : `<p class="lead">${txt('registerClosedText')}</p>`}
+    `;
+  }
+
+  if (key === 'certificate') {
+    const cert = certificateInfo(course);
+    return `
+      <h2>${txt('certificate')}</h2>
+      <p class="lead">${cert.note}</p>
+      <div class="certificate certificate-premium">
+        <div class="certificate-copy">
+          <div class="certificate-meta">
+            <span class="section-kicker">${txt('certificateIssuer')}</span>
+            <b>${cert.title}</b>
+            <p>${cert.issuer}</p>
+          </div>
+          <div class="certificate-box">
+            <span class="panel-kicker">${txt('certificateRecognitions')}</span>
+            <div class="recognition-list">
+              ${cert.recognitions.map((item) => `<span class="recognition-chip">${item}</span>`).join('')}
+            </div>
+          </div>
+          <div class="certificate-note">
+            <b>${txt('certificateBenefit')}</b>
+            <p>${txt('certificateBenefitText')}</p>
+          </div>
+        </div>
+        <div class="certificate-visual">
+          <img src="${cert.imageUrl}" alt="${cert.title}">
+        </div>
+      </div>
     `;
   }
 

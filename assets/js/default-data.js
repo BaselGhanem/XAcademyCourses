@@ -50,9 +50,28 @@ export const DEFAULT_COURSES = [
     },
     certificate: {
       enabled: true,
-      imageUrl: ``,
-      title: { ar: `شهادة إتمام من X Academy`, en: `X Academy completion certificate` },
-      note: { ar: `تُمنح بعد إتمام متطلبات الدورة.`, en: `Awarded after meeting the course requirements.` }
+      imageUrl: `./assets/img/lpcis-certificate.png`,
+      title: { ar: `International Attendance Certificate`, en: `International Attendance Certificate` },
+      note: { ar: `شهادة حضور دولية مرفقة بأختام واعتمادات متعددة كما هو ظاهر في الشهادة.`, en: `An international attendance certificate supported by multiple seals and recognitions, as displayed on the certificate.` },
+      issuer: { ar: `تصدر من Liverpool College For International Studies (LPCIS).`, en: `Issued by Liverpool College For International Studies (LPCIS).` },
+      recognitions: {
+        ar: [
+          `Liverpool College For International Studies (LPCIS)`,
+          `CPD Approved Provider`,
+          `QCET-UK`,
+          `HCB UK`,
+          `ISO`,
+          `وأختام اعتماد ومراجع دولية إضافية ظاهرة على الشهادة`
+        ],
+        en: [
+          `Liverpool College For International Studies (LPCIS)`,
+          `CPD Approved Provider`,
+          `QCET-UK`,
+          `HCB UK`,
+          `ISO`,
+          `Additional international seals and references shown on the certificate`
+        ]
+      }
     }
   },
   {
@@ -106,9 +125,28 @@ export const DEFAULT_COURSES = [
     },
     certificate: {
       enabled: true,
-      imageUrl: ``,
-      title: { ar: `شهادة إتمام من X Academy`, en: `X Academy completion certificate` },
-      note: { ar: `تُمنح بعد إتمام متطلبات الدورة.`, en: `Awarded after meeting the course requirements.` }
+      imageUrl: `./assets/img/lpcis-certificate.png`,
+      title: { ar: `International Attendance Certificate`, en: `International Attendance Certificate` },
+      note: { ar: `شهادة حضور دولية مرفقة بأختام واعتمادات متعددة كما هو ظاهر في الشهادة.`, en: `An international attendance certificate supported by multiple seals and recognitions, as displayed on the certificate.` },
+      issuer: { ar: `تصدر من Liverpool College For International Studies (LPCIS).`, en: `Issued by Liverpool College For International Studies (LPCIS).` },
+      recognitions: {
+        ar: [
+          `Liverpool College For International Studies (LPCIS)`,
+          `CPD Approved Provider`,
+          `QCET-UK`,
+          `HCB UK`,
+          `ISO`,
+          `وأختام اعتماد ومراجع دولية إضافية ظاهرة على الشهادة`
+        ],
+        en: [
+          `Liverpool College For International Studies (LPCIS)`,
+          `CPD Approved Provider`,
+          `QCET-UK`,
+          `HCB UK`,
+          `ISO`,
+          `Additional international seals and references shown on the certificate`
+        ]
+      }
     }
   }
 ];
