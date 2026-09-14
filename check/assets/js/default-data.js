@@ -5,6 +5,7 @@ export const DEFAULT_COURSES = [
     visibility: `open`,
     title: { ar: `Excel الاحترافي`, en: `Advanced Excel` },
     shortTitle: { ar: `Excel`, en: `Excel` },
+    logo: `./assets/img/excel-mark.svg`,
     promise: {
       ar: `حوّل الجداول إلى قرارات، وأتمت المهام المتكررة بثقة.`,
       en: `Turn spreadsheets into decisions and automate repetitive work with confidence.`
@@ -14,8 +15,8 @@ export const DEFAULT_COURSES = [
       en: `A practical path from structured data and formulas to analysis and a refreshable dashboard.`
     },
     fit: {
-      ar: `مناسبة إذا كان شغلك اليومي داخل Excel وتريد تنظيم البيانات، تقليل العمل اليدوي، والتحليل بشكل أسرع.`,
-      en: `Best if your daily work lives in Excel and you want cleaner data, less manual work, and faster analysis.`
+      ar: `إذا كان شغلك اليومي داخل Excel وتريد تنظيم البيانات، تقليل العمل اليدوي، والتحليل بشكل أسرع.`,
+      en: `If your daily work lives in Excel and you want cleaner data, less manual work, and faster analysis.`
     },
     level: {
       ar: `يبدأ بشكل مناسب للمبتدئ ويتدرج إلى تطبيق مهني.`,
@@ -36,7 +37,7 @@ export const DEFAULT_COURSES = [
     modules: {
       ar: [
         { n: `01`, title: `أساس متين`, detail: `تنظيف البيانات والجداول الذكية` },
-        { n: `02`, title: `المعادلات التي تعمل`, detail: `IF وXLOOKUP والمنطق المتقدم` },
+        { n: `02`, title: `المعادلات التي تعمل`, detail: `IF و XLOOKUP والمنطق المتقدم` },
         { n: `03`, title: `تحليل سريع`, detail: `Pivot Tables ومؤشرات الأداء` },
         { n: `04`, title: `لوحة قيادة`, detail: `Dashboard تنفيذي قابل للتحديث` }
       ],
@@ -50,8 +51,8 @@ export const DEFAULT_COURSES = [
     certificate: {
       enabled: true,
       imageUrl: ``,
-      title: { ar: `شهادة إتمام + شهادة مهارات Excel`, en: `Completion Certificate + Excel Skills Certificate` },
-      note: { ar: `تُمنح بعد إتمام الدورة واجتياز الامتحان.`, en: `Awarded after completing the course and passing the exam.` }
+      title: { ar: `شهادة معتمدة بعد اجتياز الدورة`, en: `Accredited certificate after course completion` },
+      note: { ar: `تُمنح بعد إتمام الدورة واجتياز الامتحان.`, en: `Awarded after course completion and passing the exam.` }
     }
   },
   {
@@ -60,8 +61,9 @@ export const DEFAULT_COURSES = [
     visibility: `open`,
     title: { ar: `Power BI Specialist`, en: `Power BI Specialist` },
     shortTitle: { ar: `Power BI`, en: `Power BI` },
+    logo: `./assets/img/powerbi-mark.svg`,
     promise: {
-      ar: `ابنِ نموذج بيانات واضحاً وتقارير تفاعلية تقود القرار.`,
+      ar: `ابنِ نموذج بيانات واضحًا وتقارير تفاعلية تقود القرار.`,
       en: `Build a clear data model and interactive reports that guide decisions.`
     },
     intro: {
@@ -69,8 +71,8 @@ export const DEFAULT_COURSES = [
       en: `A practical path from raw data to a connected model, measures, and a shareable interactive report.`
     },
     fit: {
-      ar: `مناسبة إذا كان هدفك ربط مصادر متعددة وبناء Dashboards تفاعلية وتقارير قابلة للمشاركة.`,
-      en: `Best if you want to connect multiple sources and build interactive, shareable dashboards.`
+      ar: `إذا كان هدفك ربط مصادر متعددة وبناء Dashboards تفاعلية وتقارير قابلة للمشاركة.`,
+      en: `If you want to connect multiple sources and build interactive, shareable dashboards.`
     },
     level: {
       ar: `مناسب لمن يريد دخول Power BI من أساس واضح ثم التدرج إلى التطبيق المهني.`,
@@ -105,20 +107,26 @@ export const DEFAULT_COURSES = [
     certificate: {
       enabled: true,
       imageUrl: ``,
-      title: { ar: `شهادة إتمام + شهادة مهارات Power BI`, en: `Completion Certificate + Power BI Skills Certificate` },
-      note: { ar: `تُمنح بعد إتمام الدورة واجتياز الامتحان.`, en: `Awarded after completing the course and passing the exam.` }
+      title: { ar: `شهادة معتمدة بعد اجتياز الدورة`, en: `Accredited certificate after course completion` },
+      note: { ar: `تُمنح بعد إتمام الدورة واجتياز الامتحان.`, en: `Awarded after course completion and passing the exam.` }
     }
   }
 ];
 
 export const DEFAULT_COHORTS = [
   {
-    id: `excel-default`, courseId: `excel`, name: { ar: `المجموعة القادمة`, en: `Next Cohort` }, status: `open`,
-    price: 100, currency: `JOD`, capacity: 20, seatsRemaining: null,
+    id: `excel-default`,
+    courseId: `excel`,
+    name: { ar: `المجموعة القادمة`, en: `Next Cohort` },
+    status: `open`,
+    price: 100,
+    currency: `JOD`,
+    capacity: 20,
+    seatsRemaining: null,
     offer: { enabled: false, title: { ar: ``, en: `` }, price: null, endsAt: `` },
     paymentInstructions: {
-      ar: `بعد إرسال طلب التسجيل سنتواصل معك عبر واتساب لتأكيد توفر المقعد وإتمام الدفع. تأكيد الدفع يتم يدويًا من الإدارة.`,
-      en: `After you submit your registration, we will contact you on WhatsApp to confirm seat availability and complete payment. Payment is verified manually by the admin.`
+      ar: `بعد إرسال طلب التسجيل سنتواصل معك عبر واتساب لتأكيد توفر المقعد واستكمال الدفع.`,
+      en: `After you submit your registration, we will contact you on WhatsApp to confirm seat availability and complete payment.`
     },
     sessions: [
       { day: `الأحد`, date: `30-08-2026`, time: `7:00 - 9:00 مساءً` },
@@ -134,12 +142,18 @@ export const DEFAULT_COHORTS = [
     ]
   },
   {
-    id: `powerbi-default`, courseId: `powerbi`, name: { ar: `المجموعة القادمة`, en: `Next Cohort` }, status: `open`,
-    price: 100, currency: `JOD`, capacity: 20, seatsRemaining: null,
+    id: `powerbi-default`,
+    courseId: `powerbi`,
+    name: { ar: `المجموعة القادمة`, en: `Next Cohort` },
+    status: `open`,
+    price: 100,
+    currency: `JOD`,
+    capacity: 20,
+    seatsRemaining: null,
     offer: { enabled: false, title: { ar: ``, en: `` }, price: null, endsAt: `` },
     paymentInstructions: {
-      ar: `بعد إرسال طلب التسجيل سنتواصل معك عبر واتساب لتأكيد توفر المقعد وإتمام الدفع. تأكيد الدفع يتم يدويًا من الإدارة.`,
-      en: `After you submit your registration, we will contact you on WhatsApp to confirm seat availability and complete payment. Payment is verified manually by the admin.`
+      ar: `بعد إرسال طلب التسجيل سنتواصل معك عبر واتساب لتأكيد توفر المقعد واستكمال الدفع.`,
+      en: `After you submit your registration, we will contact you on WhatsApp to confirm seat availability and complete payment.`
     },
     sessions: [
       { day: `الثلاثاء`, date: `16-06-2026`, time: `7:00 - 9:00 مساءً` },
@@ -157,12 +171,32 @@ export const DEFAULT_COHORTS = [
 ];
 
 export const ARAB_COUNTRIES = [
-  [`🇩🇿`,`Algeria`,`الجزائر`,`+213`],[`🇧🇭`,`Bahrain`,`البحرين`,`+973`],[`🇰🇲`,`Comoros`,`جزر القمر`,`+269`],
-  [`🇩🇯`,`Djibouti`,`جيبوتي`,`+253`],[`🇪🇬`,`Egypt`,`مصر`,`+20`],[`🇮🇶`,`Iraq`,`العراق`,`+964`],
-  [`🇯🇴`,`Jordan`,`الأردن`,`+962`],[`🇰🇼`,`Kuwait`,`الكويت`,`+965`],[`🇱🇧`,`Lebanon`,`لبنان`,`+961`],
-  [`🇱🇾`,`Libya`,`ليبيا`,`+218`],[`🇲🇷`,`Mauritania`,`موريتانيا`,`+222`],[`🇲🇦`,`Morocco`,`المغرب`,`+212`],
-  [`🇴🇲`,`Oman`,`عُمان`,`+968`],[`🇵🇸`,`Palestine`,`فلسطين`,`+970`],[`🇶🇦`,`Qatar`,`قطر`,`+974`],
-  [`🇸🇦`,`Saudi Arabia`,`السعودية`,`+966`],[`🇸🇴`,`Somalia`,`الصومال`,`+252`],[`🇸🇩`,`Sudan`,`السودان`,`+249`],
-  [`🇸🇾`,`Syria`,`سوريا`,`+963`],[`🇹🇳`,`Tunisia`,`تونس`,`+216`],[`🇦🇪`,`United Arab Emirates`,`الإمارات`,`+971`],
-  [`🇾🇪`,`Yemen`,`اليمن`,`+967`]
-].map(([flag,en,ar,code]) => ({ flag, en, ar, code }));
+  [`dz`,`Algeria`,`الجزائر`,`+213`],
+  [`bh`,`Bahrain`,`البحرين`,`+973`],
+  [`km`,`Comoros`,`جزر القمر`,`+269`],
+  [`dj`,`Djibouti`,`جيبوتي`,`+253`],
+  [`eg`,`Egypt`,`مصر`,`+20`],
+  [`iq`,`Iraq`,`العراق`,`+964`],
+  [`jo`,`Jordan`,`الأردن`,`+962`],
+  [`kw`,`Kuwait`,`الكويت`,`+965`],
+  [`lb`,`Lebanon`,`لبنان`,`+961`],
+  [`ly`,`Libya`,`ليبيا`,`+218`],
+  [`mr`,`Mauritania`,`موريتانيا`,`+222`],
+  [`ma`,`Morocco`,`المغرب`,`+212`],
+  [`om`,`Oman`,`عُمان`,`+968`],
+  [`ps`,`Palestine`,`فلسطين`,`+970`],
+  [`qa`,`Qatar`,`قطر`,`+974`],
+  [`sa`,`Saudi Arabia`,`السعودية`,`+966`],
+  [`so`,`Somalia`,`الصومال`,`+252`],
+  [`sd`,`Sudan`,`السودان`,`+249`],
+  [`sy`,`Syria`,`سوريا`,`+963`],
+  [`tn`,`Tunisia`,`تونس`,`+216`],
+  [`ae`,`United Arab Emirates`,`الإمارات`,`+971`],
+  [`ye`,`Yemen`,`اليمن`,`+967`]
+].map(([flagCode, en, ar, code]) => ({
+  flagCode,
+  en,
+  ar,
+  code,
+  flagUrl: `https://flagcdn.com/w40/${flagCode}.png`
+}));
