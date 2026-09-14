@@ -744,3 +744,121 @@ body { position: fixed; inset: 0; }
   .certificate-meta b { font-size: 20px; }
   .sessions { grid-template-columns: 1fr; }
 }
+
+
+/* v7 refinements: restored loader, richer hero, trainer proof, clearer schedule meta */
+.hero.hero-refined {
+  grid-template-columns: minmax(0, 1fr) minmax(420px, .96fr);
+  gap: clamp(28px, 4vw, 54px);
+}
+.hero-showcase {
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+}
+.showcase-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.showcase-card {
+  border: 1px solid rgba(24,32,36,.08);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfaf7 100%);
+  border-radius: 28px;
+  padding: 20px;
+  box-shadow: 0 16px 40px rgba(24,32,36,.06);
+  display: grid;
+  gap: 10px;
+  min-height: 0;
+}
+.showcase-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 13px;
+}
+.showcase-card b {
+  font-size: clamp(20px, 2vw, 30px);
+  line-height: 1.3;
+}
+.showcase-trainer {
+  grid-column: 1 / -1;
+  background: linear-gradient(180deg, #172126 0%, #243236 100%);
+  color: #fff;
+}
+.showcase-trainer p { color: rgba(255,255,255,.78); }
+.showcase-stats {
+  grid-template-columns: 1fr;
+  align-content: start;
+  background: linear-gradient(180deg, #f6fbfb 0%, #eef7f6 100%);
+}
+.show-stat {
+  display: grid;
+  gap: 4px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(9,153,153,.12);
+}
+.show-stat:last-child { border-bottom: 0; }
+.show-stat strong {
+  font: 800 clamp(24px, 2.4vw, 38px)/1 var(--font-en);
+  letter-spacing: -.04em;
+  color: var(--ink);
+}
+.show-stat small { color: var(--muted); line-height: 1.6; }
+.course-mini-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.course-mini-list span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid rgba(9,153,153,.14);
+}
+.course-mini-list img { width: 24px; height: 24px; object-fit: contain; }
+.course-mini-list b { font-size: 14px; }
+.showcase-certificate {
+  background: linear-gradient(180deg, #fffdfa 0%, #f8f4ea 100%);
+}
+.schedule-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+  margin-bottom: 10px;
+}
+.schedule-fact {
+  border: 1px solid rgba(24,32,36,.08);
+  background: linear-gradient(180deg, #fff 0%, #fcfbf8 100%);
+  border-radius: 18px;
+  padding: 14px 16px;
+  display: grid;
+  gap: 6px;
+}
+.schedule-fact small { color: var(--muted); font-size: 11px; }
+.schedule-fact b { font-size: 16px; line-height: 1.6; }
+.trust-panel > b { font-size: 22px; }
+.trust-panel > p { font-size: 12px; }
+.hero-proof small { max-width: 290px; }
+
+@media (max-width: 980px) {
+  .hero.hero-refined { grid-template-columns: 1fr; }
+  .showcase-grid { grid-template-columns: 1fr 1fr; }
+  .showcase-trainer { grid-column: 1 / -1; }
+}
+
+@media (max-width: 800px) {
+  .hero-showcase { width: 100%; }
+  .showcase-grid { grid-template-columns: 1fr; gap: 12px; }
+  .showcase-card { border-radius: 22px; padding: 16px; gap: 8px; }
+  .showcase-card b { font-size: 20px; }
+  .show-stat strong { font-size: 28px; }
+  .schedule-facts { grid-template-columns: 1fr; gap: 8px; margin-top: 12px; }
+  .schedule-fact { border-radius: 16px; padding: 12px 14px; }
+}

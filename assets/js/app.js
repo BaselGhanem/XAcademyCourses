@@ -22,7 +22,7 @@ const T = {
     back: 'السابق',
     restart: 'ابدأ الرحلة من جديد',
     heroTitle: 'تدريب عملي يحوّل البيانات إلى شغل تقدر تستخدمه.',
-    heroText: 'Excel وPower BI بطريقة مباشرة: تفهم الفكرة، تطبقها على سيناريوهات عمل، وتخرج بنتيجة قابلة للاستخدام.',
+    heroText: 'Excel وPower BI بطريقة مباشرة: تفهم الفكرة، تطبقها على سيناريوهات عمل، وتخرج بنتيجة قابلة للاستخدام في شغلك من أول يوم.',
     overview: 'عن الدورة',
     outcomes: 'ماذا ستتمكن من فعله؟',
     curriculum: 'المنهاج',
@@ -52,7 +52,7 @@ const T = {
     submit: 'إرسال طلب التسجيل',
     paymentStatus: 'بانتظار التأكيد',
     success: 'تم استلام تسجيلك',
-    successText: 'سنتواصل معك قريبًا لتأكيد المقعد وإرسال التفاصيل التالية.',
+    successText: 'رح يتواصل معك مسؤول التسجيل في X Academy لمتابعة تسجيلك.',
     whatsapp: 'تواصل معنا على WhatsApp',
     registerClosed: 'التسجيل غير متاح حاليًا',
     registerClosedText: 'يمكنك التعرّف على الدورة الآن، وعند فتح التسجيل ستظهر لك الخطوة التالية مباشرة.',
@@ -63,9 +63,9 @@ const T = {
     fee: 'رسوم البرنامج',
     offer: 'عرض خاص',
     until: 'حتى',
-    paymentText: 'بعد إرسال طلب التسجيل سنتواصل معك عبر واتساب لتأكيد توفر المقعد واستكمال الدفع.',
+    paymentText: 'بعد إرسال طلب التسجيل، رح يتواصل معك مسؤول التسجيل في X Academy لمتابعة تسجيلك.',
     paymentBoxTitle: 'الخطوة التالية',
-    paymentBoxText: 'سنرسل لك التفاصيل اللازمة لإكمال التسجيل.',
+    paymentBoxText: 'رح يتواصل معك مسؤول التسجيل في X Academy لمتابعة تسجيلك.',
     countrySearch: 'ابحث عن الدولة',
     required: 'هذا الحقل مطلوب.',
     invalidEmail: 'يرجى إدخال بريد إلكتروني صحيح.',
@@ -88,11 +88,22 @@ const T = {
     registerSub: 'كل المعلومات أمامك الآن. اترك بياناتك لتأكيد طلب التسجيل.',
     trainerLabel: 'المدرب',
     trainerName: 'Basel Ghanem',
-    trainerRole: 'Excel • Power BI • Data Analytics',
-    learningStyle: 'تطبيق عملي على سيناريوهات عمل',
+    trainerRole: 'Senior Sales Analyst • Excel • Power BI • Data Analytics',
+    learningStyle: 'تطبيق عملي على سيناريوهات عمل حقيقية',
     certificateSimple: 'شهادة حضور دولية من LPCIS باعتمادات متعددة',
     privacy: 'تُستخدم بياناتك فقط للتواصل بخصوص التسجيل وتأكيد المقعد.',
     scheduleSub: 'مواعيد الجلسات القادمة',
+    startDate: 'تاريخ البداية',
+    endDate: 'تاريخ النهاية',
+    trainingDays: 'أيام التدريب',
+    heroStat1Value: '4000+',
+    heroStat1Label: 'متدرب دربهم Basel',
+    heroStat2Value: 'Excel & Power BI',
+    heroStat2Label: 'مسارات عملية مرتبطة بالعمل',
+    heroStat3Value: 'Dar Al-Dawaa',
+    heroStat3Label: 'خبرة عملية في التحليل واتخاذ القرار',
+    trainerHeadline: 'Basel Ghanem',
+    trainerMicroBio: 'Senior Sales Analyst في Dar Al-Dawaa، ومدرب ومستشار في X Academy بخبرة عملية في Excel وPower BI وتحليل البيانات.',
     cardHint: 'اعرف إن كانت الدورة مناسبة لك',
     courseStatePrefix: ''
   },
@@ -109,7 +120,7 @@ const T = {
     back: 'Back',
     restart: 'Start over',
     heroTitle: 'Practical training that turns data into work you can actually use.',
-    heroText: 'Excel and Power BI taught directly: understand the idea, apply it to realistic work scenarios, and leave with something usable.',
+    heroText: 'Excel and Power BI taught directly: understand the idea, apply it to realistic work scenarios, and leave with something you can use at work from day one.',
     overview: 'Course overview',
     outcomes: 'What will you be able to do?',
     curriculum: 'Curriculum',
@@ -139,7 +150,7 @@ const T = {
     submit: 'Submit registration',
     paymentStatus: 'Pending confirmation',
     success: 'Registration received',
-    successText: 'We’ll contact you shortly to confirm your seat and share the next details.',
+    successText: 'An X Academy registration officer will contact you to continue your registration.',
     whatsapp: 'Contact us on WhatsApp',
     registerClosed: 'Registration is not open right now',
     registerClosedText: 'You can explore the course now. Registration will appear here when a new schedule opens.',
@@ -150,9 +161,9 @@ const T = {
     fee: 'Program fee',
     offer: 'Special offer',
     until: 'until',
-    paymentText: 'After you submit your registration, we will contact you on WhatsApp to confirm seat availability and complete payment.',
+    paymentText: 'After you submit your request, an X Academy registration officer will contact you to continue your registration.',
     paymentBoxTitle: 'What happens next',
-    paymentBoxText: 'We’ll share the details you need to complete registration.',
+    paymentBoxText: 'An X Academy registration officer will contact you to continue your registration.',
     countrySearch: 'Search country',
     required: 'This field is required.',
     invalidEmail: 'Please enter a valid email address.',
@@ -175,11 +186,22 @@ const T = {
     registerSub: 'You have the key information now. Leave your details to request your seat.',
     trainerLabel: 'Trainer',
     trainerName: 'Basel Ghanem',
-    trainerRole: 'Excel • Power BI • Data Analytics',
-    learningStyle: 'Hands-on learning with realistic work scenarios',
+    trainerRole: 'Senior Sales Analyst • Excel • Power BI • Data Analytics',
+    learningStyle: 'Hands-on learning with real work scenarios',
     certificateSimple: 'International LPCIS certificate with multiple recognitions',
     privacy: 'Your details are used only to contact you about registration and seat confirmation.',
     scheduleSub: 'Upcoming session dates',
+    startDate: 'Start date',
+    endDate: 'End date',
+    trainingDays: 'Training days',
+    heroStat1Value: '4000+',
+    heroStat1Label: 'professionals trained by Basel',
+    heroStat2Value: 'Excel & Power BI',
+    heroStat2Label: 'practical tracks built around work',
+    heroStat3Value: 'Dar Al-Dawaa',
+    heroStat3Label: 'hands-on analytical experience',
+    trainerHeadline: 'Basel Ghanem',
+    trainerMicroBio: 'Senior Sales Analyst at Dar Al-Dawaa and a trainer/consultant at X Academy with practical experience in Excel, Power BI, and data analytics.',
     cardHint: 'See if this course fits your work',
     courseStatePrefix: ''
   }
@@ -387,6 +409,29 @@ function scheduleNarrative(run) {
     return `تبدأ يوم ${scheduleDayName(first.parsedDate)} ${formatScheduleDate(first.parsedDate)} وتنتهي يوم ${scheduleDayName(last.parsedDate)} ${formatScheduleDate(last.parsedDate)}، أيام ${joinDays(uniqueDays)}${time ? `، ${time}` : ''}.`;
   }
   return `Starts ${scheduleDayName(first.parsedDate)}, ${formatScheduleDate(first.parsedDate)} and ends ${scheduleDayName(last.parsedDate)}, ${formatScheduleDate(last.parsedDate)}. Sessions are on ${joinDays(uniqueDays)}${time ? `, ${time}` : ''}.`;
+}
+
+function scheduleMeta(run) {
+  const sessions = datedSessions(run);
+  if (!sessions.length) return { start: '', end: '', days: '', time: '' };
+  const first = sessions[0];
+  const last = sessions[sessions.length - 1];
+  const uniqueDays = [];
+  sessions.forEach((session) => {
+    const day = scheduleDayName(session.parsedDate);
+    if (day && !uniqueDays.includes(day)) uniqueDays.push(day);
+  });
+  const joinDays = (days) => {
+    if (days.length <= 1) return days[0] || '';
+    if (state.lang === 'ar') return days.length === 2 ? `${days[0]} و${days[1]}` : `${days.slice(0, -1).join('، ')} و${days.at(-1)}`;
+    return days.length === 2 ? `${days[0]} and ${days[1]}` : `${days.slice(0, -1).join(', ')}, and ${days.at(-1)}`;
+  };
+  return {
+    start: formatScheduleDate(first.parsedDate),
+    end: formatScheduleDate(last.parsedDate),
+    days: joinDays(uniqueDays),
+    time: scheduleTimeSummary(sessions)
+  };
 }
 
 function offerIsActive(cohort) {
@@ -606,7 +651,7 @@ function shell(content) {
 
 function homeView() {
   return shell(`
-    <main class="hero">
+    <main class="hero hero-refined">
       <section class="hero-copy">
         <span class="eyebrow">LEARN. ANALYSE. LEAD.</span>
         <h1>${txt('heroTitle')}</h1>
@@ -617,9 +662,33 @@ function homeView() {
           <span><b>${txt('learningStyle')}</b><small>${txt('certificateSimple')}</small></span>
         </div>
       </section>
-      <figure class="hero-media">
-        <img src="./assets/img/hero-workspace.webp" alt="">
-      </figure>
+      <section class="hero-showcase" aria-label="${state.lang === 'ar' ? 'لمحة عن التجربة' : 'Experience snapshot'}">
+        <div class="showcase-grid">
+          <div class="showcase-card showcase-trainer">
+            <span class="panel-kicker">${txt('trainerLabel')}</span>
+            <b>${txt('trainerHeadline')}</b>
+            <p>${txt('trainerMicroBio')}</p>
+          </div>
+          <div class="showcase-card showcase-stats">
+            <div class="show-stat"><strong>${txt('heroStat1Value')}</strong><small>${txt('heroStat1Label')}</small></div>
+            <div class="show-stat"><strong>${txt('heroStat2Value')}</strong><small>${txt('heroStat2Label')}</small></div>
+            <div class="show-stat"><strong>${txt('heroStat3Value')}</strong><small>${txt('heroStat3Label')}</small></div>
+          </div>
+          <div class="showcase-card showcase-course">
+            <span class="panel-kicker">X Academy</span>
+            <div class="course-mini-list">
+              <span><img src="./assets/img/excel-mark.svg" alt="Excel"><b>Excel</b></span>
+              <span><img src="./assets/img/powerbi-mark.svg" alt="Power BI"><b>Power BI</b></span>
+            </div>
+            <p>${txt('chooseSub')}</p>
+          </div>
+          <div class="showcase-card showcase-certificate">
+            <span class="panel-kicker">Certificate</span>
+            <b>${txt('certificateSimple')}</b>
+            <p>${state.lang === 'ar' ? 'شهادة حضور دولية مرفقة بأختام واعتمادات متعددة كما هو ظاهر في الشهادة.' : 'An international attendance certificate supported by multiple seals and recognitions as shown on the certificate.'}</p>
+          </div>
+        </div>
+      </section>
     </main>
   `);
 }
@@ -729,6 +798,7 @@ function stageContent(key) {
           <div class="trust-divider"></div>
           <small>${txt('learningStyle')}</small>
           <small>${txt('certificateSimple')}</small>
+          <small>${state.lang === 'ar' ? 'خبرة عملية + تدريب احترافي + تطبيق مرتبط بالشغل.' : 'Hands-on business experience, professional training, and work-focused application.'}</small>
         </aside>
       </div>
     `;
@@ -779,6 +849,7 @@ function stageContent(key) {
   }
 
   if (key === 'schedule') {
+    const meta = scheduleMeta(cohort);
     return `
       <h2>${txt('scheduleInvestment')}</h2>
       ${cohort ? `
@@ -788,6 +859,11 @@ function stageContent(key) {
             <p class="schedule-narrative"><b>${state.lang === 'ar' ? 'الخلاصة:' : 'Summary:'}</b> ${scheduleNarrative(cohort)}</p>
           </div>
           ${feeMarkup(cohort, true)}
+        </div>
+        <div class="schedule-facts">
+          <div class="schedule-fact"><small>${txt('startDate')}</small><b>${meta.start || '—'}</b></div>
+          <div class="schedule-fact"><small>${txt('endDate')}</small><b>${meta.end || '—'}</b></div>
+          <div class="schedule-fact"><small>${txt('trainingDays')}</small><b>${meta.days || '—'}</b></div>
         </div>
         <div class="sessions">
           ${(cohort.sessions || []).map((session, index) => `
@@ -1264,7 +1340,7 @@ async function init() {
   document.documentElement.lang = state.lang;
   document.documentElement.dir = state.lang === 'ar' ? 'rtl' : 'ltr';
   document.body.classList.toggle('lang-en', state.lang === 'en');
-  renderMain();
+  startLoader();
 
   const remote = loadRemoteData();
   await Promise.race([remote, new Promise((resolve) => setTimeout(resolve, 900))]);
