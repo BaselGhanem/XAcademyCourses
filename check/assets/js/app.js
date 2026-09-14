@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
-import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+import { getFirestore, collection, getDocs, getDoc, doc, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 import { firebaseConfig, brand } from './firebase-config.js';
 import { DEFAULT_COURSES, DEFAULT_COHORTS, ARAB_COUNTRIES } from './default-data.js';
 
@@ -241,16 +241,34 @@ function saveDraft() {
 
 async function loadRemoteData() {
   try {
-    const [courseSnap, cohortSnap] = await Promise.all([
+    const [courseSnap, cohortSnap, settingsSnap] = await Promise.all([
       getDocs(collection(db, 'courses')),
-      getDocs(collection(db, 'cohorts'))
+      getDocs(collection(db, 'cohorts')),
+      getDoc(doc(db, 'siteSettings', 'system'))
     ]);
 
-    if (!courseSnap.empty) {
-      state.courses = courseSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    const remoteCourses = courseSnap.docs.map((item) => ({ id: item.id, ...item.data() }));
+    const remoteCohorts = cohortSnap.docs.map((item) => ({ id: item.id, ...item.data() }));
+    const defaultsSeeded = settingsSnap.exists() && Number(settingsSnap.data()?.defaultsSeedVersion || 0) >= 2;
+
+    if (remoteCourses.length) {
+      if (defaultsSeeded) {
+        state.courses = remoteCourses;
+      } else {
+        const byId = new Map(DEFAULT_COURSES.map((course) => [course.id, course]));
+        remoteCourses.forEach((course) => byId.set(course.id, course));
+        state.courses = [...byId.values()];
+      }
     }
-    if (!cohortSnap.empty) {
-      state.cohorts = cohortSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+    if (remoteCohorts.length) {
+      if (defaultsSeeded) {
+        state.cohorts = remoteCohorts;
+      } else {
+        const byId = new Map(DEFAULT_COHORTS.map((cohort) => [cohort.id, cohort]));
+        remoteCohorts.forEach((cohort) => byId.set(cohort.id, cohort));
+        state.cohorts = [...byId.values()];
+      }
     }
   } catch (error) {
     console.warn('Using built-in fallback data.', error);
@@ -410,10 +428,11 @@ function homeView() {
 
 function courseCard(course) {
   const currentStatus = statusLabel(courseDisplayStatus(course));
+  const logo = course.logo || (course.id === 'excel' ? './assets/img/excel-mark.svg' : course.id === 'powerbi' ? './assets/img/powerbi-mark.svg' : './assets/img/course-default-mark.svg');
   return `
     <button class="course-card" data-course="${course.id}" type="button">
       <div class="course-card-head">
-        <span class="course-logo"><img src="${course.logo || ''}" alt=""></span>
+        <span class="course-logo"><img src="${logo}" alt=""></span>
         <span class="course-state">${currentStatus}</span>
       </div>
       <div>
