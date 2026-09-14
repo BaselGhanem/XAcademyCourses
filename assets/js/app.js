@@ -21,8 +21,13 @@ const T = {
     next: 'التالي',
     back: 'السابق',
     restart: 'ابدأ الرحلة من جديد',
-    heroTitle: 'تدريب عملي يحوّل البيانات إلى شغل تقدر تستخدمه.',
-    heroText: 'Excel وPower BI بطريقة مباشرة: تفهم الفكرة، تطبقها على سيناريوهات عمل، وتخرج بنتيجة قابلة للاستخدام في شغلك من أول يوم.',
+    heroTitle: 'استثمر في مهارة تفتح لك فرص أكبر.',
+    heroText: 'تجربة تدريب عملية ومباشرة تساعدك تتعلم بوضوح، تطبق بنفسك، وتطلع بمهارة تستخدمها فعليًا.',
+    heroMicro1: 'تطبيق عملي',
+    heroMicro2: 'شرح مباشر',
+    heroMicro3: 'مهارات قابلة للاستخدام',
+    heroImageAlt: 'مساحة تعلم عملية تشجع على التطور المهني',
+    heroImageNote: 'تعلّم. طبّق. استخدمها فعليًا.',
     overview: 'عن الدورة',
     outcomes: 'ماذا ستتمكن من فعله؟',
     curriculum: 'المنهاج',
@@ -119,8 +124,13 @@ const T = {
     next: 'Next',
     back: 'Back',
     restart: 'Start over',
-    heroTitle: 'Practical training that turns data into work you can actually use.',
-    heroText: 'Excel and Power BI taught directly: understand the idea, apply it to realistic work scenarios, and leave with something you can use at work from day one.',
+    heroTitle: 'Invest in a skill that opens bigger opportunities.',
+    heroText: 'A practical, direct learning experience designed to help you understand clearly, practice hands-on, and leave with a skill you can actually use.',
+    heroMicro1: 'Hands-on practice',
+    heroMicro2: 'Clear instruction',
+    heroMicro3: 'Skills you can use',
+    heroImageAlt: 'A practical learning workspace that encourages professional growth',
+    heroImageNote: 'Learn it. Apply it. Use it.',
     overview: 'Course overview',
     outcomes: 'What will you be able to do?',
     curriculum: 'Curriculum',
@@ -651,44 +661,30 @@ function shell(content) {
 
 function homeView() {
   return shell(`
-    <main class="hero hero-refined">
-      <section class="hero-copy">
-        <span class="eyebrow">LEARN. ANALYSE. LEAD.</span>
+    <main class="hero home-hero">
+      <section class="home-copy">
+        <span class="eyebrow">X ACADEMY · LEARN. ANALYSE. LEAD.</span>
         <h1>${txt('heroTitle')}</h1>
         <p>${txt('heroText')}</p>
-        <button class="primary" data-action="start" type="button">${txt('start')}</button>
-        <div class="hero-proof" aria-label="${state.lang === 'ar' ? 'معلومات سريعة' : 'Quick facts'}">
-          <span><b>${txt('trainerName')}</b><small>${txt('trainerRole')}</small></span>
-          <span><b>${txt('learningStyle')}</b><small>${txt('certificateSimple')}</small></span>
+        <div class="home-actions">
+          <button class="primary home-cta" data-action="start" type="button">
+            <span>${txt('start')}</span>
+            <span class="cta-arrow" aria-hidden="true">${state.lang === 'ar' ? '←' : '→'}</span>
+          </button>
+        </div>
+        <div class="home-micro" aria-label="${state.lang === 'ar' ? 'مميزات التجربة' : 'Experience benefits'}">
+          <span>${txt('heroMicro1')}</span>
+          <span>${txt('heroMicro2')}</span>
+          <span>${txt('heroMicro3')}</span>
         </div>
       </section>
-      <section class="hero-showcase" aria-label="${state.lang === 'ar' ? 'لمحة عن التجربة' : 'Experience snapshot'}">
-        <div class="showcase-grid">
-          <div class="showcase-card showcase-trainer">
-            <span class="panel-kicker">${txt('trainerLabel')}</span>
-            <b>${txt('trainerHeadline')}</b>
-            <p>${txt('trainerMicroBio')}</p>
-          </div>
-          <div class="showcase-card showcase-stats">
-            <div class="show-stat"><strong>${txt('heroStat1Value')}</strong><small>${txt('heroStat1Label')}</small></div>
-            <div class="show-stat"><strong>${txt('heroStat2Value')}</strong><small>${txt('heroStat2Label')}</small></div>
-            <div class="show-stat"><strong>${txt('heroStat3Value')}</strong><small>${txt('heroStat3Label')}</small></div>
-          </div>
-          <div class="showcase-card showcase-course">
-            <span class="panel-kicker">X Academy</span>
-            <div class="course-mini-list">
-              <span><img src="./assets/img/excel-mark.svg" alt="Excel"><b>Excel</b></span>
-              <span><img src="./assets/img/powerbi-mark.svg" alt="Power BI"><b>Power BI</b></span>
-            </div>
-            <p>${txt('chooseSub')}</p>
-          </div>
-          <div class="showcase-card showcase-certificate">
-            <span class="panel-kicker">Certificate</span>
-            <b>${txt('certificateSimple')}</b>
-            <p>${state.lang === 'ar' ? 'شهادة حضور دولية مرفقة بأختام واعتمادات متعددة كما هو ظاهر في الشهادة.' : 'An international attendance certificate supported by multiple seals and recognitions as shown on the certificate.'}</p>
-          </div>
-        </div>
-      </section>
+
+      <figure class="home-visual">
+        <img src="./assets/img/hero-workspace.webp" alt="${txt('heroImageAlt')}">
+        <figcaption>
+          <span>${txt('heroImageNote')}</span>
+        </figcaption>
+      </figure>
     </main>
   `);
 }
