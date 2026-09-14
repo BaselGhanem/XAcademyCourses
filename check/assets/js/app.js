@@ -1,7 +1,7 @@
-import { initializeApp } from `https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js`;
-import { getFirestore, collection, getDocs, addDoc, serverTimestamp, query, where, orderBy } from `https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js`;
-import { firebaseConfig, brand } from `./firebase-config.js`;
-import { DEFAULT_COURSES, DEFAULT_COHORTS, ARAB_COUNTRIES } from `./default-data.js`;
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+import { getFirestore, collection, getDocs, addDoc, serverTimestamp, query, where, orderBy } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+import { firebaseConfig, brand } from './firebase-config.js';
+import { DEFAULT_COURSES, DEFAULT_COHORTS, ARAB_COUNTRIES } from './default-data.js';
 
 const fb = initializeApp(firebaseConfig);
 const db = getFirestore(fb);

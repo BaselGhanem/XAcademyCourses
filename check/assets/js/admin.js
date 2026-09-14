@@ -1,8 +1,8 @@
-import { initializeApp } from `https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js`;
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from `https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js`;
-import { getFirestore, collection, getDocs, doc, setDoc, addDoc, updateDoc, deleteDoc, serverTimestamp, query, orderBy } from `https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js`;
-import { firebaseConfig } from `./firebase-config.js`;
-import { DEFAULT_COURSES, DEFAULT_COHORTS } from `./default-data.js`;
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+import { getFirestore, collection, getDocs, doc, setDoc, addDoc, updateDoc, deleteDoc, serverTimestamp, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+import { firebaseConfig } from './firebase-config.js';
+import { DEFAULT_COURSES, DEFAULT_COHORTS } from './default-data.js';
 
 const fb=initializeApp(firebaseConfig), auth=getAuth(fb), db=getFirestore(fb), root=document.getElementById(`admin-app`);
 const A={user:null,tab:`dashboard`,courses:[],cohorts:[],regs:[],visits:[],events:[],audit:[],courseId:``,cohortId:``,search:``,filter:`all`,loading:true};
