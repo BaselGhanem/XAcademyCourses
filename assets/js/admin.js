@@ -685,7 +685,7 @@ async function createCourse() {
     certificate: {
       enabled: true,
       imageUrl: '',
-      title: { ar: 'شهادة معتمدة بعد اجتياز الدورة', en: 'Accredited certificate after course completion' },
+      title: { ar: 'شهادة إتمام من X Academy', en: 'X Academy completion certificate' },
       note: { ar: 'تُمنح بعد إتمام الدورة واجتياز الامتحان.', en: 'Awarded after course completion and passing the exam.' }
     }
   };

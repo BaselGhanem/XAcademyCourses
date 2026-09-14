@@ -10,9 +10,9 @@ const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matc
 
 const T = {
   ar: {
-    start: 'ابدأ الرحلة',
+    start: 'استكشف الدورات',
     choose: 'اختر دورتك',
-    chooseSub: 'إذا وصلت لهنا، غالبًا أنت عارف شو بدك. اختر المسار ونبدأ مباشرة.',
+    chooseSub: 'اختر المسار الأقرب لشغلك. الفرق بسيط: Excel للعمل اليومي والتحليل السريع، وPower BI لربط البيانات وبناء تقارير تفاعلية.',
     open: 'التسجيل مفتوح',
     info: 'قريبًا',
     full: 'المقاعد مكتملة',
@@ -21,8 +21,8 @@ const T = {
     next: 'التالي',
     back: 'السابق',
     restart: 'ابدأ الرحلة من جديد',
-    heroTitle: 'مهارات عملية تحرّك شغلك للأمام.',
-    heroText: 'تعلّم المهارة، طبّقها على بيانات حقيقية، واستخدمها فعليًا في شغلك.',
+    heroTitle: 'تدريب عملي يحوّل البيانات إلى شغل تقدر تستخدمه.',
+    heroText: 'Excel وPower BI بطريقة مباشرة: تفهم الفكرة، تطبقها على سيناريوهات عمل، وتخرج بنتيجة قابلة للاستخدام.',
     overview: 'عن الدورة',
     outcomes: 'ماذا ستتمكن من فعله؟',
     curriculum: 'المنهاج',
@@ -46,8 +46,8 @@ const T = {
     whatsapp: 'تواصل معنا على WhatsApp',
     registerClosed: 'التسجيل غير متاح حاليًا',
     registerClosedText: 'يمكنك التعرّف على الدورة الآن، وعند فتح التسجيل ستظهر لك الخطوة التالية مباشرة.',
-    certMissing: 'شهادة معتمدة تصدر بعد إتمام الدورة واجتياز الامتحان.',
-    awarded: 'تُمنح بعد إتمام الدورة واجتياز الامتحان.',
+    certMissing: 'شهادة إتمام من X Academy بعد إتمام متطلبات الدورة.',
+    awarded: 'تُمنح بعد إتمام متطلبات الدورة.',
     sessions: 'جلسات',
     hours: 'ساعة تدريب',
     fee: 'رسوم البرنامج',
@@ -72,14 +72,24 @@ const T = {
     bestFor: 'مناسبة لك إذا',
     level: 'المستوى',
     curriculumSub: 'محاور واضحة ومباشرة تقودك من الأساس إلى التطبيق.',
+    program: 'ماذا ستتعلم وتطبق؟',
+    scheduleInvestment: 'المواعيد والرسوم',
+    registerDetails: 'بيانات التسجيل',
+    registerSub: 'كل المعلومات أمامك الآن. اترك بياناتك لتأكيد طلب التسجيل.',
+    trainerLabel: 'المدرب',
+    trainerName: 'Basel Ghanem',
+    trainerRole: 'Excel • Power BI • Data Analytics',
+    learningStyle: 'تطبيق عملي على سيناريوهات عمل',
+    certificateSimple: 'شهادة إتمام من X Academy',
+    privacy: 'تُستخدم بياناتك فقط للتواصل بخصوص التسجيل وتأكيد المقعد.',
     scheduleSub: 'مواعيد الجلسات القادمة',
-    cardHint: 'سجّل وابدأ رحلتك',
+    cardHint: 'اعرف إن كانت الدورة مناسبة لك',
     courseStatePrefix: ''
   },
   en: {
-    start: 'Start the journey',
+    start: 'Explore courses',
     choose: 'Choose your course',
-    chooseSub: 'You probably already know what you came for. Pick the course and go straight in.',
+    chooseSub: 'Choose the path closest to your work: Excel for day-to-day analysis and workflow, or Power BI for connected data and interactive reporting.',
     open: 'Registration open',
     info: 'Coming soon',
     full: 'Full',
@@ -88,8 +98,8 @@ const T = {
     next: 'Next',
     back: 'Back',
     restart: 'Start over',
-    heroTitle: 'Build practical skills that move your work forward.',
-    heroText: 'Learn the skill, apply it to real data, and use it meaningfully at work.',
+    heroTitle: 'Practical training that turns data into work you can actually use.',
+    heroText: 'Excel and Power BI taught directly: understand the idea, apply it to realistic work scenarios, and leave with something usable.',
     overview: 'Course overview',
     outcomes: 'What will you be able to do?',
     curriculum: 'Curriculum',
@@ -113,8 +123,8 @@ const T = {
     whatsapp: 'Contact us on WhatsApp',
     registerClosed: 'Registration is not open right now',
     registerClosedText: 'You can explore the course now. Registration will appear here when a new schedule opens.',
-    certMissing: 'An accredited certificate is issued after course completion and passing the exam.',
-    awarded: 'Awarded after course completion and passing the exam.',
+    certMissing: 'A completion certificate from X Academy is issued after meeting the course requirements.',
+    awarded: 'Awarded after meeting the course requirements.',
     sessions: 'sessions',
     hours: 'training hours',
     fee: 'Program fee',
@@ -139,8 +149,18 @@ const T = {
     bestFor: 'Best for you if',
     level: 'Level',
     curriculumSub: 'A clear structure that takes you from the foundation to applied use.',
+    program: 'What will you learn and apply?',
+    scheduleInvestment: 'Schedule & fee',
+    registerDetails: 'Registration details',
+    registerSub: 'You have the key information now. Leave your details to request your seat.',
+    trainerLabel: 'Trainer',
+    trainerName: 'Basel Ghanem',
+    trainerRole: 'Excel • Power BI • Data Analytics',
+    learningStyle: 'Hands-on learning with realistic work scenarios',
+    certificateSimple: 'X Academy completion certificate',
+    privacy: 'Your details are used only to contact you about registration and seat confirmation.',
     scheduleSub: 'Upcoming session dates',
-    cardHint: 'Register and begin the journey',
+    cardHint: 'See if this course fits your work',
     courseStatePrefix: ''
   }
 };
@@ -496,6 +516,10 @@ function homeView() {
         <h1>${txt('heroTitle')}</h1>
         <p>${txt('heroText')}</p>
         <button class="primary" data-action="start" type="button">${txt('start')}</button>
+        <div class="hero-proof" aria-label="${state.lang === 'ar' ? 'معلومات سريعة' : 'Quick facts'}">
+          <span><b>${txt('trainerName')}</b><small>${txt('trainerRole')}</small></span>
+          <span><b>${txt('learningStyle')}</b><small>${txt('certificateSimple')}</small></span>
+        </div>
       </section>
       <figure class="hero-media">
         <img src="./assets/img/hero-workspace.webp" alt="">
@@ -510,7 +534,7 @@ function courseCard(course) {
   return `
     <button class="course-card" data-course="${course.id}" type="button">
       <div class="course-card-head">
-        <span class="course-logo"><img src="${logo}" alt=""></span>
+        <span class="course-logo"><img src="${logo}" alt="${escapeHtml(localized(course.title))}"></span>
         <span class="course-state">${currentStatus}</span>
       </div>
       <div>
@@ -550,20 +574,31 @@ function coursesView() {
 
 function buildSteps() {
   const course = state.course || {};
-  const contentSteps = ['overview'];
+  const steps = ['overview'];
   const outcomes = course.outcomes?.[state.lang] || course.outcomes?.ar || [];
   const modules = course.modules?.[state.lang] || course.modules?.ar || [];
-  if (outcomes.length) contentSteps.push('outcomes');
-  if (modules.length) contentSteps.push('curriculum');
+  if (outcomes.length || modules.length) steps.push('program');
 
   const registrationAvailable = course.visibility === 'open' && state.cohort && isPublicRun(state.cohort);
-  if (registrationAvailable) contentSteps.push('schedule');
-  if (course.certificate?.enabled !== false) contentSteps.push('certificate');
-  if (!registrationAvailable) return [...contentSteps, 'availability'];
+  if (!registrationAvailable) return [...steps, 'availability'];
 
-  const formSteps = ['name', 'mobile', 'title', 'email', 'review'];
-  if (isFull()) return [...contentSteps, ...formSteps, 'waiting'];
-  return [...contentSteps, ...formSteps, 'price', 'payment', 'confirmation'];
+  steps.push('schedule', 'register');
+  if (isFull()) return [...steps, 'waiting'];
+  return [...steps, 'review', 'confirmation'];
+}
+
+function feeMarkup(cohort, compact = false) {
+  const offerOn = offerIsActive(cohort);
+  const amount = offerOn ? cohort?.offer?.price : cohort?.price;
+  return `
+    <div class="fee-card ${compact ? 'compact' : ''}">
+      <div>
+        <span>${txt('fee')}</span>
+        <strong>${amount ?? '—'} <small>${cohort?.currency || 'JOD'}</small></strong>
+      </div>
+      ${offerOn ? `<div class="fee-offer"><b>${localized(cohort.offer.title) || txt('offer')}</b><span>${cohort.price} ${cohort.currency || 'JOD'}</span>${cohort.offer.endsAt ? `<small>${txt('until')} ${cohort.offer.endsAt}</small>` : ''}</div>` : ''}
+    </div>
+  `;
 }
 
 function stageContent(key) {
@@ -574,60 +609,60 @@ function stageContent(key) {
     return `
       <h2>${localized(course.title)}</h2>
       <p class="lead">${localized(course.intro)}</p>
-      <div class="stack">
-        <div class="item">
-          <strong>01</strong>
-          <div>
-            <b>${txt('bestFor')}</b>
-            <p>${localized(course.fit)}</p>
+      <div class="overview-grid">
+        <div class="overview-copy">
+          <div class="item">
+            <strong>01</strong>
+            <div><b>${txt('bestFor')}</b><p>${localized(course.fit)}</p></div>
+          </div>
+          <div class="item">
+            <strong>02</strong>
+            <div><b>${txt('level')}</b><p>${localized(course.level)}</p></div>
           </div>
         </div>
-        <div class="item">
-          <strong>02</strong>
-          <div>
-            <b>${txt('level')}</b>
-            <p>${localized(course.level)}</p>
-          </div>
-        </div>
+        <aside class="trust-panel" aria-label="${state.lang === 'ar' ? 'معلومات الثقة' : 'Trust information'}">
+          <span>${txt('trainerLabel')}</span>
+          <b>${txt('trainerName')}</b>
+          <p>${txt('trainerRole')}</p>
+          <div class="trust-divider"></div>
+          <small>${txt('learningStyle')}</small>
+          <small>${txt('certificateSimple')}</small>
+        </aside>
       </div>
     `;
   }
 
-  if (key === 'outcomes') {
-    const list = course.outcomes?.[state.lang] || course.outcomes?.ar || [];
-    return `
-      <h2>${txt('outcomes')}</h2>
-      <div class="simple-list">
-        ${list.map((item, index) => `
-          <div class="simple-row">
-            <b>${String(index + 1).padStart(2, '0')} · ${item}</b>
-          </div>
-        `).join('')}
-      </div>
-    `;
-  }
-
-  if (key === 'curriculum') {
+  if (key === 'program') {
+    const outcomes = course.outcomes?.[state.lang] || course.outcomes?.ar || [];
     const modules = course.modules?.[state.lang] || course.modules?.ar || [];
     return `
-      <h2>${txt('curriculum')}</h2>
+      <h2>${txt('program')}</h2>
       <p class="lead">${txt('curriculumSub')}</p>
-      <div class="simple-list">
-        ${modules.map((module) => `
-          <div class="simple-row">
-            <b>${module.n} · ${module.title}</b>
-            <p>${module.detail}</p>
+      <div class="program-grid">
+        <div class="program-block">
+          <span class="section-kicker">${txt('outcomes')}</span>
+          <div class="simple-list outcome-list">
+            ${outcomes.map((item, index) => `<div class="simple-row"><b>${String(index + 1).padStart(2, '0')}</b><p>${item}</p></div>`).join('')}
           </div>
-        `).join('')}
+        </div>
+        <div class="program-block">
+          <span class="section-kicker">${txt('curriculum')}</span>
+          <div class="simple-list">
+            ${modules.map((module) => `<div class="simple-row"><b>${module.n} · ${module.title}</b><p>${module.detail}</p></div>`).join('')}
+          </div>
+        </div>
       </div>
     `;
   }
 
   if (key === 'schedule') {
     return `
-      <h2>${txt('schedule')}</h2>
+      <h2>${txt('scheduleInvestment')}</h2>
       ${cohort ? `
-        <p class="lead">${localized(cohort.name)} · ${cohort.sessions?.length || 0} ${txt('sessions')}${durationHours() != null ? ` · ${durationHours()} ${txt('hours')}` : ''}</p>
+        <div class="schedule-summary">
+          <p class="lead">${localized(cohort.name)} · ${cohort.sessions?.length || 0} ${txt('sessions')}${durationHours() != null ? ` · ${durationHours()} ${txt('hours')}` : ''}</p>
+          ${feeMarkup(cohort, true)}
+        </div>
         <div class="sessions">
           ${(cohort.sessions || []).map((session, index) => `
             <div class="session">
@@ -637,30 +672,6 @@ function stageContent(key) {
           `).join('')}
         </div>
       ` : `<p class="lead">${txt('registerClosedText')}</p>`}
-    `;
-  }
-
-  if (key === 'certificate') {
-    const certificate = course.certificate || {};
-    return `
-      <h2>${txt('certificate')}</h2>
-      <div class="certificate">
-        <div class="certificate-copy">
-          <p class="lead">${localized(certificate.title) || txt('certificate')}</p>
-          <p>${localized(certificate.note) || txt('awarded')}</p>
-        </div>
-        <div class="certificate-visual">
-          ${certificate.imageUrl
-            ? `<img src="${certificate.imageUrl}" alt="${localized(certificate.title) || txt('certificate')}">`
-            : `
-              <div class="certificate-placeholder">
-                <small>X ACADEMY</small>
-                <b>${state.lang === 'ar' ? 'شهادة معتمدة' : 'Accredited Certificate'}</b>
-                <p>${txt('certMissing')}</p>
-              </div>
-            `}
-        </div>
-      </div>
     `;
   }
 
@@ -676,37 +687,39 @@ function stageContent(key) {
     `;
   }
 
-  if (['name', 'title', 'email'].includes(key)) {
-    const type = key === 'email' ? 'email' : 'text';
-    const value = state.form[key] || '';
-    const autocomplete = key === 'name' ? 'name' : key === 'email' ? 'email' : 'organization-title';
+  if (key === 'register') {
     return `
-      <h2>${txt(key)}</h2>
-      <div class="field-wrap">
-        <input id="single-field" class="field" type="${type}" autocomplete="${autocomplete}" value="${escapeHtml(value)}" placeholder="${txt(`${key}Ph`)}" autofocus>
-        <div class="error" id="field-error"></div>
-      </div>
-    `;
-  }
-
-  if (key === 'mobile') {
-    return `
-      <h2>${txt('mobile')}</h2>
-      <div class="field-wrap">
-        <div class="phone-row">
-          <div class="country-box">
-            <button class="country-btn" id="country-btn" type="button">
-              ${flagImage(state.country)}
-              <b>${state.country.code}</b>
-              <span class="country-name">${state.lang === 'ar' ? state.country.ar : state.country.en}</span>
-            </button>
-            ${state.countryOpen ? countryPicker() : ''}
-          </div>
-          <div>
-            <input id="phone-field" class="field phone-field" inputmode="tel" autocomplete="tel-national" value="${escapeHtml(state.form.mobile || '')}" placeholder="${txt('phonePh')}" dir="ltr" autofocus>
-            <div class="error" id="field-error"></div>
+      <h2>${txt('registerDetails')}</h2>
+      <p class="lead">${txt('registerSub')}</p>
+      <div class="registration-form" id="registration-form">
+        <label class="form-field">
+          <span>${state.lang === 'ar' ? 'الاسم' : 'Name'}</span>
+          <input id="reg-name" type="text" autocomplete="name" value="${escapeHtml(state.form.name || '')}" placeholder="${txt('namePh')}">
+        </label>
+        <label class="form-field">
+          <span>${txt('email')}</span>
+          <input id="reg-email" type="email" autocomplete="email" value="${escapeHtml(state.form.email || '')}" placeholder="${txt('emailPh')}" dir="ltr">
+        </label>
+        <div class="form-field phone-form-field">
+          <span>${txt('mobile')}</span>
+          <div class="phone-row compact-phone">
+            <div class="country-box">
+              <button class="country-btn" id="country-btn" type="button" aria-expanded="${state.countryOpen}" aria-haspopup="listbox">
+                ${flagImage(state.country)}
+                <b>${state.country.code}</b>
+                <span class="country-name">${state.lang === 'ar' ? state.country.ar : state.country.en}</span>
+              </button>
+              ${state.countryOpen ? countryPicker() : ''}
+            </div>
+            <input id="reg-mobile" class="phone-input" inputmode="tel" autocomplete="tel-national" value="${escapeHtml(state.form.mobile || '')}" placeholder="${txt('phonePh')}" dir="ltr">
           </div>
         </div>
+        <label class="form-field">
+          <span>${txt('jobTitle')}</span>
+          <input id="reg-title" type="text" autocomplete="organization-title" value="${escapeHtml(state.form.title || '')}" placeholder="${txt('titlePh')}">
+        </label>
+        <p class="privacy-note">${txt('privacy')}</p>
+        <div class="error" id="field-error" role="alert" aria-live="polite"></div>
       </div>
     `;
   }
@@ -714,69 +727,28 @@ function stageContent(key) {
   if (key === 'review') {
     return `
       <h2>${txt('review')}</h2>
-      <div class="review-grid">
-        <div class="review-cell"><small>${txt('course')}</small><b>${localized(course.title)}</b></div>
-        <div class="review-cell"><small>${txt('cohort')}</small><b>${localized(cohort?.name)}</b></div>
-        <div class="review-cell"><small>${state.lang === 'ar' ? 'الاسم' : 'Name'}</small><b>${escapeHtml(state.form.name || '')}</b></div>
-        <div class="review-cell"><small>${txt('phone')}</small><b dir="ltr">${state.country.code} ${escapeHtml(state.form.mobile || '')}</b></div>
-        <div class="review-cell"><small>${txt('jobTitle')}</small><b>${escapeHtml(state.form.title || '')}</b></div>
-        <div class="review-cell"><small>Email</small><b>${escapeHtml(state.form.email || '')}</b></div>
-      </div>
-    `;
-  }
-
-  if (key === 'price') {
-    const offerOn = offerIsActive(cohort);
-    const amount = offerOn ? cohort.offer.price : cohort?.price;
-    return `
-      <h2>${txt('price')}</h2>
-      <div class="price-panel">
-        <div class="price-label">${txt('fee')}</div>
-        <div class="price-figure">
-          <span class="price-amount">${amount ?? '—'}</span>
-          <span class="price-currency">${cohort?.currency || 'JOD'}</span>
-          ${offerOn ? `<span class="old-price">${cohort.price} ${cohort.currency || 'JOD'}</span>` : ''}
+      <div class="review-layout">
+        <div class="review-grid">
+          <div class="review-cell"><small>${txt('course')}</small><b>${localized(course.title)}</b></div>
+          <div class="review-cell"><small>${txt('cohort')}</small><b>${localized(cohort?.name)}</b></div>
+          <div class="review-cell"><small>${state.lang === 'ar' ? 'الاسم' : 'Name'}</small><b>${escapeHtml(state.form.name || '')}</b></div>
+          <div class="review-cell"><small>${txt('phone')}</small><b dir="ltr">${state.country.code} ${escapeHtml(state.form.mobile || '')}</b></div>
+          <div class="review-cell"><small>${txt('jobTitle')}</small><b>${escapeHtml(state.form.title || '')}</b></div>
+          <div class="review-cell"><small>Email</small><b>${escapeHtml(state.form.email || '')}</b></div>
         </div>
-        ${offerOn ? `
-          <div class="campaign-offer">
-            <span>Limited Offer</span>
-            <b>${localized(cohort.offer.title) || txt('offer')}</b>
-            <strong>${cohort.offer.price}<em>${cohort.currency || 'JOD'}</em></strong>
-            ${cohort.offer.endsAt ? `<p>${txt('until')} ${cohort.offer.endsAt}</p>` : ''}
-          </div>
-        ` : ''}
+        <div class="review-side">
+          ${feeMarkup(cohort)}
+          <div class="next-note"><b>${txt('paymentBoxTitle')}</b><p>${publicPaymentMessage(cohort)}</p></div>
+        </div>
       </div>
-    `;
-  }
-
-  if (key === 'payment') {
-    const paymentMessage = publicPaymentMessage(cohort);
-    return `
-      <h2>${txt('payment')}</h2>
-      <p class="lead">${paymentMessage}</p>
-      <div class="offer-box">
-        <b>${txt('paymentBoxTitle')}</b>
-        <p>${txt('paymentBoxText')}</p>
-      </div>
-      ${state.error ? `<div class="error">${state.error}</div>` : ''}
+      ${state.error ? `<div class="error" role="alert">${state.error}</div>` : ''}
     `;
   }
 
   if (key === 'waiting') {
     return state.submittedStatus === 'waiting-list'
-      ? `
-        <div class="success">
-          <div class="success-check">✓</div>
-          <h2>${txt('waitingSuccess')}</h2>
-          <p>${txt('waitingText')}</p>
-          <a class="whatsapp" href="${brand.whatsapp}" target="_blank" rel="noreferrer">${txt('whatsapp')}</a>
-        </div>
-      `
-      : `
-        <h2>${txt('waitingList')}</h2>
-        <p class="lead">${txt('waitingText')}</p>
-        ${state.error ? `<div class="error">${state.error}</div>` : ''}
-      `;
+      ? `<div class="success"><div class="success-check">✓</div><h2>${txt('waitingSuccess')}</h2><p>${txt('waitingText')}</p><a class="whatsapp" href="${brand.whatsapp}" target="_blank" rel="noreferrer">${txt('whatsapp')}</a></div>`
+      : `<h2>${txt('waitingList')}</h2><p class="lead">${txt('waitingText')}</p>${state.error ? `<div class="error" role="alert">${state.error}</div>` : ''}`;
   }
 
   if (key === 'confirmation') {
@@ -828,7 +800,7 @@ function journeyView() {
   const key = steps[state.step] || steps[0];
   const percent = ((state.step + 1) / steps.length) * 100;
   const isFinal = key === 'confirmation' || key === 'availability' || (key === 'waiting' && state.submittedStatus === 'waiting-list');
-  const nextText = key === 'payment' ? txt('submit') : key === 'waiting' ? txt('waitingList') : txt('next');
+  const nextText = key === 'review' ? txt('submit') : key === 'waiting' ? txt('waitingList') : txt('next');
 
   return shell(`
     <main class="journey">
@@ -838,8 +810,8 @@ function journeyView() {
           <span class="progress-copy">${String(state.step + 1).padStart(2, '0')} / ${String(steps.length).padStart(2, '0')}</span>
         </div>
         <div class="progress-line"><i style="width:${percent}%"></i></div>
-        <div class="stage">
-          <div class="stage-inner">${stageContent(key)}</div>
+        <div class="stage" data-step="${key}">
+          <div class="stage-inner" tabindex="-1">${stageContent(key)}</div>
         </div>
         <div class="navrow">
           ${state.step > 0 && key !== 'confirmation' ? `<button class="secondary" data-action="back" type="button">${txt('back')}</button>` : ''}
@@ -944,9 +916,18 @@ function bind() {
     });
   });
 
-  document.getElementById('phone-field')?.addEventListener('input', (event) => {
-    const numbersOnly = event.target.value.replace(/\D/g, '').slice(0, 8);
+  document.getElementById('reg-mobile')?.addEventListener('input', (event) => {
+    const numbersOnly = event.target.value.replace(/\D/g, '').slice(0, 12);
     event.target.value = numbersOnly;
+    state.form.mobile = numbersOnly;
+    saveDraft();
+  });
+
+  [['reg-name', 'name'], ['reg-email', 'email'], ['reg-title', 'title']].forEach(([id, key]) => {
+    document.getElementById(id)?.addEventListener('input', (event) => {
+      state.form[key] = event.target.value;
+      saveDraft();
+    });
   });
 
   document.querySelectorAll('.whatsapp').forEach((link) => {
@@ -959,39 +940,30 @@ async function nextStep() {
   const key = steps[state.step];
   state.error = '';
 
-  if (['name', 'title', 'email'].includes(key)) {
-    const field = document.getElementById('single-field');
-    const value = field?.value.trim() || '';
+  if (key === 'register') {
+    const name = document.getElementById('reg-name')?.value.trim() || '';
+    const email = document.getElementById('reg-email')?.value.trim() || '';
+    const title = document.getElementById('reg-title')?.value.trim() || '';
+    const mobile = document.getElementById('reg-mobile')?.value.replace(/\D/g, '') || '';
 
-    if (!value) {
+    if (!name || !email || !title || !mobile) {
       showFieldError(txt('required'));
       return;
     }
-
-    if (key === 'email' && !/^\S+@\S+\.\S+$/.test(value)) {
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
       showFieldError(txt('invalidEmail'));
       return;
     }
-
-    state.form[key] = value;
-    saveDraft();
-  }
-
-  if (key === 'mobile') {
-    const field = document.getElementById('phone-field');
-    const value = field?.value.replace(/\D/g, '') || '';
-
-    if (!(value.length === 7 || value.length === 8)) {
+    if (mobile.length < 7 || mobile.length > 12) {
       showFieldError(txt('invalidPhone'));
       return;
     }
 
-    state.form.mobile = value;
-    state.form.countryCode = state.country.code;
+    state.form = { ...state.form, name, email, title, mobile, countryCode: state.country.code };
     saveDraft();
   }
 
-  if (key === 'payment') {
+  if (key === 'review') {
     await submitRegistration('new');
     return;
   }
@@ -1080,7 +1052,7 @@ async function init() {
   document.documentElement.lang = state.lang;
   document.documentElement.dir = state.lang === 'ar' ? 'rtl' : 'ltr';
   document.body.classList.toggle('lang-en', state.lang === 'en');
-  startLoader();
+  renderMain();
 
   const remote = loadRemoteData();
   await Promise.race([remote, new Promise((resolve) => setTimeout(resolve, 900))]);
@@ -1101,7 +1073,7 @@ async function init() {
   applyDirectCourse();
   remote.then(() => {
     applyDirectCourse();
-    if (!document.getElementById('loader')) renderMain();
+    renderMain();
   });
 
   logVisit();
