@@ -55,28 +55,31 @@ function patchHome() {
   const copyPanel = hero.querySelector(`.home-copy`);
   if (!copyPanel) return;
 
+  screen?.classList.add(`home-redesign`);
+
   const eyebrow = copyPanel.querySelector(`.eyebrow`);
   const title = copyPanel.querySelector(`h1`);
   const body = copyPanel.querySelector(`:scope > p`);
   const benefits = copyPanel.querySelector(`.home-micro`);
   const visual = hero.querySelector(`.home-visual`);
+  const image = visual?.querySelector(`img`);
 
-  if (eyebrow && eyebrow.dataset.homeV9 !== lang) {
+  if (eyebrow && eyebrow.dataset.homeV10 !== lang) {
     eyebrow.textContent = copy.eyebrow;
-    eyebrow.dataset.homeV9 = lang;
+    eyebrow.dataset.homeV10 = lang;
   }
 
-  if (title && title.dataset.homeV9 !== lang) {
+  if (title && title.dataset.homeV10 !== lang) {
     title.innerHTML = copy.title;
-    title.dataset.homeV9 = lang;
+    title.dataset.homeV10 = lang;
   }
 
-  if (body && body.dataset.homeV9 !== lang) {
+  if (body && body.dataset.homeV10 !== lang) {
     body.innerHTML = copy.body;
-    body.dataset.homeV9 = lang;
+    body.dataset.homeV10 = lang;
   }
 
-  if (benefits && benefits.dataset.homeV9 !== lang) {
+  if (benefits && benefits.dataset.homeV10 !== lang) {
     benefits.innerHTML = copy.benefits.map((item) => `
       <span class="home-benefit">
         <span class="benefit-icon">${item.icon}</span>
@@ -84,16 +87,16 @@ function patchHome() {
         <small>${item.note}</small>
       </span>
     `).join(``);
-    benefits.dataset.homeV9 = lang;
+    benefits.dataset.homeV10 = lang;
   }
 
-  if (visual && !visual.querySelector(`.home-dots`)) {
-    visual.insertAdjacentHTML(`beforeend`, `
-      <span class="home-dots" aria-hidden="true">
-        <i></i><i></i><i></i>
-      </span>
-    `);
+  if (image) {
+    image.loading = `eager`;
+    image.decoding = `async`;
+    image.setAttribute(`fetchpriority`, `high`);
   }
+
+  visual?.querySelector(`.home-dots`)?.remove();
 }
 
 let patchQueued = false;
