@@ -257,6 +257,86 @@ function localized(value) {
   return value[state.lang] || value.ar || value.en || '';
 }
 
+
+function copy(ar, en) {
+  return state.lang === `ar` ? ar : en;
+}
+
+function experienceFor(course = {}) {
+  if (course.id === `excel`) {
+    return {
+      decision: copy(`إذا كان يومك مليان ملفات، معادلات، تنظيف بيانات وتقارير متكررة — فهذا المسار صُمم لك.`, `If your day is full of files, formulas, data cleanup, and repetitive reporting, this path is built for you.`),
+      signal: copy(`من العمل اليدوي إلى السيطرة`, `From manual work to control`),
+      scenarios: [
+        copy(`تكرر نفس الخطوات كل أسبوع أو شهر`, `You repeat the same steps every week or month`),
+        copy(`تضيع وقتك بين Lookup وتنظيف وتجميع البيانات`, `You lose time on lookups, cleanup, and consolidating data`),
+        copy(`تريد أن يتحول Excel من ملف إلى أداة قرار`, `You want Excel to become a decision tool, not just a file`)
+      ],
+      pipeline: [
+        { label: copy(`بيانات خام`, `Raw data`), code: `01` },
+        { label: copy(`منطق ذكي`, `Smart logic`), code: `02` },
+        { label: copy(`تحليل`, `Analysis`), code: `03` },
+        { label: copy(`قرار`, `Decision`), code: `04` }
+      ],
+      before: [copy(`عمل يدوي`, `Manual work`), copy(`صفوف كثيرة`, `Thousands of rows`), copy(`تقرير ثابت`, `Static report`)],
+      after: [copy(`Workflow أسرع وأقل تكرارًا`, `A faster, repeatable workflow`), copy(`مؤشرات واضحة خلال دقائق`, `Clear metrics in minutes`), copy(`Dashboard قابل للتحديث`, `A refreshable dashboard`)],
+      outcomeTag: copy(`التحول`, `THE SHIFT`),
+      accent: `excel`
+    };
+  }
+
+  if (course.id === `powerbi`) {
+    return {
+      decision: copy(`إذا كانت بياناتك موزعة على أكثر من مصدر وتريد Model واحد وتقارير تتفاعل مع السؤال — فهذا هو المسار.`, `If your data lives across multiple sources and you want one model with reports that respond to the question, this is the path.`),
+      signal: copy(`من بيانات متفرقة إلى قصة واحدة`, `From scattered data to one story`),
+      scenarios: [
+        copy(`تجمع تقارير من أكثر من ملف أو نظام`, `You consolidate reporting from multiple files or systems`),
+        copy(`تريد Metrics موحدة بدل اختلاف الأرقام بين التقارير`, `You want consistent metrics instead of conflicting numbers`),
+        copy(`تريد Report تفاعلي بدل إرسال نسخة جديدة كل مرة`, `You want an interactive report instead of sending a new copy every time`)
+      ],
+      pipeline: [
+        { label: copy(`مصادر`, `Sources`), code: `01` },
+        { label: copy(`Model`, `Model`), code: `02` },
+        { label: `DAX`, code: `03` },
+        { label: copy(`Story`, `Story`), code: `04` }
+      ],
+      before: [copy(`ملفات منفصلة`, `Separate files`), copy(`حسابات مشتتة`, `Scattered calculations`), copy(`تقارير ثابتة`, `Static reports`)],
+      after: [copy(`نموذج بيانات مترابط`, `A connected data model`), copy(`Measures موحدة بـ DAX`, `Consistent DAX measures`), copy(`Report تفاعلي قابل للمشاركة`, `An interactive, shareable report`)],
+      outcomeTag: copy(`التحول`, `THE SHIFT`),
+      accent: `powerbi`
+    };
+  }
+
+  return {
+    decision: localized(course.fit) || localized(course.intro),
+    signal: localized(course.promise),
+    scenarios: [localized(course.fit), localized(course.level)].filter(Boolean),
+    pipeline: (course.modules?.[state.lang] || course.modules?.ar || []).slice(0, 4).map((item, index) => ({ label: item.title, code: String(index + 1).padStart(2, `0`) })),
+    before: [],
+    after: course.outcomes?.[state.lang] || course.outcomes?.ar || [],
+    outcomeTag: copy(`النتيجة`, `OUTCOME`),
+    accent: `generic`
+  };
+}
+
+function courseQuestion(course) {
+  if (course?.id === `excel`) return copy(`هل Advanced Excel مناسب لك؟`, `Is Advanced Excel right for you?`);
+  if (course?.id === `powerbi`) return copy(`هل Power BI مناسب لك؟`, `Is Power BI right for you?`);
+  return copy(`هل هذه الدورة مناسبة لك؟`, `Is this course right for you?`);
+}
+
+function nextStepLabel(key) {
+  const labels = {
+    overview: copy(`شوف النتيجة`, `See the outcome`),
+    outcomes: copy(`استكشف المسار`, `Explore the path`),
+    curriculum: copy(`شوف المواعيد`, `See the schedule`),
+    schedule: copy(`شوف الشهادة`, `See the certificate`),
+    certificate: copy(`ابدأ التسجيل`, `Start registration`),
+    register: copy(`راجع طلبك`, `Review request`)
+  };
+  return labels[key] || txt(`next`);
+}
+
 function setLanguage(lang) {
   state.lang = lang;
   localStorage.setItem('xa_lang', lang);
@@ -378,9 +458,9 @@ function durationHours() {
 
 function formatScheduleDate(date) {
   if (!(date instanceof Date) || Number.isNaN(date.getTime())) return '';
-  return new Intl.DateTimeFormat(state.lang === 'ar' ? 'ar-JO-u-nu-latn' : 'en-GB', {
-    day: '2-digit', month: '2-digit', year: 'numeric'
-  }).format(date);
+  return new Intl.DateTimeFormat(state.lang === `ar` ? `ar-JO-u-nu-latn` : `en-GB`, {
+    day: `2-digit`, month: `2-digit`, year: `numeric`
+  }).format(date).replace(/[\u200e\u200f\u061c]/g, ``);
 }
 
 function scheduleDayName(date) {
@@ -661,47 +741,58 @@ function shell(content) {
 
 function homeView() {
   return shell(`
-    <main class="hero home-hero">
-      <section class="home-copy">
-        <span class="eyebrow">X ACADEMY · LEARN. ANALYSE. LEAD.</span>
-        <h1>${txt('heroTitle')}</h1>
-        <p>${txt('heroText')}</p>
-        <div class="home-actions">
-          <button class="primary home-cta" data-action="start" type="button">
-            <span>${txt('start')}</span>
-            <span class="cta-arrow" aria-hidden="true">${state.lang === 'ar' ? '←' : '→'}</span>
+    <main class="home-v11">
+      <section class="home-v11-copy">
+        <span class="home-v11-kicker">X ACADEMY · LEARN. ANALYSE. LEAD.</span>
+        <h1>${copy(`مش دورة جديدة.<br><em>طريقة شغل أذكى.</em>`, `Not another course.<br><em>A smarter way to work.</em>`)}</h1>
+        <p>${copy(`تعلّم مهارة تستخدمها من أول يوم في شغلك، بتجربة عملية مصممة لتخليك تفهم، تطبّق، وتبني شيئًا فعليًا.`, `Learn a skill you can use from day one at work, through a practical experience designed to help you understand, apply, and build something real.`)}</p>
+        <div class="home-v11-actions">
+          <button class="primary home-v11-cta" data-action="start" type="button">
+            <span>${copy(`اختر مهارتك`, `Choose your skill`)}</span>
+            <span aria-hidden="true">${state.lang === `ar` ? `←` : `→`}</span>
           </button>
         </div>
-        <div class="home-micro" aria-label="${state.lang === 'ar' ? 'مميزات التجربة' : 'Experience benefits'}">
-          <span>${txt('heroMicro1')}</span>
-          <span>${txt('heroMicro2')}</span>
-          <span>${txt('heroMicro3')}</span>
+        <div class="home-v11-proof" aria-label="${copy(`لماذا X Academy`, `Why X Academy`)}">
+          <div><b>4000+</b><span>${copy(`متدرب`, `learners trained`)}</span></div>
+          <div><b>${copy(`عملي`, `Hands-on`)}</b><span>${copy(`تطبيق أثناء التعلم`, `practice while learning`)}</span></div>
+          <div><b>${copy(`واقعي`, `Real work`)}</b><span>${copy(`سيناريوهات من الشغل`, `work-based scenarios`)}</span></div>
         </div>
       </section>
 
-      <figure class="home-visual">
-        <img src="./assets/img/hero-workspace.webp" alt="${txt('heroImageAlt')}">
-        <figcaption>
-          <span>${txt('heroImageNote')}</span>
-        </figcaption>
-      </figure>
+      <section class="home-v11-visual" aria-label="${txt(`heroImageAlt`)}">
+        <div class="home-v11-photo"><img src="./assets/img/hero-workspace.webp" alt="${txt(`heroImageAlt`)}"></div>
+        <div class="home-v11-float home-v11-float-a"><span>WATCH</span><b>→</b><span>DO</span><b>→</b><span>CHECK</span></div>
+        <div class="home-v11-float home-v11-float-b"><small>${copy(`الهدف`, `THE GOAL`)}</small><strong>${copy(`مهارة تستخدمها، مش معلومة تحفظها.`, `A skill you use, not a fact you memorize.`)}</strong></div>
+        <span class="home-v11-index">01</span>
+      </section>
     </main>
   `);
 }
 
 function courseCard(course) {
   const currentStatus = statusLabel(courseDisplayStatus(course));
-  const logo = course.logo || (course.id === 'excel' ? './assets/img/excel-mark.svg' : course.id === 'powerbi' ? './assets/img/powerbi-mark.svg' : './assets/img/course-default-mark.svg');
+  const logo = course.logo || (course.id === `excel` ? `./assets/img/excel-mark.svg` : course.id === `powerbi` ? `./assets/img/powerbi-mark.svg` : `./assets/img/course-default-mark.svg`);
+  const experience = experienceFor(course);
+  const why = course.id === `excel`
+    ? copy(`للشغل اليومي، التحليل السريع، والأتمتة داخل Excel`, `For day-to-day work, fast analysis, and Excel automation`)
+    : course.id === `powerbi`
+      ? copy(`لربط البيانات، بناء Model، وتقارير تفاعلية`, `For connected data, modeling, and interactive reporting`)
+      : localized(course.fit);
   return `
-    <button class="course-card" data-course="${course.id}" type="button">
-      <div class="course-card-head">
+    <button class="course-card course-card-v11 course-${experience.accent}" data-course="${course.id}" type="button">
+      <div class="course-card-v11-top">
         <span class="course-logo"><img src="${logo}" alt="${escapeHtml(localized(course.title))}"></span>
         <span class="course-state">${currentStatus}</span>
       </div>
-      <div>
+      <div class="course-card-v11-body">
+        <span class="course-card-v11-kicker">${experience.signal}</span>
         <h3 class="course-card-title">${localized(course.title)}</h3>
-        <div class="course-card-sub">${localized(course.promise) || txt('cardHint')}</div>
+        <p>${why}</p>
       </div>
+      <div class="course-card-v11-flow">
+        ${experience.pipeline.slice(0, 4).map((item) => `<span><i>${item.code}</i>${item.label}</span>`).join(``)}
+      </div>
+      <div class="course-card-v11-action"><span>${copy(`اعرف إذا كانت مناسبة لك`, `See if it fits you`)}</span><b>${state.lang === `ar` ? `←` : `→`}</b></div>
     </button>
   `;
 }
@@ -709,24 +800,27 @@ function courseCard(course) {
 function coursesView() {
   const list = visibleCourses();
   return shell(`
-    <main class="journey">
+    <main class="journey journey-v11">
       <section class="journey-card">
         <div class="journey-head">
-          <span class="eyebrow">X ACADEMY</span>
+          <span class="eyebrow">${copy(`خطوتك الأولى`, `YOUR FIRST STEP`)}</span>
           <span class="progress-copy">01</span>
         </div>
         <div class="progress-line"><i style="width:10%"></i></div>
-        <div class="stage">
+        <div class="stage course-selection-stage">
           <div class="stage-inner">
-            <h2>${txt('choose')}</h2>
-            <p class="lead">${txt('chooseSub')}</p>
-            <div class="course-grid">
-              ${list.map((course) => courseCard(course)).join('') || `<p>${txt('registerClosed')}</p>`}
+            <div class="selection-intro">
+              <span class="section-kicker">${copy(`اختر المشكلة التي تريد حلها`, `CHOOSE THE PROBLEM TO SOLVE`)}</span>
+              <h2>${copy(`أي نوع من الشغل تريد أن يصبح أذكى؟`, `What kind of work do you want to make smarter?`)}</h2>
+              <p class="lead">${txt(`chooseSub`)}</p>
+            </div>
+            <div class="course-grid course-grid-v11">
+              ${list.map((course) => courseCard(course)).join(``) || `<p>${txt(`registerClosed`)}</p>`}
             </div>
           </div>
         </div>
-        <div class="navrow">
-          <button class="secondary" data-action="home" type="button">${txt('back')}</button>
+        <div class="navrow navrow-v11 single-back">
+          <button class="secondary" data-action="home" type="button">${txt(`back`)}</button>
         </div>
       </section>
     </main>
@@ -771,227 +865,224 @@ function feeMarkup(cohort, compact = false) {
 function stageContent(key) {
   const course = state.course;
   const cohort = state.cohort;
+  const experience = experienceFor(course);
 
-  if (key === 'overview') {
+  if (key === `overview`) {
     return `
-      <h2>${localized(course.title)}</h2>
-      <p class="lead">${localized(course.intro)}</p>
-      <div class="overview-grid">
-        <div class="overview-copy">
-          <div class="item">
-            <strong>01</strong>
-            <div><b>${txt('bestFor')}</b><p>${localized(course.fit)}</p></div>
-          </div>
-          <div class="item">
-            <strong>02</strong>
-            <div><b>${txt('level')}</b><p>${localized(course.level)}</p></div>
-          </div>
+      <div class="stage-title-row">
+        <div>
+          <span class="section-kicker">${experience.signal}</span>
+          <h2>${courseQuestion(course)}</h2>
+          <p class="lead">${experience.decision}</p>
         </div>
-        <aside class="trust-panel" aria-label="${state.lang === 'ar' ? 'معلومات الثقة' : 'Trust information'}">
-          <span>${txt('trainerLabel')}</span>
-          <b>${txt('trainerName')}</b>
-          <p>${txt('trainerRole')}</p>
-          <div class="trust-divider"></div>
-          <small>${txt('learningStyle')}</small>
-          <small>${txt('certificateSimple')}</small>
-          <small>${state.lang === 'ar' ? 'خبرة عملية + تدريب احترافي + تطبيق مرتبط بالشغل.' : 'Hands-on business experience, professional training, and work-focused application.'}</small>
-        </aside>
+        <div class="course-badge-large"><img src="${course.logo || `./assets/img/course-default-mark.svg`}" alt=""><span>${localized(course.shortTitle)}</span></div>
+      </div>
+      <div class="fit-v11">
+        <div class="fit-scenarios">
+          <span class="fit-label">${copy(`ستعرف نفسك هنا إذا...`, `YOU'LL RECOGNIZE YOURSELF IF...`)}</span>
+          ${experience.scenarios.map((item, index) => `
+            <div class="fit-scenario"><b>${String(index + 1).padStart(2, `0`)}</b><p>${item}</p></div>
+          `).join(``)}
+        </div>
+        <div class="process-card process-${experience.accent}">
+          <span>${copy(`ما الذي سنغيّره؟`, `WHAT CHANGES?`)}</span>
+          <strong>${experience.signal}</strong>
+          <div class="process-flow">
+            ${experience.pipeline.map((item, index) => `<div><i>${item.code}</i><b>${item.label}</b>${index < experience.pipeline.length - 1 ? `<em>${state.lang === `ar` ? `←` : `→`}</em>` : ``}</div>`).join(``)}
+          </div>
+          <small>${localized(course.intro)}</small>
+        </div>
       </div>
     `;
   }
 
-  if (key === 'outcomes') {
+  if (key === `outcomes`) {
     const outcomes = course.outcomes?.[state.lang] || course.outcomes?.ar || [];
+    const rows = outcomes.map((item, index) => ({ before: experience.before[index] || copy(`قبل`, `Before`), after: experience.after[index] || item, source: item }));
     return `
-      <h2>${txt('outcomes')}</h2>
-      <p class="lead">${txt('outcomesSub')}</p>
-      <div class="split-layout">
-        <div class="program-block">
-          <div class="simple-list outcome-list">
-            ${outcomes.map((item, index) => `<div class="simple-row"><b>${String(index + 1).padStart(2, '0')}</b><p>${item}</p></div>`).join('')}
+      <span class="section-kicker">${experience.outcomeTag}</span>
+      <h2>${copy(`الفرق الذي يجب أن تشعر به في شغلك`, `The difference you should feel at work`)}</h2>
+      <p class="lead">${copy(`مش هدفنا تحفظ أدوات. هدفنا تتغير طريقة تنفيذك للشغل.`, `The goal is not to memorize tools. It is to change how you execute the work.`)}</p>
+      <div class="shift-board">
+        ${rows.map((row, index) => `
+          <div class="shift-row">
+            <span class="shift-num">0${index + 1}</span>
+            <div class="shift-before"><small>${copy(`قبل`, `BEFORE`)}</small><b>${row.before}</b></div>
+            <span class="shift-arrow">${state.lang === `ar` ? `←` : `→`}</span>
+            <div class="shift-after"><small>${copy(`بعد`, `AFTER`)}</small><b>${row.after}</b><p>${row.source}</p></div>
           </div>
-        </div>
-        <aside class="spotlight-panel">
-          <span class="panel-kicker">${txt('trainingStyleTitle')}</span>
-          <b>${txt('learningStyle')}</b>
-          <p>${txt('trainingStyleText')}</p>
-          <div class="mini-points">
-            ${trainingPoints().map((item) => `<span>${item}</span>`).join('')}
-          </div>
-        </aside>
+        `).join(``)}
       </div>
+      <div class="method-strip"><b>WATCH</b><span>30–60s</span><i>→</i><b>DO</b><span>2–4m</span><i>→</i><b>CHECK</b><span>${copy(`مع المدرب`, `with trainer`)}</span></div>
     `;
   }
 
-  if (key === 'curriculum') {
+  if (key === `curriculum`) {
     const modules = course.modules?.[state.lang] || course.modules?.ar || [];
     return `
-      <h2>${txt('curriculumStage')}</h2>
-      <p class="lead">${txt('curriculumStageSub')}</p>
-      <div class="split-layout curriculum-layout">
-        <div class="program-block">
-          <span class="section-kicker">${txt('curriculum')}</span>
-          <div class="simple-list curriculum-list">
-            ${modules.map((module) => `<div class="simple-row"><b>${module.n} · ${module.title}</b><p>${module.detail}</p></div>`).join('')}
-          </div>
-        </div>
-        <aside class="spotlight-panel spotlight-panel-soft">
-          <span class="panel-kicker">${localized(course.shortTitle)}</span>
-          <b>${localized(course.intro)}</b>
-          <p>${txt('curriculumSub')}</p>
-        </aside>
+      <span class="section-kicker">${copy(`خريطة التعلم`, `LEARNING MAP`)}</span>
+      <h2>${copy(`كل مرحلة تبني التي بعدها`, `Every stage earns the next one`)}</h2>
+      <p class="lead">${txt(`curriculumStageSub`)}</p>
+      <div class="roadmap-v11 roadmap-${experience.accent}">
+        ${modules.map((module, index) => `
+          <article class="roadmap-step">
+            <div class="roadmap-top"><span>${module.n}</span><i>${String(Math.round(((index + 1) / modules.length) * 100)).padStart(2, `0`)}%</i></div>
+            <h3>${module.title}</h3>
+            <p>${module.detail}</p>
+            <div class="roadmap-line"></div>
+          </article>
+        `).join(``)}
+      </div>
+      <div class="curriculum-output">
+        <span>${copy(`الناتج النهائي`, `FINAL OUTPUT`)}</span>
+        <b>${course.id === `excel` ? copy(`ملف عمل أذكى + Dashboard قابل للتحديث`, `A smarter workbook + refreshable dashboard`) : course.id === `powerbi` ? copy(`Data Model + Measures + Interactive Report`, `Data model + measures + interactive report`) : localized(course.promise)}</b>
       </div>
     `;
   }
 
-  if (key === 'schedule') {
+  if (key === `schedule`) {
     const meta = scheduleMeta(cohort);
+    const hours = durationHours();
     return `
-      <h2>${txt('scheduleInvestment')}</h2>
+      <span class="section-kicker">${copy(`قبل أن تحجز`, `BEFORE YOU BOOK`)}</span>
+      <h2>${txt(`scheduleInvestment`)}</h2>
       ${cohort ? `
-        <div class="schedule-summary">
-          <div class="schedule-copy">
-            <p class="lead">${localized(cohort.name)} · ${cohort.sessions?.length || 0} ${txt('sessions')}${durationHours() != null ? ` · ${durationHours()} ${txt('hours')}` : ''}</p>
-            <p class="schedule-narrative"><b>${state.lang === 'ar' ? 'الخلاصة:' : 'Summary:'}</b> ${scheduleNarrative(cohort)}</p>
+        <div class="schedule-hero-v11">
+          <div>
+            <span>${localized(cohort.name)}</span>
+            <strong>${meta.start || `—`} <i>→</i> ${meta.end || `—`}</strong>
+            <p>${scheduleNarrative(cohort)}</p>
           </div>
           ${feeMarkup(cohort, true)}
         </div>
-        <div class="schedule-facts">
-          <div class="schedule-fact"><small>${txt('startDate')}</small><b>${meta.start || '—'}</b></div>
-          <div class="schedule-fact"><small>${txt('endDate')}</small><b>${meta.end || '—'}</b></div>
-          <div class="schedule-fact"><small>${txt('trainingDays')}</small><b>${meta.days || '—'}</b></div>
+        <div class="schedule-metrics-v11">
+          <div><small>${txt(`sessions`)}</small><b>${cohort.sessions?.length || 0}</b></div>
+          <div><small>${txt(`hours`)}</small><b>${hours ?? `—`}</b></div>
+          <div><small>${txt(`trainingDays`)}</small><b>${meta.days || `—`}</b></div>
+          <div><small>${copy(`الوقت`, `Time`)}</small><b>${meta.time || scheduleTimeSummary(cohort.sessions) || `—`}</b></div>
         </div>
-        <div class="sessions">
+        <div class="schedule-list-v11">
           ${(cohort.sessions || []).map((session, index) => `
-            <div class="session">
-              <b>${String(index + 1).padStart(2, '0')} · ${session.day || ''}</b>
-              <small>${session.date || ''} · ${session.time || ''}</small>
+            <div class="schedule-session-v11">
+              <span>${String(index + 1).padStart(2, `0`)}</span>
+              <b>${session.day || ``}</b>
+              <small>${session.date || ``}</small>
+              <em>${session.time || ``}</em>
             </div>
-          `).join('')}
+          `).join(``)}
         </div>
-      ` : `<p class="lead">${txt('registerClosedText')}</p>`}
+      ` : `<p class="lead">${txt(`registerClosedText`)}</p>`}
     `;
   }
 
-  if (key === 'certificate') {
+  if (key === `certificate`) {
     const cert = certificateInfo(course);
+    const actualImage = course.id === `excel` && cert.imageUrl;
     return `
-      <h2>${txt('certificate')}</h2>
+      <span class="section-kicker">${copy(`إثبات الإنجاز`, `PROOF OF COMPLETION`)}</span>
+      <h2>${txt(`certificate`)}</h2>
       <p class="lead">${cert.note}</p>
-      <div class="certificate certificate-premium">
-        <div class="certificate-copy">
-          <div class="certificate-meta">
-            <span class="section-kicker">${txt('certificateIssuer')}</span>
-            <b>${cert.title}</b>
-            <p>${cert.issuer}</p>
-          </div>
-          <div class="certificate-box">
-            <span class="panel-kicker">${txt('certificateRecognitions')}</span>
-            <div class="recognition-list">
-              ${cert.recognitions.map((item) => `<span class="recognition-chip">${item}</span>`).join('')}
+      <div class="certificate-v11">
+        <div class="certificate-preview-v11 ${actualImage ? `has-image` : `is-generic`}">
+          ${actualImage ? `<img src="${cert.imageUrl}" alt="${cert.title}">` : `
+            <div class="credential-abstract">
+              <span>X ACADEMY</span>
+              <small>${copy(`صورة توضيحية للشهادة`, `CERTIFICATE PREVIEW`)}</small>
+              <strong>${cert.title}</strong>
+              <p>Liverpool College For International Studies</p>
+              <div><i></i><i></i><i></i></div>
             </div>
-          </div>
-          <div class="certificate-note">
-            <b>${txt('certificateBenefit')}</b>
-            <p>${txt('certificateBenefitText')}</p>
-          </div>
+          `}
         </div>
-        <div class="certificate-visual">
-          <img src="${cert.imageUrl}" alt="${cert.title}">
+        <div class="certificate-info-v11">
+          <div><small>${txt(`certificateIssuer`)}</small><b>${cert.issuer}</b></div>
+          <div><small>${copy(`ما الظاهر على الشهادة؟`, `WHAT APPEARS ON THE CERTIFICATE?`)}</small><div class="recognition-list-v11">${cert.recognitions.map((item) => `<span>${item}</span>`).join(``)}</div></div>
+          <div class="certificate-value-v11"><small>${txt(`certificateBenefit`)}</small><p>${txt(`certificateBenefitText`)}</p></div>
         </div>
       </div>
     `;
   }
 
-  if (key === 'availability') {
-    const comingSoon = course.visibility === 'information' || (course.visibility === 'open' && !state.cohort);
-    const title = comingSoon ? txt('upcoming') : txt('registerClosed');
+  if (key === `availability`) {
+    const comingSoon = course.visibility === `information` || (course.visibility === `open` && !state.cohort);
+    const title = comingSoon ? txt(`upcoming`) : txt(`registerClosed`);
     return `
-      <div class="success">
+      <div class="success success-v11">
+        <span class="success-index">X</span>
         <h2>${title}</h2>
-        <p>${txt('registerClosedText')}</p>
-        <a class="whatsapp" href="${brand.whatsapp}" target="_blank" rel="noreferrer">${txt('whatsapp')}</a>
+        <p>${txt(`registerClosedText`)}</p>
+        <a class="whatsapp" href="${brand.whatsapp}" target="_blank" rel="noreferrer">${txt(`whatsapp`)}</a>
       </div>
     `;
   }
 
-  if (key === 'register') {
+  if (key === `register`) {
     return `
-      <h2>${txt('registerDetails')}</h2>
-      <p class="lead">${txt('registerSub')}</p>
-      <div class="registration-form" id="registration-form">
-        <label class="form-field">
-          <span>${state.lang === 'ar' ? 'الاسم' : 'Name'}</span>
-          <input id="reg-name" type="text" autocomplete="name" value="${escapeHtml(state.form.name || '')}" placeholder="${txt('namePh')}">
-        </label>
-        <label class="form-field">
-          <span>${txt('email')}</span>
-          <input id="reg-email" type="email" autocomplete="email" value="${escapeHtml(state.form.email || '')}" placeholder="${txt('emailPh')}" dir="ltr">
-        </label>
-        <div class="form-field phone-form-field">
-          <span>${txt('mobile')}</span>
-          <div class="phone-row compact-phone">
-            <div class="country-box">
-              <button class="country-btn" id="country-btn" type="button" aria-expanded="${state.countryOpen}" aria-haspopup="listbox">
-                ${flagImage(state.country)}
-                <b>${state.country.code}</b>
-                <span class="country-name">${state.lang === 'ar' ? state.country.ar : state.country.en}</span>
-              </button>
-              ${state.countryOpen ? countryPicker() : ''}
-            </div>
-            <input id="reg-mobile" class="phone-input" inputmode="tel" autocomplete="tel-national" value="${escapeHtml(state.form.mobile || '')}" placeholder="${txt('phonePh')}" dir="ltr">
-          </div>
+      <span class="section-kicker">${copy(`طلب المقعد`, `REQUEST YOUR SEAT`)}</span>
+      <h2>${txt(`registerDetails`)}</h2>
+      <p class="lead">${copy(`أربع معلومات فقط. بعدها سترى ملخص طلبك كاملًا قبل الإرسال.`, `Just four details. You will review the complete request before submitting.`)}</p>
+      <div class="registration-v11">
+        <div class="registration-context-v11">
+          <span>${localized(course.shortTitle)}</span>
+          <b>${localized(course.title)}</b>
+          <p>${localized(cohort?.name) || ``}</p>
+          ${feeMarkup(cohort, true)}
+          <small>${txt(`privacy`)}</small>
         </div>
-        <label class="form-field">
-          <span>${txt('jobTitle')}</span>
-          <input id="reg-title" type="text" autocomplete="organization-title" value="${escapeHtml(state.form.title || '')}" placeholder="${txt('titlePh')}">
-        </label>
-        <p class="privacy-note">${txt('privacy')}</p>
-        <div class="error" id="field-error" role="alert" aria-live="polite"></div>
+        <div class="registration-form registration-form-v11" id="registration-form">
+          <label class="form-field"><span>${state.lang === `ar` ? `الاسم` : `Name`}</span><input id="reg-name" type="text" autocomplete="name" value="${escapeHtml(state.form.name || ``)}" placeholder="${txt(`namePh`)}"></label>
+          <label class="form-field"><span>${txt(`email`)}</span><input id="reg-email" type="email" autocomplete="email" value="${escapeHtml(state.form.email || ``)}" placeholder="${txt(`emailPh`)}" dir="ltr"></label>
+          <div class="form-field phone-form-field"><span>${txt(`mobile`)}</span><div class="phone-row compact-phone"><div class="country-box"><button class="country-btn" id="country-btn" type="button" aria-expanded="${state.countryOpen}" aria-haspopup="listbox">${flagImage(state.country)}<b>${state.country.code}</b><span class="country-name">${state.lang === `ar` ? state.country.ar : state.country.en}</span></button>${state.countryOpen ? countryPicker() : ``}</div><input id="reg-mobile" class="phone-input" inputmode="tel" autocomplete="tel-national" value="${escapeHtml(state.form.mobile || ``)}" placeholder="${txt(`phonePh`)}" dir="ltr"></div></div>
+          <label class="form-field"><span>${txt(`jobTitle`)}</span><input id="reg-title" type="text" autocomplete="organization-title" value="${escapeHtml(state.form.title || ``)}" placeholder="${txt(`titlePh`)}"></label>
+          <div class="error" id="field-error" role="alert" aria-live="polite"></div>
+        </div>
       </div>
     `;
   }
 
-  if (key === 'review') {
+  if (key === `review`) {
     return `
-      <h2>${txt('review')}</h2>
-      <div class="review-layout">
-        <div class="review-grid">
-          <div class="review-cell"><small>${txt('course')}</small><b>${localized(course.title)}</b></div>
-          <div class="review-cell"><small>${txt('cohort')}</small><b>${localized(cohort?.name)}</b></div>
-          <div class="review-cell"><small>${state.lang === 'ar' ? 'الاسم' : 'Name'}</small><b>${escapeHtml(state.form.name || '')}</b></div>
-          <div class="review-cell"><small>${txt('phone')}</small><b dir="ltr">${state.country.code} ${escapeHtml(state.form.mobile || '')}</b></div>
-          <div class="review-cell"><small>${txt('jobTitle')}</small><b>${escapeHtml(state.form.title || '')}</b></div>
-          <div class="review-cell"><small>Email</small><b>${escapeHtml(state.form.email || '')}</b></div>
+      <span class="section-kicker">${copy(`آخر خطوة`, `FINAL CHECK`)}</span>
+      <h2>${txt(`review`)}</h2>
+      <p class="lead">${copy(`راجع كل شيء مرة واحدة. لن يتم الدفع الآن.`, `Review everything once. No payment is taken at this step.`)}</p>
+      <div class="review-v11">
+        <div class="review-sheet-v11">
+          <div class="review-sheet-head"><span>${localized(course.shortTitle)}</span><b>${localized(course.title)}</b></div>
+          <div class="review-line"><small>${txt(`cohort`)}</small><b>${localized(cohort?.name)}</b></div>
+          <div class="review-line"><small>${state.lang === `ar` ? `الاسم` : `Name`}</small><b>${escapeHtml(state.form.name || ``)}</b></div>
+          <div class="review-line"><small>${txt(`phone`)}</small><b dir="ltr">${state.country.code} ${escapeHtml(state.form.mobile || ``)}</b></div>
+          <div class="review-line"><small>${txt(`jobTitle`)}</small><b>${escapeHtml(state.form.title || ``)}</b></div>
+          <div class="review-line"><small>Email</small><b>${escapeHtml(state.form.email || ``)}</b></div>
         </div>
-        <div class="review-side">
+        <div class="review-action-v11">
           ${feeMarkup(cohort)}
-          <div class="next-note"><b>${txt('paymentBoxTitle')}</b><p>${publicPaymentMessage(cohort)}</p></div>
+          <div class="next-note next-note-v11"><small>${txt(`paymentBoxTitle`)}</small><b>${copy(`أرسل الطلب الآن، وأكمل التسجيل مع مسؤول X Academy.`, `Submit now, then complete registration with X Academy.`)}</b><p>${publicPaymentMessage(cohort)}</p></div>
         </div>
       </div>
-      ${state.error ? `<div class="error" role="alert">${state.error}</div>` : ''}
+      ${state.error ? `<div class="error" role="alert">${state.error}</div>` : ``}
     `;
   }
 
-  if (key === 'waiting') {
-    return state.submittedStatus === 'waiting-list'
-      ? `<div class="success"><div class="success-check">✓</div><h2>${txt('waitingSuccess')}</h2><p>${txt('waitingText')}</p><a class="whatsapp" href="${brand.whatsapp}" target="_blank" rel="noreferrer">${txt('whatsapp')}</a></div>`
-      : `<h2>${txt('waitingList')}</h2><p class="lead">${txt('waitingText')}</p>${state.error ? `<div class="error" role="alert">${state.error}</div>` : ''}`;
+  if (key === `waiting`) {
+    return state.submittedStatus === `waiting-list`
+      ? `<div class="success success-v11"><div class="success-check">✓</div><h2>${txt(`waitingSuccess`)}</h2><p>${txt(`waitingText`)}</p><a class="whatsapp" href="${brand.whatsapp}" target="_blank" rel="noreferrer">${txt(`whatsapp`)}</a></div>`
+      : `<h2>${txt(`waitingList`)}</h2><p class="lead">${txt(`waitingText`)}</p>${state.error ? `<div class="error" role="alert">${state.error}</div>` : ``}`;
   }
 
-  if (key === 'confirmation') {
+  if (key === `confirmation`) {
     return `
-      <div class="success">
+      <div class="success success-v11">
         <div class="success-check">✓</div>
-        <h2>${txt('success')}</h2>
-        <p>${txt('successText')}</p>
-        <span class="status-chip">${txt('paymentStatus')}</span>
-        <a class="whatsapp" href="${brand.whatsapp}" target="_blank" rel="noreferrer">${txt('whatsapp')}</a>
+        <span class="section-kicker">${copy(`تم`, `DONE`)}</span>
+        <h2>${txt(`success`)}</h2>
+        <p>${txt(`successText`)}</p>
+        <div class="confirmation-flow-v11"><span class="done">${copy(`استلام الطلب`, `Request received`)}</span><i>→</i><span>${copy(`تواصل مسؤول التسجيل`, `Registration follow-up`)}</span><i>→</i><span>${copy(`تأكيد المقعد`, `Seat confirmation`)}</span></div>
+        <a class="whatsapp" href="${brand.whatsapp}" target="_blank" rel="noreferrer">${txt(`whatsapp`)}</a>
       </div>
     `;
   }
 
-  return '';
+  return ``;
 }
 
 function flagImage(country) {
@@ -1027,25 +1118,25 @@ function journeyView() {
   const steps = buildSteps();
   const key = steps[state.step] || steps[0];
   const percent = ((state.step + 1) / steps.length) * 100;
-  const isFinal = key === 'confirmation' || key === 'availability' || (key === 'waiting' && state.submittedStatus === 'waiting-list');
-  const nextText = key === 'review' ? txt('submit') : key === 'waiting' ? txt('waitingList') : txt('next');
+  const isFinal = key === `confirmation` || key === `availability` || (key === `waiting` && state.submittedStatus === `waiting-list`);
+  const nextText = key === `review` ? txt(`submit`) : key === `waiting` ? txt(`waitingList`) : nextStepLabel(key);
 
   return shell(`
-    <main class="journey">
+    <main class="journey journey-v11 course-theme-${state.course?.id || `generic`}">
       <section class="journey-card">
         <div class="journey-head">
-          <span class="eyebrow">${localized(state.course.shortTitle)}</span>
-          <span class="progress-copy">${String(state.step + 1).padStart(2, '0')} / ${String(steps.length).padStart(2, '0')}</span>
+          <span class="eyebrow"><img src="${state.course?.logo || `./assets/img/course-default-mark.svg`}" alt=""> ${localized(state.course.shortTitle)}</span>
+          <span class="progress-copy">${String(state.step + 1).padStart(2, `0`)} / ${String(steps.length).padStart(2, `0`)}</span>
         </div>
         <div class="progress-line"><i style="width:${percent}%"></i></div>
         <div class="stage" data-step="${key}">
           <div class="stage-inner" tabindex="-1">${stageContent(key)}</div>
         </div>
-        <div class="navrow">
-          ${state.step > 0 && key !== 'confirmation' ? `<button class="secondary" data-action="back" type="button">${txt('back')}</button>` : ''}
+        <div class="navrow navrow-v11">
+          ${state.step > 0 && key !== `confirmation` ? `<button class="secondary" data-action="back" type="button">${txt(`back`)}</button>` : ``}
           ${isFinal
-            ? `<button class="primary" data-action="restart" type="button">${txt('restart')}</button>`
-            : `<button class="primary" data-action="next" type="button" ${state.submitting ? 'disabled' : ''}>${state.submitting ? txt('loading') : nextText}</button>`}
+            ? `<button class="primary" data-action="restart" type="button">${txt(`restart`)}</button>`
+            : `<button class="primary" data-action="next" type="button" ${state.submitting ? `disabled` : ``}>${state.submitting ? txt(`loading`) : nextText}</button>`}
         </div>
       </section>
     </main>
@@ -1076,23 +1167,8 @@ function fitElementInside(element, container) {
 }
 
 function fitCurrentScreen() {
-  const stage = document.querySelector('.stage');
-  const stageInner = stage?.querySelector('.stage-inner');
-  if (stage && stageInner) fitElementInside(stageInner, stage);
-
-  const hero = document.querySelector('.hero');
-  if (hero) {
-    hero.style.transformOrigin = 'top center';
-    hero.style.transform = 'scale(1)';
-    const screen = hero.closest('.screen');
-    const topbar = screen?.querySelector('.topbar');
-    const availableH = Math.max(1, window.innerHeight - (topbar?.offsetHeight || 0));
-    const availableW = Math.max(1, window.innerWidth);
-    const neededH = Math.max(1, hero.scrollHeight);
-    const neededW = Math.max(1, hero.scrollWidth);
-    const scale = Math.max(0.02, Math.min(1, availableH / neededH, availableW / neededW) * 0.985);
-    hero.style.transform = `scale(${scale})`;
-  }
+  // v11: deliberate responsive layout replaces viewport scaling.
+  // Keep this function as a no-op because existing resize hooks call it.
 }
 
 let fitResizeFrame = 0;
@@ -1108,10 +1184,11 @@ window.addEventListener('load', () => requestAnimationFrame(fitCurrentScreen));
 document.fonts?.ready.then(() => requestAnimationFrame(fitCurrentScreen));
 
 function renderMain() {
-  const main = document.getElementById('main') || app;
-  main.innerHTML = state.view === 'home' ? homeView() : state.view === 'courses' ? coursesView() : journeyView();
+  const main = document.getElementById(`main`) || app;
+  main.innerHTML = state.view === `home` ? homeView() : state.view === `courses` ? coursesView() : journeyView();
   bind();
-  requestAnimationFrame(() => requestAnimationFrame(() => { fitCurrentScreen(); setTimeout(fitCurrentScreen, 80); setTimeout(fitCurrentScreen, 220); }));
+  const focusTarget = main.querySelector(`.stage-inner`);
+  if (focusTarget && !prefersReducedMotion) requestAnimationFrame(() => focusTarget.focus({ preventScroll: true }));
 }
 
 function render() {
