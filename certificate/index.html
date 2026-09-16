@@ -1,1 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X Academy Certificate Builder</title>
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <style>
+    :root{
+      --bg:#f4f7fb;--ink:#0f172a;--muted:#64748b;--line:#dbe3ed;--card:#fff;
+      --accent:#099999;--shadow:0 20px 60px rgba(15,23,42,.10);
+      --cert-w:1400px;--cert-h:990px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    .app{min-height:100vh;display:grid;grid-template-columns:320px minmax(0,1fr)}
+    .sidebar{position:sticky;top:0;height:100vh;background:#0b1220;color:#fff;padding:28px 22px;display:flex;flex-direction:column;gap:24px}
+    .brand{display:flex;align-items:center;gap:12px}.brand-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#0bb,#087777);display:grid;place-items:center;font-weight:800}.brand strong{font:800 18px Manrope}.brand small{display:block;color:#94a3b8;margin-top:2px}
+    .steps{display:grid;gap:8px}.step-nav{display:flex;align-items:center;gap:10px;border:0;background:transparent;color:#94a3b8;padding:11px 10px;border-radius:12px;text-align:left;width:100%}.step-nav .num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#162033;font-size:12px;font-weight:700}.step-nav.active{background:#131f33;color:#fff}.step-nav.active .num{background:#0aa;color:#fff}.step-nav.done{color:#cbd5e1}.side-bottom{margin-top:auto;font-size:12px;color:#64748b;line-height:1.6}
+    .main{padding:34px}.shell{max-width:1360px;margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.topbar h1{font:800 24px Manrope;margin:0}.topbar p{margin:6px 0 0;color:var(--muted);font-size:14px}.badge{background:#e7f7f7;color:#077575;padding:8px 12px;border-radius:999px;font-size:12px;font-weight:700}
+    .panel{background:var(--card);border:1px solid #e7edf4;border-radius:24px;box-shadow:var(--shadow);overflow:hidden}.form-stage{padding:36px;min-height:580px}.question{animation:in .22s ease}@keyframes in{from{opacity:.3;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .kicker{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0b8c8c}.qtitle{font:800 34px/1.12 Manrope;margin:10px 0 12px}.qdesc{color:var(--muted);font-size:15px;max-width:760px;line-height:1.7;margin-bottom:28px}
+    .field{display:grid;gap:8px;margin:18px 0}.field label{font-weight:700;font-size:13px}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:#fff;border-radius:14px;padding:14px 15px;outline:none;transition:.2s}.field input:focus,.field textarea:focus,.field select:focus{border-color:#0aa;box-shadow:0 0 0 4px rgba(9,153,153,.10)}.field textarea{min-height:130px;resize:vertical}.hint{font-size:12px;color:#94a3b8;line-height:1.55}
+    .choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.choice{border:2px solid var(--line);border-radius:20px;padding:22px;background:#fff;transition:.2s;text-align:left}.choice:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(15,23,42,.08)}.choice.selected{border-color:#0aa;box-shadow:0 0 0 4px rgba(9,153,153,.08)}.choice .swatch{height:80px;border-radius:14px;margin-bottom:16px}.swatch.excel{background:linear-gradient(135deg,#0f6b3e,#1f8f55 55%,#dff4e8)}.swatch.powerbi{background:linear-gradient(135deg,#f2c811,#ffd84d 55%,#262626)}.choice h3{margin:0 0 7px;font:800 18px Manrope}.choice p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .section-label{margin:26px 0 10px;font-weight:800;font-size:13px;color:#334155}.option-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.option-card{border:1.5px solid var(--line);border-radius:15px;background:#fff;padding:14px 15px;text-align:left;transition:.18s}.option-card:hover{border-color:#9cc}.option-card.selected{border-color:#099999;background:#f1fbfb;box-shadow:0 0 0 3px rgba(9,153,153,.08)}.option-card strong{display:block;font-size:13px;margin-bottom:4px}.option-card span{display:block;color:#64748b;font-size:11px;line-height:1.45}.font-sample{font-size:24px!important;color:#0f172a!important;margin-bottom:5px}
+    .actions{display:flex;justify-content:space-between;align-items:center;padding-top:26px;margin-top:24px;border-top:1px solid #edf1f5}.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:800;transition:.18s}.btn:hover{transform:translateY(-1px)}.btn.primary{background:#0f172a;color:#fff}.btn.secondary{background:#eef2f7;color:#334155}.btn.teal{background:#099999;color:#fff}.btn-row{display:flex;gap:8px;flex-wrap:wrap}
 
+    .preview-layout{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:18px}.preview-wrap{background:#e9eef4;border-radius:18px;padding:18px;display:flex;align-items:center;justify-content:center;overflow:auto;min-height:620px}.cert-viewport{width:100%;max-width:1000px;aspect-ratio:1400/990;position:relative;overflow:hidden;background:#fff;box-shadow:0 12px 35px rgba(15,23,42,.10)}
+    .certificate{width:var(--cert-w);height:var(--cert-h);position:absolute;left:0;top:0;background:#fff;overflow:hidden;transform-origin:top left;font-family:var(--font-body,Inter),Arial,sans-serif;color:#173525;user-select:none}
+    .certificate.font-modern{--font-display:Manrope;--font-body:Inter}.certificate.font-executive{--font-display:Montserrat;--font-body:"Source Sans 3"}.certificate.font-clean{--font-display:Poppins;--font-body:Inter}.certificate.font-editorial{--font-display:"Playfair Display";--font-body:Manrope}
+    .cert-inner{position:absolute;inset:0;z-index:2}
+    .certificate.excel{background:linear-gradient(135deg,#fbfffc 0 76%,#e8f6ee 76%)}.certificate.excel:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(22,111,62,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(22,111,62,.055) 1px,transparent 1px);background-size:56px 58px;left:42%}.certificate.excel:after{content:"X";position:absolute;right:42px;top:26px;font-family:Arial,sans-serif;font-size:290px;font-weight:900;color:rgba(16,124,65,.04);line-height:1}.certificate.excel .accent{color:#107c41}.certificate.excel .sigline{background:#107c41}.certificate.excel .name{color:#0d5d33}
+    .certificate.powerbi{color:#242424;background:linear-gradient(145deg,#fffef7 0 74%,#fff1a5 74%)}.certificate.powerbi:before{content:"";position:absolute;right:74px;top:86px;width:190px;height:220px;background:#f2c811;clip-path:polygon(0 100%,0 58%,20% 58%,20% 35%,40% 35%,40% 18%,60% 18%,60% 5%,80% 5%,80% 45%,100% 45%,100% 100%);opacity:.17}.certificate.powerbi:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 16% 18%,rgba(242,200,17,.055) 0 2px,transparent 2.5px);background-size:34px 34px;opacity:.7}.certificate.powerbi .accent{color:#9a7a00}.certificate.powerbi .sigline{background:#c8a500}.certificate.powerbi .name{color:#202020}
+    .block{position:absolute;cursor:grab;padding:4px 6px;border-radius:8px}.block:hover{outline:1px dashed rgba(9,153,153,.25)}.block.selected{outline:2px dashed rgba(9,153,153,.9);background:rgba(255,255,255,.28)}.block.dragging{cursor:grabbing}
+    .block .issuer{font-family:var(--font-display);font-weight:800;line-height:1.06}.block .subtle{font-family:var(--font-body);font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.62}
+    .block.cert-label{font-family:var(--font-body);font-weight:800;letter-spacing:.24em;text-transform:uppercase}
+    .block.pre{font-family:var(--font-body);font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.64}
+    .block.name{font-family:var(--font-display);font-weight:800;line-height:1.02}
+    .block.course{font-family:var(--font-display);font-weight:800;line-height:1.08}
+    .block.skills,.block.desc,.block.meta,.block.verifyId,.block.verifyLabel,.block.trainerName,.block.trainerTitle{font-family:var(--font-body)}
+    .block.skills{font-weight:800;opacity:.82;line-height:1.45}.block.desc{opacity:.7;line-height:1.55}.block.meta{font-weight:800;line-height:1.4}.block.trainerName{font-weight:800;line-height:1.35}.block.trainerTitle{opacity:.85;line-height:1.45}.block.verifyLabel{font-weight:800;line-height:1.35}.block.verifyId{opacity:.85;line-height:1.4}
+    .sig-art{position:absolute}.sig-art img{display:block;max-width:100%;max-height:100%;object-fit:contain}.sigline{position:absolute;height:1px}.logo-wrap{position:absolute;display:flex;align-items:center;justify-content:flex-start}.logo-wrap img{max-width:100%;max-height:100%;object-fit:contain}
+
+    .editor{background:#f8fafc;border:1px solid #e5ebf2;border-radius:18px;padding:16px;max-height:720px;overflow:auto}.editor .field{margin:11px 0}.editor .field input,.editor .field textarea,.editor .field select{padding:11px 12px;border-radius:11px}.editor .field textarea{min-height:72px}.recipient-switch{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;background:#fff;border:1px solid #e5ebf2;border-radius:12px;padding:7px}.mini{width:34px;height:34px;border:0;border-radius:9px;background:#eef2f7;font-size:22px;color:#334155}.export-bar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:18px}.progress{font-size:12px;color:#64748b;text-align:right}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,16px);opacity:0;background:#0f172a;color:#fff;padding:11px 16px;border-radius:12px;font-size:13px;transition:.2s;pointer-events:none;z-index:99}.toast.show{opacity:1;transform:translate(-50%,0)}
+    .block-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:14px}.block-pill{border:1px solid #d7e0ea;background:#fff;color:#334155;padding:9px 10px;border-radius:11px;font-size:12px;font-weight:700;text-align:center}.block-pill.active{background:#0f172a;color:#fff;border-color:#0f172a}.control-box{margin-top:10px;padding:12px;border:1px solid #e5ebf2;background:#fff;border-radius:14px}.control-box h4{margin:0 0 10px;font-size:13px}.tiny-hint{font-size:11px;color:#64748b;line-height:1.5}.grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    @media(max-width:1180px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto;padding:18px}.steps{grid-template-columns:repeat(6,1fr)}.step-nav{justify-content:center}.step-nav span:last-child{display:none}.main{padding:18px}.preview-layout{grid-template-columns:1fr}.editor{max-height:none}}
+    @media(max-width:700px){.form-stage{padding:22px}.qtitle{font-size:28px}.choice-grid,.grid2,.grid3,.option-grid,.block-grid,.grid4{grid-template-columns:1fr}.steps{grid-template-columns:repeat(3,1fr)}.topbar{align-items:flex-start;gap:12px}.badge{display:none}.preview-wrap{padding:8px;min-height:280px}.export-bar{align-items:flex-start;flex-direction:column}.btn-row .btn{flex:1 1 calc(50% - 8px)}.cert-viewport{max-width:none}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">X</div><div><strong>X Academy</strong><small>Certificate Builder</small></div></div>
+    <div class="steps" id="stepNav"></div>
+    <div class="side-bottom">Build professional Excel and Power BI credentials.<br>Preview, drag, resize, export.</div>
+  </aside>
+  <main class="main"><div class="shell">
+    <div class="topbar"><div><h1>Certificate Builder</h1><p>Typeform-style creation, live preview, batch export.</p></div><div class="badge">A4 Landscape · High Resolution</div></div>
+    <section class="panel"><div class="form-stage" id="stage"></div></section>
+  </div></main>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const CERT_W=1400;
+const CERT_H=990;
+const steps=[
+  {id:`type`,label:`Certificate type`},
+  {id:`program`,label:`Program details`},
+  {id:`recipients`,label:`Recipients`},
+  {id:`credential`,label:`Credential details`},
+  {id:`branding`,label:`Branding`},
+  {id:`preview`,label:`Build & preview`}
+];
+const skillPresets={
+  excel:{
+    advanced:{label:`Advanced Excel`,skills:`Advanced Formulas • PivotTables • Power Query • Data Analysis`},
+    dashboards:{label:`Excel Dashboards`,skills:`Dashboard Design • Data Visualization • Interactive Reporting • KPI Tracking`},
+    formulas:{label:`Excel Formulas`,skills:`Logical Functions • Lookup Functions • Dynamic Arrays • Text & Date Functions`},
+    powerquery:{label:`Power Query / Data Cleaning`,skills:`Data Cleaning • Data Transformation • Power Query • Data Preparation`}
+  },
+  powerbi:{
+    analysis:{label:`Power BI Data Analysis`,skills:`Data Modeling • DAX • Interactive Dashboards • Business Insights`},
+    dashboards:{label:`Power BI Dashboards`,skills:`Data Visualization • KPI Design • Report UX • Interactive Reporting`},
+    dax:{label:`DAX & Modeling`,skills:`DAX Measures • Data Modeling • Time Intelligence • Performance Analysis`},
+    powerquery:{label:`Power Query`,skills:`Data Cleaning • Data Transformation • Power Query • Data Preparation`}
+  }
+};
+const fontPresets={
+  modern:{label:`Modern`,sample:`Manrope + Inter`,detail:`Clean, premium, balanced.`},
+  executive:{label:`Executive`,sample:`Montserrat + Source Sans 3`,detail:`Structured and corporate.`},
+  clean:{label:`Clean`,sample:`Poppins + Inter`,detail:`Crisp and contemporary.`},
+  editorial:{label:`Editorial`,sample:`Playfair Display + Manrope`,detail:`More distinctive and premium.`}
+};
+const defaultLayout={
+  logo:{x:92,y:70,w:110,h:40},
+  signature:{x:92,y:825,w:120,h:34},
+  sigline:{x:92,y:878,w:300},
+  issuer:{x:92,y:122,w:420,size:60,align:`left`},
+  partner:{x:92,y:192,w:420,size:18,align:`left`},
+  certLabel:{x:1000,y:88,w:320,size:24,align:`right`},
+  pre:{x:440,y:376,w:520,size:19,align:`center`},
+  name:{x:230,y:420,w:940,size:86,align:`center`},
+  course:{x:345,y:560,w:710,size:48,align:`center`},
+  skills:{x:300,y:640,w:800,size:18,align:`center`},
+  desc:{x:265,y:700,w:870,size:15,align:`center`},
+  meta:{x:385,y:780,w:630,size:15,align:`center`},
+  trainerName:{x:92,y:892,w:320,size:18,align:`left`},
+  trainerTitle:{x:92,y:922,w:360,size:12,align:`left`},
+  verifyLabel:{x:1165,y:894,w:160,size:16,align:`right`},
+  verifyId:{x:1145,y:920,w:180,size:12,align:`right`}
+};
+const blockLabels={
+  issuer:`Issuer`,partner:`Sub label`,certLabel:`Certificate label`,pre:`Award line`,name:`Recipient name`,course:`Program name`,skills:`Skills`,desc:`Description`,meta:`Meta row`,trainerName:`Trainer name`,trainerTitle:`Trainer title`,verifyLabel:`Verify label`,verifyId:`Credential ID`
+};
+const defaults={
+  type:`excel`,courseName:`Advanced Microsoft Excel`,hours:`20`,date:`2025-01-22`,location:`Amman, Jordan`,
+  trainer:`Basel Ghanem`,trainerTitle:`Professional Trainer & Data Analytics Consultant`,issuer:`X Academy`,
+  recipients:`Ghaidaa Tawalbeh`,skills:skillPresets.excel.advanced.skills,skillPreset:`advanced`,fontPreset:`modern`,
+  description:`For successfully completing the professional training program, including applied exercises, business scenarios, and practical data-analysis challenges.`,
+  credentialPrefix:`XA-EXL-2026`,startNumber:1250,verificationLabel:`Verify Credential`,partner:``,logoData:``,signatureData:``,
+  layout:defaultLayout
+};
+let stored={};
+try{stored=JSON.parse(localStorage.getItem(`xa_cert_builder_state`)||`{}`)}catch(error){stored={}}
+let state={...defaults,...stored,layout:{...defaultLayout,...(stored.layout||{})}};
+if(!fontPresets[state.fontPreset])state.fontPreset=`modern`;
+if(!state.skillPreset)state.skillPreset=`advanced`;
+let current=0;
+let currentRecipient=0;
+let previewObserver=null;
+let currentPreviewScale=1;
+let selectedBlock=`name`;
+let dragInfo=null;
+const stage=document.getElementById(`stage`);
+const nav=document.getElementById(`stepNav`);
+const toast=document.getElementById(`toast`);
+function esc(value=``,attr=false){const source=String(value??``);return source.replace(/[&<>"']/g,char=>{if(char===`&`)return `&amp;`;if(char===`<`)return `&lt;`;if(char===`>`)return `&gt;`;if(char===`\"`)return `&quot;`;return `&#039;`;});}
+function save(){localStorage.setItem(`xa_cert_builder_state`,JSON.stringify(state));}
+function recipients(){return String(state.recipients||``).split(/[\n,]+/).map(item=>item.trim()).filter(Boolean);}
+function fmtDate(value){if(!value)return ``;const date=new Date(`${value}T12:00:00`);if(Number.isNaN(date.getTime()))return value;return date.toLocaleDateString(`en-US`,{year:`numeric`,month:`long`,day:`numeric`});}
+function renderNav(){nav.innerHTML=steps.map((step,index)=>`<button class="step-nav ${index===current?`active`:``} ${index<current?`done`:``}" data-index="${index}"><span class="num">${String(index+1).padStart(2,`0`)}</span><span>${step.label}</span></button>`).join(``);nav.querySelectorAll(`.step-nav`).forEach(button=>button.addEventListener(`click`,()=>{const target=Number(button.dataset.index);if(target<=current||target===steps.length-1){current=target;render();}}));}
+function input(key,label,type=`text`,extra=``){return `<div class="field"><label>${label}</label><input data-key="${key}" type="${type}" value="${esc(state[key],true)}" ${extra}></div>`;}
+function textarea(key,label,hint=``,rows=4){return `<div class="field"><label>${label}</label><textarea data-key="${key}" rows="${rows}">${esc(state[key])}</textarea>${hint?`<div class="hint">${hint}</div>`:``}</div>`;}
+function selectField(key,label,options){return `<div class="field"><label>${label}</label><select data-key="${key}">${options.map(option=>`<option value="${option.value}" ${state[key]===option.value?`selected`:``}>${option.label}</option>`).join(``)}</select></div>`;}
+function actions(showBack=true){return `<div class="actions">${showBack?`<button class="btn secondary" data-action="back">Back</button>`:`<span></span>`}<button class="btn primary" data-action="next">${current===steps.length-2?`Build certificate`:`Continue`}</button></div>`;}
+function bindFields(root=stage){root.querySelectorAll(`[data-key]`).forEach(element=>element.addEventListener(`input`,()=>{const key=element.dataset.key;state[key]=element.type===`number`?Number(element.value||0):element.value;if(key===`skills`)state.skillPreset=`custom`;save();}));}
+function bindActions(){bindFields();const back=stage.querySelector(`[data-action="back"]`);const next=stage.querySelector(`[data-action="next"]`);if(back)back.addEventListener(`click`,()=>{current=Math.max(0,current-1);render();});if(next)next.addEventListener(`click`,()=>{current=Math.min(steps.length-1,current+1);render();});}
+function presetCards(){const presets=skillPresets[state.type];return `<div class="section-label">Choose a skills profile</div><div class="option-grid" id="skillPresetGrid">${Object.entries(presets).map(([key,preset])=>`<button class="option-card ${state.skillPreset===key?`selected`:``}" data-skill-preset="${key}"><strong>${preset.label}</strong><span>${preset.skills}</span></button>`).join(``)}</div>`;}
+function fontCards(){return `<div class="section-label">Certificate typography</div><div class="option-grid" id="fontPresetGrid">${Object.entries(fontPresets).map(([key,preset])=>`<button class="option-card ${state.fontPreset===key?`selected`:``}" data-font-preset="${key}"><strong class="font-sample" style="font-family:${key===`modern`?`Manrope`:key===`executive`?`Montserrat`:key===`clean`?`Poppins`:`Playfair Display`}">Aa</strong><strong>${preset.label}</strong><span>${preset.sample}<br>${preset.detail}</span></button>`).join(``)}</div>`;}
+function render(){renderNav();const id=steps[current].id;
+  if(id===`type`){stage.innerHTML=`<div class="question"><div class="kicker">01 / 06</div><div class="qtitle">What are you certifying?</div><div class="qdesc">Choose the visual language. Excel and Power BI use different certificate identities.</div><div class="choice-grid"><button class="choice ${state.type===`excel`?`selected`:``}" data-type="excel"><div class="swatch excel"></div><h3>Microsoft Excel</h3><p>Excel green, subtle worksheet grid, clean business-data character.</p></button><button class="choice ${state.type===`powerbi`?`selected`:``}" data-type="powerbi"><div class="swatch powerbi"></div><h3>Power BI</h3><p>Power BI yellow, charcoal typography, analytics-inspired geometry.</p></button></div>${actions(false)}</div>`;stage.querySelectorAll(`[data-type]`).forEach(card=>card.addEventListener(`click`,()=>{const previousType=state.type;state.type=card.dataset.type;if(state.type!==previousType){state.courseName=state.type===`excel`?`Advanced Microsoft Excel`:`Advanced Microsoft Power BI`;state.credentialPrefix=state.type===`excel`?`XA-EXL-2026`:`XA-PBI-2026`;const firstKey=Object.keys(skillPresets[state.type])[0];state.skillPreset=firstKey;state.skills=skillPresets[state.type][firstKey].skills;}save();render();}));bindActions();return;}
+  if(id===`program`){stage.innerHTML=`<div class="question"><div class="kicker">02 / 06</div><div class="qtitle">Define the program.</div><div class="qdesc">Choose the skills profile inside the builder, then edit the final skills text only if you need a custom version.</div>${input(`courseName`,`Program name`)}<div class="grid3">${input(`hours`,`Training hours`,`number`,`min="1"`)}${input(`date`,`Completion date`,`date`)}${input(`location`,`Location`)}</div>${presetCards()}${textarea(`skills`,`Skills shown on certificate`,`Selecting a profile above fills this automatically. You can still customize it.`,3)}${actions()}</div>`;stage.querySelectorAll(`[data-skill-preset]`).forEach(button=>button.addEventListener(`click`,()=>{const key=button.dataset.skillPreset;state.skillPreset=key;state.skills=skillPresets[state.type][key].skills;save();render();}));bindActions();return;}
+  if(id===`recipients`){stage.innerHTML=`<div class="question"><div class="kicker">03 / 06</div><div class="qtitle">Who receives the certificate?</div><div class="qdesc">Paste one name per line. You can generate one certificate or an entire group in one build.</div>${textarea(`recipients`,`Recipient names`,`One name per line. Commas are also accepted.`,12)}<div class="hint" id="countHint"><strong>${recipients().length}</strong> certificate${recipients().length===1?``:`s`} will be generated.</div>${actions()}</div>`;const field=stage.querySelector(`[data-key="recipients"]`);field.addEventListener(`input`,()=>{state.recipients=field.value;document.getElementById(`countHint`).innerHTML=`<strong>${recipients().length}</strong> certificate${recipients().length===1?``:`s`} will be generated.`;save();});bindActions();return;}
+  if(id===`credential`){stage.innerHTML=`<div class="question"><div class="kicker">04 / 06</div><div class="qtitle">Make it a real credential.</div><div class="qdesc">Keep the achievement statement concise and use consistent credential IDs across the batch.</div>${textarea(`description`,`Achievement statement`,`` ,4)}<div class="grid2">${input(`credentialPrefix`,`Credential prefix`)}${input(`startNumber`,`Starting number`,`number`,`min="1"`)}</div><div class="grid2">${input(`trainer`,`Lead trainer`)}${input(`trainerTitle`,`Trainer title`)}</div>${actions()}</div>`;bindActions();return;}
+  if(id===`branding`){stage.innerHTML=`<div class="question"><div class="kicker">05 / 06</div><div class="qtitle">Branding & typography.</div><div class="qdesc">Choose the certificate font set here. Logo and signature uploads stay in your browser.</div><div class="grid2">${input(`issuer`,`Issuer`)}${input(`partner`,`Partner / sub label (optional)`)}</div>${fontCards()}<div class="grid2"><div class="field"><label>Logo image (optional)</label><input id="logoUpload" type="file" accept="image/*"><div class="hint">PNG with transparent background works best.</div></div><div class="field"><label>Trainer signature (optional)</label><input id="sigUpload" type="file" accept="image/*"><div class="hint">Transparent PNG recommended.</div></div></div>${actions()}</div>`;stage.querySelectorAll(`[data-font-preset]`).forEach(button=>button.addEventListener(`click`,()=>{state.fontPreset=button.dataset.fontPreset;save();render();}));const fileToData=(file,key)=>{if(!file)return;const reader=new FileReader();reader.onload=()=>{state[key]=reader.result;save();showToast(key===`logoData`?`Logo loaded`:`Signature loaded`);};reader.readAsDataURL(file);};document.getElementById(`logoUpload`).addEventListener(`change`,event=>fileToData(event.target.files[0],`logoData`));document.getElementById(`sigUpload`).addEventListener(`change`,event=>fileToData(event.target.files[0],`signatureData`));bindActions();return;}
+  if(id===`preview`){renderPreview();return;}
+}
+function getBlock(name){if(!state.layout[name])state.layout[name]={...defaultLayout[name]};return state.layout[name];}
+function textBlock(cls,blockName,text,extraClass=``,inlineExtra=``,contentExtra=``){const b=getBlock(blockName);return `<div class="block ${cls} ${extraClass} ${selectedBlock===blockName?`selected`:``}" data-block="${blockName}" style="left:${b.x}px;top:${b.y}px;width:${b.w}px;font-size:${b.size}px;text-align:${b.align};${inlineExtra}">${text}${contentExtra}</div>`;}
+function certHTML(name,index){const credentialId=`${state.credentialPrefix}-${String(Number(state.startNumber||1)+index).padStart(4,`0`)}`;const logoBlock=getBlock(`logo`);const signatureBlock=getBlock(`signature`);const siglineBlock=getBlock(`sigline`);const partnerText=state.partner?esc(state.partner):`Professional Credential`;
+  const logo=state.logoData?`<div class="logo-wrap" style="left:${logoBlock.x}px;top:${logoBlock.y}px;width:${logoBlock.w}px;height:${logoBlock.h}px"><img src="${state.logoData}"></div>`:``;
+  const signature=state.signatureData?`<div class="sig-art" style="left:${signatureBlock.x}px;top:${signatureBlock.y}px;width:${signatureBlock.w}px;height:${signatureBlock.h}px"><img src="${state.signatureData}"></div>`:``;
+  const sigline=`<div class="sigline" style="left:${siglineBlock.x}px;top:${siglineBlock.y}px;width:${siglineBlock.w}px"></div>`;
+  return `<div class="certificate ${state.type} font-${state.fontPreset}" data-certificate><div class="cert-inner">${logo}${signature}${sigline}${textBlock(`issuer`,`issuer`,`<div class="issuer accent">${esc(state.issuer)}</div>`)}${textBlock(`partner`,`partner`,`<div class="subtle">${partnerText}</div>`)}${textBlock(`cert-label`,`certLabel`,`Certificate of Completion`,`accent`)}${textBlock(`pre`,`pre`,`This certificate is awarded to`)}${textBlock(`name`,`name`,esc(name))}${textBlock(`course accent`,`course`,esc(state.courseName))}${textBlock(`skills`,`skills`,esc(state.skills))}${textBlock(`desc`,`desc`,esc(state.description))}${textBlock(`meta`,`meta`,`${esc(state.hours)} Training Hours &nbsp;&nbsp; • &nbsp;&nbsp; ${esc(fmtDate(state.date))} &nbsp;&nbsp; • &nbsp;&nbsp; ${esc(state.location)}`)}${textBlock(`trainerName`,`trainerName`,esc(state.trainer))}${textBlock(`trainerTitle`,`trainerTitle`,esc(state.trainerTitle))}${textBlock(`verifyLabel`,`verifyLabel`,esc(state.verificationLabel))}${textBlock(`verifyId`,`verifyId`,esc(credentialId))}</div></div>`;}
+function autoShrink(certificate){const nameEl=certificate.querySelector(`[data-block="name"]`);if(nameEl){const b=getBlock(`name`);nameEl.style.fontSize=`${b.size}px`;let size=b.size;while(nameEl.scrollWidth>nameEl.clientWidth&&size>44){size-=2;nameEl.style.fontSize=`${size}px`;}}
+  const courseEl=certificate.querySelector(`[data-block="course"]`);if(courseEl){const b=getBlock(`course`);courseEl.style.fontSize=`${b.size}px`;let size=b.size;while(courseEl.scrollWidth>courseEl.clientWidth&&size>28){size-=1;courseEl.style.fontSize=`${size}px`;}}
+}
+function fitPreview(){const viewport=document.getElementById(`certViewport`);if(!viewport)return;const certificate=viewport.querySelector(`[data-certificate]`);if(!certificate)return;currentPreviewScale=viewport.clientWidth/CERT_W;certificate.style.transform=`scale(${currentPreviewScale})`;autoShrink(certificate);}
+function drawPreviewCertificate(){const viewport=document.getElementById(`certViewport`);if(!viewport)return;const list=recipients();const name=list[currentRecipient]||list[0]||`Recipient Name`;viewport.innerHTML=certHTML(name,currentRecipient);bindCanvasEditing(viewport.querySelector(`[data-certificate]`));requestAnimationFrame(fitPreview);}
+function blockButtonGrid(){return `<div class="control-box"><h4>Select text block</h4><div class="block-grid">${Object.entries(blockLabels).map(([key,label])=>`<button class="block-pill ${selectedBlock===key?`active`:``}" data-select-block="${key}">${label}</button>`).join(``)}</div><div class="tiny-hint">Click any text directly on the certificate to select it, then drag it or edit X, Y, width, alignment, and font size.</div></div>`;}
+function selectedBlockControls(){const b=getBlock(selectedBlock);return `<div class="control-box"><h4>${blockLabels[selectedBlock]}</h4><div class="grid4"><div class="field"><label>X</label><input data-layout="${selectedBlock}" data-prop="x" type="number" value="${Math.round(b.x)}"></div><div class="field"><label>Y</label><input data-layout="${selectedBlock}" data-prop="y" type="number" value="${Math.round(b.y)}"></div><div class="field"><label>Width</label><input data-layout="${selectedBlock}" data-prop="w" type="number" value="${Math.round(b.w)}"></div><div class="field"><label>Font size</label><input data-layout="${selectedBlock}" data-prop="size" type="number" value="${Math.round(b.size)}"></div></div><div class="field"><label>Alignment</label><select data-layout="${selectedBlock}" data-prop="align"><option value="left" ${b.align===`left`?`selected`:``}>Left</option><option value="center" ${b.align===`center`?`selected`:``}>Center</option><option value="right" ${b.align===`right`?`selected`:``}>Right</option></select></div><button class="btn secondary" id="resetBlockBtn" type="button">Reset this block</button></div>`;}
+function renderPreview(){current=steps.length-1;renderNav();if(!recipients().length){state.recipients=`Recipient Name`;save();}const fontOptions=Object.entries(fontPresets).map(([value,preset])=>({value,label:`${preset.label} — ${preset.sample}`}));const skillOptions=[...Object.entries(skillPresets[state.type]).map(([value,preset])=>({value,label:preset.label})),{value:`custom`,label:`Custom skills`}];stage.innerHTML=`<div class="question"><div class="kicker">06 / 06</div><div class="qtitle">Build. Review. Export.</div><div class="qdesc">The downloaded PNG and PDF use the same fixed certificate canvas as this preview. You can also drag any text block and resize it like a light Canva-style editor.</div><div class="preview-layout"><div class="preview-wrap"><div class="cert-viewport" id="certViewport"></div></div><aside class="editor"><div class="recipient-switch"><button class="mini" id="prevRec">‹</button><strong>${currentRecipient+1} / ${recipients().length}</strong><button class="mini" id="nextRec">›</button></div>${selectField(`fontPreset`,`Font set`,fontOptions)}${selectField(`skillPreset`,`Skills profile`,skillOptions)}${input(`courseName`,`Program name`)}${input(`hours`,`Hours`,`number`)}${input(`date`,`Date`,`date`)}${input(`location`,`Location`)}${textarea(`skills`,`Skills`,`` ,2)}${textarea(`description`,`Achievement statement`,`` ,3)}${input(`trainer`,`Trainer`)}${input(`issuer`,`Issuer`)}${blockButtonGrid()}${selectedBlockControls()}</aside></div><div class="export-bar"><div class="btn-row"><button class="btn secondary" id="editBack">Edit previous step</button><button class="btn secondary" id="resetLayoutBtn">Reset layout</button><button class="btn teal" id="pngBtn">Download PNG</button><button class="btn teal" id="pdfBtn">Download PDF</button><button class="btn primary" id="allPdfBtn">All → PDF</button><button class="btn primary" id="zipBtn">All → PNG ZIP</button></div><div class="progress" id="progress">Ready</div></div></div>`;
+  drawPreviewCertificate();
+  if(previewObserver)previewObserver.disconnect();
+  previewObserver=new ResizeObserver(()=>fitPreview());
+  previewObserver.observe(document.getElementById(`certViewport`));
+  const editor=stage.querySelector(`.editor`);
+  editor.querySelectorAll(`[data-key]`).forEach(element=>element.addEventListener(`input`,()=>{const key=element.dataset.key;state[key]=element.type===`number`?Number(element.value||0):element.value;if(key===`skillPreset`&&skillPresets[state.type][state.skillPreset])state.skills=skillPresets[state.type][state.skillPreset].skills;if(key===`skills`)state.skillPreset=`custom`;save();if(key===`skillPreset`)renderPreview();else drawPreviewCertificate();}));
+  editor.querySelectorAll(`[data-select-block]`).forEach(button=>button.addEventListener(`click`,()=>{selectedBlock=button.dataset.selectBlock;renderPreview();}));
+  editor.querySelectorAll(`[data-layout]`).forEach(element=>element.addEventListener(`input`,()=>{const block=element.dataset.layout;const prop=element.dataset.prop;const value=prop===`align`?element.value:Number(element.value||0);state.layout[block][prop]=value;save();drawPreviewCertificate();updateBlockControlsOnly();}));
+  document.getElementById(`resetBlockBtn`).addEventListener(`click`,()=>{state.layout[selectedBlock]={...defaultLayout[selectedBlock]};save();renderPreview();});
+  document.getElementById(`resetLayoutBtn`).addEventListener(`click`,()=>{state.layout=JSON.parse(JSON.stringify(defaultLayout));save();renderPreview();});
+  document.getElementById(`prevRec`).addEventListener(`click`,()=>{currentRecipient=(currentRecipient-1+recipients().length)%recipients().length;renderPreview();});
+  document.getElementById(`nextRec`).addEventListener(`click`,()=>{currentRecipient=(currentRecipient+1)%recipients().length;renderPreview();});
+  document.getElementById(`editBack`).addEventListener(`click`,()=>{current=4;render();});
+  document.getElementById(`pngBtn`).addEventListener(`click`,()=>downloadSinglePNG());
+  document.getElementById(`pdfBtn`).addEventListener(`click`,()=>downloadSinglePDF());
+  document.getElementById(`allPdfBtn`).addEventListener(`click`,()=>downloadAllPDF());
+  document.getElementById(`zipBtn`).addEventListener(`click`,()=>downloadAllZIP());
+}
+function updateBlockControlsOnly(){const viewport=document.getElementById(`certViewport`);if(viewport){const oldScroll=stage.querySelector(`.editor`)?.scrollTop||0;drawPreviewCertificate();const editor=stage.querySelector(`.editor`);if(editor)editor.scrollTop=oldScroll;}}
+function bindCanvasEditing(certificate){certificate.querySelectorAll(`[data-block]`).forEach(block=>{
+  block.addEventListener(`click`,event=>{event.stopPropagation();selectedBlock=block.dataset.block;renderPreview();});
+  block.addEventListener(`mousedown`,startDrag);
+  block.addEventListener(`touchstart`,startDrag,{passive:false});
+});
+  certificate.addEventListener(`click`,()=>{});
+}
+function startDrag(event){event.preventDefault();const target=event.currentTarget;selectedBlock=target.dataset.block;const block=getBlock(selectedBlock);dragInfo={block:selectedBlock,startX:getClientX(event),startY:getClientY(event),origX:block.x,origY:block.y};target.classList.add(`dragging`);window.addEventListener(`mousemove`,handleDrag);window.addEventListener(`mouseup`,endDrag);window.addEventListener(`touchmove`,handleDrag,{passive:false});window.addEventListener(`touchend`,endDrag,{passive:false});}
+function getClientX(event){return event.touches?event.touches[0].clientX:event.clientX}
+function getClientY(event){return event.touches?event.touches[0].clientY:event.clientY}
+function handleDrag(event){if(!dragInfo)return;event.preventDefault();const dx=(getClientX(event)-dragInfo.startX)/currentPreviewScale;const dy=(getClientY(event)-dragInfo.startY)/currentPreviewScale;const block=state.layout[dragInfo.block];block.x=Math.max(0,Math.min(CERT_W-block.w,Math.round(dragInfo.origX+dx)));block.y=Math.max(0,Math.min(CERT_H-40,Math.round(dragInfo.origY+dy)));save();drawPreviewCertificate();}
+function endDrag(){dragInfo=null;window.removeEventListener(`mousemove`,handleDrag);window.removeEventListener(`mouseup`,endDrag);window.removeEventListener(`touchmove`,handleDrag);window.removeEventListener(`touchend`,endDrag);renderPreview();}
+async function waitForAssets(root){if(document.fonts&&document.fonts.ready)await document.fonts.ready;const images=[...root.querySelectorAll(`img`)];await Promise.all(images.map(image=>image.complete?Promise.resolve():new Promise(resolve=>{image.addEventListener(`load`,resolve,{once:true});image.addEventListener(`error`,resolve,{once:true});})));await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));}
+async function capture(index){const list=recipients();const holder=document.createElement(`div`);holder.style.position=`fixed`;holder.style.left=`-20000px`;holder.style.top=`0`;holder.style.width=`${CERT_W}px`;holder.style.height=`${CERT_H}px`;holder.style.overflow=`hidden`;holder.style.background=`#fff`;holder.innerHTML=certHTML(list[index]||`Recipient Name`,index);document.body.appendChild(holder);const certificate=holder.querySelector(`[data-certificate]`);certificate.style.transform=`none`;autoShrink(certificate);await waitForAssets(holder);const canvas=await html2canvas(certificate,{width:CERT_W,height:CERT_H,scale:2.5,useCORS:true,allowTaint:false,backgroundColor:`#ffffff`,logging:false,windowWidth:CERT_W,windowHeight:CERT_H,scrollX:0,scrollY:0});holder.remove();return canvas;}
+function safeName(value){return String(value).replace(/[\\/:*?"<>|]/g,``).trim().replace(/\s+/g,`_`)||`certificate`;}
+function downloadData(url,name){const anchor=document.createElement(`a`);anchor.href=url;anchor.download=name;document.body.appendChild(anchor);anchor.click();anchor.remove();}
+async function downloadSinglePNG(){setProgress(`Rendering exact-preview PNG…`);const canvas=await capture(currentRecipient);downloadData(canvas.toDataURL(`image/png`,1),`${safeName(recipients()[currentRecipient])}_${safeName(state.courseName)}.png`);setProgress(`PNG downloaded · ${canvas.width} × ${canvas.height}`);}
+async function downloadSinglePDF(){setProgress(`Rendering exact-preview PDF…`);const canvas=await capture(currentRecipient);const {jsPDF}=window.jspdf;const pdf=new jsPDF({orientation:`landscape`,unit:`mm`,format:`a4`,compress:true});pdf.addImage(canvas.toDataURL(`image/png`,1),`PNG`,0,0,297,210,undefined,`FAST`);pdf.save(`${safeName(recipients()[currentRecipient])}_${safeName(state.courseName)}.pdf`);setProgress(`PDF downloaded`);}
+async function downloadAllPDF(){const list=recipients();if(!list.length)return;const {jsPDF}=window.jspdf;const pdf=new jsPDF({orientation:`landscape`,unit:`mm`,format:`a4`,compress:true});for(let index=0;index<list.length;index++){setProgress(`Rendering ${index+1} / ${list.length}…`);const canvas=await capture(index);if(index>0)pdf.addPage(`a4`,`landscape`);pdf.addImage(canvas.toDataURL(`image/png`,1),`PNG`,0,0,297,210,undefined,`FAST`);}pdf.save(`${safeName(state.courseName)}_Certificates.pdf`);setProgress(`Batch PDF downloaded`);}
+async function downloadAllZIP(){const list=recipients();if(!list.length)return;const zip=new JSZip();for(let index=0;index<list.length;index++){setProgress(`Rendering ${index+1} / ${list.length}…`);const canvas=await capture(index);const data=canvas.toDataURL(`image/png`).split(`,`)[1];zip.file(`${String(index+1).padStart(2,`0`)}_${safeName(list[index])}.png`,data,{base64:true});}setProgress(`Building ZIP…`);const blob=await zip.generateAsync({type:`blob`,compression:`DEFLATE`,compressionOptions:{level:6}});const url=URL.createObjectURL(blob);downloadData(url,`${safeName(state.courseName)}_PNG_Certificates.zip`);setTimeout(()=>URL.revokeObjectURL(url),4000);setProgress(`PNG ZIP downloaded`);}
+function setProgress(text){const element=document.getElementById(`progress`);if(element)element.textContent=text;}
+function showToast(text){toast.textContent=text;toast.classList.add(`show`);setTimeout(()=>toast.classList.remove(`show`),1800);}
+render();
+</script>
+</body>
+</html>
