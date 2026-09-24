@@ -748,37 +748,57 @@ function homeView() {
         <p>${copy(`تعلّم مهارة تستخدمها من أول يوم في شغلك، بتجربة عملية مصممة لتخليك تفهم، تطبّق، وتبني شيئًا فعليًا.`, `Learn a skill you can use from day one at work, through a practical experience designed to help you understand, apply, and build something real.`)}</p>
         <div class="home-v11-actions">
           <button class="primary home-v11-cta" data-action="start" type="button">
-            <span>${copy(`اختر مهارتك`, `Choose your skill`)}</span>
-            <span aria-hidden="true">${state.lang === `ar` ? `←` : `→`}</span>
+            <span class="home-v11-cta-label">${copy(`اختر مهارتك`, `Choose your skill`)}</span>
+            <span class="home-v11-cta-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M5 12h13"></path>
+                <path d="m14 7 5 5-5 5"></path>
+              </svg>
+            </span>
           </button>
         </div>
         <div class="home-v11-proof" aria-label="${copy(`لماذا X Academy`, `Why X Academy`)}">
-          <div><b>${copy(`عملي`, `Hands-on`)}</b><span>${copy(`تطبيق أثناء التعلم`, `practice while learning`)}</span></div>
-          <div><b>${copy(`مباشر`, `Clear`)}</b><span>${copy(`شرح بدون تعقيد`, `straightforward learning`)}</span></div>
-          <div><b>${copy(`واقعي`, `Real work`)}</b><span>${copy(`سيناريوهات من الشغل`, `work-based scenarios`)}</span></div>
+          <div class="home-proof-item">
+            <span class="home-proof-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 6.5h16v11H4z"></path><path d="M8 20h8"></path><path d="M9 4h6"></path></svg>
+            </span>
+            <span class="home-proof-copy"><b>${copy(`عملي`, `Hands-on`)}</b><small>${copy(`تطبيق أثناء التعلم`, `practice while learning`)}</small></span>
+          </div>
+          <div class="home-proof-item">
+            <span class="home-proof-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"></circle><circle cx="16.5" cy="9" r="2.5"></circle><path d="M3.5 19c.4-4 2.4-6 5.5-6s5.1 2 5.5 6"></path><path d="M14.5 14c2.9.2 4.8 1.9 5 5"></path></svg>
+            </span>
+            <span class="home-proof-copy"><b>${copy(`مباشر`, `Clear`)}</b><small>${copy(`شرح بدون تعقيد`, `straightforward learning`)}</small></span>
+          </div>
+          <div class="home-proof-item">
+            <span class="home-proof-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 7V5.5C8 4.7 8.7 4 9.5 4h5c.8 0 1.5.7 1.5 1.5V7"></path><rect x="3" y="7" width="18" height="12" rx="2"></rect><path d="M3 12h18"></path><path d="M10 12v2h4v-2"></path></svg>
+            </span>
+            <span class="home-proof-copy"><b>${copy(`واقعي`, `Real work`)}</b><small>${copy(`سيناريوهات من الشغل`, `work-based scenarios`)}</small></span>
+          </div>
         </div>
         <section class="home-v11-orgs" aria-label="${copy(`4000+ متدرب وثقوا بنا`, `Trusted by 4,000+ learners`)}">
           <div class="home-v11-orgs-copy">
             <b><strong>4000+</strong> ${copy(`متدرب وثقوا بنا`, `learners trusted us`)}</b>
             <small>${copy(`ومن بينهم محترفون يعملون في شركات ومؤسسات رائدة.`, `Including professionals working across leading companies and organizations.`)}</small>
           </div>
-          <div class="home-v11-orgs-marquee">
+          <div class="home-v11-orgs-marquee" aria-label="${copy(`نماذج من جهات عمل متدربينا`, `Examples of learner workplaces`)}">
             <div class="home-v11-orgs-track">
               <div class="home-v11-orgs-set">
-              <span class="org-logo"><img src="./assets/img/organizations/dar-al-dawaa.png" alt="Dar Al-Dawaa" loading="lazy"></span>
-              <span class="org-logo"><img src="./assets/img/organizations/orange.png" alt="Orange" loading="lazy"></span>
-              <span class="org-logo"><img src="./assets/img/organizations/coderz.png" alt="Coderz" loading="lazy"></span>
-              <span class="org-logo"><img src="./assets/img/organizations/unrwa.png" alt="UNRWA" loading="lazy"></span>
-              <span class="org-logo"><img src="./assets/img/organizations/opensooq.png" alt="OpenSooq" loading="lazy"></span>
-              <span class="org-logo"><img src="./assets/img/organizations/stc.svg" alt="stc" loading="lazy"></span>
+                <span class="org-logo org-dad"><img src="./assets/img/organizations/dar-al-dawaa.png" alt="Dar Al-Dawaa" loading="lazy"></span>
+                <span class="org-logo org-orange"><img src="./assets/img/organizations/orange.png" alt="Orange" loading="lazy"></span>
+                <span class="org-logo org-coderz"><img src="./assets/img/organizations/coderz.png" alt="Coderz" loading="lazy"></span>
+                <span class="org-logo org-unrwa"><img src="./assets/img/organizations/unrwa.png" alt="UNRWA" loading="lazy"></span>
+                <span class="org-logo org-opensooq"><img src="./assets/img/organizations/opensooq.png" alt="OpenSooq" loading="lazy"></span>
+                <span class="org-logo org-stc"><img src="./assets/img/organizations/stc.svg" alt="stc" loading="lazy"></span>
               </div>
               <div class="home-v11-orgs-set" aria-hidden="true">
-              <span class="org-logo"><img src="./assets/img/organizations/dar-al-dawaa.png" alt="Dar Al-Dawaa" loading="lazy"></span>
-              <span class="org-logo"><img src="./assets/img/organizations/orange.png" alt="Orange" loading="lazy"></span>
-              <span class="org-logo"><img src="./assets/img/organizations/coderz.png" alt="Coderz" loading="lazy"></span>
-              <span class="org-logo"><img src="./assets/img/organizations/unrwa.png" alt="UNRWA" loading="lazy"></span>
-              <span class="org-logo"><img src="./assets/img/organizations/opensooq.png" alt="OpenSooq" loading="lazy"></span>
-              <span class="org-logo"><img src="./assets/img/organizations/stc.svg" alt="stc" loading="lazy"></span>
+                <span class="org-logo org-dad"><img src="./assets/img/organizations/dar-al-dawaa.png" alt="Dar Al-Dawaa" loading="lazy"></span>
+                <span class="org-logo org-orange"><img src="./assets/img/organizations/orange.png" alt="Orange" loading="lazy"></span>
+                <span class="org-logo org-coderz"><img src="./assets/img/organizations/coderz.png" alt="Coderz" loading="lazy"></span>
+                <span class="org-logo org-unrwa"><img src="./assets/img/organizations/unrwa.png" alt="UNRWA" loading="lazy"></span>
+                <span class="org-logo org-opensooq"><img src="./assets/img/organizations/opensooq.png" alt="OpenSooq" loading="lazy"></span>
+                <span class="org-logo org-stc"><img src="./assets/img/organizations/stc.svg" alt="stc" loading="lazy"></span>
               </div>
             </div>
           </div>
