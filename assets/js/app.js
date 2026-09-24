@@ -757,10 +757,10 @@ function homeView() {
           <div><b>${copy(`عملي`, `Hands-on`)}</b><span>${copy(`تطبيق أثناء التعلم`, `practice while learning`)}</span></div>
           <div><b>${copy(`واقعي`, `Real work`)}</b><span>${copy(`سيناريوهات من الشغل`, `work-based scenarios`)}</span></div>
         </div>
-        <section class="home-v11-orgs" aria-label="${copy(`جهات ينتمي إليها متدربونا`, `Organizations represented by our learners`)}">
+        <section class="home-v11-orgs" aria-label="${copy(`خبرات من شركات وجهات رائدة`, `Professionals from leading organizations`)}">
           <div class="home-v11-orgs-copy">
-            <b>${copy(`جهات ينتمي إليها متدربونا`, `Organizations represented by our learners`)}</b>
-            <small>${copy(`تدرّب معنا موظفون ومحترفون من هذه الجهات. ظهور الشعارات لا يعني وجود شراكة أو تعاقد مباشر.`, `Professionals from these organizations have attended our training. Logos do not imply a direct partnership or contract.`)}</small>
+            <b>${copy(`خبرات من شركات وجهات رائدة`, `Professionals from leading organizations`)}</b>
+            <small>${copy(`ضمّت دوراتنا متدربين بخبرات وخلفيات مهنية من مجموعة متنوعة من الشركات والمؤسسات.`, `Our training has brought together professionals with diverse experience across leading companies and organizations.`)}</small>
           </div>
           <div class="home-v11-orgs-logos">
             <span><img src="./assets/img/organizations/dar-al-dawaa.png" alt="Dar Al-Dawaa" loading="lazy"></span>
