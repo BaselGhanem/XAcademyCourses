@@ -757,6 +757,20 @@ function homeView() {
           <div><b>${copy(`عملي`, `Hands-on`)}</b><span>${copy(`تطبيق أثناء التعلم`, `practice while learning`)}</span></div>
           <div><b>${copy(`واقعي`, `Real work`)}</b><span>${copy(`سيناريوهات من الشغل`, `work-based scenarios`)}</span></div>
         </div>
+        <section class="home-v11-orgs" aria-label="${copy(`جهات ينتمي إليها متدربونا`, `Organizations represented by our learners`)}">
+          <div class="home-v11-orgs-copy">
+            <b>${copy(`جهات ينتمي إليها متدربونا`, `Organizations represented by our learners`)}</b>
+            <small>${copy(`تدرّب معنا موظفون ومحترفون من هذه الجهات. ظهور الشعارات لا يعني وجود شراكة أو تعاقد مباشر.`, `Professionals from these organizations have attended our training. Logos do not imply a direct partnership or contract.`)}</small>
+          </div>
+          <div class="home-v11-orgs-logos">
+            <span><img src="./assets/img/organizations/dar-al-dawaa.png" alt="Dar Al-Dawaa" loading="lazy"></span>
+            <span><img src="./assets/img/organizations/orange.png" alt="Orange" loading="lazy"></span>
+            <span><img src="./assets/img/organizations/coderz.png" alt="Coderz" loading="lazy"></span>
+            <span><img src="./assets/img/organizations/unrwa.png" alt="UNRWA" loading="lazy"></span>
+            <span><img src="./assets/img/organizations/opensooq.png" alt="OpenSooq" loading="lazy"></span>
+            <span><img src="./assets/img/organizations/stc.svg" alt="stc" loading="lazy"></span>
+          </div>
+        </section>
       </section>
 
       <section class="home-v11-visual" aria-label="${txt(`heroImageAlt`)}">
