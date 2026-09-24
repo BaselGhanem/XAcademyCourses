@@ -753,22 +753,34 @@ function homeView() {
           </button>
         </div>
         <div class="home-v11-proof" aria-label="${copy(`لماذا X Academy`, `Why X Academy`)}">
-          <div><b>4000+</b><span>${copy(`متدرب`, `learners trained`)}</span></div>
           <div><b>${copy(`عملي`, `Hands-on`)}</b><span>${copy(`تطبيق أثناء التعلم`, `practice while learning`)}</span></div>
+          <div><b>${copy(`مباشر`, `Clear`)}</b><span>${copy(`شرح بدون تعقيد`, `straightforward learning`)}</span></div>
           <div><b>${copy(`واقعي`, `Real work`)}</b><span>${copy(`سيناريوهات من الشغل`, `work-based scenarios`)}</span></div>
         </div>
-        <section class="home-v11-orgs" aria-label="${copy(`خبرات من شركات وجهات رائدة`, `Professionals from leading organizations`)}">
+        <section class="home-v11-orgs" aria-label="${copy(`4000+ متدرب وثقوا بنا`, `Trusted by 4,000+ learners`)}">
           <div class="home-v11-orgs-copy">
-            <b>${copy(`خبرات من شركات وجهات رائدة`, `Professionals from leading organizations`)}</b>
-            <small>${copy(`ضمّت دوراتنا متدربين بخبرات وخلفيات مهنية من مجموعة متنوعة من الشركات والمؤسسات.`, `Our training has brought together professionals with diverse experience across leading companies and organizations.`)}</small>
+            <b><strong>4000+</strong> ${copy(`متدرب وثقوا بنا`, `learners trusted us`)}</b>
+            <small>${copy(`ومن بينهم محترفون يعملون في شركات ومؤسسات رائدة.`, `Including professionals working across leading companies and organizations.`)}</small>
           </div>
-          <div class="home-v11-orgs-logos">
-            <span><img src="./assets/img/organizations/dar-al-dawaa.png" alt="Dar Al-Dawaa" loading="lazy"></span>
-            <span><img src="./assets/img/organizations/orange.png" alt="Orange" loading="lazy"></span>
-            <span><img src="./assets/img/organizations/coderz.png" alt="Coderz" loading="lazy"></span>
-            <span><img src="./assets/img/organizations/unrwa.png" alt="UNRWA" loading="lazy"></span>
-            <span><img src="./assets/img/organizations/opensooq.png" alt="OpenSooq" loading="lazy"></span>
-            <span><img src="./assets/img/organizations/stc.svg" alt="stc" loading="lazy"></span>
+          <div class="home-v11-orgs-marquee">
+            <div class="home-v11-orgs-track">
+              <div class="home-v11-orgs-set">
+              <span class="org-logo"><img src="./assets/img/organizations/dar-al-dawaa.png" alt="Dar Al-Dawaa" loading="lazy"></span>
+              <span class="org-logo"><img src="./assets/img/organizations/orange.png" alt="Orange" loading="lazy"></span>
+              <span class="org-logo"><img src="./assets/img/organizations/coderz.png" alt="Coderz" loading="lazy"></span>
+              <span class="org-logo"><img src="./assets/img/organizations/unrwa.png" alt="UNRWA" loading="lazy"></span>
+              <span class="org-logo"><img src="./assets/img/organizations/opensooq.png" alt="OpenSooq" loading="lazy"></span>
+              <span class="org-logo"><img src="./assets/img/organizations/stc.svg" alt="stc" loading="lazy"></span>
+              </div>
+              <div class="home-v11-orgs-set" aria-hidden="true">
+              <span class="org-logo"><img src="./assets/img/organizations/dar-al-dawaa.png" alt="Dar Al-Dawaa" loading="lazy"></span>
+              <span class="org-logo"><img src="./assets/img/organizations/orange.png" alt="Orange" loading="lazy"></span>
+              <span class="org-logo"><img src="./assets/img/organizations/coderz.png" alt="Coderz" loading="lazy"></span>
+              <span class="org-logo"><img src="./assets/img/organizations/unrwa.png" alt="UNRWA" loading="lazy"></span>
+              <span class="org-logo"><img src="./assets/img/organizations/opensooq.png" alt="OpenSooq" loading="lazy"></span>
+              <span class="org-logo"><img src="./assets/img/organizations/stc.svg" alt="stc" loading="lazy"></span>
+              </div>
+            </div>
           </div>
         </section>
       </section>
