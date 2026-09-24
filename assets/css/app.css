@@ -33,6 +33,8 @@ img { display: block; max-width: 100%; }
 .scramble {
   font-family: var(--font-mono); font-size: clamp(24px, 4vw, 52px);
   font-weight: 600; letter-spacing: .1em; padding: 24px; text-align: center;
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 .topbar {
   height: 76px; flex: 0 0 76px;
