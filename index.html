@@ -15,8 +15,10 @@
   <link rel="canonical" href="https://baselghanem.github.io/XAcademyCourses/">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="./assets/img/favicon.png">
+  <script>const legacyCourse=new URLSearchParams(location.search).get(`course`);if(legacyCourse){location.replace(`./catalog.html?course=${encodeURIComponent(legacyCourse)}`);}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
 /* X Academy Design Tokens v1.0 — LOCKED */
 :root{
@@ -61,8 +63,6 @@
 }
 
 [lang='ar'],[dir='rtl']{font-family:var(--xa-font-ar-primary);letter-spacing:0;direction:rtl;}
-
-@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
   --xa-font-en-display: "Manrope", "Inter", Arial, sans-serif;
@@ -958,7 +958,7 @@ body{font-size:16px}
             <h3 data-i18n="powerBiTitle">Power BI لتحليل الاعمال</h3>
             <p data-i18n="powerBiBody">ابن لوحات معلومات توضح ما حدث، ولماذا حدث، وما الذي يحتاج الى انتباهك.</p>
             <div class="program-tags"><span data-i18n="practicalTag">عملي</span><span data-i18n="professionalPath">مسار مهني</span><span class="ltr">Power BI</span></div>
-            <a class="program-link" href="./catalog.html?course=powerbi" target="_blank" rel="noopener">
+            <a class="program-link" href="./catalog.html?course=powerbi">
               <span data-i18n="viewProgram">عرض البرنامج</span><span class="button-arrow" aria-hidden="true">←</span>
             </a>
           </article>
@@ -971,7 +971,7 @@ body{font-size:16px}
             <h3 data-i18n="excelTitle">Excel الاحترافي</h3>
             <p data-i18n="excelBody">حول البيانات الى تحليلات وتقارير واضحة وقلل العمل اليدوي باستخدام ادوات Excel المتقدمة.</p>
             <div class="program-tags"><span data-i18n="practicalTag">عملي</span><span data-i18n="professionalPath">مسار مهني</span><span class="ltr">Excel</span></div>
-            <a class="program-link" href="./catalog.html?course=excel" target="_blank" rel="noopener">
+            <a class="program-link" href="./catalog.html?course=excel">
               <span data-i18n="viewProgram">عرض البرنامج</span><span class="button-arrow" aria-hidden="true">←</span>
             </a>
           </article>
