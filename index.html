@@ -3,18 +3,1392 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#f6f4ef">
-  <meta name="description" content="X Academy — Practical Excel and Power BI training built around real work scenarios.">
-  <title>X Academy | Learn. Analyse. Lead.</title>
-  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <meta name="theme-color" content="#FFFFFF">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="index,follow">
+  <meta name="description" content="تعلم Power BI وExcel وتحليل البيانات والذكاء الاصطناعي والمهارات الرقمية من خلال تدريب عملي مصمم للاستخدام في العمل الحقيقي.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_JO">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="X Academy">
+  <meta property="og:title" content="X Academy | تعلم مهارات عملية في البيانات والاعمال والتقنية">
+  <meta property="og:description" content="تعلم مهارات عملية واضحة ومنظمة يمكنك استخدامها فعلا في عملك.">
+  <meta property="og:url" content="https://baselghanem.github.io/XAcademyCourses/">
+  <meta property="og:image" content="https://baselghanem.github.io/XAcademyCourses/assets/img/hero-workspace.webp">
+  <meta property="og:image:alt" content="X Academy practical learning">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="X Academy | تعلم مهارات عملية في البيانات والاعمال والتقنية">
+  <meta name="twitter:description" content="تعلم مهارات عملية واضحة ومنظمة يمكنك استخدامها فعلا في عملك.">
+  <meta name="twitter:image" content="https://baselghanem.github.io/XAcademyCourses/assets/img/hero-workspace.webp">
+  <link rel="canonical" href="https://baselghanem.github.io/XAcademyCourses/">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./assets/img/favicon.png">
+  <script>const legacyCourse=new URLSearchParams(location.search).get(`course`);if(legacyCourse){location.replace(`./catalog.html?course=${encodeURIComponent(legacyCourse)}`);}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/app.css?v=9">
-  <link rel="stylesheet" href="./assets/css/experience-v12.css?v=15">
+  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* X Academy Design Tokens v1.0 — LOCKED */
+:root{
+  --xa-color-graphite: #1F2937;
+  --xa-color-midnight: #0F172A;
+  --xa-color-teal: #099999;
+  --xa-color-tealDeep: #007A8A;
+  --xa-color-slate: #4B5563;
+  --xa-color-grey500: #6B7280;
+  --xa-color-grey400: #9CA3AF;
+  --xa-color-grey300: #D1D5DB;
+  --xa-color-grey200: #E5E7EB;
+  --xa-color-grey100: #F3F4F6;
+  --xa-color-cloud: #F8F9FA;
+  --xa-color-white: #FFFFFF;
+  --xa-color-success: #0E9F6E;
+  --xa-color-warning: #F59E0B;
+  --xa-color-error: #DC2626;
+  --xa-space-1: 4px;
+  --xa-space-2: 8px;
+  --xa-space-3: 12px;
+  --xa-space-4: 16px;
+  --xa-space-5: 24px;
+  --xa-space-6: 32px;
+  --xa-space-7: 48px;
+  --xa-space-8: 64px;
+  --xa-radius-sm: 4px;
+  --xa-radius-md: 8px;
+  --xa-radius-lg: 16px;
+  --xa-radius-pill: 999px;
+  --xa-font-en-display: 'Manrope', 'Inter', sans-serif;
+  --xa-font-en-body: 'Inter', sans-serif;
+  --xa-font-en-data: 'JetBrains Mono', monospace;
+  --xa-font-ar-primary: 'Almarai', 'Noto Sans Arabic', Tahoma, Arial, sans-serif;
+  --xa-font-ar-accent: 'Noto Kufi Arabic', 'Almarai', 'Noto Sans Arabic', sans-serif;
+  --xa-motion-fastMs: 160ms;
+  --xa-motion-controlMs: 220ms;
+  --xa-motion-cardMs: 280ms;
+  --xa-motion-pageMs: 360ms;
+  --xa-motion-logoMs: 720ms;
+  --xa-motion-ease: cubic-bezier(0.22,1,0.36,1);
+}
+
+[lang='ar'],[dir='rtl']{font-family:var(--xa-font-ar-primary);letter-spacing:0;direction:rtl;}
+
+:root {
+  --xa-font-en-display: "Manrope", "Inter", Arial, sans-serif;
+  --xa-font-en-body: "Inter", Arial, sans-serif;
+  --xa-font-en-data: "JetBrains Mono", "Inter", monospace;
+  --xa-font-ar-primary: "Almarai", "Noto Sans Arabic", Tahoma, Arial, sans-serif;
+  --xa-font-ar-accent: "Noto Kufi Arabic", "Almarai", "Noto Sans Arabic", sans-serif;
+
+  --xa-ar-hero-size: clamp(3.5rem, 6vw, 4.25rem);
+  --xa-ar-h2-size: clamp(2.375rem, 4vw, 2.875rem);
+  --xa-ar-h3-size: clamp(1.625rem, 3vw, 2rem);
+  --xa-ar-h4-size: clamp(1.25rem, 2vw, 1.5rem);
+  --xa-ar-body-size: 1rem;
+  --xa-ar-caption-size: .875rem;
+  --xa-ar-ui-size: .9375rem;
+}
+
+html[lang="ar"], [lang="ar"], [dir="rtl"] {
+  font-family: var(--xa-font-ar-primary);
+  direction: rtl;
+  text-align: start;
+  letter-spacing: 0 !important;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+html[lang="en"], [lang="en"] { font-family: var(--xa-font-en-body); }
+[lang="en"] :is(h1,h2,h3,h4,.display) { font-family: var(--xa-font-en-display); }
+
+[lang="ar"] :is(h1,h2,h3,h4,.display), [dir="rtl"] :is(h1,h2,h3,h4,.display) {
+  font-family: var(--xa-font-ar-primary);
+  letter-spacing: 0 !important;
+  text-wrap: balance;
+}
+[lang="ar"] h1,[dir="rtl"] h1 { font-size:var(--xa-ar-hero-size);font-weight:800;line-height:1.18; }
+[lang="ar"] h2,[dir="rtl"] h2 { font-size:var(--xa-ar-h2-size);font-weight:700;line-height:1.25; }
+[lang="ar"] h3,[dir="rtl"] h3 { font-size:var(--xa-ar-h3-size);font-weight:700;line-height:1.34; }
+[lang="ar"] h4,[dir="rtl"] h4 { font-size:var(--xa-ar-h4-size);font-weight:700;line-height:1.40; }
+[lang="ar"] p,[dir="rtl"] p { font-size:var(--xa-ar-body-size);font-weight:400;line-height:1.82;max-inline-size:65ch; }
+[lang="ar"] .caption,[dir="rtl"] .caption { font-size:var(--xa-ar-caption-size);font-weight:400;line-height:1.65; }
+[lang="ar"] :is(button,.button,.ui-label),[dir="rtl"] :is(button,.button,.ui-label) { font-size:var(--xa-ar-ui-size);font-weight:700;line-height:1.45; }
+
+.xa-ar-technical { font-family:var(--xa-font-ar-accent);font-weight:500;letter-spacing:0 !important; }
+.xa-en-data { font-family:var(--xa-font-en-data); }
+.xa-ltr-isolate { direction:ltr; unicode-bidi:isolate; }
+.xa-rtl-isolate { direction:rtl; unicode-bidi:isolate; }
+
+/* Never use tracking on Arabic. */
+[lang="ar"] *, [dir="rtl"] * { letter-spacing:0; }
+
+:root{--xa-motion-fast:160ms;--xa-motion-control:220ms;--xa-motion-card:280ms;--xa-motion-page:360ms;--xa-motion-logo:720ms;--xa-ease:cubic-bezier(.22,1,.36,1);--xa-ease-standard:cubic-bezier(.4,0,.2,1);}
+@keyframes xa-path-a{0%{opacity:0;transform:translate(-18px,18px)}45%,100%{opacity:1;transform:none}}
+@keyframes xa-path-b{0%,18%{opacity:0;transform:translate(18px,18px)}65%,100%{opacity:1;transform:none}}
+@keyframes xa-lockup{0%,55%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:none}}
+@keyframes xa-fade-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes xa-data-rise{from{transform:scaleY(.06);transform-origin:50% 100%;opacity:.25}to{transform:scaleY(1);transform-origin:50% 100%;opacity:1}}
+.xa-motion-logo .path-a{animation:xa-path-a var(--xa-motion-logo) var(--xa-ease) both}
+.xa-motion-logo .path-b{animation:xa-path-b var(--xa-motion-logo) var(--xa-ease) both}
+.xa-motion-logo .lockup{animation:xa-lockup var(--xa-motion-logo) var(--xa-ease) both}
+.xa-motion-card{animation:xa-fade-up var(--xa-motion-card) var(--xa-ease) both}
+.xa-motion-data{animation:xa-data-rise 850ms var(--xa-ease) both}
+.xa-motion-interactive{transition:transform var(--xa-motion-control) var(--xa-ease),border-color var(--xa-motion-control) var(--xa-ease),box-shadow var(--xa-motion-control) var(--xa-ease)}
+.xa-motion-interactive:hover{transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+
+:root{
+  --xa-shell:1280px;
+  --xa-page-pad:clamp(20px,4vw,64px);
+  --xa-section-y:clamp(76px,9vw,132px);
+  --xa-border:var(--xa-color-grey200);
+  --xa-ink:var(--xa-color-graphite);
+  --xa-muted:var(--xa-color-slate);
+  --xa-bg:var(--xa-color-white);
+  --xa-soft:var(--xa-color-cloud);
+  --xa-dark:var(--xa-color-midnight);
+  --xa-signal:var(--xa-color-teal);
+  --xa-signal-deep:var(--xa-color-tealDeep);
+  --xa-shadow:0 18px 50px rgba(15,23,42,.07);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--xa-bg)}
+body{margin:0;background:var(--xa-bg);color:var(--xa-ink);overflow-x:hidden}
+body.menu-open{overflow:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{color:inherit}
+.shell{width:min(var(--xa-shell),calc(100% - (var(--xa-page-pad) * 2)));margin-inline:auto}
+.section{padding-block:var(--xa-section-y)}
+.section-tight{padding-block:56px}
+.ltr{direction:ltr;unicode-bidi:isolate}
+.teal{color:var(--xa-signal)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:fixed;inset-block-start:8px;inset-inline-start:8px;transform:translateY(-160%);padding:10px 14px;background:var(--xa-dark);color:#fff;border-radius:4px;z-index:9999}
+.skip-link:focus{transform:none}
+
+.site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.94);backdrop-filter:saturate(140%) blur(16px);border-bottom:1px solid transparent;transition:height var(--xa-motion-controlMs) var(--xa-motion-ease),border-color var(--xa-motion-controlMs) var(--xa-motion-ease),box-shadow var(--xa-motion-controlMs) var(--xa-motion-ease)}
+.site-header.is-scrolled{border-color:var(--xa-border);box-shadow:0 8px 24px rgba(15,23,42,.045)}
+.header-inner{height:76px;display:flex;align-items:center;gap:28px}
+.brand-link{display:flex;align-items:center;flex:0 0 auto}
+.brand-link img{width:176px;height:auto}
+.desktop-nav{display:flex;align-items:center;gap:28px;margin-inline-start:auto}
+.desktop-nav a,.footer-nav a{font-weight:700;font-size:14px;color:var(--xa-muted);transition:color var(--xa-motion-fastMs) ease}
+.desktop-nav a:hover,.footer-nav a:hover{color:var(--xa-signal)}
+.header-actions{display:flex;align-items:center;gap:10px}
+.icon-button,.language-switch,.menu-trigger{min-width:44px;min-height:44px;border:0;background:transparent;border-radius:4px;display:inline-grid;place-items:center;cursor:pointer}
+.icon-button img{width:20px;height:20px}
+.icon-button:hover,.language-switch:hover{background:var(--xa-soft)}
+.language-switch{font-family:var(--xa-font-en-body);font-weight:700;color:var(--xa-ink);padding-inline:10px}
+.button{min-height:48px;padding-inline:20px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:700;border:1px solid transparent;transition:transform var(--xa-motion-controlMs) var(--xa-motion-ease),background var(--xa-motion-controlMs) var(--xa-motion-ease),border-color var(--xa-motion-controlMs) var(--xa-motion-ease),color var(--xa-motion-controlMs) var(--xa-motion-ease)}
+.button:hover{transform:translateY(-2px)}
+.button:active{transform:scale(.98)}
+.button-primary{background:var(--xa-ink);color:#fff}
+.button-primary:hover{background:var(--xa-dark)}
+.button-teal{background:var(--xa-signal);color:#fff}
+.button-teal:hover{background:var(--xa-signal-deep)}
+.button-large{min-height:54px;padding-inline:24px}
+.button:focus-visible,.icon-button:focus-visible,.language-switch:focus-visible,.menu-trigger:focus-visible,a:focus-visible,input:focus-visible{outline:0;box-shadow:0 0 0 3px rgba(9,153,153,.22)}
+.button-arrow{font-size:18px;line-height:1;display:inline-block}
+.menu-trigger{display:none;gap:4px;padding:11px}
+.menu-trigger span{width:22px;height:2px;background:var(--xa-ink);display:block}
+
+.mobile-menu{position:fixed;z-index:220;inset-block:0;inset-inline-end:0;width:min(88vw,390px);background:#fff;padding:24px;transform:translateX(110%);transition:transform var(--xa-motion-pageMs) var(--xa-motion-ease);display:flex;flex-direction:column}
+[dir=rtl] .mobile-menu{transform:translateX(-110%)}
+.mobile-menu.is-open{transform:none}
+.mobile-menu-head{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.mobile-menu-head img{width:164px}
+.mobile-nav{display:flex;flex-direction:column;margin-block:50px auto;gap:0}
+.mobile-nav a{font-size:28px;font-weight:700;padding-block:18px;border-bottom:1px solid var(--xa-border)}
+.mobile-menu-foot{display:grid;gap:14px;margin-top:auto}
+.menu-backdrop{position:fixed;z-index:210;inset:0;background:rgba(15,23,42,.48);backdrop-filter:blur(3px)}
+
+.search-dialog{width:min(720px,calc(100% - 32px));border:1px solid var(--xa-border);border-radius:16px;padding:28px;background:#fff;box-shadow:0 30px 80px rgba(15,23,42,.24)}
+.search-dialog::backdrop{background:rgba(15,23,42,.55);backdrop-filter:blur(5px)}
+.search-dialog-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:22px}
+.search-dialog-head h2{font-size:clamp(26px,4vw,36px);margin:5px 0 0}
+.search-field{height:56px;border:1px solid var(--xa-color-grey300);border-radius:8px;display:flex;align-items:center;gap:12px;padding-inline:16px}
+.search-field img{width:20px}
+.search-field input{width:100%;border:0;outline:0;background:transparent;color:var(--xa-ink)}
+.search-results{display:grid;gap:8px;margin-top:16px;max-height:360px;overflow:auto}
+.search-result{border:1px solid var(--xa-border);background:#fff;border-radius:8px;text-align:start;padding:14px 16px;cursor:pointer}
+.search-result:hover{border-color:var(--xa-signal);background:#f5ffff}
+.search-result strong{display:block;margin-bottom:3px}
+.search-result span{font-size:13px;color:var(--xa-muted)}
+
+.eyebrow,.section-kicker{display:inline-block;font-size:12px;font-weight:800;color:var(--xa-signal);text-transform:uppercase;font-family:var(--xa-font-en-body);letter-spacing:.14em}
+[lang=ar] .section-kicker,[lang=ar] .eyebrow{font-family:var(--xa-font-ar-primary);letter-spacing:0;text-transform:none}
+.section-heading{max-width:720px}
+.section-heading h2{margin:12px 0 18px;color:var(--xa-ink)}
+.section-heading p{margin:0;color:var(--xa-muted)}
+.section-heading-row{max-width:none;display:flex;justify-content:space-between;align-items:end;gap:32px}
+.text-link{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--xa-signal);padding-block:8px}
+.text-link:hover{color:var(--xa-signal-deep)}
+
+.hero{padding-block:76px 64px;position:relative;isolation:isolate;overflow:hidden}
+.hero:before{content:"";position:absolute;inset-block-start:-160px;inset-inline-start:-120px;width:520px;height:520px;background:radial-gradient(circle,rgba(9,153,153,.09),transparent 68%);z-index:-1}
+.hero-grid{display:grid;grid-template-columns:5fr 7fr;gap:56px;align-items:center;min-height:600px}
+.hero-copy h1{display:grid;gap:2px;margin:18px 0 24px;font-size:clamp(52px,5.2vw,68px);line-height:1.2}
+.hero-lead{font-size:18px!important;color:var(--xa-muted);max-inline-size:560px!important;margin:0}
+.hero-actions{display:flex;align-items:center;gap:20px;margin-top:32px;flex-wrap:wrap}
+.brand-signature{margin-top:34px;font-weight:700;color:var(--xa-muted);font-size:14px}
+.hero-visual{position:relative;min-height:540px;border:1px solid var(--xa-border);border-radius:16px;background:linear-gradient(180deg,#fff 0%,#f8fafc 100%);overflow:hidden;box-shadow:var(--xa-shadow)}
+.hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(15,23,42,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.055) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 96%)}
+.x-band{position:absolute;inset-block-start:50%;inset-inline-start:50%;width:720px;height:68px;transform-origin:center}
+.x-band-dark{background:var(--xa-ink);transform:translate(-50%,-50%) rotate(42deg)}
+.x-band-teal{background:var(--xa-signal);transform:translate(-50%,-50%) rotate(-42deg);opacity:.92}
+[dir=rtl] .x-band-dark,[dir=rtl] .x-band-teal{transform-origin:center}
+.hero-data-card{position:absolute;background:rgba(255,255,255,.96);border:1px solid rgba(229,231,235,.95);border-radius:8px;box-shadow:0 18px 50px rgba(15,23,42,.13);backdrop-filter:blur(10px)}
+.hero-card-main{inset-inline-end:8%;inset-block-start:14%;width:min(390px,62%);padding:20px}
+.data-card-head{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:var(--xa-muted)}
+.signal-dot{width:9px;height:9px;background:var(--xa-signal);border-radius:50%;box-shadow:0 0 0 6px rgba(9,153,153,.09)}
+.mini-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+.mini-kpis div{display:grid;gap:3px}.mini-kpis strong{font:700 24px/1 var(--xa-font-en-data);color:var(--xa-ink)}.mini-kpis span{font-size:11px;color:var(--xa-muted)}
+.bar-chart{height:130px;display:flex;align-items:end;gap:9px;margin-top:22px;padding-top:12px;border-top:1px solid var(--xa-border)}
+.bar-chart span{width:100%;height:var(--h);background:var(--xa-color-grey300);border-radius:2px 2px 0 0}.bar-chart span.active{background:var(--xa-signal)}
+.hero-card-side{inset-inline-start:7%;inset-block-end:12%;width:190px;padding:18px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:7px}
+.hero-card-side .card-index{grid-column:1/-1;font:600 11px var(--xa-font-en-data);color:var(--xa-muted);margin-bottom:6px}
+.hero-card-side strong{font-size:13px}.hero-card-side i{grid-column:1/-1;height:1px;background:var(--xa-border)}.hero-card-side small{grid-column:1/-1;color:var(--xa-signal);font-weight:700}
+.hero-symbol{position:absolute;inset-inline-end:6%;inset-block-end:6%;width:76px;filter:drop-shadow(0 8px 12px rgba(15,23,42,.12))}
+
+.trust{border-block:1px solid var(--xa-border);background:var(--xa-soft)}
+.trust-grid{display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:center}
+.trust-number{font:800 clamp(42px,5vw,64px)/1 var(--xa-font-en-display);color:var(--xa-ink);margin-top:8px}
+.trust-copy h2{font-size:24px;margin:5px 0 8px}.trust-copy p{margin:0;color:var(--xa-muted);font-size:14px!important}
+.logo-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;align-items:center}
+.logo-grid img{width:100%;max-height:54px;object-fit:contain;filter:grayscale(1);opacity:.68;transition:filter var(--xa-motion-controlMs),opacity var(--xa-motion-controlMs),transform var(--xa-motion-controlMs)}
+.logo-grid img:hover{filter:none;opacity:1;transform:translateY(-2px)}
+
+.difference-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+.editorial-card{position:relative;border-top:2px solid var(--xa-ink);padding:28px 8px 18px 0;min-height:240px}
+[dir=ltr] .editorial-card{padding:28px 0 18px 8px}
+.editorial-card img{width:28px;height:28px;margin-block:18px}.editorial-card h3{font-size:24px;margin:0 0 12px}.editorial-card p{color:var(--xa-muted);margin:0}.card-number{font:600 12px var(--xa-font-en-data);color:var(--xa-signal)}
+
+.framework{background:var(--xa-soft)}
+.framework-grid{display:grid;grid-template-columns:5fr 7fr;gap:72px;align-items:center}
+.equation{margin-top:30px;padding-top:18px;border-top:1px solid var(--xa-border);font-weight:700;color:var(--xa-signal)}
+.framework-flow{position:relative;display:grid;gap:34px;padding:32px;border:1px solid var(--xa-border);background:#fff;border-radius:8px;box-shadow:0 12px 40px rgba(15,23,42,.04)}
+.flow-step{display:grid;grid-template-columns:58px 1fr;gap:20px;align-items:center;position:relative;z-index:2}
+.flow-node{width:50px;height:50px;border:1px solid var(--xa-color-grey300);background:#fff;border-radius:50%;display:grid;place-items:center;font:700 12px var(--xa-font-en-data)}
+.flow-node.active{border-color:var(--xa-signal);color:var(--xa-signal);box-shadow:0 0 0 7px rgba(9,153,153,.07)}
+.flow-step h3{font-size:24px;margin:0 0 4px}.flow-step p{margin:0;color:var(--xa-muted)}
+.flow-line{position:absolute;inset-block:56px;inset-inline-start:57px;width:1px;background:var(--xa-border)}
+[dir=ltr] .flow-line{inset-inline-start:57px}
+.flow-line span{position:absolute;inset:0;background:var(--xa-signal);transform-origin:top;transform:scaleY(.15);transition:transform 900ms var(--xa-motion-ease)}
+.framework-flow.is-visible .flow-line span{transform:scaleY(1)}
+
+.areas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:42px}
+.area-card{border:1px solid var(--xa-border);border-radius:8px;padding:24px;min-height:190px;transition:transform var(--xa-motion-cardMs) var(--xa-motion-ease),border-color var(--xa-motion-cardMs),box-shadow var(--xa-motion-cardMs)}
+.area-card:hover{transform:translateY(-2px);border-color:var(--xa-color-grey300);box-shadow:0 10px 30px rgba(15,23,42,.05)}
+.area-card img{width:30px;height:30px;margin-bottom:24px}.area-card h3{font-size:21px;margin:0 0 10px}.topic-list{font:500 12px/1.8 var(--xa-font-en-body)!important;color:var(--xa-muted);margin:0}
+
+.programs{background:var(--xa-soft)}
+.program-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:42px}
+.program-card{border:1px solid var(--xa-border);border-radius:8px;background:#fff;padding:24px;min-height:360px;display:flex;flex-direction:column;transition:transform var(--xa-motion-cardMs) var(--xa-motion-ease),border-color var(--xa-motion-cardMs),box-shadow var(--xa-motion-cardMs)}
+.program-card:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(15,23,42,.07)}
+.program-card-active:hover{border-color:rgba(9,153,153,.5)}
+.program-card-soon{background:rgba(255,255,255,.6)}
+.program-card-top{display:flex;align-items:center;justify-content:space-between;gap:14px}.program-card-top img{width:38px;height:38px;object-fit:contain}.program-category{font:700 10px var(--xa-font-en-body);letter-spacing:.09em;color:var(--xa-signal)}
+.status-badge,.program-tags span{display:inline-flex;align-items:center;min-height:28px;padding-inline:9px;border-radius:999px;border:1px solid var(--xa-border);background:#fff;font-size:11px;color:var(--xa-muted)}
+.status-badge{border-color:rgba(9,153,153,.35);color:var(--xa-signal);background:#f3ffff}
+.program-card h3{font-size:23px;margin:26px 0 12px}.program-card>p{color:var(--xa-muted);margin:0 0 20px}.program-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}.program-link{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px;padding-top:18px;border-top:1px solid var(--xa-border);font-weight:700;color:var(--xa-ink)}.program-link:hover{color:var(--xa-signal)}
+
+.outputs-grid{display:grid;grid-template-columns:7fr 5fr;gap:68px;align-items:center}
+.outputs-media{display:grid;gap:14px}.output-main{width:100%;aspect-ratio:16/10;object-fit:cover;border:1px solid var(--xa-border);border-radius:16px;box-shadow:var(--xa-shadow)}.output-small-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.output-small-grid img{width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--xa-border);border-radius:8px;background:#fff}
+.check-list{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:14px}.check-list li{display:flex;align-items:center;gap:10px;font-weight:700}.check-list img{width:20px;height:20px}
+
+.methodology{background:var(--xa-soft)}
+.method-grid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:46px;border-top:1px solid var(--xa-color-grey300)}
+.method-step{padding:24px 24px 0;position:relative}.method-step:before{content:"";position:absolute;top:-2px;inset-inline-start:0;width:0;height:3px;background:var(--xa-signal);transition:width 700ms var(--xa-motion-ease)}.method-step.is-visible:before{width:100%}.method-step>span{font:700 12px var(--xa-font-en-data);color:var(--xa-signal)}.method-step h3{font-size:22px;margin:14px 0 8px}.method-step p{color:var(--xa-muted);margin:0}
+
+.corporate{position:relative;background:var(--xa-dark);color:#fff;padding-block:clamp(84px,10vw,140px);overflow:hidden;isolation:isolate}
+.corporate-grid-bg{position:absolute;inset:0;opacity:.14;background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(90deg,transparent 0%,black 35%,black 100%);z-index:-2}
+.corporate:after{content:"X";position:absolute;inset-inline-end:-2vw;inset-block-start:50%;transform:translateY(-50%);font:800 min(43vw,560px)/1 var(--xa-font-en-display);color:rgba(255,255,255,.025);z-index:-1}
+.corporate-grid{display:grid;grid-template-columns:5fr 7fr;gap:80px;align-items:center}.corporate .section-kicker{color:#5de2dc}.corporate h2{font-size:clamp(42px,5vw,62px);margin:14px 0 20px;color:#fff}.corporate-copy p{color:#cbd5e1;font-size:18px!important;margin:0 0 30px}.corporate-points{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(255,255,255,.16);border-inline-start:1px solid rgba(255,255,255,.16)}.corporate-points article{display:grid;grid-template-columns:42px 1fr;gap:14px;padding:24px;border-inline-end:1px solid rgba(255,255,255,.16);border-bottom:1px solid rgba(255,255,255,.16)}.corporate-points article>span{font:600 11px var(--xa-font-en-data);color:#5de2dc}.corporate-points h3{font-size:18px;margin:0 0 8px;color:#fff}.corporate-points p{font-size:14px!important;color:#94a3b8;margin:0}
+
+.proof-grid{display:grid;grid-template-columns:1fr 400px;gap:64px;align-items:center}.metric-card{border:1px solid var(--xa-border);border-radius:8px;padding:36px;background:var(--xa-soft);display:grid;gap:8px}.metric-value{font:800 clamp(58px,7vw,90px)/.95 var(--xa-font-en-display);color:var(--xa-ink)}.metric-card strong{font-size:24px}.metric-card>span:last-child{color:var(--xa-muted);font-size:14px}
+
+.trainer{background:var(--xa-soft)}
+.trainer-grid{display:grid;grid-template-columns:5fr 7fr;gap:70px;align-items:center}.trainer-mark{min-height:390px;border:1px solid var(--xa-border);border-radius:16px;background:#fff;display:grid;place-items:center;position:relative;overflow:hidden}.trainer-mark:after{content:"";position:absolute;width:420px;height:58px;background:var(--xa-ink);transform:rotate(-42deg)}.trainer-mark:before{content:"";position:absolute;width:420px;height:58px;background:var(--xa-signal);transform:rotate(42deg)}.trainer-mark img{width:100px;position:relative;z-index:2;background:#fff;padding:12px}.trainer-mark span{position:absolute;inset-block-end:20px;inset-inline-start:20px;z-index:2;font:600 11px var(--xa-font-en-data);color:var(--xa-muted)}.trainer-details{display:grid;gap:6px;margin-top:28px;padding-top:22px;border-top:1px solid var(--xa-border)}.trainer-details strong{font-size:22px}.trainer-details>span{color:var(--xa-muted)}.trainer-details .program-tags{margin-top:12px}
+
+.final-cta{position:relative;overflow:hidden}.final-content{max-width:860px;text-align:center;display:grid;justify-items:center;position:relative;z-index:2}.final-content h2{font-size:clamp(40px,5.8vw,68px);margin:14px 0 18px}.final-content p{color:var(--xa-muted);font-size:18px!important;margin:0 0 30px}.final-x{position:absolute;inset-inline-start:50%;inset-block-start:50%;width:560px;height:560px;transform:translate(-50%,-50%);opacity:.035;background:linear-gradient(45deg,transparent 42%,var(--xa-ink) 42%,var(--xa-ink) 58%,transparent 58%),linear-gradient(-45deg,transparent 42%,var(--xa-signal) 42%,var(--xa-signal) 58%,transparent 58%)}
+[dir=rtl] .final-x{transform:translate(50%,-50%)}
+
+.site-footer{background:var(--xa-dark);color:#fff;padding-block:64px 28px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px}.footer-brand img{width:194px;filter:none}.footer-brand p{font-family:var(--xa-font-en-body);color:#94a3b8;margin-top:18px}.footer-nav{display:grid;align-content:start;gap:12px}.footer-nav a{color:#cbd5e1}.footer-contact{display:grid;align-content:start;gap:12px}.footer-contact>span{color:#94a3b8;font-size:13px}.footer-contact a{font-family:var(--xa-font-en-body);font-weight:700;color:#fff}.footer-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:48px;padding-top:22px;display:flex;align-items:center;justify-content:space-between;color:#94a3b8;font-size:13px}.language-switch-footer{color:#fff}.language-switch-footer:hover{background:rgba(255,255,255,.08)}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity var(--xa-motion-pageMs) var(--xa-motion-ease),transform var(--xa-motion-pageMs) var(--xa-motion-ease)}
+.reveal.is-visible{opacity:1;transform:none}
+
+@media(max-width:1100px){
+  .desktop-nav{display:none}.menu-trigger{display:grid}.header-cta{display:none}
+  .hero-grid,.framework-grid,.outputs-grid,.corporate-grid,.trainer-grid{grid-template-columns:1fr 1fr;gap:40px}
+  .program-grid{grid-template-columns:repeat(2,1fr)}
+  .areas-grid{grid-template-columns:repeat(2,1fr)}
+  .logo-grid{grid-template-columns:repeat(3,1fr)}
+  .hero-copy h1{font-size:clamp(44px,5vw,58px)}
+}
+
+@media(max-width:767px){
+  :root{--xa-page-pad:20px;--xa-section-y:82px}
+  .header-inner{height:64px}.brand-link img{width:146px}.search-trigger{display:none}
+  .hero{padding-block:42px 56px}.hero-grid{grid-template-columns:1fr;gap:36px;min-height:0}.hero-copy h1{font-size:clamp(35px,9.8vw,42px);margin-top:14px}.hero-lead{font-size:16px!important}.hero-actions{display:grid;gap:12px;margin-top:28px}.hero-actions .button{width:100%}.hero-actions .text-link{justify-content:center}.brand-signature{margin-top:22px}.hero-visual{min-height:360px}.hero-card-main{width:72%;inset-inline-end:6%;inset-block-start:10%;padding:14px}.mini-kpis strong{font-size:18px}.bar-chart{height:90px}.hero-card-side{width:160px;inset-inline-start:5%;inset-block-end:9%;padding:14px}.hero-symbol{width:56px}
+  .trust-grid{grid-template-columns:1fr;gap:28px}.trust-copy{text-align:start}.logo-grid{grid-template-columns:repeat(3,1fr);gap:14px}.logo-grid img{max-height:44px}
+  .difference-grid{grid-template-columns:1fr;margin-top:32px;gap:0}.editorial-card{min-height:0;padding-block:24px;border-top:1px solid var(--xa-border);display:grid;grid-template-columns:40px 1fr;column-gap:14px}.editorial-card img{grid-column:1;margin:2px 0}.editorial-card h3,.editorial-card p{grid-column:2}.editorial-card .card-number{grid-column:1}.editorial-card h3{font-size:21px;margin-top:-22px}
+  .framework-grid{grid-template-columns:1fr;gap:34px}.framework-flow{padding:22px}.flow-step{grid-template-columns:52px 1fr}.flow-line{inset-inline-start:46px}
+  .areas-grid{grid-template-columns:1fr 1fr;gap:12px;margin-top:32px}.area-card{padding:18px;min-height:166px}.area-card img{margin-bottom:18px}.area-card h3{font-size:18px}.topic-list{font-size:10.5px!important}
+  .section-heading-row{display:block}.section-heading-row>.text-link{margin-top:12px}.program-grid{grid-template-columns:1fr;margin-top:32px}.program-card{min-height:0}.program-card:nth-child(4){display:none}
+  .outputs-grid{grid-template-columns:1fr;gap:38px}.outputs-media{order:2}.output-small-grid{gap:10px}
+  .method-grid{grid-template-columns:1fr;border-top:0;margin-top:32px}.method-step{padding:0 0 28px 48px;border-inline-start:1px solid var(--xa-border)}[dir=rtl] .method-step{padding:0 48px 28px 0}.method-step:before{width:3px!important;height:0;top:0;inset-inline-start:-2px;transition:height 700ms var(--xa-motion-ease)}.method-step.is-visible:before{height:100%}.method-step>span{position:absolute;inset-inline-start:14px;top:0}[dir=rtl] .method-step>span{inset-inline-start:14px}.method-step h3{margin-top:0}
+  .corporate{padding-block:80px}.corporate-grid{grid-template-columns:1fr;gap:46px}.corporate-points{grid-template-columns:1fr;border-inline-start:0}.corporate-points article{border-inline:0}.corporate .button{width:100%}
+  .proof-grid{grid-template-columns:1fr;gap:32px}.metric-card{padding:28px}
+  .trainer-grid{grid-template-columns:1fr;gap:38px}.trainer-mark{min-height:280px}
+  .final-content h2{font-size:clamp(34px,9vw,46px)}.final-content .button{width:100%}
+  .footer-grid{grid-template-columns:1fr;gap:36px}.footer-bottom{gap:20px}.footer-brand img{width:170px}
+}
+
+@media(max-width:420px){
+  :root{--xa-page-pad:16px}.language-switch{min-width:40px}.areas-grid{grid-template-columns:1fr 1fr}.area-card{padding:16px}.topic-list{line-height:1.65!important}.logo-grid{grid-template-columns:repeat(2,1fr)}.hero-visual{min-height:330px}.hero-card-main{width:76%}.hero-card-side{width:148px}.search-dialog{padding:20px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.flow-line span{transform:scaleY(1);transition:none}.method-step:before{transition:none}.logo-grid img,.program-card,.area-card,.button{transition:none}
+}
+
+/* Phase 4 visual refinement v2 — hierarchy, density, proof, trainer and footer */
+:root{
+  --xa-shell:1240px;
+  --xa-page-pad:clamp(22px,3.2vw,48px);
+  --xa-section-y:clamp(72px,6.5vw,100px);
+  --xa-ar-hero-size:clamp(2.7rem,4.15vw,3.55rem);
+  --xa-ar-h2-size:clamp(1.9rem,2.75vw,2.42rem);
+  --xa-ar-h3-size:clamp(1.2rem,1.65vw,1.42rem);
+}
+
+body{font-size:16px}
+.section-tight{padding-block:44px}
+.section-heading{max-width:650px}
+.section-heading h2{margin:10px 0 14px}
+.section-heading p{font-size:16px!important;line-height:1.8;max-inline-size:620px}
+.section-kicker,.eyebrow{font-size:11px}
+
+.header-inner{height:72px;gap:24px}
+.brand-link img{width:164px}
+.desktop-nav{gap:24px}
+.desktop-nav a{font-size:13.5px}
+.button{border-radius:6px}
+
+.hero{padding-block:58px 56px}
+.hero-grid{grid-template-columns:5.2fr 6.8fr;gap:52px;min-height:560px}
+.hero-copy h1{font-size:clamp(46px,4.35vw,58px);line-height:1.27;margin:16px 0 20px}
+.hero-lead{font-size:17px!important;line-height:1.85!important;max-inline-size:530px!important}
+.hero-actions{margin-top:28px}
+.brand-signature{margin-top:26px;font-size:13px}
+.hero-visual{min-height:500px;border-radius:12px;box-shadow:0 18px 46px rgba(15,23,42,.055)}
+.hero-card-main{width:min(370px,61%)}
+
+.trust-grid{grid-template-columns:240px 1fr;gap:40px}
+.trust-number{font-size:clamp(40px,4.2vw,56px)}
+.logo-grid{gap:22px}
+.logo-grid img{max-height:48px}
+
+.difference-grid{margin-top:38px;gap:28px}
+.editorial-card{min-height:205px;padding-top:22px}
+.editorial-card img{margin-block:14px;width:26px;height:26px}
+.editorial-card h3{font-size:21px;margin-bottom:9px}
+.editorial-card p{font-size:15px!important;line-height:1.8}
+
+.framework-grid{gap:58px}
+.framework-flow{gap:28px;padding:28px}
+.flow-step h3{font-size:21px}
+.flow-step p{font-size:15px!important}
+
+.areas-grid{gap:14px;margin-top:34px}
+.area-card{padding:22px;min-height:176px}
+.area-card img{margin-bottom:18px}
+.area-card h3{font-size:19px}
+
+.program-grid{gap:14px;margin-top:34px}
+.program-card{padding:22px;min-height:330px}
+.program-card h3{font-size:21px;margin:22px 0 10px}
+.program-card>p{font-size:15px!important;line-height:1.78}
+
+.outputs-grid{grid-template-columns:7.2fr 4.8fr;gap:56px}
+.output-stage{position:relative}
+.output-main{aspect-ratio:16/9;border-radius:12px;box-shadow:0 18px 42px rgba(15,23,42,.06)}
+.output-stage-meta{position:absolute;inset-inline-end:18px;inset-block-end:18px;width:min(310px,70%);padding:14px 16px;background:rgba(255,255,255,.94);border:1px solid rgba(229,231,235,.95);border-radius:8px;backdrop-filter:blur(10px);display:grid;gap:5px}
+.output-stage-meta span{font:600 10px var(--xa-font-en-data);color:var(--xa-signal)}
+.output-stage-meta strong{font-size:15px;line-height:1.6}
+.output-capabilities{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--xa-border);border-bottom:1px solid var(--xa-border)}
+.output-capabilities article{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:16px 14px;border-inline-end:1px solid var(--xa-border)}
+.output-capabilities article:last-child{border-inline-end:0}
+.output-capabilities>article>span{font:600 10px var(--xa-font-en-data);color:var(--xa-signal)}
+.output-capabilities strong{display:block;font-size:13px;line-height:1.65}
+.output-capabilities small{display:block;margin-top:5px;font:500 9px var(--xa-font-en-data);color:var(--xa-muted)}
+.check-list{margin-top:22px;gap:11px}
+.check-list li{font-size:14px}
+
+.method-grid{margin-top:36px}
+.method-step{padding:20px 20px 0}
+.method-step h3{font-size:19px;margin:12px 0 7px}
+.method-step p{font-size:14.5px!important;line-height:1.8}
+
+.corporate{padding-block:clamp(78px,7vw,104px)}
+.corporate-grid{gap:62px}
+.corporate h2{font-size:clamp(34px,3.7vw,46px);line-height:1.3;margin:12px 0 16px}
+.corporate-copy p{font-size:16.5px!important;line-height:1.85}
+.corporate-points article{padding:20px}
+.corporate-points h3{font-size:17px}
+.corporate-points p{font-size:13.5px!important}
+
+.proof{padding-block:clamp(62px,5.5vw,82px)}
+.proof-grid{grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:52px}
+.metric-card{position:relative;border:0;border-radius:0;padding:8px 0 8px 28px;background:transparent;gap:5px}
+[dir=rtl] .metric-card{padding:8px 28px 8px 0}
+.metric-card:before{content:"";position:absolute;inset-block:5px;inset-inline-start:0;width:3px;background:var(--xa-signal)}
+.metric-value{font-size:clamp(54px,5.6vw,76px)}
+.metric-card strong{font-size:19px}
+.metric-card>span:last-child{font-size:13px}
+
+.trainer{padding-block:clamp(68px,6vw,92px)}
+.trainer-grid{grid-template-columns:minmax(380px,.9fr) minmax(0,1.1fr);gap:58px;align-items:center}
+[dir=rtl] .trainer-grid{direction:ltr}
+[dir=rtl] .trainer-profile{grid-column:1;grid-row:1}
+[dir=rtl] .trainer-grid>.section-heading{grid-column:2;grid-row:1;direction:rtl;text-align:right}
+[dir=ltr] .trainer-profile{grid-column:2;grid-row:1}
+[dir=ltr] .trainer-grid>.section-heading{grid-column:1;grid-row:1;direction:ltr;text-align:left}
+.trainer-profile{min-height:310px;border:1px solid var(--xa-border);border-radius:12px;background:#fff;padding:26px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 14px 40px rgba(15,23,42,.04)}
+.trainer-profile-head{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.trainer-profile-head img{width:52px;height:52px}
+.trainer-profile-head span{font:600 10px var(--xa-font-en-data);color:var(--xa-muted)}
+.trainer-profile-title{display:flex;align-items:center;flex-wrap:wrap;gap:10px 12px;font:700 clamp(23px,2.2vw,31px)/1.15 var(--xa-font-en-display);color:var(--xa-ink)}
+.trainer-profile-title i{font-style:normal;color:var(--xa-signal);font-weight:500}
+.trainer-profile-map{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--xa-border);border-inline-start:1px solid var(--xa-border)}
+.trainer-profile-map span{padding:12px;border-inline-end:1px solid var(--xa-border);border-bottom:1px solid var(--xa-border);font:600 9.5px var(--xa-font-en-data);color:var(--xa-muted)}
+.trainer-profile-foot{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.trainer-profile-foot span{font:600 10px var(--xa-font-en-data);color:var(--xa-muted)}
+.trainer-profile-foot i{width:46px;height:2px;background:var(--xa-signal)}
+.trainer-details{margin-top:22px;padding-top:18px}
+.trainer-details strong{font-size:20px}
+.trainer-details>span{font-size:15px}
+.trainer-details .program-tags{margin-top:10px}
+
+.final-cta{padding-block:clamp(70px,6.5vw,96px)}
+.final-content{max-width:760px}
+.final-content h2{font-size:clamp(34px,3.8vw,46px);line-height:1.35;margin:12px 0 14px}
+.final-content p{font-size:16px!important;margin-bottom:24px}
+.final-x{width:470px;height:470px}
+
+.site-footer{padding-block:44px 22px}
+.footer-grid{grid-template-columns:minmax(230px,1.05fr) minmax(400px,1.7fr) minmax(170px,.65fr);gap:32px;align-items:start}
+.footer-brand img{width:174px}
+.footer-brand p{margin:13px 0 0;direction:ltr;unicode-bidi:isolate;text-align:start;font-size:14px}
+.footer-nav{display:flex;flex-wrap:wrap;gap:12px 24px;padding-top:3px}
+.footer-nav a{font-size:13.5px}
+.footer-contact{gap:7px;padding-top:2px}
+.footer-contact>span{font-size:12px}
+.footer-contact a{font-size:14px}
+.footer-bottom{margin-top:30px;padding-top:18px;font-size:12px}
+
+@media(max-width:1100px){
+  .hero-grid{gap:38px}
+  .hero-copy h1{font-size:clamp(42px,4.7vw,52px)}
+  .outputs-grid,.trainer-grid{gap:38px}
+  .footer-grid{grid-template-columns:1fr 1.4fr .7fr}
+}
+
+@media(max-width:767px){
+  :root{--xa-section-y:72px;--xa-ar-hero-size:clamp(2rem,9vw,2.45rem);--xa-ar-h2-size:clamp(1.65rem,7.2vw,2rem);--xa-ar-h3-size:1.2rem}
+  .header-inner{height:62px}
+  .brand-link img{width:142px}
+  .hero{padding-block:38px 48px}
+  .hero-copy h1{font-size:clamp(34px,9vw,40px);line-height:1.32;margin-bottom:18px}
+  .hero-grid{gap:30px}
+  .hero-visual{min-height:330px}
+  .trust-grid{gap:24px}
+  .difference-grid{margin-top:28px}
+  .editorial-card{padding-block:20px}
+  .areas-grid,.program-grid{margin-top:28px}
+  .outputs-grid{grid-template-columns:1fr;gap:30px}
+  .outputs-media{order:2}
+  .output-stage-meta{inset-inline-end:10px;inset-block-end:10px;width:min(280px,78%);padding:11px 12px}
+  .output-capabilities{grid-template-columns:1fr}
+  .output-capabilities article{border-inline-end:0;border-bottom:1px solid var(--xa-border);padding:12px 4px}
+  .output-capabilities article:last-child{border-bottom:0}
+  .corporate{padding-block:68px}
+  .corporate h2{font-size:32px}
+  .proof-grid{grid-template-columns:1fr;gap:26px}
+  .metric-card{padding-block:0}
+  [dir=rtl] .metric-card{padding-inline:20px 0}
+  .trainer-grid{grid-template-columns:1fr;gap:30px;direction:initial!important}
+  [dir=rtl] .trainer-profile,[dir=ltr] .trainer-profile,[dir=rtl] .trainer-grid>.section-heading,[dir=ltr] .trainer-grid>.section-heading{grid-column:auto;grid-row:auto;direction:inherit;text-align:start}
+  .trainer-profile{min-height:260px;padding:20px;order:2}
+  .trainer-profile-title{font-size:22px}
+  .trainer-profile-map span{font-size:8.5px;padding:10px}
+  .final-content h2{font-size:32px}
+  .site-footer{padding-block:36px 20px}
+  .footer-grid{grid-template-columns:1fr;gap:24px}
+  .footer-nav{gap:10px 20px}
+  .footer-bottom{margin-top:26px}
+}
+
+@media(max-width:420px){
+  .hero-copy h1{font-size:34px}
+  .output-stage-meta{position:static;width:100%;border-top:0;border-radius:0 0 8px 8px}
+  .output-main{border-radius:8px 8px 0 0}
+  .trainer-profile-map{grid-template-columns:1fr}
+}
+
+/* Phase 4 v3 — footer refinement */
+.site-footer{
+  position:relative;
+  padding-block:0;
+  overflow:hidden;
+}
+.site-footer::before{
+  content:"";
+  position:absolute;
+  inset-block-start:0;
+  inset-inline-start:0;
+  width:84px;
+  height:3px;
+  background:var(--xa-signal);
+}
+.footer-main{
+  display:grid;
+  grid-template-columns:minmax(320px,1.05fr) minmax(520px,1.55fr);
+  gap:clamp(56px,7vw,112px);
+  align-items:start;
+  padding-block:46px 38px;
+}
+.footer-brand{
+  display:grid;
+  align-content:start;
+  justify-items:start;
+  gap:16px;
+}
+.footer-brand img{
+  width:184px;
+  height:auto;
+}
+.footer-brand p{
+  margin:0;
+  color:#aab5c6;
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:0;
+}
+.footer-links{
+  display:grid;
+  grid-template-columns:minmax(360px,1.5fr) minmax(170px,.65fr);
+  gap:48px;
+  align-items:start;
+}
+.footer-group{
+  display:grid;
+  align-content:start;
+  gap:15px;
+}
+.footer-label{
+  color:#7f8ca0;
+  font-size:12px;
+  font-weight:700;
+}
+.footer-nav{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(120px,1fr));
+  gap:11px 28px;
+  padding:0;
+}
+.footer-nav a{
+  width:max-content;
+  color:#e6ebf2;
+  font-size:14px;
+  font-weight:700;
+  line-height:1.6;
+  transition:color var(--xa-motion-uiMs) var(--xa-motion-ease),transform var(--xa-motion-uiMs) var(--xa-motion-ease);
+}
+.footer-nav a:hover,
+.footer-nav a:focus-visible{
+  color:#fff;
+  transform:translateX(-2px);
+}
+[dir=ltr] .footer-nav a:hover,
+[dir=ltr] .footer-nav a:focus-visible{
+  transform:translateX(2px);
+}
+.footer-contact{
+  gap:15px;
+  padding:0;
+}
+.footer-whatsapp{
+  display:inline-flex;
+  width:max-content;
+  align-items:center;
+  gap:9px;
+  color:#fff;
+  font-family:var(--xa-font-en-body);
+  font-size:15px;
+  font-weight:700;
+}
+.footer-link-arrow{
+  color:#5de2dc;
+  font-size:14px;
+  transition:transform var(--xa-motion-uiMs) var(--xa-motion-ease);
+}
+.footer-whatsapp:hover .footer-link-arrow,
+.footer-whatsapp:focus-visible .footer-link-arrow{
+  transform:translate(2px,-2px);
+}
+.footer-bottom{
+  min-height:58px;
+  margin-top:0;
+  padding-block:16px;
+  border-top:1px solid rgba(255,255,255,.11);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color:#8996aa;
+  font-size:12px;
+}
+.language-switch-footer{
+  min-width:44px;
+  min-height:36px;
+  padding-inline:10px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:8px;
+  color:#fff;
+  background:transparent;
+  font-weight:700;
+}
+.language-switch-footer:hover,
+.language-switch-footer:focus-visible{
+  background:rgba(255,255,255,.07);
+  border-color:rgba(255,255,255,.24);
+}
+
+@media(max-width:900px){
+  .footer-main{
+    grid-template-columns:1fr;
+    gap:34px;
+    padding-block:40px 32px;
+  }
+  .footer-links{
+    grid-template-columns:1fr .55fr;
+    gap:32px;
+  }
+}
+
+@media(max-width:767px){
+  .footer-main{
+    gap:30px;
+    padding-block:34px 28px;
+  }
+  .footer-brand{
+    gap:12px;
+  }
+  .footer-brand img{
+    width:164px;
+  }
+  .footer-brand p{
+    font-size:14px;
+  }
+  .footer-links{
+    grid-template-columns:1fr;
+    gap:26px;
+  }
+  .footer-nav{
+    grid-template-columns:1fr 1fr;
+    gap:10px 20px;
+  }
+  .footer-bottom{
+    min-height:56px;
+    margin-top:0;
+    padding-block:14px;
+  }
+}
+
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "X Academy",
+    "url": "https://baselghanem.github.io/XAcademyCourses/",
+    "description": "Practical professional learning for data, business and digital skills."
+  }
+  </script>
+  <title>X Academy | تعلم مهارات عملية في البيانات والاعمال والتقنية</title>
 </head>
 <body>
-  <div id="app"></div>
-  <script type="module" src="./assets/js/app.js?v=15"></script>
+  <a class="skip-link" href="#main-content" data-i18n="skip">انتقل الى المحتوى</a>
+
+  <header class="site-header" id="site-header">
+    <div class="header-inner shell">
+      <a class="brand-link" href="#home" aria-label="X Academy">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMTYwIiByb2xlPSJpbWciPgo8dGl0bGU+WCBBY2FkZW15IHByaW1hcnkgb3V0bGluZWQgbG9ja3VwPC90aXRsZT4KPGRlc2M+QTEgUHVyZSBJbnRlcnNlY3Rpb24gc3ltYm9sIHJlcHJlc2VudHMgWDsgQUNBREVNWSBhbmQgdGFnbGluZSBhcmUgY29udmVydGVkIHRvIHZlY3RvciBvdXRsaW5lcy48L2Rlc2M+Cgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMCAyMCkgc2NhbGUoMS4yKSI+CiAgPHJlY3QgeD0iNDEiIHk9Ii0xMCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjEyMCIgdHJhbnNmb3JtPSJyb3RhdGUoLTQ1IDUwIDUwKSIgZmlsbD0iIzFGMjkzNyIvPgogIDxyZWN0IHg9IjQxIiB5PSItMTAiIHdpZHRoPSIxOCIgaGVpZ2h0PSIxMjAiIHRyYW5zZm9ybT0icm90YXRlKDQ1IDUwIDUwKSIgZmlsbD0iIzA5OTk5OSIvPgo8L2c+CjxwYXRoIGQ9Ik0xNzYuMzc1IDgyLjBIMTgxLjkwNjI1TDE4NS4wOTM3NSA3Mi45Mjk2ODc1SDE5OS4xNzk2ODc1TDIwMi4yNzM0Mzc1IDgyLjBIMjA3LjkyMTg3NUwxOTUuMzM1OTM3NSA0Ny4wNzgxMjVIMTg5LjA1NDY4NzVaTTE4Ni42NjQwNjI1IDY4LjUgMTg4Ljg0Mzc1IDYyLjMxMjVDMTg5LjgwNDY4NzUgNTkuNDI5Njg3NSAxOTAuODEyNSA1Ni4zNTkzNzUgMTkyLjIxODc1IDUxLjgzNTkzNzVDMTkzLjYwMTU2MjUgNTYuMzU5Mzc1IDE5NC41ODU5Mzc1IDU5LjQyOTY4NzUgMTk1LjU0Njg3NSA2Mi4zMTI1TDE5Ny42NTYyNSA2OC41WiIgZmlsbD0iIzFGMjkzNyIvPgo8cGF0aCBkPSJNMjMzLjUwNzgxMjUgODIuNTYyNUMyNDEuMTI1IDgyLjU2MjUgMjQ3LjAzMTI1IDc3Ljg1MTU2MjUgMjQ4LjIyNjU2MjUgNzAuNDIxODc1SDI0Mi45NTMxMjVDMjQxLjg1MTU2MjUgNzUuMTU2MjUgMjM4LjI4OTA2MjUgNzcuODA0Njg3NSAyMzMuNTU0Njg3NSA3Ny44MDQ2ODc1QzIyNi42NjQwNjI1IDc3LjgwNDY4NzUgMjIyLjQ0NTMxMjUgNzIuNDYwOTM3NSAyMjIuNDQ1MzEyNSA2NC41NjI1QzIyMi40NDUzMTI1IDU2LjYxNzE4NzUgMjI2LjY2NDA2MjUgNTEuMjczNDM3NSAyMzMuNTU0Njg3NSA1MS4yNzM0Mzc1QzIzOC4zMTI1IDUxLjI3MzQzNzUgMjQxLjg5ODQzNzUgNTMuOTQ1MzEyNSAyNDIuOTI5Njg3NSA1OC43MDMxMjVIMjQ4LjIyNjU2MjVDMjQ3LjAwNzgxMjUgNTEuMjUgMjQxLjEyNSA0Ni41MTU2MjUgMjMzLjUwNzgxMjUgNDYuNTE1NjI1QzIyMy44NTE1NjI1IDQ2LjUxNTYyNSAyMTcuMjE4NzUgNTMuODA0Njg3NSAyMTcuMjE4NzUgNjQuNTYyNUMyMTcuMjE4NzUgNzUuMjUgMjIzLjg3NSA4Mi41NjI1IDIzMy41MDc4MTI1IDgyLjU2MjVaIiBmaWxsPSIjMUYyOTM3Ii8+CjxwYXRoIGQ9Ik0yNTcuNDI5Njg3NSA4Mi4wSDI2Mi45NjA5Mzc1TDI2Ni4xNDg0Mzc1IDcyLjkyOTY4NzVIMjgwLjIzNDM3NUwyODMuMzI4MTI1IDgyLjBIMjg4Ljk3NjU2MjVMMjc2LjM5MDYyNSA0Ny4wNzgxMjVIMjcwLjEwOTM3NVpNMjY3LjcxODc1IDY4LjUgMjY5Ljg5ODQzNzUgNjIuMzEyNUMyNzAuODU5Mzc1IDU5LjQyOTY4NzUgMjcxLjg2NzE4NzUgNTYuMzU5Mzc1IDI3My4yNzM0Mzc1IDUxLjgzNTkzNzVDMjc0LjY1NjI1IDU2LjM1OTM3NSAyNzUuNjQwNjI1IDU5LjQyOTY4NzUgMjc2LjYwMTU2MjUgNjIuMzEyNUwyNzguNzEwOTM3NSA2OC41WiIgZmlsbD0iIzFGMjkzNyIvPgo8cGF0aCBkPSJNMzEwLjg1OTM3NSA4Mi4wQzMyMS41MjM0Mzc1IDgyLjAgMzI3Ljc1NzgxMjUgNzUuMzQzNzUgMzI3Ljc1NzgxMjUgNjQuNDkyMTg3NUMzMjcuNzU3ODEyNSA1My42ODc1IDMyMS41IDQ3LjA3ODEyNSAzMTEuMjEwOTM3NSA0Ny4wNzgxMjVIMjk5LjU2MjVWODIuMFpNMzA0Ljc2NTYyNSA3Ny40NzY1NjI1VjUxLjYwMTU2MjVIMzEwLjg4MjgxMjVDMzE4LjY2NDA2MjUgNTEuNjAxNTYyNSAzMjIuNTMxMjUgNTYuNDA2MjUgMzIyLjUzMTI1IDY0LjQ5MjE4NzVDMzIyLjUzMTI1IDcyLjYyNSAzMTguNjY0MDYyNSA3Ny40NzY1NjI1IDMxMC41MzEyNSA3Ny40NzY1NjI1WiIgZmlsbD0iIzFGMjkzNyIvPgo8cGF0aCBkPSJNMzM5Ljg0Mzc1IDgyLjBIMzYzLjMyODEyNVY3Ny40Mjk2ODc1SDM0NS4wNDY4NzVWNjYuNDYwOTM3NUgzNjEuOTY4NzVWNjEuOTM3NUgzNDUuMDQ2ODc1VjUxLjY0ODQzNzVIMzYzLjMyODEyNVY0Ny4wNzgxMjVIMzM5Ljg0Mzc1WiIgZmlsbD0iIzFGMjkzNyIvPgo8cGF0aCBkPSJNMzc1LjEwOTM3NSA4Mi4wSDM4MC4yNDIxODc1VjYyLjk2ODc1QzM4MC4yNDIxODc1IDYwLjYwMTU2MjUgMzgwLjE0ODQzNzUgNTcuMjczNDM3NSAzODAuMDc4MTI1IDU0LjEwOTM3NUMzODEuMzQzNzUgNTcuNzE4NzUgMzgyLjUxNTYyNSA2MS4wNDY4NzUgMzgzLjI0MjE4NzUgNjIuOTY4NzVMMzkwLjY3MTg3NSA4Mi4wSDM5NC45Mzc1TDQwMi4yOTY4NzUgNjIuOTY4NzVDNDAzLjA0Njg3NSA2MC45NzY1NjI1IDQwNC4yNDIxODc1IDU3LjQxNDA2MjUgNDA1LjUzMTI1IDUzLjYxNzE4NzVDNDA1LjQ2MDkzNzUgNTYuOTIxODc1IDQwNS4zNjcxODc1IDYwLjQ4NDM3NSA0MDUuMzY3MTg3NSA2Mi45Njg3NVY4Mi4wSDQxMC40NzY1NjI1VjQ3LjA3ODEyNUg0MDMuMTE3MTg3NUwzOTUuNDA2MjUgNjcuNTM5MDYyNUMzOTQuNzk2ODc1IDY5LjMyMDMxMjUgMzkzLjY0ODQzNzUgNzIuNjI1IDM5Mi44NTE1NjI1IDc1LjAzOTA2MjVDMzkyLjA1NDY4NzUgNzIuNjI1IDM5MC45MDYyNSA2OS4zMjAzMTI1IDM5MC4yNzM0Mzc1IDY3LjUzOTA2MjVMMzgyLjQ0NTMxMjUgNDcuMDc4MTI1SDM3NS4xMDkzNzVaIiBmaWxsPSIjMUYyOTM3Ii8+CjxwYXRoIGQ9Ik00MzMuOTI5Njg3NSA4Mi4wSDQzOS4wODU5Mzc1VjY4LjA1NDY4NzVMNDUxLjg4MjgxMjUgNDcuMDc4MTI1SDQ0NS45MDYyNUw0MzkuMzQzNzUgNTguMDkzNzVDNDM4LjM1OTM3NSA1OS43MzQzNzUgNDM3LjQ0NTMxMjUgNjEuMzUxNTYyNSA0MzYuNTMxMjUgNjIuOTY4NzVDNDM1LjYxNzE4NzUgNjEuMzUxNTYyNSA0MzQuNjc5Njg3NSA1OS43MzQzNzUgNDMzLjY5NTMxMjUgNTguMDkzNzVMNDI3LjA2MjUgNDcuMDc4MTI1SDQyMS4wMzkwNjI1TDQzMy45Mjk2ODc1IDY4LjA1NDY4NzVaIiBmaWxsPSIjMUYyOTM3Ii8+Cgo8L3N2Zz4=" alt="X Academy" width="178" height="48">
+      </a>
+
+      <nav class="desktop-nav" aria-label="التنقل الرئيسي" data-i18n-aria="mainNav">
+        <a href="#programs" data-i18n="navPrograms">البرامج</a>
+        <a href="#organizations" data-i18n="navOrganizations">للمؤسسات</a>
+        <a href="#resources" data-i18n="navResources">مجالات التعلم</a>
+        <a href="#about" data-i18n="navAbout">من نحن</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-button search-trigger" type="button" aria-label="بحث" data-i18n-aria="searchLabel">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFGMjkzNyIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48dGl0bGUgaWQ9InQiPlggQWNhZGVteSBzZWFyY2ggaWNvbjwvdGl0bGU+PGNpcmNsZSBjeD0iMTAuNSIgY3k9IjEwLjUiIHI9IjYuNSIvPjxwYXRoIGQ9Im0xNS41IDE1LjUgNSA1Ii8+PC9zdmc+" alt="" aria-hidden="true">
+        </button>
+        <button class="language-switch" type="button" aria-label="Switch to English">EN</button>
+        <a class="button button-primary header-cta" href="#programs">
+          <span data-i18n="explorePrograms">استكشف البرامج</span>
+          <span class="button-arrow" aria-hidden="true">←</span>
+        </a>
+        <button class="menu-trigger" type="button" aria-label="فتح القائمة" aria-expanded="false" data-i18n-aria="openMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <aside class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-head">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMTYwIiByb2xlPSJpbWciPgo8dGl0bGU+WCBBY2FkZW15IHByaW1hcnkgb3V0bGluZWQgbG9ja3VwPC90aXRsZT4KPGRlc2M+QTEgUHVyZSBJbnRlcnNlY3Rpb24gc3ltYm9sIHJlcHJlc2VudHMgWDsgQUNBREVNWSBhbmQgdGFnbGluZSBhcmUgY29udmVydGVkIHRvIHZlY3RvciBvdXRsaW5lcy48L2Rlc2M+Cgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMCAyMCkgc2NhbGUoMS4yKSI+CiAgPHJlY3QgeD0iNDEiIHk9Ii0xMCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjEyMCIgdHJhbnNmb3JtPSJyb3RhdGUoLTQ1IDUwIDUwKSIgZmlsbD0iIzFGMjkzNyIvPgogIDxyZWN0IHg9IjQxIiB5PSItMTAiIHdpZHRoPSIxOCIgaGVpZ2h0PSIxMjAiIHRyYW5zZm9ybT0icm90YXRlKDQ1IDUwIDUwKSIgZmlsbD0iIzA5OTk5OSIvPgo8L2c+CjxwYXRoIGQ9Ik0xNzYuMzc1IDgyLjBIMTgxLjkwNjI1TDE4NS4wOTM3NSA3Mi45Mjk2ODc1SDE5OS4xNzk2ODc1TDIwMi4yNzM0Mzc1IDgyLjBIMjA3LjkyMTg3NUwxOTUuMzM1OTM3NSA0Ny4wNzgxMjVIMTg5LjA1NDY4NzVaTTE4Ni42NjQwNjI1IDY4LjUgMTg4Ljg0Mzc1IDYyLjMxMjVDMTg5LjgwNDY4NzUgNTkuNDI5Njg3NSAxOTAuODEyNSA1Ni4zNTkzNzUgMTkyLjIxODc1IDUxLjgzNTkzNzVDMTkzLjYwMTU2MjUgNTYuMzU5Mzc1IDE5NC41ODU5Mzc1IDU5LjQyOTY4NzUgMTk1LjU0Njg3NSA2Mi4zMTI1TDE5Ny42NTYyNSA2OC41WiIgZmlsbD0iIzFGMjkzNyIvPgo8cGF0aCBkPSJNMjMzLjUwNzgxMjUgODIuNTYyNUMyNDEuMTI1IDgyLjU2MjUgMjQ3LjAzMTI1IDc3Ljg1MTU2MjUgMjQ4LjIyNjU2MjUgNzAuNDIxODc1SDI0Mi45NTMxMjVDMjQxLjg1MTU2MjUgNzUuMTU2MjUgMjM4LjI4OTA2MjUgNzcuODA0Njg3NSAyMzMuNTU0Njg3NSA3Ny44MDQ2ODc1QzIyNi42NjQwNjI1IDc3LjgwNDY4NzUgMjIyLjQ0NTMxMjUgNzIuNDYwOTM3NSAyMjIuNDQ1MzEyNSA2NC41NjI1QzIyMi40NDUzMTI1IDU2LjYxNzE4NzUgMjI2LjY2NDA2MjUgNTEuMjczNDM3NSAyMzMuNTU0Njg3NSA1MS4yNzM0Mzc1QzIzOC4zMTI1IDUxLjI3MzQzNzUgMjQxLjg5ODQzNzUgNTMuOTQ1MzEyNSAyNDIuOTI5Njg3NSA1OC43MDMxMjVIMjQ4LjIyNjU2MjVDMjQ3LjAwNzgxMjUgNTEuMjUgMjQxLjEyNSA0Ni41MTU2MjUgMjMzLjUwNzgxMjUgNDYuNTE1NjI1QzIyMy44NTE1NjI1IDQ2LjUxNTYyNSAyMTcuMjE4NzUgNTMuODA0Njg3NSAyMTcuMjE4NzUgNjQuNTYyNUMyMTcuMjE4NzUgNzUuMjUgMjIzLjg3NSA4Mi41NjI1IDIzMy41MDc4MTI1IDgyLjU2MjVaIiBmaWxsPSIjMUYyOTM3Ii8+CjxwYXRoIGQ9Ik0yNTcuNDI5Njg3NSA4Mi4wSDI2Mi45NjA5Mzc1TDI2Ni4xNDg0Mzc1IDcyLjkyOTY4NzVIMjgwLjIzNDM3NUwyODMuMzI4MTI1IDgyLjBIMjg4Ljk3NjU2MjVMMjc2LjM5MDYyNSA0Ny4wNzgxMjVIMjcwLjEwOTM3NVpNMjY3LjcxODc1IDY4LjUgMjY5Ljg5ODQzNzUgNjIuMzEyNUMyNzAuODU5Mzc1IDU5LjQyOTY4NzUgMjcxLjg2NzE4NzUgNTYuMzU5Mzc1IDI3My4yNzM0Mzc1IDUxLjgzNTkzNzVDMjc0LjY1NjI1IDU2LjM1OTM3NSAyNzUuNjQwNjI1IDU5LjQyOTY4NzUgMjc2LjYwMTU2MjUgNjIuMzEyNUwyNzguNzEwOTM3NSA2OC41WiIgZmlsbD0iIzFGMjkzNyIvPgo8cGF0aCBkPSJNMzEwLjg1OTM3NSA4Mi4wQzMyMS41MjM0Mzc1IDgyLjAgMzI3Ljc1NzgxMjUgNzUuMzQzNzUgMzI3Ljc1NzgxMjUgNjQuNDkyMTg3NUMzMjcuNzU3ODEyNSA1My42ODc1IDMyMS41IDQ3LjA3ODEyNSAzMTEuMjEwOTM3NSA0Ny4wNzgxMjVIMjk5LjU2MjVWODIuMFpNMzA0Ljc2NTYyNSA3Ny40NzY1NjI1VjUxLjYwMTU2MjVIMzEwLjg4MjgxMjVDMzE4LjY2NDA2MjUgNTEuNjAxNTYyNSAzMjIuNTMxMjUgNTYuNDA2MjUgMzIyLjUzMTI1IDY0LjQ5MjE4NzVDMzIyLjUzMTI1IDcyLjYyNSAzMTguNjY0MDYyNSA3Ny40NzY1NjI1IDMxMC41MzEyNSA3Ny40NzY1NjI1WiIgZmlsbD0iIzFGMjkzNyIvPgo8cGF0aCBkPSJNMzM5Ljg0Mzc1IDgyLjBIMzYzLjMyODEyNVY3Ny40Mjk2ODc1SDM0NS4wNDY4NzVWNjYuNDYwOTM3NUgzNjEuOTY4NzVWNjEuOTM3NUgzNDUuMDQ2ODc1VjUxLjY0ODQzNzVIMzYzLjMyODEyNVY0Ny4wNzgxMjVIMzM5Ljg0Mzc1WiIgZmlsbD0iIzFGMjkzNyIvPgo8cGF0aCBkPSJNMzc1LjEwOTM3NSA4Mi4wSDM4MC4yNDIxODc1VjYyLjk2ODc1QzM4MC4yNDIxODc1IDYwLjYwMTU2MjUgMzgwLjE0ODQzNzUgNTcuMjczNDM3NSAzODAuMDc4MTI1IDU0LjEwOTM3NUMzODEuMzQzNzUgNTcuNzE4NzUgMzgyLjUxNTYyNSA2MS4wNDY4NzUgMzgzLjI0MjE4NzUgNjIuOTY4NzVMMzkwLjY3MTg3NSA4Mi4wSDM5NC45Mzc1TDQwMi4yOTY4NzUgNjIuOTY4NzVDNDAzLjA0Njg3NSA2MC45NzY1NjI1IDQwNC4yNDIxODc1IDU3LjQxNDA2MjUgNDA1LjUzMTI1IDUzLjYxNzE4NzVDNDA1LjQ2MDkzNzUgNTYuOTIxODc1IDQwNS4zNjcxODc1IDYwLjQ4NDM3NSA0MDUuMzY3MTg3NSA2Mi45Njg3NVY4Mi4wSDQxMC40NzY1NjI1VjQ3LjA3ODEyNUg0MDMuMTE3MTg3NUwzOTUuNDA2MjUgNjcuNTM5MDYyNUMzOTQuNzk2ODc1IDY5LjMyMDMxMjUgMzkzLjY0ODQzNzUgNzIuNjI1IDM5Mi44NTE1NjI1IDc1LjAzOTA2MjVDMzkyLjA1NDY4NzUgNzIuNjI1IDM5MC45MDYyNSA2OS4zMjAzMTI1IDM5MC4yNzM0Mzc1IDY3LjUzOTA2MjVMMzgyLjQ0NTMxMjUgNDcuMDc4MTI1SDM3NS4xMDkzNzVaIiBmaWxsPSIjMUYyOTM3Ii8+CjxwYXRoIGQ9Ik00MzMuOTI5Njg3NSA4Mi4wSDQzOS4wODU5Mzc1VjY4LjA1NDY4NzVMNDUxLjg4MjgxMjUgNDcuMDc4MTI1SDQ0NS45MDYyNUw0MzkuMzQzNzUgNTguMDkzNzVDNDM4LjM1OTM3NSA1OS43MzQzNzUgNDM3LjQ0NTMxMjUgNjEuMzUxNTYyNSA0MzYuNTMxMjUgNjIuOTY4NzVDNDM1LjYxNzE4NzUgNjEuMzUxNTYyNSA0MzQuNjc5Njg3NSA1OS43MzQzNzUgNDMzLjY5NTMxMjUgNTguMDkzNzVMNDI3LjA2MjUgNDcuMDc4MTI1SDQyMS4wMzkwNjI1TDQzMy45Mjk2ODc1IDY4LjA1NDY4NzVaIiBmaWxsPSIjMUYyOTM3Ii8+Cgo8L3N2Zz4=" alt="X Academy" width="164" height="44">
+      <button class="mobile-menu-close icon-button" type="button" aria-label="اغلاق القائمة" data-i18n-aria="closeMenu">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFGMjkzNyIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48dGl0bGUgaWQ9InQiPlggQWNhZGVteSBjbG9zZSBpY29uPC90aXRsZT48cGF0aCBkPSJNNSA1bDE0IDE0TTE5IDUgNSAxOSIvPjwvc3ZnPg==" alt="" aria-hidden="true">
+      </button>
+    </div>
+    <nav class="mobile-nav" aria-label="التنقل على الهاتف" data-i18n-aria="mobileNav">
+      <a href="#programs" data-i18n="navPrograms">البرامج</a>
+      <a href="#organizations" data-i18n="navOrganizations">للمؤسسات</a>
+      <a href="#resources" data-i18n="navResources">مجالات التعلم</a>
+      <a href="#about" data-i18n="navAbout">من نحن</a>
+    </nav>
+    <div class="mobile-menu-foot">
+      <button class="language-switch language-switch-mobile" type="button">EN</button>
+      <a class="button button-primary" href="#programs">
+        <span data-i18n="explorePrograms">استكشف البرامج</span>
+        <span class="button-arrow" aria-hidden="true">←</span>
+      </a>
+    </div>
+  </aside>
+  <div class="menu-backdrop" hidden></div>
+
+  <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title">
+    <form method="dialog" class="search-dialog-head">
+      <div>
+        <span class="eyebrow" data-i18n="searchEyebrow">بحث سريع</span>
+        <h2 id="search-title" data-i18n="searchTitle">ماذا تريد ان تجد؟</h2>
+      </div>
+      <button class="icon-button" value="cancel" aria-label="اغلاق البحث" data-i18n-aria="closeSearch">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFGMjkzNyIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48dGl0bGUgaWQ9InQiPlggQWNhZGVteSBjbG9zZSBpY29uPC90aXRsZT48cGF0aCBkPSJNNSA1bDE0IDE0TTE5IDUgNSAxOSIvPjwvc3ZnPg==" alt="" aria-hidden="true">
+      </button>
+    </form>
+    <label class="search-field">
+      <span class="sr-only" data-i18n="searchLabel">بحث</span>
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFGMjkzNyIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48dGl0bGUgaWQ9InQiPlggQWNhZGVteSBzZWFyY2ggaWNvbjwvdGl0bGU+PGNpcmNsZSBjeD0iMTAuNSIgY3k9IjEwLjUiIHI9IjYuNSIvPjxwYXRoIGQ9Im0xNS41IDE1LjUgNSA1Ii8+PC9zdmc+" alt="" aria-hidden="true">
+      <input id="site-search" type="search" autocomplete="off" placeholder="ابحث عن برنامج او مجال" data-i18n-placeholder="searchPlaceholder">
+    </label>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+  </dialog>
+
+  <main id="main-content">
+    <section class="hero section" id="home">
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">X ACADEMY</div>
+          <h1>
+            <span data-i18n="heroLine1">تعلم المهارة.</span>
+            <span data-i18n="heroLine2">افهم طريقة التفكير.</span>
+            <span class="teal" data-i18n="heroLine3">اعرف كيف تستخدمها.</span>
+          </h1>
+          <p class="hero-lead" data-i18n="heroBody">تعلم مهني عملي يحول المهارات المعقدة الى قدرات واضحة ومنظمة يمكنك استخدامها فعلا في عملك.</p>
+          <div class="hero-actions">
+            <a class="button button-primary button-large" href="#programs">
+              <span data-i18n="explorePrograms">استكشف البرامج</span>
+              <span class="button-arrow" aria-hidden="true">←</span>
+            </a>
+            <a class="text-link" href="#organizations">
+              <span data-i18n="corporateTraining">التدريب للمؤسسات</span>
+              <span class="button-arrow" aria-hidden="true">←</span>
+            </a>
+          </div>
+          <div class="brand-signature" data-i18n="brandSignatureAr">تعلم · حلل · قد</div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="X Academy intelligence intersection visual" role="img">
+          <div class="hero-grid-lines" aria-hidden="true"></div>
+          <div class="x-band x-band-dark" aria-hidden="true"></div>
+          <div class="x-band x-band-teal" aria-hidden="true"></div>
+          <div class="hero-data-card hero-card-main">
+            <div class="data-card-head">
+              <span data-i18n="dashboardLabel">مسار التعلم</span>
+              <span class="signal-dot"></span>
+            </div>
+            <div class="mini-kpis">
+              <div><strong class="ltr">01</strong><span data-i18n="knowledgeLabel">المعرفة</span></div>
+              <div><strong class="ltr">02</strong><span data-i18n="analysisLabel">التحليل</span></div>
+              <div><strong class="ltr">03</strong><span data-i18n="leadershipLabel">القيادة</span></div>
+            </div>
+            <div class="bar-chart" aria-hidden="true">
+              <span style="--h:46%"></span><span style="--h:64%"></span><span style="--h:55%"></span><span style="--h:82%"></span><span style="--h:74%"></span><span class="active" style="--h:94%"></span>
+            </div>
+          </div>
+          <div class="hero-data-card hero-card-side">
+            <span class="card-index ltr">X / 01</span>
+            <strong data-i18n="knowledgeLabel">المعرفة</strong>
+            <span>×</span>
+            <strong data-i18n="analysisLabel">التحليل</strong>
+            <i></i>
+            <small data-i18n="leadershipLabel">القيادة</small>
+          </div>
+          <img class="hero-symbol" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+Cjx0aXRsZSBpZD0idGl0bGUiPlggQWNhZGVteSBBMSBQdXJlIEludGVyc2VjdGlvbiDigJQgTWFzdGVyIFN5bWJvbDwvdGl0bGU+CjxkZXNjIGlkPSJkZXNjIj5Ud28gZXF1YWwtd2lkdGggNDUtZGVncmVlIGRpYWdvbmFsIGJhbmRzIGludGVyc2VjdCB0byBmb3JtIHRoZSBhcHByb3ZlZCBYIEFjYWRlbXkgQTEgUHVyZSBJbnRlcnNlY3Rpb24gc3ltYm9sLjwvZGVzYz4KPGRlZnM+PGNsaXBQYXRoIGlkPSJjbGlwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIvPjwvY2xpcFBhdGg+PC9kZWZzPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcCkiPgogIDxyZWN0IHg9IjQxIiB5PSItMTAiIHdpZHRoPSIxOCIgaGVpZ2h0PSIxMjAiIHRyYW5zZm9ybT0icm90YXRlKC00NSA1MCA1MCkiIGZpbGw9IiMxRjI5MzciLz4KICA8cmVjdCB4PSI0MSIgeT0iLTEwIiB3aWR0aD0iMTgiIGhlaWdodD0iMTIwIiB0cmFuc2Zvcm09InJvdGF0ZSg0NSA1MCA1MCkiIGZpbGw9IiMwOTk5OTkiLz4KPC9nPgo8L3N2Zz4=" alt="" aria-hidden="true">
+        </div>
+      </div>
+    </section>
+
+    <section class="trust section-tight" aria-labelledby="trust-title">
+      <div class="shell trust-grid">
+        <div class="trust-copy reveal">
+          <span class="section-kicker" data-i18n="trustedBy">موثوق بنا من اكثر من</span>
+          <div class="trust-number ltr">4,000+</div>
+          <h2 id="trust-title" data-i18n="learners">متعلم</h2>
+          <p data-i18n="trustSupport">من مختلف الجهات والقطاعات.</p>
+        </div>
+        <div class="logo-grid reveal" aria-label="Organizations represented by learners">
+          <img src="https://baselghanem.github.io/XAcademyCourses/assets/img/organizations/dar-al-dawaa.png" alt="Dar Al Dawa" loading="lazy">
+          <img src="https://baselghanem.github.io/XAcademyCourses/assets/img/organizations/orange.png" alt="Orange" loading="lazy">
+          <img src="https://baselghanem.github.io/XAcademyCourses/assets/img/organizations/opensooq.png" alt="OpenSooq" loading="lazy">
+          <img src="https://baselghanem.github.io/XAcademyCourses/assets/img/organizations/unrwa.png" alt="UNRWA" loading="lazy">
+          <img src="https://baselghanem.github.io/XAcademyCourses/assets/img/organizations/coderz.png" alt="Coderz" loading="lazy">
+          <img src="https://baselghanem.github.io/XAcademyCourses/assets/img/organizations/stc.svg" alt="stc" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="section difference" id="about">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <span class="section-kicker" data-i18n="whyX">لماذا X Academy؟</span>
+          <h2 data-i18n="differenceTitle">التعلم الحقيقي يغير طريقة عملك.</h2>
+          <p data-i18n="differenceBody">لا نركز فقط على شرح الادوات، بل على بناء فهم وقدرة يمكنك استخدامها في العمل الحقيقي.</p>
+        </div>
+        <div class="difference-grid">
+          <article class="editorial-card reveal">
+            <span class="card-number ltr">01</span>
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFGMjkzNyIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48dGl0bGUgaWQ9InQiPlggQWNhZGVteSBsZWFybiBpY29uPC90aXRsZT48cGF0aCBkPSJNMyA3LjUgMTIgNGw5IDMuNS05IDMuNS05LTMuNVoiLz48cGF0aCBkPSJNNiAxMHY1LjVjMy43IDIuMSA4LjMgMi4xIDEyIDBWMTAiLz48cGF0aCBkPSJNMjEgOHY2Ii8+PC9zdmc+" alt="" aria-hidden="true">
+            <h3 data-i18n="clarityTitle">وضوح</h3>
+            <p data-i18n="clarityBody">نحول المواضيع المعقدة الى افكار وانظمة واضحة ومنظمة يمكنك فهمها.</p>
+          </article>
+          <article class="editorial-card reveal">
+            <span class="card-number ltr">02</span>
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFGMjkzNyIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48dGl0bGUgaWQ9InQiPlggQWNhZGVteSBhbmFseXNlIGljb248L3RpdGxlPjxwYXRoIGQ9Ik00IDIwVjEwIi8+PHBhdGggZD0iTTEwIDIwVjQiLz48cGF0aCBkPSJNMTYgMjB2LTciLz48cGF0aCBkPSJNMjIgMjBIMiIvPjwvc3ZnPg==" alt="" aria-hidden="true">
+            <h3 data-i18n="practiceTitle">تطبيق عملي</h3>
+            <p data-i18n="practiceBody">تتعامل مع بيانات ومشكلات وسيناريوهات واقعية تشبه بيئة العمل.</p>
+          </article>
+          <article class="editorial-card reveal">
+            <span class="card-number ltr">03</span>
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFGMjkzNyIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48dGl0bGUgaWQ9InQiPlggQWNhZGVteSBsZWFkIGljb248L3RpdGxlPjxwYXRoIGQ9Ik0xMiAyIDE5IDV2NmMwIDQuOC0yLjkgOC43LTcgMTEtNC4xLTIuMy03LTYuMi03LTExVjVsNy0zWiIvPjxwYXRoIGQ9Im05IDEyIDIgMiA0LTUiLz48L3N2Zz4=" alt="" aria-hidden="true">
+            <h3 data-i18n="usableTitle">نتائج قابلة للاستخدام</h3>
+            <p data-i18n="usableBody">تخرج وانت تعرف ماذا تفعل بالمعلومة، وليس فقط اين تضغط.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section framework" aria-labelledby="framework-title">
+      <div class="shell framework-grid">
+        <div class="section-heading reveal">
+          <span class="section-kicker" data-i18n="knowledgeToLead">من المعرفة الى القيادة</span>
+          <h2 id="framework-title" data-i18n="frameworkTitle">تعلم. حلل. قد.</h2>
+          <p data-i18n="frameworkBody">المعرفة تبدأ الرحلة، لكن قيمتها الحقيقية تظهر عندما تستطيع تحليلها وتحويلها الى قرار افضل.</p>
+          <div class="equation" data-i18n="equation">المعرفة × التحليل → القيادة</div>
+        </div>
+        <div class="framework-flow reveal">
+          <div class="flow-line" aria-hidden="true"><span></span></div>
+          <article class="flow-step">
+            <span class="flow-node">01</span>
+            <div><h3 data-i18n="learnTitle">تعلم</h3><p data-i18n="learnBody">افهم المبدأ.</p></div>
+          </article>
+          <article class="flow-step">
+            <span class="flow-node">02</span>
+            <div><h3 data-i18n="analyseTitle">حلل</h3><p data-i18n="analyseBody">اربط المعلومات واكتشف المعنى.</p></div>
+          </article>
+          <article class="flow-step">
+            <span class="flow-node active">03</span>
+            <div><h3 data-i18n="leadTitle">قد</h3><p data-i18n="leadBody">حول المعرفة الى قرار افضل.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section areas" id="resources">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <span class="section-kicker" data-i18n="whatLearn">ماذا يمكنك ان تتعلم؟</span>
+          <h2 data-i18n="learningAreas">مجالات التعلم</h2>
+          <p data-i18n="areasBody">مهارات عملية مصممة لتساعدك في العمل والتحليل واتخاذ قرارات افضل.</p>
+        </div>
+        <div class="areas-grid">
+          <article class="area-card reveal">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFGMjkzNyIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48dGl0bGUgaWQ9InQiPlggQWNhZGVteSBkYXRhIGljb248L3RpdGxlPjxlbGxpcHNlIGN4PSIxMiIgY3k9IjUiIHJ4PSI3IiByeT0iMyIvPjxwYXRoIGQ9Ik01IDV2NmMwIDEuNyAzLjEgMyA3IDNzNy0xLjMgNy0zVjUiLz48cGF0aCBkPSJNNSAxMXY2YzAgMS43IDMuMSAzIDcgM3M3LTEuMyA3LTN2LTYiLz48L3N2Zz4=" alt="" aria-hidden="true">
+            <h3 data-i18n="areaData">البيانات والتحليل</h3>
+            <p class="topic-list ltr">Power BI · Excel · Data Analysis · Reporting</p>
+          </article>
+          <article class="area-card reveal">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFGMjkzNyIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48dGl0bGUgaWQ9InQiPlggQWNhZGVteSBncm93dGggaWNvbjwvdGl0bGU+PHBhdGggZD0iTTQgMTggMTAgMTJsNCA0IDYtOCIvPjxwYXRoIGQ9Ik0xNSA4aDV2NSIvPjwvc3ZnPg==" alt="" aria-hidden="true">
+            <h3 data-i18n="areaAI">الذكاء الاصطناعي والاتمتة</h3>
+            <p class="topic-list ltr">AI Tools · Automation · Productivity</p>
+          </article>
+          <article class="area-card reveal">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFGMjkzNyIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48dGl0bGUgaWQ9InQiPlggQWNhZGVteSBkYXNoYm9hcmQgaWNvbjwvdGl0bGU+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjgiIGhlaWdodD0iOCIgcng9IjEiLz48cmVjdCB4PSIxMyIgeT0iMyIgd2lkdGg9IjgiIGhlaWdodD0iNSIgcng9IjEiLz48cmVjdCB4PSIxMyIgeT0iMTAiIHdpZHRoPSI4IiBoZWlnaHQ9IjExIiByeD0iMSIvPjxyZWN0IHg9IjMiIHk9IjEzIiB3aWR0aD0iOCIgaGVpZ2h0PSI4IiByeD0iMSIvPjwvc3ZnPg==" alt="" aria-hidden="true">
+            <h3 data-i18n="areaBusiness">المهارات التجارية</h3>
+            <p class="topic-list ltr">Business Analysis · Decision Making · Reporting</p>
+          </article>
+          <article class="area-card reveal">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFGMjkzNyIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48dGl0bGUgaWQ9InQiPlggQWNhZGVteSBjb3Vyc2UgaWNvbjwvdGl0bGU+PHJlY3QgeD0iMyIgeT0iNCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE2IiByeD0iMiIvPjxwYXRoIGQ9Ik03IDhoMTBNNyAxMmg3TTcgMTZoNSIvPjwvc3ZnPg==" alt="" aria-hidden="true">
+            <h3 data-i18n="areaDigital">البناء الرقمي</h3>
+            <p class="topic-list ltr">Web · Firebase · SaaS · Vibe Coding</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section programs" id="programs">
+      <div class="shell">
+        <div class="section-heading section-heading-row reveal">
+          <div>
+            <span class="section-kicker" data-i18n="selectedPrograms">برامج مختارة</span>
+            <h2 data-i18n="featuredPrograms">ابرز البرامج</h2>
+            <p data-i18n="programsBody">برامج عملية تركز على المهارات التي تحتاجها لتنجز عملا افضل.</p>
+          </div>
+          <a class="text-link" href="#programs" data-i18n="viewAllPrograms">عرض جميع البرامج</a>
+        </div>
+
+        <div class="program-grid">
+          <article class="program-card program-card-active reveal">
+            <div class="program-card-top">
+              <span class="program-category ltr">DATA & ANALYTICS</span>
+              <img src="https://baselghanem.github.io/XAcademyCourses/assets/img/powerbi-mark.svg" alt="Power BI" loading="lazy">
+            </div>
+            <h3 data-i18n="powerBiTitle">Power BI لتحليل الاعمال</h3>
+            <p data-i18n="powerBiBody">ابن لوحات معلومات توضح ما حدث، ولماذا حدث، وما الذي يحتاج الى انتباهك.</p>
+            <div class="program-tags"><span data-i18n="practicalTag">عملي</span><span data-i18n="professionalPath">مسار مهني</span><span class="ltr">Power BI</span></div>
+            <a class="program-link" href="./catalog.html?course=powerbi">
+              <span data-i18n="viewProgram">عرض البرنامج</span><span class="button-arrow" aria-hidden="true">←</span>
+            </a>
+          </article>
+
+          <article class="program-card program-card-active reveal">
+            <div class="program-card-top">
+              <span class="program-category ltr">DATA & ANALYTICS</span>
+              <img src="https://baselghanem.github.io/XAcademyCourses/assets/img/excel-mark.svg" alt="Excel" loading="lazy">
+            </div>
+            <h3 data-i18n="excelTitle">Excel الاحترافي</h3>
+            <p data-i18n="excelBody">حول البيانات الى تحليلات وتقارير واضحة وقلل العمل اليدوي باستخدام ادوات Excel المتقدمة.</p>
+            <div class="program-tags"><span data-i18n="practicalTag">عملي</span><span data-i18n="professionalPath">مسار مهني</span><span class="ltr">Excel</span></div>
+            <a class="program-link" href="./catalog.html?course=excel">
+              <span data-i18n="viewProgram">عرض البرنامج</span><span class="button-arrow" aria-hidden="true">←</span>
+            </a>
+          </article>
+
+          <article class="program-card program-card-soon reveal">
+            <div class="program-card-top">
+              <span class="program-category ltr">AI & AUTOMATION</span>
+              <span class="status-badge" data-i18n="comingSoon">قريبا</span>
+            </div>            <h3 data-i18n="aiProgramTitle">الذكاء الاصطناعي والاتمتة</h3>
+            <p data-i18n="aiProgramBody">مسارات عملية لاستخدام ادوات الذكاء الاصطناعي والاتمتة في العمل اليومي.</p>
+            <div class="program-tags"><span class="ltr">AI</span><span class="ltr">Automation</span><span data-i18n="productivityTag">انتاجية</span></div>
+          </article>
+
+          <article class="program-card program-card-soon reveal">
+            <div class="program-card-top">
+              <span class="program-category ltr">DIGITAL BUILDING</span>
+              <span class="status-badge" data-i18n="comingSoon">قريبا</span>
+            </div>
+            <h3 data-i18n="digitalProgramTitle">بناء الحلول الرقمية</h3>
+            <p data-i18n="digitalProgramBody">من الفكرة الى تطبيق ويب عملي باستخدام تقنيات حديثة وادوات بناء سريعة.</p>
+            <div class="program-tags"><span class="ltr">Web</span><span class="ltr">Firebase</span><span class="ltr">SaaS</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section outputs" aria-labelledby="outputs-title">
+      <div class="shell outputs-grid">
+        <div class="outputs-media reveal">
+          <div class="output-stage">
+            <img class="output-main" src="https://baselghanem.github.io/XAcademyCourses/assets/img/hero-workspace.webp" alt="X Academy learning workspace" loading="lazy">
+            <div class="output-stage-meta">
+              <span class="ltr">REAL WORK / 01</span>
+              <strong data-i18n="outputStageTitle">من البيانات الى قرار اوضح</strong>
+            </div>
+          </div>
+          <div class="output-capabilities">
+            <article><span class="ltr">01</span><div><strong data-i18n="output1">تحليل بيانات منظم</strong><small class="ltr">EXCEL / POWER BI</small></div></article>
+            <article><span class="ltr">02</span><div><strong data-i18n="output2">لوحات معلومات قابلة للتحديث</strong><small class="ltr">DASHBOARD / REPORTING</small></div></article>
+            <article><span class="ltr">03</span><div><strong data-i18n="output3">حلول مرتبطة بسياق العمل</strong><small class="ltr">CASE / DECISION</small></div></article>
+          </div>
+        </div>
+        <div class="section-heading reveal">
+          <span class="section-kicker" data-i18n="practicalResults">نتائج عملية</span>
+          <h2 id="outputs-title" data-i18n="outputsTitle">شاهد ماذا ينتج عن التعلم.</h2>
+          <p data-i18n="outputsBody">لوحات معلومات، تحليلات، نماذج، دراسات حالة ومشاريع تشبه ما تستخدمه في العمل.</p>
+          <ul class="check-list">
+            <li><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFGMjkzNyIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48dGl0bGUgaWQ9InQiPlggQWNhZGVteSBjaGVjayBpY29uPC90aXRsZT48cGF0aCBkPSJtNSAxMiA0IDQgMTAtMTAiLz48L3N2Zz4=" alt=""><span data-i18n="output1">تحليل بيانات منظم</span></li>
+            <li><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFGMjkzNyIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48dGl0bGUgaWQ9InQiPlggQWNhZGVteSBjaGVjayBpY29uPC90aXRsZT48cGF0aCBkPSJtNSAxMiA0IDQgMTAtMTAiLz48L3N2Zz4=" alt=""><span data-i18n="output2">لوحات معلومات قابلة للتحديث</span></li>
+            <li><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFGMjkzNyIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48dGl0bGUgaWQ9InQiPlggQWNhZGVteSBjaGVjayBpY29uPC90aXRsZT48cGF0aCBkPSJtNSAxMiA0IDQgMTAtMTAiLz48L3N2Zz4=" alt=""><span data-i18n="output3">حلول مرتبطة بسياق العمل</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section methodology" aria-labelledby="method-title">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <span class="section-kicker" data-i18n="howWeLearn">كيف نتعلم؟</span>
+          <h2 id="method-title" data-i18n="methodTitle">من الشرح الى التطبيق.</h2>
+          <p data-i18n="methodBody">كل مفهوم يبدأ من سياق واضح وينتهي بتطبيق يمكنك استخدامه.</p>
+        </div>
+        <div class="method-grid">
+          <article class="method-step reveal"><span class="ltr">01</span><h3 data-i18n="storyTitle">القصة</h3><p data-i18n="storyBody">ابدأ من سياق او مشكلة حقيقية.</p></article>
+          <article class="method-step reveal"><span class="ltr">02</span><h3 data-i18n="conceptTitle">المفهوم</h3><p data-i18n="conceptBody">افهم الفكرة بطريقة واضحة ومنظمة.</p></article>
+          <article class="method-step reveal"><span class="ltr">03</span><h3 data-i18n="practiceStepTitle">التطبيق العملي</h3><p data-i18n="practiceStepBody">طبق على بيانات وسيناريوهات واقعية.</p></article>
+          <article class="method-step reveal"><span class="ltr">04</span><h3 data-i18n="checkTitle">التحقق</h3><p data-i18n="checkBody">تاكد انك تستطيع استخدام ما تعلمته بنفسك.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="corporate" id="organizations">
+      <div class="corporate-grid-bg" aria-hidden="true"></div>
+      <div class="shell corporate-grid">
+        <div class="corporate-copy reveal">
+          <span class="section-kicker" data-i18n="forOrganizations">للمؤسسات</span>
+          <h2 data-i18n="corporateTitle">ابن قدرات فريقك.</h2>
+          <p data-i18n="corporateBody">برامج تدريب احترافية مصممة حول احتياجات فريقك، بياناتك، وطريقة العمل داخل مؤسستك.</p>
+          <a class="button button-teal button-large" href="https://wa.me/962788458787?text=مرحبا%20X%20Academy%20ارغب%20بمناقشة%20تدريب%20لفريقي" target="_blank" rel="noopener">
+            <span data-i18n="discussTraining">ناقش تدريب فريقك</span>
+            <span class="button-arrow" aria-hidden="true">←</span>
+          </a>
+        </div>
+        <div class="corporate-points reveal">
+          <article><span>01</span><div><h3 data-i18n="customPrograms">برامج مخصصة</h3><p data-i18n="customProgramsBody">محتوى مصمم حسب مستوى الفريق واهدافه.</p></div></article>
+          <article><span>02</span><div><h3 data-i18n="realData">بيانات وسيناريوهات واقعية</h3><p data-i18n="realDataBody">تدريب اقرب الى بيئة العمل الفعلية.</p></div></article>
+          <article><span>03</span><div><h3 data-i18n="teamTraining">تدريب الفرق</h3><p data-i18n="teamTrainingBody">برامج مناسبة للمجموعات والفرق المهنية.</p></div></article>
+          <article><span>04</span><div><h3 data-i18n="progressFocus">متابعة التقدم</h3><p data-i18n="progressFocusBody">تركيز على التطبيق والنتائج وليس الحضور فقط.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section proof" aria-labelledby="proof-title">
+      <div class="shell proof-grid">
+        <div class="section-heading reveal">
+          <span class="section-kicker" data-i18n="byNumbers">بالارقام</span>
+          <h2 id="proof-title" data-i18n="proofTitle">الثقة تبنى بالعمل الحقيقي.</h2>
+          <p data-i18n="proofBody">نعرض فقط الارقام التي يمكن التحقق منها، ونضيف اي مؤشر جديد عندما تكون بياناته موثقة.</p>
+        </div>
+        <div class="metric-card reveal">
+          <span class="metric-value ltr">4,000+</span>
+          <strong data-i18n="learners">متعلم</strong>
+          <span data-i18n="metricNote">وثقوا تجربة X Academy</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section trainer" aria-labelledby="trainer-title">
+      <div class="shell trainer-grid">
+        <div class="trainer-profile reveal" aria-hidden="true">
+          <div class="trainer-profile-head">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+Cjx0aXRsZSBpZD0idGl0bGUiPlggQWNhZGVteSBBMSBQdXJlIEludGVyc2VjdGlvbiDigJQgTWFzdGVyIFN5bWJvbDwvdGl0bGU+CjxkZXNjIGlkPSJkZXNjIj5Ud28gZXF1YWwtd2lkdGggNDUtZGVncmVlIGRpYWdvbmFsIGJhbmRzIGludGVyc2VjdCB0byBmb3JtIHRoZSBhcHByb3ZlZCBYIEFjYWRlbXkgQTEgUHVyZSBJbnRlcnNlY3Rpb24gc3ltYm9sLjwvZGVzYz4KPGRlZnM+PGNsaXBQYXRoIGlkPSJjbGlwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIvPjwvY2xpcFBhdGg+PC9kZWZzPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcCkiPgogIDxyZWN0IHg9IjQxIiB5PSItMTAiIHdpZHRoPSIxOCIgaGVpZ2h0PSIxMjAiIHRyYW5zZm9ybT0icm90YXRlKC00NSA1MCA1MCkiIGZpbGw9IiMxRjI5MzciLz4KICA8cmVjdCB4PSI0MSIgeT0iLTEwIiB3aWR0aD0iMTgiIGhlaWdodD0iMTIwIiB0cmFuc2Zvcm09InJvdGF0ZSg0NSA1MCA1MCkiIGZpbGw9IiMwOTk5OTkiLz4KPC9nPgo8L3N2Zz4=" alt="">
+            <span class="ltr">APPLIED LEARNING</span>
+          </div>
+          <div class="trainer-profile-title ltr">
+            <strong>DATA</strong><i>×</i><strong>BUSINESS</strong><i>×</i><strong>DIGITAL</strong>
+          </div>
+          <div class="trainer-profile-map">
+            <span class="ltr">EXCEL</span>
+            <span class="ltr">POWER BI</span>
+            <span class="ltr">AI & AUTOMATION</span>
+            <span class="ltr">WEB DEVELOPMENT</span>
+          </div>
+          <div class="trainer-profile-foot">
+            <span class="ltr">BG / X ACADEMY</span>
+            <i aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="section-heading reveal">
+          <span class="section-kicker" data-i18n="behindLearning">من يقف خلف التعلم؟</span>
+          <h2 id="trainer-title" data-i18n="trainerTitle">تعلم ممن يستخدم ما يدرسه.</h2>
+          <p data-i18n="trainerBody">يجمع التدريب بين الخبرة العملية والتحليل وبناء الحلول، حتى ترتبط المهارة بما يحدث فعلا في العمل.</p>
+          <div class="trainer-details">
+            <strong data-i18n="trainerName">باسل غانم</strong>
+            <span data-i18n="trainerRole">مدرب ومستشار في X Academy</span>
+            <div class="program-tags"><span class="ltr">Excel</span><span class="ltr">Power BI</span><span class="ltr">AI & Automation</span><span class="ltr">Web Development</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta section">
+      <div class="final-x" aria-hidden="true"></div>
+      <div class="shell final-content reveal">
+        <span class="section-kicker">X ACADEMY</span>
+        <h2 data-i18n="finalTitle">ماذا تريد ان تعرف كيف تفعله بعد ذلك؟</h2>
+        <p data-i18n="finalBody">اختر المهارة. ابن القدرة. استخدمها في عملك.</p>
+        <a class="button button-primary button-large" href="#programs">
+          <span data-i18n="explorePrograms">استكشف البرامج</span>
+          <span class="button-arrow" aria-hidden="true">←</span>
+        </a>
+        <div class="brand-signature" data-i18n="brandSignatureAr">تعلم · حلل · قد</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-main">
+      <div class="footer-brand">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMTYwIiByb2xlPSJpbWciPgo8dGl0bGU+WCBBY2FkZW15IHByaW1hcnkgb3V0bGluZWQgbG9ja3VwPC90aXRsZT4KPGRlc2M+QTEgUHVyZSBJbnRlcnNlY3Rpb24gc3ltYm9sIHJlcHJlc2VudHMgWDsgQUNBREVNWSBhbmQgdGFnbGluZSBhcmUgY29udmVydGVkIHRvIHZlY3RvciBvdXRsaW5lcy48L2Rlc2M+CjxyZWN0IHdpZHRoPSI2NDAiIGhlaWdodD0iMTYwIiBmaWxsPSIjMEYxNzJBIi8+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwIDIwKSBzY2FsZSgxLjIpIj4KICA8cmVjdCB4PSI0MSIgeT0iLTEwIiB3aWR0aD0iMTgiIGhlaWdodD0iMTIwIiB0cmFuc2Zvcm09InJvdGF0ZSgtNDUgNTAgNTApIiBmaWxsPSIjRkZGRkZGIi8+CiAgPHJlY3QgeD0iNDEiIHk9Ii0xMCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjEyMCIgdHJhbnNmb3JtPSJyb3RhdGUoNDUgNTAgNTApIiBmaWxsPSIjRkZGRkZGIi8+CjwvZz4KPHBhdGggZD0iTTE3Ni4zNzUgODIuMEgxODEuOTA2MjVMMTg1LjA5Mzc1IDcyLjkyOTY4NzVIMTk5LjE3OTY4NzVMMjAyLjI3MzQzNzUgODIuMEgyMDcuOTIxODc1TDE5NS4zMzU5Mzc1IDQ3LjA3ODEyNUgxODkuMDU0Njg3NVpNMTg2LjY2NDA2MjUgNjguNSAxODguODQzNzUgNjIuMzEyNUMxODkuODA0Njg3NSA1OS40Mjk2ODc1IDE5MC44MTI1IDU2LjM1OTM3NSAxOTIuMjE4NzUgNTEuODM1OTM3NUMxOTMuNjAxNTYyNSA1Ni4zNTkzNzUgMTk0LjU4NTkzNzUgNTkuNDI5Njg3NSAxOTUuNTQ2ODc1IDYyLjMxMjVMMTk3LjY1NjI1IDY4LjVaIiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0yMzMuNTA3ODEyNSA4Mi41NjI1QzI0MS4xMjUgODIuNTYyNSAyNDcuMDMxMjUgNzcuODUxNTYyNSAyNDguMjI2NTYyNSA3MC40MjE4NzVIMjQyLjk1MzEyNUMyNDEuODUxNTYyNSA3NS4xNTYyNSAyMzguMjg5MDYyNSA3Ny44MDQ2ODc1IDIzMy41NTQ2ODc1IDc3LjgwNDY4NzVDMjI2LjY2NDA2MjUgNzcuODA0Njg3NSAyMjIuNDQ1MzEyNSA3Mi40NjA5Mzc1IDIyMi40NDUzMTI1IDY0LjU2MjVDMjIyLjQ0NTMxMjUgNTYuNjE3MTg3NSAyMjYuNjY0MDYyNSA1MS4yNzM0Mzc1IDIzMy41NTQ2ODc1IDUxLjI3MzQzNzVDMjM4LjMxMjUgNTEuMjczNDM3NSAyNDEuODk4NDM3NSA1My45NDUzMTI1IDI0Mi45Mjk2ODc1IDU4LjcwMzEyNUgyNDguMjI2NTYyNUMyNDcuMDA3ODEyNSA1MS4yNSAyNDEuMTI1IDQ2LjUxNTYyNSAyMzMuNTA3ODEyNSA0Ni41MTU2MjVDMjIzLjg1MTU2MjUgNDYuNTE1NjI1IDIxNy4yMTg3NSA1My44MDQ2ODc1IDIxNy4yMTg3NSA2NC41NjI1QzIxNy4yMTg3NSA3NS4yNSAyMjMuODc1IDgyLjU2MjUgMjMzLjUwNzgxMjUgODIuNTYyNVoiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTI1Ny40Mjk2ODc1IDgyLjBIMjYyLjk2MDkzNzVMMjY2LjE0ODQzNzUgNzIuOTI5Njg3NUgyODAuMjM0Mzc1TDI4My4zMjgxMjUgODIuMEgyODguOTc2NTYyNUwyNzYuMzkwNjI1IDQ3LjA3ODEyNUgyNzAuMTA5Mzc1Wk0yNjcuNzE4NzUgNjguNSAyNjkuODk4NDM3NSA2Mi4zMTI1QzI3MC44NTkzNzUgNTkuNDI5Njg3NSAyNzEuODY3MTg3NSA1Ni4zNTkzNzUgMjczLjI3MzQzNzUgNTEuODM1OTM3NUMyNzQuNjU2MjUgNTYuMzU5Mzc1IDI3NS42NDA2MjUgNTkuNDI5Njg3NSAyNzYuNjAxNTYyNSA2Mi4zMTI1TDI3OC43MTA5Mzc1IDY4LjVaIiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMTAuODU5Mzc1IDgyLjBDMzIxLjUyMzQzNzUgODIuMCAzMjcuNzU3ODEyNSA3NS4zNDM3NSAzMjcuNzU3ODEyNSA2NC40OTIxODc1QzMyNy43NTc4MTI1IDUzLjY4NzUgMzIxLjUgNDcuMDc4MTI1IDMxMS4yMTA5Mzc1IDQ3LjA3ODEyNUgyOTkuNTYyNVY4Mi4wWk0zMDQuNzY1NjI1IDc3LjQ3NjU2MjVWNTEuNjAxNTYyNUgzMTAuODgyODEyNUMzMTguNjY0MDYyNSA1MS42MDE1NjI1IDMyMi41MzEyNSA1Ni40MDYyNSAzMjIuNTMxMjUgNjQuNDkyMTg3NUMzMjIuNTMxMjUgNzIuNjI1IDMxOC42NjQwNjI1IDc3LjQ3NjU2MjUgMzEwLjUzMTI1IDc3LjQ3NjU2MjVaIiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMzkuODQzNzUgODIuMEgzNjMuMzI4MTI1Vjc3LjQyOTY4NzVIMzQ1LjA0Njg3NVY2Ni40NjA5Mzc1SDM2MS45Njg3NVY2MS45Mzc1SDM0NS4wNDY4NzVWNTEuNjQ4NDM3NUgzNjMuMzI4MTI1VjQ3LjA3ODEyNUgzMzkuODQzNzVaIiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zNzUuMTA5Mzc1IDgyLjBIMzgwLjI0MjE4NzVWNjIuOTY4NzVDMzgwLjI0MjE4NzUgNjAuNjAxNTYyNSAzODAuMTQ4NDM3NSA1Ny4yNzM0Mzc1IDM4MC4wNzgxMjUgNTQuMTA5Mzc1QzM4MS4zNDM3NSA1Ny43MTg3NSAzODIuNTE1NjI1IDYxLjA0Njg3NSAzODMuMjQyMTg3NSA2Mi45Njg3NUwzOTAuNjcxODc1IDgyLjBIMzk0LjkzNzVMNDAyLjI5Njg3NSA2Mi45Njg3NUM0MDMuMDQ2ODc1IDYwLjk3NjU2MjUgNDA0LjI0MjE4NzUgNTcuNDE0MDYyNSA0MDUuNTMxMjUgNTMuNjE3MTg3NUM0MDUuNDYwOTM3NSA1Ni45MjE4NzUgNDA1LjM2NzE4NzUgNjAuNDg0Mzc1IDQwNS4zNjcxODc1IDYyLjk2ODc1VjgyLjBINDEwLjQ3NjU2MjVWNDcuMDc4MTI1SDQwMy4xMTcxODc1TDM5NS40MDYyNSA2Ny41MzkwNjI1QzM5NC43OTY4NzUgNjkuMzIwMzEyNSAzOTMuNjQ4NDM3NSA3Mi42MjUgMzkyLjg1MTU2MjUgNzUuMDM5MDYyNUMzOTIuMDU0Njg3NSA3Mi42MjUgMzkwLjkwNjI1IDY5LjMyMDMxMjUgMzkwLjI3MzQzNzUgNjcuNTM5MDYyNUwzODIuNDQ1MzEyNSA0Ny4wNzgxMjVIMzc1LjEwOTM3NVoiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTQzMy45Mjk2ODc1IDgyLjBINDM5LjA4NTkzNzVWNjguMDU0Njg3NUw0NTEuODgyODEyNSA0Ny4wNzgxMjVINDQ1LjkwNjI1TDQzOS4zNDM3NSA1OC4wOTM3NUM0MzguMzU5Mzc1IDU5LjczNDM3NSA0MzcuNDQ1MzEyNSA2MS4zNTE1NjI1IDQzNi41MzEyNSA2Mi45Njg3NUM0MzUuNjE3MTg3NSA2MS4zNTE1NjI1IDQzNC42Nzk2ODc1IDU5LjczNDM3NSA0MzMuNjk1MzEyNSA1OC4wOTM3NUw0MjcuMDYyNSA0Ny4wNzgxMjVINDIxLjAzOTA2MjVMNDMzLjkyOTY4NzUgNjguMDU0Njg3NVoiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTE3OS4yNDg3NzkyOTY4NzUgMTE2LjBIMTg2LjA4MzAwNzgxMjVWMTE0LjUxNjYwMTU2MjVIMTgwLjk3NDM2NTIzNDM3NVYxMDQuNzIzMTQ0NTMxMjVIMTc5LjI0ODc3OTI5Njg3NVoiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTE5MS4xMTI5Mzk0NTMxMjUgMTE2LjBIMTk4LjI1NzQ3MDcwMzEyNVYxMTQuNTE2NjAxNTYyNUgxOTIuODM4NTI1MzkwNjI1VjExMS4wNDI3MjQ2MDkzNzVIMTk3LjgzMzY0MjU3ODEyNVYxMDkuNTY2ODk0NTMxMjVIMTkyLjgzODUyNTM5MDYyNVYxMDYuMjA2NTQyOTY4NzVIMTk4LjIxMjA2MDU0Njg3NVYxMDQuNzIzMTQ0NTMxMjVIMTkxLjExMjkzOTQ1MzEyNVoiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTIwMi42OTcwNzAzMTI1IDExNi4wSDIwNC41NjY0NTUwNzgxMjVMMjA1LjU3MzA0Njg3NSAxMTMuMDI1NjM0NzY1NjI1SDIxMC4wMDgxMDU0Njg3NUwyMTEuMDQ0OTcwNzAzMTI1IDExNi4wSDIxMi45MTQzNTU0Njg3NUwyMDguODI3NDQxNDA2MjUgMTA0LjcyMzE0NDUzMTI1SDIwNi43MDgzMDA3ODEyNVpNMjA2LjA2NDk5MDIzNDM3NSAxMTEuNTg3NjQ2NDg0Mzc1IDIwNi42OTMxNjQwNjI1IDEwOS43MjU4MzAwNzgxMjVDMjA2Ljk3MzE5MzM1OTM3NSAxMDguODYzMDM3MTA5Mzc1IDIwNy4zMjEzMzc4OTA2MjUgMTA3LjY4OTk0MTQwNjI1IDIwNy43NjAzMDI3MzQzNzUgMTA2LjA3Nzg4MDg1OTM3NUMyMDguMjA2ODM1OTM3NSAxMDcuNjc0ODA0Njg3NSAyMDguNTQ3NDEyMTA5Mzc1IDEwOC44MjUxOTUzMTI1IDIwOC44NTAxNDY0ODQzNzUgMTA5LjcyNTgzMDA3ODEyNUwyMDkuNTAxMDI1MzkwNjI1IDExMS41ODc2NDY0ODQzNzVaIiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0yMTcuNjQ5MTIxMDkzNzQ5OTggMTE2LjBIMjE5LjM3NDcwNzAzMTI0OTk4VjExMS43MzkwMTM2NzE4NzVIMjIxLjY3NTQ4ODI4MTI0OTk4QzIyMS43MDU3NjE3MTg3NDk5OCAxMTEuNzM5MDEzNjcxODc1IDIyMS43NDM2MDM1MTU2MjQ5OCAxMTEuNzM5MDEzNjcxODc1IDIyMS43NzM4NzY5NTMxMjQ5OCAxMTEuNzM5MDEzNjcxODc1TDIyNC4wNTk1MjE0ODQzNzQ5OCAxMTYuMEgyMjYuMDE5NzI2NTYyNDk5OThMMjIzLjUzNzMwNDY4NzQ5OTk4IDExMS40NDM4NDc2NTYyNUMyMjQuOTA3MTc3NzM0Mzc0OTggMTEwLjkyOTE5OTIxODc1IDIyNS41OTU4OTg0Mzc0OTk5OCAxMDkuNzc4ODA4NTkzNzUgMjI1LjU5NTg5ODQzNzQ5OTk4IDEwOC4yNjUxMzY3MTg3NUMyMjUuNTk1ODk4NDM3NDk5OTggMTA2LjE4MzgzNzg5MDYyNSAyMjQuMzAxNzA4OTg0Mzc0OTggMTA0LjcyMzE0NDUzMTI1IDIyMS42OTA2MjQ5OTk5OTk5OCAxMDQuNzIzMTQ0NTMxMjVIMjE3LjY0OTEyMTA5Mzc0OTk4Wk0yMTkuMzc0NzA3MDMxMjQ5OTggMTEwLjI2MzE4MzU5Mzc1VjEwNi4xOTg5NzQ2MDkzNzVIMjIxLjQ5Mzg0NzY1NjI0OTk4QzIyMy4xNTg4ODY3MTg3NDk5OCAxMDYuMTk4OTc0NjA5Mzc1IDIyMy44NDc2MDc0MjE4NzQ5OCAxMDYuOTkzNjUyMzQzNzUgMjIzLjg0NzYwNzQyMTg3NDk4IDEwOC4yNjUxMzY3MTg3NUMyMjMuODQ3NjA3NDIxODc0OTggMTA5LjUyOTA1MjczNDM3NSAyMjMuMTU4ODg2NzE4NzQ5OTggMTEwLjI2MzE4MzU5Mzc1IDIyMS41MDg5ODQzNzQ5OTk5OCAxMTAuMjYzMTgzNTkzNzVaIiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0yMzAuNzkyMzMzOTg0Mzc0OTggMTE2LjBIMjMyLjU0MDYyNDk5OTk5OTk4VjEwOS45ODMxNTQyOTY4NzVDMjMyLjU0MDYyNDk5OTk5OTk4IDEwOS40MDAzOTA2MjUgMjMyLjQ4MDA3ODEyNDk5OTk4IDEwOC4yMzQ4NjMyODEyNSAyMzIuNDExOTYyODkwNjI0OTggMTA2LjgxOTU4MDA3ODEyNUMyMzMuMjI5MzQ1NzAzMTI0OTggMTA4LjMzMzI1MTk1MzEyNSAyMzMuNjYwNzQyMTg3NDk5OTggMTA5LjExMjc5Mjk2ODc1IDIzNC4yMTMyMzI0MjE4NzQ5OCAxMDkuOTk4MjkxMDE1NjI1TDIzOC4wMjAxMTcxODc0OTk5OCAxMTYuMEgyNDAuMDE4MTY0MDYyNDk5OThWMTA0LjcyMzE0NDUzMTI1SDIzOC4yNjk4NzMwNDY4NzQ5OFYxMTEuMTQxMTEzMjgxMjVDMjM4LjI2OTg3MzA0Njg3NDk4IDExMS43OTE5OTIxODc1IDIzOC4zMDAxNDY0ODQzNzQ5OCAxMTIuODQzOTk0MTQwNjI1IDIzOC4zODMzOTg0Mzc0OTk5OCAxMTMuOTMzODM3ODkwNjI1QzIzNy44ODM4ODY3MTg3NDk5OCAxMTIuODUxNTYyNSAyMzcuMzc2ODA2NjQwNjI0OTggMTExLjk5NjMzNzg5MDYyNSAyMzcuMDI4NjYyMTA5Mzc0OTggMTExLjQzNjI3OTI5Njg3NUwyMzIuNzgyODEyNDk5OTk5OTggMTA0LjcyMzE0NDUzMTI1SDIzMC43OTIzMzM5ODQzNzQ5OFoiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTI0Ni43MjA3MDMxMjQ5OTk5NyAxMTYuMTEzNTI1MzkwNjI1QzI0Ny4zNDEzMDg1OTM3NDk5NyAxMTYuMTEzNTI1MzkwNjI1IDI0Ny44MzMyNTE5NTMxMjQ5NyAxMTUuNjIxNTgyMDMxMjUgMjQ3LjgzMzI1MTk1MzEyNDk3IDExNS4wMDA5NzY1NjI1QzI0Ny44MzMyNTE5NTMxMjQ5NyAxMTQuMzcyODAyNzM0Mzc1IDI0Ny4zNDEzMDg1OTM3NDk5NyAxMTMuODgwODU5Mzc1IDI0Ni43MjA3MDMxMjQ5OTk5NyAxMTMuODgwODU5Mzc1QzI0Ni4wOTI1MjkyOTY4NzQ5NyAxMTMuODgwODU5Mzc1IDI0NS42MDA1ODU5Mzc0OTk5NyAxMTQuMzcyODAyNzM0Mzc1IDI0NS42MDA1ODU5Mzc0OTk5NyAxMTUuMDAwOTc2NTYyNUMyNDUuNjAwNTg1OTM3NDk5OTcgMTE1LjYyMTU4MjAzMTI1IDI0Ni4wOTI1MjkyOTY4NzQ5NyAxMTYuMTEzNTI1MzkwNjI1IDI0Ni43MjA3MDMxMjQ5OTk5NyAxMTYuMTEzNTI1MzkwNjI1WiIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNMjU5Ljc4NTIwNTA3ODEyNSAxMTYuMEgyNjEuNjU0NTg5ODQzNzVMMjYyLjY2MTE4MTY0MDYyNSAxMTMuMDI1NjM0NzY1NjI1SDI2Ny4wOTYyNDAyMzQzNzVMMjY4LjEzMzEwNTQ2ODc1IDExNi4wSDI3MC4wMDI0OTAyMzQzNzVMMjY1LjkxNTU3NjE3MTg3NSAxMDQuNzIzMTQ0NTMxMjVIMjYzLjc5NjQzNTU0Njg3NVpNMjYzLjE1MzEyNSAxMTEuNTg3NjQ2NDg0Mzc1IDI2My43ODEyOTg4MjgxMjUgMTA5LjcyNTgzMDA3ODEyNUMyNjQuMDYxMzI4MTI1IDEwOC44NjMwMzcxMDkzNzUgMjY0LjQwOTQ3MjY1NjI1IDEwNy42ODk5NDE0MDYyNSAyNjQuODQ4NDM3NSAxMDYuMDc3ODgwODU5Mzc1QzI2NS4yOTQ5NzA3MDMxMjUgMTA3LjY3NDgwNDY4NzUgMjY1LjYzNTU0Njg3NSAxMDguODI1MTk1MzEyNSAyNjUuOTM4MjgxMjUgMTA5LjcyNTgzMDA3ODEyNUwyNjYuNTg5MTYwMTU2MjUgMTExLjU4NzY0NjQ4NDM3NVoiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTI3NC43MzcyNTU4NTkzNzUgMTE2LjBIMjc2LjQ4NTU0Njg3NVYxMDkuOTgzMTU0Mjk2ODc1QzI3Ni40ODU1NDY4NzUgMTA5LjQwMDM5MDYyNSAyNzYuNDI1IDEwOC4yMzQ4NjMyODEyNSAyNzYuMzU2ODg0NzY1NjI1IDEwNi44MTk1ODAwNzgxMjVDMjc3LjE3NDI2NzU3ODEyNSAxMDguMzMzMjUxOTUzMTI1IDI3Ny42MDU2NjQwNjI1IDEwOS4xMTI3OTI5Njg3NSAyNzguMTU4MTU0Mjk2ODc1IDEwOS45OTgyOTEwMTU2MjVMMjgxLjk2NTAzOTA2MjUgMTE2LjBIMjgzLjk2MzA4NTkzNzVWMTA0LjcyMzE0NDUzMTI1SDI4Mi4yMTQ3OTQ5MjE4NzVWMTExLjE0MTExMzI4MTI1QzI4Mi4yMTQ3OTQ5MjE4NzUgMTExLjc5MTk5MjE4NzUgMjgyLjI0NTA2ODM1OTM3NSAxMTIuODQzOTk0MTQwNjI1IDI4Mi4zMjgzMjAzMTI1IDExMy45MzM4Mzc4OTA2MjVDMjgxLjgyODgwODU5Mzc1IDExMi44NTE1NjI1IDI4MS4zMjE3Mjg1MTU2MjUgMTExLjk5NjMzNzg5MDYyNSAyODAuOTczNTgzOTg0Mzc1IDExMS40MzYyNzkyOTY4NzVMMjc2LjcyNzczNDM3NSAxMDQuNzIzMTQ0NTMxMjVIMjc0LjczNzI1NTg1OTM3NVoiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTI4OC42OTc4NTE1NjI1MDAwMyAxMTYuMEgyOTAuNTY3MjM2MzI4MTI1MDNMMjkxLjU3MzgyODEyNTAwMDAzIDExMy4wMjU2MzQ3NjU2MjVIMjk2LjAwODg4NjcxODc1MDAzTDI5Ny4wNDU3NTE5NTMxMjUwMyAxMTYuMEgyOTguOTE1MTM2NzE4NzUwMDNMMjk0LjgyODIyMjY1NjI1MDAzIDEwNC43MjMxNDQ1MzEyNUgyOTIuNzA5MDgyMDMxMjUwMDNaTTI5Mi4wNjU3NzE0ODQzNzUwMyAxMTEuNTg3NjQ2NDg0Mzc1IDI5Mi42OTM5NDUzMTI1MDAwMyAxMDkuNzI1ODMwMDc4MTI1QzI5Mi45NzM5NzQ2MDkzNzUwMyAxMDguODYzMDM3MTA5Mzc1IDI5My4zMjIxMTkxNDA2MjUwMyAxMDcuNjg5OTQxNDA2MjUgMjkzLjc2MTA4Mzk4NDM3NTAzIDEwNi4wNzc4ODA4NTkzNzVDMjk0LjIwNzYxNzE4NzUwMDAzIDEwNy42NzQ4MDQ2ODc1IDI5NC41NDgxOTMzNTkzNzUwMyAxMDguODI1MTk1MzEyNSAyOTQuODUwOTI3NzM0Mzc1MDMgMTA5LjcyNTgzMDA3ODEyNUwyOTUuNTAxODA2NjQwNjI1MDMgMTExLjU4NzY0NjQ4NDM3NVoiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTMwMy42NDk5MDIzNDM3NTAwNiAxMTYuMEgzMTAuNDg0MTMwODU5Mzc1MDZWMTE0LjUxNjYwMTU2MjVIMzA1LjM3NTQ4ODI4MTI1MDA2VjEwNC43MjMxNDQ1MzEyNUgzMDMuNjQ5OTAyMzQzNzUwMDZaIiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMTguODA2Mjk4ODI4MTI1MSAxMTYuMEgzMjAuNTMxODg0NzY1NjI1MVYxMTEuNTExOTYyODkwNjI1TDMyNC42NzE3NzczNDM3NTAxIDEwNC43MjMxNDQ1MzEyNUgzMjIuNjY2MTYyMTA5Mzc1MUwzMjAuNTY5NzI2NTYyNTAwMSAxMDguMzE4MTE1MjM0Mzc1QzMyMC4yMzY3MTg3NTAwMDAxIDEwOC44ODU3NDIxODc1IDMxOS45NjQyNTc4MTI1MDAxIDEwOS4zOTI4MjIyNjU2MjUgMzE5LjY4NDIyODUxNTYyNTEgMTEwLjA3Mzk3NDYwOTM3NUMzMTkuNDA0MTk5MjE4NzUwMSAxMDkuNDA3OTU4OTg0Mzc1IDMxOS4xMzE3MzgyODEyNTAxIDEwOC45MDg0NDcyNjU2MjUgMzE4Ljc4MzU5Mzc1MDAwMDEgMTA4LjMxODExNTIzNDM3NUwzMTYuNjY0NDUzMTI1MDAwMSAxMDQuNzIzMTQ0NTMxMjVIMzE0LjY1MTI2OTUzMTI1MDFMMzE4LjgwNjI5ODgyODEyNTEgMTExLjUxMTk2Mjg5MDYyNVoiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTMzMy4xOTA3MjI2NTYyNTAxIDExNi4xODkyMDg5ODQzNzVDMzM1LjgzOTY0ODQzNzUwMDEgMTE2LjE4OTIwODk4NDM3NSAzMzcuMzY4NDU3MDMxMjUwMSAxMTQuNzk2NjMwODU5Mzc1IDMzNy4zNjg0NTcwMzEyNTAxIDExMi44ODE4MzU5Mzc1QzMzNy4zNjg0NTcwMzEyNTAxIDExMC44NDU5NDcyNjU2MjUgMzM1LjU1OTYxOTE0MDYyNTEgMTEwLjA3Mzk3NDYwOTM3NSAzMzQuMTIxNjMwODU5Mzc1MSAxMDkuNzAzMTI1TDMzMy4wMjQyMTg3NTAwMDAxIDEwOS40MTU1MjczNDM3NUMzMzIuMTYxNDI1NzgxMjUwMSAxMDkuMTg4NDc2NTYyNSAzMzAuOTk1ODk4NDM3NTAwMSAxMDguNzg3MzUzNTE1NjI1IDMzMC45OTU4OTg0Mzc1MDAxIDEwNy43MjAyMTQ4NDM3NUMzMzAuOTk1ODk4NDM3NTAwMSAxMDYuNzY2NjAxNTYyNSAzMzEuODU4NjkxNDA2MjUwMSAxMDYuMDcwMzEyNSAzMzMuMjI4NTY0NDUzMTI1MSAxMDYuMDcwMzEyNUMzMzQuNTA3NjE3MTg3NTAwMSAxMDYuMDcwMzEyNSAzMzUuNDIzMzg4NjcxODc1MSAxMDYuNjYwNjQ0NTMxMjUgMzM1LjUzNjkxNDA2MjUwMDEgMTA3LjY4OTk0MTQwNjI1SDMzNy4yMTcwODk4NDM3NTAxQzMzNy4xNjQxMTEzMjgxMjUxIDEwNS44OTYyNDAyMzQzNzUgMzM1LjU4MjMyNDIxODc1MDEgMTA0LjU3MTc3NzM0Mzc1IDMzMy4yNjY0MDYyNTAwMDAxIDEwNC41NzE3NzczNDM3NUMzMzAuOTk1ODk4NDM3NTAwMSAxMDQuNTcxNzc3MzQzNzUgMzI5LjI3MDMxMjUwMDAwMDEgMTA1Ljg2NTk2Njc5Njg3NSAzMjkuMjcwMzEyNTAwMDAwMSAxMDcuODE4NjAzNTE1NjI1QzMyOS4yNzAzMTI1MDAwMDAxIDEwOS4zNjI1NDg4MjgxMjUgMzMwLjM2MDE1NjI1MDAwMDEgMTEwLjMwODU5Mzc1IDMzMi4yMDY4MzU5Mzc1MDAxIDExMC44MDA1MzcxMDkzNzVMMzMzLjUyMzczMDQ2ODc1MDEgMTExLjE2MzgxODM1OTM3NUMzMzQuNzM0NjY3OTY4NzUwMSAxMTEuNDg5MjU3ODEyNSAzMzUuNjY1NTc2MTcxODc1MSAxMTEuODc1MjQ0MTQwNjI1IDMzNS42NjU1NzYxNzE4NzUxIDExMi44NTkxMzA4NTkzNzVDMzM1LjY2NTU3NjE3MTg3NTEgMTEzLjk0ODk3NDYwOTM3NSAzMzQuNjEzNTc0MjE4NzUwMSAxMTQuNjc1NTM3MTA5Mzc1IDMzMy4xODMxNTQyOTY4NzUxIDExNC42NzU1MzcxMDkzNzVDMzMxLjg4MTM5NjQ4NDM3NTEgMTE0LjY3NTUzNzEwOTM3NSAzMzAuNzkxNTUyNzM0Mzc1MSAxMTQuMTAwMzQxNzk2ODc1IDMzMC42OTMxNjQwNjI1MDAxIDExMi44NjY2OTkyMTg3NUgzMjguOTYwMDA5NzY1NjI1MUMzMjkuMDY1OTY2Nzk2ODc1MSAxMTQuOTI1MjkyOTY4NzUgMzMwLjY1NTMyMjI2NTYyNTEgMTE2LjE4OTIwODk4NDM3NSAzMzMuMTkwNzIyNjU2MjUwMSAxMTYuMTg5MjA4OTg0Mzc1WiIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNMzQyLjUxOTQ4MjQyMTg3NTEgMTE2LjBIMzQ5LjY2NDAxMzY3MTg3NTFWMTE0LjUxNjYwMTU2MjVIMzQ0LjI0NTA2ODM1OTM3NTFWMTExLjA0MjcyNDYwOTM3NUgzNDkuMjQwMTg1NTQ2ODc1MVYxMDkuNTY2ODk0NTMxMjVIMzQ0LjI0NTA2ODM1OTM3NTFWMTA2LjIwNjU0Mjk2ODc1SDM0OS42MTg2MDM1MTU2MjUxVjEwNC43MjMxNDQ1MzEyNUgzNDIuNTE5NDgyNDIxODc1MVoiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTM1Ni4wNzEzODY3MTg3NTAxNSAxMTYuMTEzNTI1MzkwNjI1QzM1Ni42OTE5OTIxODc1MDAxNSAxMTYuMTEzNTI1MzkwNjI1IDM1Ny4xODM5MzU1NDY4NzUxNSAxMTUuNjIxNTgyMDMxMjUgMzU3LjE4MzkzNTU0Njg3NTE1IDExNS4wMDA5NzY1NjI1QzM1Ny4xODM5MzU1NDY4NzUxNSAxMTQuMzcyODAyNzM0Mzc1IDM1Ni42OTE5OTIxODc1MDAxNSAxMTMuODgwODU5Mzc1IDM1Ni4wNzEzODY3MTg3NTAxNSAxMTMuODgwODU5Mzc1QzM1NS40NDMyMTI4OTA2MjUxNSAxMTMuODgwODU5Mzc1IDM1NC45NTEyNjk1MzEyNTAxNSAxMTQuMzcyODAyNzM0Mzc1IDM1NC45NTEyNjk1MzEyNTAxNSAxMTUuMDAwOTc2NTYyNUMzNTQuOTUxMjY5NTMxMjUwMTUgMTE1LjYyMTU4MjAzMTI1IDM1NS40NDMyMTI4OTA2MjUxNSAxMTYuMTEzNTI1MzkwNjI1IDM1Ni4wNzEzODY3MTg3NTAxNSAxMTYuMTEzNTI1MzkwNjI1WiIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNMzY5Ljk5ODY4MTY0MDYyNTIgMTE2LjBIMzc2LjgzMjkxMDE1NjI1MDJWMTE0LjUxNjYwMTU2MjVIMzcxLjcyNDI2NzU3ODEyNTJWMTA0LjcyMzE0NDUzMTI1SDM2OS45OTg2ODE2NDA2MjUyWiIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNMzgxLjg2Mjg0MTc5Njg3NTIgMTE2LjBIMzg5LjAwNzM3MzA0Njg3NTJWMTE0LjUxNjYwMTU2MjVIMzgzLjU4ODQyNzczNDM3NTJWMTExLjA0MjcyNDYwOTM3NUgzODguNTgzNTQ0OTIxODc1MlYxMDkuNTY2ODk0NTMxMjVIMzgzLjU4ODQyNzczNDM3NTJWMTA2LjIwNjU0Mjk2ODc1SDM4OC45NjE5NjI4OTA2MjUyVjEwNC43MjMxNDQ1MzEyNUgzODEuODYyODQxNzk2ODc1MloiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTM5My40NDY5NzI2NTYyNTAyNCAxMTYuMEgzOTUuMzE2MzU3NDIxODc1MjRMMzk2LjMyMjk0OTIxODc1MDI0IDExMy4wMjU2MzQ3NjU2MjVINDAwLjc1ODAwNzgxMjUwMDI0TDQwMS43OTQ4NzMwNDY4NzUyNCAxMTYuMEg0MDMuNjY0MjU3ODEyNTAwMjRMMzk5LjU3NzM0Mzc1MDAwMDI0IDEwNC43MjMxNDQ1MzEyNUgzOTcuNDU4MjAzMTI1MDAwMjRaTTM5Ni44MTQ4OTI1NzgxMjUyNCAxMTEuNTg3NjQ2NDg0Mzc1IDM5Ny40NDMwNjY0MDYyNTAyNCAxMDkuNzI1ODMwMDc4MTI1QzM5Ny43MjMwOTU3MDMxMjUyNCAxMDguODYzMDM3MTA5Mzc1IDM5OC4wNzEyNDAyMzQzNzUyNCAxMDcuNjg5OTQxNDA2MjUgMzk4LjUxMDIwNTA3ODEyNTI0IDEwNi4wNzc4ODA4NTkzNzVDMzk4Ljk1NjczODI4MTI1MDI0IDEwNy42NzQ4MDQ2ODc1IDM5OS4yOTczMTQ0NTMxMjUyNCAxMDguODI1MTk1MzEyNSAzOTkuNjAwMDQ4ODI4MTI1MjQgMTA5LjcyNTgzMDA3ODEyNUw0MDAuMjUwOTI3NzM0Mzc1MjQgMTExLjU4NzY0NjQ4NDM3NVoiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTQxMi4wNjk2Nzc3MzQzNzUyNiAxMTYuMEM0MTUuNDk4MTQ0NTMxMjUwMjYgMTE2LjAgNDE3LjQ4ODYyMzA0Njg3NTI2IDExMy44NzMyOTEwMTU2MjUgNDE3LjQ4ODYyMzA0Njg3NTI2IDExMC4zNDY0MzU1NDY4NzVDNDE3LjQ4ODYyMzA0Njg3NTI2IDEwNi44NDIyODUxNTYyNSA0MTUuNDk4MTQ0NTMxMjUwMjYgMTA0LjcyMzE0NDUzMTI1IDQxMi4xNzU2MzQ3NjU2MjUyNiAxMDQuNzIzMTQ0NTMxMjVINDA4LjM5OTAyMzQzNzUwMDI2VjExNi4wWk00MTAuMTI0NjA5Mzc1MDAwMjYgMTE0LjQ4NjMyODEyNVYxMDYuMjM2ODE2NDA2MjVINDEyLjA2MjEwOTM3NTAwMDI2QzQxNC41MjE4MjYxNzE4NzUyNiAxMDYuMjM2ODE2NDA2MjUgNDE1Ljc5MzMxMDU0Njg3NTI2IDEwNy42OTc1MDk3NjU2MjUgNDE1Ljc5MzMxMDU0Njg3NTI2IDExMC4zNDY0MzU1NDY4NzVDNDE1Ljc5MzMxMDU0Njg3NTI2IDExMy4wMTgwNjY0MDYyNSA0MTQuNTIxODI2MTcxODc1MjYgMTE0LjQ4NjMyODEyNSA0MTEuOTcxMjg5MDYyNTAwMjYgMTE0LjQ4NjMyODEyNVoiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTQyMy43OTAwMzkwNjI1MDAzIDExNi4xMTM1MjUzOTA2MjVDNDI0LjQxMDY0NDUzMTI1MDMgMTE2LjExMzUyNTM5MDYyNSA0MjQuOTAyNTg3ODkwNjI1MyAxMTUuNjIxNTgyMDMxMjUgNDI0LjkwMjU4Nzg5MDYyNTMgMTE1LjAwMDk3NjU2MjVDNDI0LjkwMjU4Nzg5MDYyNTMgMTE0LjM3MjgwMjczNDM3NSA0MjQuNDEwNjQ0NTMxMjUwMyAxMTMuODgwODU5Mzc1IDQyMy43OTAwMzkwNjI1MDAzIDExMy44ODA4NTkzNzVDNDIzLjE2MTg2NTIzNDM3NTMgMTEzLjg4MDg1OTM3NSA0MjIuNjY5OTIxODc1MDAwMyAxMTQuMzcyODAyNzM0Mzc1IDQyMi42Njk5MjE4NzUwMDAzIDExNS4wMDA5NzY1NjI1QzQyMi42Njk5MjE4NzUwMDAzIDExNS42MjE1ODIwMzEyNSA0MjMuMTYxODY1MjM0Mzc1MyAxMTYuMTEzNTI1MzkwNjI1IDQyMy43OTAwMzkwNjI1MDAzIDExNi4xMTM1MjUzOTA2MjVaIiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPg==" alt="X Academy" width="194" height="56">
+        <p data-i18n="footerTagline">تعلم. حلل. قد.</p>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-group">
+          <span class="footer-label" data-i18n="footerExplore">استكشف</span>
+          <nav class="footer-nav" aria-label="روابط الموقع" data-i18n-aria="footerNav">
+            <a href="#programs" data-i18n="navPrograms">البرامج</a>
+            <a href="#organizations" data-i18n="navOrganizations">للمؤسسات</a>
+            <a href="#resources" data-i18n="navResources">مجالات التعلم</a>
+            <a href="#about" data-i18n="navAbout">من نحن</a>
+          </nav>
+        </div>
+
+        <div class="footer-group footer-contact">
+          <span class="footer-label" data-i18n="contact">تواصل معنا</span>
+          <a class="footer-whatsapp ltr" href="https://wa.me/962788458787" target="_blank" rel="noopener">
+            <span>WhatsApp</span>
+            <span class="footer-link-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="shell footer-bottom">
+      <span class="ltr">© <span id="current-year"></span> X Academy</span>
+      <button class="language-switch language-switch-footer" type="button">EN</button>
+    </div>
+  </footer>
+
+  <script>
+const copy = {
+  ar: {
+    lang: `ar`, dir: `rtl`, switchLabel: `EN`, switchAria: `Switch to English`,
+    title: `X Academy | تعلم مهارات عملية في البيانات والاعمال والتقنية`,
+    description: `تعلم Power BI وExcel وتحليل البيانات والذكاء الاصطناعي والمهارات الرقمية من خلال تدريب عملي مصمم للاستخدام في العمل الحقيقي.`,
+    skip: `انتقل الى المحتوى`, mainNav: `التنقل الرئيسي`, mobileNav: `التنقل على الهاتف`, footerNav: `روابط الموقع`, searchLabel: `بحث`, openMenu: `فتح القائمة`, closeMenu: `اغلاق القائمة`, closeSearch: `اغلاق البحث`,
+    navPrograms: `البرامج`, navOrganizations: `للمؤسسات`, navResources: `مجالات التعلم`, navAbout: `من نحن`, explorePrograms: `استكشف البرامج`, corporateTraining: `التدريب للمؤسسات`, brandSignatureAr: `تعلم · حلل · قد`,
+    heroLine1: `تعلم المهارة.`, heroLine2: `افهم طريقة التفكير.`, heroLine3: `اعرف كيف تستخدمها.`, heroBody: `تعلم مهني عملي يحول المهارات المعقدة الى قدرات واضحة ومنظمة يمكنك استخدامها فعلا في عملك.`,
+    dashboardLabel: `مسار التعلم`, clarityKpi: `وضوح`, impactKpi: `اثر`, learnerKpi: `متعلم`, knowledgeLabel: `المعرفة`, analysisLabel: `التحليل`, leadershipLabel: `القيادة`,
+    trustedBy: `موثوق بنا من اكثر من`, learners: `متعلم`, trustSupport: `من مختلف الجهات والقطاعات.`,
+    whyX: `لماذا X Academy؟`, differenceTitle: `التعلم الحقيقي يغير طريقة عملك.`, differenceBody: `لا نركز فقط على شرح الادوات، بل على بناء فهم وقدرة يمكنك استخدامها في العمل الحقيقي.`,
+    clarityTitle: `وضوح`, clarityBody: `نحول المواضيع المعقدة الى افكار وانظمة واضحة ومنظمة يمكنك فهمها.`, practiceTitle: `تطبيق عملي`, practiceBody: `تتعامل مع بيانات ومشكلات وسيناريوهات واقعية تشبه بيئة العمل.`, usableTitle: `نتائج قابلة للاستخدام`, usableBody: `تخرج وانت تعرف ماذا تفعل بالمعلومة، وليس فقط اين تضغط.`,
+    knowledgeToLead: `من المعرفة الى القيادة`, frameworkTitle: `تعلم. حلل. قد.`, frameworkBody: `المعرفة تبدأ الرحلة، لكن قيمتها الحقيقية تظهر عندما تستطيع تحليلها وتحويلها الى قرار افضل.`, equation: `المعرفة × التحليل → القيادة`, learnTitle: `تعلم`, learnBody: `افهم المبدأ.`, analyseTitle: `حلل`, analyseBody: `اربط المعلومات واكتشف المعنى.`, leadTitle: `قد`, leadBody: `حول المعرفة الى قرار افضل.`,
+    whatLearn: `ماذا يمكنك ان تتعلم؟`, learningAreas: `مجالات التعلم`, areasBody: `مهارات عملية مصممة لتساعدك في العمل والتحليل واتخاذ قرارات افضل.`, areaData: `البيانات والتحليل`, areaAI: `الذكاء الاصطناعي والاتمتة`, areaBusiness: `المهارات التجارية`, areaDigital: `البناء الرقمي`,
+    selectedPrograms: `برامج مختارة`, featuredPrograms: `ابرز البرامج`, programsBody: `برامج عملية تركز على المهارات التي تحتاجها لتنجز عملا افضل.`, viewAllPrograms: `عرض جميع البرامج`, practicalTag: `عملي`, professionalPath: `مسار مهني`, viewProgram: `عرض البرنامج`, comingSoon: `قريبا`, productivityTag: `انتاجية`,
+    powerBiTitle: `Power BI لتحليل الاعمال`, powerBiBody: `ابن لوحات معلومات توضح ما حدث، ولماذا حدث، وما الذي يحتاج الى انتباهك.`, excelTitle: `Excel الاحترافي`, excelBody: `حول البيانات الى تحليلات وتقارير واضحة وقلل العمل اليدوي باستخدام ادوات Excel المتقدمة.`, aiProgramTitle: `الذكاء الاصطناعي والاتمتة`, aiProgramBody: `مسارات عملية لاستخدام ادوات الذكاء الاصطناعي والاتمتة في العمل اليومي.`, digitalProgramTitle: `بناء الحلول الرقمية`, digitalProgramBody: `من الفكرة الى تطبيق ويب عملي باستخدام تقنيات حديثة وادوات بناء سريعة.`,
+    practicalResults: `نتائج عملية`, outputsTitle: `شاهد ماذا ينتج عن التعلم.`, outputStageTitle: `من البيانات الى قرار اوضح`, outputsBody: `لوحات معلومات، تحليلات، نماذج، دراسات حالة ومشاريع تشبه ما تستخدمه في العمل.`, output1: `تحليل بيانات منظم`, output2: `لوحات معلومات قابلة للتحديث`, output3: `حلول مرتبطة بسياق العمل`,
+    howWeLearn: `كيف نتعلم؟`, methodTitle: `من الشرح الى التطبيق.`, methodBody: `كل مفهوم يبدأ من سياق واضح وينتهي بتطبيق يمكنك استخدامه.`, storyTitle: `القصة`, storyBody: `ابدأ من سياق او مشكلة حقيقية.`, conceptTitle: `المفهوم`, conceptBody: `افهم الفكرة بطريقة واضحة ومنظمة.`, practiceStepTitle: `التطبيق العملي`, practiceStepBody: `طبق على بيانات وسيناريوهات واقعية.`, checkTitle: `التحقق`, checkBody: `تاكد انك تستطيع استخدام ما تعلمته بنفسك.`,
+    forOrganizations: `للمؤسسات`, corporateTitle: `ابن قدرات فريقك.`, corporateBody: `برامج تدريب احترافية مصممة حول احتياجات فريقك، بياناتك، وطريقة العمل داخل مؤسستك.`, discussTraining: `ناقش تدريب فريقك`, customPrograms: `برامج مخصصة`, customProgramsBody: `محتوى مصمم حسب مستوى الفريق واهدافه.`, realData: `بيانات وسيناريوهات واقعية`, realDataBody: `تدريب اقرب الى بيئة العمل الفعلية.`, teamTraining: `تدريب الفرق`, teamTrainingBody: `برامج مناسبة للمجموعات والفرق المهنية.`, progressFocus: `متابعة التقدم`, progressFocusBody: `تركيز على التطبيق والنتائج وليس الحضور فقط.`,
+    byNumbers: `بالارقام`, proofTitle: `الثقة تبنى بالعمل الحقيقي.`, proofBody: `نعرض فقط الارقام التي يمكن التحقق منها، ونضيف اي مؤشر جديد عندما تكون بياناته موثقة.`, metricNote: `وثقوا تجربة X Academy`,
+    behindLearning: `من يقف خلف التعلم؟`, trainerTitle: `تعلم ممن يستخدم ما يدرسه.`, trainerBody: `يجمع التدريب بين الخبرة العملية والتحليل وبناء الحلول، حتى ترتبط المهارة بما يحدث فعلا في العمل.`, trainerName: `باسل غانم`, trainerRole: `مدرب ومستشار في X Academy`,
+    finalTitle: `ماذا تريد ان تعرف كيف تفعله بعد ذلك؟`, finalBody: `اختر المهارة. ابن القدرة. استخدمها في عملك.`, contact: `تواصل معنا`, footerExplore: `استكشف`, footerTagline: `تعلم. حلل. قد.`,
+    searchEyebrow: `بحث سريع`, searchTitle: `ماذا تريد ان تجد؟`, searchPlaceholder: `ابحث عن برنامج او مجال`, searchEmpty: `لا توجد نتائج مطابقة`, searchStart: `اكتب كلمة للبحث داخل الصفحة`,
+    searchGroups: { programs: `البرامج`, areas: `مجالات التعلم`, organizations: `المؤسسات`, about: `عن X Academy` }
+  },
+  en: {
+    lang: `en`, dir: `ltr`, switchLabel: `عربي`, switchAria: `التحويل الى العربية`,
+    title: `X Academy | Practical Skills for Data, Business & Technology`,
+    description: `Practical professional learning in Power BI, Excel, data analysis, AI, automation, business capability, and digital building.`,
+    skip: `Skip to content`, mainNav: `Main navigation`, mobileNav: `Mobile navigation`, footerNav: `Footer navigation`, searchLabel: `Search`, openMenu: `Open menu`, closeMenu: `Close menu`, closeSearch: `Close search`,
+    navPrograms: `Programs`, navOrganizations: `For Organizations`, navResources: `Learning Areas`, navAbout: `About`, explorePrograms: `Explore Programs`, corporateTraining: `Corporate Training`, brandSignatureAr: `Learn. Analyse. Lead.`,
+    heroLine1: `Learn the skill.`, heroLine2: `Understand the thinking.`, heroLine3: `Know how to use it.`, heroBody: `Practical professional learning that turns complex skills into clear, structured capabilities you can use at work.`,
+    dashboardLabel: `Learning path`, clarityKpi: `Clarity`, impactKpi: `Impact`, learnerKpi: `Learners`, knowledgeLabel: `Knowledge`, analysisLabel: `Analysis`, leadershipLabel: `Leadership`,
+    trustedBy: `Trusted by more than`, learners: `learners`, trustSupport: `Across different organizations and industries.`,
+    whyX: `Why X Academy?`, differenceTitle: `Real learning changes how you work.`, differenceBody: `We do not stop at explaining tools. We build understanding and capability you can use in real work.`,
+    clarityTitle: `Clarity`, clarityBody: `Complex topics become clear, structured systems you can understand.`, practiceTitle: `Practical Application`, practiceBody: `Work with realistic data, problems, and business scenarios.`, usableTitle: `Usable Outcomes`, usableBody: `Leave knowing what to do with the information, not only where to click.`,
+    knowledgeToLead: `From knowledge to leadership`, frameworkTitle: `Learn. Analyse. Lead.`, frameworkBody: `Knowledge starts the journey. Its real value appears when you can analyze it and turn it into a better decision.`, equation: `Knowledge × Analysis → Leadership`, learnTitle: `Learn`, learnBody: `Understand the principle.`, analyseTitle: `Analyse`, analyseBody: `Connect information and discover meaning.`, leadTitle: `Lead`, leadBody: `Turn knowledge into better decisions.`,
+    whatLearn: `What can you learn?`, learningAreas: `Learning Areas`, areasBody: `Practical skills designed to help you work, analyze, and make better decisions.`, areaData: `Data & Analytics`, areaAI: `AI & Automation`, areaBusiness: `Business Capability`, areaDigital: `Digital Building`,
+    selectedPrograms: `Selected programs`, featuredPrograms: `Featured Programs`, programsBody: `Practical programs focused on the skills you need to do better work.`, viewAllPrograms: `View all programs`, practicalTag: `Practical`, professionalPath: `Professional path`, viewProgram: `View program`, comingSoon: `Coming soon`, productivityTag: `Productivity`,
+    powerBiTitle: `Power BI for Business Analysis`, powerBiBody: `Build dashboards that explain what happened, why it happened, and what deserves attention.`, excelTitle: `Advanced Excel`, excelBody: `Turn data into clear analysis and reports while reducing manual work with advanced Excel tools.`, aiProgramTitle: `AI & Automation`, aiProgramBody: `Practical learning paths for using AI and automation in everyday work.`, digitalProgramTitle: `Digital Solution Building`, digitalProgramBody: `Move from idea to practical web application using modern technologies and rapid building tools.`,
+    practicalResults: `Practical outcomes`, outputsTitle: `See what learning turns into.`, outputStageTitle: `From data to a clearer decision`, outputsBody: `Dashboards, analysis, models, case studies, and projects similar to what you use at work.`, output1: `Structured data analysis`, output2: `Refreshable dashboards`, output3: `Solutions connected to real work`,
+    howWeLearn: `How do we learn?`, methodTitle: `From explanation to application.`, methodBody: `Every concept starts with clear context and ends with an application you can use.`, storyTitle: `Story`, storyBody: `Start from a real context or problem.`, conceptTitle: `Concept`, conceptBody: `Understand the idea clearly and structurally.`, practiceStepTitle: `Practice`, practiceStepBody: `Apply it to realistic data and scenarios.`, checkTitle: `Check`, checkBody: `Confirm that you can use what you learned independently.`,
+    forOrganizations: `For Organizations`, corporateTitle: `Build capability across your team.`, corporateBody: `Professional training designed around your team, data, and the way work happens inside your organization.`, discussTraining: `Discuss Team Training`, customPrograms: `Customized programs`, customProgramsBody: `Content designed around your team level and goals.`, realData: `Real data and scenarios`, realDataBody: `Training that stays close to the actual work environment.`, teamTraining: `Team delivery`, teamTrainingBody: `Programs designed for professional groups and teams.`, progressFocus: `Progress focus`, progressFocusBody: `Emphasis on application and outcomes, not attendance alone.`,
+    byNumbers: `By the numbers`, proofTitle: `Trust is built through real work.`, proofBody: `We show only figures we can verify and add new metrics when the underlying data is documented.`, metricNote: `have trusted the X Academy experience`,
+    behindLearning: `Who is behind the learning?`, trainerTitle: `Learn from people who use what they teach.`, trainerBody: `Training combines practical experience, analysis, and solution building so every skill connects to real work.`, trainerName: `Basel Ghanem`, trainerRole: `Trainer & Consultant - X Academy`,
+    finalTitle: `What will you know how to do next?`, finalBody: `Choose the skill. Build the capability. Put it to work.`, contact: `Contact`, footerExplore: `Explore`, footerTagline: `Learn. Analyse. Lead.`,
+    searchEyebrow: `Quick search`, searchTitle: `What do you want to find?`, searchPlaceholder: `Search for a program or learning area`, searchEmpty: `No matching results`, searchStart: `Type a keyword to search this page`,
+    searchGroups: { programs: `Programs`, areas: `Learning Areas`, organizations: `Organizations`, about: `About X Academy` }
+  }
+};
+
+const searchIndex = {
+  ar: [
+    { title: `Power BI لتحليل الاعمال`, group: `programs`, target: `programs`, terms: `power bi بيانات تحليل لوحة معلومات dax power query` },
+    { title: `Excel الاحترافي`, group: `programs`, target: `programs`, terms: `excel اكسل تحليل بيانات pivot dashboard` },
+    { title: `البيانات والتحليل`, group: `areas`, target: `resources`, terms: `بيانات تحليل تقارير power bi excel` },
+    { title: `الذكاء الاصطناعي والاتمتة`, group: `areas`, target: `resources`, terms: `ذكاء اصطناعي ai automation اتمتة انتاجية` },
+    { title: `التدريب للمؤسسات`, group: `organizations`, target: `organizations`, terms: `مؤسسات شركات فرق تدريب مخصص` },
+    { title: `من نحن`, group: `about`, target: `about`, terms: `x academy باسل غانم اكاديمية` }
+  ],
+  en: [
+    { title: `Power BI for Business Analysis`, group: `programs`, target: `programs`, terms: `power bi data analytics dashboard dax power query` },
+    { title: `Advanced Excel`, group: `programs`, target: `programs`, terms: `excel analysis pivot dashboard spreadsheets` },
+    { title: `Data & Analytics`, group: `areas`, target: `resources`, terms: `data analytics reporting power bi excel` },
+    { title: `AI & Automation`, group: `areas`, target: `resources`, terms: `ai automation productivity` },
+    { title: `Corporate Training`, group: `organizations`, target: `organizations`, terms: `organizations companies team training customized` },
+    { title: `About X Academy`, group: `about`, target: `about`, terms: `x academy basel ghanem trainer` }
+  ]
+};
+
+let currentLanguage = localStorage.getItem(`xa-language`) === `en` ? `en` : `ar`;
+
+const html = document.documentElement;
+const metaDescription = document.querySelector(`meta[name="description"]`);
+const ogTitle = document.querySelector(`meta[property="og:title"]`);
+const ogDescription = document.querySelector(`meta[property="og:description"]`);
+const languageButtons = [...document.querySelectorAll(`.language-switch`)];
+const arrowElements = [...document.querySelectorAll(`.button-arrow`)];
+const menu = document.querySelector(`.mobile-menu`);
+const menuTrigger = document.querySelector(`.menu-trigger`);
+const menuClose = document.querySelector(`.mobile-menu-close`);
+const menuBackdrop = document.querySelector(`.menu-backdrop`);
+const searchDialog = document.querySelector(`#search-dialog`);
+const searchInput = document.querySelector(`#site-search`);
+const searchResults = document.querySelector(`#search-results`);
+const searchTriggers = [...document.querySelectorAll(`.search-trigger`)];
+
+function applyLanguage(language){
+  const dict = copy[language];
+  currentLanguage = language;
+  localStorage.setItem(`xa-language`, language);
+  html.lang = dict.lang;
+  html.dir = dict.dir;
+  document.title = dict.title;
+  metaDescription?.setAttribute(`content`, dict.description);
+  ogTitle?.setAttribute(`content`, dict.title);
+  ogDescription?.setAttribute(`content`, dict.description);
+
+  document.querySelectorAll(`[data-i18n]`).forEach((element) => {
+    const key = element.dataset.i18n;
+    if (dict[key] !== undefined) element.textContent = dict[key];
+  });
+
+  document.querySelectorAll(`[data-i18n-aria]`).forEach((element) => {
+    const key = element.dataset.i18nAria;
+    if (dict[key] !== undefined) element.setAttribute(`aria-label`, dict[key]);
+  });
+
+  document.querySelectorAll(`[data-i18n-placeholder]`).forEach((element) => {
+    const key = element.dataset.i18nPlaceholder;
+    if (dict[key] !== undefined) element.setAttribute(`placeholder`, dict[key]);
+  });
+
+  languageButtons.forEach((button) => {
+    button.textContent = dict.switchLabel;
+    button.setAttribute(`aria-label`, dict.switchAria);
+  });
+
+  arrowElements.forEach((arrow) => {
+    arrow.textContent = language === `ar` ? `←` : `→`;
+  });
+
+  renderSearchResults(searchInput?.value ?? ``);
+}
+
+function toggleLanguage(){
+  applyLanguage(currentLanguage === `ar` ? `en` : `ar`);
+}
+
+languageButtons.forEach((button) => button.addEventListener(`click`, toggleLanguage));
+
+function setMenu(open){
+  menu.classList.toggle(`is-open`, open);
+  menu.setAttribute(`aria-hidden`, open ? `false` : `true`);
+  menuTrigger.setAttribute(`aria-expanded`, open ? `true` : `false`);
+  menuBackdrop.hidden = !open;
+  document.body.classList.toggle(`menu-open`, open);
+  if (open) menuClose.focus();
+}
+
+menuTrigger.addEventListener(`click`, () => setMenu(true));
+menuClose.addEventListener(`click`, () => setMenu(false));
+menuBackdrop.addEventListener(`click`, () => setMenu(false));
+menu.querySelectorAll(`a`).forEach((link) => link.addEventListener(`click`, () => setMenu(false)));
+
+document.addEventListener(`keydown`, (event) => {
+  if (event.key === `Escape` && menu.classList.contains(`is-open`)) setMenu(false);
+});
+
+function openSearch(){
+  if (!searchDialog.open) searchDialog.showModal();
+  window.requestAnimationFrame(() => searchInput.focus());
+  renderSearchResults(searchInput.value);
+}
+
+searchTriggers.forEach((button) => button.addEventListener(`click`, openSearch));
+
+function renderSearchResults(query){
+  if (!searchResults) return;
+  const dict = copy[currentLanguage];
+  const normalized = query.trim().toLocaleLowerCase();
+  if (!normalized){
+    searchResults.innerHTML = `<div class="search-result"><span>${dict.searchStart}</span></div>`;
+    return;
+  }
+
+  const matches = searchIndex[currentLanguage].filter((item) => `${item.title} ${item.terms}`.toLocaleLowerCase().includes(normalized));
+  if (!matches.length){
+    searchResults.innerHTML = `<div class="search-result"><span>${dict.searchEmpty}</span></div>`;
+    return;
+  }
+
+  searchResults.innerHTML = matches.map((item) => `
+    <button class="search-result" type="button" data-target="${item.target}">
+      <strong>${item.title}</strong>
+      <span>${dict.searchGroups[item.group]}</span>
+    </button>
+  `).join(``);
+
+  searchResults.querySelectorAll(`[data-target]`).forEach((button) => {
+    button.addEventListener(`click`, () => {
+      searchDialog.close();
+      document.getElementById(button.dataset.target)?.scrollIntoView({ behavior: `smooth`, block: `start` });
+    });
+  });
+}
+
+searchInput?.addEventListener(`input`, (event) => renderSearchResults(event.target.value));
+
+const header = document.querySelector(`#site-header`);
+function updateHeader(){
+  header.classList.toggle(`is-scrolled`, window.scrollY > 12);
+}
+window.addEventListener(`scroll`, updateHeader, { passive: true });
+updateHeader();
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add(`is-visible`);
+    revealObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.12, rootMargin: `0px 0px -40px 0px` });
+
+document.querySelectorAll(`.reveal, .framework-flow, .method-step`).forEach((element) => revealObserver.observe(element));
+
+document.querySelector(`#current-year`).textContent = `${new Date().getFullYear()}`;
+applyLanguage(currentLanguage);
+
+</script>
 </body>
 </html>
