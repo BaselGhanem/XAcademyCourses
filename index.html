@@ -251,6 +251,10 @@ button{color:inherit}
 .hero-card-side .card-index{grid-column:1/-1;font:600 11px var(--xa-font-en-data);color:var(--xa-muted);margin-bottom:6px}
 .hero-card-side strong{font-size:13px}.hero-card-side i{grid-column:1/-1;height:1px;background:var(--xa-border)}.hero-card-side small{grid-column:1/-1;color:var(--xa-signal);font-weight:700}
 .hero-symbol{position:absolute;inset-inline-end:6%;inset-block-end:6%;width:76px;filter:drop-shadow(0 8px 12px rgba(15,23,42,.12))}
+.brand-film{padding-block:0 64px}
+.brand-film-inner{max-width:960px;margin-inline:auto;overflow:hidden;border-radius:16px;background:#0f1720;box-shadow:0 22px 58px rgba(15,23,42,.15)}
+.brand-film video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+@media(max-width:600px){.brand-film{padding-block:0 40px}.brand-film-inner{border-radius:12px}}
 
 .trust{border-block:1px solid var(--xa-border);background:var(--xa-soft)}
 .trust-grid{display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:center}
@@ -848,6 +852,16 @@ body{font-size:16px}
       </div>
     </section>
 
+    <section class="brand-film" aria-label="X Academy brand film">
+      <div class="shell">
+        <div class="brand-film-inner">
+          <video id="brand-film-video" muted autoplay loop playsinline preload="metadata" poster="./assets/img/x-academy-intro-poster.webp" aria-label="X Academy animated logo">
+            <source src="./assets/video/x-academy-intro.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </section>
+
     <section class="trust section-tight" aria-labelledby="trust-title">
       <div class="shell trust-grid">
         <div class="trust-copy reveal">
@@ -1266,6 +1280,13 @@ const searchDialog = document.querySelector(`#search-dialog`);
 const searchInput = document.querySelector(`#site-search`);
 const searchResults = document.querySelector(`#search-results`);
 const searchTriggers = [...document.querySelectorAll(`.search-trigger`)];
+const brandFilmVideo = document.querySelector(`#brand-film-video`);
+if (window.matchMedia(`(prefers-reduced-motion: reduce)`).matches) {
+  brandFilmVideo.removeAttribute(`autoplay`);
+  brandFilmVideo.removeAttribute(`loop`);
+  brandFilmVideo.controls = true;
+  brandFilmVideo.pause();
+}
 
 function applyLanguage(language){
   const dict = copy[language];
