@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<rect width="1800" height="1000" fill="#0b1116"/><rect x="55" y="50" width="1690" height="900" rx="38" fill="#121a21" stroke="#27343d"/>
+<text x="105" y="125" fill="#099999" font-size="30" font-family="Arial" font-weight="800">WEEK 2 • DAY 6</text><text x="105" y="190" fill="#fff" font-size="62" font-family="Arial" font-weight="800">CONTEXT CHANGES EVERYTHING</text><text x="105" y="238" fill="#9eb0bc" font-size="27" font-family="Arial">Understand why Measures change, then control the context intentionally.</text>
+<g font-family="Arial" font-weight="800" text-anchor="middle">
+<rect x="105" y="330" width="270" height="120" rx="22" fill="#17212a" stroke="#42535e"/><text x="240" y="380" fill="#fff" font-size="24">1 • REVIEW DAY 5</text><text x="240" y="418" fill="#9eb0bc" font-size="18">Cards + Slicers + Visuals</text>
+<rect x="430" y="330" width="270" height="120" rx="22" fill="#0d292b" stroke="#099999"/><text x="565" y="380" fill="#6edbd7" font-size="24">2 • FILTER CONTEXT</text><text x="565" y="418" fill="#fff" font-size="18">Same Measure, new result</text>
+<rect x="755" y="330" width="270" height="120" rx="22" fill="#211f12" stroke="#f2c811"/><text x="890" y="380" fill="#f2c811" font-size="24">3 • CALCULATE</text><text x="890" y="418" fill="#fff" font-size="18">Add a filter</text>
+<rect x="1080" y="330" width="270" height="120" rx="22" fill="#271a2c" stroke="#a98bff"/><text x="1215" y="380" fill="#c9b7ff" font-size="23">4 • REMOVEFILTERS</text><text x="1215" y="418" fill="#fff" font-size="18">Remove Category only</text>
+<rect x="1405" y="330" width="270" height="120" rx="22" fill="#17212a" stroke="#6aa8ff"/><text x="1540" y="380" fill="#8fbfff" font-size="23">5 • CONTRIBUTION %</text><text x="1540" y="418" fill="#fff" font-size="18">Revenue / All Categories</text>
+<rect x="270" y="590" width="310" height="120" rx="22" fill="#17212a" stroke="#6aa8ff"/><text x="425" y="640" fill="#8fbfff" font-size="23">6 • CROSS FILTERING</text><text x="425" y="678" fill="#fff" font-size="18">Click charts and observe</text>
+<rect x="745" y="590" width="310" height="120" rx="22" fill="#0d292b" stroke="#099999"/><text x="900" y="640" fill="#6edbd7" font-size="23">7 • EDIT INTERACTIONS</text><text x="900" y="678" fill="#fff" font-size="18">Filter • Highlight • None</text>
+<rect x="1220" y="590" width="310" height="120" rx="22" fill="#211f12" stroke="#f2c811"/><text x="1375" y="640" fill="#f2c811" font-size="23">8 • CONTEXT LAB</text><text x="1375" y="678" fill="#fff" font-size="18">Explain every result</text>
+</g>
+<g stroke="#71838d" stroke-width="6" fill="none"><path d="M375 390 H430"/><path d="M700 390 H755"/><path d="M1025 390 H1080"/><path d="M1350 390 H1405"/><path d="M1540 450 V520 H425 V590"/><path d="M580 650 H745"/><path d="M1055 650 H1220"/></g>
+<text x="900" y="825" text-anchor="middle" fill="#fff" font-size="34" font-family="Arial" font-weight="800">READY FOR DAY 7 • TIME INTELLIGENCE</text>
+<text x="900" y="875" text-anchor="middle" fill="#9eb0bc" font-size="23" font-family="Arial">Today: CALCULATE + REMOVEFILTERS. Not FILTER / VAR / SELECTEDVALUE / ALLSELECTED.</text>
+</svg>

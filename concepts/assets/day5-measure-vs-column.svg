@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<rect width="1600" height="900" fill="#0b1116"/><rect x="60" y="55" width="1480" height="790" rx="36" fill="#121a21" stroke="#27343d"/>
+<text x="110" y="125" fill="#f2c811" font-size="28" font-family="Arial" font-weight="700">DAY 5 • DAX THINKING</text>
+<text x="110" y="185" fill="#fff" font-size="58" font-family="Arial" font-weight="800">Measure vs Column</text>
+<text x="110" y="230" fill="#9eb0bc" font-size="28" font-family="Arial">Column describes a row • Measure answers a question</text>
+<rect x="110" y="300" width="650" height="390" rx="28" fill="#0d292b" stroke="#099999" stroke-width="3"/>
+<text x="155" y="360" fill="#6edbd7" font-size="36" font-family="Arial" font-weight="800">COLUMN</text>
+<text x="155" y="410" fill="#fff" font-size="26" font-family="Arial">FactSales row</text>
+<g fill="#d9e1e5" font-size="25" font-family="Arial"><text x="175" y="475">Quantity = 3</text><text x="175" y="520">Unit Price = 20</text><text x="175" y="565">Gross Sales = 60</text></g>
+<text x="155" y="630" fill="#9eb0bc" font-size="23" font-family="Arial">Calculated during Refresh</text>
+<rect x="840" y="300" width="650" height="390" rx="28" fill="#211f12" stroke="#f2c811" stroke-width="3"/>
+<text x="885" y="360" fill="#f2c811" font-size="36" font-family="Arial" font-weight="800">MEASURE</text>
+<text x="885" y="410" fill="#fff" font-size="26" font-family="Arial">Total Revenue = SUM(FactSales[Revenue])</text>
+<rect x="890" y="465" width="250" height="100" rx="18" fill="#171f25"/><text x="1015" y="500" text-anchor="middle" fill="#9eb0bc" font-size="20" font-family="Arial">Branch = Amman</text><text x="1015" y="545" text-anchor="middle" fill="#fff" font-size="30" font-family="Arial" font-weight="800">1.2M</text>
+<rect x="1180" y="465" width="250" height="100" rx="18" fill="#171f25"/><text x="1305" y="500" text-anchor="middle" fill="#9eb0bc" font-size="20" font-family="Arial">Branch = Zarqa</text><text x="1305" y="545" text-anchor="middle" fill="#fff" font-size="30" font-family="Arial" font-weight="800">840K</text>
+<text x="1165" y="630" text-anchor="middle" fill="#9eb0bc" font-size="23" font-family="Arial">Same Measure • Different Filter • Different Answer</text>
+<text x="800" y="790" text-anchor="middle" fill="#fff" font-size="34" font-family="Arial" font-weight="800">Row value? Column. Dynamic business answer? Measure.</text>
+</svg>
