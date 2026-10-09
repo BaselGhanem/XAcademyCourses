@@ -1,3 +1,0 @@
-Generate the completed Day 08 Visual Selection Cards and Every Visual Earns Its Place files from tools/day08_asset_source.br.b64.
-
-Build retry: assets should be committed under week3/day8/downloads and week3/day8/web.

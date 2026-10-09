@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>مركز الدورة | Power BI Specialist</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>مركز الدورة | Power BI | Mariam</title>
+  <link rel="stylesheet" href="styles.css?v=mariam-plan-20261010">
 </head>
 <body>
   <main class="auth-page">
@@ -12,7 +12,7 @@
       <section class="auth-art">
         <a class="brand" href="index.html">
           <span class="pbi-mark"><span></span><span></span><span></span></span>
-          <span class="brand-copy"><strong>Power BI Specialist</strong><small>FROM DATA TO DECISION</small></span>
+          <span class="brand-copy"><strong>Power BI | Mariam</strong><small>HEALTHCARE WORKFORCE</small></span>
         </a>
         <div>
           <span class="hero-kicker"><i></i> COURSE HUB</span>
@@ -20,7 +20,7 @@
           <p>الخطة، التسجيل، الملفات، التحدي، والمخرج النهائي لكل يوم. ادخل باسمك لتبقى نسبة تقدمك محفوظة على هذا الجهاز.</p>
         </div>
         <div class="project-flow">
-          <span class="flow-pill">10 DAYS</span><span class="flow-arrow">→</span><span class="flow-pill">20 HOURS</span><span class="flow-arrow">→</span><span class="flow-pill">1 PROJECT</span>
+          <span class="flow-pill">10 DAYS</span><span class="flow-arrow">→</span><span class="flow-pill">PRIVATE TRAINING</span><span class="flow-arrow">→</span><span class="flow-pill">1 PROJECT</span>
         </div>
       </section>
       <section class="auth-form">
@@ -30,12 +30,11 @@
 
         <div class="form-group">
           <label class="form-label" for="name">اسمك</label>
-          <input class="form-input" id="name" type="text" autocomplete="name" placeholder="مثال: Basel Ghanem">
+          <input class="form-input" id="name" type="text" autocomplete="name" placeholder="مريم">
         </div>
         <div class="form-group">
           <label class="form-label" for="password">رمز الدورة</label>
-          <input class="form-input" id="password" type="password" autocomplete="current-password" placeholder="PowerBI">
-          <div class="form-hint">يمكن تغيير رمز الدخول من ملف <strong>data.js</strong> في سطر <span dir="ltr">portalPassword</span>.</div>
+          <input class="form-input" id="password" type="password" autocomplete="current-password" placeholder="رمز الدخول">
         </div>
         <div class="auth-error" id="errorBox">تحقق من الاسم ورمز الدورة.</div>
         <button class="btn btn-primary" id="loginBtn" style="width:100%;margin-top:18px">دخول إلى مركز الدورة ←</button>
@@ -44,15 +43,15 @@
     </div>
   </main>
 
-  <script src="data.js"></script>
+  <script src="data.js?v=mariam-plan-20261010"></script>
   <script>
     const nameInput = document.getElementById('name');
     const passInput = document.getElementById('password');
     const errorBox = document.getElementById('errorBox');
     const loginBtn = document.getElementById('loginBtn');
 
-    const savedName = localStorage.getItem('pbi_student_name');
-    if (savedName) nameInput.value = savedName;
+    const savedName = localStorage.getItem(COURSE_CONFIG.storage.student);
+    nameInput.value = savedName || COURSE_CONFIG.learner;
 
     function login() {
       const name = nameInput.value.trim();
@@ -63,8 +62,8 @@
         errorBox.classList.add('show');
         return;
       }
-      localStorage.setItem('pbi_student_name', name);
-      if (!localStorage.getItem('pbi_completed_days')) localStorage.setItem('pbi_completed_days', '[]');
+      localStorage.setItem(COURSE_CONFIG.storage.student, name);
+      if (!localStorage.getItem(COURSE_CONFIG.storage.completed)) localStorage.setItem(COURSE_CONFIG.storage.completed, '[]');
       location.href = 'dashboard.html';
     }
     loginBtn.addEventListener('click', login);

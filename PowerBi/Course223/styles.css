@@ -375,3 +375,21 @@ img { max-width: 100%; display: block; }
   font-size:.68rem;
   text-align:center
 }
+
+/* Proposed plan state for the private Mariam course. */
+[hidden] { display: none !important; }
+.plan-notice { border: 1px solid rgba(9,153,153,.35); background: var(--teal-soft); padding: 18px; border-radius: var(--radius); color: #bde7e5; line-height: 1.9; margin: 0; }
+.plan-badge, .status-chip.planned { color: #8addd8; border-color: rgba(9,153,153,.3); background: var(--teal-soft); }
+.day-card[role="link"] { cursor: pointer; }
+.day-card:focus-visible, .portal-day:focus-visible { outline: 3px solid var(--teal); outline-offset: 5px; }
+.mock-kpi b { font-size: clamp(1rem, 2.5vw, 1.8rem); }
+.resource-icon, .resource-action { flex-shrink: 0; }
+.resource-copy strong { white-space: normal; overflow-wrap: anywhere; }
+.portal-day-top > div:nth-child(2) { min-width: 0; flex: 1; }
+@media (max-width: 620px) {
+  .topbar-inner { min-height: 64px; height: auto; flex-wrap: wrap; padding-block: 12px; }
+  .topbar .brand { min-width: 0; max-width: 100%; }
+  .topbar .brand-copy { min-width: 0; }
+  .topbar .brand-copy strong { overflow-wrap: anywhere; font-size: .88rem; }
+  .nav-actions { flex-wrap: wrap; max-width: 100%; }
+}

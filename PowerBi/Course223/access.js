@@ -15,7 +15,8 @@
 // "OFF"  = اقفل هذا اليوم إجبارياً حتى لو فيه فيديو أو AUTO يريد فتحه.
 //
 // ملاحظة مهمة:
-// ON / OFF اليدوي له الأولوية دائماً على AUTO.
+// ON / OFF اليدوي له الأولوية على AUTO للايام التي جهزت موادها.
+// ready: false في data.js يبقي المواد غير منشورة مع عرض الخطة للمراجعة.
 // إذا أردت ترجع اليوم للوضع الطبيعي فقط اكتب "AUTO".
 //
 // مثال سريع:
@@ -25,7 +26,7 @@
 // ============================================================
 
 const ACCESS_CONFIG = {
-  agenda: "OFF", // غيّرها إلى "OFF" إذا أردت index.html يحول مباشرة إلى login.html.
+  agenda: "ON", // غيّرها إلى "OFF" إذا أردت index.html يحول مباشرة إلى login.html.
 
   days: {
     "Day 1": "AUTO",  // AUTO / ON / OFF
@@ -66,6 +67,9 @@ function isDayAutomaticallyOpen(dayId) {
 }
 
 function isDayOpen(dayId) {
+  // Planned days can be previewed, but training materials require a ready day.
+  if (typeof getDay !== `function` || !getDay(dayId)?.ready) return false;
+
   const override = getDayOverride(dayId);
 
   // التحكم اليدوي له الأولوية على أي شيء آخر.

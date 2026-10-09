@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Course Hub | Power BI Specialist</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=mariam-plan-20261010">
 </head>
 <body>
   <header class="topbar">
     <div class="shell topbar-inner">
       <a class="brand" href="dashboard.html">
         <span class="pbi-mark"><span></span><span></span><span></span></span>
-        <span class="brand-copy"><strong>Power BI Course Hub</strong><small>10 DAYS • 20 HOURS</small></span>
+        <span class="brand-copy"><strong>Power BI | Mariam</strong><small>MARIAM • PRIVATE TRAINING</small></span>
       </a>
       <div class="nav-actions">
-        <a class="btn btn-ghost" href="concepts/">Concept Cards</a>
+        <a class="btn btn-ghost" href="concepts/">المفاهيم حسب اليوم</a>
         <a class="btn btn-ghost" href="index.html">الموقع الرئيسي</a>
         <button class="icon-btn" id="logoutBtn" title="تسجيل الخروج">↪</button>
       </div>
@@ -27,7 +27,7 @@
         <div class="welcome-card">
           <span class="eyebrow">YOUR COURSE HUB</span>
           <h1>أهلاً، <span id="studentName"></span>.</h1>
-          <p>كل يوم واضح أمامك: ما المشكلة التي سنحلها، ماذا سنبني، التسجيل، الملفات، والتحدي. أنت لا تجمع Videos؛ أنت تبني مشروعاً كاملاً.</p>
+          <p>خطة خاصة للقوى العاملة الصحية ومتابعة اعمال القسم. اختاري اليوم لمراجعة المحتوى والتطبيق والملفات المطلوب تجهيزها</p>
           <div class="progress-line"><i id="progressFill" style="width:0%"></i></div>
           <div class="progress-meta"><span id="progressText">0 من 10 أيام مكتملة</span><span id="progressPct">0%</span></div>
         </div>
@@ -38,11 +38,11 @@
     <section class="portal-section">
       <div class="shell">
         <div class="portal-head">
-          <div><h2>الأيام العشرة</h2><p>الأيام تفتح تدريجياً مع تقدم الدورة.</p></div>
+          <div><h2>الأيام العشرة</h2><p>الخطة متاحة للمراجعة، ومواد التدريب تفتح بعد تجهيز كل يوم</p></div>
           <div class="filter-row">
             <button class="filter-btn active" data-filter="all">الكل</button>
-            <button class="filter-btn" data-filter="past">تم موعدها</button>
-            <button class="filter-btn" data-filter="upcoming">قادمة</button>
+            <button class="filter-btn" data-filter="planned">الخطة المقترحة</button>
+            <button class="filter-btn" data-filter="available">مواد جاهزة</button>
             <button class="filter-btn" data-filter="completed">مكتملة عندي</button>
           </div>
         </div>
@@ -51,18 +51,15 @@
     </section>
   </main>
 
-  <script src="data.js"></script>
-  <script src="videos.js"></script>
-  <script src="access.js"></script>
+  <script src="data.js?v=mariam-plan-20261010"></script>
+  <script src="videos.js?v=mariam-plan-20261010"></script>
+  <script src="access.js?v=mariam-plan-20261010"></script>
   <script>
-    const student = localStorage.getItem('pbi_student_name');
+    const student = localStorage.getItem(COURSE_CONFIG.storage.student);
     if (!student) location.href = 'login.html';
     document.getElementById('studentName').textContent = student || '';
 
-    function getCompleted() {
-      try { return JSON.parse(localStorage.getItem('pbi_completed_days') || '[]'); }
-      catch { return []; }
-    }
+    function getCompleted() { return getCompletedDays(); }
 
     function renderProgress() {
       const done = getCompleted();
@@ -73,63 +70,68 @@
     }
 
     function getNextRelevantDay() {
-      const today = new Date();
-      const todayOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-      const openDays = DAYS.filter(day => isDayOpen(day.id));
-      return openDays.find(d => new Date(`${d.date}T00:00:00`) >= todayOnly)
-        || openDays[openDays.length - 1]
+      const done = getCompleted();
+      return DAYS.find(day => isDayOpen(day.id) && !done.includes(day.id))
+        || DAYS.find(day => !day.ready)
         || DAYS[0];
     }
 
     function renderNextCard() {
       const day = getNextRelevantDay();
-      const status = dayRuntimeStatus(day);
-      const open = isDayOpen(day.id);
-      const liveButton = COURSE_CONFIG.liveUrl
-        ? `<a class="btn btn-primary" href="${COURSE_CONFIG.liveUrl}" target="_blank" rel="noopener">دخول الجلسة المباشرة</a>`
-        : `<span class="btn btn-ghost btn-disabled">رابط الجلسة يضاف قبل الموعد</span>`;
-      document.getElementById('nextCard').innerHTML = `
-        <span class="next-label">${status === 'today' ? 'TODAY' : 'NEXT AVAILABLE DAY'}</span>
-        <h2>Day ${String(day.id).padStart(2,'0')} — ${day.titleAr}</h2>
-        <p>${day.hook}</p>
-        <span class="next-date">${day.weekday} • ${formatDateAr(day.date)}</span>
+      const liveButton = isDayOpen(day.id) && COURSE_CONFIG.liveUrl
+        ? `<a class="btn btn-primary" href="${COURSE_CONFIG.liveUrl}" target="_blank" rel="noopener">دخول الجلسة المباشرة</a>` : ``;
+      document.getElementById(`nextCard`).innerHTML = `
+        <span class="next-label">${day.ready ? `NEXT TRAINING DAY` : `NEXT TO PREPARE`}</span>
+        <h2>Day ${String(day.id).padStart(2,`0`)} — ${day.titleAr}</h2>
+        <p>${day.mission}</p>
+        <span class="next-date">${dayScheduleLabel(day)}</span>
         <div class="live-slot">
-          ${open ? `<a class="btn btn-ghost" href="day.html?id=${day.id}">عرض تفاصيل اليوم</a>` : ''}
+          <a class="btn btn-ghost" href="day.html?id=${day.id}">${day.ready ? `عرض تفاصيل اليوم` : `عرض الخطة المقترحة`}</a>
           ${liveButton}
         </div>`;
     }
 
-    function renderDays(filter='all') {
+    function renderDays(filter = `all`) {
       const done = getCompleted();
-      const grid = document.getElementById('daysGrid');
-      grid.innerHTML = '';
+      const grid = document.getElementById(`daysGrid`);
+      grid.replaceChildren();
       DAYS.forEach(day => {
-        const runtime = dayRuntimeStatus(day);
-        const isCompleted = done.includes(day.id);
-        if (filter === 'completed' && !isCompleted) return;
-        if (filter !== 'all' && filter !== 'completed' && runtime !== filter) return;
         const open = isDayOpen(day.id);
-        const card = document.createElement('article');
-        card.className = `portal-day ${isCompleted ? 'completed' : ''} ${open ? 'open' : 'locked'}`;
-        card.setAttribute('aria-disabled', open ? 'false' : 'true');
+        const planned = !day.ready;
+        const completed = done.includes(day.id);
+        if (filter === `completed` && !completed) return;
+        if (filter === `planned` && !planned) return;
+        if (filter === `available` && !open) return;
+        const accessible = open || planned;
+        const card = document.createElement(`article`);
+        card.className = `portal-day ${completed ? `completed` : ``} ${accessible ? `open` : `locked`}`;
+        card.setAttribute(`aria-disabled`, String(!accessible));
         card.innerHTML = `
           <div class="portal-day-top">
-            <div class="portal-day-index">${String(day.id).padStart(2,'0')}</div>
-            <div>
-              <h3>${day.titleAr}</h3>
-              <span class="portal-en" dir="ltr">${day.title}</span>
-            </div>
-            ${open ? '' : '<span class="day-lock-badge" aria-label="مقفل">LOCKED</span>'}
+            <div class="portal-day-index">${String(day.id).padStart(2,`0`)}</div>
+            <div><h3>${day.titleAr}</h3><span class="portal-en" dir="ltr">${day.title}</span></div>
+            ${planned ? `<span class="day-lock-badge plan-badge">PLAN</span>` : open ? `` : `<span class="day-lock-badge">LOCKED</span>`}
           </div>
           <div class="portal-day-bottom">
-            <span class="status-chip ${open ? runtime : 'locked'}"><i class="complete-dot"></i>${open ? (runtime === 'today' ? 'اليوم' : runtime === 'past' ? 'تم موعده' : day.weekday + ' • ' + formatDateAr(day.date)) : 'غير متاح حالياً'}</span>
-            <span class="resource-count">${open ? (hasDayVideo(day.id) ? '▶ التسجيل متاح للمشاهدة' : day.resources.length + ' مواد متاحة لليوم') : 'يفتح مع تقدم الدورة'}</span>
+            <span class="status-chip ${planned ? `planned` : open ? dayRuntimeStatus(day) : `locked`}"><i class="complete-dot"></i>${planned ? `خطة مقترحة` : open ? dayScheduleLabel(day) : `مواد مقفلة`}</span>
+            <span class="resource-count">${planned ? `المحتوى والتمرين والملفات المطلوبة` : open ? `${day.resources.filter(resource => resource.url).length} مواد جاهزة` : `تفتح مع تقدم الدورة`}</span>
           </div>`;
-        if (open) {
-          card.addEventListener('click', () => location.href = `day.html?id=${day.id}`);
+        if (accessible) {
+          card.tabIndex = 0;
+          card.setAttribute(`role`, `link`);
+          card.setAttribute(`aria-label`, `عرض اليوم ${day.id}: ${day.titleAr}`);
+          const openDay = () => { location.href = `day.html?id=${day.id}`; };
+          card.addEventListener(`click`, openDay);
+          card.addEventListener(`keydown`, event => { if (event.key === `Enter`) openDay(); });
         }
         grid.appendChild(card);
       });
+      if (!grid.children.length) {
+        const empty = document.createElement(`p`);
+        empty.className = `muted`;
+        empty.textContent = filter === `available` ? `لم تجهز مواد التدريب بعد` : `لا توجد ايام ضمن هذا الاختيار`;
+        grid.appendChild(empty);
+      }
     }
 
     document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
@@ -139,7 +141,7 @@
     }));
 
     document.getElementById('logoutBtn').addEventListener('click', () => {
-      localStorage.removeItem('pbi_student_name');
+      localStorage.removeItem(COURSE_CONFIG.storage.student);
       location.href = 'login.html';
     });
 
