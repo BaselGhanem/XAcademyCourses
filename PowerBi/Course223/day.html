@@ -135,6 +135,7 @@
   <script src="data.js?v=mariam-day1-20261010"></script>
   <script src="videos.js?v=mariam-day1-20261010"></script>
   <script src="access.js?v=mariam-day1-20261010"></script>
+  <script src="day1-experience.js?v=20261010-parallax1"></script>
   <script>
     const student = localStorage.getItem(COURSE_CONFIG.storage.student);
     const courseHome = student ? `dashboard.html` : `index.html#journey`;
@@ -147,6 +148,9 @@
     } else if (!day || (day.ready && !isDayOpen(day.id))) {
       // لا نظهر محتوى يوم مقفل حتى للحظة عند فتح رابطه مباشرة.
       location.replace('dashboard.html');
+    } else if (day.id === 1) {
+      document.title = `اليوم الاول | مريم | X Academy`;
+      initMariamJourney(day, courseHome);
     } else {
       document.body.classList.remove(`access-pending`);
 
