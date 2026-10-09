@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Day | Power BI Specialist</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="access-pending">
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="dashboard.html">
+        <span class="pbi-mark"><span></span><span></span><span></span></span>
+        <span class="brand-copy"><strong>Power BI Course Hub</strong><small>FROM DATA TO DECISION</small></span>
+      </a>
+      <div class="nav-actions"><a class="btn btn-ghost" href="dashboard.html">كل الأيام</a></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="day-hero">
+      <div class="shell">
+        <div class="breadcrumb"><a href="dashboard.html">مركز الدورة</a><span>›</span><span id="crumb"></span></div>
+        <div class="day-title-wrap">
+          <div>
+            <span class="eyebrow" id="phase"></span>
+            <h1 id="titleAr"></h1>
+            <div class="day-subtitle" dir="ltr" id="titleEn"></div>
+          </div>
+          <div class="day-date-card"><strong id="dayLabel"></strong><span id="dateLabel"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="recording-hero-wrap" id="recordingHeroWrap" hidden>
+      <div class="shell">
+        <article class="recording-hero-panel">
+          <div class="recording-hero-head">
+            <div class="recording-hero-copy">
+              <div class="recording-label-row">
+                <span class="panel-kicker">SESSION RECORDING</span>
+                <span class="recording-live-badge"><i></i> AVAILABLE NOW</span>
+              </div>
+              <h2>تسجيل الجلسة</h2>
+              <p>شاهد الجلسة كاملة أو ارجع لأي جزء تحتاج مراجعته.</p>
+            </div>
+            <div class="recording-day-badge">DAY <span id="recordingDayNumber"></span></div>
+          </div>
+          <div class="video-stage" id="videoBox"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="day-content-section">
+      <div class="shell day-layout">
+        <div class="day-main-stack">
+          <div class="day-intro-grid">
+            <article class="panel hook-panel">
+              <span class="panel-kicker">THE BUSINESS PROBLEM</span>
+              <p class="hook-quote" id="hook"></p>
+            </article>
+
+            <article class="panel mission-panel">
+              <span class="panel-kicker">YOUR MISSION</span>
+              <h2>ماذا سننجز اليوم؟</h2>
+              <p id="mission"></p>
+            </article>
+          </div>
+
+          <article class="panel">
+            <span class="panel-kicker">WHAT WE WILL USE</span>
+            <h2>الأدوات والمفاهيم</h2>
+            <div class="topic-grid" id="topics"></div>
+          </article>
+
+          <article class="panel">
+            <span class="panel-kicker">BUILD WITH ME</span>
+            <h2>ماذا سنبني أثناء الجلسة؟</h2>
+            <div class="steps" id="buildSteps"></div>
+          </article>
+
+          <article class="panel visual-guide-panel" id="visualGuidePanel" hidden>
+            <span class="panel-kicker">DAY VISUAL GUIDE</span>
+            <h2 id="visualGuideTitle">ملخص اليوم بصريا</h2>
+            <p id="visualGuideNote"></p>
+            <a class="visual-guide-link" id="visualGuideLink" target="_blank" rel="noopener" aria-label="فتح صورة ملخص اليوم بالحجم الكامل">
+              <img id="visualGuideImage" alt="">
+            </a>
+            <small class="visual-guide-hint">اضغط على الصورة لفتحها بالحجم الكامل</small>
+          </article>
+
+          <article class="panel challenge-panel">
+            <span class="panel-kicker">YOUR TURN</span>
+            <h2>تحدي اليوم</h2>
+            <p id="challenge"></p>
+            <div class="deliverable"><span>✓</span><span><strong>المخرج النهائي:</strong> <span id="deliverable"></span></span></div>
+          </article>
+        </div>
+
+        <aside class="day-sidebar">
+          <article class="panel live-session-panel" id="liveSessionPanel">
+            <span class="panel-kicker">LIVE SESSION</span>
+            <h2>الجلسة المباشرة</h2>
+            <p>نفس رابط Teams لكل جلسات الدورة.</p>
+            <a class="btn btn-primary full-btn" id="liveSessionBtn" target="_blank" rel="noopener">JOIN TEAMS SESSION ↗</a>
+          </article>
+
+          <article class="panel install-panel" id="installPanel" hidden>
+            <span class="panel-kicker">BEFORE WE START</span>
+            <h2>نزّل Power BI Desktop</h2>
+            <p>Day 01 يبدأ من جهازك. استخدم صفحة Microsoft الرسمية للحصول على النسخة الحالية.</p>
+            <a class="btn btn-primary full-btn" id="downloadPowerBiBtn" target="_blank" rel="noopener">DOWNLOAD POWER BI DESKTOP ↗</a>
+          </article>
+
+          <article class="panel files-panel">
+            <span class="panel-kicker">DAY FILES</span>
+            <h2>ملفات اليوم</h2>
+            <div class="resource-list" id="resources"></div>
+          </article>
+
+          <article class="panel complete-box" id="completeBox">
+            <div class="big-check">✓</div>
+            <h2 id="completeTitle">أنهيت هذا اليوم؟</h2>
+            <p id="completeCopy">سجل إتمامك ليظهر تقدمك داخل Course Hub.</p>
+            <button class="btn btn-primary" id="completeBtn" style="width:100%">سجّل إتمام Day</button>
+          </article>
+
+          <div class="day-nav" id="dayNav"></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="videos.js"></script>
+  <script src="access.js"></script>
+  <script>
+    const student = localStorage.getItem('pbi_student_name');
+    if (!student) location.href = 'login.html';
+    const params = new URLSearchParams(location.search);
+    const day = getDay(params.get('id') || 1);
+
+    if (!day || !isDayOpen(day.id)) {
+      // لا نظهر محتوى يوم مقفل حتى للحظة عند فتح رابطه مباشرة.
+      location.replace('dashboard.html');
+    } else {
+      document.body.classList.remove('access-pending');
+
+    document.title = `Day ${day.id} — ${day.title} | Power BI Specialist`;
+    document.getElementById('crumb').textContent = `Day ${String(day.id).padStart(2,'0')}`;
+    document.getElementById('phase').textContent = `${day.phase} • DAY ${String(day.id).padStart(2,'0')}`;
+    document.getElementById('titleAr').textContent = day.titleAr;
+    document.getElementById('titleEn').textContent = day.title;
+    document.getElementById('dayLabel').textContent = `${day.weekday} — Day ${String(day.id).padStart(2,'0')}`;
+    document.getElementById('dateLabel').textContent = formatDateAr(day.date);
+    document.getElementById('hook').textContent = day.hook;
+    document.getElementById('mission').textContent = day.mission;
+    document.getElementById('challenge').textContent = day.challenge;
+    document.getElementById('deliverable').textContent = day.deliverable;
+
+    const liveSessionBtn = document.getElementById('liveSessionBtn');
+    if (COURSE_CONFIG.liveUrl) {
+      liveSessionBtn.href = COURSE_CONFIG.liveUrl;
+    } else {
+      liveSessionBtn.textContent = 'رابط Teams يضاف قبل الجلسة';
+      liveSessionBtn.classList.add('btn-disabled');
+      liveSessionBtn.removeAttribute('href');
+    }
+
+    const installPanel = document.getElementById('installPanel');
+    if (day.id === 1) {
+      installPanel.hidden = false;
+      document.getElementById('downloadPowerBiBtn').href = COURSE_CONFIG.powerBiDownloadUrl;
+    }
+
+    document.getElementById('topics').innerHTML = day.topics.map(t => `<div class="topic-item">${t}</div>`).join('');
+    document.getElementById('buildSteps').innerHTML = day.build.map((t,i) => `<div class="step"><span class="step-num">${String(i+1).padStart(2,'0')}</span><span>${t}</span></div>`).join('');
+
+    const visualGuidePanel = document.getElementById('visualGuidePanel');
+    if (day.visualGuide?.image) {
+      visualGuidePanel.hidden = false;
+      document.getElementById('visualGuideTitle').textContent = day.visualGuide.title || 'ملخص اليوم بصريا';
+      document.getElementById('visualGuideNote').textContent = day.visualGuide.note || '';
+      const visualGuideImage = document.getElementById('visualGuideImage');
+      visualGuideImage.src = day.visualGuide.image;
+      visualGuideImage.alt = day.visualGuide.title || day.title;
+      document.getElementById('visualGuideLink').href = day.visualGuide.image;
+    }
+
+    const recordingHeroWrap = document.getElementById('recordingHeroWrap');
+    const videoBox = document.getElementById('videoBox');
+    const videoEmbed = getDayVideo(day.id).trim();
+    document.getElementById('recordingDayNumber').textContent = String(day.id).padStart(2, '0');
+
+    if (videoEmbed) {
+      videoBox.innerHTML = videoEmbed;
+      recordingHeroWrap.hidden = false;
+    } else {
+      videoBox.replaceChildren();
+      recordingHeroWrap.hidden = true;
+    }
+
+    const typeIcon = {PBIX:'PBI',Excel:'XLSX',PDF:'PDF',ZIP:'ZIP',Challenge:'LAB',Guide:'DOC',WEB:'WEB',FLOW:'FLOW',IMAGE:'IMG'};
+    document.getElementById('resources').innerHTML = day.resources.map(r => {
+      const available = Boolean(r.url);
+      return `<${available ? 'a' : 'div'} class="resource ${available ? '' : 'pending'}" ${available ? `href="${r.url}" target="_blank" rel="noopener"` : ''}>
+        <span class="resource-icon">${typeIcon[r.type] || r.type}</span>
+        <span class="resource-copy"><strong dir="ltr">${r.name}</strong><small>${r.note}</small></span>
+        <span class="resource-action">${available ? 'فتح ↗' : 'قيد الإعداد'}</span>
+      </${available ? 'a' : 'div'}>`;
+    }).join('');
+
+    function getCompleted(){ try{return JSON.parse(localStorage.getItem('pbi_completed_days') || '[]')}catch{return []} }
+    function updateCompleteUI(){
+      const done = getCompleted();
+      const completed = done.includes(day.id);
+      document.getElementById('completeBox').classList.toggle('completed', completed);
+      document.getElementById('completeTitle').textContent = completed ? 'مكتمل ✓' : 'أنهيت هذا اليوم؟';
+      document.getElementById('completeCopy').textContent = completed ? 'تم حفظ تقدمك على هذا الجهاز.' : 'سجل إتمامك ليظهر تقدمك داخل Course Hub.';
+      document.getElementById('completeBtn').textContent = completed ? 'إلغاء علامة الإتمام' : `سجّل إتمام Day ${day.id}`;
+      document.getElementById('completeBtn').className = `btn ${completed ? 'btn-ghost' : 'btn-primary'}`;
+      document.getElementById('completeBtn').style.width='100%';
+    }
+    document.getElementById('completeBtn').addEventListener('click', () => {
+      const done = getCompleted();
+      const next = done.includes(day.id) ? done.filter(id => id !== day.id) : [...done, day.id].sort((a,b)=>a-b);
+      localStorage.setItem('pbi_completed_days', JSON.stringify(next));
+      updateCompleteUI();
+    });
+
+    const nav = document.getElementById('dayNav');
+    const prev = getDay(day.id - 1);
+    const next = getDay(day.id + 1);
+    const prevLink = prev && isDayOpen(prev.id)
+      ? `<a href="day.html?id=${prev.id}">→ Day ${String(prev.id).padStart(2,'0')}</a>`
+      : '<span></span>';
+    const nextLink = next && isDayOpen(next.id)
+      ? `<a href="day.html?id=${next.id}">Day ${String(next.id).padStart(2,'0')} ←</a>`
+      : '<a href="dashboard.html">العودة للمركز</a>';
+    nav.innerHTML = `${prevLink}${nextLink}`;
+    updateCompleteUI();
+    }
+  </script>
+</body>
+</html>

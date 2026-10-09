@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Hub | Power BI Specialist</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="dashboard.html">
+        <span class="pbi-mark"><span></span><span></span><span></span></span>
+        <span class="brand-copy"><strong>Power BI Course Hub</strong><small>10 DAYS • 20 HOURS</small></span>
+      </a>
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="concepts/">Concept Cards</a>
+        <a class="btn btn-ghost" href="index.html">الموقع الرئيسي</a>
+        <button class="icon-btn" id="logoutBtn" title="تسجيل الخروج">↪</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="portal-hero">
+      <div class="shell portal-top">
+        <div class="welcome-card">
+          <span class="eyebrow">YOUR COURSE HUB</span>
+          <h1>أهلاً، <span id="studentName"></span>.</h1>
+          <p>كل يوم واضح أمامك: ما المشكلة التي سنحلها، ماذا سنبني، التسجيل، الملفات، والتحدي. أنت لا تجمع Videos؛ أنت تبني مشروعاً كاملاً.</p>
+          <div class="progress-line"><i id="progressFill" style="width:0%"></i></div>
+          <div class="progress-meta"><span id="progressText">0 من 10 أيام مكتملة</span><span id="progressPct">0%</span></div>
+        </div>
+        <aside class="next-card" id="nextCard"></aside>
+      </div>
+    </section>
+
+    <section class="portal-section">
+      <div class="shell">
+        <div class="portal-head">
+          <div><h2>الأيام العشرة</h2><p>الأيام تفتح تدريجياً مع تقدم الدورة.</p></div>
+          <div class="filter-row">
+            <button class="filter-btn active" data-filter="all">الكل</button>
+            <button class="filter-btn" data-filter="past">تم موعدها</button>
+            <button class="filter-btn" data-filter="upcoming">قادمة</button>
+            <button class="filter-btn" data-filter="completed">مكتملة عندي</button>
+          </div>
+        </div>
+        <div class="portal-grid" id="daysGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="videos.js"></script>
+  <script src="access.js"></script>
+  <script>
+    const student = localStorage.getItem('pbi_student_name');
+    if (!student) location.href = 'login.html';
+    document.getElementById('studentName').textContent = student || '';
+
+    function getCompleted() {
+      try { return JSON.parse(localStorage.getItem('pbi_completed_days') || '[]'); }
+      catch { return []; }
+    }
+
+    function renderProgress() {
+      const done = getCompleted();
+      const pct = Math.round((done.length / DAYS.length) * 100);
+      document.getElementById('progressFill').style.width = `${pct}%`;
+      document.getElementById('progressText').textContent = `${done.length} من ${DAYS.length} أيام مكتملة`;
+      document.getElementById('progressPct').textContent = `${pct}%`;
+    }
+
+    function getNextRelevantDay() {
+      const today = new Date();
+      const todayOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      const openDays = DAYS.filter(day => isDayOpen(day.id));
+      return openDays.find(d => new Date(`${d.date}T00:00:00`) >= todayOnly)
+        || openDays[openDays.length - 1]
+        || DAYS[0];
+    }
+
+    function renderNextCard() {
+      const day = getNextRelevantDay();
+      const status = dayRuntimeStatus(day);
+      const open = isDayOpen(day.id);
+      const liveButton = COURSE_CONFIG.liveUrl
+        ? `<a class="btn btn-primary" href="${COURSE_CONFIG.liveUrl}" target="_blank" rel="noopener">دخول الجلسة المباشرة</a>`
+        : `<span class="btn btn-ghost btn-disabled">رابط الجلسة يضاف قبل الموعد</span>`;
+      document.getElementById('nextCard').innerHTML = `
+        <span class="next-label">${status === 'today' ? 'TODAY' : 'NEXT AVAILABLE DAY'}</span>
+        <h2>Day ${String(day.id).padStart(2,'0')} — ${day.titleAr}</h2>
+        <p>${day.hook}</p>
+        <span class="next-date">${day.weekday} • ${formatDateAr(day.date)}</span>
+        <div class="live-slot">
+          ${open ? `<a class="btn btn-ghost" href="day.html?id=${day.id}">عرض تفاصيل اليوم</a>` : ''}
+          ${liveButton}
+        </div>`;
+    }
+
+    function renderDays(filter='all') {
+      const done = getCompleted();
+      const grid = document.getElementById('daysGrid');
+      grid.innerHTML = '';
+      DAYS.forEach(day => {
+        const runtime = dayRuntimeStatus(day);
+        const isCompleted = done.includes(day.id);
+        if (filter === 'completed' && !isCompleted) return;
+        if (filter !== 'all' && filter !== 'completed' && runtime !== filter) return;
+        const open = isDayOpen(day.id);
+        const card = document.createElement('article');
+        card.className = `portal-day ${isCompleted ? 'completed' : ''} ${open ? 'open' : 'locked'}`;
+        card.setAttribute('aria-disabled', open ? 'false' : 'true');
+        card.innerHTML = `
+          <div class="portal-day-top">
+            <div class="portal-day-index">${String(day.id).padStart(2,'0')}</div>
+            <div>
+              <h3>${day.titleAr}</h3>
+              <span class="portal-en" dir="ltr">${day.title}</span>
+            </div>
+            ${open ? '' : '<span class="day-lock-badge" aria-label="مقفل">LOCKED</span>'}
+          </div>
+          <div class="portal-day-bottom">
+            <span class="status-chip ${open ? runtime : 'locked'}"><i class="complete-dot"></i>${open ? (runtime === 'today' ? 'اليوم' : runtime === 'past' ? 'تم موعده' : day.weekday + ' • ' + formatDateAr(day.date)) : 'غير متاح حالياً'}</span>
+            <span class="resource-count">${open ? (hasDayVideo(day.id) ? '▶ التسجيل متاح للمشاهدة' : day.resources.length + ' مواد متاحة لليوم') : 'يفتح مع تقدم الدورة'}</span>
+          </div>`;
+        if (open) {
+          card.addEventListener('click', () => location.href = `day.html?id=${day.id}`);
+        }
+        grid.appendChild(card);
+      });
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderDays(btn.dataset.filter);
+    }));
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('pbi_student_name');
+      location.href = 'login.html';
+    });
+
+    renderProgress(); renderNextCard(); renderDays();
+  </script>
+</body>
+</html>

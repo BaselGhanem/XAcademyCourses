@@ -1,0 +1,3 @@
+Trigger for the reproducible Day 8 PBIR training package.
+Source: week3/day7/downloads/Day07_TRAINER_REFERENCES.zip
+Output: week3/day8/downloads/Nova_Day08_Executive_360_PBIR.zip
