@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<rect width="1600" height="900" fill="#0b1116"/><rect x="60" y="55" width="1480" height="790" rx="36" fill="#121a21" stroke="#27343d"/>
+<text x="110" y="125" fill="#f2c811" font-size="28" font-family="Arial" font-weight="700">DAY 4 • STAR SCHEMA</text>
+<text x="110" y="185" fill="#fff" font-size="58" font-family="Arial" font-weight="800">Nova Sales Model</text>
+<text x="110" y="230" fill="#9eb0bc" font-size="28" font-family="Arial">Fact in the center • Dimensions around it • 1:* toward FactSales</text>
+<g stroke="#7f929c" stroke-width="5"><line x1="800" y1="385" x2="800" y2="300"/><line x1="650" y1="485" x2="445" y2="485"/><line x1="950" y1="485" x2="1155" y2="485"/><line x1="800" y1="585" x2="800" y2="675"/></g>
+<rect x="650" y="385" width="300" height="200" rx="28" fill="#211f12" stroke="#f2c811" stroke-width="4"/><text x="800" y="465" text-anchor="middle" fill="#f2c811" font-size="42" font-family="Arial" font-weight="800">FactSales</text><text x="800" y="515" text-anchor="middle" fill="#fff" font-size="24" font-family="Arial">40,000 Transactions</text>
+<g fill="#0d292b" stroke="#099999" stroke-width="3"><rect x="635" y="245" width="330" height="110" rx="22"/><rect x="150" y="430" width="330" height="110" rx="22"/><rect x="1120" y="430" width="330" height="110" rx="22"/><rect x="635" y="650" width="330" height="110" rx="22"/></g>
+<g fill="#6edbd7" font-size="30" font-family="Arial" font-weight="800" text-anchor="middle"><text x="800" y="315">DimDate</text><text x="315" y="500">DimCustomer</text><text x="1285" y="500">DimProduct</text><text x="800" y="720">DimBranch</text></g>
+<g fill="#f2c811" font-size="24" font-family="Arial" font-weight="800"><text x="780" y="378">1 ↓ *</text><text x="505" y="470">1 → *</text><text x="1000" y="470">* ← 1</text><text x="780" y="625">* ↑ 1</text></g>
+<text x="800" y="815" text-anchor="middle" fill="#fff" font-size="32" font-family="Arial" font-weight="700">Slicer from a Dimension → Filter FactSales → Ready for DAX</text>
+</svg>

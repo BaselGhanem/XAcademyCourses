@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<rect width="1600" height="900" fill="#0b1116"/><rect x="60" y="55" width="1480" height="790" rx="36" fill="#121a21" stroke="#27343d"/>
+<text x="110" y="125" fill="#099999" font-size="28" font-family="Arial" font-weight="700">DAY 5 • POWER QUERY</text>
+<text x="110" y="185" fill="#fff" font-size="58" font-family="Arial" font-weight="800">Custom Column = Row Calculation</text>
+<text x="110" y="230" fill="#9eb0bc" font-size="27" font-family="Arial">Calculated during Refresh • One result for every row</text>
+<rect x="110" y="310" width="410" height="350" rx="26" fill="#0d292b" stroke="#099999" stroke-width="3"/>
+<text x="150" y="370" fill="#6edbd7" font-size="34" font-family="Arial" font-weight="800">FactSales Row</text>
+<g fill="#fff" font-size="25" font-family="Arial"><text x="150" y="435">Quantity</text><text x="410" y="435" text-anchor="end">3</text><text x="150" y="485">Unit Price</text><text x="410" y="485" text-anchor="end">20</text><text x="150" y="535">Revenue</text><text x="410" y="535" text-anchor="end">54</text><text x="150" y="585">Discount %</text><text x="410" y="585" text-anchor="end">10%</text></g>
+<path d="M550 485 L650 485" stroke="#83959f" stroke-width="6"/><polygon points="650,485 620,468 620,502" fill="#83959f"/>
+<rect x="680" y="300" width="800" height="380" rx="28" fill="#171f25" stroke="#34434d"/>
+<g font-family="Arial"><text x="730" y="365" fill="#f2c811" font-size="30" font-weight="800">1 • Gross Sales</text><text x="1030" y="365" fill="#fff" font-size="25">[Quantity] * [Unit Price] = 60</text><text x="730" y="455" fill="#f2c811" font-size="30" font-weight="800">2 • Discount Amount</text><text x="1030" y="455" fill="#fff" font-size="25">[Gross Sales] - [Revenue] = 6</text><text x="730" y="545" fill="#f2c811" font-size="30" font-weight="800">3 • Discount Status</text><text x="1030" y="545" fill="#fff" font-size="25">if Discount % &gt; 0 → "Discounted"</text></g>
+<rect x="680" y="600" width="800" height="80" rx="18" fill="#0d292b"/><text x="1080" y="650" text-anchor="middle" fill="#6edbd7" font-size="27" font-family="Arial" font-weight="700">Refresh → Recalculate every row</text>
+<text x="800" y="790" text-anchor="middle" fill="#fff" font-size="32" font-family="Arial" font-weight="700">Row question? Power Query can be the right place.</text>
+</svg>
