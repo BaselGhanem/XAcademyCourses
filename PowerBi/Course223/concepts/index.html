@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>مفاهيم مريم حسب اليوم | X Academy</title>
-  <link rel="stylesheet" href="../styles.css?v=mariam-plan-20261010">
+  <link rel="stylesheet" href="../styles.css?v=mariam-day1-20261010">
 </head>
 <body>
   <header class="topbar"><div class="shell topbar-inner">
@@ -13,7 +13,7 @@
   <main class="shell section">
     <span class="eyebrow">CONCEPTS BY DAY</span>
     <h1 class="section-title">المفاهيم حسب اليوم</h1>
-    <p class="section-copy">فهرس مقترح لمهارات مريم. الشرح التفصيلي والامثلة ستجهز مع مواد كل يوم</p>
+    <p class="section-copy">شرح اليوم الاول متاح في دليل التطبيق، وباقي المفاهيم تجهز مع مواد كل يوم</p>
     <div class="filter-row" id="dayFilters" aria-label="اختيار اليوم"></div>
     <section class="panel" style="margin-top:24px">
       <h2 id="dayTitle"></h2><p id="dayMission" class="section-copy"></p>
@@ -21,7 +21,7 @@
       <a class="btn btn-teal" id="dayLink" style="margin-top:24px">المحتوى والتمرين والملفات المطلوبة</a>
     </section>
   </main>
-  <script src="../data.js?v=mariam-plan-20261010"></script>
+  <script src="../data.js?v=mariam-day1-20261010"></script>
   <script>
     const requestedDay = Number(new URLSearchParams(location.search).get(`day`));
     let activeDay = getDay(requestedDay) ? requestedDay : 1;
@@ -29,7 +29,7 @@
       const day = getDay(activeDay);
       document.getElementById(`dayTitle`).textContent = `اليوم ${day.id} — ${day.titleAr}`;
       document.getElementById(`dayMission`).textContent = day.mission;
-      document.getElementById(`dayLink`).href = `../day.html?id=${day.id}`;
+      document.getElementById(`dayLink`).href = day.id === 1 ? `../week1/day1/web/Day01_Guide.html` : `../day.html?id=${day.id}`;
       document.getElementById(`conceptList`).replaceChildren();
       day.topics.forEach(topic => {
         const item = document.createElement(`div`);

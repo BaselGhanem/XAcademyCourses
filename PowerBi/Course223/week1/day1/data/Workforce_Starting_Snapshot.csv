@@ -1,0 +1,169 @@
+﻿EmployeeID,SnapshotDate,FacilityID,FacilityName,FacilityType,Department,Cadre,EmploymentType,FTE
+EMP0001,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Part-time,0.5
+EMP0002,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0003,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0004,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0005,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0006,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Part-time,0.5
+EMP0007,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0008,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0009,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0010,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0011,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Part-time,0.5
+EMP0012,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0013,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0014,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0015,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0016,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Part-time,0.5
+EMP0017,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0018,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0019,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0020,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0021,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Part-time,0.5
+EMP0022,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0023,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0024,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0025,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0026,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Part-time,0.5
+EMP0027,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0028,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0029,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0030,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0031,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Part-time,0.5
+EMP0032,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0033,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0034,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0035,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0036,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Part-time,0.5
+EMP0037,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0038,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0039,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0040,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0041,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Part-time,0.5
+EMP0042,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0043,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0044,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0045,2026-09-30,F01,Pearl Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0046,2026-09-30,F01,Pearl Training Hospital,Hospital,Diagnostic Services,Allied Health,Part-time,0.5
+EMP0047,2026-09-30,F01,Pearl Training Hospital,Hospital,Diagnostic Services,Allied Health,Full-time,1
+EMP0048,2026-09-30,F01,Pearl Training Hospital,Hospital,Diagnostic Services,Allied Health,Full-time,1
+EMP0049,2026-09-30,F01,Pearl Training Hospital,Hospital,Diagnostic Services,Allied Health,Full-time,1
+EMP0050,2026-09-30,F01,Pearl Training Hospital,Hospital,Diagnostic Services,Allied Health,Full-time,1
+EMP0051,2026-09-30,F01,Pearl Training Hospital,Hospital,Diagnostic Services,Allied Health,Part-time,0.5
+EMP0052,2026-09-30,F01,Pearl Training Hospital,Hospital,Diagnostic Services,Allied Health,Full-time,1
+EMP0053,2026-09-30,F01,Pearl Training Hospital,Hospital,Diagnostic Services,Allied Health,Full-time,1
+EMP0054,2026-09-30,F01,Pearl Training Hospital,Hospital,Diagnostic Services,Allied Health,Full-time,1
+EMP0055,2026-09-30,F01,Pearl Training Hospital,Hospital,Corporate Services,Administration,Part-time,0.5
+EMP0056,2026-09-30,F01,Pearl Training Hospital,Hospital,Corporate Services,Administration,Full-time,1
+EMP0057,2026-09-30,F01,Pearl Training Hospital,Hospital,Corporate Services,Administration,Full-time,1
+EMP0058,2026-09-30,F01,Pearl Training Hospital,Hospital,Corporate Services,Administration,Full-time,1
+EMP0059,2026-09-30,F01,Pearl Training Hospital,Hospital,Corporate Services,Administration,Full-time,1
+EMP0060,2026-09-30,F01,Pearl Training Hospital,Hospital,Corporate Services,Administration,Part-time,0.5
+EMP0061,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Part-time,0.5
+EMP0062,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0063,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0064,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0065,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0066,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Part-time,0.5
+EMP0067,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0068,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0069,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0070,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0071,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Part-time,0.5
+EMP0072,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0073,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0074,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0075,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0076,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Part-time,0.5
+EMP0077,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0078,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0079,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0080,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0081,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Part-time,0.5
+EMP0082,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0083,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0084,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Nursing,Full-time,1
+EMP0085,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Medical,Part-time,0.5
+EMP0086,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0087,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0088,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0089,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0090,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Medical,Part-time,0.5
+EMP0091,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0092,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0093,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0094,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0095,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Medical,Part-time,0.5
+EMP0096,2026-09-30,F02,North Training Hospital,Hospital,Clinical Services,Medical,Full-time,1
+EMP0097,2026-09-30,F02,North Training Hospital,Hospital,Diagnostic Services,Allied Health,Part-time,0.5
+EMP0098,2026-09-30,F02,North Training Hospital,Hospital,Diagnostic Services,Allied Health,Full-time,1
+EMP0099,2026-09-30,F02,North Training Hospital,Hospital,Diagnostic Services,Allied Health,Full-time,1
+EMP0100,2026-09-30,F02,North Training Hospital,Hospital,Diagnostic Services,Allied Health,Full-time,1
+EMP0101,2026-09-30,F02,North Training Hospital,Hospital,Diagnostic Services,Allied Health,Full-time,1
+EMP0102,2026-09-30,F02,North Training Hospital,Hospital,Diagnostic Services,Allied Health,Part-time,0.5
+EMP0103,2026-09-30,F02,North Training Hospital,Hospital,Diagnostic Services,Allied Health,Full-time,1
+EMP0104,2026-09-30,F02,North Training Hospital,Hospital,Diagnostic Services,Allied Health,Full-time,1
+EMP0105,2026-09-30,F02,North Training Hospital,Hospital,Corporate Services,Administration,Part-time,0.5
+EMP0106,2026-09-30,F02,North Training Hospital,Hospital,Corporate Services,Administration,Full-time,1
+EMP0107,2026-09-30,F02,North Training Hospital,Hospital,Corporate Services,Administration,Full-time,1
+EMP0108,2026-09-30,F02,North Training Hospital,Hospital,Corporate Services,Administration,Full-time,1
+EMP0109,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Part-time,0.5
+EMP0110,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0111,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0112,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0113,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0114,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Part-time,0.5
+EMP0115,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0116,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0117,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0118,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0119,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Part-time,0.5
+EMP0120,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0121,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0122,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0123,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0124,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Part-time,0.5
+EMP0125,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0126,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0127,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Medical,Part-time,0.5
+EMP0128,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Medical,Full-time,1
+EMP0129,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Medical,Full-time,1
+EMP0130,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Medical,Full-time,1
+EMP0131,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Medical,Full-time,1
+EMP0132,2026-09-30,F03,West Training Health Center,Health Center,Clinical Services,Medical,Part-time,0.5
+EMP0133,2026-09-30,F03,West Training Health Center,Health Center,Diagnostic Services,Allied Health,Part-time,0.5
+EMP0134,2026-09-30,F03,West Training Health Center,Health Center,Diagnostic Services,Allied Health,Full-time,1
+EMP0135,2026-09-30,F03,West Training Health Center,Health Center,Diagnostic Services,Allied Health,Full-time,1
+EMP0136,2026-09-30,F03,West Training Health Center,Health Center,Diagnostic Services,Allied Health,Full-time,1
+EMP0137,2026-09-30,F03,West Training Health Center,Health Center,Diagnostic Services,Allied Health,Full-time,1
+EMP0138,2026-09-30,F03,West Training Health Center,Health Center,Diagnostic Services,Allied Health,Part-time,0.5
+EMP0139,2026-09-30,F03,West Training Health Center,Health Center,Diagnostic Services,Allied Health,Full-time,1
+EMP0140,2026-09-30,F03,West Training Health Center,Health Center,Diagnostic Services,Allied Health,Full-time,1
+EMP0141,2026-09-30,F03,West Training Health Center,Health Center,Corporate Services,Administration,Part-time,0.5
+EMP0142,2026-09-30,F03,West Training Health Center,Health Center,Corporate Services,Administration,Full-time,1
+EMP0143,2026-09-30,F03,West Training Health Center,Health Center,Corporate Services,Administration,Full-time,1
+EMP0144,2026-09-30,F03,West Training Health Center,Health Center,Corporate Services,Administration,Full-time,1
+EMP0145,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Nursing,Part-time,0.5
+EMP0146,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0147,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0148,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0149,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0150,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Nursing,Part-time,0.5
+EMP0151,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0152,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0153,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0154,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0155,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Nursing,Part-time,0.5
+EMP0156,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Nursing,Full-time,1
+EMP0157,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Medical,Part-time,0.5
+EMP0158,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Medical,Full-time,1
+EMP0159,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Medical,Full-time,1
+EMP0160,2026-09-30,F04,South Training Health Center,Health Center,Clinical Services,Medical,Full-time,1
+EMP0161,2026-09-30,F04,South Training Health Center,Health Center,Diagnostic Services,Allied Health,Part-time,0.5
+EMP0162,2026-09-30,F04,South Training Health Center,Health Center,Diagnostic Services,Allied Health,Full-time,1
+EMP0163,2026-09-30,F04,South Training Health Center,Health Center,Diagnostic Services,Allied Health,Full-time,1
+EMP0164,2026-09-30,F04,South Training Health Center,Health Center,Diagnostic Services,Allied Health,Full-time,1
+EMP0165,2026-09-30,F04,South Training Health Center,Health Center,Diagnostic Services,Allied Health,Full-time,1
+EMP0166,2026-09-30,F04,South Training Health Center,Health Center,Corporate Services,Administration,Part-time,0.5
+EMP0167,2026-09-30,F04,South Training Health Center,Health Center,Corporate Services,Administration,Full-time,1
+EMP0168,2026-09-30,F04,South Training Health Center,Health Center,Corporate Services,Administration,Full-time,1

@@ -1,0 +1,20 @@
+{
+  "snapshot": "2026-09-30",
+  "employees": 168,
+  "fte": 148.5,
+  "facilities": {
+    "Pearl Training Hospital": 60,
+    "North Training Hospital": 48,
+    "West Training Health Center": 36,
+    "South Training Health Center": 24
+  },
+  "cadres": {
+    "Nursing": 84,
+    "Medical": 37,
+    "Allied Health": 30,
+    "Administration": 17
+  },
+  "north_nursing": 24,
+  "north_total": 48,
+  "part_time": 39
+}

@@ -1,4 +1,4 @@
-// Course223 — proposed private training plan for Mariam. Teaching assets are not released yet.
+// Course223 — Mariam private training. Day 01 materials ready; remaining days proposed.
 const COURSE_CONFIG = {
   id: `course223_mariam`,
   title: `Power BI | Mariam`,
@@ -31,7 +31,7 @@ const DAYS = [
     id: 1,
     date: ``,
     weekday: ``,
-    ready: false,
+    ready: true,
     phase: `CONNECT`,
     title: `Meet Your Workforce Data`,
     titleAr: `من ملفات القسم الى اول تقرير`,
@@ -59,8 +59,19 @@ const DAYS = [
     ],
     challenge: `اختاري منشاة وفئة مهنية، ثم قارني عدد الموظفين الظاهر بالملف المصدر لنفس اللقطة الشهرية`,
     deliverable: `تقرير اولي يوضح عدد الموظفين وتوزيعهم ويستجيب للفلاتر`,
+    visualGuide: { image: `week1/day1/images/day1-overview.png`, title: `رحلة اليوم الاول`, note: `ربط البيانات ثم استكشافها وبناء التقرير والتحقق من لقطة شهرية واحدة` },
     resources: [
-
+      { name: `Day01_Mariam_Complete.zip`, type: `ZIP`, url: `week1/day1/downloads/Day01_Mariam_Complete.zip`, note: `الحزمة الكاملة: البيانات والشرح والتمرين والصورة` },
+      { name: `Workforce_Starting_Snapshot.xlsx`, type: `Excel`, url: `week1/day1/data/Workforce_Starting_Snapshot.xlsx`, note: `ملف التطبيق الاساسي: 168 موظفا في لقطة واحدة` },
+      { name: `Day01_Guide.html`, type: `Guide`, url: `week1/day1/web/Day01_Guide.html`, note: `شرح عملي خطوة بخطوة والمفاهيم وحل المشكلات` },
+      { name: `Day01_Challenge.html`, type: `Challenge`, url: `week1/day1/web/Day01_Challenge.html`, note: `تمرين مستقل وقائمة تسليم تحفظ تقدمها` },
+      { name: `Day01_Dictionary.html`, type: `Guide`, url: `week1/day1/web/Day01_Dictionary.html`, note: `قاموس الحقول وتعريف مستوى التفاصيل` },
+      { name: `Day01_Reference.html`, type: `Guide`, url: `week1/day1/web/Day01_Reference.html`, note: `نتائج التحقق ومخطط التقرير` },
+      { name: `Facility_Master.csv`, type: `CSV`, url: `week1/day1/data/Facility_Master.csv`, note: `عرض ربط CSV دون علاقات اليوم` },
+      { name: `Facility_Demo.txt`, type: `TXT`, url: `week1/day1/data/Facility_Demo.txt`, note: `عرض المصدر النصي بفاصل Tab` },
+      { name: `Facility_Demo.pdf`, type: `PDF`, url: `week1/day1/data/Facility_Demo.pdf`, note: `جدول منشات نصي لاستكشاف PDF` },
+      { name: `Facility_Directory.html`, type: `WEB`, url: `week1/day1/web/Facility_Directory.html`, note: `صفحة جدول ثابت لعرض موصل Web` },
+      { name: `Workforce_Starting_Snapshot.csv`, type: `CSV`, url: `week1/day1/data/Workforce_Starting_Snapshot.csv`, note: `بديل لملف Excel بنفس الموظفين، لا يجمع معه` }
     ],
     requiredFiles: [
       {
