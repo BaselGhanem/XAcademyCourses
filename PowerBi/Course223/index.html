@@ -11,6 +11,7 @@
     // إذا أغلقت الـAgenda من access.js، لا نعرض الصفحة الرئيسية أصلاً.
     if (!isAgendaEnabled()) location.replace('login.html');
   </script>
+  <link rel="stylesheet" href="schedule.css?v=20261010">
 </head>
 <body>
   <header class="topbar">
@@ -20,6 +21,7 @@
         <span class="brand-copy"><strong>Power BI | Mariam</strong><small>HEALTHCARE WORKFORCE</small></span>
       </a>
       <nav class="nav-links" aria-label="التنقل الرئيسي">
+        <a href="#schedule">جدول المحاضرات</a>
         <a href="#journey">الأيام العشرة</a>
         <a href="#project">المشروع</a>
         <a href="#preview">النتيجة</a>
@@ -32,11 +34,30 @@
   </header>
 
   <main>
+    <section class="mariam-schedule" id="schedule" aria-labelledby="schedule-title">
+ <div class="shell"><div class="schedule-poster">
+ <div class="schedule-top"><div class="schedule-brand" dir="ltr"><img src="Trainer/assets/X_Academy_Intersection.svg" alt="شعار X ACADEMY"><strong>X ACADEMY</strong></div><span>POWER BI • MARIAM</span></div>
+ <p class="schedule-kicker">من ملفاتك… لتقرير يحكي القصة</p>
+ <h1 id="schedule-title">مريم، جاهزة نبدأ؟<br><span>هاي مواعيد محاضراتك</span></h1>
+ <div class="schedule-glow">الأحد • الثلاثاء • الخميس <b>7–9 المسا</b></div>
+ <div class="schedule-table-wrap"><table class="schedule-table"><caption>جدول محاضرات مريم — جميع المواعيد بتوقيت عمّان</caption><thead><tr><th>المحاضرة</th><th>اليوم</th><th>التاريخ</th><th>شو رح نتعلّم؟</th><th>الوقت</th></tr></thead><tbody><tr><td><span class="schedule-num">01</span></td><th scope="row">الخميس</th><td><time datetime="2026-10-15">15-10-2026</time></td><td>من ملفات القسم الى اول تقرير</td><td>7–9 م</td></tr>
+<tr><td><span class="schedule-num">02</span></td><th scope="row">الأحد</th><td><time datetime="2026-10-18">18-10-2026</time></td><td>تنظيف بيانات القوى العاملة</td><td>7–9 م</td></tr>
+<tr><td><span class="schedule-num">03</span></td><th scope="row">الثلاثاء</th><td><time datetime="2026-10-20">20-10-2026</time></td><td>تجميع التقارير الشهرية تلقائيا</td><td>7–9 م</td></tr>
+<tr><td><span class="schedule-num">04</span></td><th scope="row">الخميس</th><td><time datetime="2026-10-22">22-10-2026</time></td><td>بناء نموذج بيانات صحيح</td><td>7–9 م</td></tr>
+<tr><td><span class="schedule-num">05</span></td><th scope="row">الأحد</th><td><time datetime="2026-10-25">25-10-2026</time></td><td>حساب العدد والتغطية والعجز</td><td>7–9 م</td></tr>
+<tr><td><span class="schedule-num">06</span></td><th scope="row">الثلاثاء</th><td><time datetime="2026-10-27">27-10-2026</time></td><td>فهم الفلاتر واللقطات الشهرية</td><td>7–9 م</td></tr>
+<tr><td><span class="schedule-num">07</span></td><th scope="row">الخميس</th><td><time datetime="2026-10-29">29-10-2026</time></td><td>مقارنة التغير الشهري والسنوي</td><td>7–9 م</td></tr>
+<tr><td><span class="schedule-num">08</span></td><th scope="row">الأحد</th><td><time datetime="2026-11-01">01-11-2026</time></td><td>تصميم داشبورد للقسم</td><td>7–9 م</td></tr>
+<tr><td><span class="schedule-num">09</span></td><th scope="row">الثلاثاء</th><td><time datetime="2026-11-03">03-11-2026</time></td><td>متابعة اعمال القسم وشرح النتائج</td><td>7–9 م</td></tr>
+<tr><td><span class="schedule-num">10</span></td><th scope="row">الخميس</th><td><time datetime="2026-11-05">05-11-2026</time></td><td>مشروع نهائي وتحديث وتسليم</td><td>7–9 م</td></tr></tbody></table></div>
+ <div class="schedule-summary"><span><b>10</b> محاضرات</span><span><b>20</b> ساعة تدريب</span><span>من <b>15 أكتوبر</b> لـ <b>5 نوفمبر 2026</b></span></div>
+ <p class="schedule-foot">ساعتين بكل لقاء، وتطبيق خطوة بخطوة مع Basel Ghanem.</p>
+ </div></div></section>
     <section class="hero">
       <div class="shell hero-grid">
         <div>
           <span class="hero-kicker"><i></i> 10 DAYS • PRIVATE TRAINING • MARIAM</span>
-          <h1>مريم، من ملفات القسم<br>الى <span>Power BI.</span><br>وقرار اوضح</h1>
+          <h2 class="hero-title">مريم، من ملفات القسم<br>الى <span>Power BI.</span><br>وقرار اوضح</h2>
           <p class="hero-desc">خطة تدريب خاصة لبناء تقرير اداء للقوى العاملة الصحية ومتابعة اعمال قسم ادارة الاداء في الموارد البشرية. تنطلق من مستواك المتوسط في اكسل وتربط كل مهارة بسؤال من عملك.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#journey">شاهد الرحلة يوم بيوم ←</a>
@@ -92,7 +113,7 @@
           <div>
             <span class="eyebrow">THE 10-DAY JOURNEY</span>
             <h2 class="section-title">عشرة ايام مرتبطة بعملك</h2>
-            <p class="section-copy">مواد اليوم الاول جاهزة لمريم، وباقي الايام خطط مقترحة. اختاري يوما لعرض المحتوى والتمرين والملفات. مواعيد الجلسات ومدة كل جلسة لم تحدد بعد</p>
+            <p class="section-copy">مواد اليوم الاول جاهزة لمريم، وباقي الايام خطط مقترحة. اختاري يوما لعرض المحتوى والتمرين والملفات. كل محاضرة ساعتين من 7–9 المسا، بتوقيت عمّان</p>
           </div>
           <a class="btn btn-ghost" href="login.html">ادخل لمركز الدورة</a>
         </div>
@@ -140,7 +161,7 @@
     </div>
   </footer>
 
-  <script src="data.js?v=mariam-day1-20261010"></script>
+  <script src="data.js?v=mariam-schedule-20261010"></script>
   <script>
     const grid = document.getElementById('journeyGrid');
     DAYS.forEach(day => {
@@ -155,7 +176,7 @@
       card.innerHTML = `
         <div class="day-card-head">
           <span class="day-num">DAY ${String(day.id).padStart(2,'0')}</span>
-          <span class="day-date">${day.ready ? dayScheduleLabel(day) : `خطة مقترحة`}</span>
+          <span class="day-date">${dayScheduleLabel(day)}</span>
         </div>
         <span class="phase">${day.phase}</span>
         <h3>${day.titleAr}<span class="en" dir="ltr">${day.title}</span></h3>
