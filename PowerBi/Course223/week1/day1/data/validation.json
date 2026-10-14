@@ -1,20 +1,52 @@
 {
-  "snapshot": "2026-09-30",
-  "employees": 168,
-  "fte": 148.5,
-  "facilities": {
-    "Pearl Training Hospital": 60,
-    "North Training Hospital": 48,
-    "West Training Health Center": 36,
-    "South Training Health Center": 24
+  "workforceRows": 10000,
+  "webRows": 5000,
+  "pdfRows": 1000,
+  "attendanceRows": 5000,
+  "facilityCounts": {
+    "Pearl Training Hospital": 3750,
+    "North Training Hospital": 2750,
+    "West Training Health Center": 2000,
+    "South Training Health Center": 1500
   },
-  "cadres": {
-    "Nursing": 84,
-    "Medical": 37,
-    "Allied Health": 30,
-    "Administration": 17
+  "cadreCounts": {
+    "Nursing": 4936,
+    "Medical": 2166,
+    "Allied Health": 1870,
+    "Administration": 1028
   },
-  "north_nursing": 24,
-  "north_total": 48,
-  "part_time": 39
+  "northNursing": 1351,
+  "totalFTE": 8991.5,
+  "demoData": {
+    "": {
+      "Nursing": 4936,
+      "Medical": 2166,
+      "Allied Health": 1870,
+      "Administration": 1028
+    },
+    "Pearl Training Hospital": {
+      "Nursing": 1884,
+      "Medical": 763,
+      "Allied Health": 709,
+      "Administration": 394
+    },
+    "North Training Hospital": {
+      "Nursing": 1351,
+      "Medical": 585,
+      "Allied Health": 536,
+      "Administration": 278
+    },
+    "West Training Health Center": {
+      "Medical": 449,
+      "Nursing": 980,
+      "Allied Health": 357,
+      "Administration": 214
+    },
+    "South Training Health Center": {
+      "Nursing": 721,
+      "Administration": 142,
+      "Medical": 369,
+      "Allied Health": 268
+    }
+  }
 }
