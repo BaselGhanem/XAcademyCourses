@@ -18,6 +18,17 @@ function getDayVideo(dayId) {
   const embed = DAY_VIDEOS[Number(dayId)] || ``;
   if (!embed.trim()) return ``;
 
+  // Accept a direct player/share URL as well as existing embed markup.
+  if (/^https?:\/\/\S+$/i.test(embed.trim())) {
+    const url = new URL(embed.trim());
+    const directVideo = /\.(mp4|webm|ogg)$/i.test(url.pathname);
+    const player = document.createElement(directVideo ? `video` : `iframe`);
+    player.src = url.href;
+    if (directVideo) { player.controls = true; player.preload = `metadata`; }
+    else { player.title = `تسجيل المحاضرة ${Number(dayId)}`; player.setAttribute(`allowfullscreen`, ``); player.setAttribute(`allow`, `fullscreen; picture-in-picture`); }
+    return player.outerHTML;
+  }
+
   const template = document.createElement('template');
   template.innerHTML = embed.trim();
   const element = template.content.firstElementChild;
