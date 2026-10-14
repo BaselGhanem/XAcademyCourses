@@ -30,7 +30,7 @@ const ACCESS_CONFIG = {
 
   days: {
     "Day 1": "AUTO",  // AUTO / ON / OFF
-    "Day 2": "AUTO",  // AUTO / ON / OFF
+    "Day 2": "ON",  // AUTO / ON / OFF
     "Day 3": "AUTO",  // AUTO / ON / OFF
     "Day 4": "AUTO",  // AUTO / ON / OFF
     "Day 5": "AUTO",  // AUTO / ON / OFF

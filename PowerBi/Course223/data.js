@@ -92,10 +92,10 @@ const DAYS = [
     id: 2,
     date: `2026-10-18`,
     weekday: `الأحد`,
-    ready: false,
+    ready: true,
     phase: `CLEAN`,
     title: `Trust Your Workforce Data`,
-    titleAr: `تنظيف بيانات القوى العاملة`,
+    titleAr: `ليش الرقم غلط؟ ننظف البيانات`,
     hook: `اختلاف اسم الفئة المهنية وتكرار السجل والتاريخ غير الصحيح قد يعطي ارقاما مضللة`,
     mission: `بناء خطوات تنظيف قابلة للتحديث مع التمييز بين الخطا والبيانات المفقودة فعلا`,
     topics: [
@@ -108,17 +108,23 @@ const DAYS = [
       `Applied Steps`
     ],
     build: [
-      `فحص جودة الحقول قبل التنظيف`,
-      `توحيد مسميات المنشات والفئات المهنية`,
-      `تصحيح انواع التاريخ والارقام`,
-      `مراجعة القيم المفقودة وتوثيق معالجتها`,
-      `التحقق من مفتاح الموظف والشهر قبل حذف التكرار`,
-      `مقارنة عدد الصفوف قبل التنظيف وبعده`
+      `نربط Workforce_10000_Dirty.csv من Text/CSV ونختار Transform Data، الملف فيه 10120 صف و10000 موظف فريد`,
+      `نطبق Trim وClean على FacilityName وCadre، ونوحد Nursng الى Nursing وMedical Staff الى Medical`,
+      `نحول SnapshotDate الى Date وFTE الى Decimal، ونعوض الاخطاء بـ null بدون حذف الموظفين، والقسم المفقود Unassigned`,
+      `نتاكد ان الملف شهر واحد والنسخ المكررة متطابقة، ثم Remove Duplicates على EmployeeID؛ النتيجة 10000 صف`,
+      `Close & Apply، نبني بطاقة عدد فريد ورسم افقي وفلتر؛ North يساوي 2750 وNursing يساوي 4936`,
+      `نراجع Applied Steps ونحفظ Day02_Cleaning.pbix، وبعدها نجرب ملف التمرين المستقل`
     ],
-    challenge: `نظفي نسخة تحتوي اخطاء مزروعة ثم نشرح سبب كل حذف او استبدال`,
+    challenge: `نجرب ملف مستقل فيه 1010 صف، نوحد المسميات ونراجع التكرار ونوصل 1000 صف، ونشرح سبب خطوتين`,
     deliverable: `جدول نظيف وسجل واضح للاخطاء وخطوات معالجتها`,
     resources: [
-
+      {name:`Day02_Complete.zip`,type:`ZIP`,url:`week1/day2/downloads/Day02_Complete.zip`,note:`البيانات والتمرين والدليل ومرجع التحقق`},
+      {name:`Workforce_10000_Dirty.csv`,type:`CSV`,url:`week1/day2/data/Workforce_10000_Dirty.csv`,note:`التطبيق: 10120 صف قبل التنظيف، 10000 موظف فريد`},
+      {name:`Day02_Guide.html`,type:`Guide`,url:`week1/day2/web/Day02_Guide.html`,note:`التنظيف خطوة بخطوة`},
+      {name:`Practice_1000_Dirty.csv`,type:`CSV`,url:`week1/day2/data/Practice_1000_Dirty.csv`,note:`ملف مستقل للتمرين: 1010 صف قبل التنظيف`},
+      {name:`Day02_Challenge.html`,type:`Challenge`,url:`week1/day2/web/Day02_Challenge.html`,note:`تمرين مع قائمة متابعة`},
+      {name:`Day02_Reference.html`,type:`Guide`,url:`week1/day2/web/Day02_Reference.html`,note:`ارقام التحقق وروابط ملفات النتيجة، نفتحها بعد المحاولة`},
+      {name:`Day02_Dictionary.html`,type:`Guide`,url:`week1/day2/web/Day02_Dictionary.html`,note:`الحقول وقواعد التعامل مع القيم الناقصة`}
     ],
     requiredFiles: [
       {

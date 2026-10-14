@@ -1,0 +1,55 @@
+{
+  "synthetic": true,
+  "period": "2026-09-30",
+  "main": {
+    "inputRows": 10120,
+    "outputRows": 10000,
+    "uniqueEmployees": 10000,
+    "duplicateRowsRemoved": 120,
+    "nullDates": 10,
+    "nullFTE": 12,
+    "unassignedDepartments": 20,
+    "facilityCounts": {
+      "Pearl Training Hospital": 3750,
+      "North Training Hospital": 2750,
+      "West Training Health Center": 2000,
+      "South Training Health Center": 1500
+    },
+    "cadreCounts": {
+      "Nursing": 4936,
+      "Medical": 2166,
+      "Allied Health": 1870,
+      "Administration": 1028
+    },
+    "northNursing": 1351
+  },
+  "practice": {
+    "inputRows": 1010,
+    "outputRows": 1000,
+    "uniqueEmployees": 1000,
+    "duplicateRowsRemoved": 10,
+    "nullDates": 2,
+    "nullFTE": 3,
+    "unassignedDepartments": 4,
+    "facilityCounts": {
+      "Pearl Training Hospital": 250,
+      "North Training Hospital": 250,
+      "West Training Health Center": 250,
+      "South Training Health Center": 250
+    },
+    "cadreCounts": {
+      "Nursing": 500,
+      "Medical": 250,
+      "Allied Health": 125,
+      "Administration": 125
+    },
+    "northNursing": 125
+  },
+  "rules": [
+    "Single-period dataset: deduplicate EmployeeID only after confirming duplicate copies agree",
+    "Invalid dates become null, never delete employee rows",
+    "Invalid FTE becomes null, never zero",
+    "Blank Department becomes Unassigned",
+    "Trim and Clean FacilityName and Cadre, then replace entire Cadre values"
+  ]
+}
