@@ -1,4 +1,4 @@
-# Day 01 | Mariam | X Academy
+# Day 01 | Power BI | X Academy
 
 Start with web/Day01_Guide.html and data/Workforce_Starting_Snapshot.xlsx.
 One employee per row, snapshot 2026-09-30. All data is synthetic.

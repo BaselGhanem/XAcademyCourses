@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>اليوم | مريم | Power BI</title>
-  <link rel="stylesheet" href="styles.css?v=mariam-day1-20261010">
+  <title>اليوم | Power BI | X Academy</title>
+  <link rel="stylesheet" href="styles.css?v=course-20261015-general">
 </head>
 <body class="access-pending">
   <header class="topbar">
     <div class="shell topbar-inner">
       <a class="brand" href="dashboard.html">
         <span class="pbi-mark"><span></span><span></span><span></span></span>
-        <span class="brand-copy"><strong>Power BI | Mariam</strong><small>HEALTHCARE WORKFORCE</small></span>
+        <span class="brand-copy"><strong>Power BI | X Academy</strong><small>POWER BI TRAINING</small></span>
       </a>
       <div class="nav-actions"><a class="btn btn-ghost" href="dashboard.html">كل الأيام</a></div>
     </div>
@@ -102,7 +102,7 @@
           <article class="panel live-session-panel" id="liveSessionPanel">
             <span class="panel-kicker">LIVE SESSION</span>
             <h2>الجلسة المباشرة</h2>
-            <p>رابط الجلسة الخاصة يضاف عند تحديده</p>
+            <p>رابط الجلسة يضاف عند تحديده</p>
             <a class="btn btn-primary full-btn" id="liveSessionBtn" target="_blank" rel="noopener">JOIN TEAMS SESSION ↗</a>
           </article>
 
@@ -132,10 +132,10 @@
     </section>
   </main>
 
-  <script src="data.js?v=mariam-day1-20261010"></script>
-  <script src="videos.js?v=mariam-day1-20261010"></script>
-  <script src="access.js?v=mariam-day1-20261010"></script>
-  <script src="day1-experience.js?v=20261010-refined2"></script>
+  <script src="data.js?v=course-20261015-general"></script>
+  <script src="videos.js?v=course-20261015-general"></script>
+  <script src="access.js?v=course-20261015-general"></script>
+  <script src="day1-experience.js?v=course-20261015-general"></script>
   <script>
     const student = localStorage.getItem(COURSE_CONFIG.storage.student);
     const courseHome = student ? `dashboard.html` : `index.html#journey`;
@@ -149,12 +149,12 @@
       // لا نظهر محتوى يوم مقفل حتى للحظة عند فتح رابطه مباشرة.
       location.replace('dashboard.html');
     } else if (day.id === 1) {
-      document.title = `اليوم الاول | مريم | X Academy`;
+      document.title = `اليوم الاول | Power BI | X Academy`;
       initMariamJourney(day, courseHome);
     } else {
       document.body.classList.remove(`access-pending`);
 
-    document.title = `Day ${day.id} — ${day.title} | Power BI | Mariam`;
+    document.title = `Day ${day.id} — ${day.title} | Power BI | X Academy`;
     document.getElementById('crumb').textContent = `Day ${String(day.id).padStart(2,'0')}`;
     document.getElementById('phase').textContent = `${day.phase} • DAY ${String(day.id).padStart(2,`0`)}${day.ready ? `` : ` • PROPOSED PLAN`}`;
     document.getElementById('titleAr').textContent = day.titleAr;
