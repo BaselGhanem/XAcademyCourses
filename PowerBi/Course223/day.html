@@ -135,7 +135,8 @@
   <script src="data.js?v=20261015-large"></script>
   <script src="videos.js?v=course-20261015-general"></script>
   <script src="access.js?v=course-20261015-general"></script>
-  <script src="day1-experience.js?v=20261015-recording"></script>
+  <script src="day1-experience.js?v=20261015-all-days"></script>
+  <script src="day-experience.js?v=20261015-all-days"></script>
   <script>
     const student = localStorage.getItem(COURSE_CONFIG.storage.student);
     const courseHome = student ? `dashboard.html` : `index.html#journey`;
@@ -152,108 +153,9 @@
       document.title = `اليوم الاول | Power BI | X Academy`;
       initMariamJourney(day, courseHome);
     } else {
-      document.body.classList.remove(`access-pending`);
-
-    document.title = `Day ${day.id} — ${day.title} | Power BI | X Academy`;
-    document.getElementById('crumb').textContent = `Day ${String(day.id).padStart(2,'0')}`;
-    document.getElementById('phase').textContent = `${day.phase} • DAY ${String(day.id).padStart(2,`0`)}${day.ready ? `` : ` • PROPOSED PLAN`}`;
-    document.getElementById('titleAr').textContent = day.titleAr;
-    document.getElementById('titleEn').textContent = day.title;
-    document.getElementById('dayLabel').textContent = `Day ${String(day.id).padStart(2,`0`)}`;
-    document.getElementById('dateLabel').textContent = dayScheduleLabel(day);
-    document.getElementById('hook').textContent = day.hook;
-    document.getElementById('mission').textContent = day.mission;
-    document.getElementById('challenge').textContent = day.challenge;
-    document.getElementById('deliverable').textContent = day.deliverable;
-
-    document.getElementById(`planNotice`).hidden = Boolean(day.ready);
-    document.getElementById(`liveSessionPanel`).hidden = !day.ready || !COURSE_CONFIG.liveUrl;
-    document.getElementById(`completeBox`).hidden = !day.ready;
-    const liveSessionBtn = document.getElementById('liveSessionBtn');
-    if (COURSE_CONFIG.liveUrl) {
-      liveSessionBtn.href = COURSE_CONFIG.liveUrl;
-    } else {
-      liveSessionBtn.textContent = 'رابط Teams يضاف قبل الجلسة';
-      liveSessionBtn.classList.add('btn-disabled');
-      liveSessionBtn.removeAttribute('href');
+      initCourseDayJourney(day, courseHome);
     }
 
-    const installPanel = document.getElementById('installPanel');
-    if (day.ready && day.id === 1) {
-      installPanel.hidden = false;
-      document.getElementById('downloadPowerBiBtn').href = COURSE_CONFIG.powerBiDownloadUrl;
-    }
-
-    document.getElementById('topics').innerHTML = day.topics.map(t => `<div class="topic-item">${t}</div>`).join('');
-    document.getElementById('buildSteps').innerHTML = day.build.map((t,i) => `<div class="step"><span class="step-num">${String(i+1).padStart(2,'0')}</span><span>${t}</span></div>`).join('');
-
-    const visualGuidePanel = document.getElementById('visualGuidePanel');
-    if (day.visualGuide?.image) {
-      visualGuidePanel.hidden = false;
-      document.getElementById('visualGuideTitle').textContent = day.visualGuide.title || 'ملخص اليوم بصريا';
-      document.getElementById('visualGuideNote').textContent = day.visualGuide.note || '';
-      const visualGuideImage = document.getElementById('visualGuideImage');
-      visualGuideImage.src = day.visualGuide.image;
-      visualGuideImage.alt = day.visualGuide.title || day.title;
-      document.getElementById('visualGuideLink').href = day.visualGuide.image;
-    }
-
-    const recordingHeroWrap = document.getElementById('recordingHeroWrap');
-    const videoBox = document.getElementById('videoBox');
-    const videoEmbed = day.ready ? getDayVideo(day.id).trim() : ``;
-    document.getElementById('recordingDayNumber').textContent = String(day.id).padStart(2, '0');
-
-    if (videoEmbed) {
-      videoBox.innerHTML = videoEmbed;
-      recordingHeroWrap.hidden = false;
-    } else {
-      videoBox.replaceChildren();
-      recordingHeroWrap.hidden = true;
-    }
-
-    const typeIcon = {PBIX:'PBI',Excel:'XLSX',PDF:'PDF',ZIP:'ZIP',Challenge:'LAB',Guide:'DOC',WEB:'WEB',FLOW:'FLOW',IMAGE:'IMG'};
-    document.querySelector(`.files-panel h2`).textContent = day.ready ? `ملفات اليوم` : `ملفات مطلوب تجهيزها`;
-    const visibleResources = day.ready ? day.resources : day.requiredFiles.map(file => ({ ...file, url: `` }));
-    document.getElementById('resources').innerHTML = visibleResources.map(r => {
-      const available = Boolean(r.url);
-      return `<${available ? 'a' : 'div'} class="resource ${available ? '' : 'pending'}" ${available ? `href="${r.url}" target="_blank" rel="noopener"` : ''}>
-        <span class="resource-icon">${typeIcon[r.type] || r.type}</span>
-        <span class="resource-copy"><strong dir="ltr">${r.name}</strong><small>${r.note}</small></span>
-        <span class="resource-action">${available ? `فتح ↗` : day.ready ? `قيد الاعداد` : `مقترح`}</span>
-      </${available ? 'a' : 'div'}>`;
-    }).join('');
-
-    function getCompleted(){ return getCompletedDays(); }
-    function updateCompleteUI(){
-      const done = getCompleted();
-      const completed = done.includes(day.id);
-      document.getElementById('completeBox').classList.toggle('completed', completed);
-      document.getElementById('completeTitle').textContent = completed ? 'مكتمل ✓' : 'أنهيت هذا اليوم؟';
-      document.getElementById('completeCopy').textContent = completed ? 'تم حفظ تقدمك على هذا الجهاز.' : 'سجل إتمامك ليظهر تقدمك داخل Course Hub.';
-      document.getElementById('completeBtn').textContent = completed ? 'إلغاء علامة الإتمام' : `سجّل إتمام Day ${day.id}`;
-      document.getElementById('completeBtn').className = `btn ${completed ? 'btn-ghost' : 'btn-primary'}`;
-      document.getElementById('completeBtn').style.width='100%';
-    }
-    document.getElementById('completeBtn').addEventListener('click', () => {
-      if (!day.ready || !isDayOpen(day.id)) return;
-      const done = getCompleted();
-      const next = done.includes(day.id) ? done.filter(id => id !== day.id) : [...done, day.id].sort((a,b)=>a-b);
-      localStorage.setItem(COURSE_CONFIG.storage.completed, JSON.stringify(next));
-      updateCompleteUI();
-    });
-
-    const nav = document.getElementById('dayNav');
-    const prev = getDay(day.id - 1);
-    const next = getDay(day.id + 1);
-    const prevLink = prev && (!prev.ready || isDayOpen(prev.id))
-      ? `<a href="day.html?id=${prev.id}">→ Day ${String(prev.id).padStart(2,'0')}</a>`
-      : '<span></span>';
-    const nextLink = next && (!next.ready || isDayOpen(next.id))
-      ? `<a href="day.html?id=${next.id}">Day ${String(next.id).padStart(2,'0')} ←</a>`
-      : `<a href="${courseHome}">العودة للايام</a>`;
-    nav.innerHTML = `${prevLink}${nextLink}`;
-    updateCompleteUI();
-    }
   </script>
 </body>
 </html>
