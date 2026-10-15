@@ -2,7 +2,7 @@
 // Paste a OneDrive video iframe or its image-preview embed code.
 
 const DAY_VIDEOS = {
-  1: ``,
+  1: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQTvbwGMn5m5S4-0cAYHajrHAXQvilO399MYC4ENpI4_XTs" width="1920" height="1080" frameborder="0" scrolling="no" allowfullscreen title="تسجيل اليوم الأول" allow="autoplay; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
   2: ``,
   3: ``,
   4: ``,
