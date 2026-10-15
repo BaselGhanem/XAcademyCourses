@@ -7,15 +7,15 @@
 </head>
 <body>
   <header class="topbar"><div class="shell topbar-inner">
-    <a class="brand" href="../index.html"><img src="assets/X_Academy_Intersection.svg" width="38" height="38" alt="X Academy"><span class="brand-copy"><strong>Mariam — Trainer Workspace</strong><small>HEALTHCARE WORKFORCE</small></span></a>
+    <a class="brand" href="../index.html"><img src="assets/X_Academy_Intersection.svg" width="38" height="38" alt="X Academy"><span class="brand-copy"><strong>Mariam — Trainer Workspace</strong><small>EMPLOYEE PERFORMANCE</small></span></a>
     <a class="btn btn-ghost" href="../index.html">خطة الدورة</a>
   </div></header>
   <main class="shell section">
     <span class="eyebrow">PREPARATION PLAN</span>
     <h1 class="section-title">تجهيز دورة مريم</h1>
-    <p class="section-copy">مواد اليوم الاول جاهزة، وباقي الايام خطط مقترحة تجهز بالتدريج</p>
+    <p class="section-copy">اليوم الاول تم تدريسه في 15 اكتوبر، اليوم الثاني مجهز لجلسة 18 اكتوبر ولم يدرس بعد، باقي الايام مخططة</p>
     <a class="btn btn-ghost" href="../week1/day1/web/Day01_Trainer.html">دليل مدرب اليوم الاول</a> <a class="btn btn-teal" href="../ADAPTATION_PLAN.md">خطة التخصيص وقواعد المؤشرات</a>
-    <div class="panel" style="margin-top:28px">
+    <a class="btn btn-primary" href="Day02_Performance.html" style="margin-top:18px">دليل المدرب التفاعلي لليوم الثاني — 120 دقيقة</a><div class="panel" style="margin-top:28px">
       <h2>قبل تجهيز كل يوم</h2>
       <div class="steps">
         <div class="step"><span class="step-num">01</span><span>تعريف السؤال والحقول ومستوى التفاصيل</span></div>
@@ -26,20 +26,21 @@
     </div>
     <div class="portal-grid" id="trainerDays" style="margin-top:28px"></div>
   </main>
-  <script src="../data.js?v=mariam-day1-20261010"></script>
+  <script src="../data.js?v=20261015-performance-v2"></script>
   <script>
     DAYS.forEach(day => {
       const card = document.createElement(`a`);
       card.className = `portal-day open`;
-      card.href = `../day.html?id=${day.id}`;
+      card.href = day.id === 2 ? `Day02_Performance.html` : `../day.html?id=${day.id}`;
       const title = document.createElement(`h3`);
       title.textContent = `اليوم ${day.id} — ${day.titleAr}`;
       const status = document.createElement(`p`);
       status.className = `muted`;
-      status.textContent = day.ready ? `المواد جاهزة` : `خطة مقترحة — مواد التدريب لم تجهز`;
+      status.textContent = day.id === 1 ? `تم تدريسه — 15 اكتوبر 2026` : day.ready ? `مجهز ولم يدرس` : `مخطط — المواد لم تجهز`;
       card.append(title, status);
       document.getElementById(`trainerDays`).appendChild(card);
     });
   </script>
 </body>
 </html>
+

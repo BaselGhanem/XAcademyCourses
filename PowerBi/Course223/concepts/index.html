@@ -13,7 +13,7 @@
   <main class="shell section">
     <span class="eyebrow">CONCEPTS BY DAY</span>
     <h1 class="section-title">المفاهيم حسب اليوم</h1>
-    <p class="section-copy">شرح اليوم الاول متاح في دليل التطبيق، وباقي المفاهيم تجهز مع مواد كل يوم</p>
+    <p class="section-copy">اليوم الاول تم تدريسه، وشرح اليوم الثاني لتنظيف تقييمات الاداء جاهز، باقي المفاهيم مخططة</p>
     <div class="filter-row" id="dayFilters" aria-label="اختيار اليوم"></div>
     <section class="panel" style="margin-top:24px">
       <h2 id="dayTitle"></h2><p id="dayMission" class="section-copy"></p>
@@ -21,7 +21,7 @@
       <a class="btn btn-teal" id="dayLink" style="margin-top:24px">المحتوى والتمرين والملفات المطلوبة</a>
     </section>
   </main>
-  <script src="../data.js?v=20261015-day2"></script>
+  <script src="../data.js?v=20261015-performance-v2"></script>
   <script>
     const requestedDay = Number(new URLSearchParams(location.search).get(`day`));
     let activeDay = getDay(requestedDay) ? requestedDay : 1;
@@ -60,3 +60,4 @@
   </script>
 </body>
 </html>
+

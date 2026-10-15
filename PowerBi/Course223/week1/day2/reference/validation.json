@@ -1,55 +1,112 @@
 {
-  "synthetic": true,
-  "period": "2026-09-30",
-  "main": {
-    "inputRows": 10120,
-    "outputRows": 10000,
-    "uniqueEmployees": 10000,
-    "duplicateRowsRemoved": 120,
-    "nullDates": 10,
-    "nullFTE": 12,
-    "unassignedDepartments": 20,
-    "facilityCounts": {
-      "Pearl Training Hospital": 3750,
-      "North Training Hospital": 2750,
-      "West Training Health Center": 2000,
-      "South Training Health Center": 1500
+  "Performance_KPI_30000": {
+    "raw_rows": 30450,
+    "exact_duplicate_copies": 300,
+    "quarantine_rows": 595,
+    "quarantine_keys": 445,
+    "accepted_rows": 29555,
+    "distinct_employees": 1000,
+    "raw_naive_numeric_count": 28650,
+    "raw_naive_score_sum": 1405598.0,
+    "raw_naive_mean": 49.06101221640488,
+    "valid_score_count": 27192,
+    "missing_or_invalid_scores": 2363,
+    "valid_zero_scores": 592,
+    "invalid_or_missing_dates": 591,
+    "unassigned_departments": 296,
+    "score_sum": 1334201.0,
+    "by_evaluation_type": {
+      "Self": 9851,
+      "Manager": 9852,
+      "Upward": 9852
     },
-    "cadreCounts": {
-      "Nursing": 4936,
-      "Medical": 2166,
-      "Allied Health": 1870,
-      "Administration": 1028
+    "by_status": {
+      "Completed": 28965,
+      "Pending": 590
     },
-    "northNursing": 1351
+    "complete_objectives": 12939,
+    "incomplete_objectives": 2060,
+    "objective_score_sums_by_type": {
+      "Self": 217623.5,
+      "Manager": 218786.0,
+      "Upward": 218235.0
+    },
+    "quarantine_reasons": {
+      "MissingEmployeeID": 295,
+      "ConflictingKey": 296,
+      "ConflictingKey|MissingEmployeeID": 4
+    },
+    "complete_evaluations_by_type": {
+      "Self": {
+        "count": 707,
+        "weighted_score_sum": 35666.7,
+        "weighted_score_mean": 50.447949
+      },
+      "Manager": {
+        "count": 706,
+        "weighted_score_sum": 35803.55,
+        "weighted_score_mean": 50.713244
+      },
+      "Upward": {
+        "count": 704,
+        "weighted_score_sum": 35529.125,
+        "weighted_score_mean": 50.467507
+      }
+    }
   },
-  "practice": {
-    "inputRows": 1010,
-    "outputRows": 1000,
-    "uniqueEmployees": 1000,
-    "duplicateRowsRemoved": 10,
-    "nullDates": 2,
-    "nullFTE": 3,
-    "unassignedDepartments": 4,
-    "facilityCounts": {
-      "Pearl Training Hospital": 250,
-      "North Training Hospital": 250,
-      "West Training Health Center": 250,
-      "South Training Health Center": 250
+  "Performance_Challenge_12000": {
+    "raw_rows": 12180,
+    "exact_duplicate_copies": 120,
+    "quarantine_rows": 238,
+    "quarantine_keys": 178,
+    "accepted_rows": 11822,
+    "distinct_employees": 400,
+    "raw_naive_numeric_count": 11460,
+    "raw_naive_score_sum": 561080.0,
+    "raw_naive_mean": 48.959860383944154,
+    "valid_score_count": 10875,
+    "missing_or_invalid_scores": 947,
+    "valid_zero_scores": 238,
+    "invalid_or_missing_dates": 237,
+    "unassigned_departments": 119,
+    "score_sum": 532369.0,
+    "by_evaluation_type": {
+      "Self": 3941,
+      "Manager": 3941,
+      "Upward": 3940
     },
-    "cadreCounts": {
-      "Nursing": 500,
-      "Medical": 250,
-      "Allied Health": 125,
-      "Administration": 125
+    "by_status": {
+      "Completed": 11586,
+      "Pending": 236
     },
-    "northNursing": 125
-  },
-  "rules": [
-    "Single-period dataset: deduplicate EmployeeID only after confirming duplicate copies agree",
-    "Invalid dates become null, never delete employee rows",
-    "Invalid FTE becomes null, never zero",
-    "Blank Department becomes Unassigned",
-    "Trim and Clean FacilityName and Cadre, then replace entire Cadre values"
-  ]
+    "complete_objectives": 5173,
+    "incomplete_objectives": 827,
+    "objective_score_sums_by_type": {
+      "Self": 86898.0,
+      "Manager": 87380.5,
+      "Upward": 86712.0
+    },
+    "quarantine_reasons": {
+      "MissingEmployeeID": 118,
+      "ConflictingKey": 118,
+      "ConflictingKey|MissingEmployeeID": 2
+    },
+    "complete_evaluations_by_type": {
+      "Self": {
+        "count": 282,
+        "weighted_score_sum": 14170.25,
+        "weighted_score_mean": 50.249113
+      },
+      "Manager": {
+        "count": 281,
+        "weighted_score_sum": 14153.025,
+        "weighted_score_mean": 50.366637
+      },
+      "Upward": {
+        "count": 281,
+        "weighted_score_sum": 14005.55,
+        "weighted_score_mean": 49.841815
+      }
+    }
+  }
 }

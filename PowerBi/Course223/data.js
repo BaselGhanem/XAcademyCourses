@@ -1,4 +1,4 @@
-// Course223 — Mariam private training. Day 01 materials ready; remaining days proposed.
+// Course223 — Day 1 preserved; Day 2 prepared; Days 3–10 planned.
 const COURSE_CONFIG = {
   id: `course223_mariam`,
   title: `Power BI | X Academy`,
@@ -89,422 +89,401 @@ const DAYS = [
     ]
   },
   {
-    id: 2,
-    date: `2026-10-18`,
-    weekday: `الأحد`,
-    ready: true,
-    phase: `CLEAN`,
-    title: `Trust Your Workforce Data`,
-    titleAr: `ليش الرقم غلط؟ ننظف البيانات`,
-    hook: `اختلاف اسم الفئة المهنية وتكرار السجل والتاريخ غير الصحيح قد يعطي ارقاما مضللة`,
-    mission: `بناء خطوات تنظيف قابلة للتحديث مع التمييز بين الخطا والبيانات المفقودة فعلا`,
-    topics: [
-      `Power Query`,
-      `Data Types`,
-      `Trim / Clean`,
-      `Replace Values`,
-      `Nulls / Errors`,
-      `Duplicates`,
-      `Applied Steps`
+    "id": 2,
+    "date": "2026-10-18",
+    "weekday": "الأحد",
+    "ready": true,
+    "phase": "CLEAN",
+    "title": "Power Query — Cleaning Performance Evaluation Data",
+    "titleAr": "تنظيف بيانات تقييم اداء الموظفين",
+    "hook": "وصل ملف تقييمات فيه 30450 صف، لكن التكرار والدرجات الناقصة واختلاف المسميات بيعطوا صورة مضللة",
+    "mission": "نبني خطوات تنظيف قابلة للتحديث، نحافظ على KPIs الصحيحة ونفصل الحالات التي تحتاج مراجعة بدون خلط اتجاهات التقييم",
+    "topics": [
+      "Power Query",
+      "Data Profiling",
+      "Trim / Clean / NBSP",
+      "Replace Values",
+      "Data Types / Locale",
+      "Null vs Zero",
+      "Remove / Replace Errors",
+      "Fill / Split Columns",
+      "Conditional Columns",
+      "True Duplicates",
+      "Applied Steps"
     ],
-    build: [
-      `نربط Workforce_10000_Dirty.csv من Text/CSV ونختار Transform Data، الملف فيه 10120 صف و10000 موظف فريد`,
-      `نطبق Trim وClean على FacilityName وCadre، ونوحد Nursng الى Nursing وMedical Staff الى Medical`,
-      `نحول SnapshotDate الى Date وFTE الى Decimal، ونعوض الاخطاء بـ null بدون حذف الموظفين، والقسم المفقود Unassigned`,
-      `نتاكد ان الملف شهر واحد والنسخ المكررة متطابقة، ثم Remove Duplicates على EmployeeID؛ النتيجة 10000 صف`,
-      `Close & Apply، نبني بطاقة عدد فريد ورسم افقي وفلتر؛ North يساوي 2750 وNursing يساوي 4936`,
-      `نراجع Applied Steps ونحفظ Day02_Cleaning.pbix، وبعدها نجرب ملف التمرين المستقل`
+    "build": [
+      "نستورد ملف التطبيق: 30450 صف خام، نحافظ على Raw ونفحص كامل البيانات بدل اول 1000 صف",
+      "نحدد مستوى الصف: KPI لموظف ومقيم وفترة واتجاه وهدف، تكرار EmployeeID او KPIID وحده طبيعي",
+      "نحذف 300 نسخة متطابقة فقط، نوحد النصوص والمسميات ونراجع 595 صفا متعارضا او ناقص الهوية في Review بمساعدة المدرب",
+      "نحول Score الى رقم وDate الى تاريخ بقواعد واضحة، نحافظ على صفر الاداء ونعزل Pending والدرجات الناقصة والخاطئة كـnull",
+      "نجرب Split للحقول المركبة وFill لوصف الدفعة داخل مجموعتها فقط وConditional لتصنيف الدرجة، ونسمي Applied Steps",
+      "Close & Apply ثم نطابق Clean: 29555 صفا و1000 موظف و27192 درجة صحيحة، Self وManager وUpward منفصلة، بدون DAX اليوم"
     ],
-    challenge: `نجرب ملف مستقل فيه 1010 صف، نوحد المسميات ونراجع التكرار ونوصل 1000 صف، ونشرح سبب خطوتين`,
-    deliverable: `جدول نظيف وسجل واضح للاخطاء وخطوات معالجتها`,
-    resources: [
-      {name:`Day02_Complete.zip`,type:`ZIP`,url:`week1/day2/downloads/Day02_Complete.zip`,note:`البيانات والتمرين والدليل ومرجع التحقق`},
-      {name:`Workforce_10000_Dirty.csv`,type:`CSV`,url:`week1/day2/data/Workforce_10000_Dirty.csv`,note:`التطبيق: 10120 صف قبل التنظيف، 10000 موظف فريد`},
-      {name:`Day02_Guide.html`,type:`Guide`,url:`week1/day2/web/Day02_Guide.html`,note:`التنظيف خطوة بخطوة`},
-      {name:`Practice_1000_Dirty.csv`,type:`CSV`,url:`week1/day2/data/Practice_1000_Dirty.csv`,note:`ملف مستقل للتمرين: 1010 صف قبل التنظيف`},
-      {name:`Day02_Challenge.html`,type:`Challenge`,url:`week1/day2/web/Day02_Challenge.html`,note:`تمرين مع قائمة متابعة`},
-      {name:`Day02_Reference.html`,type:`Guide`,url:`week1/day2/web/Day02_Reference.html`,note:`ارقام التحقق وروابط ملفات النتيجة، نفتحها بعد المحاولة`},
-      {name:`Day02_Dictionary.html`,type:`Guide`,url:`week1/day2/web/Day02_Dictionary.html`,note:`الحقول وقواعد التعامل مع القيم الناقصة`}
-    ],
-    requiredFiles: [
+    "challenge": "ملف مستقل فيه 12180 صف خام، نطبق النصوص والانواع داخل الجلسة ثم نكمل المراجعة والمطابقة كواجب عند الحاجة، لا نحذف موظفا لانه مكرر ولا نعوض الغياب بصفر",
+    "deliverable": "Day02_Performance_Cleaning.pbix مع Raw وClean وReview وخطوات مفهومة وارقام مطابقة",
+    "resources": [
       {
-        name: `Workforce_Monthly_Dirty.csv`,
-        type: `CSV`,
-        note: `نسخة تدريبية تحتوي اخطاء متعمدة`
+        "name": "Day02_Complete.zip",
+        "type": "ZIP",
+        "url": "week1/day2/downloads/Day02_Complete.zip",
+        "note": "كل ملفات اليوم والشرح والتحدي والمراجع الحالية"
       },
       {
-        name: `Day02_Cleaning_Checklist`,
-        type: `Guide`,
-        note: `قواعد التنظيف وارقام التحقق`
+        "name": "Performance_KPI_30000_Dirty.csv",
+        "type": "CSV",
+        "url": "week1/day2/data/Performance_KPI_30000_Dirty.csv",
+        "note": "التطبيق: 30450 صف خام، بيانات افتراضية بالكامل"
+      },
+      {
+        "name": "Day02_Guide.html",
+        "type": "Guide",
+        "url": "week1/day2/web/Day02_Guide.html",
+        "note": "تطبيق متدرج: نكتشف ثم ننظف ثم نتحقق"
+      },
+      {
+        "name": "Performance_Challenge_12000_Dirty.csv",
+        "type": "CSV",
+        "url": "week1/day2/data/Performance_Challenge_12000_Dirty.csv",
+        "note": "تحدي مستقل: 12180 صف خام، 400 موظف افتراضي"
+      },
+      {
+        "name": "Day02_Challenge.html",
+        "type": "Challenge",
+        "url": "week1/day2/web/Day02_Challenge.html",
+        "note": "مهام مستقلة وChecklist تحفظ محليا"
+      },
+      {
+        "name": "Day02_Dictionary.html",
+        "type": "Guide",
+        "url": "week1/day2/web/Day02_Dictionary.html",
+        "note": "مستوى الصف والمفاتيح وقواعد null والتكرار"
+      },
+      {
+        "name": "Day02_Reference.html",
+        "type": "Guide",
+        "url": "week1/day2/web/Day02_Reference.html",
+        "note": "مرجع رقمي قبل وبعد التنظيف، يفتح بعد المحاولة"
       }
-    ]
+    ],
+    "requiredFiles": [],
+    "teachingStatus": "prepared"
   },
   {
-    id: 3,
-    date: `2026-10-20`,
-    weekday: `الثلاثاء`,
-    ready: false,
-    phase: `AUTOMATE`,
-    title: `Refresh Instead of Copying`,
-    titleAr: `تجميع التقارير الشهرية تلقائيا`,
-    hook: `كل شهر يصل ملف جديد وتبدأ عملية النسخ والدمج من جديد`,
-    mission: `تجميع الملفات الشهرية وربطها بالقوائم المرجعية لتحديث التقرير دون تكرار العمل`,
-    topics: [
-      `Folder Connector`,
-      `Combine Files`,
-      `Append`,
-      `Merge`,
-      `Expand`,
-      `Reference / Duplicate`,
-      `Refresh`
+    "id": 3,
+    "date": "2026-10-20",
+    "weekday": "الثلاثاء",
+    "ready": false,
+    "phase": "AUTOMATE",
+    "title": "Merge, Append, Folder Connector & Refresh",
+    "titleAr": "دمج الملفات وتحديثها بدون نسخ ولصق",
+    "hook": "كل فترة تصل ملفات تقييم جديدة، والنسخ اليدوي يعيد نفس الاخطاء",
+    "mission": "نبني عملية تجميع وربط قابلة للتحديث مع مراجعة عدد الصفوف والمفاتيح",
+    "topics": [
+      "Merge / Join Types",
+      "Append",
+      "Folder Connector",
+      "Combine Files",
+      "Reference / Duplicate",
+      "Refresh",
+      "Schema Checks"
     ],
-    build: [
-      `تجميع ملفات الاشهر من مجلد واحد`,
-      `الاحتفاظ باسم الملف المصدر`,
-      `فحص ثبات الحقول بين الملفات`,
-      `دمج وصف المنشاة والفئة المهنية`,
-      `فحص عدد الصفوف بعد الدمج`,
-      `اضافة شهر جديد واثبات عمل التحديث`
+    "build": [
+      "نراجع اي تنظيف لم يطبق فعليا في اليوم الثاني",
+      "نفرق بين اضافة صفوف Append واضافة اعمدة Merge",
+      "نجمع ملفات تقييم متوافقة من مجلد ونحتفظ باسم المصدر",
+      "نربط قاموس الاقسام والاهداف ونفحص فريدية المفتاح قبل التوسيع",
+      "نراجع عدد الصفوف قبل وبعد الربط لمنع تضاعف السجلات",
+      "نضيف ملف فترة جديدة ونثبت ان Refresh يعمل"
     ],
-    challenge: `اضيفي ملف شهر جديد وحدثي التقرير دون نسخ صفوف او تعديل خطوات التحويل`,
-    deliverable: `عملية تجميع شهرية قابلة للتحديث مع فحص للبيانات الجديدة`,
-    resources: [
-
-    ],
-    requiredFiles: [
+    "challenge": "اضيفي ملفا جديدا وحدثي التقرير ثم اثبتي عدم تضاعف صفوف KPI",
+    "deliverable": "عملية استيراد وتجميع وربط قابلة للتحديث",
+    "resources": [],
+    "requiredFiles": [
       {
-        name: `Monthly_Workforce_Files`,
-        type: `CSV`,
-        note: `ملفات متوافقة الاشهر ومفاتيح موحدة`
-      },
-      {
-        name: `Facility_and_Cadre_Masters.xlsx`,
-        type: `Excel`,
-        note: `القوائم المرجعية`
-      },
-      {
-        name: `New_Month_Refresh_Proof`,
-        type: `CSV`,
-        note: `شهر اضافي لاختبار التحديث`
+        "name": "مواد اليوم 3",
+        "type": "Plan",
+        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
       }
-    ]
+    ],
+    "teachingStatus": "planned"
   },
   {
-    id: 4,
-    date: `2026-10-22`,
-    weekday: `الخميس`,
-    ready: false,
-    phase: `MODEL`,
-    title: `Model Workforce Correctly`,
-    titleAr: `بناء نموذج بيانات صحيح`,
-    hook: `دمج كل الجداول في جدول واحد قد يكرر الخطة او عدد الموظفين`,
-    mission: `فصل اللقطات الشهرية وخطة الاحتياج عن الجداول الوصفية وبناء علاقات صحيحة`,
-    topics: [
-      `Fact / Dimension`,
-      `Grain`,
-      `Keys`,
-      `One-to-Many`,
-      `Single Filter Direction`,
-      `Star Schema`,
-      `Date Table`
+    "id": 4,
+    "date": "2026-10-22",
+    "weekday": "الخميس",
+    "ready": false,
+    "phase": "MODEL",
+    "title": "Data Modeling, Relationships & Star Schema",
+    "titleAr": "نموذج بيانات صحيح وعلاقات واضحة",
+    "hook": "جدول كبير بدون مستوى صف واضح قد يضاعف الاوزان ويخلط الموظف بالمقيم",
+    "mission": "نصمم Fact EvaluationKPI مع ابعاد الموظفين والاهداف والتاريخ واتجاه التقييم",
+    "topics": [
+      "Fact / Dimension",
+      "Grain / Keys",
+      "Star Schema",
+      "One-to-Many",
+      "Single Direction",
+      "Date Table",
+      "Role-playing Dimensions"
     ],
-    build: [
-      `تحديد مستوى التفاصيل لكل جدول`,
-      `فحص المعرفات الفريدة في الجداول الوصفية`,
-      `بناء جدول تاريخ يغطي فترة البيانات`,
-      `ربط بيانات القوى العاملة والخطة بالابعاد المشتركة`,
-      `تجنب العلاقة المباشرة بين جدولي الوقائع`,
-      `اختبار فلاتر المنشاة والقسم والفئة والشهر`
+    "build": [
+      "نحدد مستوى كل جدول ومفتاحه",
+      "نفصل جداول الوصف عن سجل KPI ونضع الوزن على مستوى الهدف المناسب",
+      "نبني Date Table ونميز تاريخ التقييم عن Period",
+      "نبني علاقات One-to-Many باتجاه واحد ونفحص المفاتيح اليتيمة",
+      "نوضح دور الموظف المقيم ودور المقيم خاصة في Upward",
+      "نختبر الفلاتر ونتجنب many-to-many غير المقصودة"
     ],
-    challenge: `اثبتي ان الفلاتر تصل للجدول الصحيح دون مضاعفة عدد الموظفين او قيمة الخطة`,
-    deliverable: `نموذج نجمي واضح مع قاموس للمفاتيح ومستوى التفاصيل`,
-    resources: [
-
-    ],
-    requiredFiles: [
+    "challenge": "اختبري فلاتر القسم والهدف والاتجاه دون تضاعف السجلات",
+    "deliverable": "Star Schema موثق ومفاتيح وعلاقات قابلة للفحص",
+    "resources": [],
+    "requiredFiles": [
       {
-        name: `Workforce_Model.xlsx`,
-        type: `Excel`,
-        note: `اللقطات والخطة والابعاد المشتركة`
-      },
-      {
-        name: `Day04_Model_Checklist`,
-        type: `Guide`,
-        note: `فحص المفاتيح والعلاقات والفلاتر`
+        "name": "مواد اليوم 4",
+        "type": "Plan",
+        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
       }
-    ]
+    ],
+    "teachingStatus": "planned"
   },
   {
-    id: 5,
-    date: `2026-10-25`,
-    weekday: `الأحد`,
-    ready: false,
-    phase: `MEASURE`,
-    title: `Measure Staffing and Coverage`,
-    titleAr: `حساب العدد والتغطية والعجز`,
-    hook: `عدد الموظفين وحده لا يوضح حجم التغطية مقارنة بالاحتياج`,
-    mission: `كتابة مقاييس اساسية للموظفين ومكافئ الدوام الكامل والاحتياج ونسبة التغطية`,
-    topics: [
-      `Measure / Column`,
-      `DISTINCTCOUNT`,
-      `SUM`,
-      `COUNTROWS`,
-      `DIVIDE`,
-      `FTE`,
-      `KPI Cards`,
-      `Matrix`
+    "id": 5,
+    "date": "2026-10-25",
+    "weekday": "الأحد",
+    "ready": false,
+    "phase": "MEASURE",
+    "title": "DAX Fundamentals & Weighted Performance Calculation",
+    "titleAr": "اساسيات DAX وحساب التقييم الموزون",
+    "hook": "متوسط كل KPIs معا لا يطبق اوزان الاهداف وقد يخلط اتجاهات التقييم",
+    "mission": "نتعلم Measures ونحسب متوسط KPI لكل هدف ثم مساهمته بالوزن مع منع اعتماد النتائج الناقصة",
+    "topics": [
+      "Measures vs Columns",
+      "SUM / COUNTROWS",
+      "DISTINCTCOUNT",
+      "AVERAGE",
+      "DIVIDE",
+      "Iterators: AVERAGEX / SUMX",
+      "BLANK / Completeness",
+      "Weighted Objectives"
     ],
-    build: [
-      `استخدام شهر واحد في التطبيق الاول`,
-      `حساب عدد الموظفين الفريد ومجموع مكافئ الدوام الكامل`,
-      `حساب الاحتياج من جدول الخطة لنفس الشهر والابعاد`,
-      `حساب العجز بوحدات متطابقة`,
-      `حساب التغطية من اجمالي الفعلي مقسوما على اجمالي المخطط`,
-      `بناء البطاقات ومصفوفة مقارنة المنشات`
+    "build": [
+      "نكتب مقاييس عدد السجلات والموظفين والدرجات المتاحة",
+      "نقارن Measure بCalculated Column",
+      "نحسب الهدف لموظف ومقيم وفترة واتجاه محدد",
+      "نتحقق من اكتمال KPIs ونتعامل مع BLANK دون تحويله لصفر",
+      "نطبق وزن الهدف مرة واحدة ونحسب نتيجة التقييم المكتمل",
+      "نطابق مثالا يدويا ونعرض النتائج منفصلة لكل اتجاه"
     ],
-    challenge: `نقارن منشاتين ونراجع العدد والتغطية يدويا، ثم نشرح الفرق بين عدد الموظفين ومكافئ الدوام الكامل`,
-    deliverable: `صفحة مؤشرات موثقة التعريف وصحيحة الحساب لشهر واحد`,
-    resources: [
-
-    ],
-    requiredFiles: [
+    "challenge": "احسبي مثال هدف بدرجتي 60 و80 ووزن 30 ثم فسري غياب درجة",
+    "deliverable": "Measures اساسية ونتيجة موزونة مشروطة بالاكتمال",
+    "resources": [],
+    "requiredFiles": [
       {
-        name: `Day05_Measures_and_Checks`,
-        type: `Guide`,
-        note: `تعريفات المقاييس ونتائج مرجعية`
-      },
-      {
-        name: `Day04_Checkpoint`,
-        type: `PBIX`,
-        note: `نسخة متابعة من النموذج بعد تجهيزها والتحقق منها`
+        "name": "مواد اليوم 5",
+        "type": "Plan",
+        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
       }
-    ]
+    ],
+    "teachingStatus": "planned"
   },
   {
-    id: 6,
-    date: `2026-10-27`,
-    weekday: `الثلاثاء`,
-    ready: false,
-    phase: `CONTEXT`,
-    title: `Read the Latest Snapshot`,
-    titleAr: `فهم الفلاتر واللقطات الشهرية`,
-    hook: `جمع موظفي يناير وفبراير يعطي حجما مضللا للقوى العاملة عند عرض فترة متعددة الاشهر`,
-    mission: `التحكم بسياق الفلاتر وعرض لقطة شهرية مشتركة واضحة عند اختيار عدة اشهر`,
-    topics: [
-      `Filter Context`,
-      `CALCULATE`,
-      `REMOVEFILTERS`,
-      `Latest Snapshot`,
-      `Contribution %`,
-      `Edit Interactions`
+    "id": 6,
+    "date": "2026-10-27",
+    "weekday": "الثلاثاء",
+    "ready": false,
+    "phase": "CONTEXT",
+    "title": "Advanced DAX, CALCULATE & Filter Context",
+    "titleAr": "نفهم سياق الفلاتر ونكتب DAX اقوى",
+    "hook": "القياس يتغير حسب الفلاتر والتجميع ويحتاج تفسيرا واضحا",
+    "mission": "نفهم CALCULATE والسياق ونبني مقارنات ومقاييس تحافظ على تعريف التقييم",
+    "topics": [
+      "Filter Context",
+      "CALCULATE",
+      "FILTER",
+      "REMOVEFILTERS",
+      "ALLSELECTED Overview",
+      "Variables",
+      "Iterators",
+      "Totals Validation"
     ],
-    build: [
-      `مراقبة تغير القياس مع الفلاتر`,
-      `تحديد اخر شهر مشترك مكتمل ضمن الفترة المختارة`,
-      `حساب الموظفين والخطة لذلك الشهر نفسه`,
-      `عرض تاريخ اللقطة المستخدمة بجانب المؤشرات`,
-      `قياس مساهمة الفئات ضمن الفلاتر المطلوبة`,
-      `اختبار تفاعل الرسوم مع البطاقات`
+    "build": [
+      "نتتبع قياسا داخل Card وMatrix وفلاتر مختلفة",
+      "نستخدم VAR وCALCULATE لتغيير السياق بشكل مقصود",
+      "نقارن النتيجة بمتوسط القسم مع تحديد الفلاتر التي تزال",
+      "نبني نسبة اكتمال ضمن نفس الفترة والاتجاه",
+      "نراجع Total ومنع متوسط متوسطات غير متكافئة",
+      "نختبر سيناريوهات Missing وMulti-select"
     ],
-    challenge: `نختار ثلاثة اشهر واثبتي ان البطاقة تعرض لقطة واحدة، بينما الاتجاه يعرض كل شهر مستقلا`,
-    deliverable: `مقاييس للقطة الشهرية تمنع جمع الارصدة عبر الزمن وتوضح تاريخها`,
-    resources: [
-
-    ],
-    requiredFiles: [
+    "challenge": "فسري لماذا تغير القياس مع Slicer وحددي الفلتر الذي اثر عليه",
+    "deliverable": "مقاييس بسياق واضح مع فحوص للتجميع والنتائج",
+    "resources": [],
+    "requiredFiles": [
       {
-        name: `Day06_Snapshot_Context_Lab`,
-        type: `Guide`,
-        note: `سيناريوهات الفلاتر والفترات الناقصة`
-      },
-      {
-        name: `Day05_Checkpoint`,
-        type: `PBIX`,
-        note: `نسخة متابعة بعد تجهيزها والتحقق منها`
+        "name": "مواد اليوم 6",
+        "type": "Plan",
+        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
       }
-    ]
+    ],
+    "teachingStatus": "planned"
   },
   {
-    id: 7,
-    date: `2026-10-29`,
-    weekday: `الخميس`,
-    ready: false,
-    phase: `COMPARE`,
-    title: `Compare Workforce Over Time`,
-    titleAr: `مقارنة التغير الشهري والسنوي`,
-    hook: `ارتفاع العدد لا يوضح وحده اين حدث التغير او هل تحسنت التغطية`,
-    mission: `بناء مقارنات شهرية وسنوية عادلة على نفس تعريفات المؤشرات`,
-    topics: [
-      `Date Table`,
-      `Previous Month`,
-      `Previous Year`,
-      `MoM / YoY`,
-      `Percentage Points`,
-      `Missing Periods`,
-      `Sorting`
+    "id": 7,
+    "date": "2026-10-29",
+    "weekday": "الخميس",
+    "ready": false,
+    "phase": "COMPARE",
+    "title": "Date Intelligence, Comparisons & Advanced Analysis",
+    "titleAr": "مقارنات زمنية وتحليل اعمق",
+    "hook": "مقارنة فترتين باتجاهات او نسب اكتمال مختلفة قد تضلل القرار",
+    "mission": "نبني مقارنات عادلة للفترات مع جدول تاريخ وتوضيح التغطية",
+    "topics": [
+      "Date Intelligence",
+      "Date Table",
+      "Previous Period",
+      "DATEADD / SAMEPERIODLASTYEAR",
+      "MoM / YoY",
+      "Percentage Points",
+      "Missing Periods",
+      "Ranking / Top N"
     ],
-    build: [
-      `مقارنة اللقطة الحالية بالشهر السابق المطابق`,
-      `مقارنة نفس الشهر بالسنة السابقة`,
-      `حساب تغير العدد وتغير التغطية`,
-      `تمييز النسبة المئوية عن النقاط المئوية`,
-      `ترك المقارنة غير متاحة عند غياب الفترة المرجعية`,
-      `بناء اتجاه شهري ومصفوفة للفئات والمنشات`
+    "build": [
+      "نراجع جدول التاريخ وعلاقته وتغطية الفترات",
+      "نطبق مقارنة زمنية على تاريخ مناسب وبفترات قابلة للمقارنة",
+      "نقارن نتائج كل اتجاه بشكل مستقل",
+      "نميز تغير النسبة عن النقاط المئوية",
+      "نمنع المقارنة عند غياب الفترة المرجعية ونوضح الاكتمال",
+      "نستكشف الاقسام والاهداف التي تحتاج متابعة دون اختراع اسباب"
     ],
-    challenge: `نشرح تغير التغطية في منشاة باستخدام الفترة الصحيحة، دون جمع اعداد الموظفين منذ بداية السنة`,
-    deliverable: `صفحة اتجاهات ومقارنات مع تاريخ واضح وقواعد للفترات المفقودة`,
-    resources: [
-
-    ],
-    requiredFiles: [
+    "challenge": "قدمي مقارنة بين فترتين مع تفسير اثر التغطية والفترة الناقصة",
+    "deliverable": "صفحة مقارنات زمنية مع تعريفات وفحوص واضحة",
+    "resources": [],
+    "requiredFiles": [
       {
-        name: `Workforce_Comparison_History`,
-        type: `CSV`,
-        note: `تاريخ تدريبي يغطي فترات المقارنة`
-      },
-      {
-        name: `Day07_Time_Comparison_Guide`,
-        type: `Guide`,
-        note: `صيغ المقارنة وفحوص النتائج`
+        "name": "مواد اليوم 7",
+        "type": "Plan",
+        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
       }
-    ]
+    ],
+    "teachingStatus": "planned"
   },
   {
-    id: 8,
-    date: `2026-11-01`,
-    weekday: `الأحد`,
-    ready: false,
-    phase: `DESIGN`,
-    title: `Build the Department Dashboard`,
-    titleAr: `تصميم داشبورد للقسم`,
-    hook: `كثرة الرسوم قد تخفي المنشات والفئات التي تحتاج متابعة`,
-    mission: `تنظيم التقرير في ملخص اداري وصفحة تفاصيل تساعد مستخدم القسم على الوصول للسؤال المطلوب`,
-    topics: [
-      `Visual Hierarchy`,
-      `Chart Selection`,
-      `Conditional Formatting`,
-      `Drillthrough`,
-      `Tooltips`,
-      `Bookmarks / Buttons`,
-      `Edit Interactions`
+    "id": 8,
+    "date": "2026-11-01",
+    "weekday": "الأحد",
+    "ready": false,
+    "phase": "DESIGN",
+    "title": "Professional Dashboard Design & Interactions",
+    "titleAr": "داشبورد واضح وتفاعل عملي",
+    "hook": "كثرة الرسوم لا تضمن ان القارئ يصل للاجابة بسرعة",
+    "mission": "نصمم ملخصا اداريا وتفاصيل قابلة للاستكشاف باستخدام هوية واضحة",
+    "topics": [
+      "Visual Hierarchy",
+      "Chart Selection",
+      "Conditional Formatting",
+      "Drillthrough",
+      "Report Page Tooltips",
+      "Bookmarks / Buttons",
+      "Edit Interactions",
+      "Mobile Layout"
     ],
-    build: [
-      `تحديد ترتيب الاسئلة والمؤشرات`,
-      `بناء ملخص اداري واضح`,
-      `تصميم صفحة تفاصيل المنشاة`,
-      `اضافة الانتقال للتفاصيل والتلميحات`,
-      `استخدام تنسيق شرطي مرتبط بتعريف المؤشر`,
-      `اختبار الفلاتر والتنقل ووضوح النص`
+    "build": [
+      "نحدد اسئلة المستخدم وترتيب البطاقات",
+      "نبني ملخصا يفصل الاتجاهات والاكتمال عن نتائج الاداء",
+      "نضيف Drillthrough لتفاصيل موظف او قسم مناسب للصلاحيات",
+      "نبني Tooltip وBookmark وازرار مع اختبار تفاعلها",
+      "نراجع الالوان والوضوح وMobile Layout",
+      "نختبر رحلة القارئ من السؤال الى التفاصيل"
     ],
-    challenge: `ننتقل من منشاة تحتاج متابعة الى تفاصيل فئاتها دون اعادة اختيار الفلاتر`,
-    deliverable: `تقرير للقسم بملخص اداري وتفاصيل قابلة للاستكشاف`,
-    resources: [
-
-    ],
-    requiredFiles: [
+    "challenge": "انتقلي من قسم الى تفاصيله ثم عودي مع الحفاظ على الفلاتر المقصودة",
+    "deliverable": "تقرير تفاعلي منظم على Desktop وMobile",
+    "resources": [],
+    "requiredFiles": [
       {
-        name: `Day08_Report_Blueprint`,
-        type: `Guide`,
-        note: `مخطط الصفحات وقواعد التنسيق`
-      },
-      {
-        name: `Day07_Checkpoint`,
-        type: `PBIX`,
-        note: `نسخة متابعة بعد تجهيزها والتحقق منها`
+        "name": "مواد اليوم 8",
+        "type": "Plan",
+        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
       }
-    ]
+    ],
+    "teachingStatus": "planned"
   },
   {
-    id: 9,
-    date: `2026-11-03`,
-    weekday: `الثلاثاء`,
-    ready: false,
-    phase: `FOLLOW UP`,
-    title: `Track Work and Explain Findings`,
-    titleAr: `متابعة الاعمال وشرح النتائج`,
-    hook: `متابعة التقارير والطلبات جزء من التطبيق، الى جانب قراءة مؤشرات القوى العاملة`,
-    mission: `اضافة صفحة لمتابعة طلبات العمل ثم تحويل النتائج الى استنتاجات مدعومة بارقام`,
-    topics: [
-      `Request Grain`,
-      `Status / Due Date`,
-      `Overdue Open Requests`,
-      `Cycle Time`,
-      `On-Time %`,
-      `Operational Slicers`,
-      `Storytelling`
+    "id": 9,
+    "date": "2026-11-03",
+    "weekday": "الثلاثاء",
+    "ready": false,
+    "phase": "PUBLISH",
+    "title": "Power BI Service, Refresh, Security, RLS & Performance",
+    "titleAr": "النشر والتحديث والصلاحيات والاداء",
+    "hook": "تقرير Desktop لا يصبح حلا تشغيليا قبل وضوح النشر والتحديث والوصول",
+    "mission": "نفهم دورة النشر والادارة ونطبق حسب الحساب والصلاحيات المتاحة",
+    "topics": [
+      "Power BI Service",
+      "Workspaces / Apps",
+      "Publishing / Sharing",
+      "Semantic Model",
+      "Scheduled Refresh / Gateway",
+      "Credentials",
+      "RLS / View As",
+      "Performance Analyzer"
     ],
-    build: [
-      `ربط سجل الطلبات بالابعاد المناسبة`,
-      `تمييز الطلبات المفتوحة والمنجزة والملغاة`,
-      `حساب المتاخر المفتوح حسب تاريخ مرجعي واضح`,
-      `حساب مدة انجاز الطلبات المكتملة فقط`,
-      `مقارنة الالتزام باستخدام نفس تعريف المهلة`,
-      `كتابة ثلاثة استنتاجات واجراء متابعة مرتبط بها`
+    "build": [
+      "نوضح متطلبات الحساب والترخيص وسياسة المؤسسة قبل النشر",
+      "ننشر مثالا افتراضيا فقط اذا توفرت البيئة المناسبة",
+      "نراجع Refresh وCredentials وGateway لمصدر محلي",
+      "نبني Role ونختبر View As في Desktop ثم نفهم عضوية Service",
+      "نوضح ان اخفاء الصفحة لا يمثل حماية بيانات",
+      "نستخدم Performance Analyzer ونراجع اخطاء التحديث ونبني قائمة تشغيل"
     ],
-    challenge: `نحدد طلبات المتابعة ذات الاولوية ونفسر نتيجة واحدة في القوى العاملة دون افتراض سبب لم تثبته البيانات`,
-    deliverable: `صفحة متابعة اعمال مع استنتاجات وارقام واجراءات مقترحة`,
-    resources: [
-
-    ],
-    requiredFiles: [
+    "challenge": "اختبري دور قسم مختلف وقدمي خطة تحديث وصلاحيات قابلة للتنفيذ",
+    "deliverable": "تجربة نشر عند توفر الحساب ودليل تحديث وRLS واختبار اداء",
+    "resources": [],
+    "requiredFiles": [
       {
-        name: `Department_Followup_Requests.xlsx`,
-        type: `Excel`,
-        note: `سجل طلبات وتقارير افتراضي مع المواعيد والحالات`
-      },
-      {
-        name: `Day09_Insights_and_Actions`,
-        type: `Guide`,
-        note: `قالب الاستنتاج والدليل واجراء المتابعة`
+        "name": "مواد اليوم 9",
+        "type": "Plan",
+        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
       }
-    ]
+    ],
+    "teachingStatus": "planned"
   },
   {
-    id: 10,
-    date: `2026-11-05`,
-    weekday: `الخميس`,
-    ready: false,
-    phase: `DELIVER`,
-    title: `Refresh Validate and Handover`,
-    titleAr: `مشروع نهائي وتحديث وتسليم`,
-    hook: `قيمة التقرير تظهر عندما يصل شهر جديد ونقدر نحدثه ونتحقق منه بشكل مستقل`,
-    mission: `تنفيذ دورة العمل كاملة وتقديم داشبورد تفاعلي مع تعليمات تحديث وتشغيل`,
-    topics: [
-      `Refresh`,
-      `Data Validation`,
-      `Reconciliation`,
-      `Model Check`,
-      `Power BI Service Overview`,
-      `Workspace / Sharing`,
-      `Scheduled Refresh`,
-      `RLS Overview`,
-      `Handover`
+    "id": 10,
+    "date": "2026-11-05",
+    "weekday": "الخميس",
+    "ready": false,
+    "phase": "DELIVER",
+    "title": "Final End-to-End Project, Validation & Presentation",
+    "titleAr": "مشروع كامل باستقلالية وتحقق وعرض",
+    "hook": "القيمة تظهر عندما تستلمين ملفا جديدا وتنفذين العمل دون مساعدة خطوة بخطوة",
+    "mission": "تنفيذ Get Data ثم Query ثم Model ثم DAX ثم Report ثم Validation وعرض النتائج",
+    "topics": [
+      "End-to-End Project",
+      "Refresh / Reconciliation",
+      "Model Checks",
+      "Measure Validation",
+      "UX / Security Checks",
+      "Presentation",
+      "Handover"
     ],
-    build: [
-      `اضافة بيانات شهر جديد وتحديث التقرير`,
-      `مراجعة الصفوف والمفاتيح والتواريخ`,
-      `مطابقة مؤشرات مختارة مع ملفات المصدر`,
-      `اختبار الفلاتر والتنقل والمقارنات`,
-      `شرح متطلبات النشر والتحديث وفق بيئة العمل المتاحة`,
-      `عرض النتائج وتسليم قائمة تشغيل وتحديث`
+    "build": [
+      "استيراد بيانات تقييم افتراضية جديدة وتنظيفها",
+      "تحديث النموذج والعلاقات والتحقق من المفاتيح",
+      "حساب الاهداف والاوزان والاكتمال لكل اتجاه بشكل مستقل",
+      "بناء او اكمال الملخص والتفاصيل والتفاعل",
+      "مطابقة ارقام مختارة وفحص الصلاحيات والتحديث",
+      "عرض النتائج وحدودها وتسليم دليل تشغيل وخطة تعمق لاحقة"
     ],
-    challenge: `نفذي التحديث من البداية للنهاية، ثم نقدم ثلاثة استنتاجات موثقة واجراء متابعة واحدا`,
-    deliverable: `المشروع النهائي مع تقرير تحقق ودليل تشغيل مختصر`,
-    resources: [
-
-    ],
-    requiredFiles: [
+    "challenge": "نفذي التحديث وقدمي 3 استنتاجات مدعومة وفحصا رقميا وخطوة متابعة",
+    "deliverable": "مشروع Power BI متكامل وتقرير تحقق ودليل تشغيل مختصر",
+    "resources": [],
+    "requiredFiles": [
       {
-        name: `Final_New_Month_Pack`,
-        type: `ZIP`,
-        note: `ملفات شهر جديد لاختبار المشروع النهائي`
-      },
-      {
-        name: `Final_Validation_and_Handover`,
-        type: `Guide`,
-        note: `قائمة التحقق والتسليم`
+        "name": "مواد اليوم 10",
+        "type": "Plan",
+        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
       }
-    ]
+    ],
+    "teachingStatus": "planned"
   }
 ];
 
@@ -541,3 +520,4 @@ function getCompletedDays() {
     return [];
   }
 }
+
