@@ -6,3 +6,4 @@
 - Put all instructor resources on the trainer page with explicit time slots, speech, screen actions, learner practice, and checks. Preserve local checklist/notes storage.
 - Preserve completed Day 1 content, source demos, recording, login and day gating.
 - Modify only PowerBi/Course223.
+- Explicitly mark new learner resources with audience: learner. For days 2 onward, undeclared resources are excluded from learner surfaces. Mark answer/reference CSVs as trainer-only.
