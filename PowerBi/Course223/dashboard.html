@@ -52,7 +52,7 @@
     </section>
   </main>
 
-  <script src="data.js?v=20261015-performance-v2"></script>
+  <script src="data.js?v=20261017-learner-csv"></script>
   <script src="videos.js?v=20261015-day1-iframe-fix"></script>
   <script src="access.js?v=20261015-day2"></script>
   <script>
@@ -115,7 +115,7 @@
           </div>
           <div class="portal-day-bottom">
             <span class="status-chip ${planned ? `planned` : open ? dayRuntimeStatus(day) : `locked`}"><i class="complete-dot"></i>${planned ? `خطة مقترحة` : open ? dayScheduleLabel(day) : `مواد مقفلة`}</span>
-            <span class="resource-count">${planned ? `المحتوى والتمرين والملفات المطلوبة` : open ? `${day.resources.filter(resource => resource.url).length} مواد جاهزة` : `تفتح مع تقدم الدورة`}</span>
+            <span class="resource-count">${planned ? `المحتوى والتمرين والملفات المطلوبة` : open ? `${getLearnerResources(day).filter(resource => resource.url).length} مواد جاهزة` : `تفتح مع تقدم الدورة`}</span>
           </div>`;
         if (accessible) {
           card.tabIndex = 0;
@@ -150,4 +150,5 @@
   </script>
 </body>
 </html>
+
 

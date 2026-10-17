@@ -112,57 +112,29 @@ const DAYS = [
       "Applied Steps"
     ],
     "build": [
-      "نستورد ملف التطبيق: 30450 صف خام، نحافظ على Raw ونفحص كامل البيانات بدل اول 1000 صف",
-      "نحدد مستوى الصف: KPI لموظف ومقيم وفترة واتجاه وهدف، تكرار EmployeeID او KPIID وحده طبيعي",
-      "نحذف 300 نسخة متطابقة فقط، نوحد النصوص والمسميات ونراجع 595 صفا متعارضا او ناقص الهوية في Review بمساعدة المدرب",
-      "نحول Score الى رقم وDate الى تاريخ بقواعد واضحة، نحافظ على صفر الاداء ونعزل Pending والدرجات الناقصة والخاطئة كـnull",
-      "نجرب Split للحقول المركبة وFill لوصف الدفعة داخل مجموعتها فقط وConditional لتصنيف الدرجة، ونسمي Applied Steps",
-      "Close & Apply ثم نطابق Clean: 29555 صفا و1000 موظف و27192 درجة صحيحة، Self وManager وUpward منفصلة، بدون DAX اليوم"
+      "نزلي ملف التطبيق CSV وافتحيه من Get Data ثم Text/CSV واختاري Transform Data",
+      "استكشفي الاعمدة والقيم الناقصة والتكرار باستخدام Data Profiling",
+      "نظفي المسافات ووحدي اسماء الاقسام وانواع التقييم وحالاته",
+      "راجعي انواع البيانات والدرجات والتواريخ، وميزي بين الدرجة الصفرية والدرجة الناقصة",
+      "طبقي Split وFill وConditional Columns في المكان المناسب، وراجعي خطوات التنظيف",
+      "اختاري Close & Apply واعرضي البيانات في جدول وبطاقات وفلاتر، ثم احفظي التقرير"
     ],
-    "challenge": "ملف مستقل فيه 12180 صف خام، نطبق النصوص والانواع داخل الجلسة ثم نكمل المراجعة والمطابقة كواجب عند الحاجة، لا نحذف موظفا لانه مكرر ولا نعوض الغياب بصفر",
-    "deliverable": "Day02_Performance_Cleaning.pbix مع Raw وClean وReview وخطوات مفهومة وارقام مطابقة",
+    "challenge": "افتحي ملف التمرين CSV وطبقي مهارات التنظيف على البيانات الجديدة، سجلي الخطوات التي نفذتيها واي حالة تحتاج مراجعة، ثم احفظي ملف Power BI",
+    "deliverable": "ملف Power BI محفوظ، فيه بيانات التطبيق بعد التنظيف وخطوات واضحة يمكن مراجعتها",
     "resources": [
       {
-        "name": "Day02_Complete.zip",
-        "type": "ZIP",
-        "url": "week1/day2/downloads/Day02_Complete.zip",
-        "note": "كل ملفات اليوم والشرح والتحدي والمراجع الحالية"
-      },
-      {
-        "name": "Performance_KPI_30000_Dirty.csv",
+        "name": "ملف التطبيق — تقييم اداء الموظفين",
         "type": "CSV",
         "url": "week1/day2/data/Performance_KPI_30000_Dirty.csv",
-        "note": "التطبيق: 30450 صف خام، بيانات افتراضية بالكامل"
+        "note": "CSV · 30,450 صف من بيانات تدريبية افتراضية",
+        "audience": "learner"
       },
       {
-        "name": "Day02_Guide.html",
-        "type": "Guide",
-        "url": "week1/day2/web/Day02_Guide.html",
-        "note": "تطبيق متدرج: نكتشف ثم ننظف ثم نتحقق"
-      },
-      {
-        "name": "Performance_Challenge_12000_Dirty.csv",
+        "name": "ملف التمرين المستقل",
         "type": "CSV",
         "url": "week1/day2/data/Performance_Challenge_12000_Dirty.csv",
-        "note": "تحدي مستقل: 12180 صف خام، 400 موظف افتراضي"
-      },
-      {
-        "name": "Day02_Challenge.html",
-        "type": "Challenge",
-        "url": "week1/day2/web/Day02_Challenge.html",
-        "note": "مهام مستقلة وChecklist تحفظ محليا"
-      },
-      {
-        "name": "Day02_Dictionary.html",
-        "type": "Guide",
-        "url": "week1/day2/web/Day02_Dictionary.html",
-        "note": "مستوى الصف والمفاتيح وقواعد null والتكرار"
-      },
-      {
-        "name": "Day02_Reference.html",
-        "type": "Guide",
-        "url": "week1/day2/web/Day02_Reference.html",
-        "note": "مرجع رقمي قبل وبعد التنظيف، يفتح بعد المحاولة"
+        "note": "CSV · 12,180 صف للتطبيق المستقل",
+        "audience": "learner"
       }
     ],
     "requiredFiles": [],
@@ -521,3 +493,9 @@ function getCompletedDays() {
   }
 }
 
+
+
+// Learner surfaces use this allowlist; instructor guides and answers belong in Trainer.
+function getLearnerResources(day) {
+  return (day.resources || []).filter(resource => resource.audience !== `trainer` && (day.id === 1 || /\.csv(?:[?#]|$)/i.test(resource.url || ``)));
+}

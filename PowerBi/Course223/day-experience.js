@@ -1,7 +1,7 @@
 function initCourseDayJourney(day, courseHome) {
   const escape = value => String(value ?? ``).replace(/[&<>"']/g, c => ({[`&`]:`&amp;`,[`<`]:`&lt;`,[`>`]:`&gt;`,[`"`]:`&quot;`,[`'`]:`&#39;`}[c]));
   const number = String(day.id).padStart(2, `0`);
-  const resources = day.ready ? (day.resources || []) : (day.requiredFiles || []);
+  const resources = day.ready ? getLearnerResources(day) : (day.requiredFiles || []);
   const fileList = resources.length ? resources.map(file => {
     const copy = `<span class="mj-resource-icon">${escape(file.type)}</span><span><b>${escape(file.name)}</b><small>${escape(file.note || ``)}</small></span>`;
     return day.ready && file.url ? `<a class="mj-resource" href="${escape(file.url)}" target="_blank" rel="noopener">${copy}</a>` : `<div class="mj-resource">${copy}<small>قيد التجهيز</small></div>`;
@@ -19,3 +19,4 @@ function initCourseDayJourney(day, courseHome) {
   document.title = `اليوم ${day.id} | ${day.titleAr} | X Academy`;
   initMariamJourney(day, courseHome, chapters);
 }
+
