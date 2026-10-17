@@ -7,3 +7,5 @@
 - Preserve completed Day 1 content, source demos, recording, login and day gating.
 - Modify only PowerBi/Course223.
 - Explicitly mark new learner resources with audience: learner. For days 2 onward, undeclared resources are excluded from learner surfaces. Mark answer/reference CSVs as trainer-only.
+
+- Keep learner copy focused on the task. Omit synthetic-data labels, internal preparation/teaching notes, instructor process details and unnecessary technical provenance from learner-facing text. Keep provenance accurate in instructor materials; never describe synthetic records as real employee data.
