@@ -9,3 +9,6 @@
 - Explicitly mark new learner resources with audience: learner. For days 2 onward, undeclared resources are excluded from learner surfaces. Mark answer/reference CSVs as trainer-only.
 
 - Keep learner copy focused on the task. Omit synthetic-data labels, internal preparation/teaching notes, instructor process details and unnecessary technical provenance from learner-facing text. Keep provenance accurate in instructor materials; never describe synthetic records as real employee data.
+
+- Trainer guides must support a second-screen focus view: one actionable step at a time, large readable speech/screen/practice prompts, quick next/previous navigation, optional references/notes, and preserved local checklist storage. Avoid long dense default pages. Use refined teal motion graphics with a motion-off control and respect reduced-motion preferences. The user requested this on 2026-10-18.
+- Confirmed teaching feedback for Day 2 (2026-10-18): all agreed Power Query content was covered, plus Column from Examples. Power Query remains ongoing throughout the course; Day 3 starts with at most 15 minutes of cleaning practice before Append, Merge, Folder and Refresh. Do not mark future application datasets as prepared until built and verified.
