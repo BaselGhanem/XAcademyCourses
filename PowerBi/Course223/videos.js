@@ -3,7 +3,7 @@
 
 const DAY_VIDEOS = {
   1: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQTvbwGMn5m5S4-0cAYHajrHAXQvilO399MYC4ENpI4_XTs" width="1920" height="1080" frameborder="0" scrolling="no" title="تسجيل اليوم الأول" allow="autoplay; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
-  2: ``,
+  2: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQQJZ5-LIv2OQ65KcBsn6J9pAZGY88Cy_lfSMbxSjApvH2E" width="1920" height="1080" frameborder="0" scrolling="no" title="تسجيل اليوم الثاني" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`,
   3: ``,
   4: ``,
   5: ``,
