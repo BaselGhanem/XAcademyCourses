@@ -48,7 +48,7 @@
           <div id="cf-step-content">
             <h2 id="cf-title" tabindex="-1"></h2>
             <div class="cf-say"><span class="cf-label">احكي لمريم</span><p class="cf-speech" id="cf-speech"></p></div>
-            <div class="cf-instruction-grid"><div><span class="cf-label">على الشاشة</span><p id="cf-screen"></p></div><div><span class="cf-label">خلي مريم تجرب</span><p id="cf-practice"></p></div></div>
+            <div class="cf-instruction-grid"><div><span class="cf-label">على الشاشة</span><p id="cf-screen" dir="auto"></p></div><div><span class="cf-label">خلي مريم تجرب</span><p id="cf-practice"></p></div></div>
             <div class="cf-check"><b aria-hidden="true">✓</b><span id="cf-check"></span></div>
           </div>
           <div class="cf-footer"><label class="cf-done"><input type="checkbox" id="cf-done"> خلصت هاي الخطوة</label><div class="cf-actions"><button class="cf-btn" id="cf-prev" type="button">السابق</button><button class="cf-btn" id="cf-next" type="button" aria-label="الخطوة التالية بدون شطب">التالي</button><button class="cf-btn primary" id="cf-complete" type="button">خلصت، التالي</button></div></div>
