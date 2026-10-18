@@ -10,13 +10,27 @@ function initCourseDayJourney(day, courseHome) {
   const middle = Math.ceil(steps.length / 2);
   const renderSteps = (list, offset) => list.map((text, i) => `<article class="mj-block"><span class="mj-num">${String(offset+i+1).padStart(2,`0`)}</span><p class="mj-copy">${escape(text)}</p></article>`).join(``);
   const chapter = (label, name, title, body, next) => ({label, name, title, body, next, scene:day.title, tag:`DAY ${number} / ${day.phase}`});
-  const chapters = [
+  let chapters = [
     chapter(`01 / SEE THE GOAL`, `نشوف الفكرة`, escape(day.titleAr), `<p class="mj-lead">${escape(day.hook)}</p><div class="mj-callout">${escape(day.mission)}</div><p class="mj-note">${escape(dayScheduleLabel(day))}${COURSE_CONFIG.sessionHours ? ` • ${COURSE_CONFIG.sessionHours} ساعة` : ``}</p>${day.ready ? `` : `<p class="mj-note">هاي خطة اليوم، ملفات التطبيق لسا قيد التجهيز</p>`}<details><summary>${day.ready ? `ملفات اليوم` : `ملفات التطبيق المطلوبة`}</summary><div id="mj-resources">${fileList}</div></details>`, `يلا نشوف اول خطوة`),
     chapter(`02 / GET STARTED`, `نبلش التطبيق`, `نبلش خطوة<br>بخطوة`, renderSteps(steps.slice(0,middle),0), `نكمل ونشوف النتيجة`),
     chapter(`03 / BUILD & CHECK`, `نبني ونتاكد`, `نطبق،<br>ونتاكد من النتيجة`, `${renderSteps(steps.slice(middle),middle)}<div class="mj-callout">${escape(day.deliverable)}</div><details><summary>المهارات اللي بنمر عليها</summary><p class="mj-copy" dir="ltr">${(day.topics||[]).map(escape).join(` · `)}</p></details>`, `هلا دور التطبيق المستقل`),
     chapter(`04 / YOUR TURN`, `نجرب ونحفظ`, `هلا دورك،<br>نجرب بشكل مستقل`, `<p class="mj-lead">${escape(day.challenge)}</p><div class="mj-callout">المطلوب بالنهاية: ${escape(day.deliverable)}</div><div class="mj-complete" ${day.ready ? `` : `hidden`}><h3 id="mj-complete-title">انهيت التطبيق العملي؟</h3><button type="button" id="mj-complete">نسجل اتمام اليوم ${day.id}</button></div><footer class="mj-footer"><a href="${escape(courseHome)}">مركز الدورة</a>${day.id<10 ? `<a href="day.html?id=${day.id+1}">خطة اليوم ${day.id+1} ←</a>` : `<span dir="ltr">X ACADEMY</span>`}</footer>`, ``)
   ];
+  if (day.learningSections?.length) {
+    const scenes = [[`CSV`, `POWER QUERY`], [`RAW`, `CLEAN`], [`JUL + AUG`, `APPEND`], [`EmployeeID`, `MERGE`], [`FOLDER`, `REFRESH`], [`YOUR TURN`, `VALIDATE`]];
+    chapters = day.learningSections.map((section, index) => {
+      const files = section.files ? resources.filter(file => file.stage === section.files).map(file => `<a class="mj-resource" href="${escape(file.url)}" download><span class="mj-resource-icon">CSV</span><span><b>${escape(file.name)}</b><small>${escape(file.note)}</small></span></a>`).join(``) : ``;
+      const items = (section.steps || []).map((step, i) => `<article class="mj-block"><span class="mj-num">${String(i + 1).padStart(2, `0`)}</span><h3>${escape(step.title)}</h3><p class="mj-copy" dir="auto">${escape(step.copy)}</p></article>`).join(``);
+      const final = index === day.learningSections.length - 1;
+      const scene = scenes[index] || [`POWER QUERY`, `APPLY`];
+      return {...chapter(`${String(index + 1).padStart(2, `0`)} / POWER QUERY`, section.name, escape(section.title), `<p class="mj-lead">${escape(section.lead)}</p>${files ? `<details><summary>${section.files === `practice` ? `ملفات التمرين المستقل` : `تحميل ملفات التطبيق`}</summary>${files}</details>` : ``}${items}<div class="mj-callout">${escape(section.callout)}</div>${final ? `<div class="mj-complete"><h3 id="mj-complete-title">انهيت التطبيق العملي؟</h3><button type="button" id="mj-complete">نسجل اتمام اليوم ${day.id}</button></div><footer class="mj-footer"><a href="${escape(courseHome)}">مركز الدورة</a><a href="day.html?id=${day.id + 1}">خطة اليوم ${day.id + 1} ←</a></footer>` : ``}`, final ? `` : `نكمل للخطوة التالية`), art:`<div class="mj-flow"><span>${escape(scene[0])}</span><i>↓</i><span>${escape(scene[1])}</span></div>`};
+    });
+  }
   document.title = `اليوم ${day.id} | ${day.titleAr} | X Academy`;
   initMariamJourney(day, courseHome, chapters);
+  if (day.learningSections?.length) {
+    document.querySelector(`.mj-glass-top span:last-child`).textContent = number;
+    document.querySelector(`.mj-loader`)?.setAttribute(`aria-label`, `بنجهز اليوم ${day.id}`);
+  }
 }
 

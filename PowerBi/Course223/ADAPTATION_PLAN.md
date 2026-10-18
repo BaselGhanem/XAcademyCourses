@@ -5,11 +5,12 @@
 ## حالة التدريس
 
 - اليوم الاول: تم تدريسه فعليا في 15 اكتوبر 2026، المحتوى والتسجيل والملفات محفوظة دون تعديل
-- المنجز فعليا: Get Data من مصادر متعددة، Extract & Load، Filters وSlicers وDropdown وHorizontal وClear Filter، Card، Rename for Visual Values، Count وDistinct Count من Visual، استعراض Table View
+- المنجز فعليا: Get Data من مصادر متعددة، Extract & Load، Filters و Slicers و Dropdown و Horizontal و Clear Filter، Card، Rename for Visual Values، Count و Distinct Count من Visual، استعراض Table View
 - لم يدرس في اليوم الاول: DAX Measures او Power Query Transform بالتفصيل
-- اليوم الثاني: مجهز لجلسة 18 اكتوبر 2026، لم يدرس بعد
-- الايام 3–10: مخططة فقط، لا تعني جاهزية مواد او تسجيلات
-- علامة اتمام المتدربة وChecklist المدرب تقدم محلي، وليستا سجلا تلقائيا لما درس فعليا
+- اليوم الثاني: تم تدريسه فعليا في 18 اكتوبر 2026، غطيت مهارات Power Query المتفق عليها واضيف Column from Examples حسب تاكيد المدرب
+- اليوم الثالث: مجهز لجلسة 20 اكتوبر 2026، لم يدرس بعد، ستة CSV وشرح متدرج ودليل مدرب ونتائج مدققة
+- الايام 4–10: مخططة فقط، لا تعني جاهزية مواد او تسجيلات
+- علامة اتمام المتدربة و Checklist المدرب تقدم محلي، وليستا سجلا تلقائيا لما درس فعليا
 
 ## سياق التطبيق
 
@@ -24,8 +25,8 @@ Self: الموظف يقيم نفسه، Manager: المدير يقيم الموظ
 | اليوم | التاريخ | المهارات | الحالة |
 |---|---|---|---|
 |1|15-10-2026|Data Sources & Report Basics|تم تدريسه، لا يعاد تحريره|
-|2|18-10-2026|Power Query، Profiling، Text، Types، Nulls، Errors، Fill، Split، Conditional، Duplicates، Applied Steps|مجهز ولم يدرس|
-|3|20-10-2026|Merge، Append، Folder Connector، Refresh، Schema Checks|مخطط|
+|2|18-10-2026|Power Query، Profiling، Text، Types، Nulls، Errors، Fill، Split، Conditional، Duplicates، Applied Steps|تم تدريسه + Column from Examples|
+|3|20-10-2026|15 دقيقة تنظيف، Append، Merge، Folder Connector، Refresh، Schema Checks|مجهز ولم يدرس|
 |4|22-10-2026|Fact/Dimension، Star Schema، Relationships، Date Table، Grain/Keys|مخطط|
 |5|25-10-2026|DAX Fundamentals، Measures/Columns، SUM، DISTINCTCOUNT، DIVIDE، Iterators، Weighted Objectives|مخطط|
 |6|27-10-2026|CALCULATE، Filter Context، FILTER، REMOVEFILTERS، Variables، Totals|مخطط|
@@ -46,7 +47,7 @@ Self: الموظف يقيم نفسه، Manager: المدير يقيم الموظ
 - التطبيق 30,450 صف خام، التحدي المستقل 12,180 صف خام
 - لا نحذف صفوفا لمجرد تكرار EmployeeID او KPIID
 - النسخ المطابقة تزال اولا، النسخ المتعارضة بكل نسخها والهوية الناقصة تذهب الى Review
-- صفر الدرجة صالح، الغياب والخطا وPending لا يصبح صفرا
+- صفر الدرجة صالح، الغياب والخطا و Pending لا يصبح صفرا
 - التاريخ الفاسد يحول الى null مع مراجعة، ولا يحذف السجل
 - المرجع الكامل: Trainer/day2/Day02_Reference.html
 - الدليل التفاعلي: Trainer/Day02_Performance.html
@@ -63,3 +64,12 @@ Self: الموظف يقيم نفسه، Manager: المدير يقيم الموظ
 - صفحة اليوم الثاني تعرض ملف التطبيق CSV وملف التمرين CSV فقط، مع تعليمات تعلم مختصرة
 - كل المراجع وقاموس الحقول والشرح التفصيلي والتعليمات والاجابات ضمن مساحة Trainer، وروابطها مرتبة زمنيا في دليل المدرب
 - هذه قاعدة عمل مستمرة للمواد الجديدة، مع الحفاظ على محتوى اليوم الاول المكتمل وتسجيله
+
+## اليوم الثالث
+
+- التنظيف 15 دقيقة، Append 20، Merge 25، Folder 30، Refresh 10، تطبيق مستقل ومراجعة 20
+- خمسة ملفات تقييم وتمرن، كل منها 12,120 صف خام و 12,000 بعد التنظيف، ودليل Employees من 10,000 صف
+- التطبيق يبدأ بيوليو واغسطس:24,000 صف، وبعد اضافةسبتمبر 36,000 صف
+- التمرين مستقل:ابريل 12,000 صف، وبعد اضافةمايو 24,000 صف
+- اجابات المدرب وقاموس الحقول وادوات التحقق تحت Trainer/day3 فقط
+- Power Query مستمر خلال المسار، لا نساوي جاهزية اليوم بتدريسه او اتقانه

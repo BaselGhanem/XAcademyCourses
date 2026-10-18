@@ -15,7 +15,8 @@
       minutes: slot ? minute(slot[2]) - minute(slot[1]) : 0,
       say: after(`احكي`), screen: after(`اعرض`), practice: after(`تطبيق`),
       check: section.querySelector(`.note`)?.textContent.replace(/^سؤال التحقق والاجابة:\s*/, ``) || ``,
-      group: section.dataset.phase || `الخطوات`
+      group: section.dataset.phase || `الخطوات`,
+      detail: section.querySelector(`.trainer-detail`)
     };
   });
   if (!tasks.length) return;
@@ -50,6 +51,7 @@
             <div class="cf-say"><span class="cf-label">احكي لمريم</span><p class="cf-speech" id="cf-speech"></p></div>
             <div class="cf-instruction-grid"><div><span class="cf-label">على الشاشة</span><p id="cf-screen" dir="auto"></p></div><div><span class="cf-label">خلي مريم تجرب</span><p id="cf-practice"></p></div></div>
             <div class="cf-check"><b aria-hidden="true">✓</b><span id="cf-check"></span></div>
+            <button class="cf-btn" type="button" id="cf-step-help" hidden style="margin-top:15px">خطوات الشاشة بالتفصيل</button>
           </div>
           <div class="cf-footer"><label class="cf-done"><input type="checkbox" id="cf-done"> خلصت هاي الخطوة</label><div class="cf-actions"><button class="cf-btn" id="cf-prev" type="button">السابق</button><button class="cf-btn" id="cf-next" type="button" aria-label="الخطوة التالية بدون شطب">التالي</button><button class="cf-btn primary" id="cf-complete" type="button">خلصت، التالي</button></div></div>
         </section>
@@ -118,6 +120,7 @@
     el(`number`).textContent = `STEP ${String(index + 1).padStart(2, `0`)} / ${String(tasks.length).padStart(2, `0`)}`;
     el(`title`).textContent = task.title;
     for (const [id, value] of [[`speech`, task.say], [`screen`, task.screen], [`practice`, task.practice], [`check`, task.check]]) el(id).textContent = value;
+    el(`step-help`).hidden = !task.detail;
     el(`upnext`).textContent = tasks[index + 1]?.title || `حفظ الملف وتوثيق ما تم فعليا`;
     el(`prev`).disabled = index === 0;
     el(`next`).disabled = index === tasks.length - 1;
@@ -151,6 +154,14 @@
   const dialog = el(`dialog`), dialogBody = app.querySelector(`.cf-dialog-body`);
   function open(title) { el(`dialog-title`).textContent = title; dialogBody.replaceChildren(); dialog.showModal(); }
   el(`close`).onclick = () => dialog.close();
+  el(`step-help`).onclick = () => {
+    const detail = tasks[index].detail;
+    if (!detail) return;
+    open(tasks[index].title);
+    const copy = detail.cloneNode(true);
+    copy.className = ``;
+    dialogBody.append(copy);
+  };
   dialog.onclick = event => { if (event.target !== dialog) return; const bounds = dialog.getBoundingClientRect(); if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close(); };
   el(`plan`).onclick = () => {
     open(`خطة الجلسة · ${tasks.reduce((sum, task) => sum + task.minutes, 0)} دقيقة`);

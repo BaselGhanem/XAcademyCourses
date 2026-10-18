@@ -1,0 +1,214 @@
+{
+  "provenance": "Deterministic synthetic training data. No real employee records.",
+  "grain": "One KPI for one evaluated employee, period, evaluation direction, evaluator and objective.",
+  "files": {
+    "Evaluations_Jul.csv": {
+      "rawRows": 12120,
+      "removedDuplicates": 120,
+      "rows": 12000,
+      "employees": 400,
+      "scoreCount": 11882,
+      "missingScores": 118,
+      "zeroScores": 211,
+      "scoreSum": 588535,
+      "pending": 118,
+      "byType": {
+        "Self": 4000,
+        "Manager": 4000,
+        "Upward": 4000
+      }
+    },
+    "Evaluations_Aug.csv": {
+      "rawRows": 12120,
+      "removedDuplicates": 120,
+      "rows": 12000,
+      "employees": 400,
+      "scoreCount": 11882,
+      "missingScores": 118,
+      "zeroScores": 207,
+      "scoreSum": 589095,
+      "pending": 118,
+      "byType": {
+        "Self": 4000,
+        "Manager": 4000,
+        "Upward": 4000
+      }
+    },
+    "Evaluations_Sep.csv": {
+      "rawRows": 12120,
+      "removedDuplicates": 120,
+      "rows": 12000,
+      "employees": 400,
+      "scoreCount": 11882,
+      "missingScores": 118,
+      "zeroScores": 210,
+      "scoreSum": 590059,
+      "pending": 118,
+      "byType": {
+        "Self": 4000,
+        "Manager": 4000,
+        "Upward": 4000
+      }
+    },
+    "Practice_Apr.csv": {
+      "rawRows": 12120,
+      "removedDuplicates": 120,
+      "rows": 12000,
+      "employees": 400,
+      "scoreCount": 11882,
+      "missingScores": 118,
+      "zeroScores": 212,
+      "scoreSum": 589569,
+      "pending": 118,
+      "byType": {
+        "Self": 4000,
+        "Manager": 4000,
+        "Upward": 4000
+      }
+    },
+    "Practice_May.csv": {
+      "rawRows": 12120,
+      "removedDuplicates": 120,
+      "rows": 12000,
+      "employees": 400,
+      "scoreCount": 11882,
+      "missingScores": 118,
+      "zeroScores": 212,
+      "scoreSum": 590331,
+      "pending": 118,
+      "byType": {
+        "Self": 4000,
+        "Manager": 4000,
+        "Upward": 4000
+      }
+    },
+    "Employees.csv": {
+      "rawRows": 10000,
+      "rows": 10000,
+      "distinctEmployeeIDs": 10000
+    }
+  },
+  "stages": {
+    "Application_BeforeRefresh": {
+      "files": 2,
+      "rawRows": 24240,
+      "rows": 24000,
+      "employees": 400,
+      "scoreCount": 23764,
+      "missingScores": 236,
+      "zeroScores": 418,
+      "scoreSum": 1177630,
+      "pending": 236,
+      "byType": {
+        "Self": 8000,
+        "Manager": 8000,
+        "Upward": 8000
+      },
+      "matchedRows": 23400,
+      "unmatchedRows": 600,
+      "unmatchedEmployeeIDs": [
+        "E00391",
+        "E00392",
+        "E00393",
+        "E00394",
+        "E00395",
+        "E00396",
+        "E00397",
+        "E00398",
+        "E00399",
+        "E00400"
+      ],
+      "departmentMismatches": 0
+    },
+    "Application_AfterRefresh": {
+      "files": 3,
+      "rawRows": 36360,
+      "rows": 36000,
+      "employees": 400,
+      "scoreCount": 35646,
+      "missingScores": 354,
+      "zeroScores": 628,
+      "scoreSum": 1767689,
+      "pending": 354,
+      "byType": {
+        "Self": 12000,
+        "Manager": 12000,
+        "Upward": 12000
+      },
+      "matchedRows": 35100,
+      "unmatchedRows": 900,
+      "unmatchedEmployeeIDs": [
+        "E00391",
+        "E00392",
+        "E00393",
+        "E00394",
+        "E00395",
+        "E00396",
+        "E00397",
+        "E00398",
+        "E00399",
+        "E00400"
+      ],
+      "departmentMismatches": 0
+    },
+    "Practice_BeforeRefresh": {
+      "files": 1,
+      "rawRows": 12120,
+      "rows": 12000,
+      "employees": 400,
+      "scoreCount": 11882,
+      "missingScores": 118,
+      "zeroScores": 212,
+      "scoreSum": 589569,
+      "pending": 118,
+      "byType": {
+        "Self": 4000,
+        "Manager": 4000,
+        "Upward": 4000
+      },
+      "matchedRows": 11850,
+      "unmatchedRows": 150,
+      "unmatchedEmployeeIDs": [
+        "E03396",
+        "E03397",
+        "E03398",
+        "E03399",
+        "E03400"
+      ],
+      "departmentMismatches": 0
+    },
+    "Practice_AfterRefresh": {
+      "files": 2,
+      "rawRows": 24240,
+      "rows": 24000,
+      "employees": 400,
+      "scoreCount": 23764,
+      "missingScores": 236,
+      "zeroScores": 424,
+      "scoreSum": 1179900,
+      "pending": 236,
+      "byType": {
+        "Self": 8000,
+        "Manager": 8000,
+        "Upward": 8000
+      },
+      "matchedRows": 23700,
+      "unmatchedRows": 300,
+      "unmatchedEmployeeIDs": [
+        "E03396",
+        "E03397",
+        "E03398",
+        "E03399",
+        "E03400"
+      ],
+      "departmentMismatches": 0
+    }
+  },
+  "duplicateMasterExperiment": {
+    "key": "E00001",
+    "before": 24000,
+    "after": 24060,
+    "extraRows": 60,
+    "explanation": "Adding one copy of E00001 to the lookup duplicates 30 KPI rows per period across two periods."
+  }
+}

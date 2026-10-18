@@ -1,4 +1,4 @@
-// Course223 — Day 1 preserved; Day 2 prepared; Days 3–10 planned.
+// Course223 — Day 1 preserved; Day 3 prepared; Days 4–10 planned.
 const COURSE_CONFIG = {
   id: `course223_mariam`,
   title: `Power BI | X Academy`,
@@ -140,45 +140,227 @@ const DAYS = [
     "requiredFiles": [],
     "teachingStatus": "prepared"
   },
-  {
-    "id": 3,
-    "date": "2026-10-20",
-    "weekday": "الثلاثاء",
-    "ready": false,
-    "phase": "AUTOMATE",
-    "title": "Merge, Append, Folder Connector & Refresh",
-    "titleAr": "دمج الملفات وتحديثها بدون نسخ ولصق",
-    "hook": "كل فترة تصل ملفات تقييم جديدة، والنسخ اليدوي يعيد نفس الاخطاء",
-    "mission": "نبني عملية تجميع وربط قابلة للتحديث مع مراجعة عدد الصفوف والمفاتيح",
-    "topics": [
-      "Merge / Join Types",
-      "Append",
-      "Folder Connector",
-      "Combine Files",
-      "Reference / Duplicate",
-      "Refresh",
-      "Schema Checks"
-    ],
-    "build": [
-      "نراجع اي تنظيف لم يطبق فعليا في اليوم الثاني",
-      "نفرق بين اضافة صفوف Append واضافة اعمدة Merge",
-      "نجمع ملفات تقييم متوافقة من مجلد ونحتفظ باسم المصدر",
-      "نربط قاموس الاقسام والاهداف ونفحص فريدية المفتاح قبل التوسيع",
-      "نراجع عدد الصفوف قبل وبعد الربط لمنع تضاعف السجلات",
-      "نضيف ملف فترة جديدة ونثبت ان Refresh يعمل"
-    ],
-    "challenge": "اضيفي ملفا جديدا وحدثي التقرير ثم اثبتي عدم تضاعف صفوف KPI",
-    "deliverable": "عملية استيراد وتجميع وربط قابلة للتحديث",
-    "resources": [],
-    "requiredFiles": [
-      {
-        "name": "مواد اليوم 3",
-        "type": "Plan",
-        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
-      }
-    ],
-    "teachingStatus": "planned"
-  },
+{
+  "id": 3,
+  "date": "2026-10-20",
+  "weekday": "الثلاثاء",
+  "ready": true,
+  "phase": "AUTOMATE",
+  "title": "Power Query — Append, Merge, Folder & Refresh",
+  "titleAr": "من ملفات تقييم متفرقة الى تحديث تلقائي",
+  "hook": "كل فترة بيوصلك ملف تقييم جديد، بدنا ننظفه ونجمعه مع الفترات السابقة ونضيف معلومات الموظفين بدون نسخ ولصق كل مرة",
+  "mission": "نراجع التنظيف، نجمع الصفوف باستخدام Append، نربط بيانات الموظفين باستخدام Merge، ونبني مصدر Folder يتحدث عند اضافة ملف جديد",
+  "topics": [
+    "Cleaning Review",
+    "Append Queries as New",
+    "Merge / Left Outer",
+    "Left Anti",
+    "Key Uniqueness",
+    "Folder / Combine Files",
+    "Transform Sample File",
+    "Source.Name",
+    "Refresh",
+    "Reference / Duplicate"
+  ],
+  "build": [
+    "جهزي المجلدات ونزلي ملفات التطبيق ودليل الموظفين، وخلي ملف التحديث خارج Sources بالبداية",
+    "نظفي المسافات والمسميات والدرجات والتواريخ، واحذفي النسخ المتطابقة بالكامل",
+    "اجمعي يوليو واغسطس باستخدام Append Queries as New وراجعي الاعمدة والصفوف",
+    "نظفي مفتاح دليل الموظفين واربطي EmployeeID باستخدام Left Outer، ثم افحصي الصفوف غير المتطابقة",
+    "اجمعي المصادر من Folder وطبقي التنظيف داخل Transform Sample File، واحتفظي باسم الملف",
+    "اربطي الناتج بدليل الموظفين، ثم انقلي سبتمبر الى Sources واعملي Refresh واحفظي التقرير"
+  ],
+  "challenge": "استخدمي Practice_Apr وPractice_May مع نفس دليل الموظفين، ابداي بابريل فقط داخل مجلد المصادر، ثم اضيفي مايو وقت التحديث وتاكدي من وصول صفوفه بدون فقد او تضاعف",
+  "deliverable": "ملف Power BI محفوظ، فيه Fact_Evaluations قابل للتحديث وخطوات تنظيف واضحة وربط موظفين مع الاحتفاظ بالسجلات التي تحتاج مراجعة",
+  "resources": [
+    {
+      "name": "التطبيق 1 — تقييمات يوليو",
+      "type": "CSV",
+      "url": "week1/day3/data/Evaluations_Jul.csv",
+      "note": "12,120 صف · ضعيه في Day03/Sources",
+      "audience": "learner",
+      "stage": "application"
+    },
+    {
+      "name": "التطبيق 2 — تقييمات اغسطس",
+      "type": "CSV",
+      "url": "week1/day3/data/Evaluations_Aug.csv",
+      "note": "12,120 صف · ضعيه في Day03/Sources",
+      "audience": "learner",
+      "stage": "application"
+    },
+    {
+      "name": "دليل الموظفين",
+      "type": "CSV",
+      "url": "week1/day3/data/Employees.csv",
+      "note": "10,000 صف · ضعيه في Day03/Reference",
+      "audience": "learner",
+      "stage": "application"
+    },
+    {
+      "name": "ملف التحديث — تقييمات سبتمبر",
+      "type": "CSV",
+      "url": "week1/day3/data/Evaluations_Sep.csv",
+      "note": "12,120 صف · خليه في Day03/Refresh_Later لحد خطوة التحديث",
+      "audience": "learner",
+      "stage": "application"
+    },
+    {
+      "name": "التمرين المستقل 1 — ابريل",
+      "type": "CSV",
+      "url": "week1/day3/data/Practice_Apr.csv",
+      "note": "12,120 صف · ضعيه في Day03/Practice/Sources",
+      "audience": "learner",
+      "stage": "practice"
+    },
+    {
+      "name": "التمرين المستقل 2 — مايو",
+      "type": "CSV",
+      "url": "week1/day3/data/Practice_May.csv",
+      "note": "12,120 صف · خليه في Day03/Practice/Refresh_Later لحد التحديث",
+      "audience": "learner",
+      "stage": "practice"
+    }
+  ],
+  "requiredFiles": [],
+  "teachingStatus": "prepared",
+  "learningSections": [
+    {
+      "name": "نجهز الملفات",
+      "title": "ملفات مرتبة، بداية اسهل",
+      "lead": "اليوم بنكمل على مهارات التنظيف، وبنحول ملفات التقييم الى مسار بنقدر نحدثه كل فترة",
+      "steps": [
+        {
+          "title": "جهزي مجلداتك",
+          "copy": "اعملي مجلد Day03، وداخله Sources وReference وRefresh_Later"
+        },
+        {
+          "title": "وزعي الملفات",
+          "copy": "يوليو واغسطس داخل Sources، ودليل الموظفين داخل Reference، وسبتمبر داخل Refresh_Later لحد ما نوصل للتحديث"
+        }
+      ],
+      "callout": "Sources بالبداية فيه يوليو واغسطس فقط، دليل الموظفين وملف سبتمبر يضلوا برا هذا المجلد",
+      "files": "application"
+    },
+    {
+      "name": "نراجع التنظيف",
+      "title": "نثبت مهارات التنظيف",
+      "lead": "افتحي Evaluations_Jul.csv من Get Data ثم Text/CSV واختاري Transform Data",
+      "steps": [
+        {
+          "title": "ابدئي بالنصوص",
+          "copy": "اذا انضاف Changed Type تلقائيا قبل التنظيف احذفي هاي الخطوة، خلي الاعمدة Text، وراجعي Column Quality وColumn Profile على كامل البيانات"
+        },
+        {
+          "title": "نظفي ووحدي القيم",
+          "copy": "استبدلي المسافة بين [ ] بمسافة عادية، ثم Clean وTrim، وحدي EvaluationType وStatus باستخدام Capitalize Each Word، واستبدلي HR بـHuman Resources في Department"
+        },
+        {
+          "title": "راجعي الانواع والنسخ",
+          "copy": "في Score استبدلي pts بفراغ واعملي Trim، ثم خلي Score وObjectiveWeight ارقام صحيحة، وحولي EvaluationDate الى Date باستخدام English (United Kingdom)، وخلي Period نص"
+        },
+        {
+          "title": "احذفي النسخ المطابقة فقط",
+          "copy": "حددي كل الاعمدة واستخدمي Remove Duplicates، ما تحذفي تكرار EmployeeID، واحتفظي بالدرجات الفارغة والصفر الصحيح"
+        },
+        {
+          "title": "طبقي الخطوات على اغسطس",
+          "copy": "سمي الاستعلام Jul_Clean، اعملي Duplicate وسمي النسخة Aug_Clean، ومن ترس Source اختاري Evaluations_Aug.csv"
+        }
+      ],
+      "callout": "كل صف يمثل KPI واحد لموظف خلال فترة واتجاه تقييم محددين، تكرار الموظف طبيعي"
+    },
+    {
+      "name": "Append",
+      "title": "نجمع الصفوف تحت بعض",
+      "lead": "يوليو واغسطس بنفس البنية، نحتاج جدول واحد يحتوي الفترتين",
+      "steps": [
+        {
+          "title": "قارني اسماء الاعمدة",
+          "copy": "تاكدي ان اسماء الاعمدة وانواعها متوافقة، Append يعتمد على الاسم وليس ترتيب العمود"
+        },
+        {
+          "title": "اعملي استعلام جديد",
+          "copy": "Home → Append Queries as New، اختاري Jul_Clean وAug_Clean وسمي الناتج Append_JulAug"
+        },
+        {
+          "title": "تاكدي من اكتمال التجميع",
+          "copy": "راجعي الفترتين والاعمدة، وقارني عدد الناتج بمجموع صفوف الاستعلامين بعد التنظيف"
+        }
+      ],
+      "callout": "وجود اتجاهات التقييم بجدول واحد لا يعني حساب متوسط يجمع Self وManager وUpward"
+    },
+    {
+      "name": "Merge",
+      "title": "نضيف معلومات الموظف جنب التقييم",
+      "lead": "التقييم فيه EmployeeID، ودليل الموظفين فيه الاسم والقسم والموقع، بنربطهم باستخدام نفس المفتاح",
+      "steps": [
+        {
+          "title": "جهزي Employees",
+          "copy": "استوردي Employees.csv ونظفي EmployeeID وDepartment بنفس القواعد، وراجعي ان مفتاح الموظف فريد ونوعه Text"
+        },
+        {
+          "title": "اربطي الجدولين",
+          "copy": "Home → Merge Queries as New، اختاري Append_JulAug ثم Employees وحددي EmployeeID بالاثنين، واختاري Left Outer"
+        },
+        {
+          "title": "وسعي الاعمدة المطلوبة",
+          "copy": "اختاري EmployeeName وDepartment وLocation من الجدول المرجعي، خلي Prefix مفعلا ثم سمي الاعمدة EmployeeName وEmployeeDepartment وLocation"
+        },
+        {
+          "title": "راجعي اللي ما ارتبط",
+          "copy": "قارني عدد الصفوف قبل التوسيع وبعده، وافحصي الاسم الفارغ، ولعرض السجلات غير المتطابقة فقط جربي Left Anti في استعلام مراجعة"
+        }
+      ],
+      "callout": "الصف غير المتطابق يضل موجود للمراجعة، وزيادة عدد الصفوف بعد Expand تحتاج فحص المفتاح المرجعي"
+    },
+    {
+      "name": "Folder وRefresh",
+      "title": "تنظيف مرة، وتحديث كل فترة",
+      "lead": "بنستبدل اختيار كل ملف يدويا بمصدر Folder، ونطبق قواعد التنظيف على كل ملف",
+      "steps": [
+        {
+          "title": "اربطي Sources",
+          "copy": "Get Data → Folder، اختاري Day03/Sources ثم Transform Data، راجعي قائمة الملفات وفلتر CSV قبل Combine Files"
+        },
+        {
+          "title": "عدلي ملف العينة",
+          "copy": "اختاري Transform Sample File وطبقي نفس قواعد التنظيف السابقة، بما فيها ازالة النسخ المتطابقة داخل كل ملف، وراجعي اي Changed Type تلقائي يسبق التنظيف"
+        },
+        {
+          "title": "جهزي الجدول النهائي",
+          "copy": "سمي الناتج Evaluations_Folder واحتفظي بـSource.Name، اربطيه مع Employees بنفس Left Outer وسمي الناتج Fact_Evaluations، وعطلي Enable Load لاستعلامات التطبيق الوسيطة"
+        },
+        {
+          "title": "ضيفي سبتمبر وحدثي",
+          "copy": "انقلي Evaluations_Sep.csv من Refresh_Later الى Sources، ثم حدثي المصدر والتقرير، وتاكدي من ظهور الملف والفترة الجديدة وتطبيق التنظيف عليها"
+        }
+      ],
+      "callout": "Append_JulAug وEvaluations_Folder بديلان لتجميع نفس البيانات، ما بنعمل Append بينهم"
+    },
+    {
+      "name": "تطبيق مستقل",
+      "title": "هلا دورك تقودي المسار",
+      "lead": "طبقي نفس الفكرة على ملفي التمرين، مع نفس دليل الموظفين",
+      "steps": [
+        {
+          "title": "جهزي مصدر التمرين",
+          "copy": "اعملي Day03/Practice/Sources وDay03/Practice/Refresh_Later، ابريل داخل Sources ومايو خارجه بالبداية"
+        },
+        {
+          "title": "اعيدي استخدام قواعدك",
+          "copy": "اعملي Duplicate لاستعلام المجلد وغيري Source لمجلد التمرين، راجعي التنظيف واربطيه مع Employees، ثم انقلي مايو واعملي Refresh"
+        },
+        {
+          "title": "راجعي واحفظي",
+          "copy": "تاكدي ان الفترة الجديدة وصلت وان الربط ما ضاعف الصفوف، واحفظي الملف واشرحي الفرق بين Append وMerge وفائدة Folder"
+        }
+      ],
+      "callout": "احفظي ملفك باسم Day03_Performance.pbix، وخلي ملاحظاتك عن اي حالة تحتاج مراجعة",
+      "files": "practice"
+    }
+  ]
+},
   {
     "id": 4,
     "date": "2026-10-22",

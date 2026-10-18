@@ -15,7 +15,7 @@
     <h1 class="section-title">تجهيز دورة مريم</h1>
     <p class="section-copy">اليوم الاول تم تدريسه في 15 اكتوبر، واليوم الثاني اكتمل في 18 اكتوبر مع Column from Examples، اليوم الثالث مخطط مع مراجعة تنظيف لمدة 15 دقيقة</p>
     <a class="btn btn-ghost" href="../week1/day1/web/Day01_Trainer.html">دليل مدرب اليوم الاول</a> <a class="btn btn-teal" href="../ADAPTATION_PLAN.md">خطة التخصيص وقواعد المؤشرات</a>
-    <a class="btn btn-primary" href="Day03_Integration.html" style="margin-top:18px">اليوم الثالث — وضع المدرب خطوة بخطوة</a><p class="muted">خطة المدرب جاهزة، ملفات التطبيق لم تجهز بعد</p><a class="btn btn-primary" href="Day02_Performance.html" style="margin-top:18px">دليل المدرب التفاعلي لليوم الثاني — 120 دقيقة</a><div class="panel" style="margin-top:28px">
+    <a class="btn btn-primary" href="Day03_Integration.html" style="margin-top:18px">اليوم الثالث — وضع المدرب خطوة بخطوة</a><p class="muted">ملفات اليوم الثالث والشرح جاهزة، لم يدرس بعد</p><a class="btn btn-primary" href="Day02_Performance.html" style="margin-top:18px">دليل المدرب التفاعلي لليوم الثاني — 120 دقيقة</a><div class="panel" style="margin-top:28px">
       <h2>قبل تجهيز كل يوم</h2>
       <div class="steps">
         <div class="step"><span class="step-num">01</span><span>تعريف السؤال والحقول ومستوى التفاصيل</span></div>
@@ -26,7 +26,7 @@
     </div>
     <div class="portal-grid" id="trainerDays" style="margin-top:28px"></div>
   </main>
-  <script src="../data.js?v=20261017-learner-copy"></script>
+  <script src="../data.js?v=20261018-day3"></script>
   <script>
     DAYS.forEach(day => {
       const card = document.createElement(`a`);
@@ -36,7 +36,7 @@
       title.textContent = `اليوم ${day.id} — ${day.titleAr}`;
       const status = document.createElement(`p`);
       status.className = `muted`;
-      status.textContent = day.id === 1 ? `تم تدريسه — 15 اكتوبر 2026` : day.id === 2 ? `تم تدريسه — 18 اكتوبر 2026 + Column from Examples` : day.id === 3 ? `خطة المدرب جاهزة — ملفات التطبيق لم تجهز` : day.ready ? `مجهز ولم يدرس` : `مخطط — المواد لم تجهز`;
+      status.textContent = day.id === 1 ? `تم تدريسه — 15 اكتوبر 2026` : day.id === 2 ? `تم تدريسه — 18 اكتوبر 2026 + Column from Examples` : day.id === 3 ? `مجهز ولم يدرس — التطبيق والشرح والارقام جاهزة` : day.ready ? `مجهز ولم يدرس` : `مخطط — المواد لم تجهز`;
       card.append(title, status);
       document.getElementById(`trainerDays`).appendChild(card);
     });
