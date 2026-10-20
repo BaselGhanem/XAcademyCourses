@@ -11,3 +11,14 @@
 @media(prefers-reduced-motion:reduce){.mj-loader{display:none}.mj-loader *{animation:none!important}}
 
 .mj-recording{max-width:1440px;margin:0 auto;padding:110px 6vw 0}.mj-recording h2{font-size:clamp(24px,3vw,36px);margin:14px 0 24px}.mj-video-player{position:relative;width:100%;aspect-ratio:16/9;background:#10282b;border-radius:16px;overflow:hidden}.mj-video-player iframe,.mj-video-player video{display:block;position:absolute;inset:0;width:100%!important;height:100%!important;border:0}.mj-recording .mj-block{margin:0}@media(max-width:800px){.mj-recording{padding:100px 22px 0}}
+
+/* OneDrive share pages can refuse iframe embedding. Provide a direct playback handoff. */
+.mj-video-open{display:flex;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;gap:14px;isolation:isolate;text-align:center;padding:24px;background:radial-gradient(ellipse at 50% 20%,#1c5557 0%,#103638 48%,#0d2427 100%);color:#f3fffe;text-decoration:none;transition:filter .2s ease}
+.mj-video-open:hover,.mj-video-open:focus-visible{filter:brightness(1.12)}
+.mj-video-open:focus-visible{outline:3px solid #099999;outline-offset:-5px}
+.mj-video-open-play{display:grid;place-items:center;width:70px;height:70px;flex:none;border-radius:50%;border:1px solid rgba(163,250,237,.4);background:#099999;box-shadow:0 0 0 9px rgba(9,153,153,.13),0 12px 28px rgba(0,0,0,.25)}
+.mj-video-open-play:after{content:"";display:block;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:19px solid #fff;margin-left:5px}
+.mj-video-open strong{font-size:clamp(16px,2.6vw,26px);font-weight:800;line-height:1.4}
+.mj-video-open-action{display:inline-flex;padding:10px 22px;border-radius:99px;background:#f4fffe;color:#0c3a3d;font-size:14px;font-weight:800}
+.mj-video-open small{font-size:12px;color:rgba(231,255,252,.78)}
+@media(max-width:420px){.mj-video-open{gap:10px}.mj-video-open-play{width:55px;height:55px}.mj-video-open-play:after{border-top-width:9px;border-bottom-width:9px;border-left-width:15px}.mj-video-open-action{padding:8px 17px}}
