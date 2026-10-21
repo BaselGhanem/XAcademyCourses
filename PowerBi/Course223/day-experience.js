@@ -17,7 +17,7 @@ function initCourseDayJourney(day, courseHome) {
     chapter(`04 / YOUR TURN`, `نجرب ونحفظ`, `هلا دورك،<br>نجرب بشكل مستقل`, `<p class="mj-lead">${escape(day.challenge)}</p><div class="mj-callout">المطلوب بالنهاية: ${escape(day.deliverable)}</div><div class="mj-complete" ${day.ready ? `` : `hidden`}><h3 id="mj-complete-title">انهيت التطبيق العملي؟</h3><button type="button" id="mj-complete">نسجل اتمام اليوم ${day.id}</button></div><footer class="mj-footer"><a href="${escape(courseHome)}">مركز الدورة</a>${day.id<10 ? `<a href="day.html?id=${day.id+1}">خطة اليوم ${day.id+1} ←</a>` : `<span dir="ltr">X ACADEMY</span>`}</footer>`, ``)
   ];
   if (day.learningSections?.length) {
-    const scenes = [[`CSV`, `POWER QUERY`], [`RAW`, `CLEAN`], [`JUL + AUG`, `APPEND`], [`EmployeeID`, `MERGE`], [`FOLDER`, `REFRESH`], [`YOUR TURN`, `VALIDATE`]];
+    const scenes = day.learningScenes || [[`CSV`, `POWER QUERY`], [`RAW`, `CLEAN`], [`JUL + AUG`, `APPEND`], [`EmployeeID`, `MERGE`], [`FOLDER`, `REFRESH`], [`YOUR TURN`, `VALIDATE`]];
     chapters = day.learningSections.map((section, index) => {
       const files = section.files ? resources.filter(file => file.stage === section.files).map(file => `<a class="mj-resource" href="${escape(file.url)}" download><span class="mj-resource-icon">CSV</span><span><b>${escape(file.name)}</b><small>${escape(file.note)}</small></span></a>`).join(``) : ``;
       const items = (section.steps || []).map((step, i) => `<article class="mj-block"><span class="mj-num">${String(i + 1).padStart(2, `0`)}</span><h3>${escape(step.title)}</h3><p class="mj-copy" dir="auto">${escape(step.copy)}</p></article>`).join(``);

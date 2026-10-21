@@ -1,4 +1,4 @@
-// Course223 — Day 1 preserved; Day 3 prepared; Days 4–10 planned.
+// Course223 — Day 1–3 preserved; Day 4 project foundation prepared; Days 5–10 planned.
 const COURSE_CONFIG = {
   id: `course223_mariam`,
   title: `Power BI | X Academy`,
@@ -365,40 +365,241 @@ const DAYS = [
     "id": 4,
     "date": "2026-10-22",
     "weekday": "الخميس",
-    "ready": false,
+    "ready": true,
     "phase": "MODEL",
-    "title": "Data Modeling, Relationships & Star Schema",
-    "titleAr": "نموذج بيانات صحيح وعلاقات واضحة",
-    "hook": "جدول كبير بدون مستوى صف واضح قد يضاعف الاوزان ويخلط الموظف بالمقيم",
-    "mission": "نصمم Fact EvaluationKPI مع ابعاد الموظفين والاهداف والتاريخ واتجاه التقييم",
+    "title": "HR Performance Intelligence — Data Model Foundation",
+    "titleAr": "بناء قاعدة مشروع اداء الموظفين",
+    "hook": "One employee has several objectives. Each objective has several KPIs. Each KPI can be evaluated more than once. How do we connect the files without multiplying scores or weights?",
+    "mission": "Build the reusable data model for the same HR Performance Intelligence report we will develop through Day 10. Connect employee, objective, KPI and assessment data correctly.",
     "topics": [
-      "Fact / Dimension",
-      "Grain / Keys",
-      "Star Schema",
-      "One-to-Many",
-      "Single Direction",
-      "Date Table",
-      "Role-playing Dimensions"
+      "Source grain",
+      "Primary & foreign keys",
+      "Fact vs dimension",
+      "Snowflake / Star schema",
+      "One-to-many relationships",
+      "Single filter direction",
+      "Calendar dimension",
+      "Power Query Reference"
     ],
     "build": [
-      "نحدد مستوى كل جدول ومفتاحه",
-      "نفصل جداول الوصف عن سجل KPI ونضع الوزن على مستوى الهدف المناسب",
-      "نبني Date Table ونميز تاريخ التقييم عن Period",
-      "نبني علاقات One-to-Many باتجاه واحد ونفحص المفاتيح اليتيمة",
-      "نوضح دور الموظف المقيم ودور المقيم خاصة في Upward",
-      "نختبر الفلاتر ونتجنب many-to-many غير المقصودة"
+      "Unzip the project starter and import the eight CSV tables with Transform Data.",
+      "Set IDs to Text, percentages and scores to numeric types, and assessment dates to Date.",
+      "Identify one unique primary key for each lookup table and confirm what one row represents.",
+      "Connect Directorates → Departments → Employees → Objectives → KPIs → EvaluationScores, plus StrategicPriorities → Objectives.",
+      "Connect Calendar[Date] to EvaluationScores_2026_H1[AssessmentDate], set all relationships to single direction.",
+      "Use a referenced Objectives query to audit total objective weights by employee and year.",
+      "Build a small validation matrix and check that Directorate, Department, Quarter and AssessmentSource filter the assessments."
     ],
-    "challenge": "اختبري فلاتر القسم والهدف والاتجاه دون تضاعف السجلات",
-    "deliverable": "Star Schema موثق ومفاتيح وعلاقات قابلة للفحص",
-    "resources": [],
-    "requiredFiles": [
+    "challenge": "In your own Power BI report, build a Matrix of assessments by department, add filters for directorate, quarter and assessment source, and explain one example where repeating a weight would create a wrong result.",
+    "deliverable": "Save HR_Performance_Intelligence.pbix with seven validated one-to-many relationships and a working model-validation report page.",
+    "resources": [
       {
-        "name": "مواد اليوم 4",
-        "type": "Plan",
-        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
+        "name": "Day04_Project_Starter.zip",
+        "type": "ZIP",
+        "url": "week1/day4/data/Day04_Project_Starter.zip",
+        "note": "Download once · unzip to access eight linked CSV files",
+        "stage": "starter",
+        "audience": "learner"
       }
     ],
-    "teachingStatus": "planned"
+    "learningScenes": [
+      [
+        "THE CASE",
+        "ONE PROJECT"
+      ],
+      [
+        "SOURCE",
+        "GRAIN"
+      ],
+      [
+        "KEYS",
+        "TYPES"
+      ],
+      [
+        "ONE",
+        "MANY"
+      ],
+      [
+        "DATES",
+        "FILTERS"
+      ],
+      [
+        "100%",
+        "WEIGHT AUDIT"
+      ],
+      [
+        "TEST",
+        "SAVE"
+      ]
+    ],
+    "learningSections": [
+      {
+        "name": "Start the project",
+        "title": "One project.<br>Seven sessions.",
+        "lead": "The employee performance dashboard starts here and grows every session through Day 10. Today we create the foundation, not a disposable practice report.",
+        "files": "starter",
+        "steps": [
+          {
+            "title": "Download and extract",
+            "copy": "Download the Day04 Project Starter ZIP and extract it. Keep the two folders together in a stable location."
+          },
+          {
+            "title": "Create the Power BI file",
+            "copy": "Open Power BI Desktop, create a blank report and save it as HR_Performance_Intelligence.pbix."
+          },
+          {
+            "title": "Start with a question",
+            "copy": "Why can one employee have four objectives, each with three KPIs, yet only one employee record?"
+          }
+        ],
+        "callout": "We will keep building this same PBIX over the remaining days."
+      },
+      {
+        "name": "Learn the business grain",
+        "title": "What does<br>one row mean?",
+        "lead": "Before making relationships, identify the level of detail in each table.",
+        "steps": [
+          {
+            "title": "Employee",
+            "copy": "One row identifies one employee, not one objective or one assessment."
+          },
+          {
+            "title": "Objective",
+            "copy": "One row defines one employee objective for one year. ObjectiveWeightPct belongs here."
+          },
+          {
+            "title": "KPI",
+            "copy": "One row defines one KPI under one objective. KPIs do not carry individual weights."
+          },
+          {
+            "title": "Assessment",
+            "copy": "One row is a KPI assessment for a specific round and assessment source: Self, Manager or Upward."
+          }
+        ],
+        "callout": "Never copy ObjectiveWeightPct to every KPI score row and then sum it."
+      },
+      {
+        "name": "Import and inspect",
+        "title": "Eight CSVs.<br>Clear data types.",
+        "lead": "Connect every source as a separate Power Query table, then correct its data types.",
+        "steps": [
+          {
+            "title": "Import the eight tables",
+            "copy": "Home → Get Data → Text/CSV → Transform Data. Import Directorates, Departments, Employees, StrategicPriorities, Objectives, KPIs, Calendar and EvaluationScores_2026_H1."
+          },
+          {
+            "title": "Keep business keys as text",
+            "copy": "Set *ID columns to Text. For example, EMP0001 is an identifier, not a numeric measure."
+          },
+          {
+            "title": "Check dates and numbers",
+            "copy": "Make ObjectiveWeightPct and KPIScore numeric, and Calendar[Date] and AssessmentDate actual Date types."
+          },
+          {
+            "title": "Load the model",
+            "copy": "Choose Close & Apply; confirm each table has its own field list."
+          }
+        ],
+        "callout": "A correct data model starts with trustworthy keys and data types."
+      },
+      {
+        "name": "Create relationships",
+        "title": "The many-to-one<br>logic",
+        "lead": "Build a controlled filter path from organizational hierarchy to individual assessments.",
+        "steps": [
+          {
+            "title": "Organization",
+            "copy": "Directorates[DirectorateID] → Departments[DirectorateID] → Employees[DepartmentID]. Configure one-to-many and Single direction."
+          },
+          {
+            "title": "Performance hierarchy",
+            "copy": "Employees[EmployeeID] → Objectives[EmployeeID] → KPIs[ObjectiveID] → EvaluationScores_2026_H1[KPIID]."
+          },
+          {
+            "title": "Strategic link",
+            "copy": "Connect StrategicPriorities[StrategicPriorityID] to Objectives[StrategicPriorityID]."
+          },
+          {
+            "title": "Check each line",
+            "copy": "Every relationship should be Active, one-to-many and single-direction. If Power BI suggests many-to-many, investigate the keys first."
+          }
+        ],
+        "callout": "Our starting schema has normalized dimensions in a snowflake chain, feeding one assessment fact. We will learn where a true star schema differs."
+      },
+      {
+        "name": "Give the model time",
+        "title": "Calendar +<br>filter direction",
+        "lead": "A date table makes the model ready for trend analysis later in the course.",
+        "steps": [
+          {
+            "title": "Create the date relationship",
+            "copy": "Connect Calendar[Date] (one) to EvaluationScores_2026_H1[AssessmentDate] (many)."
+          },
+          {
+            "title": "Mark the date table",
+            "copy": "With Calendar selected: Table tools → Mark as date table → choose Date."
+          },
+          {
+            "title": "Avoid an ambiguous employee role",
+            "copy": "EvaluatorID identifies the assessor, while EmployeeID on Objectives identifies the objective owner. Keep these roles separate for now."
+          },
+          {
+            "title": "Test filtering",
+            "copy": "Try Calendar[QuarterLabel] and AssessmentSource separately and observe which assessment records remain."
+          }
+        ],
+        "callout": "Assessment date and objective due date are different business events."
+      },
+      {
+        "name": "Solve a hidden problem",
+        "title": "The weight<br>multiplication trap",
+        "lead": "A manager notices a weight total that looks three times too high. Investigate the reason at the correct grain.",
+        "steps": [
+          {
+            "title": "Preserve the original",
+            "copy": "In Power Query, right-click Objectives and create a referenced query called Objective_Weight_Audit."
+          },
+          {
+            "title": "Audit the weights",
+            "copy": "Group by EmployeeID and PlanYear. Sum ObjectiveWeightPct into TotalObjectiveWeight."
+          },
+          {
+            "title": "Explain the trap",
+            "copy": "Every Objective has multiple KPIs. Repeating its weight per KPI would incorrectly inflate the total."
+          },
+          {
+            "title": "Keep your model tidy",
+            "copy": "Use the audit as a temporary validation query. Disable its load when the check is complete."
+          }
+        ],
+        "callout": "Objective weights are applied once per objective; actual weighted performance calculations start on Day 5."
+      },
+      {
+        "name": "Your model test",
+        "title": "Verify.<br>Save. Continue.",
+        "lead": "Use report visuals to prove the relationships work before creating any DAX measure.",
+        "steps": [
+          {
+            "title": "Build a matrix",
+            "copy": "Matrix rows: DirectorateName and DepartmentName. Values: Count of AssessmentID."
+          },
+          {
+            "title": "Add slicers",
+            "copy": "Create slicers for AssessmentSource and Calendar[QuarterLabel]. Check that counts change correctly."
+          },
+          {
+            "title": "Independent challenge",
+            "copy": "Explain why Upward has a different record volume from Self; do not average the assessment sources together."
+          },
+          {
+            "title": "Keep your finished work",
+            "copy": "Save HR_Performance_Intelligence.pbix. Keep all source CSV files in their current location; the same report continues on Day 5."
+          }
+        ],
+        "callout": "Final checkpoint: connected model, correct keys, stable file paths and one saved PBIX."
+      }
+    ],
+    "teachingStatus": "prepared"
   },
   {
     "id": 5,
@@ -679,5 +880,5 @@ function getCompletedDays() {
 
 // Learner surfaces use this allowlist; instructor guides and answers belong in Trainer.
 function getLearnerResources(day) {
-  return (day.resources || []).filter(resource => resource.audience !== `trainer` && (day.id === 1 || (resource.audience === `learner` && /\.csv(?:[?#]|$)/i.test(resource.url || ``))));
+  return (day.resources || []).filter(resource => resource.audience !== `trainer` && (day.id === 1 || (resource.audience === `learner` && (/\.csv(?:[?#]|$)/i.test(resource.url || ``) || (day.id === 4 && /\.zip(?:[?#]|$)/i.test(resource.url || ``))))));
 }
