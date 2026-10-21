@@ -368,235 +368,235 @@ const DAYS = [
     "ready": true,
     "phase": "MODEL",
     "title": "HR Performance Intelligence — Data Model Foundation",
-    "titleAr": "بناء قاعدة مشروع اداء الموظفين",
-    "hook": "One employee has several objectives. Each objective has several KPIs. Each KPI can be evaluated more than once. How do we connect the files without multiplying scores or weights?",
-    "mission": "Build the reusable data model for the same HR Performance Intelligence report we will develop through Day 10. Connect employee, objective, KPI and assessment data correctly.",
+    "titleAr": "اليوم الرابع | نبني نموذج بيانات مشروع الاداء",
+    "hook": "تخيلي موظف عنده 4 اهداف، وكل هدف تحته 3 مؤشرات KPI، وكل مؤشر اله اكثر من تقييم. كيف نربط كل هاي الملفات بدون ما نكرر الدرجات او نضاعف الاوزان؟",
+    "mission": "اليوم رح نبدأ مشروع HR Performance Intelligence اللي رح نطوره لغاية اليوم العاشر. رح نربط الموظفين والاهداف ومؤشرات الاداء والتقييمات بطريقة صحيحة، ونجهز قاعدة قوية للحسابات والتقارير القادمة.",
     "topics": [
-      "Source grain",
-      "Primary & foreign keys",
-      "Fact vs dimension",
-      "Snowflake / Star schema",
-      "One-to-many relationships",
-      "Single filter direction",
-      "Calendar dimension",
-      "Power Query Reference"
+      "Data Model",
+      "Fact & Dimension",
+      "Grain / Primary Key",
+      "One-to-Many Relationships",
+      "Filter Direction",
+      "Calendar Table",
+      "Reference & Group By",
+      "Model Validation"
     ],
     "build": [
-      "Unzip the project starter and import the eight CSV tables with Transform Data.",
-      "Set IDs to Text, percentages and scores to numeric types, and assessment dates to Date.",
-      "Identify one unique primary key for each lookup table and confirm what one row represents.",
-      "Connect Directorates → Departments → Employees → Objectives → KPIs → EvaluationScores, plus StrategicPriorities → Objectives.",
-      "Connect Calendar[Date] to EvaluationScores_2026_H1[AssessmentDate], set all relationships to single direction.",
-      "Use a referenced Objectives query to audit total objective weights by employee and year.",
-      "Build a small validation matrix and check that Directorate, Department, Quarter and AssessmentSource filter the assessments."
+      "نزلي ملف المشروع المضغوط وفكيه، ثم استوردي ملفات CSV الثمانية داخل Power BI باستخدام Transform Data",
+      "حددي معنى كل صف في كل جدول، وتأكدي من نوع المفاتيح والتواريخ والارقام",
+      "ابني العلاقات بين Directorates وDepartments وEmployees وObjectives وKPIs والتقييمات",
+      "اربطي StrategicPriorities بالاهداف، ثم Calendar بتاريخ التقييم",
+      "راجعي Cardinality واتجاه الفلاتر حتى ما تتكرر النتائج بشكل غير صحيح",
+      "رح نحل مشكلة مفاجئة في مجموع اوزان الاهداف باستخدام Reference وGroup By",
+      "اعملي Matrix وSlicers واختبري العلاقات، ثم احفظي مشروع Power BI اللي رح نكمله في الجلسات القادمة"
     ],
-    "challenge": "In your own Power BI report, build a Matrix of assessments by department, add filters for directorate, quarter and assessment source, and explain one example where repeating a weight would create a wrong result.",
-    "deliverable": "Save HR_Performance_Intelligence.pbix with seven validated one-to-many relationships and a working model-validation report page.",
+    "challenge": "اعملي Matrix يعرض عدد سجلات التقييم حسب Directorate وDepartment. اضيفي Slicers لـ AssessmentSource وQuarterLabel، وفسري كيف ممكن تكرار وزن الهدف مع كل KPI يعطي نتيجة غلط.",
+    "deliverable": "ملف HR_Performance_Intelligence.pbix يحتوي نموذج بيانات مترابط، و7 علاقات صحيحة، وصفحة بسيطة للتحقق من الفلاتر.",
     "resources": [
       {
         "name": "Day04_Project_Starter.zip",
         "type": "ZIP",
         "url": "week1/day4/data/Day04_Project_Starter.zip",
-        "note": "Download once · unzip to access eight linked CSV files",
+        "note": "تحميل واحد يحتوي 8 ملفات CSV مترابطة لبداية المشروع",
         "stage": "starter",
         "audience": "learner"
       }
     ],
     "learningScenes": [
       [
-        "THE CASE",
-        "ONE PROJECT"
+        "المشروع",
+        "البداية"
       ],
       [
-        "SOURCE",
-        "GRAIN"
+        "البيانات",
+        "التفاصيل"
       ],
       [
-        "KEYS",
-        "TYPES"
+        "المفاتيح",
+        "الانواع"
       ],
       [
-        "ONE",
-        "MANY"
+        "العلاقات",
+        "الترابط"
       ],
       [
-        "DATES",
-        "FILTERS"
+        "التاريخ",
+        "الفلاتر"
       ],
       [
-        "100%",
-        "WEIGHT AUDIT"
+        "الاوزان",
+        "التحقق"
       ],
       [
-        "TEST",
-        "SAVE"
+        "التجربة",
+        "الحفظ"
       ]
     ],
     "learningSections": [
       {
-        "name": "Start the project",
-        "title": "One project. Seven sessions.",
-        "lead": "The employee performance dashboard starts here and grows every session through Day 10. Today we create the foundation, not a disposable practice report.",
+        "name": "نبدأ المشروع",
+        "title": "مشروع واحد من اليوم الرابع للعاشر",
+        "lead": "اليوم رح نبدأ فعليا ببناء Dashboard لتحليل اداء الموظفين. كل جزء بنعمله رح نستخدمه في الجلسات الجاي، وما رح نعيد المشروع من البداية.",
         "files": "starter",
         "steps": [
           {
-            "title": "Download and extract",
-            "copy": "Download the Day04 Project Starter ZIP and extract it. Keep the two folders together in a stable location."
+            "title": "نزلي ملف اليوم",
+            "copy": "نزلي Day04_Project_Starter.zip وفكي الضغط. رح تلاقي ملفات CSV مترابطة داخل مجلدين. خلي المجلدات في مكان ثابت على جهازك."
           },
           {
-            "title": "Create the Power BI file",
-            "copy": "Open Power BI Desktop, create a blank report and save it as HR_Performance_Intelligence.pbix."
+            "title": "افتحي مشروع Power BI",
+            "copy": "افتحي Power BI Desktop، واعملي تقرير جديد واحفظيه من البداية باسم HR_Performance_Intelligence.pbix."
           },
           {
-            "title": "Start with a question",
-            "copy": "Why can one employee have four objectives, each with three KPIs, yet only one employee record?"
+            "title": "فكري معنا",
+            "copy": "كيف ممكن يكون الموظف موجود مرة واحدة في Employees، لكن يظهر في اكثر من Objective، وكل Objective له عدة KPIs؟"
           }
         ],
-        "callout": "We will keep building this same PBIX over the remaining days."
+        "callout": "احتفظي بنفس ملف PBIX؛ رح نكمل عليه في الايام 5–10."
       },
       {
-        "name": "Learn the business grain",
-        "title": "What does one row mean?",
-        "lead": "Before making relationships, identify the level of detail in each table.",
+        "name": "نفهم البيانات",
+        "title": "كل صف شو بيمثل؟",
+        "lead": "قبل ما نربط الجداول، لازم نعرف مستوى التفاصيل (Grain) لكل جدول. هاي الخطوة بتحمينا من تكرار النتائج.",
         "steps": [
           {
-            "title": "Employee",
-            "copy": "One row identifies one employee, not one objective or one assessment."
+            "title": "Employees",
+            "copy": "كل صف يمثل موظف واحد، وله EmployeeID يميزه عن باقي الموظفين."
           },
           {
-            "title": "Objective",
-            "copy": "One row defines one employee objective for one year. ObjectiveWeightPct belongs here."
+            "title": "Objectives",
+            "copy": "كل صف يمثل هدف واحد لموظف في سنة محددة. وزن الهدف ObjectiveWeightPct موجود هون، مش في جدول التقييمات."
           },
           {
-            "title": "KPI",
-            "copy": "One row defines one KPI under one objective. KPIs do not carry individual weights."
+            "title": "KPIs",
+            "copy": "كل صف يمثل مؤشر اداء تابع لهدف محدد. ممكن يكون للهدف اكثر من KPI، وما في وزن مستقل لكل KPI."
           },
           {
-            "title": "Assessment",
-            "copy": "One row is a KPI assessment for a specific round and assessment source: Self, Manager or Upward."
+            "title": "EvaluationScores",
+            "copy": "كل صف يمثل درجة تقييم KPI في فترة معينة ومن مصدر تقييم محدد: Self او Manager او Upward. لازم نظل نفصل هاي المصادر."
           }
         ],
-        "callout": "Never copy ObjectiveWeightPct to every KPI score row and then sum it."
+        "callout": "اذا جمعنا وزن الهدف بعد تكراره مع كل KPI، رح نحصل على مجموع اوزان غير صحيح."
       },
       {
-        "name": "Import and inspect",
-        "title": "Eight CSVs. Clear data types.",
-        "lead": "Connect every source as a separate Power Query table, then correct its data types.",
+        "name": "نستورد الملفات",
+        "title": "ثمانية ملفات، ونوع بيانات صحيح",
+        "lead": "رح نستورد ملفات المشروع كجداول منفصلة داخل Power Query، ونراجع انواع الاعمدة قبل بناء العلاقات.",
         "steps": [
           {
-            "title": "Import the eight tables",
-            "copy": "Home → Get Data → Text/CSV → Transform Data. Import Directorates, Departments, Employees, StrategicPriorities, Objectives, KPIs, Calendar and EvaluationScores_2026_H1."
+            "title": "استوردي ملفات CSV",
+            "copy": "من Home → Get Data → Text/CSV اختاري كل ملف ثم Transform Data. كرري العملية لجداول Directorates وDepartments وEmployees وStrategicPriorities وObjectives وKPIs وCalendar وEvaluationScores_2026_H1."
           },
           {
-            "title": "Keep business keys as text",
-            "copy": "Set *ID columns to Text. For example, EMP0001 is an identifier, not a numeric measure."
+            "title": "المفاتيح لازم تكون Text",
+            "copy": "راجعي اعمدة ID وخلي نوعها Text. مثلا EMP0001 هو رقم تعريفي للموظف، مش رقم مطلوب منا نجمعه."
           },
           {
-            "title": "Check dates and numbers",
-            "copy": "Make ObjectiveWeightPct and KPIScore numeric, and Calendar[Date] and AssessmentDate actual Date types."
+            "title": "صححي التواريخ والدرجات",
+            "copy": "خلي Calendar[Date] وAssessmentDate من نوع Date. وراجعي ObjectiveWeightPct وKPIScore حتى يكونوا ارقام مش نصوص."
           },
           {
-            "title": "Load the model",
-            "copy": "Choose Close & Apply; confirm each table has its own field list."
+            "title": "حملي الجداول",
+            "copy": "اضغطي Close & Apply، وتأكدي ان الجداول الثمانية ظهرت في قائمة Data داخل Power BI."
           }
         ],
-        "callout": "A correct data model starts with trustworthy keys and data types."
+        "callout": "نوع البيانات الصحيح والمفتاح الواضح هما بداية نموذج موثوق."
       },
       {
-        "name": "Create relationships",
-        "title": "The many-to-one logic",
-        "lead": "Build a controlled filter path from organizational hierarchy to individual assessments.",
+        "name": "نبني العلاقات",
+        "title": "كيف بنربط One مع Many؟",
+        "lead": "بدنا نعمل مسار واضح يخلي فلتر الادارة او القسم يوصل لسجلات تقييم الموظفين بدون ازدواجية.",
         "steps": [
           {
-            "title": "Organization",
-            "copy": "Directorates[DirectorateID] → Departments[DirectorateID] → Employees[DepartmentID]. Configure one-to-many and Single direction."
+            "title": "تسلسل الادارات والموظفين",
+            "copy": "في Model View اربطي Directorates[DirectorateID] مع Departments[DirectorateID]، وبعدها Departments[DepartmentID] مع Employees[DepartmentID]."
           },
           {
-            "title": "Performance hierarchy",
-            "copy": "Employees[EmployeeID] → Objectives[EmployeeID] → KPIs[ObjectiveID] → EvaluationScores_2026_H1[KPIID]."
+            "title": "تسلسل الاهداف والتقييمات",
+            "copy": "اربطي Employees[EmployeeID] مع Objectives[EmployeeID]، وبعدها Objectives[ObjectiveID] مع KPIs[ObjectiveID]، ثم KPIs[KPIID] مع EvaluationScores_2026_H1[KPIID]."
           },
           {
-            "title": "Strategic link",
-            "copy": "Connect StrategicPriorities[StrategicPriorityID] to Objectives[StrategicPriorityID]."
+            "title": "الاولويات الاستراتيجية",
+            "copy": "اربطي StrategicPriorities[StrategicPriorityID] مع Objectives[StrategicPriorityID]."
           },
           {
-            "title": "Check each line",
-            "copy": "Every relationship should be Active, one-to-many and single-direction. If Power BI suggests many-to-many, investigate the keys first."
+            "title": "راجعي خصائص العلاقات",
+            "copy": "افتحي كل علاقة وتأكدي ان Cardinality هي One-to-Many (1:*)، وان Cross-filter direction هي Single، والعلاقة Active. اذا ظهر Many-to-Many، راجعي المفاتيح قبل الموافقة."
           }
         ],
-        "callout": "Our starting schema has normalized dimensions in a snowflake chain, feeding one assessment fact. We will learn where a true star schema differs."
+        "callout": "النموذج الحالي فيه سلسلة جداول وصفية مترابطة (Snowflake). المهم نفهم ليش العلاقات صحيحة قبل ما نحولها لاحقا الى تصميم اكثر تنظيما."
       },
       {
-        "name": "Give the model time",
-        "title": "Calendar + filter direction",
-        "lead": "A date table makes the model ready for trend analysis later in the course.",
+        "name": "نضيف التاريخ",
+        "title": "Calendar بربط كل فترة مع تقييماتها",
+        "lead": "وجود جدول تاريخ مستقل رح يساعدنا في تحليل تطور الاداء شهريا وربع سنويا في الجلسات القادمة.",
         "steps": [
           {
-            "title": "Create the date relationship",
-            "copy": "Connect Calendar[Date] (one) to EvaluationScores_2026_H1[AssessmentDate] (many)."
+            "title": "اربطي تاريخ التقييم",
+            "copy": "اربطي Calendar[Date] من جهة One مع EvaluationScores_2026_H1[AssessmentDate] من جهة Many."
           },
           {
-            "title": "Mark the date table",
-            "copy": "With Calendar selected: Table tools → Mark as date table → choose Date."
+            "title": "حددي جدول التاريخ",
+            "copy": "اختاري Calendar، ثم Table tools → Mark as date table، وحددي عمود Date."
           },
           {
-            "title": "Avoid an ambiguous employee role",
-            "copy": "EvaluatorID identifies the assessor, while EmployeeID on Objectives identifies the objective owner. Keep these roles separate for now."
+            "title": "انتبهي لدور الموظف والمقيم",
+            "copy": "EmployeeID يمثل صاحب الهدف، بينما EvaluatorID يمثل الشخص الذي اجرى التقييم. لا تعملي علاقة اضافية ممكن تسبب مسار فلترة ملتبس."
           },
           {
-            "title": "Test filtering",
-            "copy": "Try Calendar[QuarterLabel] and AssessmentSource separately and observe which assessment records remain."
+            "title": "جربي الفلاتر",
+            "copy": "اعملي Slicer من Calendar[QuarterLabel]، وجربي فلتر AssessmentSource من جدول التقييمات. راقبي كيف يتغير عدد السجلات."
           }
         ],
-        "callout": "Assessment date and objective due date are different business events."
+        "callout": "تاريخ التقييم AssessmentDate مختلف عن تاريخ استحقاق الهدف DueDate؛ كل واحد اله معنى مختلف."
       },
       {
-        "name": "Solve a hidden problem",
-        "title": "The weight multiplication trap",
-        "lead": "A manager notices a weight total that looks three times too high. Investigate the reason at the correct grain.",
+        "name": "نكتشف مشكلة",
+        "title": "ليش مجموع الاوزان طلع غلط؟",
+        "lead": "تخيلي مدير لاحظ ان مجموع اوزان اهداف بعض الموظفين صار اعلى بكثير من المتوقع. بدنا نكتشف السبب من شكل البيانات.",
         "steps": [
           {
-            "title": "Preserve the original",
-            "copy": "In Power Query, right-click Objectives and create a referenced query called Objective_Weight_Audit."
+            "title": "اعملي Reference",
+            "copy": "افتحي Power Query، واضغطي بزر الفأرة اليمين على Objectives ثم Reference. سمي الاستعلام الجديد Objective_Weight_Audit."
           },
           {
-            "title": "Audit the weights",
-            "copy": "Group by EmployeeID and PlanYear. Sum ObjectiveWeightPct into TotalObjectiveWeight."
+            "title": "اجمعي الاوزان بالمستوى الصحيح",
+            "copy": "في الاستعلام الجديد استخدمي Group By حسب EmployeeID وPlanYear، واجمعي ObjectiveWeightPct في عمود اسمه TotalObjectiveWeight."
           },
           {
-            "title": "Explain the trap",
-            "copy": "Every Objective has multiple KPIs. Repeating its weight per KPI would incorrectly inflate the total."
+            "title": "قارني مع KPIs",
+            "copy": "لاحظي ان كل Objective ممكن يظهر تحته عدة KPIs. لو كررنا الوزن مع كل KPI وجمعناه، رح تتضاعف قيمة الوزن بشكل غير صحيح."
           },
           {
-            "title": "Keep your model tidy",
-            "copy": "Use the audit as a temporary validation query. Disable its load when the check is complete."
+            "title": "خلي النموذج مرتب",
+            "copy": "استعملي الاستعلام للتأكد من النتيجة، وبعدها عطلي Enable Load لاستعلام التدقيق اذا ما بدك يظهر كجدول مستقل في التقرير."
           }
         ],
-        "callout": "Objective weights are applied once per objective; actual weighted performance calculations start on Day 5."
+        "callout": "الاوزان تخص Objectives فقط. حساب النتيجة الموزونة باستخدام DAX رح يكون في اليوم الخامس."
       },
       {
-        "name": "Your model test",
-        "title": "Verify. Save. Continue.",
-        "lead": "Use report visuals to prove the relationships work before creating any DAX measure.",
+        "name": "التطبيق المستقل",
+        "title": "اختبري العلاقات واحفظي مشروعك",
+        "lead": "هسا دورك تتأكدي ان النموذج بشتغل فعلا، مش بس انه خطوط العلاقات ظاهرة في Model View.",
         "steps": [
           {
-            "title": "Build a matrix",
-            "copy": "Matrix rows: DirectorateName and DepartmentName. Values: Count of AssessmentID."
+            "title": "اعملي Matrix",
+            "copy": "اعملي Matrix وحطي DirectorateName ثم DepartmentName في Rows، واختاري Count of AssessmentID في Values من دون كتابة DAX Measure جديد."
           },
           {
-            "title": "Add slicers",
-            "copy": "Create slicers for AssessmentSource and Calendar[QuarterLabel]. Check that counts change correctly."
+            "title": "اضيفي Slicers",
+            "copy": "اعملي Slicer لـ AssessmentSource، والثاني لـ Calendar[QuarterLabel]. جربي اختيارات مختلفة وتابعي تغير عدد التقييمات."
           },
           {
-            "title": "Independent challenge",
-            "copy": "Explain why Upward has a different record volume from Self; do not average the assessment sources together."
+            "title": "جاوبي على السؤال",
+            "copy": "ليش ممكن يختلف عدد سجلات Upward عن Self؟ وليش ما بصير ناخد متوسط المصادر الثلاثة مع بعض بدون قاعدة واضحة؟"
           },
           {
-            "title": "Keep your finished work",
-            "copy": "Save HR_Performance_Intelligence.pbix. Keep all source CSV files in their current location; the same report continues on Day 5."
+            "title": "احفظي النتيجة",
+            "copy": "احفظي HR_Performance_Intelligence.pbix، ولا تغيري مكان ملفات CSV بعد الربط. رح نبدأ عليه مباشرة في اليوم الخامس."
           }
         ],
-        "callout": "Final checkpoint: connected model, correct keys, stable file paths and one saved PBIX."
+        "callout": "الهدف النهائي اليوم: نموذج صحيح، مفاتيح وعلاقات واضحة، فلاتر شغالة، وملف PBIX محفوظ."
       }
     ],
     "teachingStatus": "prepared"
