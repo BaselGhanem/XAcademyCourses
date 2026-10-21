@@ -435,7 +435,7 @@ const DAYS = [
     "learningSections": [
       {
         "name": "Start the project",
-        "title": "One project.<br>Seven sessions.",
+        "title": "One project. Seven sessions.",
         "lead": "The employee performance dashboard starts here and grows every session through Day 10. Today we create the foundation, not a disposable practice report.",
         "files": "starter",
         "steps": [
@@ -456,7 +456,7 @@ const DAYS = [
       },
       {
         "name": "Learn the business grain",
-        "title": "What does<br>one row mean?",
+        "title": "What does one row mean?",
         "lead": "Before making relationships, identify the level of detail in each table.",
         "steps": [
           {
@@ -480,7 +480,7 @@ const DAYS = [
       },
       {
         "name": "Import and inspect",
-        "title": "Eight CSVs.<br>Clear data types.",
+        "title": "Eight CSVs. Clear data types.",
         "lead": "Connect every source as a separate Power Query table, then correct its data types.",
         "steps": [
           {
@@ -504,7 +504,7 @@ const DAYS = [
       },
       {
         "name": "Create relationships",
-        "title": "The many-to-one<br>logic",
+        "title": "The many-to-one logic",
         "lead": "Build a controlled filter path from organizational hierarchy to individual assessments.",
         "steps": [
           {
@@ -528,7 +528,7 @@ const DAYS = [
       },
       {
         "name": "Give the model time",
-        "title": "Calendar +<br>filter direction",
+        "title": "Calendar + filter direction",
         "lead": "A date table makes the model ready for trend analysis later in the course.",
         "steps": [
           {
@@ -552,7 +552,7 @@ const DAYS = [
       },
       {
         "name": "Solve a hidden problem",
-        "title": "The weight<br>multiplication trap",
+        "title": "The weight multiplication trap",
         "lead": "A manager notices a weight total that looks three times too high. Investigate the reason at the correct grain.",
         "steps": [
           {
@@ -576,7 +576,7 @@ const DAYS = [
       },
       {
         "name": "Your model test",
-        "title": "Verify.<br>Save. Continue.",
+        "title": "Verify. Save. Continue.",
         "lead": "Use report visuals to prove the relationships work before creating any DAX measure.",
         "steps": [
           {
