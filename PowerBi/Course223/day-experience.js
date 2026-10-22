@@ -28,6 +28,28 @@ function initCourseDayJourney(day, courseHome) {
   }
   document.title = `اليوم ${day.id} | ${day.titleAr} | X Academy`;
   initMariamJourney(day, courseHome, chapters);
+  // Day 04: the user-selected data model graphic is the full-width lesson introduction.
+  if (day.id === 4) {
+    const diagram = 'week1/day4/media/Day04_Data_Model_Relationships.webp';
+    const style = document.createElement('link');
+    style.rel = 'stylesheet';
+    style.href = 'week1/day4/media/model-image.css?v=20261022';
+    document.head.append(style);
+    const section = document.createElement('section');
+    section.className = 'mj-model-hero';
+    section.setAttribute('aria-labelledby', 'mj-model-title');
+    section.innerHTML = `<div class="mj-model-head"><div><span class="mj-model-kicker">DAY 04 · DATA MODEL</span><h2 id="mj-model-title">خريطة العلاقات اللي رح نبنيها اليوم</h2><p>هاي صورة الجداول الثمانية والعلاقات بينها. اضغطي على الصورة لتكبيرها.</p></div><span class="mj-model-chip">7 RELATIONSHIPS</span></div><button class="mj-model-preview" type="button" aria-label="تكبير مخطط علاقات البيانات"><img src="${diagram}" width="1672" height="941" fetchpriority="high" alt="خريطة علاقات الجداول: Directorates وDepartments وEmployees وObjectives وKPIs وStrategicPriorities وCalendar وEvaluationScores_2026_H1"><span class="mj-model-zoom-label">تكبير الصورة ↗</span></button><dialog class="mj-model-dialog" aria-label="مخطط العلاقات بالحجم الكامل"><div class="mj-model-dialog-head"><strong>Data Model Relationships</strong><div><button class="mj-model-actual" type="button" aria-pressed="false">عرض 100%</button><button class="mj-model-close" type="button">إغلاق ×</button></div></div><div class="mj-model-dialog-view"><img src="${diagram}" width="1672" height="941" alt="مخطط العلاقات بالحجم الكامل"></div></dialog>`;
+    document.querySelector('.mj-layout').before(section);
+    const dialog = section.querySelector('dialog');
+    section.querySelector('.mj-model-preview').addEventListener('click', () => dialog.showModal());
+    section.querySelector('.mj-model-close').addEventListener('click', () => dialog.close());
+    section.querySelector('.mj-model-actual').addEventListener('click', event => {
+      const zoomed = dialog.classList.toggle('is-zoomed');
+      event.currentTarget.textContent = zoomed ? 'ملاءمة الشاشة' : 'عرض 100%';
+      event.currentTarget.setAttribute('aria-pressed', String(zoomed));
+    });
+    dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  }
   if (day.learningSections?.length) {
     document.querySelector(`.mj-glass-top span:last-child`).textContent = number;
     document.querySelector(`.mj-loader`)?.setAttribute(`aria-label`, `بنجهز اليوم ${day.id}`);
