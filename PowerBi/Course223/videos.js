@@ -4,7 +4,7 @@
 const DAY_VIDEOS = {
   1: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQTvbwGMn5m5S4-0cAYHajrHAXQvilO399MYC4ENpI4_XTs" width="1920" height="1080" frameborder="0" scrolling="no" title="تسجيل اليوم الأول" allow="autoplay; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
   2: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQQJZ5-LIv2OQ65KcBsn6J9pAZGY88Cy_lfSMbxSjApvH2E" width="1920" height="1080" frameborder="0" scrolling="no" title="تسجيل اليوم الثاني" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`,
-  3: `<a class="mj-video-open" href="https://1drv.ms/v/c/a1a27fad04d192e9/IQDOH9dS2GSOT6vbVqcG8UVrAXtSiAstA9fblUmqyBxOww8" target="_blank" rel="noopener noreferrer" aria-label="مشاهدة تسجيل اليوم الثالث على OneDrive"><span class="mj-video-open-play" aria-hidden="true"></span><strong>شاهد تسجيل اليوم الثالث</strong><span class="mj-video-open-action">فتح التسجيل ↗</span><small>يفتح في نافذة جديدة</small></a>`,
+  3: `<a class="mj-video-open" href="https://1drv.ms/v/c/a1a27fad04d192e9/IQTOH9dS2GSOT6vbVqcG8UVrAWjKFG2N9ysdGAEb5bUUYwo" target="_blank" rel="noopener noreferrer" aria-label="مشاهدة تسجيل اليوم الثالث على OneDrive"><span class="mj-video-open-play" aria-hidden="true"></span><strong>شاهد تسجيل اليوم الثالث</strong><span class="mj-video-open-action">فتح التسجيل ↗</span><small>يفتح في نافذة جديدة</small></a>`,
   4: ``,
   5: ``,
   6: ``,
