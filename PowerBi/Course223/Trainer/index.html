@@ -13,9 +13,9 @@
   <main class="shell section">
     <span class="eyebrow">PREPARATION PLAN</span>
     <h1 class="section-title">تجهيز دورة مريم</h1>
-    <p class="section-copy">اليوم الاول تم تدريسه في 15 اكتوبر، واليوم الثاني اكتمل في 18 اكتوبر مع Column from Examples، اليوم الثالث اكتمل في 20 اكتوبر، واليوم الرابع جاهز لبدء مشروع مترابط يستمر لليوم العاشر</p>
+    <p class="section-copy">اليوم الاول تم تدريسه في 15 اكتوبر، واليوم الثاني اكتمل في 18 اكتوبر مع Column from Examples، اليوم الثالث اكتمل في 20 اكتوبر، واليوم الرابع اكتمل وتم اختبار العلاقات، واليوم الخامس جاهز لتطبيق DAX وبناء أول صفحة تنفيذية</p>
     <a class="btn btn-ghost" href="../week1/day1/web/Day01_Trainer.html">دليل مدرب اليوم الاول</a> <a class="btn btn-teal" href="../ADAPTATION_PLAN.md">خطة التخصيص وقواعد المؤشرات</a>
-    <a class="btn btn-primary" href="Day04_Model.html" style="margin-top:18px">اليوم الرابع — وضع المدرب / المشروع الجديد</a><a class="btn btn-primary" href="Day03_Integration.html" style="margin-top:18px">اليوم الثالث — وضع المدرب خطوة بخطوة</a><p class="muted">مواد اليوم الرابع جاهزة، اليوم الثالث تم تدريسه</p><a class="btn btn-primary" href="Day02_Performance.html" style="margin-top:18px">دليل المدرب التفاعلي لليوم الثاني — 120 دقيقة</a><div class="panel" style="margin-top:28px">
+    <a class="btn btn-primary" href="Day05_DAX.html" style="margin-top:18px">اليوم الخامس — وضع المدرب التفاعلي / DAX & Dashboard</a><a class="btn btn-ghost" href="Day05_Reference.html" style="margin-top:18px">مرجع نتائج اليوم الخامس المدققة</a><a class="btn btn-primary" href="Day04_Model.html" style="margin-top:18px">اليوم الرابع — وضع المدرب / المشروع الجديد</a><a class="btn btn-primary" href="Day03_Integration.html" style="margin-top:18px">اليوم الثالث — وضع المدرب خطوة بخطوة</a><p class="muted">اليوم الرابع تم تطبيقه واختبار العلاقات، واليوم الخامس جاهز للتدريب</p><a class="btn btn-primary" href="Day02_Performance.html" style="margin-top:18px">دليل المدرب التفاعلي لليوم الثاني — 120 دقيقة</a><div class="panel" style="margin-top:28px">
       <h2>قبل تجهيز كل يوم</h2>
       <div class="steps">
         <div class="step"><span class="step-num">01</span><span>تعريف السؤال والحقول ومستوى التفاصيل</span></div>
@@ -26,17 +26,17 @@
     </div>
     <div class="portal-grid" id="trainerDays" style="margin-top:28px"></div>
   </main>
-  <script src="../data.js?v=20261022-day4-ar"></script>
+  <script src="../data.js?v=20261025-day5"></script>
   <script>
     DAYS.forEach(day => {
       const card = document.createElement(`a`);
       card.className = `portal-day open`;
-      card.href = day.id === 2 ? `Day02_Performance.html` : day.id === 3 ? `Day03_Integration.html` : day.id === 4 ? `Day04_Model.html` : `../day.html?id=${day.id}`;
+      card.href = day.id === 2 ? `Day02_Performance.html` : day.id === 3 ? `Day03_Integration.html` : day.id === 4 ? `Day04_Model.html` : day.id === 5 ? `Day05_DAX.html` : `../day.html?id=${day.id}`;
       const title = document.createElement(`h3`);
       title.textContent = `اليوم ${day.id} — ${day.titleAr}`;
       const status = document.createElement(`p`);
       status.className = `muted`;
-      status.textContent = day.id === 1 ? `تم تدريسه — 15 اكتوبر 2026` : day.id === 2 ? `تم تدريسه — 18 اكتوبر 2026 + Column from Examples` : day.id === 3 ? `تم تدريسه — 20 اكتوبر 2026` : day.id === 4 ? `مجهز — مدخل المشروع النهائي` : day.ready ? `مجهز ولم يدرس` : `مخطط — المواد لم تجهز`;
+      status.textContent = day.id === 1 ? `تم تدريسه — 15 اكتوبر 2026` : day.id === 2 ? `تم تدريسه — 18 اكتوبر 2026 + Column from Examples` : day.id === 3 ? `تم تدريسه — 20 اكتوبر 2026` : day.id === 4 ? `تم تدريسه واختبار العلاقات — 22 اكتوبر 2026` : day.id === 5 ? `مجهز — DAX وتقييم Manager ولوحة أولية` : day.ready ? `مجهز ولم يدرس` : `مخطط — المواد لم تجهز`;
       card.append(title, status);
       document.getElementById(`trainerDays`).appendChild(card);
     });
