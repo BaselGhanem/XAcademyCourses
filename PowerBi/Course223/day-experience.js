@@ -32,7 +32,7 @@ function initCourseDayJourney(day, courseHome) {
   if (day.id === 5) {
     const stylesheet = document.createElement(`link`);
     stylesheet.rel = `stylesheet`;
-    stylesheet.href = `week1/day5/web/day05-hero.css?v=20261025`;
+    stylesheet.href = `week1/day5/web/day05-hero.css?v=20261025-pbix`;
     document.head.append(stylesheet);
     const banner = document.createElement(`section`);
     banner.className = `mj-day5-hero`;
