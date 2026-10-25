@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#091619">
+<title>Day 05 · Verified DAX Reference | X Academy</title>
+<link rel="icon" type="image/svg+xml" href="assets/X_Academy_Intersection.svg">
+<link rel="stylesheet" href="assets/day05-reference.css?v=1"></head>
+<body><main class="shell">
+<header class="top">
+<div class="brand"><img src="assets/X_Academy_Intersection.svg" width="48" height="48" alt=""><div><strong>X ACADEMY</strong><span>TRAINER / VERIFIED REFERENCE</span></div></div>
+<nav><a href="Day05_DAX.html">وضع المدرب</a><a href="Day05_Measures.dax" download>تحميل DAX كامل</a></nav>
+</header>
+<section class="hero">
+<div class="eyebrow">DAY 05 · DATA VALIDATION</div><h1>النتيجة موثوقة قبل ما تكون جميلة</h1>
+<p>صفحة مرجع المدرب للمواد التي تم التحقق منها من ملفات CSV الثمانية الموجودة في Day04_Project_Starter.zip · لا تعرض هذه الصفحة على المتدربة</p>
+<div class="chips"><span>2026-Q2</span><span>Manager ONLY</span><span>One quarter</span><span>Complete objectives</span></div>
+</section>
+<section class="stats">
+<article><small>Manager Assessments · Q2</small><strong>2,370</strong><span>من اصل 2,400 متوقع</span></article>
+<article><small>Completed employees · Q2</small><strong>190</strong><span>من اصل 200 موظف</span></article>
+<article><small>Manager KPI Average · Q2</small><strong>75.738</strong><span>متوسط العلامات الخام</span></article>
+<article class="focus"><small>Manager Weighted Score · Q2</small><strong>75.792</strong><span>متوسط النتائج الموزونة المكتملة</span></article>
+</section>
+<section class="panel">
+<h2>الجدول المرجعي · من بيانات CSV نفسها</h2>
+<div class="table-scroll"><table>
+<thead><tr><th>المعيار</th><th>2026-Q1</th><th>2026-Q2</th><th>Q1 + Q2</th></tr></thead>
+<tbody>
+<tr><td>تقييمات Manager الموجودة</td><td>2,373</td><td>2,370</td><td>4,743</td></tr>
+<tr><td>تقييمات Manager المتوقعة</td><td>2,400</td><td>2,400</td><td>4,800</td></tr>
+<tr><td>التقييمات الغائبة</td><td>27</td><td>30</td><td>57</td></tr>
+<tr><td>الموظفون بتقييم مكتمل</td><td>191</td><td>190</td><td>—</td></tr>
+<tr><td>الموظفون بتقييم غير مكتمل</td><td>9</td><td>10</td><td>—</td></tr>
+<tr><td>Manager KPI Average</td><td>73.80198</td><td>75.73751</td><td>—</td></tr>
+<tr><td>Manager Weighted Score (Completed Only)</td><td>73.81423</td><td>75.79203</td><td>—</td></tr>
+</tbody></table></div>
+<p class="muted">الأرقام مقربة في العرض فقط. Manager Weighted Score متوسط نتائج الموظفين المكتملة لكل ربع، وليس متوسط جميع KPI Scores. لا تعرض مجموع Q1+Q2 كأنه تقييم سنوي.</p>
+</section>
+<div class="twocol">
+<section class="panel">
+<h2>منطق التقييم · خطوة بخطوة</h2>
+<ol>
+<li>فلتر <code>Calendar[QuarterLabel]</code> يجب أن يختار ربعًا واحدا مثل <code>2026-Q2</code></li>
+<li>كل موظف لديه 4 Objectives في سنة 2026، وكل Objective يتبعه 3 KPIs</li>
+<li>الـ<code>Objective Score</code> هو متوسط KPIScore من Manager للربع نفسه بعد التحقق من وجود كل KPIs المطلوبة</li>
+<li>الوزن موجود في <code>Objectives[ObjectiveWeightPct]</code> ولا ينسخ إلى Fact؛ مجموع أوزان الموظف في 2026 يساوي 100</li>
+<li>نتيجة الموظف = مجموع (نتيجة الهدف × وزنه / 100)، بشرط اكتمال أهدافه كلها</li>
+<li>على مستوى Department/Directorate: AVERAGEX على نتائج الموظفين المكتملة، لا SUMX على الجميع ولا AVERAGE للـFact الخام</li>
+</ol>
+</section>
+<section class="panel">
+<h2>تفاصيل مفاجأة التقييم الناقص</h2>
+<div class="person"><div><span>Completed Q2</span><strong>EMP0001</strong><small>Sami Habib</small></div><strong>≈ 70.393</strong></div>
+<div class="person alert"><div><span>Missing 3 Manager KPIs · Q2</span><strong>EMP0013</strong><small>Objective واحد غير مكتمل</small></div><strong>BLANK</strong></div>
+<p>الشرط السليم: لا تجعل 9 KPIs الموجودة تتظاهر بأنها تمثل الـ12 كاملة، ولا تدخل قيما صفرية مكان السجلات غير الموجودة. البيانات لا تحتوي Null KPIScore في السجلات الموجودة؛ النقص سببه غياب سجل التقييم نفسه</p>
+<p class="muted">الـBlank المتوقع لا يعني ان الـMeasure معطلة. تحقق من الفلتر والـEmployeeID قبل الاستنتاج.</p>
+</section>
+</div>
+<section class="panel">
+<h2>أسماء الحقول الحقيقية</h2>
+<div class="table-scroll"><table>
+<thead><tr><th>الجدول</th><th>الأعمدة المستخدمة في اليوم الخامس</th></tr></thead><tbody>
+<tr><td><code>Employees</code></td><td><code>EmployeeID</code>, <code>EmployeeName</code>, <code>DepartmentID</code></td></tr>
+<tr><td><code>Departments</code></td><td><code>DepartmentName</code>, <code>DirectorateID</code></td></tr>
+<tr><td><code>Directorates</code></td><td><code>DirectorateName</code></td></tr>
+<tr><td><code>Objectives</code></td><td><code>ObjectiveID</code>, <code>EmployeeID</code>, <code>ObjectiveWeightPct</code>, <code>PlanYear</code></td></tr>
+<tr><td><code>KPIs</code></td><td><code>KPIID</code>, <code>ObjectiveID</code></td></tr>
+<tr><td><code>EvaluationScores_2026_H1</code></td><td><code>AssessmentID</code>, <code>KPIID</code>, <code>AssessmentSource</code>, <code>AssessmentDate</code>, <code>KPIScore</code>, <code>AssessmentStatus</code></td></tr>
+<tr><td><code>Calendar</code></td><td><code>Date</code>, <code>Year</code>, <code>QuarterLabel</code> (القيم: <code>2026-Q1</code>, <code>2026-Q2</code>)</td></tr>
+</tbody></table></div>
+</section>
+<section class="panel">
+<h2>لو ظهرت نتيجة مختلفة · Troubleshooting</h2>
+<div class="trouble">
+<article><b>نتيجة KPI Average مختلفة عن 75.738</b><p>راجع QuarterLabel = 2026-Q2، واسم المصدر Manager حرفيا، وعدم وضع صفحة Filters إضافية</p></article>
+<article><b>Weighted Score لموظف فارغة</b><p>راجع اكتمال KPIs الأربعة أهداف، ومجموع الأوزان 100، والموظف الواحد والربع الواحد. جرب EMP0001 أولا</p></article>
+<article><b>نتيجة القسم ضخمة أو غير منطقية</b><p>لا تستخدم SUMX على EvaluationScores، لا تضرب الوزن أكثر من مرة، واستخدم AVERAGEX على الموظفين المكتملين</p></article>
+<article><b>الموظفون غير المكتملين يعرضون نتيجة</b><p>لا يكفي AVERAGE للعلامات الموجودة، يجب مقارنة عدد KPIID المستلمة بعدد KPIs المتوقعة لكل Objective ثم التحقق من جميع Objectives</p></article>
+<article><b>تظهر نتيجة عند اختيار Q1 وQ2 معا</b><p>الـMeasure النهائية يجب أن تكون BLANK لأن شرط HASONEVALUE(Calendar[QuarterLabel]) غير متحقق</p></article>
+<article><b>يظهر 200 Employees مع وجود 190 Complete</b><p>بطاقة Employee Count تعبر عن كل موظفي النطاق، وبطاقة Manager Complete Employees تمثل من يملك درجة معتمدة؛ هما مؤشرين مختلفين</p></article>
+</div>
+</section>
+<section class="panel">
+<h2>خطة الطوارئ ومعايير الإغلاق</h2>
+<div class="twocol">
+<div><h3>إذا تأخرنا 10 دقائق</h3><p>نفذ 3 Cards بدل 4، واختصر ترتيب الرسم، لكن لا تختصر Completeness Checks أو حفظ PBIX</p>
+<h3>إذا تأخرنا 20 دقيقة</h3><p>استخدم الصيغة المدققة للـWeighted Score بعد شرح فكرتها على الورق. اجعل تطبيق مريم يركز على Bar Chart بالـMeasure البسيطة</p></div>
+<div><h3>قبل ما نقول خلصنا</h3><p>تأكد من 2026-Q2، Manager فقط، وزن Objective مرة، Missing = BLANK، Q2 Score ≈75.792، 2,370 تقييم Manager، 190 مكتمل، وحفظ HR_Performance_Intelligence.pbix</p><h3>لليوم السادس</h3><p>نوسع CALCULATE وFilter Context، ونضيف مقارنات Self وManager وUpward دون تغيير قواعد الأوزان أو ملفات المصدر</p></div>
+</div>
+</section>
+<footer>Trainer only · X Academy · DAX validation from original CSV (not executed inside Power BI Desktop)</footer>
+</main></body></html>
