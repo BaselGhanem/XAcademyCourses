@@ -611,9 +611,18 @@ const DAYS = [
     "titleAr": "من البيانات لأول Dashboard احترافي",
     "hook": "كيف بنحول درجات مؤشرات KPI ووزن كل Objective لنتيجة دقيقة ونبني منها اول Dashboard؟",
     "mission": "نكتب Measures، ونحسب نتيجة Manager حسب الأهداف والأوزان، ونبني أول صفحة Performance Overview تتفاعل مع الأقسام والفترات",
-    "topics": ["COUNTROWS", "DISTINCTCOUNT", "AVERAGE", "CALCULATE", "SUMX", "DIVIDE", "Weighted Performance", "Executive Overview"],
+    "topics": [
+      "COUNTROWS",
+      "DISTINCTCOUNT",
+      "AVERAGE",
+      "CALCULATE",
+      "SUMX",
+      "DIVIDE",
+      "Weighted Performance",
+      "Executive Overview"
+    ],
     "build": [
-      "افتحي HR_Performance_Intelligence.pbix وراجعي مسار البيانات والحقول",
+      "افتحي نفس مشروع اليوم الرابع من جهازك، أو استرجعي نسخة PBIX الاحتياطية اذا احتجتي",
       "احسبي متوسط KPIs ووزن Objective على الورق",
       "اكتبي Measures لعدد التقييمات والموظفين",
       "احسبي متوسط Manager باستخدام AVERAGE وCALCULATE",
@@ -623,7 +632,24 @@ const DAYS = [
     ],
     "challenge": "ابني Clustered Bar Chart يعرض Manager KPI Average حسب DepartmentName، وجربي اختيار مديرية وربع مختلف",
     "deliverable": "صفحة Performance Overview تتفاعل مع الفلاتر، وفيها Measures لحساب نتائج Manager الموزونة بعد التحقق من الاكتمال",
-    "resources": [{"name":"مختبر الأوزان التفاعلي","type":"WEB","url":"week1/day5/web/Score_Lab.html","note":"غيري علامات KPIs وشوفي أثر الوزن والدرجات الناقصة","audience":"learner","stage":"lab"}],
+    "resources": [
+      {
+        "name": "ملف المشروع من اليوم الرابع — نسخة احتياطية",
+        "type": "PBIX",
+        "url": "https://drive.google.com/file/d/1muj3R4SHlKplnOGoOElSuPfk-uShvBFT/view?usp=drivesdk",
+        "note": "نسخة احتياطية من نهاية اليوم الرابع، للتنزيل اذا ضاع المشروع من جهازك",
+        "audience": "learner",
+        "stage": "backup"
+      },
+      {
+        "name": "مختبر الأوزان التفاعلي",
+        "type": "WEB",
+        "url": "week1/day5/web/Score_Lab.html",
+        "note": "غيري علامات KPIs وشوفي أثر الوزن والدرجات الناقصة",
+        "audience": "learner",
+        "stage": "lab"
+      }
+    ],
     "requiredFiles": [],
     "teachingStatus": "prepared",
     "learningScenes": [
@@ -668,7 +694,7 @@ const DAYS = [
         "steps": [
           {
             "title": "افتحي المشروع",
-            "copy": "افتحي HR_Performance_Intelligence.pbix. ما في ملفات جديدة اليوم؛ الجداول والعلاقات اللي بنيناها جاهزة."
+            "copy": "افتحي HR_Performance_Intelligence.pbix من جهازك. اذا ضاع، افتحي النسخة الاحتياطية من أول الصفحة على Google Drive، نزلي ملف PBIX وافتحيه في Power BI Desktop."
           },
           {
             "title": "حددي نطاق العمل",
@@ -1070,5 +1096,5 @@ function getCompletedDays() {
 
 // Learner surfaces use this allowlist; instructor guides and answers belong in Trainer.
 function getLearnerResources(day) {
-  return (day.resources || []).filter(resource => resource.audience !== `trainer` && (day.id === 1 || (resource.audience === `learner` && (/\.csv(?:[?#]|$)/i.test(resource.url || ``) || (day.id === 4 && /\.zip(?:[?#]|$)/i.test(resource.url || ``)) || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`)))));
+  return (day.resources || []).filter(resource => resource.audience !== `trainer` && (day.id === 1 || (resource.audience === `learner` && (/\.csv(?:[?#]|$)/i.test(resource.url || ``) || (day.id === 4 && /\.zip(?:[?#]|$)/i.test(resource.url || ``)) || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`) || (day.id === 5 && resource.type === `PBIX` && resource.stage === `backup` && resource.url === `https://drive.google.com/file/d/1muj3R4SHlKplnOGoOElSuPfk-uShvBFT/view?usp=drivesdk`)))));
 }
