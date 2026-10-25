@@ -39,6 +39,15 @@ function initCourseDayJourney(day, courseHome) {
     banner.setAttribute(`aria-labelledby`, `mj-day5-title`);
     banner.innerHTML = `<div class="mj-day5-heading"><div><span>DAY 05 · FROM MODEL TO MEASURE</span><h2 id="mj-day5-title">البيانات صارت جاهزة<br>هلا بنخليها تحكي</h2><p>من علامات KPIs إلى درجة كل هدف، ومنها إلى نتيجة أداء موزونة</p></div><a href="week1/day5/web/Score_Lab.html" target="_blank" rel="noopener">جربي مختبر الأوزان ↗</a></div><div class="mj-day5-pipeline"><div><small>01</small><strong>KPI SCORES</strong><span>علامة كل مؤشر</span></div><b>←</b><div><small>02</small><strong>OBJECTIVE</strong><span>متوسط العلامات</span></div><b>←</b><div><small>03</small><strong>WEIGHT</strong><span>وزن الهدف</span></div><b>←</b><div><small>04</small><strong>FINAL SCORE</strong><span>النتيجة الموزونة</span></div></div>`;
     document.querySelector(`.mj-layout`).before(banner);
+    // The binary PBIX is held in the course owner's Drive, not reconstructed client-side.
+    const backup = getLearnerResources(day).find(file => file.stage === `backup` && file.type === `PBIX`);
+    if (backup) {
+      const panel = document.createElement(`section`);
+      panel.className = `mj-day5-backup`;
+      panel.setAttribute(`aria-labelledby`, `mj-day5-backup-title`);
+      panel.innerHTML = `<div class="mj-backup-mark" aria-hidden="true">PBIX</div><div class="mj-backup-body"><span class="mj-backup-kicker">START HERE · PROJECT RECOVERY</span><h2 id="mj-day5-backup-title">قبل ما نبدأ — ملف مشروع اليوم الرابع</h2><p>كملي على نفس ملف Power BI اللي اشتغلنا عليه. اذا الملف مش عندك، افتحي النسخة الاحتياطية من Google Drive ونزليها. احتفظي بنسختك باسم HR_Performance_Intelligence.pbix</p><span class="mj-backup-meta">Power BI Project · 485 KB · نسخة نهاية اليوم الرابع</span></div><a class="mj-backup-download" href="${escape(backup.url)}" target="_blank" rel="noopener noreferrer"><span>فتح النسخة الاحتياطية وتنزيلها</span><span aria-hidden="true">↗</span></a>`;
+      banner.before(panel);
+    }
     document.querySelectorAll(`.mj-copy-code`).forEach(button => button.addEventListener(`click`, async () => {
       const code = button.closest(`.mj-dax-code`)?.querySelector(`code`)?.textContent || ``;
       if (!code) return;
