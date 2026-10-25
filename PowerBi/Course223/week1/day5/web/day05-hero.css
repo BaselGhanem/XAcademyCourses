@@ -22,3 +22,16 @@
 @media(max-width:920px){.mj-day5-pipeline{gap:7px}.mj-day5-pipeline>div{padding:11px;min-height:95px}.mj-day5-pipeline strong{font-size:10px}.mj-day5-heading{align-items:start}}
 @media(max-width:650px){.mj-day5-hero{width:calc(100% - 26px);border-radius:19px;padding:20px}.mj-day5-heading{display:flex;flex-direction:column;align-items:start}.mj-day5-heading a{width:100%}.mj-day5-pipeline{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-top:19px}.mj-day5-pipeline>b{display:none}.mj-day5-pipeline>div{padding:9px 5px;min-height:86px;border-radius:9px}.mj-day5-pipeline small{font-size:8px}.mj-day5-pipeline strong{font-size:8px;letter-spacing:-.04em;overflow-wrap:anywhere}.mj-day5-pipeline span{font-size:9px}.mj-dax-code pre{padding:12px}.mj-dax-code code{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.mj-day5-heading a{transition:none}}
+
+/* First-screen project recovery · kept before the lesson's visual header. */
+.mj-day5-backup{width:min(1400px,calc(100% - 44px));margin:20px auto 0;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:20px;padding:22px 25px;border:1px solid #64d5c65c;border-radius:22px;background:linear-gradient(115deg,#0c3735,#112c31);color:#eefaf6;box-shadow:0 12px 30px #00000020;font-family:Almarai,system-ui,sans-serif}
+.mj-backup-mark{display:grid;place-items:center;width:70px;height:70px;border:1px solid #71ded049;border-radius:16px;background:#087e7835;color:#99f0e3;font:800 16px Inter,monospace;letter-spacing:.04em}
+.mj-backup-kicker{color:#81d7ce;letter-spacing:.12em;font:700 10px Inter,sans-serif}
+.mj-day5-backup h2{font-size:clamp(19px,2.3vw,27px);line-height:1.5;margin:5px 0;color:#f7fffd}
+.mj-day5-backup p{color:#bfdbd4;font-size:12px;line-height:1.9;margin:0;max-width:800px}
+.mj-backup-meta{display:block;margin-top:8px;font:500 10px Inter,sans-serif;color:#a1d7cf;direction:ltr;text-align:right}
+.mj-backup-download{display:inline-flex;gap:11px;align-items:center;justify-content:center;min-height:48px;border-radius:12px;padding:12px 20px;background:#099999;color:#fff;text-align:center;font-weight:800;font-size:13px;text-decoration:none;white-space:nowrap;box-shadow:0 8px 26px #001b1a3d;transition:background .22s,transform .22s}
+.mj-backup-download:hover{background:#087e7e;transform:translateY(-2px)}
+.mj-backup-download:focus-visible{outline:3px solid #9cf6e9;outline-offset:4px}
+@media(max-width:850px){.mj-day5-backup{grid-template-columns:auto minmax(0,1fr)}.mj-backup-download{grid-column:1/-1;width:100%}}
+@media(max-width:650px){.mj-day5-backup{width:calc(100% - 26px);gap:12px;padding:16px;border-radius:18px}.mj-backup-mark{width:49px;height:49px;font-size:12px;border-radius:12px}.mj-day5-backup h2{font-size:18px}.mj-backup-download{font-size:12px;white-space:normal}.mj-backup-meta{font-size:9px}}
