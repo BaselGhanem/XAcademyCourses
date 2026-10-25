@@ -605,12 +605,12 @@ const DAYS = [
     "id": 5,
     "date": "2026-10-25",
     "weekday": "الأحد",
-    "ready": false,
+    "ready": true,
     "phase": "MEASURE",
-    "title": "DAX Fundamentals & Weighted Performance Calculation",
-    "titleAr": "اساسيات DAX وحساب التقييم الموزون",
+    "title": "DAX Fundamentals — Manager Performance & Executive Overview",
+    "titleAr": "من البيانات لأول Dashboard احترافي",
     "hook": "متوسط كل KPIs معا لا يطبق اوزان الاهداف وقد يخلط اتجاهات التقييم",
-    "mission": "نتعلم Measures ونحسب متوسط KPI لكل هدف ثم مساهمته بالوزن مع منع اعتماد النتائج الناقصة",
+    "mission": "نكتب Measures، ونحسب نتيجة Manager حسب الأهداف والأوزان، ونبني أول صفحة Performance Overview تتفاعل مع الأقسام والفترات",
     "topics": [
       "Measures vs Columns",
       "SUM / COUNTROWS",
@@ -631,15 +631,9 @@ const DAYS = [
     ],
     "challenge": "احسبي مثال هدف بدرجتي 60 و80 ووزن 30 ثم فسري غياب درجة",
     "deliverable": "Measures اساسية ونتيجة موزونة مشروطة بالاكتمال",
-    "resources": [],
-    "requiredFiles": [
-      {
-        "name": "مواد اليوم 5",
-        "type": "Plan",
-        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
-      }
-    ],
-    "teachingStatus": "planned"
+    "resources": [{"name":"مختبر الأوزان التفاعلي","type":"WEB","url":"week1/day5/web/Score_Lab.html","note":"غيري علامات KPIs وشوفي أثر الوزن والدرجات الناقصة","audience":"learner","stage":"lab"}],
+    "requiredFiles": [],
+    "teachingStatus": "prepared"
   },
   {
     "id": 6,
