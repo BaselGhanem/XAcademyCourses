@@ -10,3 +10,26 @@ body.xp-trainer{--xp-ink:#eef9f5;--xp-aqua:#82e8d8;--xp-muted:#aac0bd;--xp-borde
 @media(max-width:675px){.xp-focus .cf-header{padding:14px 15px;flex-wrap:wrap;gap:11px}.xp-focus .cf-brand img{width:35px;height:35px}.xp-focus .cf-brand strong{font-size:12px}.xp-focus .cf-header .cf-actions{display:flex;gap:6px;flex-wrap:wrap}.xp-focus .cf-header .cf-btn{font-size:11px;padding:8px}.xp-focus .cf-shell{padding:14px 13px 70px}.xp-focus .cf-overview{gap:12px}.xp-focus .cf-overview h1{font-size:22px}.xp-focus .cf-overview p{font-size:11px}.xp-focus .cf-layout{display:flex;flex-direction:column}.xp-focus .cf-card{width:100%;min-height:min(580px,70dvh);max-height:none;padding:23px 17px;border-radius:20px}.xp-focus .cf-speech{font-size:20px}.xp-focus .cf-card h2{font-size:26px}.xp-focus .cf-instruction-grid{grid-template-columns:1fr}.xp-focus .cf-aside{width:100%;display:grid;grid-template-columns:1fr 1fr}.xp-focus .cf-shortcuts{grid-column:1/-1}.xp-focus .cf-stage-list{scrollbar-width:none}.xp-focus .cf-stage{min-width:100px}.xp-focus .cf-dialog{width:calc(100% - 18px)!important;max-width:none!important}.xp-reference>.xp-shell-layout>main{padding:13px 5px}.xp-reference>.xp-shell-layout>main section{padding:15px}}
 @media(prefers-reduced-motion:reduce){.xp-shell-layout *{animation:none!important;transition:none!important}}
 @media print{.xp-shell-sidebar,.xp-shell-backdrop,.xp-shell-toggle{display:none!important}.xp-shell-layout{display:block!important}.xp-reference>.xp-shell-layout>main{width:100%!important}.xp-focus .cf-dialog{display:none!important}}
+
+
+/* Reference pages share the same charcoal surface and spacious editorial language. */
+body.xp-reference{background:#09191d!important;color:#e9f7f2!important}
+body.xp-reference .xp-shell-layout>main{background:transparent!important;color:#e9f7f2!important;line-height:1.95}
+body.xp-reference .xp-shell-layout>main>header,body.xp-reference .xp-shell-layout>main>section,body.xp-reference .xp-shell-layout>main>.panel,body.xp-reference .xp-shell-layout>main>details{background:linear-gradient(145deg,#142e32,#102429)!important;color:#eaf8f3!important;border:1px solid #e7fff220!important;border-radius:23px!important;padding:clamp(20px,3vw,31px)!important;box-shadow:0 12px 35px #0003!important}
+body.xp-reference .xp-shell-layout>main h1{font-size:clamp(26px,3.6vw,42px);line-height:1.5;color:#f4fffa!important}
+body.xp-reference .xp-shell-layout>main h2{color:#86e7d7!important;font-size:clamp(18px,2vw,24px)}
+body.xp-reference .xp-shell-layout>main h3{color:#a8ddd2!important}
+body.xp-reference .xp-shell-layout>main p,body.xp-reference .xp-shell-layout>main li{color:#d5e9e2}
+body.xp-reference .xp-shell-layout>main .muted,body.xp-reference .xp-shell-layout>main small{color:#9ebbb3}
+body.xp-reference .xp-shell-layout>main a{color:#98eadd!important}
+body.xp-reference .xp-shell-layout>main a:hover{color:#d9fff8!important}
+body.xp-reference .xp-shell-layout>main nav{display:flex;flex-wrap:wrap;gap:8px}
+body.xp-reference .xp-shell-layout>main nav a{display:inline-flex;padding:10px 13px;border-radius:11px;border:1px solid #78e4cf2f;background:#09999913}
+body.xp-reference .xp-shell-layout>main table{width:100%!important;max-width:100%;border-collapse:collapse}
+body.xp-reference .xp-shell-layout>main td,body.xp-reference .xp-shell-layout>main th{border-bottom:1px solid #ffffff1a!important;color:#e2f7ec!important;vertical-align:top}
+body.xp-reference .xp-shell-layout>main th{background:#13484130!important;color:#8ff1dc!important}
+body.xp-reference .xp-shell-layout>main .metric,body.xp-reference .xp-shell-layout>main .step,body.xp-reference .xp-shell-layout>main .trouble article,body.xp-reference .xp-shell-layout>main details{background:#15363a!important;border:1px solid #ffffff12!important;color:#e9f8f2!important}
+body.xp-reference .xp-shell-layout>main code{background:#082729;color:#a5f4e3;padding:3px 5px;border-radius:5px}
+body.xp-reference .xp-shell-layout>main img{max-width:100%}
+body.xp-reference .xp-shell-layout>main button{background:#099999;color:#fff;border:1px solid #09999988;border-radius:11px}
+@media(max-width:700px){body.xp-reference .xp-shell-layout>main>header,body.xp-reference .xp-shell-layout>main>section,body.xp-reference .xp-shell-layout>main>.panel{padding:18px!important}body.xp-reference .xp-shell-layout>main table{display:block;overflow-x:auto;max-width:100%;font-size:12px}}
