@@ -694,7 +694,7 @@ const DAYS = [
         "steps": [
           {
             "title": "افتحي المشروع",
-            "copy": "افتحي HR_Performance_Intelligence.pbix من جهازك. اذا ضاع، نزلي النسخة الاحتياطية من أول الصفحة مباشرة من GitHub، وافتحي ملف PBIX وافتحيه في Power BI Desktop."
+            "copy": "افتحي HR_Performance_Intelligence.pbix من جهازك. اذا ضاع، نزلي النسخة الاحتياطية من أول الصفحة مباشرة من GitHub، وافتحي الملف في Power BI Desktop."
           },
           {
             "title": "حددي نطاق العمل",
