@@ -1,47 +1,49 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head><style>html:not(.trainer-ok) body{visibility:hidden!important}</style><script src="assets/trainer-guard.js?v=20261025"></script>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex,nofollow"><title>تجهيز دورة مريم | X Academy</title>
-  <link rel="stylesheet" href="../styles.css?v=mariam-day1-20261010">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#081519">
+<title>Trainer Studio | Mariam · X Academy</title>
+<link rel="icon" href="assets/X_Academy_Intersection.svg" type="image/svg+xml">
+<style>html:not(.trainer-ok) body{visibility:hidden!important}</style>
+<script src="assets/trainer-guard.js?v=20261025"></script>
+<link rel="stylesheet" href="assets/trainer-premium.css?v=20261025-redesign">
 </head>
-<body>
-  <header class="topbar"><div class="shell topbar-inner">
-    <a class="brand" href="../index.html"><img src="assets/X_Academy_Intersection.svg" width="38" height="38" alt="X Academy"><span class="brand-copy"><strong>Mariam — Trainer Workspace</strong><small>EMPLOYEE PERFORMANCE</small></span></a>
-    <a class="btn btn-ghost" href="../index.html">خطة الدورة</a>
-  </div></header>
-  <main class="shell section">
-    <span class="eyebrow">PREPARATION PLAN</span>
-    <h1 class="section-title">تجهيز دورة مريم</h1>
-    <p class="section-copy">اليوم الاول تم تدريسه في 15 اكتوبر، واليوم الثاني اكتمل في 18 اكتوبر مع Column from Examples، اليوم الثالث اكتمل في 20 اكتوبر، واليوم الرابع اكتمل وتم اختبار العلاقات، واليوم الخامس جاهز لتطبيق DAX وبناء أول صفحة تنفيذية</p>
-    <a class="btn btn-ghost" href="../week1/day1/web/Day01_Trainer.html">دليل مدرب اليوم الاول</a> <a class="btn btn-teal" href="../ADAPTATION_PLAN.md">خطة التخصيص وقواعد المؤشرات</a>
-    <a class="btn btn-primary" href="Day05_DAX.html" style="margin-top:18px">اليوم الخامس — وضع المدرب التفاعلي / DAX & Dashboard</a><a class="btn btn-ghost" href="Day05_Reference.html" style="margin-top:18px">مرجع نتائج اليوم الخامس المدققة</a><a class="btn btn-primary" href="Day04_Model.html" style="margin-top:18px">اليوم الرابع — وضع المدرب / المشروع الجديد</a><a class="btn btn-primary" href="Day03_Integration.html" style="margin-top:18px">اليوم الثالث — وضع المدرب خطوة بخطوة</a><p class="muted">اليوم الرابع تم تطبيقه واختبار العلاقات، واليوم الخامس جاهز للتدريب</p><a class="btn btn-primary" href="Day02_Performance.html" style="margin-top:18px">دليل المدرب التفاعلي لليوم الثاني — 120 دقيقة</a><div class="panel" style="margin-top:28px">
-      <h2>قبل تجهيز كل يوم</h2>
-      <div class="steps">
-        <div class="step"><span class="step-num">01</span><span>تعريف السؤال والحقول ومستوى التفاصيل</span></div>
-        <div class="step"><span class="step-num">02</span><span>تجهيز بيانات افتراضية ونتائج مرجعية قابلة للمطابقة</span></div>
-        <div class="step"><span class="step-num">03</span><span>كتابة التطبيق الموجه والتمرين المستقل</span></div>
-        <div class="step"><span class="step-num">04</span><span>تحديث المفاهيم والملخص والروابط ثم التحقق من جاهزية اليوم</span></div>
-      </div>
-    </div>
-    <div class="portal-grid" id="trainerDays" style="margin-top:28px"></div>
-  </main>
-  <script src="../data.js?v=20261025-day5-github"></script>
-  <script>
-    DAYS.forEach(day => {
-      const card = document.createElement(`a`);
-      card.className = `portal-day open`;
-      card.href = day.id === 2 ? `Day02_Performance.html` : day.id === 3 ? `Day03_Integration.html` : day.id === 4 ? `Day04_Model.html` : day.id === 5 ? `Day05_DAX.html` : `../day.html?id=${day.id}`;
-      const title = document.createElement(`h3`);
-      title.textContent = `اليوم ${day.id} — ${day.titleAr}`;
-      const status = document.createElement(`p`);
-      status.className = `muted`;
-      status.textContent = day.id === 1 ? `تم تدريسه — 15 اكتوبر 2026` : day.id === 2 ? `تم تدريسه — 18 اكتوبر 2026 + Column from Examples` : day.id === 3 ? `تم تدريسه — 20 اكتوبر 2026` : day.id === 4 ? `تم تدريسه واختبار العلاقات — 22 اكتوبر 2026` : day.id === 5 ? `مجهز — DAX وتقييم Manager ولوحة أولية` : day.ready ? `مجهز ولم يدرس` : `مخطط — المواد لم تجهز`;
-      card.append(title, status);
-      document.getElementById(`trainerDays`).appendChild(card);
-    });
-  </script>
-</body>
-</html>
-
-
+<body class="xp-portal">
+<div class="xp-app">
+<aside class="xp-sidebar" aria-label="التنقل بين جلسات الدورة">
+ <a class="xp-logo" href="index.html"><img src="assets/X_Academy_Intersection.svg" alt="X Academy"><span><b>X ACADEMY</b><small>TRAINER STUDIO</small></span></a>
+ <div class="xp-rail-label">COURSE NAVIGATION <span>01—10</span></div>
+ <nav id="xp-days" class="xp-days" aria-label="أيام الدورة"></nav>
+ <div class="xp-sidefoot"><span class="xp-status-dot"></span><div><strong>PRIVATE WORKSPACE</strong><small>Mariam · Power BI</small></div></div>
+</aside>
+<div class="xp-backdrop" id="xp-backdrop" hidden></div>
+<div class="xp-main">
+<header class="xp-topbar"><button class="xp-mobile-menu" id="xp-toggle" aria-label="فتح قائمة الأيام" aria-expanded="false">☰</button><div class="xp-breadcrumb">WORKSPACE <span>/</span> MARIAM <span>/</span> OVERVIEW</div><div class="xp-top-actions"><span class="xp-live"><i></i> TRAINER ACCESS</span><a href="../dashboard.html">مركز الدورة ↗</a></div></header>
+<main class="xp-content">
+<section class="xp-titlebar"><div><span class="xp-eyebrow">X ACADEMY / INSTRUCTOR EDITION</span><h1>مساحة المدرب</h1><p>كل جلسة واضحة. كل خطوة تحت السيطرة. وكل مرجع في مكانه.</p></div><span class="xp-titlemark" aria-hidden="true">10<span>SESSIONS</span></span></section>
+<section class="xp-spotlight" aria-labelledby="xp-feature-title">
+ <div class="xp-spotlight-copy"><div class="xp-feature-meta"><span class="xp-chip">CURRENT FOCUS</span><span>DAY 05 / 10</span></div><h2 id="xp-feature-title">من البيانات لأول<br><span>Dashboard احترافي</span></h2><p>نبدأ Measures وDAX ثم نصل إلى تقييم Manager الموزون وأول صفحة تنفيذية، مع ضمان اكتمال البيانات.</p><div class="xp-feature-actions"><a class="xp-primary" href="Day05_DAX.html">ابدأ جلسة اليوم الخامس <span aria-hidden="true">↖</span></a><a class="xp-link" href="Day05_Reference.html">نتائج التحقق والحلول</a></div></div>
+ <div class="xp-feature-art" aria-hidden="true"><div class="xp-graph-head"><span>PERFORMANCE OVERVIEW</span><span class="xp-graph-dot"></span></div><div class="xp-graph-num">75.79<span>/ 100</span></div><div class="xp-graph-caption">MANAGER · 2026 Q2</div><div class="xp-bars"><i style="--b:68%"></i><i style="--b:82%"></i><i style="--b:60%"></i><i style="--b:94%"></i><i style="--b:76%"></i><i style="--b:88%"></i></div><div class="xp-graph-line"></div></div>
+</section>
+<div class="xp-section-heading"><div><span class="xp-eyebrow">READY TO LAUNCH</span><h2>مركز الجلسات</h2></div><p>اختار اليوم من القائمة الجانبية أو من بطاقاته</p></div>
+<section id="xp-daycards" class="xp-daycards" aria-label="جلسات التدريب"></section>
+<div class="xp-bottom-grid">
+<section class="xp-panel"><div class="xp-panel-header"><span class="xp-eyebrow">INSTRUCTOR TOOLKIT</span><h2>مرجع المدرب</h2></div><div class="xp-tool-list">
+<a href="Day05_Measures.dax" download><span class="xp-tool-ico">ƒx</span><span><strong>معادلات اليوم الخامس</strong><small>مرجع DAX الجاهز للمدرب فقط</small></span><em>↖</em></a>
+<a href="Day04_Reference.html"><span class="xp-tool-ico">✓</span><span><strong>التحقق من نموذج البيانات</strong><small>العلاقات الثمانية والجداول والاختبارات</small></span><em>↖</em></a>
+<a href="../ADAPTATION_PLAN.md"><span class="xp-tool-ico">≡</span><span><strong>منهج التقييم</strong><small>قواعد الأهداف والمؤشرات والأوزان</small></span><em>↖</em></a></div></section>
+<section class="xp-panel"><div class="xp-panel-header"><span class="xp-eyebrow">PRE-SESSION RITUAL</span><h2>قبل كل جلسة</h2></div><div class="xp-prep-list">
+<label><input type="checkbox"><span>راجع السؤال والحقول ومستوى البيانات</span></label>
+<label><input type="checkbox"><span>جهز نتائج مرجعية قابلة للمطابقة</span></label>
+<label><input type="checkbox"><span>تأكد من التمرين والتطبيق المستقل</span></label>
+<label><input type="checkbox"><span>افحص روابط الموارد وتسجيل الجلسة</span></label>
+</div></section>
+</div>
+<footer class="xp-footer">© X ACADEMY · MAR​IAM / COURSE223 <span>LEARN · ANALYSE · LEAD</span></footer>
+</main>
+</div>
+</div>
+<script src="../data.js?v=20261025-day5-github"></script>
+<script src="assets/trainer-portal.js?v=20261025-redesign"></script>
+</body></html>
