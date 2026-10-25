@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a1d20">
+<meta name="description" content="مختبر تفاعلي لحساب متوسط مؤشرات الأداء ونتيجة الأهداف الموزونة — X Academy">
+<title>Weighted Performance Lab | X Academy</title>
+<link rel="icon" type="image/svg+xml" href="../../../Trainer/assets/X_Academy_Intersection.svg">
+<link rel="stylesheet" href="score-lab.css?v=20261025">
+<script src="score-lab.js?v=20261025" defer></script>
+</head>
+<body>
+<div class="ambient" aria-hidden="true"><div class="glow glow-a"></div><div class="glow glow-b"></div></div>
+<header class="top shell">
+<a class="brand" href="../../../day.html?id=5" aria-label="العودة لليوم الخامس">
+<img src="../../../Trainer/assets/X_Academy_Intersection.svg" width="44" height="44" alt="">
+<span><b>X ACADEMY</b><small>LEARN · ANALYSE · LEAD</small></span>
+</a>
+<div class="top-right"><span class="top-badge">DAY 05 · DAX LAB</span><a href="../../../day.html?id=5" class="back">الرجوع للدرس ←</a></div>
+</header>
+<main class="shell">
+<section class="hero">
+<div class="eyebrow"><span class="dot"></span>INTERACTIVE PERFORMANCE STUDIO</div>
+<h1>من درجة كل KPI<br>لنتيجة <em>تقدر تثقي فيها</em></h1>
+<p>غيري علامات مؤشرات الأداء وشوفي كيف يتغير متوسط كل هدف، ثم كيف يشارك وزنه في النتيجة النهائية. بعدها جربي شو بصير لما يغيب تقييم واحد</p>
+</section>
+<div class="workspace">
+<section class="objectives" aria-label="مؤشرات الأداء">
+<div class="section-top"><div><span class="micro">01 / KPI LEVEL</span><h2>علامات المؤشرات</h2></div><span class="tiny-label">اسحبي للتحكم في العلامات</span></div>
+<div class="objectives-list">
+<article class="objective" data-index="0">
+<div class="objective-top"><div><span class="obj-index">01</span><h3>Objective A</h3></div><span class="weight-tag">30% WEIGHT</span></div>
+<div class="inputs">
+<label>KPI 1 <output id="v-0-0" for="k-0-0">60</output><input id="k-0-0" type="range" min="0" max="100" step="1" value="60" aria-label="علامة KPI الاول للهدف A"></label>
+<label>KPI 2 <output id="v-0-1" for="k-0-1">80</output><input id="k-0-1" type="range" min="0" max="100" step="1" value="80" aria-label="علامة KPI الثاني للهدف A"></label>
+</div>
+<div class="obj-foot"><span>Objective Score</span><strong id="avg-0">70.0</strong></div>
+</article>
+<article class="objective" data-index="1">
+<div class="objective-top"><div><span class="obj-index">02</span><h3>Objective B</h3></div><span class="weight-tag">40% WEIGHT</span></div>
+<div class="inputs">
+<label>KPI 1 <output id="v-1-0" for="k-1-0">85</output><input id="k-1-0" type="range" min="0" max="100" step="1" value="85" aria-label="علامة KPI الاول للهدف B"></label>
+<label>KPI 2 <output id="v-1-1" for="k-1-1">95</output><input id="k-1-1" type="range" min="0" max="100" step="1" value="95" aria-label="علامة KPI الثاني للهدف B"></label>
+</div>
+<div class="obj-foot"><span>Objective Score</span><strong id="avg-1">90.0</strong></div>
+</article>
+<article class="objective" data-index="2">
+<div class="objective-top"><div><span class="obj-index">03</span><h3>Objective C</h3></div><span class="weight-tag">30% WEIGHT</span></div>
+<div class="inputs">
+<label>KPI 1 <output id="v-2-0" for="k-2-0">75</output><input id="k-2-0" type="range" min="0" max="100" step="1" value="75" aria-label="علامة KPI الاول للهدف C"></label>
+<label id="last-kpi">KPI 2 <output id="v-2-1" for="k-2-1">85</output><input id="k-2-1" type="range" min="0" max="100" step="1" value="85" aria-label="علامة KPI الثاني للهدف C"></label>
+</div>
+<div class="obj-foot"><span>Objective Score</span><strong id="avg-2">80.0</strong></div>
+</article>
+</div>
+<div class="experiment">
+<div><span class="micro">02 / TRY THIS</span><h3>شو لو تقييم KPI واحد مش موجود؟</h3><p>فعلي الاختيار وشوفي اذا منطقي نحسب التقييم النهائي كأنه مكتمل</p></div>
+<label class="switch"><input type="checkbox" id="missing" role="switch" aria-label="اجعلي تقييم KPI الثاني للهدف C غير موجود"><span class="track"></span></label>
+</div>
+</section>
+<aside class="results" aria-live="polite">
+<div class="summary-top"><span class="micro">03 / WEIGHTED RESULT</span><span class="status" id="status"><i></i> تقييم مكتمل</span></div>
+<div class="score-display">
+<div class="score-ring" id="ring" role="img" aria-label="مساهمة الأهداف في النتيجة النهائية"><div class="score-inside"><small>Final Weighted Score</small><strong id="total">81.0</strong><span id="score-unit">/ 100</span></div></div>
+</div>
+<div class="contributions">
+<h2>كيف حسبناها؟</h2>
+<div class="contrib-row"><div class="contrib-head"><span>Objective A</span><b id="result-0">21.0</b></div><div class="bar"><i id="bar-0"></i></div><small id="formula-0">70.0 × 30% = 21.0</small></div>
+<div class="contrib-row"><div class="contrib-head"><span>Objective B</span><b id="result-1">36.0</b></div><div class="bar"><i id="bar-1"></i></div><small id="formula-1">90.0 × 40% = 36.0</small></div>
+<div class="contrib-row"><div class="contrib-head"><span>Objective C</span><b id="result-2">24.0</b></div><div class="bar"><i id="bar-2"></i></div><small id="formula-2">80.0 × 30% = 24.0</small></div>
+</div>
+<p id="insight" class="insight">كل هدف له وزنه الخاص. نحسب متوسط KPIs اولا، وبعدها نجمع المساهمات الموزونة</p>
+<button id="reset" class="reset" type="button">↺ اعادة العلامات للبداية</button>
+</aside>
+</div>
+<section class="bottom-note">
+<div class="note-mark">DAX</div>
+<div><h2>من التدريب للتقرير الحقيقي</h2><p>هون جربنا الفكرة على ثلاث أهداف. في ملف مريم، كل موظف عنده أربع أهداف لسنة 2026، وكل هدف تحته ثلاثة KPIs. نفس المنطق بنطبقه هناك على تقييم Manager وبنحافظ على مصدر التقييم والفترة</p></div>
+</section>
+</main>
+<footer>© X Academy · Weighted Performance Lab · Day 05</footer>
+</body>
+</html>
