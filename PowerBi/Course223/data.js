@@ -1070,5 +1070,5 @@ function getCompletedDays() {
 
 // Learner surfaces use this allowlist; instructor guides and answers belong in Trainer.
 function getLearnerResources(day) {
-  return (day.resources || []).filter(resource => resource.audience !== `trainer` && (day.id === 1 || (resource.audience === `learner` && (/\.csv(?:[?#]|$)/i.test(resource.url || ``) || (day.id === 4 && /\.zip(?:[?#]|$)/i.test(resource.url || ``))))));
+  return (day.resources || []).filter(resource => resource.audience !== `trainer` && (day.id === 1 || (resource.audience === `learner` && (/\.csv(?:[?#]|$)/i.test(resource.url || ``) || (day.id === 4 && /\.zip(?:[?#]|$)/i.test(resource.url || ``)) || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`)))));
 }
