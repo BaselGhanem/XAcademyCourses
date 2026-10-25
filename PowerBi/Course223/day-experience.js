@@ -4,7 +4,7 @@ function initCourseDayJourney(day, courseHome) {
   const resources = day.ready ? getLearnerResources(day) : (day.requiredFiles || []);
   const fileList = resources.length ? resources.map(file => {
     const copy = `<span class="mj-resource-icon">${escape(file.type)}</span><span><b>${escape(file.name)}</b><small>${escape(file.note || ``)}</small></span>`;
-    return day.ready && file.url ? `<a class="mj-resource" href="${escape(file.url)}" target="_blank" rel="noopener">${copy}</a>` : `<div class="mj-resource">${copy}<small>قيد التجهيز</small></div>`;
+    return day.ready && file.url ? `<a class="mj-resource" href="${escape(file.url)}" ${file.type === `PBIX` ? `download="HR_Performance_Intelligence_Day04_Backup.pbix"` : `target="_blank" rel="noopener"`}>${copy}</a>` : `<div class="mj-resource">${copy}<small>قيد التجهيز</small></div>`;
   }).join(``) : `<p class="mj-copy">ملفات التطبيق بتظهر هون لما تجهز</p>`;
   const steps = day.build || [];
   const middle = Math.ceil(steps.length / 2);
@@ -45,7 +45,7 @@ function initCourseDayJourney(day, courseHome) {
       const panel = document.createElement(`section`);
       panel.className = `mj-day5-backup`;
       panel.setAttribute(`aria-labelledby`, `mj-day5-backup-title`);
-      panel.innerHTML = `<div class="mj-backup-mark" aria-hidden="true">PBIX</div><div class="mj-backup-body"><span class="mj-backup-kicker">START HERE · PROJECT RECOVERY</span><h2 id="mj-day5-backup-title">قبل ما نبدأ — ملف مشروع اليوم الرابع</h2><p>كملي على نفس ملف Power BI اللي اشتغلنا عليه. اذا الملف مش عندك، افتحي النسخة الاحتياطية من Google Drive ونزليها. احتفظي بنسختك باسم HR_Performance_Intelligence.pbix</p><span class="mj-backup-meta">Power BI Project · 485 KB · نسخة نهاية اليوم الرابع</span></div><a class="mj-backup-download" href="${escape(backup.url)}" target="_blank" rel="noopener noreferrer"><span>فتح النسخة الاحتياطية وتنزيلها</span><span aria-hidden="true">↗</span></a>`;
+      panel.innerHTML = `<div class="mj-backup-mark" aria-hidden="true">PBIX</div><div class="mj-backup-body"><span class="mj-backup-kicker">START HERE · PROJECT RECOVERY</span><h2 id="mj-day5-backup-title">قبل ما نبدأ — ملف مشروع اليوم الرابع</h2><p>كملي على نفس ملف Power BI اللي اشتغلنا عليه. اذا الملف مش عندك، نزلي النسخة الاحتياطية المحفوظة ضمن ملفات الدورة على GitHub. احتفظي بنسختك باسم HR_Performance_Intelligence.pbix</p><span class="mj-backup-meta">Power BI Project · 485 KB · نسخة نهاية اليوم الرابع</span></div><a class="mj-backup-download" href="${escape(backup.url)}" download="HR_Performance_Intelligence_Day04_Backup.pbix"><span>تنزيل ملف Power BI الاحتياطي</span><span aria-hidden="true">↗</span></a>`;
       banner.before(panel);
     }
     document.querySelectorAll(`.mj-copy-code`).forEach(button => button.addEventListener(`click`, async () => {
