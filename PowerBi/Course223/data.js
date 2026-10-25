@@ -636,8 +636,8 @@ const DAYS = [
       {
         "name": "ملف المشروع من اليوم الرابع — نسخة احتياطية",
         "type": "PBIX",
-        "url": "https://drive.google.com/file/d/1muj3R4SHlKplnOGoOElSuPfk-uShvBFT/view?usp=drivesdk",
-        "note": "نسخة احتياطية من نهاية اليوم الرابع، للتنزيل اذا ضاع المشروع من جهازك",
+        "url": "week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix",
+        "note": "ملف PBIX محفوظ مع ملفات الدورة على GitHub، للرجوع إلى نقطة نهاية اليوم الرابع",
         "audience": "learner",
         "stage": "backup"
       },
@@ -1096,5 +1096,5 @@ function getCompletedDays() {
 
 // Learner surfaces use this allowlist; instructor guides and answers belong in Trainer.
 function getLearnerResources(day) {
-  return (day.resources || []).filter(resource => resource.audience !== `trainer` && (day.id === 1 || (resource.audience === `learner` && (/\.csv(?:[?#]|$)/i.test(resource.url || ``) || (day.id === 4 && /\.zip(?:[?#]|$)/i.test(resource.url || ``)) || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`) || (day.id === 5 && resource.type === `PBIX` && resource.stage === `backup` && resource.url === `https://drive.google.com/file/d/1muj3R4SHlKplnOGoOElSuPfk-uShvBFT/view?usp=drivesdk`)))));
+  return (day.resources || []).filter(resource => resource.audience !== `trainer` && (day.id === 1 || (resource.audience === `learner` && (/\.csv(?:[?#]|$)/i.test(resource.url || ``) || (day.id === 4 && /\.zip(?:[?#]|$)/i.test(resource.url || ``)) || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`) || (day.id === 5 && resource.type === `PBIX` && resource.stage === `backup` && resource.url === `week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix`)))));
 }
