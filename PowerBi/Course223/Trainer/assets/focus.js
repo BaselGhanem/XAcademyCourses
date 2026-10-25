@@ -120,7 +120,8 @@
     el(`number`).textContent = `STEP ${String(index + 1).padStart(2, `0`)} / ${String(tasks.length).padStart(2, `0`)}`;
     el(`title`).textContent = task.title;
     for (const [id, value] of [[`speech`, task.say], [`screen`, task.screen], [`practice`, task.practice], [`check`, task.check]]) el(id).textContent = value;
-    el(`step-help`).hidden = !task.detail;
+    el(`step-help`).hidden = false;
+    el(`step-help`).textContent = `كشف الاجابة والتفاصيل ✦`;
     el(`upnext`).textContent = tasks[index + 1]?.title || `حفظ الملف وتوثيق ما تم فعليا`;
     el(`prev`).disabled = index === 0;
     el(`next`).disabled = index === tasks.length - 1;
@@ -155,12 +156,21 @@
   function open(title) { el(`dialog-title`).textContent = title; dialogBody.replaceChildren(); dialog.showModal(); }
   el(`close`).onclick = () => dialog.close();
   el(`step-help`).onclick = () => {
+    open(`مرجع الخطوة · ${tasks[index].title}`);
+    const answer = document.createElement(`div`);
+    answer.className = `xp-reveal-answer`;
+    const label = document.createElement(`strong`);
+    label.textContent = `التحقق من النتيجة`;
+    const paragraph = document.createElement(`p`);
+    paragraph.textContent = tasks[index].check || `راجعي التنفيذ من المرجع ثم انتقلي للخطوة التالية`;
+    answer.append(label, paragraph);
+    dialogBody.append(answer);
     const detail = tasks[index].detail;
-    if (!detail) return;
-    open(tasks[index].title);
-    const copy = detail.cloneNode(true);
-    copy.className = ``;
-    dialogBody.append(copy);
+    if (detail) {
+      const copy = detail.cloneNode(true);
+      copy.className = ``;
+      dialogBody.append(copy);
+    }
   };
   dialog.onclick = event => { if (event.target !== dialog) return; const bounds = dialog.getBoundingClientRect(); if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close(); };
   el(`plan`).onclick = () => {
