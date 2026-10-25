@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#091316">
+<title>Day 05 · DAX & Executive Overview | Trainer Studio</title>
+<link rel="icon" type="image/svg+xml" href="assets/X_Academy_Intersection.svg">
+<link rel="stylesheet" href="../week1/day2/web/day2.css">
+<link rel="stylesheet" href="assets/focus.css?v=20261025-day5">
+<style>
+body:not(.coach-focus){background:#091316;color:#eaf6f2;font:16px/1.9 Almarai,system-ui,sans-serif}
+body:not(.coach-focus)>main{max-width:1050px;margin:auto;padding:clamp(16px,4vw,34px)}
+body:not(.coach-focus)>main header,body:not(.coach-focus)>main section{padding:24px;margin-bottom:18px;border:1px solid #ffffff20;border-radius:22px;background:#142428}
+body:not(.coach-focus)>main header{background:linear-gradient(135deg,#113336,#122327)}
+body:not(.coach-focus)>main h1{font-size:clamp(26px,4vw,40px)}
+body:not(.coach-focus)>main h2{font-size:24px;color:#94ded2}
+body:not(.coach-focus)>main h3{color:#64cdc1;font-size:14px}
+body:not(.coach-focus)>main a{color:#a1eee4;display:inline-block;padding:8px;text-decoration:none}
+body:not(.coach-focus)>main .note{border-inline-start:3px solid #099999;background:#0b444140;padding:12px;border-radius:9px}
+body:not(.coach-focus)>main table{border-collapse:collapse;width:100%}
+body:not(.coach-focus)>main th,body:not(.coach-focus)>main td{text-align:right;padding:8px;border-bottom:1px solid #ffffff18}
+body:not(.coach-focus)>main textarea{width:100%;min-height:110px;border:1px solid #ffffff28;background:#0c1c20;color:white;border-radius:12px;padding:14px}
+body:not(.coach-focus)>main button{background:#099999;color:white;padding:11px 20px;border:0;border-radius:12px;cursor:pointer}
+</style>
+</head>
+<body data-checklist="Day05_DAX" data-focus-title="اليوم الخامس · من النموذج لأول Dashboard" data-focus-summary="الأحد 25 اكتوبر · 19:00–21:00 · 20 تأسيس + 80 تطبيق + 20 تصميم">
+<main>
+<header>
+<div class="eyebrow">X ACADEMY / TRAINER STUDIO / DAY 05</div>
+<h1>DAX · From Data to Decisions</h1>
+<p>ملف PBIX نفسه من اليوم الرابع · Manager فقط · 2026-Q2 · 6 دوال أساسية · صفحة Executive Overview</p>
+<nav aria-label="روابط المدرب">
+<a href="index.html">مركز المدرب</a>
+<a href="Day05_Reference.html">التحقق والحلول</a>
+<a href="Day05_Measures.dax" download>مرجع DAX كامل</a>
+<a href="../day.html?id=5">صفحة مريم</a>
+<a href="../week1/day5/web/Score_Lab.html">مختبر المعادلة</a>
+</nav>
+</header>
+
+<section aria-labelledby="preflight"><h2 id="preflight">قبل الجلسة · جهز شاشتك الثانية</h2>
+<p>افتح HR_Performance_Intelligence.pbix الذي حفظته مريم في اليوم الرابع. لا تنشئ استعلامات ولا تنزل ملفات جديدة. تأكد أن جداول Employees وObjectives وKPIs وEvaluationScores_2026_H1 وCalendar موجودة وأن العلاقات السبع Active / Single</p>
+<p>جهز فلتر الصفحة Calendar[QuarterLabel] = 2026-Q2، وقيد التدريب هو Manager. سنجعل CALCULATE يحدد Manager في الـMeasures نفسها. لا تجمع Self وUpward مع Manager. قيم الوزن في Objectives هي 20 و25 و30 وغيرها بوحدة 0–100، والقسمة على 100 إلزامية</p>
+<p>على شاشة المدرب افتح المرجع DAX وفي الشاشة الثانية Power BI. لا تفتح جدول التحقق أو أرقام الإجابات أمام مريم. اعتمد أسماء الحقول كما هي من CSV دون إعادة تسمية</p>
+</section>
+
+<section data-phase="01 / MODEL">
+<h2>19:00–19:08 — افتتاح سريع بدون اعادة الدرس</h2>
+<label><input type="checkbox" data-check="0"><span>انجزت الخطوة</span></label>
+<h3>شو احكي</h3><p>المرة الماضية خلينا كل موظف يرتبط باهدافه، وكل هدف بمؤشراته، وكل KPI بتقييماته. اليوم بنخلي هذا النموذج يحكي لنا نتيجة الاداء الفعلية، مش بس عدد السجلات</p>
+<h3>شو اعرض</h3><p>افتح Model View لمدة دقيقة: Employees → Objectives → KPIs → EvaluationScores_2026_H1. اشر الى ObjectiveWeightPct في Objectives والى KPIScore في جدول التقييمات. بعدين ارجع Report View</p>
+<h3>تطبيق مريم</h3><p>تحدد بنفسها مكان وزن الهدف ومكان علامة المؤشر وتفسر ليش ما بنجمع الوزن من سجلات التقييم</p>
+<div class="note">فحص: وزن الهدف موجود في Objectives فقط، وقراءة الوزن 30 معناها 30% وليس 30 نقطة تضاف مباشرة</div>
+<div class="trainer-detail"><ol><li>لا تعد استيراد CSV ولا اختبار العلاقات، المستخدم أكد أنها اختبرتها بنجاح</li><li>افتح Power BI على ملف HR_Performance_Intelligence.pbix نفسه</li><li>إذا ظهرت أي مشكلة علاقات، اصلح الرابط المطلوب فقط بدون إعادة شرح Model View</li></ol></div>
+</section>
+
+<section data-phase="02 / FORMULA">
+<h2>19:08–19:20 — من الورقة الى منطق التقييم</h2>
+<label><input type="checkbox" data-check="1"><span>انجزت الخطوة</span></label>
+<h3>شو احكي</h3><p>خلينا نحسبها بدون Power BI اول. الهدف A متوسطه 70 ووزنه 30%، الهدف B متوسطه 90 ووزنه 40%، والهدف C متوسطه 80 ووزنه 30%. شو بتطلع مساهمة كل واحد والنتيجة النهائية؟</p>
+<h3>شو اعرض</h3><p>اكتب: A = 70 × 0.30 = 21؛ B = 90 × 0.40 = 36؛ C = 80 × 0.30 = 24. المجموع 81/100. اعرض KPI scores 60 و80 → Objective Score 70</p>
+<h3>تطبيق مريم</h3><p>تحسب وزن هدف واحد والنتيجة النهائية بيدها، وتشرح الفرق بين Average KPI Score وWeighted Employee Score</p>
+<div class="note">فحص: 81 هي النتيجة النهائية في هذا المثال التعليمي. لا تستخدم هذا الرقم كأنه نتيجة موظف من CSV</div>
+<div class="trainer-detail"><ol><li>انتباه: بياناتنا الحقيقية فيها 4 Objectives لكل موظف في 2026، المثال الورقي ثلاثة فقط لتبسيط الفكرة</li><li>اسأل: هل حساب 70 × 30 صحيح؟ لا، المطلوب 70 × (30/100)</li><li>لا ندخل تفاصيل Result Aggregation الآن</li></ol></div>
+</section>
+
+<section data-phase="03 / MEASURES">
+<h2>19:20–19:35 — اول Measure والفرق عن العمود</h2>
+<label><input type="checkbox" data-check="2"><span>انجزت الخطوة</span></label>
+<h3>شو احكي</h3><p>العمود موجود مع كل صف. اما Measure فهي نتيجة تحسبها Power BI حسب الفلاتر الموجودة. تعالي نجرب بنفس البيانات ونشوف الفرق قدامنا</p>
+<h3>شو اعرض</h3><p>Modeling → New measure. اكتب Assessment Count = COUNTROWS('EvaluationScores_2026_H1')، ثم Employee Count = DISTINCTCOUNT(Employees[EmployeeID]). ضع كل واحدة في Card، وجرب تغيير Directorate وDepartment</p>
+<h3>تطبيق مريم</h3><p>تعيد Measure الاولى وحدها، وتنشئ الثانية تحت اسم واضح، وتجرب Card بعد اختيار قسم معين</p>
+<div class="note">فحص: Employee Count يحسب الموظفين في نطاق الجدول الوصفي، وليس تلقائيا عدد أصحاب تقييم Manager المكتمل</div>
+<div class="trainer-detail"><ol><li>افتح Day05_Measures.dax عند الحاجة وانسخ صيغة واحدة فقط كل مرة</li><li>لا تشرح Calculated Columns بشكل متعمق؛ مقارنة بصرية عملية تكفي</li><li>لو استهلك الإدخال أكثر من 15 دقيقة انتقل مباشرة إلى CALCULATE دون إعادة الدالة مرتين</li></ol></div>
+</section>
+
+<section data-phase="04 / MANAGER">
+<h2>19:35–19:55 — متوسط العلامات بس من Manager</h2>
+<label><input type="checkbox" data-check="3"><span>انجزت الخطوة</span></label>
+<h3>شو احكي</h3><p>لو اخدنا AVERAGE على كل البيانات، رح نخلط رأي الموظف مع رأي المدير وتقييم Upward. اليوم بدنا نسمع صوت Manager لحاله. كيف نطلب من DAX تغير سياق الحساب؟</p>
+<h3>شو اعرض</h3><p>اكتب Manager KPI Average باستخدام CALCULATE(AVERAGE('EvaluationScores_2026_H1'[KPIScore]), 'EvaluationScores_2026_H1'[AssessmentSource] = "Manager"). ضعها في Card، وجرّب Matrix مع DepartmentName واختار 2026-Q2 من Calendar[QuarterLabel]</p>
+<h3>تطبيق مريم</h3><p>تكتب Measure معك خطوة بخطوة، وتضعها في Values، وتحكي شو حصل عند تغيير القسم</p>
+<div class="note">فحص: هذا متوسط KPI الخام لمصدر Manager، مش Employee Weighted Score. مرجع Q2: حوالي 75.74</div>
+<div class="trainer-detail"><ol><li>اعرض الفرق بين CALCULATE واستخدام متوسط KPIScore بدون شرط مصدر</li><li>تاكد أن Calendar[QuarterLabel] يساوي 2026-Q2؛ الحقل قيمته نص 2026-Q2 وليس Q2 فقط</li><li>لا نشتق تقييم Upward أو Self ولا نطبق REMOVEFILTERS اليوم</li></ol></div>
+</section>
+
+<section data-phase="05 / WEIGHTS">
+<h2>19:55–20:15 — نبني نتيجة موزونة لكل موظف</h2>
+<label><input type="checkbox" data-check="4"><span>انجزت الخطوة</span></label>
+<h3>شو احكي</h3><p>حساب المتوسط لحاله مش كفاية. كل Objective له وزن، بس KPIs تحته بدون اوزان. معناها لازم نحسب متوسط علامات KPI داخل الهدف، وبعدها نضربه بوزن هذا الهدف مرة وحدة</p>
+<h3>شو اعرض</h3><p>من ملف DAX افتح Manager Objective Score (Complete)، ووضح ExpectedKPIs مقابل ReceivedKPIs. بعدها Manager Employee Weighted (Complete): SUMX يمر على ObjectiveID ويستخدم DIVIDE للوزن. اخيرا Manager Weighted Score (Complete) يخلي Card القسم تمثل متوسط الموظفين المكتملين</p>
+<h3>تطبيق مريم</h3><p>تطبق الدوال بالتدريج، تبدأ بموظف EMP0001 في 2026-Q2، ثم تشيل فلتر الموظف وتشوف متوسط القسم. تسألك ليش ما جمعنا علامات الموظفين</p>
+<div class="note">فحص: كل هدف له 3 KPIs، الموظف له 4 اهداف، مجموع اوزان الموظف للسنة = 100. مرجع EMP0001 في Q2 حوالي 70.39، وليس 81 المثال الورقي</div>
+<div class="trainer-detail"><ol><li>المنطق المتقدم جاهز بالكامل في Day05_Measures.dax؛ لا تكتب 80 سطر أمام مريم حرفا بحرف</li><li>ابدأ بمنطق المتوسط والوزن، ثم الصق الصيغة الكاملة للـCompleteness واشرح ماذا تحمي</li><li>لو ظهرت نتيجة BLANK لموظف ناقص فهذا سلوك صحيح وليس خطأ في الكود</li><li>احفظ الـMeasures في جدولها المناسب؛ لا تنقل ObjectiveWeightPct إلى جدول Fact</li><li>لا تحاول استخدام SUMX مباشرة على EvaluationScores؛ الوزن سيكرر لكل KPI</li></ol></div>
+</section>
+
+<section data-phase="06 / SURPRISE">
+<h2>20:15–20:27 — المفاجأة: تقييمات Manager مش كاملة</h2>
+<label><input type="checkbox" data-check="5"><span>انجزت الخطوة</span></label>
+<h3>شو احكي</h3><p>طلعت النتائج، بس المدير بده يعتمدها. قبل ما نعطيه التقرير خلينا نفحص إذا في موظف نقصه KPI. اذا حسبنا اللي وصل بس واعتبرناه تقييم نهائي، هل هيك بنكون منصفين؟</p>
+<h3>شو اعرض</h3><p>Q2، اختار EMP0013 في EmployeeID. اعرض Manager KPI Average مقابل Manager Employee Weighted (Complete)، واشرح لماذا الثانية فارغة. اعرض Manager Complete Employees وأزل فلتر الموظف</p>
+<h3>تطبيق مريم</h3><p>تفسر ليش Blank أفضل من صفر أو نتيجة تبدو مكتملة، وتتعرف على أثر ثلاثة تقييمات ناقصة من هدف واحد</p>
+<div class="note">الحقيقة المدققة Q2: 2370 تقييم Manager، 190 موظف مكتمل، 10 موظفين غير مكتملين. مثال EMP0013 ينقصه 3 KPIs</div>
+<div class="trainer-detail"><ol><li>المتوقع في الربع لكل الموظفين = 2400 تقييم KPI من Manager، الفعلي 2370 (30 ناقص)</li><li>Q1 = 2373 مقابل 2400 (27 ناقص)، الإجمالي 57 ناقص على جولتين</li><li>غير المكتملين Q2 = 10 موظفين، Q1 = 9 موظفين. لا تضع بيانات المرجع في صفحة مريم</li><li>لا تخلط نقص المدير مع العدد المختلف عمدا لمصدر Upward</li></ol></div>
+</section>
+
+<section data-phase="07 / PRACTICE">
+<h2>20:27–20:40 — مريم تبني Visual بدون تدخل</h2>
+<label><input type="checkbox" data-check="6"><span>انجزت الخطوة</span></label>
+<h3>شو احكي</h3><p>هلا دوري بس اتفرج. اعملي Bar Chart تبين متوسط درجات Manager بكل Department، واستخدمي Measure مش العمود الخام. بعدين اختاري قسم واحكيلي شو تغير</p>
+<h3>شو اعرض</h3><p>لا تعمل Visual بدلا عنها. جهز الحقول DepartmentName وManager KPI Average فقط في Data pane. لا تظهر مرجع الحل أو العدد المتوقع</p>
+<h3>تطبيق مريم</h3><p>تختار الرسم وتضع DepartmentName في Y-axis وManager KPI Average في X-axis، وترتب تنازليا، وتجرب Slicer</p>
+<div class="note">فحص: يجب أن تتغير نتيجة الـMeasure حسب Department وQuarter دون خلط Self وUpward</div>
+<div class="trainer-detail"><ol><li>إذا تعثرت اسألها أين الـMeasure وأين DepartmentName، ولا تعطها الخطوات كلها دفعة واحدة</li><li>إن انتهت مبكرا جرب Matrix أو Tooltip بسيط، بدون فتح درس Bookmarks</li><li>امنحها وقتا مستقلا فعليا لا يقل عن 8 دقائق</li></ol></div>
+</section>
+
+<section data-phase="08 / DESIGN">
+<h2>20:40–21:00 — أول Executive Overview وحفظ الملف</h2>
+<label><input type="checkbox" data-check="7"><span>انجزت الخطوة</span></label>
+<h3>شو احكي</h3><p>هلا بدل ما كل رقم بصفحة مختلفة، بدنا نجمع أهم الأسئلة في شاشة واحدة. المدير يشوف عدد الموظفين، وعدد تقييمات Manager، والمتوسط، والنتيجة الموزونة، ويقدر يختار القسم</p>
+<h3>شو اعرض</h3><p>رتب 4 Cards: Employee Count وManager Assessment Count وManager KPI Average وManager Weighted Score (Complete)، وBar Chart حسب DepartmentName، مع Slicers DirectorateName وDepartmentName وCalendar[QuarterLabel]. لون أساسي #099999 ومساحات بيضاء واضحة</p>
+<h3>تطبيق مريم</h3><p>تسمي الصفحة Performance Overview، وتنسق العناوين، وتتحقق من مديرية أو قسم مختلف، ثم تحفظ نفس الملف HR_Performance_Intelligence.pbix</p>
+<div class="note">فحص: مع ALL/Q2، Manager Weighted Score ≈75.79، Manager KPI Average ≈75.74، وعدد تقييمات Manager=2370. العنوان يوضح أن المتوسط النهائي يخص المكتملين فقط</div>
+<div class="trainer-detail"><ol><li>اختصر التصميم إلى 3 Cards إن تأخرت ولكن لا تتنازل عن صحة القياس الموزون</li><li>فضّل Power BI native visuals اليوم، HTML/SVG موعدها اليوم العاشر</li><li>احفظ PBIX وشغل سلايسر القسم والربع أمامها مرة أخيرة</li><li>اكتب ملاحظاتك في خانة المدرب، ثم راجع أن اليوم السادس يبني CALCULATE وFilter Context على نفس الـMeasures</li></ol></div>
+</section>
+
+<section aria-label="المراجع والتدقيق">
+<h2>مراجع المدرب · لا تعرض على مريم</h2>
+<p>البيانات هي ملفات التطبيق الاصطناعية من اليوم الرابع. نتيجة مديرية أو قسم تستخدم متوسط نتائج الموظفين المكتملة، ولا تجمع نقاطهم. انطلاقا من CSV نفسه تحققنا من 200 موظف، 4 Objectives و12 KPIs في 2026 لكل موظف، و10 موظفين لا يملكون تقييم Manager مكتمل في Q2</p>
+<div class="table-wrap"><table><thead><tr><th>الاختبار</th><th>2026-Q1</th><th>2026-Q2</th></tr></thead><tbody><tr><td>Manager Assessments</td><td>2373</td><td>2370</td></tr><tr><td>Completed employees</td><td>191</td><td>190</td></tr><tr><td>Manager KPI Average</td><td>73.802</td><td>75.738</td></tr><tr><td>Manager Weighted Score</td><td>73.814</td><td>75.792</td></tr></tbody></table></div>
+<p><a href="Day05_Reference.html">دليل كامل للحسابات، الأخطاء والخطة البديلة</a> <a href="Day05_Measures.dax" download>جميع معادلات DAX</a></p>
+</section>
+<section aria-label="التقدم والملاحظات"><h2>تقدم الجلسة</h2>
+<p id="progress" role="status"></p>
+<button type="button" id="resetChecklist">اعادة ضبط المهام</button>
+<p id="storage-status" role="status"></p>
+<label for="feedback">ملاحظات الجلسة: ماذا أنجزت مريم؟ ما الذي يحتاج مراجعة؟</label>
+<textarea id="feedback" placeholder="ملاحظات المدرب فقط"></textarea>
+</section>
+</main>
+<script src="../week1/day2/web/checklist.js"></script>
+<script src="assets/focus.js?v=20261025-day5"></script>
+</body>
+</html>
