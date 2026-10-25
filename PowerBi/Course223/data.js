@@ -633,7 +633,211 @@ const DAYS = [
     "deliverable": "Measures اساسية ونتيجة موزونة مشروطة بالاكتمال",
     "resources": [{"name":"مختبر الأوزان التفاعلي","type":"WEB","url":"week1/day5/web/Score_Lab.html","note":"غيري علامات KPIs وشوفي أثر الوزن والدرجات الناقصة","audience":"learner","stage":"lab"}],
     "requiredFiles": [],
-    "teachingStatus": "prepared"
+    "teachingStatus": "prepared",
+    "learningScenes": [
+      [
+        "MODEL",
+        "MEASURE"
+      ],
+      [
+        "KPI SCORES",
+        "WEIGHTED"
+      ],
+      [
+        "MEASURES",
+        "COUNT"
+      ],
+      [
+        "MANAGER",
+        "AVERAGE"
+      ],
+      [
+        "OBJECTIVES",
+        "SUMX"
+      ],
+      [
+        "MISSING",
+        "VALIDATE"
+      ],
+      [
+        "VISUAL",
+        "DASHBOARD"
+      ],
+      [
+        "YOUR TURN",
+        "SAVE"
+      ]
+    ],
+    "learningSections": [
+      {
+        "name": "نبدأ",
+        "title": "من النموذج للنتيجة",
+        "lead": "اليوم رح نكمل على نفس ملف Power BI اللي حفظناه بعد ما ضبطنا العلاقات. رح نحول البيانات لحسابات واضحة ونبني صفحة Performance Overview.",
+        "steps": [
+          {
+            "title": "افتحي المشروع",
+            "copy": "افتحي HR_Performance_Intelligence.pbix. ما في ملفات جديدة اليوم؛ الجداول والعلاقات اللي بنيناها جاهزة."
+          },
+          {
+            "title": "حددي نطاق العمل",
+            "copy": "اختاري Calendar[QuarterLabel] = 2026-Q2. رح نركز على تقييم Manager فقط بالبداية."
+          },
+          {
+            "title": "تذكري المسار",
+            "copy": "Employees → Objectives → KPIs → EvaluationScores. الوزن في Objectives، وعلامات KPIs في EvaluationScores_2026_H1."
+          }
+        ],
+        "callout": "كل Objective له وزن خاص. بنحسب العلامة من KPIs، وبعدين بنطبق الوزن مرة واحدة فقط."
+      },
+      {
+        "name": "نفهم الحسبة",
+        "title": "اول نحسبها على الورق",
+        "lead": "قبل كتابة DAX، رح نتأكد ان معادلة التقييم الموزون واضحة.",
+        "files": "lab",
+        "steps": [
+          {
+            "title": "متوسط علامات الهدف",
+            "copy": "اذا كان KPI الاول 60 والثاني 80، متوسط الهدف = 70."
+          },
+          {
+            "title": "مساهمة الهدف",
+            "copy": "اذا وزن الهدف 30%، مساهمته = 70 × 30 / 100 = 21 نقطة."
+          },
+          {
+            "title": "مختبر تفاعلي",
+            "copy": "افتحي مختبر الأوزان، وغيري علامات KPIs وشوفي كيف متوسط الهدف يختلف عن مساهمته في النتيجة النهائية."
+          }
+        ],
+        "callout": "ما بنعطي كل KPI وزن مستقل. المتوسط للـKPIs، والوزن للـObjective."
+      },
+      {
+        "name": "اول Measures",
+        "title": "من الأرقام للـMeasures",
+        "lead": "الـMeasure بتعيد الحساب بحسب اختيار القسم والفترة، ومش مجرد رقم ثابت مع كل صف.",
+        "steps": [
+          {
+            "title": "عدد السجلات",
+            "copy": "Modeling → New measure. اكتبي Assessment Count باستخدام COUNTROWS، وضيفيها إلى Card.",
+            "code": "Assessment Count =\nCOUNTROWS('EvaluationScores_2026_H1')"
+          },
+          {
+            "title": "عدد الموظفين",
+            "copy": "اعملي Employee Count باستخدام DISTINCTCOUNT على Employees[EmployeeID]، وضيفيها إلى Card.",
+            "code": "Employee Count =\nDISTINCTCOUNT(Employees[EmployeeID])"
+          },
+          {
+            "title": "جربي الفلتر",
+            "copy": "غيري Directorate وDepartment. لازم البطاقات تتفاعل مع نطاق البيانات."
+          }
+        ],
+        "callout": "عدد الموظفين في جدول Employees مش هو نفسه عدد الموظفين اللي عندهم تقييم مكتمل."
+      },
+      {
+        "name": "Manager",
+        "title": "نحسب تقييم المدير فقط",
+        "lead": "مصادر التقييم Self وManager وUpward مختلفة، واليوم بنركز على Manager.",
+        "steps": [
+          {
+            "title": "متوسط العلامات",
+            "copy": "جربي AVERAGE على KPIScore، وفكري شو بصير لو خلطنا مصادر التقييم الثلاثة."
+          },
+          {
+            "title": "نخصص الحساب",
+            "copy": "استخدمي CALCULATE لعزل Manager، وبعدها ضيفي Manager KPI Average إلى Card.",
+            "code": "Manager KPI Average =\nCALCULATE(\n    AVERAGE('EvaluationScores_2026_H1'[KPIScore]),\n    'EvaluationScores_2026_H1'[AssessmentSource] = \"Manager\"\n)"
+          },
+          {
+            "title": "على مستوى القسم",
+            "copy": "اعملي Matrix مع DepartmentName في Rows وManager KPI Average في Values."
+          }
+        ],
+        "callout": "متوسط KPI Score من Manager مختلف عن النتيجة الموزونة النهائية لكل موظف."
+      },
+      {
+        "name": "الأوزان",
+        "title": "نحسب نتيجة الموظف الموزونة",
+        "lead": "نحسب درجة كل Objective من متوسط KPIs التابعة له، ثم نضربها بوزن الهدف.",
+        "steps": [
+          {
+            "title": "درجة الهدف",
+            "copy": "نحدد KPIs المطلوبة للهدف ونحسب متوسط درجات Manager لهذا الهدف في الربع المختار."
+          },
+          {
+            "title": "الوزن مرة واحدة",
+            "copy": "نتعلم كيف SUMX تمشي على Objectives، وكيف DIVIDE تحول الوزن من 30 إلى 0.30 قبل الضرب."
+          },
+          {
+            "title": "النتيجة النهائية",
+            "copy": "نجمع مساهمات Objectives المكتملة، ونجرب النتيجة على موظف واحد قبل عرض القسم."
+          }
+        ],
+        "callout": "إذا تقييم KPI مطلوب مش موجود، ما بنعتبره صفر ولا بنعرض نتيجة نهائية كأنها مكتملة."
+      },
+      {
+        "name": "نختبر",
+        "title": "شو لو في تقييم ناقص؟",
+        "lead": "قبل اعتماد الأرقام، لازم نتأكد إذا كل KPI مطلوب إله تقييم.",
+        "steps": [
+          {
+            "title": "راجعي الموظف",
+            "copy": "اختاري موظفا وجربي مقارنة Manager KPI Average بالنتيجة الموزونة."
+          },
+          {
+            "title": "BLANK مش Zero",
+            "copy": "التقييم غير الموجود يخلّي النتيجة النهائية غير مكتملة. الدرجة الصفرية لو موجودة فعلا هي حالة مختلفة."
+          },
+          {
+            "title": "ثبتي الفترة",
+            "copy": "خلي اختيار الربع واحد حتى ما نخلط تقييمين لنفس KPI."
+          }
+        ],
+        "callout": "دقة الحساب شرط قبل ما نحطه على Dashboard."
+      },
+      {
+        "name": "أول Dashboard",
+        "title": "نبني Performance Overview",
+        "lead": "نجهز صفحة تنفيذية مرتبة، فيها أهم المؤشرات ورسمة واحدة وفلاتر سهلة.",
+        "steps": [
+          {
+            "title": "أربع بطاقات",
+            "copy": "ضيفي Employee Count، وManager Assessment Count، وManager KPI Average، وManager Weighted Score (Complete)."
+          },
+          {
+            "title": "رسم الأقسام",
+            "copy": "اعملي Bar Chart باستخدام DepartmentName وManager KPI Average."
+          },
+          {
+            "title": "الفلاتر",
+            "copy": "ضيفي DirectorateName وDepartmentName وCalendar[QuarterLabel]. وخلي 2026-Q2 محدد."
+          },
+          {
+            "title": "التنسيق",
+            "copy": "سمي الصفحة Performance Overview، ورتبي البطاقات أعلى التقرير مع ألوان هادئة ومسافات واضحة."
+          }
+        ],
+        "callout": "النتيجة الموزونة على مستوى القسم هي متوسط نتائج الموظفين المكتملة، مش مجموع درجاتهم."
+      },
+      {
+        "name": "دورك",
+        "title": "هلا اعملي Visual لحالك",
+        "lead": "جربي تعملي Visual باستخدام Measure تعلمناها، من غير ما يعيد المدرب كل خطوة.",
+        "steps": [
+          {
+            "title": "ابني الرسم",
+            "copy": "اختاري Clustered Bar Chart. ضعي DepartmentName على Y-axis وManager KPI Average على X-axis."
+          },
+          {
+            "title": "اختبريه",
+            "copy": "اختاري مديرية أو قسم مختلف، وجربي Quarter ثانية، وراقبي تغير الأرقام."
+          },
+          {
+            "title": "احفظي شغلك",
+            "copy": "Save على نفس HR_Performance_Intelligence.pbix. بنرجع له باليوم السادس مع Filter Context وCALCULATE."
+          }
+        ],
+        "callout": "هدف اليوم: أول Dashboard شغالة وحساباتها واضحة."
+      }
+    ]
   },
   {
     "id": 6,
