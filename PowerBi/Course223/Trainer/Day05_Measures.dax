@@ -125,7 +125,7 @@ DIVIDE(
 //   Manager Weighted Score (Complete) ≈ 75.79203
 //   Manager KPI Average ≈ 75.73751
 // For 2026-Q2, Employees[EmployeeID] = "EMP0001":
-//   Manager Employee Weighted (Complete) ≈ 70.3933
+//   Manager Employee Weighted (Complete) ≈ 70.393
 // Missing case 2026-Q2: EMP0013 => BLANK (three Manager KPI assessments missing).
 // Always test with Calendar single-quarter filtering; no Quarter selection => blank weighted KPI.
 // All scores are 0–100. Number of employees = 200, 4 Objectives and 12 KPIs per employee-year.
