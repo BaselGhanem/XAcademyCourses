@@ -1,0 +1,132 @@
+// DAY 05 · TRAINER ONLY
+// Source: Day04_Project_Starter.zip — same eight CSV tables and seven relationships.
+// Select one Calendar[QuarterLabel], e.g. 2026-Q2.
+// Keep AssessmentSource="Manager" for the first session.
+// Define measures separately in Power BI (Modeling > New measure).
+// ObjectiveWeightPct stores 0..100, so divide it by 100.
+// Missing Manager KPI records are NOT zeros. A final weighted score requires every KPI,
+// all four objectives, a single employee and a single assessment round.
+
+Assessment Count =
+COUNTROWS('EvaluationScores_2026_H1')
+
+Employee Count =
+DISTINCTCOUNT(Employees[EmployeeID])
+
+Manager Assessment Count =
+CALCULATE(
+    [Assessment Count],
+    'EvaluationScores_2026_H1'[AssessmentSource] = "Manager"
+)
+
+Manager KPI Average =
+CALCULATE(
+    AVERAGE('EvaluationScores_2026_H1'[KPIScore]),
+    'EvaluationScores_2026_H1'[AssessmentSource] = "Manager"
+)
+
+Manager Objective Score (Complete) =
+VAR ExpectedKPIs =
+    CALCULATE(COUNTROWS(KPIs))
+VAR ReceivedKPIs =
+    CALCULATE(
+        DISTINCTCOUNT('EvaluationScores_2026_H1'[KPIID]),
+        'EvaluationScores_2026_H1'[AssessmentSource] = "Manager",
+        NOT(ISBLANK('EvaluationScores_2026_H1'[KPIScore]))
+    )
+RETURN
+    IF(
+        ExpectedKPIs > 0 &&
+        ReceivedKPIs = ExpectedKPIs &&
+        HASONEVALUE('Calendar'[QuarterLabel]),
+        [Manager KPI Average],
+        BLANK()
+    )
+
+Manager Employee Weighted (Complete) =
+VAR OneEmployee = HASONEVALUE(Employees[EmployeeID])
+VAR OneQuarter = HASONEVALUE('Calendar'[QuarterLabel])
+VAR RequiredObjectives =
+    CALCULATETABLE(
+        VALUES(Objectives[ObjectiveID]),
+        Objectives[PlanYear] = 2026
+    )
+VAR ExpectedObjectives = COUNTROWS(RequiredObjectives)
+VAR CompleteObjectives =
+    COUNTROWS(
+        FILTER(
+            RequiredObjectives,
+            NOT(ISBLANK([Manager Objective Score (Complete)]))
+        )
+    )
+VAR TotalWeight =
+    CALCULATE(
+        SUM(Objectives[ObjectiveWeightPct]),
+        Objectives[PlanYear] = 2026
+    )
+VAR WeightedResult =
+    SUMX(
+        RequiredObjectives,
+        [Manager Objective Score (Complete)] *
+        DIVIDE(CALCULATE(MAX(Objectives[ObjectiveWeightPct])), 100)
+    )
+RETURN
+    IF(
+        OneEmployee &&
+        OneQuarter &&
+        ExpectedObjectives > 0 &&
+        CompleteObjectives = ExpectedObjectives &&
+        TotalWeight = 100,
+        WeightedResult,
+        BLANK()
+    )
+
+// A department score is the AVERAGE of complete employee results,
+// not SUM of employee scores, and not the average of fact KPI rows.
+Manager Weighted Score (Complete) =
+IF(
+    HASONEVALUE('Calendar'[QuarterLabel]),
+    AVERAGEX(
+        VALUES(Employees[EmployeeID]),
+        [Manager Employee Weighted (Complete)]
+    ),
+    BLANK()
+)
+
+Manager Complete Employees =
+IF(
+    HASONEVALUE('Calendar'[QuarterLabel]),
+    COUNTROWS(
+        FILTER(
+            VALUES(Employees[EmployeeID]),
+            NOT(ISBLANK([Manager Employee Weighted (Complete)]))
+        )
+    ),
+    BLANK()
+)
+
+// OPTIONAL: Use this for context-sensitive chart annotations, not during
+// the six-function fundamentals explanation.
+Manager Completion Rate =
+DIVIDE(
+    [Manager Complete Employees],
+    [Employee Count]
+)
+
+// VERIFIED DATA BENCHMARKS (computed independently from the actual Day04 CSVs):
+// Calendar[QuarterLabel] = 2026-Q1:
+//   Manager Assessment Count = 2373
+//   Manager Complete Employees = 191
+//   Manager Weighted Score (Complete) ≈ 73.81423
+//   Manager KPI Average ≈ 73.80198
+// Calendar[QuarterLabel] = 2026-Q2:
+//   Manager Assessment Count = 2370
+//   Manager Complete Employees = 190
+//   Manager Weighted Score (Complete) ≈ 75.79203
+//   Manager KPI Average ≈ 75.73751
+// For 2026-Q2, Employees[EmployeeID] = "EMP0001":
+//   Manager Employee Weighted (Complete) ≈ 70.3933
+// Missing case 2026-Q2: EMP0013 => BLANK (three Manager KPI assessments missing).
+// Always test with Calendar single-quarter filtering; no Quarter selection => blank weighted KPI.
+// All scores are 0–100. Number of employees = 200, 4 Objectives and 12 KPIs per employee-year.
+// Never copy this trainer-only reference into the student downloads.
