@@ -17,15 +17,15 @@ function initMariamJourney(day, courseHome, customChapters = null) {
     `<div class="mj-save-visual"><span>✓</span><small>Your First Report</small></div>`
   ];
   if(customChapters){sceneArt[0]=`<div class="mj-question">${String(day.id).padStart(2,`0`)}<small>${day.phase}</small></div>`;sceneArt[1]=`<div class="mj-flow"><span>${day.phase}</span><i>↓</i><span>APPLY</span></div>`;sceneArt[2]=`<div class="mj-save-visual"><span>✓</span><small>BUILD & CHECK</small></div>`;}
-  const loader = document.createElement(`div`);loader.className=`mj-loader`;loader.setAttribute(`role`,`status`);loader.setAttribute(`aria-label`,`بنجهز يومك الاول`);
-  loader.innerHTML=`<div class="mj-loader-stage"><div class="mj-loader-halo"></div><div class="mj-loader-sheet"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mj-loader-logo"><img src="Trainer/assets/X_Academy_Intersection.svg" alt=""><span>ACADEMY</span></div><div class="mj-loader-ring"></div></div><p>من البيانات للصورة الواضحة</p><small dir="ltr">DAY ${String(day.id).padStart(2,`0`)} / POWER BI</small><div class="mj-loader-track"><i></i></div>`;
-  document.body.prepend(loader);
-  const journeyMain=document.querySelector(`.mj-layout`);journeyMain.inert=true;
-  const dismissLoader=()=>{journeyMain.inert=false;loader.remove();};
-  const loaderTimer=setTimeout(dismissLoader,3600);
+  // Shared premium loader: real page readiness, no forced 3.6-second wait.
+  const journeyMain=document.querySelector(`.mj-layout`);
+  const loader=window.XAcademyLoader?.mount({
+    day:day.id,
+    content:journeyMain,
+    minDuration:820
+  });
   const reduce = typeof matchMedia === `function` && matchMedia(`(prefers-reduced-motion: reduce)`).matches;
   let still=reduce, active=0;
-  if(reduce){clearTimeout(loaderTimer);dismissLoader();}
   document.body.classList.toggle(`mj-still`,still);
   const motion=document.getElementById(`mj-motion`);
   function updateMotion(){motion.textContent=still?`تشغيل الحركة`:`ايقاف الحركة`;motion.setAttribute(`aria-pressed`,String(still));}
@@ -81,4 +81,5 @@ function initMariamJourney(day, courseHome, customChapters = null) {
     panel.innerHTML=`<div class="mj-block"><span class="mj-kicker">DAY ${String(day.id).padStart(2,`0`)} / RECORDING</span><h2 id="mj-recording-title">تسجيل المحاضرة ${day.id}</h2><div class="mj-video-player">${video}</div></div>`;
     document.querySelector(`.mj-layout`).before(panel);
   }
+  loader?.finish();
 }
