@@ -16,7 +16,7 @@ const days=[
 ];
 const link=(p)=>new URL(p,root).href;
 const style=document.createElement("link");style.rel="stylesheet";style.href=new URL("trainer-shell.css?v=20261025-premium",script.src).href;document.head.append(style);
-const mobile=document.createElement("link");mobile.rel="stylesheet";mobile.href=new URL("trainer-mobile.css?v=20261026-r1",script.src).href;document.head.append(mobile);
+const mobile=document.createElement("link");mobile.rel="stylesheet";mobile.href=new URL("trainer-mobile.css?v=20261026-r2",script.src).href;document.head.append(mobile);
 function load(){
  if(document.body.classList.contains("xp-portal"))return;
  document.body.classList.add("xp-trainer");
