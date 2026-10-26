@@ -1,3 +1,5 @@
+/* Phone teaching tabs occupy no room on desktop. */
+body.xp-focus .cf-mobile-tabs{display:none}
 /* Course223 / Trainer Studio
    Small-screen correction: no overlapping stage labels, no clipped task content,
    controls in toolbar instead of a floating button covering the lesson.
@@ -175,6 +177,41 @@
     line-height:1.55!important;letter-spacing:-.013em;
     margin:14px 0 17px!important;overflow-wrap:anywhere
   }
+
+  /* Compact, independent lesson panes – one visible at a time on a phone. */
+  body.xp-focus .cf-mobile-tabs{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    align-items:stretch;gap:5px;margin:0 0 14px;padding:4px;
+    background:#081f23;border:1px solid #4a837b42;border-radius:12px
+  }
+  body.xp-focus .cf-mobile-tabs button{
+    min-width:0;min-height:39px;padding:8px 4px;
+    background:transparent;border:1px solid transparent;
+    border-radius:9px;color:#a6c8c0;
+    font:700 clamp(10px,2.9vw,12px)/1.5 Almarai,system-ui,sans-serif;
+    cursor:pointer;white-space:normal;text-align:center
+  }
+  body.xp-focus .cf-mobile-tabs button[aria-pressed="true"]{
+    color:#fff;background:#087c78;
+    border-color:#65d4c65e;box-shadow:0 4px 16px #04171977
+  }
+  body.xp-focus .cf-card[data-mobile-pane="say"] .cf-instruction-grid{display:none!important}
+  body.xp-focus .cf-card[data-mobile-pane="screen"] .cf-say,
+  body.xp-focus .cf-card[data-mobile-pane="practice"] .cf-say{display:none!important}
+  body.xp-focus .cf-card[data-mobile-pane="screen"] .cf-instruction-grid>div:nth-child(2),
+  body.xp-focus .cf-card[data-mobile-pane="practice"] .cf-instruction-grid>div:nth-child(1){display:none!important}
+  body.xp-focus .cf-card[data-mobile-pane="screen"] .cf-instruction-grid,
+  body.xp-focus .cf-card[data-mobile-pane="practice"] .cf-instruction-grid{
+    margin:0 0 12px!important;display:grid!important;
+    grid-template-columns:1fr!important
+  }
+  body.xp-focus .cf-card[data-mobile-pane="screen"] .cf-instruction-grid>div,
+  body.xp-focus .cf-card[data-mobile-pane="practice"] .cf-instruction-grid>div{
+    background:#0e3839;padding:15px!important;
+    border:1px solid #498f8250;border-radius:13px;min-width:0
+  }
+
   body.xp-focus .cf-say{
     padding:15px 15px!important;
     margin:0 0 16px!important;
