@@ -1,4 +1,6 @@
-// DAY 05 · TRAINER ONLY
+// PREPARED FOR DAY 05, NOT TAUGHT THEN. TO BE COVERED IN DAY 07 · TRAINER ONLY
+// Actual Day 05 covered only COUNTROWS, DISTINCTCOUNT, CALCULATE and AVERAGE.
+// SUMX, DIVIDE and weighted calculation are planned for Day 07.
 // Source: Day04_Project_Starter.zip — same eight CSV tables and seven relationships.
 // Select one Calendar[QuarterLabel], e.g. 2026-Q2.
 // Keep AssessmentSource="Manager" for the first session.
