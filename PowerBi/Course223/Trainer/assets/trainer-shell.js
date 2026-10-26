@@ -7,12 +7,12 @@ const days=[
 ["تنظيف بيانات تقييم الاداء","Day02_Performance.html"],
 ["من الملفات للتحديث التلقائي","Day03_Integration.html"],
 ["نموذج بيانات الاداء","Day04_Model.html"],
-["DAX وExecutive Overview","Day05_DAX.html"],
-["Filter Context",null],
-["مقارنات الاداء",null],
-["تجربة الداشبورد",null],
-["التفاعلات المتقدمة",null],
-["HTML / SVG والتسليم",null]
+["Change Source وMeasures · منجز","Day05_DAX.html"],
+["توسعة مصادر البيانات",null],
+["التقييم الموزون",null],
+["مقارنة الفترات والتفاصيل",null],
+["Bookmarks وNavigation",null],
+["HTML/SVG والست صفحات",null]
 ];
 const link=(p)=>new URL(p,root).href;
 // Preloaded statically by focus pages, lazy-loaded on trainer reference pages.
