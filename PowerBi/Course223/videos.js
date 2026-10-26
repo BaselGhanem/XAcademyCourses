@@ -6,7 +6,7 @@ const DAY_VIDEOS = {
   2: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQQJZ5-LIv2OQ65KcBsn6J9pAZGY88Cy_lfSMbxSjApvH2E" width="1920" height="1080" frameborder="0" scrolling="no" title="تسجيل اليوم الثاني" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`,
   3: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQTOH9dS2GSOT6vbVqcG8UVrAWjKFG2N9ysdGAEb5bUUYwo" width="1920" height="1080" frameborder="0" scrolling="no" title="تسجيل اليوم الثالث" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`,
   4: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQSUbfbvV_rjQbftI82mhWrKAXCbz_mzMwv38ExklBq_ymo" width="1920" height="1080" frameborder="0" scrolling="no" title="تسجيل اليوم الرابع" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`,
-  5: ``,
+  5: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQTwmBfhuVJIQoktyfC_vkryARXy13VtDtZ6MFFRD228A7A" width="1920" height="1080" frameborder="0" scrolling="no" title="تسجيل اليوم الخامس" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`,
   6: ``,
   7: ``,
   8: ``,
