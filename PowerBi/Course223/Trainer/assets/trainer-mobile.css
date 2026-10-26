@@ -1,0 +1,253 @@
+/* Course223 / Trainer Studio
+   Small-screen correction: no overlapping stage labels, no clipped task content,
+   controls in toolbar instead of a floating button covering the lesson.
+   Loaded after focus.css + trainer-shell.css; intentionally scoped. */
+@media (max-width:990px){
+  body.xp-focus,body.xp-focus #focus-app{max-width:100%;overflow-x:clip}
+  body.xp-focus .cf-shell,body.xp-focus .cf-header{box-sizing:border-box;max-width:100%;min-width:0}
+  body.xp-focus .cf-stage-list{
+    display:flex!important;flex-flow:row nowrap!important;align-items:stretch;
+    max-width:100%;min-width:0;overflow-x:auto!important;overflow-y:hidden!important;
+    overscroll-behavior-inline:contain;scroll-snap-type:x proximity;
+    scrollbar-width:thin;scrollbar-color:#166d6b transparent;
+    -webkit-overflow-scrolling:touch;touch-action:pan-x;
+    padding:2px 0 7px;gap:7px
+  }
+  body.xp-focus .cf-stage{
+    flex:0 0 124px!important;width:124px!important;min-width:0!important;
+    max-width:124px!important;min-height:48px;height:48px;
+    box-sizing:border-box;display:flex;flex-direction:row;align-items:center;
+    justify-content:flex-start;gap:8px;text-align:start;
+    padding:9px!important;border-radius:13px;
+    overflow:hidden;white-space:nowrap;scroll-snap-align:start
+  }
+  body.xp-focus .cf-stage em{
+    display:block;flex:0 0 18px;width:18px;min-width:18px;
+    font:700 12px/1.5 Inter,Arial,sans-serif!important;opacity:.78
+  }
+  body.xp-focus .cf-stage span{
+    display:block;flex:1;min-width:0;width:0;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    font:700 10px/1.4 Inter,Almarai,sans-serif;letter-spacing:.02em
+  }
+  body.xp-focus .cf-header .xp-shell-toggle{
+    position:static!important;right:auto!important;bottom:auto!important;
+    inset:auto!important;z-index:5;width:42px;height:42px;flex:none;
+    border-radius:12px;font:700 19px/1 sans-serif
+  }
+  body.xp-focus .cf-ambient{pointer-events:none}
+}
+
+@media(max-width:675px){
+  html{scroll-padding-top:12px}
+  body.xp-focus{font-size:14px}
+  body.xp-focus .cf-header{
+    display:grid!important;grid-template-columns:minmax(0,1fr) 42px;
+    grid-template-rows:auto auto;align-items:center;
+    column-gap:10px;row-gap:12px;
+    padding:12px 13px 13px!important;min-height:0!important;
+    background:#0b2428!important;border-bottom:1px solid #3b696050!important
+  }
+  body.xp-focus .cf-header .cf-brand{
+    grid-column:1;grid-row:1;display:flex;min-width:0;gap:9px;
+    align-items:center;text-align:start
+  }
+  body.xp-focus .cf-header .cf-brand img{
+    width:37px;height:37px;flex:none;border-radius:11px;padding:6px
+  }
+  body.xp-focus .cf-header .cf-brand strong{
+    font:800 12px/1.5 Inter,Arial,sans-serif;letter-spacing:.05em;
+    white-space:nowrap
+  }
+  body.xp-focus .cf-header .cf-brand small{
+    font:600 9px/1.3 Inter,Arial,sans-serif;color:#81b6ad;
+    letter-spacing:.1em;white-space:nowrap
+  }
+  body.xp-focus .cf-header .xp-shell-toggle{
+    grid-column:2;grid-row:1;margin:0;justify-self:end
+  }
+  body.xp-focus .cf-header .cf-actions{
+    grid-column:1/-1;grid-row:2;
+    display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:7px!important;max-width:none!important;width:100%;
+    justify-content:stretch!important;min-width:0
+  }
+  body.xp-focus .cf-header .cf-actions .cf-btn{
+    min-width:0;min-height:36px;max-width:100%;margin:0;
+    display:flex;align-items:center;justify-content:center;
+    padding:7px 4px!important;
+    font-size:clamp(10px,2.7vw,12px)!important;
+    line-height:1.5;white-space:nowrap;overflow:hidden;
+    border-radius:10px
+  }
+  body.xp-focus .cf-shell{
+    padding:16px 12px max(18px,env(safe-area-inset-bottom))!important;
+    width:100%;max-width:100%
+  }
+  body.xp-focus .cf-overview{
+    display:grid!important;grid-template-columns:minmax(0,1fr) 76px;
+    gap:9px;align-items:start;margin:0 0 15px!important;
+    width:100%;min-width:0
+  }
+  body.xp-focus .cf-overview>div:first-child{min-width:0}
+  body.xp-focus .cf-eyebrow{display:none!important}
+  body.xp-focus .cf-overview h1{
+    font-size:clamp(21px,5.5vw,25px)!important;
+    line-height:1.53!important;margin:0 0 4px!important;
+    overflow-wrap:anywhere;letter-spacing:-.015em
+  }
+  body.xp-focus .cf-overview p{
+    font-size:10px!important;line-height:1.75;
+    color:#aac7be;overflow-wrap:anywhere
+  }
+  body.xp-focus .cf-progress{
+    display:flex;flex-direction:column;align-items:center;justify-content:start;
+    text-align:center;min-width:0;max-width:76px;width:76px;
+    border:1px solid #ffffff12;background:#ffffff06;border-radius:11px;
+    padding:10px 5px 8px;font-size:9px
+  }
+  body.xp-focus .cf-progress strong{font:700 19px/1.4 Inter,Arial,sans-serif}
+  body.xp-focus .cf-progress>div:not(.cf-progress-track){font-size:9px;line-height:1.5}
+  body.xp-focus .cf-progress-track{width:100%;margin-top:6px}
+  body.xp-focus .cf-stage-list{margin:0 0 13px!important}
+  body.xp-focus .cf-stage{flex-basis:112px!important;width:112px!important;max-width:112px!important}
+  body.xp-focus .cf-layout{display:flex!important;flex-direction:column!important;gap:12px}
+  body.xp-focus .cf-aside{
+    order:-1!important;display:block!important;width:100%;
+    max-width:100%;margin:0
+  }
+  body.xp-focus .cf-timer{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto auto;
+    grid-template-rows:auto auto;
+    grid-template-areas:"label clock action" "tip clock reset";
+    gap:2px 10px!important;
+    align-items:center!important;padding:10px 13px!important;
+    min-height:72px!important;border-radius:15px!important;
+    text-align:start!important;box-shadow:none
+  }
+  body.xp-focus .cf-timer:before{left:7%;right:7%}
+  body.xp-focus .cf-timer>.cf-label{grid-area:label;margin:0;font-size:10px!important}
+  body.xp-focus .cf-clock{
+    grid-area:clock;margin:0!important;
+    font:700 clamp(22px,6vw,27px)/1.1 Inter,monospace!important;
+    color:#c8fbef;letter-spacing:-.04em;white-space:nowrap
+  }
+  body.xp-focus .cf-timer #cf-timer{
+    grid-area:action;width:auto!important;min-width:74px;
+    margin:0!important;padding:7px 8px!important;
+    min-height:31px;line-height:1.4;font-size:10px!important;
+    border-radius:9px
+  }
+  body.xp-focus .cf-timer #cf-reset-time{
+    grid-area:reset;margin:0!important;padding:3px 5px!important;
+    min-height:21px;font-size:9px!important
+  }
+  body.xp-focus .cf-timer-tip{
+    grid-area:tip;min-height:0;margin:0!important;
+    font-size:9px!important;line-height:1.5
+  }
+  body.xp-focus .cf-upnext,body.xp-focus .cf-shortcuts{display:none!important}
+  body.xp-focus .cf-card{
+    order:0!important;display:flex!important;
+    flex-direction:column;justify-content:flex-start!important;
+    width:100%!important;max-width:100%;min-width:0;
+    min-height:0!important;max-height:none!important;
+    padding:17px 15px!important;margin:0;
+    border-radius:18px!important;
+    background:linear-gradient(150deg,#17373b,#10282c)!important;
+    box-shadow:0 13px 40px #0003!important
+  }
+  body.xp-focus .cf-card-top{
+    display:flex;justify-content:space-between;flex-wrap:wrap;
+    column-gap:11px;row-gap:4px;
+    font-size:10px!important;letter-spacing:0;line-height:1.5
+  }
+  body.xp-focus .cf-card-top #cf-slot{
+    unicode-bidi:plaintext;overflow-wrap:normal;white-space:nowrap;
+    font:600 10px/1.6 Almarai,system-ui,sans-serif
+  }
+  body.xp-focus .cf-step-count{
+    font:700 11px/1.6 Inter,Arial,sans-serif!important;white-space:nowrap
+  }
+  body.xp-focus .cf-card h2{
+    font-size:clamp(22px,5.7vw,29px)!important;
+    line-height:1.55!important;letter-spacing:-.013em;
+    margin:14px 0 17px!important;overflow-wrap:anywhere
+  }
+  body.xp-focus .cf-say{
+    padding:15px 15px!important;
+    margin:0 0 16px!important;
+    border-radius:13px!important;
+    background:linear-gradient(126deg,#0e4844,#14403e)!important;
+    border-right:3px solid #099999!important;
+    max-width:100%;min-width:0
+  }
+  body.xp-focus .cf-label{
+    margin-bottom:6px!important;font-size:10px!important;
+    line-height:1.5;color:#95dacc
+  }
+  body.xp-focus .cf-speech{
+    font-size:clamp(17px,4.35vw,20px)!important;
+    line-height:1.85!important;
+    margin:0!important;white-space:normal;
+    overflow-wrap:anywhere
+  }
+  body.xp-focus .cf-instruction-grid{
+    display:grid!important;grid-template-columns:1fr!important;
+    gap:14px!important;margin-top:3px
+  }
+  body.xp-focus .cf-instruction-grid>div{
+    min-width:0;border-top:1px solid #ffffff14;padding-top:13px
+  }
+  body.xp-focus .cf-instruction-grid p{
+    font-size:clamp(14px,3.8vw,16px)!important;
+    line-height:1.9!important;overflow-wrap:anywhere
+  }
+  body.xp-focus #cf-step-help{
+    font-size:12px!important;min-height:40px;
+    padding:10px 13px!important;margin-top:15px!important
+  }
+  body.xp-focus .cf-footer{
+    display:flex!important;flex-direction:column!important;
+    gap:12px;margin-top:17px!important;padding-top:15px!important;
+    align-items:stretch!important
+  }
+  body.xp-focus .cf-done{font-size:12px}
+  body.xp-focus .cf-footer .cf-actions{
+    display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:6px!important;max-width:none;width:100%
+  }
+  body.xp-focus .cf-footer .cf-btn{
+    min-width:0;padding:10px 5px!important;
+    font-size:11px!important;line-height:1.5;
+    white-space:normal;border-radius:10px
+  }
+  body.xp-focus .cf-dialog{
+    max-width:calc(100vw - 20px)!important;
+    width:calc(100vw - 20px)!important;
+    max-height:calc(100dvh - 35px)!important;
+    border-radius:17px!important
+  }
+  body.xp-focus .cf-dialog-head{padding:12px 14px!important;gap:10px}
+  body.xp-focus .cf-dialog-head h2{font-size:16px!important;line-height:1.5}
+  body.xp-focus .cf-dialog-body{
+    padding:15px!important;max-height:calc(100dvh - 112px)!important;
+    overflow-y:auto!important;overscroll-behavior:contain
+  }
+  body.xp-focus .cf-dialog-body p,body.xp-focus .cf-dialog-body li{overflow-wrap:anywhere}
+  body.xp-focus .cf-status{font-size:10px}
+  body.xp-focus .xp-shell-toggle{box-shadow:0 6px 15px #0004!important}
+}
+@media (max-width:365px){
+  body.xp-focus .cf-header{padding-inline:10px!important}
+  body.xp-focus .cf-header .cf-actions .cf-btn{font-size:9px!important}
+  body.xp-focus .cf-shell{padding-inline:9px!important}
+  body.xp-focus .cf-timer{gap:2px 5px!important;padding-inline:9px!important}
+  body.xp-focus .cf-card{padding-inline:11px!important}
+  body.xp-focus .cf-card h2{font-size:22px!important}
+}
+@media (prefers-reduced-motion:reduce){
+  body.xp-focus .cf-stage{scroll-snap-type:none}
+  body.xp-focus .cf-card,body.xp-focus .cf-say{animation:none!important;transition:none!important}
+}
