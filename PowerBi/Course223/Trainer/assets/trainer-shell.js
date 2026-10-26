@@ -15,8 +15,19 @@ const days=[
 ["HTML / SVG والتسليم",null]
 ];
 const link=(p)=>new URL(p,root).href;
-const style=document.createElement("link");style.rel="stylesheet";style.href=new URL("trainer-shell.css?v=20261025-premium",script.src).href;document.head.append(style);
-const mobile=document.createElement("link");mobile.rel="stylesheet";mobile.href=new URL("trainer-mobile.css?v=20261026-r2",script.src).href;document.head.append(mobile);
+// Preloaded statically by focus pages, lazy-loaded on trainer reference pages.
+if(!document.querySelector('link[href*="trainer-shell.css"]')){
+ const style=document.createElement("link");
+ style.rel="stylesheet";
+ style.href=new URL("trainer-shell.css?v=20261026-v4",script.src).href;
+ document.head.append(style);
+}
+if(!document.querySelector('link[href*="trainer-layout-v4.css"]')){
+ const responsive=document.createElement("link");
+ responsive.rel="stylesheet";
+ responsive.href=new URL("trainer-layout-v4.css?v=20261026-v4",script.src).href;
+ document.head.append(responsive);
+}
 function load(){
  if(document.body.classList.contains("xp-portal"))return;
  document.body.classList.add("xp-trainer");
@@ -24,6 +35,20 @@ function load(){
  const target=focus||document.querySelector("body > main");
  if(!target)return;
  document.body.classList.toggle("xp-focus",!!focus);document.body.classList.toggle("xp-reference",!focus);
+ // Some mobile browsers can request a desktop layout viewport (~980px).
+ // Do not mistake a narrow touchscreen for a laptop in this mode.
+ const sw=Math.min(window.screen?.width||9999,window.screen?.height||9999);
+ const handheld=sw<=730 && (navigator.maxTouchPoints>0||/Android|iPhone|Mobile/i.test(navigator.userAgent));
+ if(handheld && focus){
+   document.body.classList.add("xp-handset");
+   const layout=window.innerWidth;
+   const realWidth=window.screen?.width||0;
+   if(realWidth>0 && layout/realWidth>1.55){
+     // Compensate only for synthetic desktop-site zoom, never for normal phone/laptop rendering.
+     document.documentElement.style.zoom=String(Math.min(3,Math.max(1,layout/realWidth)));
+     document.body.dataset.viewportRepair="desktop-site";
+   }
+ }
  const shell=document.createElement("div");shell.className="xp-shell-layout";
  const sidebar=document.createElement("aside");sidebar.className="xp-shell-sidebar";sidebar.id="xp-shell-sidebar";sidebar.setAttribute("aria-label","قائمة أيام الدورة");
  sidebar.innerHTML='<a class="xp-shell-brand" href="'+link("index.html")+'"><img src="'+link("assets/X_Academy_Intersection.svg")+'" alt=""><span><b>X ACADEMY</b><small>TRAINER STUDIO</small></span></a><div class="xp-shell-heading">COURSE 223 <span>10 SESSIONS</span></div>';
