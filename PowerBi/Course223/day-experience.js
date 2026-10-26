@@ -29,7 +29,7 @@ function initCourseDayJourney(day, courseHome) {
   document.title = `اليوم ${day.id} | ${day.titleAr} | X Academy`;
   initMariamJourney(day, courseHome, chapters);
   if (day.id === 4 || day.id === 5) document.body.classList.add(`mj-has-preamble`);
-  // Day 05: code samples and concept banner are learner-only and do not contain trainer solutions.
+  // Day 05 actual taught content; weighted performance lab remains optional prep for Day 07.
   if (day.id === 5) {
     const stylesheet = document.createElement(`link`);
     stylesheet.rel = `stylesheet`;
@@ -38,7 +38,7 @@ function initCourseDayJourney(day, courseHome) {
     const banner = document.createElement(`section`);
     banner.className = `mj-day5-hero`;
     banner.setAttribute(`aria-labelledby`, `mj-day5-title`);
-    banner.innerHTML = `<div class="mj-day5-heading"><div><span>DAY 05 · FROM MODEL TO MEASURE</span><h2 id="mj-day5-title">البيانات صارت جاهزة<br>هلا بنخليها تحكي</h2><p>من علامات KPIs إلى درجة كل هدف، ومنها إلى نتيجة أداء موزونة</p></div><a href="week1/day5/web/Score_Lab.html" target="_blank" rel="noopener">جربي مختبر الأوزان ↗</a></div><div class="mj-day5-pipeline"><div><small>01</small><strong>KPI SCORES</strong><span>علامة كل مؤشر</span></div><b>←</b><div><small>02</small><strong>OBJECTIVE</strong><span>متوسط العلامات</span></div><b>←</b><div><small>03</small><strong>WEIGHT</strong><span>وزن الهدف</span></div><b>←</b><div><small>04</small><strong>FINAL SCORE</strong><span>النتيجة الموزونة</span></div></div>`;
+    banner.innerHTML = `<div class="mj-day5-heading"><div><span>DAY 05 · ACTUAL LESSON RECAP</span><h2 id="mj-day5-title">كبرنا التقرير<br>وصرنا نتحكم بالنتائج</h2><p>Change Source · صفحة ثانية · 5 Slicers · Edit Interactions · Measures لمدير وSelf</p></div><a href="week1/day5/web/Score_Lab.html" target="_blank" rel="noopener">مختبر اختياري للدرس القادم ↗</a></div><div class="mj-day5-pipeline"><div><small>01</small><strong>CHANGE SOURCE</strong><span>تعديل المسار</span></div><b>←</b><div><small>02</small><strong>PAGE + SLICERS</strong><span>صفحة وفلاتر</span></div><b>←</b><div><small>03</small><strong>INTERACTIONS</strong><span>التحكم بالتأثير</span></div><b>←</b><div><small>04</small><strong>MANAGER / SELF</strong><span>مقاييس منفصلة</span></div></div>`;
     document.querySelector(`.mj-layout`).before(banner);
     // The original binary PBIX is stored with the course files on GitHub.
     const backup = getLearnerResources(day).find(file => file.stage === `backup` && file.type === `PBIX`);
