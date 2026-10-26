@@ -1,0 +1,1 @@
+(()=>{"use strict";document.querySelectorAll("[data-copy]").forEach(button=>{button.addEventListener("click",async()=>{const code=button.closest("article")?.querySelector("code")?.textContent||"";if(!code)return;try{await navigator.clipboard.writeText(code);button.textContent="تم النسخ ✓"}catch{button.textContent="حدد النص لنسخه"}})})})();
