@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+:root{color-scheme:dark}
+body.day05-actual{margin:0;min-height:100svh;background:#0b1b20;color:#eaf8f3;font:14px/1.85 Almarai,system-ui,sans-serif}
+body.day05-actual *{box-sizing:border-box}
+body.day05-actual a{color:inherit;text-decoration:none}body.day05-actual button{font:inherit;cursor:pointer}
+body.day05-actual :focus-visible{outline:3px solid #75e4d3;outline-offset:4px}
+.actual-main{width:min(1300px,calc(100% - 44px));margin:auto;padding:35px 0 25px;min-width:0}
+.actual-heading{border-radius:25px;background:radial-gradient(circle at 0% 0%,#189e8c39,transparent 45%),linear-gradient(135deg,#16363b,#10282e);border:1px solid #60e3d329;padding:clamp(24px,4vw,48px);position:relative;overflow:hidden}
+.actual-heading::before{content:"";pointer-events:none;position:absolute;left:-100px;bottom:-190px;width:420px;height:420px;border:1px solid #51baa922;border-radius:50%}
+.actual-brow,.actual-eyebrow{font:700 10px/1.5 Inter,sans-serif;color:#85dbce;letter-spacing:.14em}
+.actual-brow{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.actual-dot{width:8px;height:8px;border-radius:50%;background:#71e7c9;box-shadow:0 0 15px #33bea3}.actual-tag{background:#09999924;border:1px solid #79ecd64a;border-radius:30px;padding:7px 10px}
+.actual-heading h1{font-size:clamp(30px,4.3vw,53px);line-height:1.45;letter-spacing:-.035em;margin:18px 0 13px}.actual-heading h1 em{font-style:normal;color:#89e8d9}
+.actual-heading p{font-size:clamp(12px,1.25vw,15px);max-width:800px;color:#b6d2cb}
+.actual-meta{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0}.actual-meta span{font-size:11px;border:1px solid #ffffff27;border-radius:10px;padding:7px 12px;background:#ffffff07}
+.actual-heading nav{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}.actual-heading nav a,.actual-end a{padding:10px 14px;border-radius:11px;background:#0d807b;color:white;font-weight:800;font-size:12px;transition:transform .2s,background .2s}
+.actual-heading nav a:hover,.actual-end a:hover{background:#0aa5a0;transform:translateY(-2px)}
+.actual-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0 25px}
+.actual-kpis article{min-width:0;border:1px solid #e2fff316;border-radius:18px;background:#112a2e;padding:19px}
+.actual-kpis article>span{display:block;font:700 32px/1.4 Inter,sans-serif;color:#75decf}.actual-kpis article small{font:600 10px Inter,sans-serif;color:#b0c6c0;letter-spacing:.06em}.actual-kpis article p{margin:7px 0 0;font-size:12px;color:#a2c6bf}
+.actual-panel{border-radius:22px;background:#10272d;border:1px solid #ffffff17;padding:clamp(20px,3vw,32px);margin:16px 0}
+.actual-panel h2{font-size:clamp(22px,2.4vw,29px);line-height:1.5;margin:8px 0 20px}
+.actual-skill-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.actual-skill-list article{display:flex;gap:14px;padding:16px;background:#ffffff06;border:1px solid #ffffff11;border-radius:13px;min-width:0}
+.actual-num{font:700 13px Inter,sans-serif;color:#8bdccf}
+.actual-skill-list h3{font:700 14px/1.6 Inter,Almarai,sans-serif;margin:0 0 5px;color:#dffbf4;overflow-wrap:anywhere}
+.actual-skill-list p{font-size:12px;color:#aac8c1;margin:0;line-height:1.9}
+.actual-codegrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.actual-codegrid article{min-width:0;border-radius:14px;border:1px solid #3c9e914a;background:#091e23;overflow:hidden}
+.actual-codehead{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 15px;border-bottom:1px solid #ffffff18}
+.actual-codehead strong{font:700 12px Inter,sans-serif;color:#a4ebdf}.actual-codehead button{background:#0c6f6e;color:#fff;border:1px solid #46bbaf4e;border-radius:8px;padding:6px 12px;font-size:11px;min-width:50px}
+.actual-codegrid pre{margin:0;padding:16px;overflow-x:auto;max-width:100%;direction:ltr;text-align:left}.actual-codegrid code{font:500 12px/1.8 Consolas,monospace;color:#e3fbf1}
+.actual-info{margin:17px 0 0;background:#09999914;border-right:3px solid #099999;padding:12px 15px;border-radius:8px;color:#beded5;font-size:12px;line-height:2}
+.actual-pending{display:grid;gap:8px}.actual-pending>div{display:grid;grid-template-columns:minmax(120px,1.3fr) minmax(120px,2fr) auto;align-items:center;gap:12px;padding:15px;background:#ffffff05;border:1px solid #ffffff13;border-radius:13px}.actual-pending strong{font:700 12px Inter,sans-serif;color:#91ebdb}.actual-pending span{color:#b6d2c9;font-size:12px}.actual-pending b{font:700 10px Inter,sans-serif;border-radius:9px;background:#113f40;padding:8px;color:#86cbbf}
+.actual-timeline{display:grid;gap:8px}.actual-timeline article{display:flex;align-items:center;gap:14px;padding:15px;background:#ffffff06;border:1px solid #ffffff12;border-radius:13px}.actual-timeline article>span{display:grid;place-items:center;background:#0b514e;border-radius:11px;color:#8de6d5;width:44px;height:44px;flex:none;font:700 17px Inter,sans-serif}.actual-timeline article>div{flex:1;min-width:0}.actual-timeline strong{font-size:14px}.actual-timeline p{font-size:11px;color:#a4c4be;margin:3px 0}.actual-timeline small{font:700 10px Inter,sans-serif;color:#8caea5;white-space:nowrap}
+.actual-end{display:flex;align-items:center;flex-wrap:wrap;justify-content:space-between;gap:17px;background:#0b4643;border-radius:20px;padding:22px;margin:20px 0}.actual-end h2{font-size:20px;margin:0}.actual-end p{font-size:12px;line-height:2;flex:1;min-width:210px;max-width:670px;color:#c9e9df;margin:0}.actual-end a{white-space:nowrap}.actual-footer{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #ffffff1c;padding:23px 0;font:700 10px Inter,sans-serif;color:#78a79c}
+@media(max-width:1050px){.actual-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.actual-codegrid{grid-template-columns:1fr}}
+@media(max-width:700px){.actual-main{width:calc(100% - 26px);padding-top:16px}.actual-heading,.actual-panel{border-radius:17px;padding:19px}.actual-kpis{gap:8px;margin:12px 0}.actual-kpis article{padding:14px}.actual-kpis article>span{font-size:25px}.actual-kpis article p{font-size:10px}.actual-skill-list{grid-template-columns:1fr}.actual-pending>div{grid-template-columns:1fr auto;gap:6px}.actual-pending span{grid-column:1/-1;grid-row:2}.actual-timeline article{padding:11px}.actual-timeline small{display:none}.actual-end{padding:17px}.actual-end a{width:100%;text-align:center}.actual-footer{font-size:8px}.actual-codegrid code{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
