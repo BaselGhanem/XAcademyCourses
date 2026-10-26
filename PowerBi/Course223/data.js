@@ -643,6 +643,14 @@ const DAYS = [
         "stage": "backup"
       },
       {
+        "name": "ملفات بيانات المشروع — 8 ملفات CSV",
+        "type": "ZIP",
+        "url": "week1/day4/data/Day04_Project_Starter.zip",
+        "note": "ملفات CSV الأصلية التي اعتمدناها من اليوم الرابع، تستخدم إذا احتجنا Change Source أو استرجاع البيانات",
+        "stage": "source",
+        "audience": "learner"
+      },
+      {
         "name": "مختبر الأوزان — إثراء اختياري",
         "type": "WEB",
         "url": "week1/day5/web/Score_Lab.html",
@@ -651,7 +659,20 @@ const DAYS = [
         "stage": "lab"
       }
     ],
-    "requiredFiles": [],
+    "requiredFiles": [
+      {
+        "name": "ملف المشروع من اليوم الرابع — نسخة احتياطية",
+        "type": "PBIX",
+        "url": "week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix",
+        "note": "ملف PBIX محفوظ مع ملفات الدورة على GitHub، للرجوع إلى نقطة نهاية اليوم الرابع"
+      },
+      {
+        "name": "ملفات بيانات المشروع — 8 ملفات CSV",
+        "type": "ZIP",
+        "url": "week1/day4/data/Day04_Project_Starter.zip",
+        "note": "ملفات CSV الأصلية التي اعتمدناها من اليوم الرابع، تستخدم إذا احتجنا Change Source أو استرجاع البيانات"
+      }
+    ],
     "teachingStatus": "taught",
     "learningScenes": [
       [
@@ -702,7 +723,8 @@ const DAYS = [
             "copy": "اذا ضاع ملف PBIX اللي بنينا عليه في اليوم الرابع، فيه نسخة احتياطية في بداية الصفحة. الملف الحالي بعد الجلسة يحتفظ بتعديلاتك الجديدة."
           }
         ],
-        "callout": "Change Source بيغير مكان المصدر، مش هو نفسه إضافة جدول جديد."
+        "callout": "Change Source بيغير مكان المصدر، مش هو نفسه إضافة جدول جديد.",
+        "files": "day5-files"
       },
       {
         "name": "الصفحة الثانية",
@@ -814,7 +836,8 @@ const DAYS = [
             "copy": "النتيجة الموزونة للأهداف باستخدام SUMX وDIVIDE، والتقييمات غير المكتملة، والـBookmarks وTooltips رح نشتغل عليهم بجلسات قادمة."
           }
         ],
-        "callout": "هدفنا بنهاية التدريب مشروع من ست صفحات، مبني خطوة خطوة على اللي أنجزناه فعلا، بدون قفز على مهارات ما تدربنا عليها."
+        "callout": "هدفنا بنهاية التدريب مشروع من ست صفحات، مبني خطوة خطوة على اللي أنجزناه فعلا، بدون قفز على مهارات ما تدربنا عليها.",
+        "files": "lab"
       }
     ],
     "actualDate": "2026-10-26"
@@ -1057,5 +1080,5 @@ function getCompletedDays() {
 
 // Learner surfaces use this allowlist; instructor guides and answers belong in Trainer.
 function getLearnerResources(day) {
-  return (day.resources || []).filter(resource => resource.audience !== `trainer` && (day.id === 1 || (resource.audience === `learner` && (/\.csv(?:[?#]|$)/i.test(resource.url || ``) || (day.id === 4 && /\.zip(?:[?#]|$)/i.test(resource.url || ``)) || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`) || (day.id === 5 && resource.type === `PBIX` && resource.stage === `backup` && resource.url === `week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix`)))));
+  return (day.resources || []).filter(resource => resource.audience !== `trainer` && (day.id === 1 || (resource.audience === `learner` && (/\.csv(?:[?#]|$)/i.test(resource.url || ``) || ((day.id === 4 || day.id === 5) && /\.zip(?:[?#]|$)/i.test(resource.url || ``) && (day.id !== 5 || resource.url === `week1/day4/data/Day04_Project_Starter.zip`)) || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`) || (day.id === 5 && resource.type === `PBIX` && resource.stage === `backup` && resource.url === `week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix`)))));
 }
