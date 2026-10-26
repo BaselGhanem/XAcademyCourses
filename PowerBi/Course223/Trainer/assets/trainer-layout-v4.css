@@ -1,0 +1,215 @@
+/* Course223: unified responsive trainer workspace · laptop, tablet, phone.
+   Layer is loaded statically after focus.css and dynamically added shell CSS.
+   Keeps lesson data and timer logic intact. */
+:root{--t4-teal:#099999;--t4-aqua:#78e7d8;--t4-ink:#e8f7f3;--t4-muted:#9abcb7;--t4-line:#e0fff321}
+html,body.xp-focus{max-width:100%;overflow-x:clip}
+body.xp-focus{background:#08191d;color:var(--t4-ink)}
+body.xp-focus .xp-shell-layout{min-width:0;width:100%}
+body.xp-focus .cf-shell,body.xp-focus .cf-header,body.xp-focus .cf-layout,body.xp-focus .cf-card,body.xp-focus .cf-overview{min-width:0;max-width:100%;box-sizing:border-box}
+body.xp-focus .cf-header{width:100%;background:#0b2125d9!important;border-bottom:1px solid var(--t4-line);gap:12px}
+body.xp-focus .cf-header .cf-actions{min-width:0;display:flex;align-items:center;gap:7px}
+body.xp-focus .cf-header .cf-btn{border:1px solid #ffffff21;border-radius:11px;white-space:nowrap;line-height:1.45}
+body.xp-focus .cf-shell{width:100%;margin:auto}
+body.xp-focus .cf-overview{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start}
+body.xp-focus .cf-overview>div:first-child{min-width:0}
+body.xp-focus .cf-overview h1{overflow-wrap:anywhere;text-wrap:balance}
+body.xp-focus .cf-overview p{overflow-wrap:anywhere}
+body.xp-focus .cf-progress{min-width:95px;flex:none}
+body.xp-focus .cf-stage-list{
+ display:flex!important;flex-wrap:nowrap!important;width:100%;min-width:0;max-width:100%;
+ overflow-x:auto!important;overflow-y:hidden!important;overscroll-behavior-x:contain;
+ -webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#266e6b transparent;
+ gap:9px;padding:2px 2px 9px!important;
+}
+body.xp-focus .cf-stage{
+ display:flex!important;flex:0 0 144px!important;width:144px!important;min-width:0!important;max-width:144px!important;
+ min-height:51px;max-height:58px;padding:9px 11px!important;gap:9px!important;
+ white-space:nowrap;overflow:hidden;box-sizing:border-box;
+ border-radius:13px!important;transition:background .2s,border-color .2s
+}
+body.xp-focus .cf-stage em{display:block;flex:none;width:20px;white-space:nowrap;opacity:.75;font:700 13px/1.6 Inter,sans-serif!important}
+body.xp-focus .cf-stage span{display:block;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:700 11px/1.5 Almarai,Inter,sans-serif!important}
+body.xp-focus .cf-stage[aria-current=true]{box-shadow:inset 0 -3px #099999!important}
+body.xp-focus .cf-layout{width:100%;gap:17px}
+body.xp-focus .cf-card{min-width:0!important;overflow-wrap:anywhere;background:linear-gradient(160deg,#17353b,#0e262c)!important;border:1px solid #ffffff22;box-shadow:0 18px 62px #0004}
+body.xp-focus .cf-card-top{flex-wrap:wrap;row-gap:4px}
+body.xp-focus .cf-card h2{line-height:1.47;color:#f4fdf9;overflow-wrap:anywhere}
+body.xp-focus .cf-say{background:#0c4a4555;border-color:#58c9b555;padding:clamp(15px,2.1vw,23px)!important}
+body.xp-focus .cf-speech{line-height:1.84!important;overflow-wrap:anywhere}
+body.xp-focus .cf-instruction-grid{min-width:0;gap:clamp(13px,2vw,25px)}
+body.xp-focus .cf-instruction-grid>div{min-width:0}
+body.xp-focus .cf-instruction-grid p{overflow-wrap:anywhere;line-height:1.8!important}
+body.xp-focus .cf-footer{min-width:0;gap:10px}
+body.xp-focus .cf-footer .cf-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:end}
+body.xp-focus .cf-footer .cf-actions .cf-btn{font-size:12px}
+body.xp-focus .cf-aside{min-width:0;gap:12px}
+body.xp-focus .cf-timer,body.xp-focus .cf-upnext{min-width:0}
+body.xp-focus .cf-dialog{max-width:min(920px,calc(100vw - 28px))!important}
+body.xp-focus .cf-dialog-body{max-height:68dvh;overflow-y:auto}
+body.xp-focus .cf-mobile-tabs{display:none}
+body.xp-focus .cf-header .xp-shell-toggle{display:none}
+/* Wide laptop / desktop. Sidebar stays visible; timer remains a useful utility column. */
+@media(min-width:1281px){
+ body.xp-focus .cf-shell{padding:24px clamp(21px,2.7vw,46px) 30px}
+ body.xp-focus .cf-layout{grid-template-columns:minmax(0,1fr) clamp(165px,15vw,205px)}
+ body.xp-focus .cf-card{min-height:min(600px,calc(100dvh - 270px));max-height:none;padding:clamp(24px,2.9vw,40px)}
+ body.xp-focus .cf-overview h1{font-size:clamp(25px,2.5vw,33px);line-height:1.48}
+ body.xp-focus .cf-speech{font-size:clamp(18px,1.8vw,25px)!important}
+ body.xp-focus .cf-instruction-grid p{font-size:clamp(14px,1.22vw,17px)!important}
+}
+/* Smaller laptops: one wide task card and a compact utility row, rather than compressed columns. */
+@media(min-width:851px) and (max-width:1280px){
+ body.xp-focus .cf-shell{padding:17px clamp(15px,2vw,25px) 30px}
+ body.xp-focus .cf-layout{display:flex!important;flex-direction:column!important;gap:12px}
+ body.xp-focus .cf-aside{order:-1;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(190px,.65fr);gap:10px;width:100%}
+ body.xp-focus .cf-timer{display:flex;align-items:center;flex-wrap:wrap;gap:9px;padding:11px 17px!important;min-height:74px;text-align:start}
+ body.xp-focus .cf-timer .cf-label{flex:1 1 75px;margin:0}
+ body.xp-focus .cf-clock{font-size:31px!important;line-height:1.25;margin:0 10px}
+ body.xp-focus .cf-timer #cf-timer{width:auto;margin:0;min-height:38px}
+ body.xp-focus .cf-timer #cf-reset-time{margin:0}
+ body.xp-focus .cf-timer-tip{flex-basis:100%;margin:0;font-size:10px}
+ body.xp-focus .cf-upnext{min-height:74px;padding:14px}
+ body.xp-focus .cf-shortcuts{display:none}
+ body.xp-focus .cf-card{padding:clamp(20px,3vw,33px)!important;min-height:380px!important;max-height:none!important}
+ body.xp-focus .cf-card h2{font-size:clamp(24px,3vw,33px);margin:10px 0 17px}
+ body.xp-focus .cf-speech{font-size:clamp(18px,2.1vw,23px)!important}
+ body.xp-focus .cf-overview h1{font-size:clamp(22px,2.8vw,29px)}
+ body.xp-focus .cf-instruction-grid p{font-size:clamp(15px,1.55vw,18px)!important}
+}
+/* Tablets, Chrome desktop-mode mobile, and portrait phones use one-column content. */
+@media(max-width:850px){
+ body.xp-focus .cf-header{padding:12px 15px!important}
+ body.xp-focus .cf-shell{padding:14px 13px 26px!important}
+ body.xp-focus .cf-layout{display:flex!important;flex-direction:column!important;gap:11px}
+ body.xp-focus .cf-card{width:100%;padding:20px!important;min-height:0!important;max-height:none!important}
+ body.xp-focus .cf-overview{gap:10px;margin-bottom:14px!important}
+ body.xp-focus .cf-overview h1{font-size:clamp(23px,4vw,30px)!important;line-height:1.5}
+ body.xp-focus .cf-overview p{font-size:11px!important;line-height:1.8}
+ body.xp-focus .cf-speech{font-size:clamp(18px,2.7vw,23px)!important}
+ body.xp-focus .cf-instruction-grid{grid-template-columns:1fr!important}
+ body.xp-focus .cf-instruction-grid p{font-size:clamp(15px,2vw,18px)!important}
+ body.xp-focus .cf-aside{order:-1;width:100%;display:block!important}
+ body.xp-focus .cf-timer{padding:12px!important}
+ body.xp-focus .cf-upnext,body.xp-focus .cf-shortcuts{display:none!important}
+ body.xp-focus .cf-header .xp-shell-toggle{display:flex!important;position:static!important;inset:auto!important;z-index:5;min-width:42px;min-height:42px;width:42px;height:42px;box-shadow:0 4px 15px #0004}
+}
+/* True phone widths: single task pane + 3 compact tabs, stable typography. */
+@media(max-width:675px){
+ body.xp-focus .cf-header{
+  display:grid!important;grid-template-columns:minmax(0,1fr) 42px;
+  grid-template-rows:auto auto;gap:10px 8px!important;
+  padding:12px!important;min-height:0!important;align-items:center
+ }
+ body.xp-focus .cf-header .cf-brand{grid-column:1;grid-row:1;min-width:0}
+ body.xp-focus .cf-header .cf-brand img{width:37px;height:37px;padding:6px}
+ body.xp-focus .cf-header .cf-brand strong{font-size:12px;white-space:nowrap}
+ body.xp-focus .cf-header .cf-brand small{font-size:9px}
+ body.xp-focus .cf-header .xp-shell-toggle{grid-column:2;grid-row:1;justify-self:end}
+ body.xp-focus .cf-header .cf-actions{
+  grid-column:1/-1;grid-row:2;display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr));width:100%;max-width:none;gap:5px!important
+ }
+ body.xp-focus .cf-header .cf-actions .cf-btn{
+  width:100%;min-width:0;min-height:37px;padding:8px 3px!important;
+  font-size:clamp(10px,2.6vw,12px)!important;line-height:1.35
+ }
+ body.xp-focus .cf-shell{padding:14px 12px max(20px,env(safe-area-inset-bottom))!important}
+ body.xp-focus .cf-overview{grid-template-columns:minmax(0,1fr) 74px;gap:9px}
+ body.xp-focus .cf-overview .cf-eyebrow{display:none}
+ body.xp-focus .cf-overview h1{font-size:clamp(20px,5.4vw,26px)!important;margin:0 0 4px!important}
+ body.xp-focus .cf-overview p{font-size:10px!important}
+ body.xp-focus .cf-progress{min-width:0;width:74px;max-width:74px;padding:9px 4px;border:1px solid #ffffff18;border-radius:11px;background:#ffffff08;text-align:center}
+ body.xp-focus .cf-progress strong{font:700 19px/1.4 Inter,sans-serif}
+ body.xp-focus .cf-progress>div:not(.cf-progress-track){font-size:9px}
+ body.xp-focus .cf-stage-list{gap:6px;margin-bottom:12px!important}
+ body.xp-focus .cf-stage{flex-basis:113px!important;width:113px!important;max-width:113px!important;min-height:46px!important;height:46px;padding:8px!important}
+ body.xp-focus .cf-stage span{font-size:10px!important}
+ body.xp-focus .cf-aside{order:-1!important}
+ body.xp-focus .cf-timer{
+  display:grid!important;grid-template-columns:minmax(0,1fr) auto auto;
+  grid-template-areas:"label clock action" "tip clock reset";
+  grid-template-rows:auto auto;gap:1px 8px;
+  align-items:center;padding:9px 12px!important;min-height:69px!important;
+  text-align:start;border-radius:14px
+ }
+ body.xp-focus .cf-timer>.cf-label{grid-area:label;margin:0;font-size:10px}
+ body.xp-focus .cf-clock{grid-area:clock;font:700 clamp(21px,5.8vw,28px)/1.15 Inter,sans-serif!important;margin:0!important;white-space:nowrap}
+ body.xp-focus .cf-timer #cf-timer{grid-area:action;min-width:73px;width:auto!important;margin:0!important;padding:7px!important;font-size:10px}
+ body.xp-focus .cf-timer #cf-reset-time{grid-area:reset;margin:0;padding:4px!important;font-size:9px}
+ body.xp-focus .cf-timer-tip{grid-area:tip;min-height:0;margin:0;font-size:9px}
+ body.xp-focus .cf-card{
+  width:100%!important;min-height:0!important;max-height:none!important;
+  border-radius:18px!important;padding:16px 14px!important;justify-content:flex-start!important;
+  box-shadow:0 11px 35px #0003
+ }
+ body.xp-focus .cf-card-top{font-size:10px;gap:6px}
+ body.xp-focus .cf-card h2{font-size:clamp(22px,5.6vw,29px)!important;line-height:1.55;margin:13px 0 12px!important}
+ body.xp-focus .cf-mobile-tabs{
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;
+  border-radius:12px;padding:4px;background:#081e22;border:1px solid #ffffff1c;
+  margin:0 0 14px
+ }
+ body.xp-focus .cf-mobile-tabs button{
+  min-width:0;min-height:40px;border-radius:9px;padding:7px 3px;
+  font:700 clamp(10px,2.8vw,12px)/1.45 Almarai,sans-serif;
+  background:transparent;color:#a9cec5;border:1px solid transparent;white-space:normal
+ }
+ body.xp-focus .cf-mobile-tabs button[aria-pressed=true]{background:#087b79;color:#fff;border-color:#75ebd758}
+ body.xp-focus .cf-card[data-mobile-pane=say] .cf-instruction-grid{display:none!important}
+ body.xp-focus .cf-card[data-mobile-pane=screen] .cf-say,
+ body.xp-focus .cf-card[data-mobile-pane=practice] .cf-say{display:none!important}
+ body.xp-focus .cf-card[data-mobile-pane=screen] .cf-instruction-grid>div:nth-child(2),
+ body.xp-focus .cf-card[data-mobile-pane=practice] .cf-instruction-grid>div:nth-child(1){display:none!important}
+ body.xp-focus .cf-card[data-mobile-pane=screen] .cf-instruction-grid,
+ body.xp-focus .cf-card[data-mobile-pane=practice] .cf-instruction-grid{display:grid!important;grid-template-columns:1fr}
+ body.xp-focus .cf-card[data-mobile-pane=screen] .cf-instruction-grid>div,
+ body.xp-focus .cf-card[data-mobile-pane=practice] .cf-instruction-grid>div{padding:16px;border-radius:12px;border:1px solid #5db5a439;background:#10383a}
+ body.xp-focus .cf-say{margin:0 0 15px!important;padding:15px!important;border-radius:13px}
+ body.xp-focus .cf-speech{font-size:clamp(17px,4.35vw,20px)!important;line-height:1.83!important}
+ body.xp-focus .cf-instruction-grid{gap:10px}
+ body.xp-focus .cf-instruction-grid p{font-size:clamp(14px,3.6vw,16px)!important}
+ body.xp-focus #cf-step-help{margin-top:12px!important;padding:10px 12px!important;font-size:12px!important}
+ body.xp-focus .cf-footer{display:flex!important;flex-direction:column!important;align-items:stretch;gap:10px;margin-top:16px!important;padding-top:13px!important}
+ body.xp-focus .cf-footer .cf-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:6px}
+ body.xp-focus .cf-footer .cf-actions .cf-btn{min-width:0;padding:10px 5px!important;font-size:11px!important;white-space:normal;line-height:1.4}
+ body.xp-focus .cf-done{font-size:12px}
+ body.xp-focus .cf-dialog{max-height:calc(100dvh - 34px)!important;width:calc(100vw - 18px)!important;max-width:none!important}
+ body.xp-focus .cf-dialog-body{max-height:calc(100dvh - 115px)!important;padding:14px!important;overflow-y:auto!important}
+}
+/* Phones whose browser reports a desktop-sized layout viewport. Screen detection
+   adds xp-handset without affecting any laptop at all. */
+body.xp-handset .cf-header{
+ display:grid!important;grid-template-columns:minmax(0,1fr) 48px;
+ grid-template-rows:auto auto;align-items:center;gap:10px!important;
+ padding:14px!important
+}
+body.xp-handset .cf-header .cf-brand{grid-column:1;grid-row:1;min-width:0}
+body.xp-handset .cf-header .xp-shell-toggle{grid-column:2;grid-row:1;display:flex!important;position:static!important;width:46px;height:46px;inset:auto!important;justify-self:end}
+body.xp-handset .cf-header .cf-actions{grid-column:1/-1;grid-row:2;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));max-width:none!important;width:100%;gap:7px!important}
+body.xp-handset .cf-header .cf-actions .cf-btn{padding:9px 4px!important;min-width:0!important}
+body.xp-handset .cf-shell{padding:17px 14px!important}
+body.xp-handset .cf-overview{grid-template-columns:minmax(0,1fr) 82px;gap:12px}
+body.xp-handset .cf-eyebrow{display:none}
+body.xp-handset .cf-overview h1{font-size:26px!important}
+body.xp-handset .cf-layout{display:flex!important;flex-direction:column!important;gap:11px}
+body.xp-handset .cf-aside{order:-1!important;width:100%!important;display:block!important}
+body.xp-handset .cf-timer{display:flex!important;align-items:center;gap:16px;flex-wrap:wrap;padding:12px!important}
+body.xp-handset .cf-timer .cf-label,body.xp-handset .cf-timer .cf-timer-tip{margin:0!important}
+body.xp-handset .cf-clock{font-size:30px!important;margin:0!important}
+body.xp-handset .cf-timer #cf-timer{width:auto!important;margin:0!important}
+body.xp-handset .cf-timer #cf-reset-time{margin:0!important}
+body.xp-handset .cf-upnext,body.xp-handset .cf-shortcuts{display:none!important}
+body.xp-handset .cf-card{width:100%!important;min-height:0!important;max-height:none!important;padding:22px!important}
+body.xp-handset .cf-card h2{font-size:29px!important}
+body.xp-handset .cf-mobile-tabs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-bottom:17px}
+body.xp-handset .cf-mobile-tabs button{min-height:42px;padding:9px;background:#14383d;color:#d6eee7;border:1px solid #ffffff20;border-radius:10px}
+body.xp-handset .cf-mobile-tabs button[aria-pressed=true]{background:#099999;color:white}
+body.xp-handset .cf-card[data-mobile-pane=say] .cf-instruction-grid{display:none!important}
+body.xp-handset .cf-card[data-mobile-pane=screen] .cf-say,body.xp-handset .cf-card[data-mobile-pane=practice] .cf-say{display:none!important}
+body.xp-handset .cf-card[data-mobile-pane=screen] .cf-instruction-grid>div:nth-child(2),body.xp-handset .cf-card[data-mobile-pane=practice] .cf-instruction-grid>div:nth-child(1){display:none!important}
+body.xp-handset .cf-card[data-mobile-pane=screen] .cf-instruction-grid,body.xp-handset .cf-card[data-mobile-pane=practice] .cf-instruction-grid{display:grid!important;grid-template-columns:1fr!important}
+body.xp-handset .cf-footer{flex-direction:column!important;align-items:stretch!important;gap:9px}
+body.xp-handset .cf-footer .cf-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+body.xp-handset .cf-stage{flex:0 0 142px!important;width:142px!important}
+body.xp-handset .cf-progress{min-width:82px!important;max-width:82px}
+@media(prefers-reduced-motion:reduce){body.xp-focus *{animation:none!important;transition:none!important}}
