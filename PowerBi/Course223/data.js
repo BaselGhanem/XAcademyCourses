@@ -1,4 +1,4 @@
-// Course223 — Day 1–3 preserved; Day 4 project foundation prepared; Days 5–10 planned.
+// Course223 — Days 1–4 preserved. Day 5 actual taught content (Oct 26). Days 6–10 revised plan, not ready.
 const COURSE_CONFIG = {
   id: `course223_mariam`,
   title: `Power BI | X Academy`,
@@ -603,35 +603,36 @@ const DAYS = [
   },
   {
     "id": 5,
-    "date": "2026-10-25",
-    "weekday": "الأحد",
+    "date": "2026-10-26",
+    "weekday": "الإثنين",
     "ready": true,
     "phase": "MEASURE",
-    "title": "DAX Fundamentals — Manager Performance & Executive Overview",
-    "titleAr": "من البيانات لأول Dashboard احترافي",
-    "hook": "كيف بنحول درجات مؤشرات KPI ووزن كل Objective لنتيجة دقيقة ونبني منها اول Dashboard؟",
-    "mission": "نكتب Measures، ونحسب نتيجة Manager حسب الأهداف والأوزان، ونبني أول صفحة Performance Overview تتفاعل مع الأقسام والفترات",
+    "title": "DAX Essentials, Change Source & Report Interactions",
+    "titleAr": "جلسة التطبيق — تغيير المصدر وMeasures وتفاعل الفلاتر",
+    "hook": "اليوم وسعنا تقريرنا العملي: غيرنا مصدر الملفات، أضفنا صفحة ثانية وخمسة فلاتر، وكتبنا Measures تفصل تقييم Manager عن Self",
+    "mission": "مراجعة التطبيق الفعلي للجلسة الخامسة: تغيير المصدر، صفحة جديدة، Count وDistinct Count، خمسة Slicers، Edit Interactions ومتوسطات Manager وSelf",
     "topics": [
+      "Change Source",
+      "New Report Page",
       "COUNTROWS",
       "DISTINCTCOUNT",
-      "AVERAGE",
+      "5 Slicers",
+      "Edit Interactions",
       "CALCULATE",
-      "SUMX",
-      "DIVIDE",
-      "Weighted Performance",
-      "Executive Overview"
+      "AVERAGE",
+      "Manager vs Self"
     ],
     "build": [
-      "افتحي نفس مشروع اليوم الرابع من جهازك، أو استرجعي نسخة PBIX الاحتياطية اذا احتجتي",
-      "احسبي متوسط KPIs ووزن Objective على الورق",
-      "اكتبي Measures لعدد التقييمات والموظفين",
-      "احسبي متوسط Manager باستخدام AVERAGE وCALCULATE",
-      "ابني النتيجة الموزونة مع التحقق من اكتمال التقييم",
-      "جهزي Performance Overview ببطاقات ورسم وفلاتر",
-      "اعملي Visual بنفسك واختبري الفلاتر واحفظي نفس PBIX"
+      "تغيير مصدر الملفات للمسار الصحيح ومراجعة أن البيانات اتصلت بشكل طبيعي",
+      "إنشاء صفحة ثانية داخل نفس تقرير Power BI",
+      "كتابة Assessment Count باستخدام COUNTROWS وEmployee Count باستخدام DISTINCTCOUNT",
+      "إضافة خمسة Slicers للتحكم بعرض التقرير",
+      "استخدام Edit Interactions لتحديد أثر كل فلتر على الرسومات",
+      "إنشاء Manager KPI Average وSelf KPI Average باستخدام CALCULATE وAVERAGE",
+      "حفظ نفس مشروع Power BI حتى نكمل عليه في اليوم السادس"
     ],
-    "challenge": "ابني Clustered Bar Chart يعرض Manager KPI Average حسب DepartmentName، وجربي اختيار مديرية وربع مختلف",
-    "deliverable": "صفحة Performance Overview تتفاعل مع الفلاتر، وفيها Measures لحساب نتائج Manager الموزونة بعد التحقق من الاكتمال",
+    "challenge": "ارجعي للصفحة الثانية، اختبري فلاترها وتأثيراتها، وقارني نتيجتي Manager وSelf بدون دمجهما في Measure واحدة",
+    "deliverable": "مشروع Power BI محدث بمصدر صحيح، صفحتين، خمسة Slicers، تفاعلات مضبوطة وأربع Measures تم تطبيقها",
     "resources": [
       {
         "name": "ملف المشروع من اليوم الرابع — نسخة احتياطية",
@@ -642,257 +643,217 @@ const DAYS = [
         "stage": "backup"
       },
       {
-        "name": "مختبر الأوزان التفاعلي",
+        "name": "مختبر الأوزان — إثراء اختياري",
         "type": "WEB",
         "url": "week1/day5/web/Score_Lab.html",
-        "note": "غيري علامات KPIs وشوفي أثر الوزن والدرجات الناقصة",
+        "note": "نشاط استكشافي تحضيرا للحساب الموزون في جلسة لاحقة، وليس من تطبيق اليوم الخامس",
         "audience": "learner",
         "stage": "lab"
       }
     ],
     "requiredFiles": [],
-    "teachingStatus": "prepared",
+    "teachingStatus": "taught",
     "learningScenes": [
       [
-        "MODEL",
-        "MEASURE"
+        "FILE PATH",
+        "CHANGE SOURCE"
       ],
       [
-        "KPI SCORES",
-        "WEIGHTED"
+        "PAGE 01",
+        "PAGE 02"
       ],
       [
-        "MEASURES",
-        "COUNT"
+        "ROWS",
+        "EMPLOYEES"
+      ],
+      [
+        "SLICERS",
+        "FILTERS"
+      ],
+      [
+        "EDIT",
+        "INTERACTIONS"
       ],
       [
         "MANAGER",
-        "AVERAGE"
+        "SELF"
       ],
       [
-        "OBJECTIVES",
-        "SUMX"
-      ],
-      [
-        "MISSING",
-        "VALIDATE"
-      ],
-      [
-        "VISUAL",
-        "DASHBOARD"
-      ],
-      [
-        "YOUR TURN",
-        "SAVE"
+        "REVIEW",
+        "CONTINUE"
       ]
     ],
     "learningSections": [
       {
-        "name": "نبدأ",
-        "title": "من النموذج للنتيجة",
-        "lead": "اليوم رح نكمل على نفس ملف Power BI اللي حفظناه بعد ما ضبطنا العلاقات. رح نحول البيانات لحسابات واضحة ونبني صفحة Performance Overview.",
+        "name": "تغيير المصدر",
+        "title": "ربطنا التقرير بالمصدر الصحيح",
+        "lead": "راجعنا كيف نغير مسار الملفات الموجودة بدل ما نعيد بناء كل الاستعلامات. الخطوة هاي بتفيد لما ينتقل المشروع من جهاز لجهاز.",
         "steps": [
           {
-            "title": "افتحي المشروع",
-            "copy": "افتحي HR_Performance_Intelligence.pbix من جهازك. اذا ضاع، نزلي النسخة الاحتياطية من أول الصفحة مباشرة من GitHub، وافتحي الملف في Power BI Desktop."
+            "title": "Change Source",
+            "copy": "من إعدادات مصدر البيانات أو Source Step داخل Power Query غيري مسار الملف للمكان الجديد، ثم تأكدي أن الاستعلام رجع يقرأ البيانات."
           },
           {
-            "title": "حددي نطاق العمل",
-            "copy": "اختاري Calendar[QuarterLabel] = 2026-Q2. رح نركز على تقييم Manager فقط بالبداية."
+            "title": "Refresh والتحقق",
+            "copy": "اعملي Refresh وراجعي ظهور البيانات بدون أخطاء. تغيير المسار ما لازم يغير معنى الجداول أو علاقاتها."
           },
           {
-            "title": "تذكري المسار",
-            "copy": "Employees → Objectives → KPIs → EvaluationScores. الوزن في Objectives، وعلامات KPIs في EvaluationScores_2026_H1."
+            "title": "نسخة المشروع",
+            "copy": "اذا ضاع ملف PBIX اللي بنينا عليه في اليوم الرابع، فيه نسخة احتياطية في بداية الصفحة. الملف الحالي بعد الجلسة يحتفظ بتعديلاتك الجديدة."
           }
         ],
-        "callout": "كل Objective له وزن خاص. بنحسب العلامة من KPIs، وبعدين بنطبق الوزن مرة واحدة فقط."
+        "callout": "Change Source بيغير مكان المصدر، مش هو نفسه إضافة جدول جديد."
       },
       {
-        "name": "نفهم الحسبة",
-        "title": "اول نحسبها على الورق",
-        "lead": "قبل كتابة DAX، رح نتأكد ان معادلة التقييم الموزون واضحة.",
-        "files": "lab",
+        "name": "الصفحة الثانية",
+        "title": "عملنا صفحة ثانية في التقرير",
+        "lead": "وسعنا المشروع بصفحة جديدة بدل حشر كل الرسومات والفلاتر بصفحة واحدة.",
         "steps": [
           {
-            "title": "متوسط علامات الهدف",
-            "copy": "اذا كان KPI الاول 60 والثاني 80، متوسط الهدف = 70."
+            "title": "New Page",
+            "copy": "من تبويبات التقرير أضفنا صفحة ثانية. كل صفحة ممكن يكون إلها Visuals وفلاتر وتفاعلات مختلفة."
           },
           {
-            "title": "مساهمة الهدف",
-            "copy": "اذا وزن الهدف 30%، مساهمته = 70 × 30 / 100 = 21 نقطة."
-          },
-          {
-            "title": "مختبر تفاعلي",
-            "copy": "افتحي مختبر الأوزان، وغيري علامات KPIs وشوفي كيف متوسط الهدف يختلف عن مساهمته في النتيجة النهائية."
+            "title": "تنظيم الصفحات",
+            "copy": "راجعي الصفحتين الموجودات واحفظي أسماء واضحة تعبر عن غرض كل صفحة، من غير ما نعيد بناء اللي عملناه."
           }
         ],
-        "callout": "ما بنعطي كل KPI وزن مستقل. المتوسط للـKPIs، والوزن للـObjective."
+        "callout": "إضافة صفحة جديدة مختلفة عن إنشاء ملف PBIX جديد."
       },
       {
-        "name": "اول Measures",
-        "title": "من الأرقام للـMeasures",
-        "lead": "الـMeasure بتعيد الحساب بحسب اختيار القسم والفترة، ومش مجرد رقم ثابت مع كل صف.",
+        "name": "أول Measures",
+        "title": "عدد التقييمات وعدد الموظفين",
+        "lead": "كتبنا مقاييس DAX بسيطة تتغير مع سياق الفلاتر والرسومات.",
         "steps": [
           {
-            "title": "عدد السجلات",
-            "copy": "Modeling → New measure. اكتبي Assessment Count باستخدام COUNTROWS، وضيفيها إلى Card.",
+            "title": "Assessment Count",
+            "copy": "يحسب عدد سجلات تقييم KPIs الموجودة في جدول EvaluationScores_2026_H1.",
             "code": "Assessment Count =\nCOUNTROWS('EvaluationScores_2026_H1')"
           },
           {
-            "title": "عدد الموظفين",
-            "copy": "اعملي Employee Count باستخدام DISTINCTCOUNT على Employees[EmployeeID]، وضيفيها إلى Card.",
+            "title": "Employee Count",
+            "copy": "يحسب عدد EmployeeID المختلف في جدول Employees، وهو مش بالضرورة عدد الموظفين أصحاب التقييم المكتمل.",
             "code": "Employee Count =\nDISTINCTCOUNT(Employees[EmployeeID])"
           },
           {
-            "title": "جربي الفلتر",
-            "copy": "غيري Directorate وDepartment. لازم البطاقات تتفاعل مع نطاق البيانات."
+            "title": "راجعي الفرق",
+            "copy": "اسألي حالك: ليش ممكن يكون عدد سجلات التقييم أكبر بكثير من عدد الموظفين؟"
           }
         ],
-        "callout": "عدد الموظفين في جدول Employees مش هو نفسه عدد الموظفين اللي عندهم تقييم مكتمل."
+        "callout": "COUNTROWS يحسب الصفوف، أما DISTINCTCOUNT فيحسب القيم الفريدة في العمود المحدد."
       },
       {
-        "name": "Manager",
-        "title": "نحسب تقييم المدير فقط",
-        "lead": "مصادر التقييم Self وManager وUpward مختلفة، واليوم بنركز على Manager.",
+        "name": "خمسة Slicers",
+        "title": "تحكم أكبر بعرض التقرير",
+        "lead": "أضفنا خمسة Slicers داخل التقرير، وبنقدر نختار منها القيم اللي بدنا نحللها.",
         "steps": [
           {
-            "title": "متوسط العلامات",
-            "copy": "جربي AVERAGE على KPIScore، وفكري شو بصير لو خلطنا مصادر التقييم الثلاثة."
+            "title": "خمسة فلاتر",
+            "copy": "راجعي الفلاتر الخمسة اللي أضفناها فعليا. اختاري قيمة من أحدها ولاحظي تغير النتائج في نفس الصفحة."
           },
           {
-            "title": "نخصص الحساب",
-            "copy": "استخدمي CALCULATE لعزل Manager، وبعدها ضيفي Manager KPI Average إلى Card.",
+            "title": "تجربة مشتركة",
+            "copy": "جربي اختيار أكثر من Slicer وتأكدي إنك عارفة أي بيانات عم تشوفي حاليا."
+          }
+        ],
+        "callout": "عدد الفلاتر المؤكد في الجلسة خمسة. أسماء حقولها تعتمد على النسخة اللي عملناها داخل Power BI."
+      },
+      {
+        "name": "Edit Interactions",
+        "title": "مش كل فلتر لازم يأثر على كل رسم",
+        "lead": "استخدمنا Edit Interactions عشان نتحكم بشكل مقصود بتفاعل الرسومات والفلاتر.",
+        "steps": [
+          {
+            "title": "اختيار Visual",
+            "copy": "اختاري Slicer أو Visual، ثم Edit Interactions، وحددي إذا الرسمة الثانية تتفلتر أو يبقى تأثيرها معطل حسب هدف الصفحة."
+          },
+          {
+            "title": "اختبار بعد التعديل",
+            "copy": "جربي اختيار قيمة وشوفي أي Visual تغير وأي Visual بقي ثابت. بعدين ارجعي للعرض الطبيعي."
+          }
+        ],
+        "callout": "تعديل التفاعل يخص سلوك العناصر داخل التقرير، مش تغيير البيانات الأصلية."
+      },
+      {
+        "name": "Manager وSelf",
+        "title": "فصلنا مصادر التقييم باستخدام DAX",
+        "lead": "تعلمنا نستخدم CALCULATE وAVERAGE لنحسب متوسط العلامات من Manager وحده ومن Self وحده.",
+        "steps": [
+          {
+            "title": "Manager KPI Average",
+            "copy": "متوسط درجات KPI المسجلة بتقييم المدير فقط.",
             "code": "Manager KPI Average =\nCALCULATE(\n    AVERAGE('EvaluationScores_2026_H1'[KPIScore]),\n    'EvaluationScores_2026_H1'[AssessmentSource] = \"Manager\"\n)"
           },
           {
-            "title": "على مستوى القسم",
-            "copy": "اعملي Matrix مع DepartmentName في Rows وManager KPI Average في Values."
+            "title": "Self KPI Average",
+            "copy": "متوسط درجات KPI المسجلة بتقييم الموظف لنفسه فقط.",
+            "code": "Self KPI Average =\nCALCULATE(\n    AVERAGE('EvaluationScores_2026_H1'[KPIScore]),\n    'EvaluationScores_2026_H1'[AssessmentSource] = \"Self\"\n)"
+          },
+          {
+            "title": "قارني النتائج",
+            "copy": "استخدمي Measures على Card أو رسم مناسب، وجربي الفلاتر. هاي متوسطات KPI وليست النتيجة النهائية الموزونة."
           }
         ],
-        "callout": "متوسط KPI Score من Manager مختلف عن النتيجة الموزونة النهائية لكل موظف."
+        "callout": "ما بنخلط Self وManager وUpward في متوسط واحد. كل مصدر إله تعريف مستقل."
       },
       {
-        "name": "الأوزان",
-        "title": "نحسب نتيجة الموظف الموزونة",
-        "lead": "نحسب درجة كل Objective من متوسط KPIs التابعة له، ثم نضربها بوزن الهدف.",
+        "name": "الخطوة الجاية",
+        "title": "شو أصبح معنا وشو لسه قدامنا؟",
+        "lead": "صار عنا نموذج مربوط وتقرير من صفحتين، ومقاييس للعدد والمتوسط، وفلاتر وتفاعلات. هاي قاعدة رح نبني عليها باقي المشروع.",
         "steps": [
           {
-            "title": "درجة الهدف",
-            "copy": "نحدد KPIs المطلوبة للهدف ونحسب متوسط درجات Manager لهذا الهدف في الربع المختار."
+            "title": "مراجعة منجزات الجلسة",
+            "copy": "افتحي المشروع وراجعي الصفحتين، والـMeasures الأربعة، والخمسة Slicers، وEdit Interactions."
           },
           {
-            "title": "الوزن مرة واحدة",
-            "copy": "نتعلم كيف SUMX تمشي على Objectives، وكيف DIVIDE تحول الوزن من 30 إلى 0.30 قبل الضرب."
+            "title": "احفظي مشروعك",
+            "copy": "اعملي Save لملفك الحالي. نسخة اليوم الرابع الموجودة هون للاسترجاع عند الحاجة، وما فيها تعديلات اليوم الخامس."
           },
           {
-            "title": "النتيجة النهائية",
-            "copy": "نجمع مساهمات Objectives المكتملة، ونجرب النتيجة على موظف واحد قبل عرض القسم."
+            "title": "مستوى متقدم لاحقا",
+            "copy": "النتيجة الموزونة للأهداف باستخدام SUMX وDIVIDE، والتقييمات غير المكتملة، والـBookmarks وTooltips رح نشتغل عليهم بجلسات قادمة."
           }
         ],
-        "callout": "إذا تقييم KPI مطلوب مش موجود، ما بنعتبره صفر ولا بنعرض نتيجة نهائية كأنها مكتملة."
-      },
-      {
-        "name": "نختبر",
-        "title": "شو لو في تقييم ناقص؟",
-        "lead": "قبل اعتماد الأرقام، لازم نتأكد إذا كل KPI مطلوب إله تقييم.",
-        "steps": [
-          {
-            "title": "راجعي الموظف",
-            "copy": "اختاري موظفا وجربي مقارنة Manager KPI Average بالنتيجة الموزونة."
-          },
-          {
-            "title": "BLANK مش Zero",
-            "copy": "التقييم غير الموجود يخلّي النتيجة النهائية غير مكتملة. الدرجة الصفرية لو موجودة فعلا هي حالة مختلفة."
-          },
-          {
-            "title": "ثبتي الفترة",
-            "copy": "خلي اختيار الربع واحد حتى ما نخلط تقييمين لنفس KPI."
-          }
-        ],
-        "callout": "دقة الحساب شرط قبل ما نحطه على Dashboard."
-      },
-      {
-        "name": "أول Dashboard",
-        "title": "نبني Performance Overview",
-        "lead": "نجهز صفحة تنفيذية مرتبة، فيها أهم المؤشرات ورسمة واحدة وفلاتر سهلة.",
-        "steps": [
-          {
-            "title": "أربع بطاقات",
-            "copy": "ضيفي Employee Count، وManager Assessment Count، وManager KPI Average، وManager Weighted Score (Complete)."
-          },
-          {
-            "title": "رسم الأقسام",
-            "copy": "اعملي Bar Chart باستخدام DepartmentName وManager KPI Average."
-          },
-          {
-            "title": "الفلاتر",
-            "copy": "ضيفي DirectorateName وDepartmentName وCalendar[QuarterLabel]. وخلي 2026-Q2 محدد."
-          },
-          {
-            "title": "التنسيق",
-            "copy": "سمي الصفحة Performance Overview، ورتبي البطاقات أعلى التقرير مع ألوان هادئة ومسافات واضحة."
-          }
-        ],
-        "callout": "النتيجة الموزونة على مستوى القسم هي متوسط نتائج الموظفين المكتملة، مش مجموع درجاتهم."
-      },
-      {
-        "name": "دورك",
-        "title": "هلا اعملي Visual لحالك",
-        "lead": "جربي تعملي Visual باستخدام Measure تعلمناها، من غير ما يعيد المدرب كل خطوة.",
-        "steps": [
-          {
-            "title": "ابني الرسم",
-            "copy": "اختاري Clustered Bar Chart. ضعي DepartmentName على Y-axis وManager KPI Average على X-axis."
-          },
-          {
-            "title": "اختبريه",
-            "copy": "اختاري مديرية أو قسم مختلف، وجربي Quarter ثانية، وراقبي تغير الأرقام."
-          },
-          {
-            "title": "احفظي شغلك",
-            "copy": "Save على نفس HR_Performance_Intelligence.pbix. بنرجع له باليوم السادس مع Filter Context وCALCULATE."
-          }
-        ],
-        "callout": "هدف اليوم: أول Dashboard شغالة وحساباتها واضحة."
+        "callout": "هدفنا بنهاية التدريب مشروع من ست صفحات، مبني خطوة خطوة على اللي أنجزناه فعلا، بدون قفز على مهارات ما تدربنا عليها."
       }
-    ]
+    ],
+    "actualDate": "2026-10-26"
   },
   {
     "id": 6,
     "date": "2026-10-27",
     "weekday": "الثلاثاء",
     "ready": false,
-    "phase": "CONTEXT",
-    "title": "Advanced DAX, CALCULATE & Filter Context",
-    "titleAr": "نفهم سياق الفلاتر ونكتب DAX اقوى",
-    "hook": "القياس يتغير حسب الفلاتر والتجميع ويحتاج تفسيرا واضحا",
-    "mission": "نفهم CALCULATE والسياق ونبني مقارنات ومقاييس تحافظ على تعريف التقييم",
+    "phase": "EXPAND",
+    "title": "Data Expansion & Model Reliability",
+    "titleAr": "نوسع المشروع بمصادر جديدة ونتأكد من البيانات",
+    "hook": "لما توصل ملفات جديدة بعد بناء التقرير، كيف نضيفها للمشروع ونحافظ على النتائج السابقة؟",
+    "mission": "نوسع مشروع الأداء ببيانات إضافية، ونراجع مصدر الملفات وربطها وAppend وRefresh والتحقق من سلامة النموذج قبل الحسابات المتقدمة",
     "topics": [
-      "Filter Context",
-      "CALCULATE",
-      "FILTER",
-      "REMOVEFILTERS",
-      "ALLSELECTED Overview",
-      "Variables",
-      "Iterators",
-      "Totals Validation"
+      "Get Data",
+      "Schema Checks",
+      "Append",
+      "New Relationships",
+      "Refresh",
+      "Data Validation",
+      "Existing Measures Regression"
     ],
     "build": [
-      "نتتبع قياسا داخل Card وMatrix وفلاتر مختلفة",
-      "نستخدم VAR وCALCULATE لتغيير السياق بشكل مقصود",
-      "نقارن النتيجة بمتوسط القسم مع تحديد الفلاتر التي تزال",
-      "نبني نسبة اكتمال ضمن نفس الفترة والاتجاه",
-      "نراجع Total ومنع متوسط متوسطات غير متكافئة",
-      "نختبر سيناريوهات Missing وMulti-select"
+      "نراجع Change Source والـMeasures التي كتبناها في الجلسة الخامسة",
+      "نضيف مصادر جديدة ونفحص الأعمدة والأنواع قبل استخدامها",
+      "نوسع البيانات والجداول والعلاقات دون حذف النموذج القائم",
+      "نختبر Refresh وعدم تكرار الصفوف والمفاتيح",
+      "نتأكد أن الصفحتين والـMeasures وSlicers السابقة ما زالت تعمل",
+      "نحفظ نسخة جديدة ونجهز أساس مقارنة الفترات ونتائج الأداء"
     ],
-    "challenge": "فسري لماذا تغير القياس مع Slicer وحددي الفلتر الذي اثر عليه",
-    "deliverable": "مقاييس بسياق واضح مع فحوص للتجميع والنتائج",
+    "challenge": "اختبري أن التقرير الحالي ما تغيرت نتائجه خطأ بعد إضافة مصدر جديد وحددي مصدر أي اختلاف",
+    "deliverable": "نموذج بيانات موسع وموثوق، مع بقاء التقرير الحالي قابلا للاستخدام",
     "resources": [],
     "requiredFiles": [
       {
         "name": "مواد اليوم 6",
         "type": "Plan",
-        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
+        "note": "الخطة محدثة حسب ما تم تطبيقه فعلا، وملفات هذا اليوم لم تجهز للنشر بعد"
       }
     ],
     "teachingStatus": "planned"
@@ -902,37 +863,37 @@ const DAYS = [
     "date": "2026-10-29",
     "weekday": "الخميس",
     "ready": false,
-    "phase": "COMPARE",
-    "title": "Date Intelligence, Comparisons & Advanced Analysis",
-    "titleAr": "مقارنات زمنية وتحليل اعمق",
-    "hook": "مقارنة فترتين باتجاهات او نسب اكتمال مختلفة قد تضلل القرار",
-    "mission": "نبني مقارنات عادلة للفترات مع جدول تاريخ وتوضيح التغطية",
+    "phase": "WEIGHT",
+    "title": "Weighted Evaluation & Completion-Safe DAX",
+    "titleAr": "من متوسطات KPIs إلى التقييم الموزون الصحيح",
+    "hook": "Manager KPI Average وSelf KPI Average مفيدان، لكن كيف نحسب نتيجة الموظف حسب أوزان أهدافه؟",
+    "mission": "نبني Objective Score والنتيجة الموزونة لكل مصدر تقييم على حدة، مع التحقق من نقص KPIs وصحة إجماليات الأقسام",
     "topics": [
-      "Date Intelligence",
-      "Date Table",
-      "Previous Period",
-      "DATEADD / SAMEPERIODLASTYEAR",
-      "MoM / YoY",
-      "Percentage Points",
-      "Missing Periods",
-      "Ranking / Top N"
+      "Objective Score",
+      "SUMX",
+      "DIVIDE",
+      "VAR",
+      "Completion Checks",
+      "Manager vs Self",
+      "Weighted Score",
+      "Measures Validation"
     ],
     "build": [
-      "نراجع جدول التاريخ وعلاقته وتغطية الفترات",
-      "نطبق مقارنة زمنية على تاريخ مناسب وبفترات قابلة للمقارنة",
-      "نقارن نتائج كل اتجاه بشكل مستقل",
-      "نميز تغير النسبة عن النقاط المئوية",
-      "نمنع المقارنة عند غياب الفترة المرجعية ونوضح الاكتمال",
-      "نستكشف الاقسام والاهداف التي تحتاج متابعة دون اختراع اسباب"
+      "نراجع Manager وSelf Measures من اليوم الخامس",
+      "نحسب متوسط KPI داخل كل Objective مع اختيار مصدر التقييم والفترة",
+      "نطبق وزن Objective مرة واحدة باستخدام SUMX وDIVIDE",
+      "نتحقق من كل KPIs المطلوبة ومن مجموع الأوزان دون تحويل الناقص لصفر",
+      "نحسب متوسط نتائج الموظفين المكتملة للقسم بدل جمع الدرجات",
+      "نضيف مؤشرات أداء موزونة إلى صفحات التقرير ونطابق موظفا واحدا يدويا"
     ],
-    "challenge": "قدمي مقارنة بين فترتين مع تفسير اثر التغطية والفترة الناقصة",
-    "deliverable": "صفحة مقارنات زمنية مع تعريفات وفحوص واضحة",
+    "challenge": "تحققي من موظف مكتمل وآخر ناقص، واشرحي اختلاف KPI Average عن Weighted Score",
+    "deliverable": "مقاييس Manager وSelf موزونة ومدققة، مع إضافة صفحات تحليل الأداء",
     "resources": [],
     "requiredFiles": [
       {
         "name": "مواد اليوم 7",
         "type": "Plan",
-        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
+        "note": "الخطة محدثة حسب ما تم تطبيقه فعلا، وملفات هذا اليوم لم تجهز للنشر بعد"
       }
     ],
     "teachingStatus": "planned"
@@ -942,37 +903,36 @@ const DAYS = [
     "date": "2026-11-01",
     "weekday": "الأحد",
     "ready": false,
-    "phase": "DESIGN",
-    "title": "Professional Dashboard Design & Interactions",
-    "titleAr": "داشبورد واضح وتفاعل عملي",
-    "hook": "كثرة الرسوم لا تضمن ان القارئ يصل للاجابة بسرعة",
-    "mission": "نصمم ملخصا اداريا وتفاصيل قابلة للاستكشاف باستخدام هوية واضحة",
+    "phase": "COMPARE",
+    "title": "Period Comparison, Department Analysis & Drillthrough",
+    "titleAr": "مقارنات الفترات وتحليل الأقسام وتفاصيل الموظفين",
+    "hook": "مين تحسن بين الفترات؟ وهل المقارنة عادلة لو تغيرت تغطية التقييم؟",
+    "mission": "نبني تحليل الأقسام ومقارنة الفترات المتاحة، ونستخدم Conditional Formatting وDrillthrough للتفاصيل من غير استنتاجات غير مدعومة",
     "topics": [
-      "Visual Hierarchy",
-      "Chart Selection",
+      "Period Comparison",
+      "Calendar",
+      "Completion Coverage",
+      "Department Analysis",
       "Conditional Formatting",
-      "Drillthrough",
-      "Report Page Tooltips",
-      "Bookmarks / Buttons",
-      "Edit Interactions",
-      "Mobile Layout"
+      "Top N",
+      "Drillthrough"
     ],
     "build": [
-      "نحدد اسئلة المستخدم وترتيب البطاقات",
-      "نبني ملخصا يفصل الاتجاهات والاكتمال عن نتائج الاداء",
-      "نضيف Drillthrough لتفاصيل موظف او قسم مناسب للصلاحيات",
-      "نبني Tooltip وBookmark وازرار مع اختبار تفاعلها",
-      "نراجع الالوان والوضوح وMobile Layout",
-      "نختبر رحلة القارئ من السؤال الى التفاصيل"
+      "نحدد الفترات القابلة للمقارنة من الملفات المتاحة، ونتجنب اختراع اتجاه شهري لتقييمات ربع سنوية",
+      "نضيف صفحة Performance Comparison ونراجع اختلاف درجات Manager وSelf",
+      "نوسع صفحة Department Analysis بمقاييس الأداء الموزون",
+      "نستخدم Conditional Formatting وTop N لإبراز الفروقات المهمة",
+      "نصمم صفحة Employee Detail ونربطها بـDrillthrough",
+      "نراجع تفاعل خمسة Slicers مع جميع الصفحات المرتبطة"
     ],
-    "challenge": "انتقلي من قسم الى تفاصيله ثم عودي مع الحفاظ على الفلاتر المقصودة",
-    "deliverable": "تقرير تفاعلي منظم على Desktop وMobile",
+    "challenge": "انتقلي من قسم إلى موظف محدد، وقدمي مقارنة مدعومة بأرقام وفترة واضحة",
+    "deliverable": "صفحات تحليل الفترات والأقسام والموظفين تتفاعل مع التقييمات الصحيحة",
     "resources": [],
     "requiredFiles": [
       {
         "name": "مواد اليوم 8",
         "type": "Plan",
-        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
+        "note": "الخطة محدثة حسب ما تم تطبيقه فعلا، وملفات هذا اليوم لم تجهز للنشر بعد"
       }
     ],
     "teachingStatus": "planned"
@@ -982,37 +942,37 @@ const DAYS = [
     "date": "2026-11-03",
     "weekday": "الثلاثاء",
     "ready": false,
-    "phase": "PUBLISH",
-    "title": "Power BI Service, Refresh, Security, RLS & Performance",
-    "titleAr": "النشر والتحديث والصلاحيات والاداء",
-    "hook": "تقرير Desktop لا يصبح حلا تشغيليا قبل وضوح النشر والتحديث والوصول",
-    "mission": "نفهم دورة النشر والادارة ونطبق حسب الحساب والصلاحيات المتاحة",
+    "phase": "DESIGN",
+    "title": "Premium Power BI UX & Navigation",
+    "titleAr": "الملاحة والـTooltips وBookmarks والتجربة التفاعلية",
+    "hook": "التقرير القوي مش بس أرقام: كيف نخليه مفهوم وسهل التنقل من دون زحمة؟",
+    "mission": "نحول الصفحات إلى تجربة متماسكة باستخدام Sidebar Navigation وBookmarks وReport Page Tooltips وField Parameters وأساسيات HTML/SVG",
     "topics": [
-      "Power BI Service",
-      "Workspaces / Apps",
-      "Publishing / Sharing",
-      "Semantic Model",
-      "Scheduled Refresh / Gateway",
-      "Credentials",
-      "RLS / View As",
-      "Performance Analyzer"
+      "Bookmarks",
+      "Selection Pane",
+      "Sidebar Navigation",
+      "Buttons",
+      "Report Page Tooltips",
+      "Field Parameters",
+      "Sync Slicers",
+      "HTML/SVG Introduction"
     ],
     "build": [
-      "نوضح متطلبات الحساب والترخيص وسياسة المؤسسة قبل النشر",
-      "ننشر التقرير عند توفر الحساب والصلاحيات المناسبة",
-      "نراجع Refresh وCredentials وGateway لمصدر محلي",
-      "نبني Role ونختبر View As في Desktop ثم نفهم عضوية Service",
-      "نوضح ان اخفاء الصفحة لا يمثل حماية بيانات",
-      "نستخدم Performance Analyzer ونراجع اخطاء التحديث ونبني قائمة تشغيل"
+      "نراجع Edit Interactions من اليوم الخامس وننسق تفاعل العناصر بشكل متعمد",
+      "نبني Sidebar Navigation باستخدام Buttons وBookmarks وSelection Pane",
+      "نضيف Tooltips تعرض تفاصيل مفيدة من غير فتح صفحة جديدة",
+      "نجرب Field Parameters للتبديل بين أبعاد أو مقاييس مناسبة",
+      "نضبط Sync Slicers والانتقال بين الصفحات وتفاصيل Drillthrough",
+      "نجهز مكونات تصميم HTML/SVG بسيطة تناسب المشروع النهائي"
     ],
-    "challenge": "اختبري دور قسم مختلف وقدمي خطة تحديث وصلاحيات قابلة للتنفيذ",
-    "deliverable": "تجربة نشر عند توفر الحساب ودليل تحديث وRLS واختبار اداء",
+    "challenge": "نفذي رحلة من الملخص إلى التفاصيل وارجعي باستخدام الملاحة مع الحفاظ على الفلاتر المقصودة",
+    "deliverable": "تنقل احترافي وتفاعلات متقدمة على الصفحات الست أو المتاح منها",
     "resources": [],
     "requiredFiles": [
       {
         "name": "مواد اليوم 9",
         "type": "Plan",
-        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
+        "note": "الخطة محدثة حسب ما تم تطبيقه فعلا، وملفات هذا اليوم لم تجهز للنشر بعد"
       }
     ],
     "teachingStatus": "planned"
@@ -1023,39 +983,40 @@ const DAYS = [
     "weekday": "الخميس",
     "ready": false,
     "phase": "DELIVER",
-    "title": "Final End-to-End Project, Validation & Presentation",
-    "titleAr": "مشروع كامل باستقلالية وتحقق وعرض",
-    "hook": "القيمة تظهر عندما تستلمين ملفا جديدا وتنفذين العمل دون مساعدة خطوة بخطوة",
-    "mission": "تنفيذ Get Data ثم Query ثم Model ثم DAX ثم Report ثم Validation وعرض النتائج",
+    "title": "Final Six-Page Executive Dashboard & QA",
+    "titleAr": "ننجز داشبورد الست صفحات ونراجع المشروع بالكامل",
+    "hook": "آخر خطوة: التقرير يشتغل بأرقام صحيحة، وتجربة واضحة، وشكل بصري يستحق العرض",
+    "mission": "إنهاء ست صفحات احترافية وتطبيق HTML/SVG للتحسين البصري، والتحقق من Measures والبيانات والملاحة وتسليم الملف",
     "topics": [
-      "End-to-End Project",
-      "Refresh / Reconciliation",
-      "Model Checks",
-      "Measure Validation",
-      "UX / Security Checks",
-      "Presentation",
-      "Handover"
+      "Six-Page Review",
+      "HTML/SVG Design",
+      "Model Validation",
+      "Measure QA",
+      "Visual Interactions",
+      "Navigation QA",
+      "Final Demo"
     ],
     "build": [
-      "استيراد بيانات تقييم جديدة وتنظيفها",
-      "تحديث النموذج والعلاقات والتحقق من المفاتيح",
-      "حساب الاهداف والاوزان والاكتمال لكل اتجاه بشكل مستقل",
-      "بناء او اكمال الملخص والتفاصيل والتفاعل",
-      "مطابقة ارقام مختارة وفحص الصلاحيات والتحديث",
-      "عرض النتائج وحدودها وتسليم دليل تشغيل وخطة تعمق لاحقة"
+      "نراجع اكتمال صفحات Overview وManager vs Self وDepartment وWeighted Performance وPeriod & Progress وEmployee Detail",
+      "نضيف لمسات HTML/SVG انتقائية دون تعريض الأرقام أو الأداء للخطر",
+      "نتأكد من فصل مصادر التقييم ومن صحة الأوزان وحالات النقص",
+      "نراجع Filters وSlicers وTooltips وBookmarks وDrillthrough",
+      "نختبر التصفح وحفظ المشروع وفتح الملف عند نقل مصدر البيانات",
+      "تقدم مريم عرضا نهائيا للمشروع مع ثلاث ملاحظات مبنية على البيانات"
     ],
-    "challenge": "نفذي التحديث وقدمي 3 استنتاجات مدعومة وفحصا رقميا وخطوة متابعة",
-    "deliverable": "مشروع Power BI متكامل وتقرير تحقق ودليل تشغيل مختصر",
+    "challenge": "قدمي المشروع من الصفحة الرئيسية حتى تفاصيل موظف، واشرحي دقة النتيجة وأثر أي تقييم ناقص",
+    "deliverable": "ملف PBIX نهائي بست صفحات متكاملة مع اختبار جودة ودليل استخدام مختصر",
     "resources": [],
     "requiredFiles": [
       {
         "name": "مواد اليوم 10",
         "type": "Plan",
-        "note": "مخططة ولم تجهز، كل Dataset جديد سيكون 10000 صف على الاقل"
+        "note": "الخطة محدثة حسب ما تم تطبيقه فعلا، وملفات هذا اليوم لم تجهز للنشر بعد"
       }
     ],
     "teachingStatus": "planned"
-  }
+  },
+
 ];
 
 function getDay(id) {
