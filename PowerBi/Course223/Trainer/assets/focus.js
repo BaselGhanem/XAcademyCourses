@@ -108,7 +108,7 @@
       button.setAttribute(`aria-current`, String(group === tasks[index].group));
       button.classList.toggle(`cf-complete`, tasks.filter(task => task.group === group).every(task => task.input.checked));
       const number = document.createElement(`em`); number.textContent = String(groupIndex + 1).padStart(2, `0`);
-      const label = document.createElement(`span`); label.textContent = group;
+      const label = document.createElement(`span`); label.textContent = group.replace(/^\d{1,2}\s*\/\s*/, ``); button.setAttribute(`aria-label`, group);
       button.append(number, label);
       button.onclick = () => go(tasks.findIndex(task => task.group === group));
       nav.append(button);
