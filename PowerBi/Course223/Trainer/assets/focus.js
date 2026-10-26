@@ -137,6 +137,10 @@
       button.onclick = () => go(tasks.findIndex(task => task.group === group));
       nav.append(button);
     });
+    // Keep the active stage visible inside the compact horizontal phone navigator.
+    if (window.matchMedia && window.matchMedia(`(max-width: 990px)`).matches) {
+      requestAnimationFrame(() => nav.querySelector(`[aria-current="true"]`)?.scrollIntoView({block:`nearest`,inline:`center`,behavior:`instant`}));
+    }
   }
   function render() {
     const task = tasks[index];
