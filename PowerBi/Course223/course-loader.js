@@ -2,6 +2,8 @@
    Content readiness drives dismissal; max watchdog prevents blocking the user. */
 (function(){
  "use strict";
+ const scriptUrl=document.currentScript?.src||location.href;
+ const logoUrl=new URL("Trainer/assets/X_Academy_Intersection.svg",scriptUrl).href;
  function mount(options){
    options=options||{};
    if(!document.body)return null;
@@ -16,7 +18,7 @@
    const card=document.createElement("div");
    card.className="xa-loader__card";
    card.innerHTML='<div class="xa-loader__overline"><span class="xa-loader__live" aria-hidden="true"></span><span>LEARNING EXPERIENCE</span></div>'+
-    '<div class="xa-loader__mark"><span class="xa-loader__ring" aria-hidden="true"></span><span class="xa-loader__logo"><img src="Trainer/assets/X_Academy_Intersection.svg" width="56" height="56" alt=""></span></div>'+
+    '<div class="xa-loader__mark"><span class="xa-loader__ring" aria-hidden="true"></span><span class="xa-loader__logo"><img src="'+logoUrl+'" width="56" height="56" alt=""></span></div>'+
     '<div class="xa-loader__brand" dir="ltr">X ACADEMY</div><div class="xa-loader__brand-sub" dir="ltr">LEARN · ANALYSE · LEAD</div>'+
     '<h2 class="xa-loader__title">جاري تجهيز مساحة التعلم</h2><p class="xa-loader__subtitle">COURSE223 · MARIAM</p>'+
     '<div class="xa-loader__track" aria-hidden="true"><span class="xa-loader__fill"></span></div>'+
