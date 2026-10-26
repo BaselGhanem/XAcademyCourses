@@ -16,6 +16,7 @@ const days=[
 ];
 const link=(p)=>new URL(p,root).href;
 const style=document.createElement("link");style.rel="stylesheet";style.href=new URL("trainer-shell.css?v=20261025-premium",script.src).href;document.head.append(style);
+const mobile=document.createElement("link");mobile.rel="stylesheet";mobile.href=new URL("trainer-mobile.css?v=20261026-r1",script.src).href;document.head.append(mobile);
 function load(){
  if(document.body.classList.contains("xp-portal"))return;
  document.body.classList.add("xp-trainer");
@@ -42,7 +43,10 @@ function load(){
  const footer=document.createElement("div");footer.className="xp-shell-foot";footer.innerHTML='<a href="'+link("index.html")+'">مركز المدرب ↗</a><span>PRIVATE WORKSPACE</span>';sidebar.append(footer);
  const backdrop=document.createElement("button");backdrop.type="button";backdrop.className="xp-shell-backdrop";backdrop.hidden=true;backdrop.setAttribute("aria-label","إغلاق قائمة الأيام");
  const toggle=document.createElement("button");toggle.type="button";toggle.className="xp-shell-toggle";toggle.setAttribute("aria-label","فتح قائمة الأيام");toggle.setAttribute("aria-controls","xp-shell-sidebar");toggle.setAttribute("aria-expanded","false");toggle.textContent="☰";
- target.before(shell);shell.append(sidebar,target);document.body.append(backdrop,toggle);
+ target.before(shell);shell.append(sidebar,target);document.body.append(backdrop);
+ // On a phone the menu belongs in the toolbar, never floating above lesson text.
+ const toolbar=focus?.querySelector(`.cf-header`);
+ if(toolbar)toolbar.append(toggle);else document.body.append(toggle);
  function close(){document.body.classList.remove("xp-side-open");toggle.setAttribute("aria-expanded","false");backdrop.hidden=true}
  toggle.addEventListener("click",()=>{const opened=document.body.classList.toggle("xp-side-open");toggle.setAttribute("aria-expanded",String(opened));backdrop.hidden=!opened});
  backdrop.addEventListener("click",close);document.addEventListener("keydown",e=>{if(e.key==="Escape")close()});
