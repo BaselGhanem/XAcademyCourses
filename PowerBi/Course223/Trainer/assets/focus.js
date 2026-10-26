@@ -65,6 +65,30 @@
     </div>
     <dialog class="cf-dialog" id="cf-dialog" aria-labelledby="cf-dialog-title"><div class="cf-dialog-head"><h2 id="cf-dialog-title"></h2><button class="cf-btn" id="cf-close" type="button">اغلاق ×</button></div><div class="cf-dialog-body"></div></dialog>`;
   document.body.append(app);
+  // Phone teaching mode: a single readable panel per task, without losing any content.
+  const cardForTabs=app.querySelector(`.cf-card`);
+  const sayPanel=cardForTabs?.querySelector(`.cf-say`);
+  if (sayPanel) {
+    const tabs=document.createElement(`div`);
+    tabs.className=`cf-mobile-tabs`;
+    tabs.setAttribute(`role`,`group`);
+    tabs.setAttribute(`aria-label`,`محتوى المهمة الحالية`);
+    const views=[[`say`,`احكي لمريم`],[`screen`,`على الشاشة`],[`practice`,`تطبيق مريم`]];
+    for (const [name,label] of views) {
+      const button=document.createElement(`button`);
+      button.type=`button`;button.dataset.pane=name;button.textContent=label;
+      button.setAttribute(`aria-pressed`,String(name===`say`));
+      button.addEventListener(`click`,()=>choosePane(name));
+      tabs.append(button);
+    }
+    sayPanel.before(tabs);
+    function choosePane(pane) {
+      cardForTabs.dataset.mobilePane=pane;
+      tabs.querySelectorAll(`button`).forEach(button=>button.setAttribute(`aria-pressed`,String(button.dataset.pane===pane)));
+    }
+    choosePane(`say`);
+    app.addEventListener(`focus:stepchange`,()=>choosePane(`say`));
+  }
   const el = id => app.querySelector(`#cf-${id}`);
   const groups = [...new Set(tasks.map(task => task.group))];
   el(`day-title`).textContent = document.body.dataset.focusTitle || document.title.split(` | `)[0];
@@ -116,7 +140,11 @@
   }
   function render() {
     const task = tasks[index];
-    el(`slot`).textContent = `${task.slot} · ${task.minutes} دقيقة`;
+    const timeEl=el(`slot`);
+    const timeSpan=document.createElement(`bdi`);
+    timeSpan.setAttribute(`dir`,`ltr`);
+    timeSpan.textContent=task.slot;
+    timeEl.replaceChildren(timeSpan,document.createTextNode(` · ${task.minutes} دقيقة`));
     el(`number`).textContent = `STEP ${String(index + 1).padStart(2, `0`)} / ${String(tasks.length).padStart(2, `0`)}`;
     el(`title`).textContent = task.title;
     for (const [id, value] of [[`speech`, task.say], [`screen`, task.screen], [`practice`, task.practice], [`check`, task.check]]) el(id).textContent = value;
@@ -126,6 +154,7 @@
     el(`prev`).disabled = index === 0;
     el(`next`).disabled = index === tasks.length - 1;
     renderProgress(); renderClock();
+    app.dispatchEvent(new Event(`focus:stepchange`));
     const content = el(`step-content`);
     content.classList.remove(`cf-enter`);
     void content.offsetWidth;
