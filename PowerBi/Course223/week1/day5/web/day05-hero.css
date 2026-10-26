@@ -35,3 +35,13 @@
 .mj-backup-download:focus-visible{outline:3px solid #9cf6e9;outline-offset:4px}
 @media(max-width:850px){.mj-day5-backup{grid-template-columns:auto minmax(0,1fr)}.mj-backup-download{grid-column:1/-1;width:100%}}
 @media(max-width:650px){.mj-day5-backup{width:calc(100% - 26px);gap:12px;padding:16px;border-radius:18px}.mj-backup-mark{width:49px;height:49px;font-size:12px;border-radius:12px}.mj-day5-backup h2{font-size:18px}.mj-backup-download{font-size:12px;white-space:normal}.mj-backup-meta{font-size:9px}}
+
+
+/* Recovery resources: both files visibly available before lesson chapters. */
+.mj-backup-actions{display:flex;flex-direction:column;gap:9px;align-self:center;min-width:min(100%,235px)}
+.mj-backup-actions a{display:flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;line-height:1.65;text-align:center;min-height:43px;white-space:normal}
+.mj-backup-actions .mj-backup-download{width:100%;white-space:normal}
+.mj-backup-source{color:#d9fcf5;border:1px solid #8be7d080;border-radius:12px;padding:10px 13px;background:#ffffff12;font:700 12px/1.6 Almarai,system-ui,sans-serif}
+.mj-backup-source:hover{background:#ffffff24;border-color:#bbfff1}
+@media(max-width:850px){.mj-backup-actions{grid-column:1/-1;width:100%;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.mj-backup-actions{grid-template-columns:1fr;gap:8px}.mj-backup-actions a{width:100%;min-height:43px}}
