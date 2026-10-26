@@ -29,8 +29,8 @@ Self: الموظف يقيم نفسه، Manager: المدير يقيم الموظ
 |3|20-10-2026|15 دقيقة تنظيف، Append، Merge، Folder Connector، Refresh، Schema Checks|مجهز ولم يدرس|
 |4|22-10-2026|Fact/Dimension، Star Schema، Relationships، Date Table، Grain/Keys|مخطط|
 |5|25-10-2026|DAX Fundamentals، Measures/Columns، SUM، DISTINCTCOUNT، DIVIDE، Iterators، Weighted Objectives|مخطط|
-|6|27-10-2026|CALCULATE، Filter Context، FILTER، REMOVEFILTERS، Variables، Totals|مخطط|
-|7|29-10-2026|Date Intelligence، Previous Period، MoM/YoY، Missing Periods، Ranking|مخطط|
+|6|27-10-2026|توسعة المشروع بملفي CSV جديدين (Objective Progress و2025 Assessments)، Get Data وRelationships وAppend وRefresh، ثم CALCULATE وFilter Context وFILTER وREMOVEFILTERS وVariables وTotals|مخطط — التوسعة معتمدة ولم تجهز الملفات بعد|
+|7|29-10-2026|Date Intelligence، Previous Period، MoM/YoY، Missing Periods، Ranking باستخدام بيانات التاريخ والتقدم المضافة في اليوم السادس|مخطط|
 |8|01-11-2026|Dashboard Design، Drillthrough، Tooltips، Bookmarks، Interactions، Mobile|مخطط|
 |9|03-11-2026|Service، Publishing، Refresh/Gateway، Security، RLS، Performance|مخطط|
 |10|05-11-2026|End-to-End Project، Validation، Presentation، Handover|مخطط|
@@ -73,3 +73,15 @@ Self: الموظف يقيم نفسه، Manager: المدير يقيم الموظ
 - التمرين مستقل:ابريل 12,000 صف، وبعد اضافةمايو 24,000 صف
 - اجابات المدرب وقاموس الحقول وادوات التحقق تحت Trainer/day3 فقط
 - Power Query مستمر خلال المسار، لا نساوي جاهزية اليوم بتدريسه او اتقانه
+
+
+## قرار توسعة اليوم السادس — 26 اكتوبر 2026
+
+- **قرار المدرب المعتمد:** نقل الملفين الجديدين معا إلى **اليوم السادس**؛ لا نضيف أيا منهما في اليوم الخامس، ولا نؤجل إضافة ملف التقييمات التاريخية إلى اليوم السابع.
+- **ObjectiveProgressSnapshots.csv:** مصدر جديد لتقدم الأهداف عبر لقطات زمنية، يضاف من Get Data، وتراجع الأنواع والمفاتيح وتبنى علاقاته مع Objectives وCalendar؛ يبقى Progress مختلفا عن KPIScore والنتيجة الموزونة.
+- **EvaluationScores_2025_H1.csv:** بيانات تقييم تاريخية من النصف الاول 2025، تستخدم في تمرين Append مع تقييمات 2026 لإنشاء Assessment Fact موحد، ثم فحص توافق Schema وتمييز ID وعدم تكراره والعلاقات وتأثير التحديث على Measures.
+- **اليوم السادس / سيناريو عملي مخفي عن المتدربة مسبقا:** وصول ملف متابعة الاهداف ثم ملف تقييمات العام السابق بعد بدء المشروع، وإضافة مصدر جديد وربطه ثم توسعة Fact قائم بدلا من إعادة بناء التقرير. يحتفظ المدرب بخطوات التنفيذ ومفاتيح التحقق في مساحة Trainer فقط.
+- **توزيع الزمن المقترح (120 دقيقة، يراجع مع تقدم اليوم الخامس):** 10 دقائق مراجعة؛ 25 دقيقة إضافة المصدرين وربطهما وAppend وفحوص سلامة النتائج؛ 60 دقيقة CALCULATE وFilter Context وFILTER وREMOVEFILTERS وVAR والمقارنات؛ 15 دقيقة تطبيق مستقل؛ 10 دقائق تحقق وحفظ. لا نضغط على جودة Measures اذا استغرقت إضافة الملفات وقتا اطول.
+- **اليوم السابع:** نستخدم تقييمات 2025 و2026 لمقارنات YoY بين أرباع متقابلة؛ نستخدم لقطات تقدم الاهداف لتحليل MoM عند توفر تواريخ شهرية حقيقية. لا ندعي أن تقييمات KPI الربع سنوية تصلح لاتجاه شهري.
+- **شرط قبل التنفيذ:** الملفان حاليا مقترحان وليسا ملفات منشأة أو مرفوعة. يجب إنشاؤهما وتدقيق مفاتيحهما وتواريخهما قبل تدريس اليوم السادس. تظل قاعدة كل Dataset جديد بعد اليوم الأول >=10,000 صف فعلي سارية، ولا نبدل الملفات الأساسية لليوم الرابع.
+- **حماية تجربة التعلم:** لا نكشف سيناريو المفاجأة أو الحلول او الارقام المرجعية على صفحات مريم قبل وقته؛ لا نغير حالة جاهزية اليوم السادس الى Ready حتى تصبح ملفات التمرين ودليل المدرب جاهزة ومتحققا منها.
