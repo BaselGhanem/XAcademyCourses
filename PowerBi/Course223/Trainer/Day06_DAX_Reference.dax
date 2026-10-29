@@ -1,5 +1,5 @@
 // DAY 06 HYBRID · PREPARED TRAINER REFERENCE ONLY · NOT YET TAUGHT
-// Actual Day 05 covered only COUNTROWS, DISTINCTCOUNT, CALCULATE and AVERAGE.
+// Actual uploaded Day05 PBIX has the existing measure [Manager Score] on Calendar. Use it by this exact name.
 // SUMX, DIVIDE and weighted calculation are now prepared for Day 06; source Day05 preserved.
 // Source: Day04_Project_Starter.zip — same eight CSV tables and seven relationships.
 // Select one Calendar[QuarterLabel], e.g. 2026-Q2.
@@ -21,11 +21,7 @@ CALCULATE(
     'EvaluationScores_2026_H1'[AssessmentSource] = "Manager"
 )
 
-Manager KPI Average =
-CALCULATE(
-    AVERAGE('EvaluationScores_2026_H1'[KPIScore]),
-    'EvaluationScores_2026_H1'[AssessmentSource] = "Manager"
-)
+// Manager Score is already present in the uploaded original PBIX. Do not recreate it with another name.
 
 Manager Objective Score (Complete) =
 VAR ExpectedKPIs =
@@ -41,7 +37,7 @@ RETURN
         ExpectedKPIs > 0 &&
         ReceivedKPIs = ExpectedKPIs &&
         HASONEVALUE('Calendar'[QuarterLabel]),
-        [Manager KPI Average],
+        [Manager Score],
         BLANK()
     )
 
