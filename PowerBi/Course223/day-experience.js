@@ -23,7 +23,7 @@ function initCourseDayJourney(day, courseHome) {
       const items = (section.steps || []).map((step, i) => `<article class="mj-block"><span class="mj-num">${String(i + 1).padStart(2, `0`)}</span><h3>${escape(step.title)}</h3><p class="mj-copy" dir="auto">${escape(step.copy)}</p>${day.id === 5 && step.code ? `<div class="mj-dax-code"><div class="mj-dax-code-head"><span>DAX · NEW MEASURE</span><button type="button" class="mj-copy-code">نسخ DAX</button></div><pre dir="ltr"><code>${escape(step.code)}</code></pre></div>` : ``}</article>`).join(``);
       const final = index === day.learningSections.length - 1;
       const scene = scenes[index] || [`POWER QUERY`, `APPLY`];
-      return {...chapter(`${String(index + 1).padStart(2, `0`)} / ${day.phase === `MODEL` ? `DATA MODEL` : day.phase === `MEASURE` ? `DAX LAB` : `POWER QUERY`}`, section.name, escape(section.title), `<p class="mj-lead">${escape(section.lead)}</p>${files ? `<details ${day.id === 5 && section.files === `day5-files` ? `open` : ``}><summary>${section.files === `practice` ? `ملفات التمرين المستقل` : section.files === `lab` ? `مختبر إضافي اختياري` : `ملفات اليوم الخامس — روابط التنزيل`}</summary>${files}</details>` : ``}${items}<div class="mj-callout">${escape(section.callout)}</div>${final ? `<div class="mj-complete"><h3 id="mj-complete-title">انهيت التطبيق العملي؟</h3><button type="button" id="mj-complete">نسجل اتمام اليوم ${day.id}</button></div><footer class="mj-footer"><a href="${escape(courseHome)}">مركز الدورة</a><a href="day.html?id=${day.id + 1}">خطة اليوم ${day.id + 1} ←</a></footer>` : ``}`, final ? `` : `نكمل للخطوة التالية`), art:`<div class="mj-flow"><span>${escape(scene[0])}</span><i>↓</i><span>${escape(scene[1])}</span></div>`};
+      return {...chapter(`${String(index + 1).padStart(2, `0`)} / ${day.phase === `MODEL` ? `DATA MODEL` : day.phase === `MEASURE` ? `DAX LAB` : `POWER QUERY`}`, section.name, escape(section.title), `<p class="mj-lead">${escape(section.lead)}</p>${files ? `<details ${day.id === 5 && section.files === `day5-files` ? `open` : ``}><summary>${section.files === `practice` ? `ملفات التمرين المستقل` : section.files === `lab` ? `مختبر إضافي اختياري` : day.id === 6 ? `ملفات التطبيق الجديدة` : `ملفات اليوم الخامس — روابط التنزيل`}</summary>${files}</details>` : ``}${items}<div class="mj-callout">${escape(section.callout)}</div>${final ? `<div class="mj-complete"><h3 id="mj-complete-title">انهيت التطبيق العملي؟</h3><button type="button" id="mj-complete">نسجل اتمام اليوم ${day.id}</button></div><footer class="mj-footer"><a href="${escape(courseHome)}">مركز الدورة</a><a href="day.html?id=${day.id + 1}">خطة اليوم ${day.id + 1} ←</a></footer>` : ``}`, final ? `` : `نكمل للخطوة التالية`), art:`<div class="mj-flow"><span>${escape(scene[0])}</span><i>↓</i><span>${escape(scene[1])}</span></div>`};
     });
   }
   document.title = `اليوم ${day.id} | ${day.titleAr} | X Academy`;
@@ -55,6 +55,17 @@ function initCourseDayJourney(day, courseHome) {
       try { await navigator.clipboard.writeText(code); button.textContent = `تم النسخ ✓`; }
       catch { button.textContent = `حددي النص لنسخه`; }
     }));
+  }
+  if (day.id === 6) {
+    document.body.classList.add(`mj-has-preamble`);
+    const css = document.createElement(`link`);
+    css.rel = `stylesheet`;
+    css.href = `week1/day6/web/day06-hero.css?v=20261029`;
+    document.head.append(css);
+    const section = document.createElement(`section`);
+    section.className = `mj-day6-hero`;
+    section.innerHTML = `<div class="mj6-content"><span class="mj6-kicker">DAY 06 · DATA EXPANSION</span><h2>بيانات اكثر.<br><em>قرارات ادق.</em></h2><p>رح نوسع نفس مشروع Power BI بمصدرين جديدين ونحافظ على النتائج اللي بنيناها.</p><div class="mj6-tags"><span>POWER QUERY</span><span>APPEND</span><span>MODEL INTEGRITY</span></div></div><div class="mj6-pipeline" aria-hidden="true"><div><strong>2025</strong><small>HISTORICAL</small></div><b>+</b><div><strong>2026</strong><small>CURRENT</small></div><b>→</b><div class="mj6-result"><strong>POWER BI</strong><small>ONE PROJECT</small></div></div>`;
+    document.querySelector(`.mj-layout`).before(section);
   }
   // Day 04: the user-selected data model graphic is the full-width lesson introduction.
   if (day.id === 4) {
