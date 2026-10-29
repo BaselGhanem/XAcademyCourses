@@ -846,40 +846,220 @@ const DAYS = [
     "id": 6,
     "date": "2026-10-27",
     "weekday": "الثلاثاء",
-    "ready": false,
+    "ready": true,
     "phase": "EXPAND",
-    "title": "Data Expansion & Model Reliability",
-    "titleAr": "نوسع المشروع بمصادر جديدة ونتأكد من البيانات",
-    "hook": "لما توصل ملفات جديدة بعد بناء التقرير، كيف نضيفها للمشروع ونحافظ على النتائج السابقة؟",
-    "mission": "نوسع مشروع الأداء ببيانات إضافية، ونراجع مصدر الملفات وربطها وAppend وRefresh والتحقق من سلامة النموذج قبل الحسابات المتقدمة",
+    "title": "Data Expansion & Model Integrity",
+    "titleAr": "نوسع بيانات المشروع ونحافظ على دقة النتائج",
+    "hook": "صار عنا تقييمات فترة سابقة وتقدم الاهداف عبر الشهور، كيف نضيف الملفات الجديدة بدون ما نخرب صفحاتنا الحالية؟",
+    "mission": "نوسع نفس مشروع Power BI بمصدرين CSV، ونعمل Append ونتحقق من العلاقات والمقاييس ونجهز صفحة جديدة",
     "topics": [
       "Get Data",
-      "Schema Checks",
-      "Append",
-      "New Relationships",
+      "Append Queries as New",
+      "Power Query",
+      "Data Modeling",
+      "Relationships",
       "Refresh",
-      "Data Validation",
-      "Existing Measures Regression"
+      "Filter Context",
+      "Report Visuals"
     ],
     "build": [
-      "نراجع Change Source والـMeasures التي كتبناها في الجلسة الخامسة",
-      "نضيف مصادر جديدة ونفحص الأعمدة والأنواع قبل استخدامها",
-      "نوسع البيانات والجداول والعلاقات دون حذف النموذج القائم",
-      "نختبر Refresh وعدم تكرار الصفوف والمفاتيح",
-      "نتأكد أن الصفحتين والـMeasures وSlicers السابقة ما زالت تعمل",
-      "نحفظ نسخة جديدة ونجهز أساس مقارنة الفترات ونتائج الأداء"
+      "افتحي مشروع اليوم الخامس وخذي نسخة عمل جديدة",
+      "استوردي ملف تقييمات 2025 وتاكدي من تطابق اعمدته مع 2026",
+      "اعملي Append Queries as New لجدول مستقل",
+      "استوردي ملف تقدم الاهداف واربطينه بالاهداف والتقويم",
+      "راجعي صحة المفاتيح وRefresh",
+      "اختبري المقاييس القديمة وابدئي الصفحة الثالثة"
     ],
-    "challenge": "اختبري أن التقرير الحالي ما تغيرت نتائجه خطأ بعد إضافة مصدر جديد وحددي مصدر أي اختلاف",
-    "deliverable": "نموذج بيانات موسع وموثوق، مع بقاء التقرير الحالي قابلا للاستخدام",
-    "resources": [],
-    "requiredFiles": [
+    "challenge": "اختبري نتيجتي Manager وSelf مع اختيار قسم، ثم تاكدي ان الصفحات القديمة ما تغيرت بعد التحديث",
+    "deliverable": "مصادر جديدة مترابطة وبيانات مهيأة للتحليل مع الحفاظ على المشروع الموجود",
+    "resources": [
       {
-        "name": "مواد اليوم 6",
-        "type": "Plan",
-        "note": "الخطة محدثة حسب ما تم تطبيقه فعلا، وملفات هذا اليوم لم تجهز للنشر بعد"
+        "name": "EvaluationScores_2025_H1.csv",
+        "type": "CSV",
+        "url": "week1/day6/data/EvaluationScores_2025_H1.csv",
+        "note": "التقييمات التاريخية لمقارنة الفترات",
+        "audience": "learner",
+        "stage": "expansion"
+      },
+      {
+        "name": "ObjectiveProgressSnapshots.csv",
+        "type": "CSV",
+        "url": "week1/day6/data/ObjectiveProgressSnapshots.csv",
+        "note": "تقدم الاهداف في تواريخ متابعة مختلفة",
+        "audience": "learner",
+        "stage": "expansion"
       }
     ],
-    "teachingStatus": "planned"
+    "requiredFiles": [
+      {
+        "name": "EvaluationScores_2025_H1.csv",
+        "type": "CSV",
+        "note": "ملف التقييمات التاريخية"
+      },
+      {
+        "name": "ObjectiveProgressSnapshots.csv",
+        "type": "CSV",
+        "note": "ملف متابعة تقدم الاهداف"
+      }
+    ],
+    "teachingStatus": "prepared",
+    "learningScenes": [
+      [
+        "PROJECT",
+        "CONTINUE"
+      ],
+      [
+        "2025",
+        "2026"
+      ],
+      [
+        "APPEND",
+        "AS NEW"
+      ],
+      [
+        "OBJECTIVES",
+        "SNAPSHOTS"
+      ],
+      [
+        "KEYS",
+        "RELATIONS"
+      ],
+      [
+        "FILTER",
+        "CONTEXT"
+      ],
+      [
+        "PAGE 03",
+        "SAVE"
+      ]
+    ],
+    "learningSections": [
+      {
+        "name": "نكمل مشروعنا",
+        "title": "نفس التقرير، بيانات اكثر",
+        "lead": "رح نكمل من ملف اليوم الخامس، مش من تقرير جديد",
+        "steps": [
+          {
+            "title": "افتحي المشروع",
+            "copy": "افتحي HR_Performance_Intelligence.pbix وتاكدي من وجود Overview وDepartments والمقاييس اللي انشأناها"
+          },
+          {
+            "title": "احفظي نسخة",
+            "copy": "اعملي Save As لنسخة عمل جديدة قبل اضافة الملفات"
+          }
+        ],
+        "callout": "المشروع القديم هو نقطة البداية ولازم يظل شغال"
+      },
+      {
+        "name": "ملفات التطبيق",
+        "title": "ملفين جديدين، سؤالين مختلفين",
+        "lead": "نزلي الملفين من هون وخليهم مع ملفات مشروعك بمجلد ثابت",
+        "steps": [
+          {
+            "title": "EvaluationScores_2025_H1.csv",
+            "copy": "استوردي تقييمات 2025 باستخدام Get Data ثم Transform Data"
+          },
+          {
+            "title": "ObjectiveProgressSnapshots.csv",
+            "copy": "استعرضي متابعة الاهداف من حيث ObjectiveID وSnapshotDate وProgressPct"
+          }
+        ],
+        "callout": "KPIScore علامة تقييم، بينما ProgressPct تقدم الهدف؛ كل واحد له معنى مختلف",
+        "files": "expansion"
+      },
+      {
+        "name": "تجميع الفترات",
+        "title": "Append بدون هدم البيانات الحالية",
+        "lead": "قبل الجمع، قارني Schema الملفات وتاكدي من النوع الصحيح",
+        "steps": [
+          {
+            "title": "راجعي الاعمدة",
+            "copy": "التقييمات التاريخية تتبع نفس اعمدة تقييمات 2026: مفاتيح Text وتاريخ Date ودرجة Decimal Number"
+          },
+          {
+            "title": "Append Queries as New",
+            "copy": "اختاري جدولي EvaluationScores_2026_H1 وEvaluationScores_2025_H1، وسمي الناتج EvaluationScores_All_Staging"
+          },
+          {
+            "title": "حافظي على المقاييس القديمة",
+            "copy": "خلي Staging استعلام Connection only حاليا، ولا تغيري اسم جدول 2026 المرتبط بالصفحات"
+          }
+        ],
+        "callout": "Append يضيف صفوف تحت بعض. Merge يضيف اعمدة من جدول مرتبط"
+      },
+      {
+        "name": "سجل تقدم الاهداف",
+        "title": "التقدم عبر الزمن",
+        "lead": "كل هدف ممكن يظهر في اكثر من شهر، وهذا جزء من تصميم بيانات المتابعة",
+        "steps": [
+          {
+            "title": "انواع البيانات",
+            "copy": "خلي SnapshotDate تاريخ، وProgressPct رقم، وObjectiveID وEmployeeID نص"
+          },
+          {
+            "title": "العلاقة الاولى",
+            "copy": "اربطي Objectives[ObjectiveID] كـOne مع ObjectiveProgressSnapshots[ObjectiveID] كـMany باتجاه Single"
+          },
+          {
+            "title": "العلاقة الثانية",
+            "copy": "اربطي Calendar[Date] كـOne مع ObjectiveProgressSnapshots[SnapshotDate] كـMany باتجاه Single"
+          }
+        ],
+        "callout": "تكرار ObjectiveID بتواريخ مختلفة متوقع، وما بنحسب SUM لنسب التقدم"
+      },
+      {
+        "name": "تطبيق جديد",
+        "title": "كيف نفحص السجلات بدون تغيير المصدر؟",
+        "lead": "رح نحل سؤال عملي على بيانات المتابعة قبل ما نكمل التقرير",
+        "steps": [
+          {
+            "title": "افهمي الصف الواحد",
+            "copy": "اختاري هدفا واحدا، وشوفي كيف تظهر له تواريخ متابعة مختلفة"
+          },
+          {
+            "title": "حافظي على بياناتك",
+            "copy": "اعملي فحص منفصل لاخر تاريخ متابعة لكل هدف، وخلي جدول المصدر الاصلي بدون تغيير"
+          }
+        ],
+        "callout": "قبل حذف اي صف، اسألي شو مستوى التفاصيل اللي يمثله"
+      },
+      {
+        "name": "فحوص التقرير",
+        "title": "هل ظلت نتائجنا صحيحة؟",
+        "lead": "نراجع سلوك المقاييس والتفاعلات بعد توسعة البيانات",
+        "steps": [
+          {
+            "title": "اختبري Filter Context",
+            "copy": "جربي Slicers على Assessment Count وEmployee Count ومتوسطي Manager وSelf"
+          },
+          {
+            "title": "تذكري Edit Interactions",
+            "copy": "اختبري عنصر يتاثر بالفلتر وعنصر بقي كما حددتيه في الجلسة السابقة"
+          },
+          {
+            "title": "اعملي Refresh",
+            "copy": "تاكدي ان الاستعلامات الجديدة حملت وان الصفحتين القديمتين ما زالوا شغالين"
+          }
+        ],
+        "callout": "CALCULATE اللي تعلمناه بالخامس يكفي للتطبيق، واليوم نهتم بفهم اثر الفلاتر"
+      },
+      {
+        "name": "الصفحة الثالثة",
+        "title": "نجهز مساحة لتحليل التقدم",
+        "lead": "رح نعطي Progress مساحة مستقلة في التقرير",
+        "steps": [
+          {
+            "title": "اضيفي صفحة جديدة",
+            "copy": "سميها Objective Progress، واستخدمي Visual مناسب لعرض متوسط ProgressPct حسب الشهر"
+          },
+          {
+            "title": "احفظي نسخة",
+            "copy": "راجعي الصفحات الثلاث واحفظي PBIX الحالي"
+          }
+        ],
+        "callout": "الحساب الموزون للاهداف رح يكون في جلسة مستقلة"
+      }
+    ]
   },
   {
     "id": 7,
