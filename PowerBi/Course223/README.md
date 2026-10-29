@@ -40,3 +40,14 @@ access.js وvideos.js وlogin.html بقيت دون تغيير، تقدم الت�
 - Trainer/Day06_Reference.html: نتائج تحقق مفصلة غير ظاهرة لمريم
 - استعمل Append Queries as New مع staging Connection only كي لا تتغير Measures 2026 الحالية
 - نسخة PBIX المنقحة لنهاية اليوم الخامس محفوظة بمكتبة المستخدم الخاصة، ولم تنشر في مستودع GitHub العام
+
+## Course223 — تغيير خطة 29 اكتوبر 2026
+
+- Days 1–5 remain preserved as the actually taught record; Day 06 is prepared, not taught.
+- Day 06 is now a hybrid weighted-DAX + interactive report lesson using the original Day05 PBIX only: SUMX / DIVIDE / REMOVEFILTERS / Contribution, third report page and basic Buttons/Bookmarks.
+- Drillthrough / Drill Down → Day07; Report Page Tooltips + Field Parameters + Dynamic Titles → Day08; full Sidebar/Bookmarks/Sync Slicers → Day09; HTML Content/SVG/AI Design/QA → Day10.
+- The previously published Day06 CSVs stay in the repo but are not learner resources or required datasets for Day06.
+- Trainer-only references: Trainer/Day06_Expansion.html, Trainer/Day06_Reference.html, Trainer/Day06_DAX_Reference.dax.
+- Student preview: week1/day6/web/Day06_Weighted_Blueprint.html.
+- Day05 original PBIX is untouched in week1/day6/data/.
+- The previous source-expansion Day06 plan is archived as superseded in ADAPTATION_PLAN.md.

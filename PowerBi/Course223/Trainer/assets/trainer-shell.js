@@ -8,10 +8,10 @@ const days=[
 ["من الملفات للتحديث التلقائي","Day03_Integration.html"],
 ["نموذج بيانات الاداء","Day04_Model.html"],
 ["Change Source وMeasures · منجز","Day05_DAX.html"],
-["توسعة مصادر البيانات","Day06_Expansion.html"],
-["التقييم الموزون",null],
-["مقارنة الفترات والتفاصيل",null],
-["Bookmarks وNavigation",null],
+["Weighted DAX + صفحة ثالثة","Day06_Expansion.html"],
+["Drillthrough وتفاصيل الموظف",null],
+["Tooltips وField Parameters",null],
+["Sidebar وBookmarks المتقدم",null],
 ["HTML/SVG والست صفحات",null]
 ];
 const link=(p)=>new URL(p,root).href;

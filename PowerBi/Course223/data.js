@@ -1,4 +1,4 @@
-// Course223 — Days 1–4 preserved. Day 5 actual taught content (Oct 26). Days 6–10 revised plan, not ready.
+// Course223 — Days 1–5 preserved as taught. Day 6 hybrid ready; Days 7–10 planned.
 const COURSE_CONFIG = {
   id: `course223_mariam`,
   title: `Power BI | X Academy`,
@@ -844,391 +844,358 @@ const DAYS = [
   },
   {
     "id": 6,
-    "date": "2026-10-27",
-    "weekday": "الثلاثاء",
+    "date": null,
+    "weekday": null,
     "ready": true,
-    "phase": "EXPAND",
-    "title": "Data Expansion & Model Integrity",
-    "titleAr": "نوسع بيانات المشروع ونحافظ على دقة النتائج",
-    "hook": "صار عنا تقييمات فترة سابقة وتقدم الاهداف عبر الشهور، كيف نضيف الملفات الجديدة بدون ما نخرب صفحاتنا الحالية؟",
-    "mission": "نوسع نفس مشروع Power BI بمصدرين CSV، ونعمل Append ونتحقق من العلاقات والمقاييس ونجهز صفحة جديدة",
+    "phase": "HYBRID",
+    "teachingStatus": "prepared",
+    "title": "Weighted Performance + Interactive Report",
+    "titleAr": "نحسب الاداء الموزون ونبني صفحة ثالثة تفاعلية",
+    "hook": "لما يختلف وزن كل Objective، هل المتوسط العادي يعطي المدير نتيجة عادلة؟ اليوم رح نحسب النتيجة الصح ونحطها في صفحة يقدر يستخدمها بسهولة",
+    "mission": "نستخدم SUMX وDIVIDE لحساب اداء الاهداف الموزون، وREMOVEFILTERS للمساهمة، ثم نبني صفحة Weighted Performance مع بطاقات ومقارنات ونضيف اول Navigation باستخدام Buttons وBookmarks",
     "topics": [
-      "Get Data",
-      "Append Queries as New",
-      "Power Query",
-      "Data Modeling",
-      "Relationships",
-      "Refresh",
-      "Filter Context",
-      "Report Visuals"
+      "SUMX",
+      "DIVIDE",
+      "Weighted Score",
+      "REMOVEFILTERS",
+      "Contribution %",
+      "Cards / Matrix / Bar",
+      "Page Navigation",
+      "Buttons",
+      "Bookmarks Basics"
     ],
     "build": [
-      "افتحي مشروع اليوم الخامس وخذي نسخة عمل جديدة",
-      "استوردي ملف تقييمات 2025 وتاكدي من تطابق اعمدته مع 2026",
-      "اعملي Append Queries as New لجدول مستقل",
-      "استوردي ملف تقدم الاهداف واربطينه بالاهداف والتقويم",
-      "راجعي صحة المفاتيح وRefresh",
-      "اختبري المقاييس القديمة وابدئي الصفحة الثالثة"
+      "نكمل على نفس PBIX بعد اليوم الخامس ونحفظ نسخة Save As",
+      "نختار موظفا وربع سنة واحدا، ونحسب متوسط KPIs لكل Objective مكتمل",
+      "نطبق وزن كل Objective مرة واحدة بواسطة SUMX وDIVIDE",
+      "نقارن عدد تقييمات القسم باجمالي الاقسام بواسطة REMOVEFILTERS ونظهر Contribution %",
+      "نبني صفحة ثالثة Weighted Performance فيها 3 KPI Cards وBar Chart وMatrix وSlicer",
+      "نضيف Buttons للتنقل بين الصفحات وBookmark بسيطا لإظهار واخفاء لوحة الفلاتر",
+      "نختبر الفلاتر والنتائج ونحفظ الملف"
     ],
-    "challenge": "اختبري نتيجتي Manager وSelf مع اختيار قسم، ثم تاكدي ان الصفحات القديمة ما تغيرت بعد التحديث",
-    "deliverable": "مصادر جديدة مترابطة وبيانات مهيأة للتحليل مع الحفاظ على المشروع الموجود",
+    "challenge": "اختاري موظفا وربع سنة واحدا وتحققي من اختلاف KPI Average وWeighted Score. بعد ذلك اختاري قسما وجربي مساهمته واخفاء الفلاتر بدون ان يتغير الاختيار",
+    "deliverable": "صفحة ثالثة Weighted Performance مكتملة كبنية عملية: مؤشرات، تحليل اقسام، مصفوفة، تنقل اساسي واختبار صحة الارقام",
     "resources": [
       {
-        "name": "نسخة المشروع بعد اليوم الخامس — ملف استرجاع",
+        "name": "ملف Power BI الاصلي — نهاية اليوم الخامس",
         "type": "PBIX",
         "url": "week1/day6/data/HR_Performance_Intelligence_Day05_Backup.pbix",
-        "note": "النسخة الاصلية من نهاية اليوم الخامس، استخدميها عند الحاجة لاسترجاع مشروع Power BI",
-        "audience": "learner",
-        "stage": "backup"
+        "note": "نسخة استرجاع محفوظة كما رفعها المدرب، اشتغلي على نسخة Save As",
+        "stage": "backup",
+        "audience": "learner"
       },
       {
-        "name": "EvaluationScores_2025_H1.csv",
-        "type": "CSV",
-        "url": "week1/day6/data/EvaluationScores_2025_H1.csv",
-        "note": "التقييمات التاريخية لمقارنة الفترات",
-        "audience": "learner",
-        "stage": "expansion"
-      },
-      {
-        "name": "ObjectiveProgressSnapshots.csv",
-        "type": "CSV",
-        "url": "week1/day6/data/ObjectiveProgressSnapshots.csv",
-        "note": "تقدم الاهداف في تواريخ متابعة مختلفة",
-        "audience": "learner",
-        "stage": "expansion"
+        "name": "مخطط الصفحة الثالثة — Visual Blueprint",
+        "type": "WEB",
+        "url": "week1/day6/web/Day06_Weighted_Blueprint.html",
+        "note": "تصور بصري للصفحة التي سنبنيها داخل Power BI",
+        "stage": "blueprint",
+        "audience": "learner"
       }
     ],
     "requiredFiles": [
       {
-        "name": "EvaluationScores_2025_H1.csv",
-        "type": "CSV",
-        "note": "ملف التقييمات التاريخية"
-      },
-      {
-        "name": "ObjectiveProgressSnapshots.csv",
-        "type": "CSV",
-        "note": "ملف متابعة تقدم الاهداف"
+        "name": "HR_Performance_Intelligence_Day05_Backup.pbix",
+        "type": "PBIX",
+        "note": "ملف المشروع الحالي"
       }
     ],
-    "teachingStatus": "prepared",
     "learningScenes": [
       [
-        "PROJECT",
+        "DAY 05",
         "CONTINUE"
       ],
       [
-        "2025",
-        "2026"
+        "KPIs",
+        "OBJECTIVES"
       ],
       [
-        "APPEND",
-        "AS NEW"
+        "SUMX",
+        "DIVIDE"
       ],
       [
-        "OBJECTIVES",
-        "SNAPSHOTS"
+        "REMOVEFILTERS",
+        "CONTRIBUTION"
       ],
       [
-        "KEYS",
-        "RELATIONS"
+        "WEIGHTED",
+        "PAGE 03"
       ],
       [
-        "FILTER",
-        "CONTEXT"
+        "BUTTONS",
+        "BOOKMARKS"
       ],
       [
-        "PAGE 03",
-        "SAVE"
+        "SAVE",
+        "CHECK"
       ]
     ],
     "learningSections": [
       {
-        "name": "نكمل مشروعنا",
-        "title": "نفس التقرير، بيانات اكثر",
-        "lead": "رح نكمل من ملف اليوم الخامس، مش من تقرير جديد",
-        "files": "backup",
+        "name": "نبدأ من نفس الملف",
+        "title": "ما بدنا نبدأ من الصفر",
+        "lead": "بنفتح ملف مشروعك الحالي، وبنبني على الصفحتين والمقاييس اللي صاروا عندنا",
         "steps": [
           {
-            "title": "افتحي المشروع",
-            "copy": "افتحي HR_Performance_Intelligence.pbix وتاكدي من وجود Overview وDepartments والمقاييس اللي انشأناها"
+            "title": "استرجعي المشروع",
+            "copy": "افتحي النسخة اللي اشتغلتي عليها بعد اليوم الخامس، او ملف الاسترجاع اذا احتجتيه"
           },
           {
-            "title": "احفظي نسخة",
-            "copy": "اعملي Save As لنسخة عمل جديدة قبل اضافة الملفات"
+            "title": "Save As",
+            "copy": "احفظي نسخة جديدة للعمل على اليوم السادس مع بقاء النسخة الاصلية"
+          },
+          {
+            "title": "حددي السياق",
+            "copy": "اختاري موظفا واحدا وQuarter واحدا قبل مقارنة التقييمات"
           }
         ],
-        "callout": "المشروع القديم هو نقطة البداية ولازم يظل شغال"
+        "callout": "رح نشتغل على الجداول الموجودة بدون اضافة بيانات جديدة",
+        "files": "backup"
       },
       {
-        "name": "ملفات التطبيق",
-        "title": "ملفين جديدين، سؤالين مختلفين",
-        "lead": "نزلي ملفي CSV الجديدين من هون وخليهم مع ملفات مشروعك بمجلد ثابت",
+        "name": "Weighted Performance",
+        "title": "من متوسط KPIs الى وزن الاهداف",
+        "lead": "كل KPI له درجة، وكل Objective له Weight، لذلك النتيجة النهائية مش مجرد متوسط كل الصفوف",
         "steps": [
           {
-            "title": "EvaluationScores_2025_H1.csv",
-            "copy": "استوردي تقييمات 2025 باستخدام Get Data ثم Transform Data"
+            "title": "Objective Score",
+            "copy": "احسبي متوسط درجات KPIs التابعة للهدف ضمن مصدر تقييم واحد وربع واحد، مع فحص اكتمال المؤشرات"
           },
           {
-            "title": "ObjectiveProgressSnapshots.csv",
-            "copy": "استعرضي متابعة الاهداف من حيث ObjectiveID وSnapshotDate وProgressPct"
+            "title": "SUMX",
+            "copy": "مرّي على اهداف الموظف واجمعي مساهمة كل هدف مرة واحدة بدل تكرار الوزن على كل KPI"
+          },
+          {
+            "title": "DIVIDE",
+            "copy": "حوّلي ObjectiveWeightPct الى نسبة بقسمتها على 100، وتحققي ان مجموع الاوزان يساوي 100"
+          },
+          {
+            "title": "تعاملي مع النقص",
+            "copy": "اذا تقييم مطلوب ناقص، خلي النتيجة الكاملة فارغة بدل اعتبار الرقم الناقص صفرا"
           }
         ],
-        "callout": "KPIScore علامة تقييم، بينما ProgressPct تقدم الهدف؛ كل واحد له معنى مختلف",
-        "files": "expansion"
+        "callout": "رح نبدأ بمدير الموظف Manager وبربع واحد، ونقارن النتيجة بمتوسط KPI العادي"
       },
       {
-        "name": "تجميع الفترات",
-        "title": "Append بدون هدم البيانات الحالية",
-        "lead": "قبل الجمع، قارني Schema الملفات وتاكدي من النوع الصحيح",
+        "name": "Contribution %",
+        "title": "كم بيساهم القسم في مجموع التقييمات؟",
+        "lead": "بدنا نقارن عدد تقييمات قسم معين باجمالي الاقسام مع الاحتفاظ بالفترة المختارة",
         "steps": [
           {
-            "title": "راجعي الاعمدة",
-            "copy": "التقييمات التاريخية تتبع نفس اعمدة تقييمات 2026: مفاتيح Text وتاريخ Date ودرجة Decimal Number"
+            "title": "المقياس الحالي",
+            "copy": "استخدمي Assessment Count الذي انشأناه في اليوم الخامس"
           },
           {
-            "title": "Append Queries as New",
-            "copy": "اختاري جدولي EvaluationScores_2026_H1 وEvaluationScores_2025_H1، وسمي الناتج EvaluationScores_All_Staging"
+            "title": "REMOVEFILTERS",
+            "copy": "اعملي قياسا مرجعيا يتجاهل فلتر اسم القسم فقط، بدون تجاهل الفلاتر الزمنية"
           },
           {
-            "title": "حافظي على المقاييس القديمة",
-            "copy": "خلي Staging استعلام Connection only حاليا، ولا تغيري اسم جدول 2026 المرتبط بالصفحات"
+            "title": "DIVIDE",
+            "copy": "اقسمي عدد تقييمات القسم على المجموع المرجعي، واختاري تنسيق Percentage"
           }
         ],
-        "callout": "Append يضيف صفوف تحت بعض. Merge يضيف اعمدة من جدول مرتبط"
+        "callout": "قارني الاقسام داخل نفس الفترة، وافحصي ليش بتتغير النسبة لما يتغير الفلتر"
       },
       {
-        "name": "سجل تقدم الاهداف",
-        "title": "التقدم عبر الزمن",
-        "lead": "كل هدف ممكن يظهر في اكثر من شهر، وهذا جزء من تصميم بيانات المتابعة",
+        "name": "Page 03",
+        "title": "نبني صفحة Weighted Performance",
+        "lead": "نحول Measures الى واجهة ادارية واضحة بدل الاكتفاء بالكود",
         "steps": [
           {
-            "title": "انواع البيانات",
-            "copy": "خلي SnapshotDate تاريخ، وProgressPct رقم، وObjectiveID وEmployeeID نص"
+            "title": "خريطة التصميم",
+            "copy": "افتحي Visual Blueprint وشوفي توزيع العنوان والبطاقات والرسومات"
           },
           {
-            "title": "العلاقة الاولى",
-            "copy": "اربطي Objectives[ObjectiveID] كـOne مع ObjectiveProgressSnapshots[ObjectiveID] كـMany باتجاه Single"
+            "title": "Cards",
+            "copy": "ضعي Manager Weighted Score وManager KPI Average وDepartment Contribution %"
           },
           {
-            "title": "العلاقة الثانية",
-            "copy": "اربطي Calendar[Date] كـOne مع ObjectiveProgressSnapshots[SnapshotDate] كـMany باتجاه Single"
+            "title": "Bar Chart + Matrix",
+            "copy": "قارنة الاداء بين الاقسام، واعرضي الموظف والهدف والوزن بطريقة قابلة للقراءة"
+          },
+          {
+            "title": "Filter",
+            "copy": "استخدمي Quarter واحدا، واختبري قسم او موظف بدون خلط Self وManager"
           }
         ],
-        "callout": "تكرار ObjectiveID بتواريخ مختلفة متوقع، وما بنحسب SUM لنسب التقدم"
+        "callout": "تأكدي ان الرسوم تعرض BLANK بشكل صحيح وان مجموع النسب مش بالضرورة درجة أداء",
+        "files": "blueprint"
       },
       {
-        "name": "تطبيق جديد",
-        "title": "كيف نفحص السجلات بدون تغيير المصدر؟",
-        "lead": "رح نحل سؤال عملي على بيانات المتابعة قبل ما نكمل التقرير",
+        "name": "Navigation & Bookmarks",
+        "title": "نخلي التنقل اسهل من اول يوم",
+        "lead": "المدير لازم يقدر يروح للصفحات الثلاث بدون ما يدور على التبويبات",
         "steps": [
           {
-            "title": "افهمي الصف الواحد",
-            "copy": "اختاري هدفا واحدا، وشوفي كيف تظهر له تواريخ متابعة مختلفة"
+            "title": "Buttons",
+            "copy": "اضيفي ثلاثة ازرار Page Navigation لصفحات Overview وDepartments وWeighted Performance"
           },
           {
-            "title": "حافظي على بياناتك",
-            "copy": "اعملي فحص منفصل لاخر تاريخ متابعة لكل هدف، وخلي جدول المصدر الاصلي بدون تغيير"
+            "title": "Selection Pane",
+            "copy": "اعملي مجموعة فلاتر واضحة على الصفحة الثالثة"
+          },
+          {
+            "title": "Bookmark بسيط",
+            "copy": "انشئي Bookmark للاظهار واخر للاخفاء، وخلي Data مغلق وDisplay مفعل حتى ما تنمسح اختيارات المستخدم"
           }
         ],
-        "callout": "قبل حذف اي صف، اسألي شو مستوى التفاصيل اللي يمثله"
+        "callout": "باقي انواع التفاعلات رح نطورها في الجلسات القادمة"
       },
       {
-        "name": "فحوص التقرير",
-        "title": "هل ظلت نتائجنا صحيحة؟",
-        "lead": "نراجع سلوك المقاييس والتفاعلات بعد توسعة البيانات",
+        "name": "Final Check",
+        "title": "اختبري واحفظي",
+        "lead": "الصفحة الاحترافية لازم تعطي ارقاما صحيحة وتشتغل من اي زر",
         "steps": [
           {
-            "title": "اختبري Filter Context",
-            "copy": "جربي Slicers على Assessment Count وEmployee Count ومتوسطي Manager وSelf"
+            "title": "اختبار النتائج",
+            "copy": "قارنة Weighted Score بمثال موظف واحد، واختبري Contribution % عند تغيير القسم"
           },
           {
-            "title": "تذكري Edit Interactions",
-            "copy": "اختبري عنصر يتاثر بالفلتر وعنصر بقي كما حددتيه في الجلسة السابقة"
+            "title": "اختبار التفاعل",
+            "copy": "تنقلي بين الصفحات، اظهري لوحة الفلاتر ثم اخفيها وتاكدي ان الاختيارات ما تغيرت"
           },
           {
-            "title": "اعملي Refresh",
-            "copy": "تاكدي ان الاستعلامات الجديدة حملت وان الصفحتين القديمتين ما زالوا شغالين"
+            "title": "حفظ المشروع",
+            "copy": "احفظي ملف PBIX الجديد وخلي نسختك الاصلية منفصلة"
           }
         ],
-        "callout": "CALCULATE اللي تعلمناه بالخامس يكفي للتطبيق، واليوم نهتم بفهم اثر الفلاتر"
-      },
-      {
-        "name": "الصفحة الثالثة",
-        "title": "نجهز مساحة لتحليل التقدم",
-        "lead": "رح نعطي Progress مساحة مستقلة في التقرير",
-        "steps": [
-          {
-            "title": "اضيفي صفحة جديدة",
-            "copy": "سميها Objective Progress، واستخدمي Visual مناسب لعرض متوسط ProgressPct حسب الشهر"
-          },
-          {
-            "title": "احفظي نسخة",
-            "copy": "راجعي الصفحات الثلاث واحفظي PBIX الحالي"
-          }
-        ],
-        "callout": "الحساب الموزون للاهداف رح يكون في جلسة مستقلة"
+        "callout": "النجاح اليوم: صفحة ثالثة قابلة للاستخدام ونتائج يمكن تفسيرها"
       }
     ]
   },
   {
     "id": 7,
-    "date": "2026-10-29",
-    "weekday": "الخميس",
+    "date": null,
+    "weekday": null,
     "ready": false,
-    "phase": "WEIGHT",
-    "title": "Weighted Evaluation & Completion-Safe DAX",
-    "titleAr": "من متوسطات KPIs إلى التقييم الموزون الصحيح",
-    "hook": "Manager KPI Average وSelf KPI Average مفيدان، لكن كيف نحسب نتيجة الموظف حسب أوزان أهدافه؟",
-    "mission": "نبني Objective Score والنتيجة الموزونة لكل مصدر تقييم على حدة، مع التحقق من نقص KPIs وصحة إجماليات الأقسام",
+    "phase": "EXPLORE",
+    "teachingStatus": "planned",
+    "title": "Drillthrough, Drill Down & Employee Story",
+    "titleAr": "ننتقل من نتائج الاقسام لتفاصيل الموظفين",
+    "hook": "لما يلاقي المدير قسما نتيجته منخفضة، بده يعرف السبب والموظف والمؤشرات اللي تحتاج متابعة بدون ما يرجع لملفات Excel",
+    "mission": "نصمم Employee Detail كصفحة رابعة ونتعلم Drillthrough وDrill Down ونراجع التقييمات غير المكتملة وConditional Formatting",
     "topics": [
-      "Objective Score",
-      "SUMX",
-      "DIVIDE",
-      "VAR",
-      "Completion Checks",
-      "Manager vs Self",
-      "Weighted Score",
-      "Measures Validation"
+      "Drillthrough",
+      "Drill Down / Hierarchy",
+      "Employee Detail",
+      "Conditional Formatting",
+      "Top N",
+      "Blank vs Zero",
+      "Manager vs Self"
     ],
     "build": [
-      "نراجع Manager وSelf Measures من اليوم الخامس",
-      "نحسب متوسط KPI داخل كل Objective مع اختيار مصدر التقييم والفترة",
-      "نطبق وزن Objective مرة واحدة باستخدام SUMX وDIVIDE",
-      "نتحقق من كل KPIs المطلوبة ومن مجموع الأوزان دون تحويل الناقص لصفر",
-      "نحسب متوسط نتائج الموظفين المكتملة للقسم بدل جمع الدرجات",
-      "نضيف مؤشرات أداء موزونة إلى صفحات التقرير ونطابق موظفا واحدا يدويا"
+      "نكمل على ملف اليوم السادس ونراجع الصفحة الموزونة",
+      "نبني Employee Detail كصفحة رابعة باستخدام بيانات الموظف والاهداف والمؤشرات",
+      "نطبق Drillthrough من الاقسام الى تفاصيل الموظف مع Back Button",
+      "نضيف Drill Down في تسلسل Directorate → Department أو Objective → KPI حسب الحقول",
+      "نستخدم Conditional Formatting لتمييز الحالات مع فحص Missing KPIs",
+      "نراجع Sidebar وازرار الرجوع ونحفظ نسخة العمل"
     ],
-    "challenge": "تحققي من موظف مكتمل وآخر ناقص، واشرحي اختلاف KPI Average عن Weighted Score",
-    "deliverable": "مقاييس Manager وSelf موزونة ومدققة، مع إضافة صفحات تحليل الأداء",
-    "resources": [],
-    "requiredFiles": [
-      {
-        "name": "مواد اليوم 7",
-        "type": "Plan",
-        "note": "الخطة محدثة حسب ما تم تطبيقه فعلا، وملفات هذا اليوم لم تجهز للنشر بعد"
-      }
-    ],
-    "teachingStatus": "planned"
+    "challenge": "انتقلي من قسم محدد الى موظف ثم اشرحي سبب اختلاف متوسطه ومؤشراته",
+    "deliverable": "صفحة رابعة Employee Detail مرتبطة بـDrillthrough وتدرج تفاصيل حقيقي",
+    "resources": []
   },
   {
     "id": 8,
-    "date": "2026-11-01",
-    "weekday": "الأحد",
+    "date": null,
+    "weekday": null,
     "ready": false,
-    "phase": "COMPARE",
-    "title": "Period Comparison, Department Analysis & Drillthrough",
-    "titleAr": "مقارنات الفترات وتحليل الأقسام وتفاصيل الموظفين",
-    "hook": "مين تحسن بين الفترات؟ وهل المقارنة عادلة لو تغيرت تغطية التقييم؟",
-    "mission": "نبني تحليل الأقسام ومقارنة الفترات المتاحة، ونستخدم Conditional Formatting وDrillthrough للتفاصيل من غير استنتاجات غير مدعومة",
+    "phase": "INSIGHT",
+    "teachingStatus": "planned",
+    "title": "Report Page Tooltips, Field Parameters & Dynamic Titles",
+    "titleAr": "نصنع تحليلا يتغير حسب سؤال المدير",
+    "hook": "بدل ما نعمل عشر رسومات شبه بعض، بنخلي الرسم الواحد يغير منظور العرض، ونعطي المستخدم تفاصيل اضافية بمجرد المرور عليه",
+    "mission": "نبني صفحة خامسة Analysis Explorer ونستخدم Tooltips وField Parameters وDynamic Titles مع ترتيب بصري متقن",
     "topics": [
-      "Period Comparison",
-      "Calendar",
-      "Completion Coverage",
-      "Department Analysis",
-      "Conditional Formatting",
+      "Report Page Tooltips",
+      "Field Parameters",
+      "Dynamic Titles",
+      "SWITCH / SELECTEDVALUE as needed",
+      "Advanced Matrix",
       "Top N",
-      "Drillthrough"
+      "Visual Hierarchy",
+      "Design QA"
     ],
     "build": [
-      "نحدد الفترات القابلة للمقارنة من الملفات المتاحة، ونتجنب اختراع اتجاه شهري لتقييمات ربع سنوية",
-      "نضيف صفحة Performance Comparison ونراجع اختلاف درجات Manager وSelf",
-      "نوسع صفحة Department Analysis بمقاييس الأداء الموزون",
-      "نستخدم Conditional Formatting وTop N لإبراز الفروقات المهمة",
-      "نصمم صفحة Employee Detail ونربطها بـDrillthrough",
-      "نراجع تفاعل خمسة Slicers مع جميع الصفحات المرتبطة"
+      "ننظم عناصر الصفحة الخامسة Analysis Explorer",
+      "نعمل Tooltip Page مخصصة لتفاصيل الهدف او القسم",
+      "ننشىء Field Parameter للتبديل بين Directorate وDepartment وEmployee بحسب الحقول المتاحة",
+      "نربط عنوانا ديناميكيا بالاختيار مع فحص Single/Multiple selection",
+      "نضبط Visual hierarchy وTop N وConditional Formatting",
+      "نتحقق من مطابقة الارقام بين Tooltips والرسوم الرئيسية"
     ],
-    "challenge": "انتقلي من قسم إلى موظف محدد، وقدمي مقارنة مدعومة بأرقام وفترة واضحة",
-    "deliverable": "صفحات تحليل الفترات والأقسام والموظفين تتفاعل مع التقييمات الصحيحة",
-    "resources": [],
-    "requiredFiles": [
-      {
-        "name": "مواد اليوم 8",
-        "type": "Plan",
-        "note": "الخطة محدثة حسب ما تم تطبيقه فعلا، وملفات هذا اليوم لم تجهز للنشر بعد"
-      }
-    ],
-    "teachingStatus": "planned"
+    "challenge": "بدلي منظور الرسم واختبري Tooltip على قسم ثم موظف مع التحقق من السياق",
+    "deliverable": "صفحة خامسة Explorer بميزات Tooltips وField Parameters وعناوين ديناميكية",
+    "resources": []
   },
   {
     "id": 9,
-    "date": "2026-11-03",
-    "weekday": "الثلاثاء",
+    "date": null,
+    "weekday": null,
     "ready": false,
-    "phase": "DESIGN",
-    "title": "Premium Power BI UX & Navigation",
-    "titleAr": "الملاحة والـTooltips وBookmarks والتجربة التفاعلية",
-    "hook": "التقرير القوي مش بس أرقام: كيف نخليه مفهوم وسهل التنقل من دون زحمة؟",
-    "mission": "نحول الصفحات إلى تجربة متماسكة باستخدام Sidebar Navigation وBookmarks وReport Page Tooltips وField Parameters وأساسيات HTML/SVG",
+    "phase": "UX",
+    "teachingStatus": "planned",
+    "title": "Premium Sidebar, Bookmarks & Executive UX",
+    "titleAr": "نحول التقرير الى تجربة ادارية متكاملة",
+    "hook": "تقرير الست صفحات رح يصير اسهل بالاستخدام لما التنقل والفلاتر والمحتوى يتصرفوا بشكل متناسق",
+    "mission": "نكمل صفحة Executive Insights السادسة ونوحد Sidebar وBookmarks وButtons وSync Slicers عبر صفحات التقرير",
     "topics": [
-      "Bookmarks",
+      "Advanced Bookmarks",
+      "Buttons",
       "Selection Pane",
       "Sidebar Navigation",
-      "Buttons",
-      "Report Page Tooltips",
-      "Field Parameters",
       "Sync Slicers",
-      "HTML/SVG Introduction"
+      "Page Navigation",
+      "Theme",
+      "Visual Hierarchy",
+      "Mobile Layout"
     ],
     "build": [
-      "نراجع Edit Interactions من اليوم الخامس وننسق تفاعل العناصر بشكل متعمد",
-      "نبني Sidebar Navigation باستخدام Buttons وBookmarks وSelection Pane",
-      "نضيف Tooltips تعرض تفاصيل مفيدة من غير فتح صفحة جديدة",
-      "نجرب Field Parameters للتبديل بين أبعاد أو مقاييس مناسبة",
-      "نضبط Sync Slicers والانتقال بين الصفحات وتفاصيل Drillthrough",
-      "نجهز مكونات تصميم HTML/SVG بسيطة تناسب المشروع النهائي"
+      "نبني صفحة سادسة Executive Insights بملخص القرارات",
+      "نضيف Sidebar موحدا للصفحات الست",
+      "نطور Bookmarks وSelection Pane مع Show/Hide Panel من غير مسح الفلاتر",
+      "نضبط Sync Slicers على الصفحات المناسبة وBack Buttons",
+      "نستعرض تجربة الموبايل ومساحات العناصر وتناسق الالوان والخطوط",
+      "نختبر انتقال المستخدم بين الصفحات الست"
     ],
-    "challenge": "نفذي رحلة من الملخص إلى التفاصيل وارجعي باستخدام الملاحة مع الحفاظ على الفلاتر المقصودة",
-    "deliverable": "تنقل احترافي وتفاعلات متقدمة على الصفحات الست أو المتاح منها",
-    "resources": [],
-    "requiredFiles": [
-      {
-        "name": "مواد اليوم 9",
-        "type": "Plan",
-        "note": "الخطة محدثة حسب ما تم تطبيقه فعلا، وملفات هذا اليوم لم تجهز للنشر بعد"
-      }
-    ],
-    "teachingStatus": "planned"
+    "challenge": "نفذي رحلة مدير من الملخص الى القسم الى الموظف ثم العودة من غير فقدان سياق مهم",
+    "deliverable": "ست صفحات مترابطة بملاحة Premium وفلاتر متناسقة",
+    "resources": []
   },
   {
     "id": 10,
-    "date": "2026-11-05",
-    "weekday": "الخميس",
+    "date": null,
+    "weekday": null,
     "ready": false,
-    "phase": "DELIVER",
-    "title": "Final Six-Page Executive Dashboard & QA",
-    "titleAr": "ننجز داشبورد الست صفحات ونراجع المشروع بالكامل",
-    "hook": "آخر خطوة: التقرير يشتغل بأرقام صحيحة، وتجربة واضحة، وشكل بصري يستحق العرض",
-    "mission": "إنهاء ست صفحات احترافية وتطبيق HTML/SVG للتحسين البصري، والتحقق من Measures والبيانات والملاحة وتسليم الملف",
+    "phase": "DESIGN",
+    "teachingStatus": "planned",
+    "title": "HTML/SVG Visual Design + Final Six-Page QA",
+    "titleAr": "اللمسات السينمائية والاختبار النهائي للمشروع",
+    "hook": "الخطوة الاخيرة مش بس نجمل الرسوم، بدنا نحافظ على معنى البيانات ونختبر كل تفاعل",
+    "mission": "نستخدم HTML Content وSVG بشكل محسوب مع AI Design Prompt ونتحقق من الارقام والفلاتر والاداء في كل الصفحات",
     "topics": [
-      "Six-Page Review",
-      "HTML/SVG Design",
-      "Model Validation",
-      "Measure QA",
-      "Visual Interactions",
+      "HTML Content",
+      "SVG",
+      "AI Prompt Design",
+      "DAX HTML Measures",
+      "Safe Motion",
+      "Responsive Canvas",
+      "Native Visual QA",
       "Navigation QA",
       "Final Demo"
     ],
     "build": [
-      "نراجع اكتمال صفحات Overview وManager vs Self وDepartment وWeighted Performance وPeriod & Progress وEmployee Detail",
-      "نضيف لمسات HTML/SVG انتقائية دون تعريض الأرقام أو الأداء للخطر",
-      "نتأكد من فصل مصادر التقييم ومن صحة الأوزان وحالات النقص",
-      "نراجع Filters وSlicers وTooltips وBookmarks وDrillthrough",
-      "نختبر التصفح وحفظ المشروع وفتح الملف عند نقل مصدر البيانات",
-      "تقدم مريم عرضا نهائيا للمشروع مع ثلاث ملاحظات مبنية على البيانات"
+      "نشوف Before/After لعنصر Native ونسخة HTML Content",
+      "نبني مكونا بصريا Premium من المقاييس الموجودة بدون ارقام ثابتة",
+      "نضيف SVG او HTML صغيرا مع حركة آمنة عند الحاجة",
+      "نقارن قيم HTML مع Native عبر عدة Slicers ونتحقق من BLANK وZero",
+      "نراجع Drillthrough وTooltips وField Parameters وBookmarks عبر الصفحات الست",
+      "نحفظ نسخة التسليم النهائية وتعرض مريم استنتاجات ادارية من التقرير"
     ],
-    "challenge": "قدمي المشروع من الصفحة الرئيسية حتى تفاصيل موظف، واشرحي دقة النتيجة وأثر أي تقييم ناقص",
-    "deliverable": "ملف PBIX نهائي بست صفحات متكاملة مع اختبار جودة ودليل استخدام مختصر",
-    "resources": [],
-    "requiredFiles": [
-      {
-        "name": "مواد اليوم 10",
-        "type": "Plan",
-        "note": "الخطة محدثة حسب ما تم تطبيقه فعلا، وملفات هذا اليوم لم تجهز للنشر بعد"
-      }
-    ],
-    "teachingStatus": "planned"
-  },
-
+    "challenge": "قارني نفس Measure في Native وHTML عند تغيير الفلاتر ثم قدمي النتيجة التنفيذية",
+    "deliverable": "PBIX نهائي بست صفحات مع تجربة Premium وحسابات قابلة للتدقيق",
+    "resources": []
+  }
 ];
 
 function getDay(id) {
@@ -1269,5 +1236,21 @@ function getCompletedDays() {
 
 // Learner surfaces use this allowlist; instructor guides and answers belong in Trainer.
 function getLearnerResources(day) {
-  return (day.resources || []).filter(resource => resource.audience !== `trainer` && (day.id === 1 || (resource.audience === `learner` && (/\.csv(?:[?#]|$)/i.test(resource.url || ``) || ((day.id === 4 || day.id === 5) && /\.zip(?:[?#]|$)/i.test(resource.url || ``) && (day.id !== 5 || resource.url === `week1/day4/data/Day04_Project_Starter.zip`)) || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`) || (resource.type === `PBIX` && resource.stage === `backup` && ((day.id === 5 && resource.url === `week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix`) || (day.id === 6 && resource.url === `week1/day6/data/HR_Performance_Intelligence_Day05_Backup.pbix`)))))));
+  const allowed = day.id === 1
+    ? new Set([ "WEB", "ZIP", "CSV", "PDF", "IMAGE" ])
+    : day.id === 6
+      ? new Set([ "PBIX", "WEB" ])
+      : null;
+  if (allowed && day.id === 6) {
+    return (day.resources || []).filter(r => r.audience === "learner"
+      && ((r.type === "PBIX" && r.url === "week1/day6/data/HR_Performance_Intelligence_Day05_Backup.pbix")
+        || (r.type === "WEB" && r.url === "week1/day6/web/Day06_Weighted_Blueprint.html")));
+  }
+  return (day.resources || []).filter(resource => resource.audience !== `trainer`
+    && (day.id === 1 || (resource.audience === `learner`
+    && (/\.csv(?:[?#]|$)/i.test(resource.url || ``)
+    || ((day.id === 4 || day.id === 5) && /\.zip(?:[?#]|$)/i.test(resource.url || ``)
+      && (day.id !== 5 || resource.url === `week1/day4/data/Day04_Project_Starter.zip`))
+    || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`)
+    || (day.id === 5 && resource.type === `PBIX` && resource.stage === `backup` && resource.url === `week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix`)))));
 }

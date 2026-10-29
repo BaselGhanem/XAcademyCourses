@@ -1,6 +1,6 @@
 # Course223 — الخطة المتكيفة مع سير التدريب الفعلي
 
-**المرجع المعتمد بعد تحديث المدرب بتاريخ 26 اكتوبر 2026**
+**المرجع المعتمد بعد تحديث الخطة بتاريخ 29 اكتوبر 2026**
 10 جلسات × ساعتين = 20 ساعة — مريم — Power BI
 
 ## المبدأ الحاكم
@@ -22,11 +22,11 @@
 | 3 | 20-10-2026 | تم | Append وMerge وFolder Connector وRefresh وفحوص النتائج |
 | 4 | 22-10-2026 | تم | بناء نموذج العلاقات والتحقق منه، مع PBIX مرجعي محفوظ في GitHub |
 | 5 | **26-10-2026 (اثنين، موعد التنفيذ الفعلي)** | **تم حسب ملخص المدرب** | Change Source، صفحة ثانية، Assessment Count، Employee Count، **5 Slicers**، Edit Interactions، Manager KPI Average، Self KPI Average |
-| 6 | 27-10-2026 | **جاهز للتدريس — لم يتأكد التنفيذ** | توسعة البيانات بمصدرين وفحوص سلامة النموذج |
-| 7 | 29-10-2026 | مخطط | التقييم الموزون والتحقق من اكتمال KPIs |
-| 8 | 01-11-2026 | مخطط | مقارنة الفترات والأقسام وتفاصيل الموظف وDrillthrough |
-| 9 | 03-11-2026 | مخطط | Sidebar Navigation وBookmarks وTooltips وField Parameters |
-| 10 | 05-11-2026 | مخطط | HTML/SVG والتشطيب واختبار الست صفحات والتسليم |
+| 6 | يحدد لاحقا | **جاهز للتدريس — لم ينفذ بعد** | SUMX وDIVIDE والتقييم الموزون وREMOVEFILTERS وContribution وصفحة ثالثة مع Navigation وBookmark اساسي |
+| 7 | يحدد لاحقا | مخطط | Drillthrough وDrill Down وصفحة Employee Detail الرابعة |
+| 8 | يحدد لاحقا | مخطط | Report Page Tooltips وField Parameters وDynamic Titles وصفحة Analysis Explorer الخامسة |
+| 9 | يحدد لاحقا | مخطط | Sidebar متكامل وAdvanced Bookmarks وSync Slicers وصفحة Executive Insights السادسة |
+| 10 | يحدد لاحقا | مخطط | HTML Content وSVG وتصميم AI وQA وتسليم الست صفحات |
 
 **توقيت اليوم الخامس:** كان تاريخ الجلسة في الخطة السابقة 25 اكتوبر (الاحد)، وبلغ المدرب عن التطبيق الفعلي يوم 26 اكتوبر. لا نغير تواريخ الجلسات 6–10 تلقائيا.
 
@@ -42,54 +42,63 @@
 7. `Manager KPI Average = CALCULATE(AVERAGE('EvaluationScores_2026_H1'[KPIScore]), 'EvaluationScores_2026_H1'[AssessmentSource] = "Manager")`
 8. `Self KPI Average = CALCULATE(AVERAGE('EvaluationScores_2026_H1'[KPIScore]), 'EvaluationScores_2026_H1'[AssessmentSource] = "Self")`
 
-**لم يتم تأكيد تدريسه:** SUMX وDIVIDE والنتائج الموزونة، فحوص اكتمال التقييم، Bookmarks وReport Page Tooltips وHTML/SVG. مرجع `Trainer/Day05_Measures.dax` ومختبر الأوزان تم تجهيزهما مسبقا؛ لا يعتبران دليلا على تدريسهما. يخصص الحساب الموزون لليوم السابع.
+**لم يتم تأكيد تدريسه:** SUMX وDIVIDE والنتائج الموزونة، فحوص اكتمال التقييم، Bookmarks وReport Page Tooltips وHTML/SVG. مرجع `Trainer/Day05_Measures.dax` ومختبر الأوزان تم تجهيزهما مسبقا؛ لا يعتبران دليلا على تدريسهما. بعد تعديل الخطة بتاريخ 29 اكتوبر، اصبح الحساب الموزون جزءا من اليوم السادس الجاهز للتدريس.
 
 **نقطة استرجاع مهمة:** `week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix` نسخة ما بعد اليوم الرابع **ولا تحتوي على تعديلات اليوم الخامس**؛ استكمال المشروع من ملف مريم الحالي على جهازها.
 
-## خطة الأيام القادمة — تنفيذ عملي دون ضغط المهارات
+## الخطة الجديدة — قرار المدرب بتاريخ 29 اكتوبر 2026
 
-### Day 06 — 27 اكتوبر: توسعة المشروع (120 دقيقة مقترحة)
+**الاختيارات المعتمدة:** Hybrid · SUMX + DIVIDE · REMOVEFILTERS + Contribution % · Bookmarks/Buttons/Sidebar · Drillthrough/Drill Down · Report Page Tooltips · Field Parameters/Dynamic Titles · البيانات الموجودة فقط · المخرج صفحة جديدة · عمق Balanced · الايام 7–10 تصميم Premium.
 
-- 10 دقائق: مراجعة التقرير الحالي وحفظ نسخة عمل
-- 25 دقيقة: تقييمات 2025 وAppend Queries as New في Staging مستقل
-- 20 دقيقة: Progress Snapshots وربط أهدافه وتقويمه
-- 15 دقيقة: مفاجاة داخل سيناريو Power Query — Reference وGroup By
-- 15 دقيقة: فحص المفاتيح والتواريخ وRefresh
-- 20 دقيقة: Filter Context باستخدام Measures الموجودة
-- 15 دقيقة: بداية صفحة Objective Progress وحفظ نسخة المشروع
+**ملاحظة الجدولة:** تواريخ الايام 6–10 القديمة لم تعد مواعيد مؤكدة بعد تغيير التوزيع؛ نحدثها عند تحديدها مع المدرب. حالة `ready:true` لليوم السادس تعني المواد جاهزة وليست شهادة بأنه نُفذ. كل الايام 7–10 `ready:false` الى حين تحضيرها.
 
-**قرار سابق محفوظ حرفيا من حيث النطاق:** نضيف الملفين معا في اليوم السادس، لا ملفا واحدا في الخامس والآخر في السابع. المصدران المقترحان:
-- `ObjectiveProgressSnapshots.csv` للتقدم عبر لقطات زمنية، ليس KPI Score
-- `EvaluationScores_2025_H1.csv` للمقارنة بين فترات متاحة، ويستخدم في Append لفات تقييمات موحد
+### Day 06 — Hybrid / Weighted Performance + Interactive Page (120 دقيقة)
 
-**تحديث 29 اكتوبر 2026:** انشئ الملفان واختبرت مفاتيحهما باستخدام جداول اليوم الرابع. EvaluationScores_2025_H1: 10,023 سجلا، وObjectiveProgressSnapshots: 14,400 سجلا. جاهزان للتدريس، لكن لم يؤكد تقديم محاضرة اليوم السادس. دليل المدرب والنتائج في Trainer/Day06_Expansion.html وTrainer/Day06_Reference.html.
+| الفترة داخل ساعتين | النشاط | مخرج التطبيق |
+|---|---|---|
+| 00–08 | افتح PBIX الاصلي من نهاية الخامس + Save As، اختر موظفا وQuarter واحدا | نقطة استرجاع آمنة |
+| 08–38 | SUMX وDIVIDE + Objective Score وComplete Manager Weighted Score | حساب موزون لا يكرر وزن Objective ولا يحول Missing الى 0 |
+| 38–55 | REMOVEFILTERS وContribution % لعدد Assessment حسب Department | مقياس حصة القسم من التقييمات في فترة معينة |
+| 55–90 | الصفحة الثالثة Weighted Performance: 3 Cards + Bar + Matrix + Slicers | صفحة تحليل منجزة بنيويا |
+| 90–105 | Buttons وPage Navigation وSidebar اولي | تنقل بين صفحات Overview وDepartments وWeighted Performance |
+| 105–113 | Bookmark Show/Hide filters اساسي | ظهور/اخفاء لوحة فلاتر مع Data OFF |
+| 113–120 | تحقق، حفظ، وتمرين مستقل | نسخة PBIX عمل جديدة |
 
-### Day 07 — 29 اكتوبر: الحساب الموزون
+**ملاحظة تعليمية:** Weighted Score هنا للـManager، ولا يخلط Self وUpward. KPI Average = متوسط مؤشرات داخل هدف، ثم SUMX عبر Objectives المتوافقة مع موظف واحد وربع واحد، مع اكتمال KPIs وObjectiveWeightPct/100. متوسط القسم = AVERAGEX لنتائج الموظفين المكتملة، وليس جمع درجاتهم. Contribution % هنا **نسبة عدد سجلات التقييم**، وليس نسبة الوزن او النتيجة الموزونة. مرجع `Trainer/Day06_DAX_Reference.dax` للمدرب فقط، ولا نعطي مفتاح اجابة لمريم.
 
-تثبيت `KPI Average` ثم `Objective Score`، تدريب `SUMX` و`DIVIDE` و`VAR` بالحد الأدنى الضروري، التحقق من جميع KPIs وتوزيع وزن الهدف مرة واحدة، الفصل بين Manager وSelf، والتحقق من Total ومتوسط نتائج الموظفين المكتملة. لا نعتبر غياب السجل صفرا ولا نعيد توزيع الاوزان تلقائيا. تخصيص وقت لمطابقة موظف واحد يدويا ثم استخدام المقاييس في التقرير.
+**المصادر:** لا نضيف CSV يوم 6. نستخدم `week1/day6/data/HR_Performance_Intelligence_Day05_Backup.pbix` الاصلي كما رفعه المدرب، بنسخة Save As للعمل. ملفا `EvaluationScores_2025_H1.csv` و`ObjectiveProgressSnapshots.csv` يظلان محفوظين في GitHub، لكنهما لم يعودا ضمن ملفات اليوم السادس المطلوبة ولا تظهر روابطهما في صفحة مريم. مخطط الصفحة الثالثة مستقل في `week1/day6/web/Day06_Weighted_Blueprint.html`.
 
-### Day 08 — 1 نوفمبر: مقارنات وتفاصيل
+**اذا تجاوز الوقت:** لا تختصر صحة DAX او فحص Missing KPI من اجل شكل التقرير. الاولويات وزن صحيح → الصفحة الثالثة → Buttons → Bookmark؛ تنقل تفاصيل Bookmarks المتقدمة لليوم التاسع.
 
-مقارنة الفترات القابلة للدفاع عنها من ملفات 2025/2026، والتقدم الشهري من Snapshots فقط اذا احتوى تواريخ مناسبة. بناء Department Analysis وPerformance Comparison وEmployee Detail وDrillthrough، مع Conditional Formatting وTop N. لا ندعي وجود KPIs شهرية من ملفات التقييمات الربع سنوية.
+### Day 07 — Drillthrough / Drill Down / Employee Detail (120 دقيقة)
 
-### Day 09 — 3 نوفمبر: تجربة Premium
+ننشئ صفحة رابعة **Employee Detail** مع Drillthrough من الاقسام لملف موظف واحد وBack Button، وDrill Down في Hierarchy مناسبة، وConditional Formatting وTop N حيث يناسب. نثبت ان الفلاتر لم تغير معنى Measures والـBLANK.
 
-Sidebar Navigation + Bookmarks + Buttons + Selection Pane + Report Page Tooltips + Field Parameters + Sync Slicers، وموضع مناسب لمقدمة HTML/SVG. Edit Interactions سبق تطبيقها بالخامس؛ هنا نراجعها ونضبطها على الصفحات الست، لا نعيد شرحها من الصفر.
+### Day 08 — Tooltips / Field Parameters / Dynamic Titles (120 دقيقة)
 
-### Day 10 — 5 نوفمبر: اللمسات النهائية والتسليم
+ننشئ صفحة خامسة **Analysis Explorer**، وReport Page Tooltip تعرض تفاصيل مفيدة عند Hover، ثم Field Parameters تسمح بتغيير منظور الرسم وفق حقول النموذج، وDynamic Title باستخدام SWITCH/SELECTEDVALUE عند الحاجة. نختبر الفلاتر والفرق بين حالة اختيار واحد وعدة اختيارات.
 
-تطبيق HTML/SVG بشكل انتقائي، إكمال الست صفحات واختبار Data/Measures/Interactions/Navigation وRefresh، وتقديم مريم للنتائج بصيغة تنفيذية مع ملف PBIX قابل للاستمرار. إذا ضاق الوقت، يقدم QA وصحة التقييم على تعدد الزخارف.
+### Day 09 — Premium Navigation & UX (120 دقيقة)
 
-## ست صفحات مستهدفة داخل PBIX
+ننشئ الصفحة السادسة **Executive Insights**، ونوحد Sidebar مع Buttons وPage Navigation وAdvanced Bookmarks (Selection Pane وData OFF وDisplay ON وSelected visuals)، وSync Slicers على الصفحات المناسبة. نركز على hierarchy وspacing وmobile layout وTheme وهوية X Academy. لا نعيد بناء المقاييس الصحيحة من الصفر.
 
-1. **Performance Overview** — الملخص التنفيذي
-2. **Manager vs Self** — الفصل بين مصادر التقييم
-3. **Department Analysis** — تحليل الاقسام
-4. **Weighted Performance** — نتائج الأهداف الموزونة والاكتمال
-5. **Period & Progress** — المقارنة الزمنية وتقدم الأهداف
-6. **Employee Detail** — تفاصيل الموظف وDrillthrough
+### Day 10 — HTML/SVG & Final QA (120 دقيقة)
 
-وجود صفحتين حاليا **لا يعني** ان صفحتي Overview وManager vs Self اكتملتا؛ الأسماء أعلاه مسار بناء مستهدف نطبقه على الموجود دون هدمه.
+نستخدم **HTML Content وSVG وAI Prompt Design** لتطوير عنصر بصري مع Static Fallback دون التضحية بصحة الارقام. نراجع كل صفحات PBIX الست، ونقارن Visual اصليا مع HTML عند تغيير الفلاتر، ونتحقق من Bookmarks وDrillthrough وTooltips وField Parameters وRefresh. نحفظ نسخة تسليم وتعرض مريم نتائجها.
+
+## الصفحات الست النهائية المستهدفة
+
+1. **Overview** — الموجودة منذ الجلسة الخامسة، تحسن تدريجيا
+2. **Departments** — الموجودة منذ الجلسة الخامسة، تحسن تدريجيا
+3. **Weighted Performance** — جلسة 6، درجة الاداء والمساهمة والتحقق
+4. **Employee Detail** — جلسة 7، Drillthrough وDrill Down
+5. **Analysis Explorer** — جلسة 8، Tooltips وField Parameters وDynamic Titles
+6. **Executive Insights** — جلسة 9، صفحة ادارية وSidebar
+**جلسة 10 ليست صفحة سابعة**، بل التشطيب وHTML/SVG والاختبار النهائي
+
+هدفنا ست صفحات فعلية، لا نفترض اكتمال الصفحتين الحاليتين، ولا ننشئ PBIX بديل قبل التدريب.
+
+**المهارات المؤجلة عن اليوم السادس:** Drillthrough/Drill Down لليوم 7، Report Page Tooltips وField Parameters وDynamic Titles لليوم 8، Sidebar وBookmarks المتقدم وSync Slicers لليوم 9، HTML/SVG لليوم 10. Time Intelligence وتوسعة مصادر 2025/Snapshots ليست ضمن الساعتين القادمتين؛ سنعيد تقييمها بعد تجربة تصميم الصفحات، دون الادعاء انها انجزت.
 
 ## منهجية البيانات والتقييم
 
@@ -132,17 +141,6 @@ Sidebar Navigation + Bookmarks + Buttons + Selection Pane + Report Page Tooltips
 - Power Query مستمر خلال المسار، لا نساوي جاهزية اليوم بتدريسه او اتقانه
 
 
-## ارشيف قرار توسعة اليوم السادس — 26 اكتوبر 2026
+## ارشيف القرار السابق — غير معتمد بعد 29 اكتوبر 2026
 
-هذا القرار محفوظ للتوثيق، لكن **توزيع الـ120 دقيقة أعلاه هو المعتمد بعد الجلسة الخامسة**. قرار نقل الملفين معا لليوم السادس ما زال ساريا، أما حصص CALCULATE وREMOVEFILTERS المقترحة سابقا في نفس اليوم فقد أعيد توزيعها لصالح اضافة المصادر، ثم التقييم الموزون في اليوم السابع.
-
-
-
-- **قرار المدرب المعتمد:** نقل الملفين الجديدين معا إلى **اليوم السادس**؛ لا نضيف أيا منهما في اليوم الخامس، ولا نؤجل إضافة ملف التقييمات التاريخية إلى اليوم السابع.
-- **ObjectiveProgressSnapshots.csv:** مصدر جديد لتقدم الأهداف عبر لقطات زمنية، يضاف من Get Data، وتراجع الأنواع والمفاتيح وتبنى علاقاته مع Objectives وCalendar؛ يبقى Progress مختلفا عن KPIScore والنتيجة الموزونة.
-- **EvaluationScores_2025_H1.csv:** بيانات تقييم تاريخية من النصف الاول 2025، تستخدم في تمرين Append مع تقييمات 2026 لإنشاء Assessment Fact موحد، ثم فحص توافق Schema وتمييز ID وعدم تكراره والعلاقات وتأثير التحديث على Measures.
-- **اليوم السادس / سيناريو عملي مخفي عن المتدربة مسبقا:** وصول ملف متابعة الاهداف ثم ملف تقييمات العام السابق بعد بدء المشروع، وإضافة مصدر جديد وربطه ثم توسعة Fact قائم بدلا من إعادة بناء التقرير. يحتفظ المدرب بخطوات التنفيذ ومفاتيح التحقق في مساحة Trainer فقط.
-- **توزيع الزمن المقترح (120 دقيقة، يراجع مع تقدم اليوم الخامس):** 10 دقائق مراجعة؛ 25 دقيقة إضافة المصدرين وربطهما وAppend وفحوص سلامة النتائج؛ 60 دقيقة CALCULATE وFilter Context وFILTER وREMOVEFILTERS وVAR والمقارنات؛ 15 دقيقة تطبيق مستقل؛ 10 دقائق تحقق وحفظ. لا نضغط على جودة Measures اذا استغرقت إضافة الملفات وقتا اطول.
-- **اليوم السابع:** نستخدم تقييمات 2025 و2026 لمقارنات YoY بين أرباع متقابلة؛ نستخدم لقطات تقدم الاهداف لتحليل MoM عند توفر تواريخ شهرية حقيقية. لا ندعي أن تقييمات KPI الربع سنوية تصلح لاتجاه شهري.
-- **شرط قبل التنفيذ:** الملفان حاليا مقترحان وليسا ملفات منشأة أو مرفوعة. يجب إنشاؤهما وتدقيق مفاتيحهما وتواريخهما قبل تدريس اليوم السادس. تظل قاعدة كل Dataset جديد بعد اليوم الأول >=10,000 صف فعلي سارية، ولا نبدل الملفات الأساسية لليوم الرابع.
-- **حماية تجربة التعلم:** لا نكشف سيناريو المفاجأة أو الحلول او الارقام المرجعية على صفحات مريم قبل وقته؛ لا نغير حالة جاهزية اليوم السادس الى Ready حتى تصبح ملفات التمرين ودليل المدرب جاهزة ومتحققا منها.
+الخطة السابقة كانت تضع EvaluationScores_2025_H1 وObjectiveProgressSnapshots في اليوم السادس مع Append وReference/Group By. هذان الملفان انشئا ونشرا على GitHub لكن قرار المدرب الجديد اعتمد استخدام PBIX الحالي فقط. لا تعرضهما كملفات مطلوبة لليوم السادس ولا تنسب تعليم مهاراتهما للجلسة السادسة. يحتفظ المستودع بهما لاستخدام محتمل في مسار لاحق بعد قرار جديد.
