@@ -874,6 +874,14 @@ const DAYS = [
     "deliverable": "مصادر جديدة مترابطة وبيانات مهيأة للتحليل مع الحفاظ على المشروع الموجود",
     "resources": [
       {
+        "name": "نسخة المشروع بعد اليوم الخامس — ملف استرجاع",
+        "type": "PBIX",
+        "url": "week1/day6/data/HR_Performance_Intelligence_Day05_Backup.pbix",
+        "note": "النسخة الاصلية من نهاية اليوم الخامس، استخدميها عند الحاجة لاسترجاع مشروع Power BI",
+        "audience": "learner",
+        "stage": "backup"
+      },
+      {
         "name": "EvaluationScores_2025_H1.csv",
         "type": "CSV",
         "url": "week1/day6/data/EvaluationScores_2025_H1.csv",
@@ -938,6 +946,7 @@ const DAYS = [
         "name": "نكمل مشروعنا",
         "title": "نفس التقرير، بيانات اكثر",
         "lead": "رح نكمل من ملف اليوم الخامس، مش من تقرير جديد",
+        "files": "backup",
         "steps": [
           {
             "title": "افتحي المشروع",
@@ -953,7 +962,7 @@ const DAYS = [
       {
         "name": "ملفات التطبيق",
         "title": "ملفين جديدين، سؤالين مختلفين",
-        "lead": "نزلي الملفين من هون وخليهم مع ملفات مشروعك بمجلد ثابت",
+        "lead": "نزلي ملفي CSV الجديدين من هون وخليهم مع ملفات مشروعك بمجلد ثابت",
         "steps": [
           {
             "title": "EvaluationScores_2025_H1.csv",
@@ -1260,5 +1269,5 @@ function getCompletedDays() {
 
 // Learner surfaces use this allowlist; instructor guides and answers belong in Trainer.
 function getLearnerResources(day) {
-  return (day.resources || []).filter(resource => resource.audience !== `trainer` && (day.id === 1 || (resource.audience === `learner` && (/\.csv(?:[?#]|$)/i.test(resource.url || ``) || ((day.id === 4 || day.id === 5) && /\.zip(?:[?#]|$)/i.test(resource.url || ``) && (day.id !== 5 || resource.url === `week1/day4/data/Day04_Project_Starter.zip`)) || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`) || (day.id === 5 && resource.type === `PBIX` && resource.stage === `backup` && resource.url === `week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix`)))));
+  return (day.resources || []).filter(resource => resource.audience !== `trainer` && (day.id === 1 || (resource.audience === `learner` && (/\.csv(?:[?#]|$)/i.test(resource.url || ``) || ((day.id === 4 || day.id === 5) && /\.zip(?:[?#]|$)/i.test(resource.url || ``) && (day.id !== 5 || resource.url === `week1/day4/data/Day04_Project_Starter.zip`)) || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`) || (resource.type === `PBIX` && resource.stage === `backup` && ((day.id === 5 && resource.url === `week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix`) || (day.id === 6 && resource.url === `week1/day6/data/HR_Performance_Intelligence_Day05_Backup.pbix`)))))));
 }
