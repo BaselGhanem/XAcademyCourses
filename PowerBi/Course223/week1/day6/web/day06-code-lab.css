@@ -1,0 +1,19 @@
+/* X Academy · Day 06 inline DAX code studio · shared by learner and trainer */
+.mj-dax-code,.xa-code-card{direction:ltr;text-align:left;max-width:100%;min-width:0;overflow:hidden;border:1px solid rgba(77,205,187,.28);border-radius:16px;background:#071d25;color:#e0fff7;box-shadow:0 15px 35px rgba(0,27,34,.15);margin:17px 0}
+.mj-dax-code-head,.xa-code-top{display:flex;align-items:center;justify-content:space-between;gap:14px;min-width:0;padding:13px 16px;border-bottom:1px solid rgba(115,227,207,.16);background:linear-gradient(95deg,#11383a,#09242c)}
+.mj-dax-code-head span,.xa-code-top span{font:700 10px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;color:#70d9c9}
+.xa-code-top h4{font:750 14px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;color:#f0fffc;margin:3px 0 0;overflow-wrap:anywhere}
+.mj-copy-code,.xa-copy-code{flex-shrink:0;background:#116965!important;color:#f0fffa!important;border:1px solid #36bbac!important;padding:8px 12px!important;border-radius:9px!important;font:700 12px Almarai,system-ui,sans-serif!important;cursor:pointer;min-height:36px}
+.mj-copy-code:hover,.xa-copy-code:hover{background:#168a81!important;box-shadow:0 0 16px #139c9859!important}
+.mj-copy-code:focus-visible,.xa-copy-code:focus-visible{outline:3px solid #a1ffec;outline-offset:2px}
+.mj-dax-code pre,.xa-code-card pre{direction:ltr;text-align:left;margin:0!important;padding:20px!important;width:100%;max-width:100%;white-space:pre;overflow-x:auto;overflow-y:auto;max-height:340px;scrollbar-width:thin;scrollbar-color:#257b78 transparent;line-height:1.72;background:#081d25!important}
+.mj-dax-code code,.xa-code-card code{direction:ltr;unicode-bidi:normal;display:block;width:max-content;min-width:100%;font:500 12.8px/1.75 Consolas,'Cascadia Code','Courier New',monospace!important;color:#c9fff1!important;tab-size:4;user-select:text;white-space:pre}
+.mj-code-explain,.xa-code-how{direction:rtl;text-align:right;padding:16px 18px;margin:0 0 22px;border:1px solid rgba(9,153,153,.22);border-radius:13px;background:rgba(9,153,153,.045);max-width:100%}
+.mj-code-explain strong,.xa-code-how strong{display:block;font:800 13px Almarai,system-ui,sans-serif!important;color:#087f7b!important;margin-bottom:10px}
+.mj-code-explain p,.xa-code-how p{position:relative;padding:0 18px 0 0;margin:8px 0;font:500 13px/2 Almarai,system-ui,sans-serif!important;color:inherit!important;max-width:100%;overflow-wrap:anywhere}
+.mj-code-explain p::before,.xa-code-how p::before{content:'•';position:absolute;right:0;top:0;color:#11a7a1;font-weight:900}
+.xa-code-card .xa-code-how{background:#0e3137;margin:0;border:0;border-top:1px solid #1d5559;border-radius:0;color:#c5dfdc}.xa-code-card .xa-code-how strong{color:#76e3d7!important}.xa-code-card .xa-code-how p{color:#c5dfdc!important}
+.xa-code-card{margin:18px 0}.xa-focus-code{margin:22px 0 12px;min-width:0;width:100%;max-width:100%}.xa-focus-code[hidden]{display:none}.xa-focus-code .xa-code-card pre{max-height:235px}.xa-focus-code .xa-code-card{box-shadow:none}
+.xa-code-top>div{min-width:0}
+@media(max-width:720px){.mj-dax-code-head,.xa-code-top{padding:10px;gap:8px}.xa-code-top h4{font-size:12px}.mj-dax-code pre,.xa-code-card pre{padding:12px!important;max-height:310px}.mj-dax-code code,.xa-code-card code{font-size:11px!important}.mj-code-explain,.xa-code-how{padding:12px}.mj-code-explain p,.xa-code-how p{font-size:12px!important}}
+@media(prefers-reduced-motion:no-preference){.mj-dax-code,.xa-code-card{animation:xaCodeIn .45s ease both}@keyframes xaCodeIn{from{opacity:.55;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}}

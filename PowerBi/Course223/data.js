@@ -959,11 +959,23 @@ const DAYS = [
         "steps": [
           {
             "title": "Objective Score",
-            "copy": "احسبي متوسط درجات KPIs التابعة للهدف ضمن مصدر تقييم واحد وربع واحد، مع فحص اكتمال المؤشرات"
+            "copy": "احسبي متوسط درجات KPIs التابعة للهدف ضمن مصدر تقييم واحد وربع واحد، مع فحص اكتمال المؤشرات",
+            "code": "Manager Objective Score (Complete) =\nVAR ExpectedKPIs =\n    CALCULATE(COUNTROWS(KPIs))\nVAR ReceivedKPIs =\n    CALCULATE(\n        DISTINCTCOUNT('EvaluationScores_2026_H1'[KPIID]),\n        'EvaluationScores_2026_H1'[AssessmentSource] = \"Manager\",\n        NOT(ISBLANK('EvaluationScores_2026_H1'[KPIScore]))\n    )\nRETURN\n    IF(\n        ExpectedKPIs > 0 &&\n        ReceivedKPIs = ExpectedKPIs &&\n        HASONEVALUE('Calendar'[QuarterLabel]),\n        [Manager KPI Average],\n        BLANK()\n    )",
+            "explain": [
+              "ExpectedKPIs بيحسب عدد المؤشرات المطلوبة للهدف، وReceivedKPIs بيحسب ما وصل من تقييم المدير",
+              "اذا في مؤشر ناقص او ما اخترنا Quarter واحد، النتيجة بتظل BLANK مش صفر",
+              "بنستخدم Manager KPI Average من اليوم الخامس ضمن الهدف المختار"
+            ]
           },
           {
             "title": "SUMX",
-            "copy": "مرّي على اهداف الموظف واجمعي مساهمة كل هدف مرة واحدة بدل تكرار الوزن على كل KPI"
+            "copy": "مرّي على اهداف الموظف واجمعي مساهمة كل هدف مرة واحدة بدل تكرار الوزن على كل KPI",
+            "code": "Manager Employee Weighted (Complete) =\nVAR OneEmployee = HASONEVALUE(Employees[EmployeeID])\nVAR OneQuarter = HASONEVALUE('Calendar'[QuarterLabel])\nVAR RequiredObjectives =\n    CALCULATETABLE(\n        VALUES(Objectives[ObjectiveID]),\n        Objectives[PlanYear] = 2026\n    )\nVAR ExpectedObjectives = COUNTROWS(RequiredObjectives)\nVAR CompleteObjectives =\n    COUNTROWS(\n        FILTER(\n            RequiredObjectives,\n            NOT(ISBLANK([Manager Objective Score (Complete)]))\n        )\n    )\nVAR TotalWeight =\n    CALCULATE(\n        SUM(Objectives[ObjectiveWeightPct]),\n        Objectives[PlanYear] = 2026\n    )\nVAR WeightedResult =\n    SUMX(\n        RequiredObjectives,\n        [Manager Objective Score (Complete)] *\n        DIVIDE(CALCULATE(MAX(Objectives[ObjectiveWeightPct])), 100)\n    )\nRETURN\n    IF(\n        OneEmployee &&\n        OneQuarter &&\n        ExpectedObjectives > 0 &&\n        CompleteObjectives = ExpectedObjectives &&\n        TotalWeight = 100,\n        WeightedResult,\n        BLANK()\n    )",
+            "explain": [
+              "RequiredObjectives بتحدد اهداف الموظف في سنة 2026 وتتأكد من اكتمالها",
+              "SUMX بتمر على كل Objective، وDIVIDE بتحول الوزن من 0–100 الى نسبة",
+              "النتيجة تظهر فقط عند اكتمال كل الاهداف ومجموع الاوزان 100"
+            ]
           },
           {
             "title": "DIVIDE",
@@ -971,7 +983,12 @@ const DAYS = [
           },
           {
             "title": "تعاملي مع النقص",
-            "copy": "اذا تقييم مطلوب ناقص، خلي النتيجة الكاملة فارغة بدل اعتبار الرقم الناقص صفرا"
+            "copy": "اذا تقييم مطلوب ناقص، خلي النتيجة الكاملة فارغة بدل اعتبار الرقم الناقص صفرا",
+            "code": "Manager Weighted Score (Complete) =\nIF(\n    HASONEVALUE('Calendar'[QuarterLabel]),\n    AVERAGEX(\n        VALUES(Employees[EmployeeID]),\n        [Manager Employee Weighted (Complete)]\n    ),\n    BLANK()\n)",
+            "explain": [
+              "AVERAGEX بتحسب متوسط درجات الموظفين المكتملة، مش مجموع درجاتهم",
+              "المقياس يتطلب Quarter واحد وما بيحسب الموظف ناقص التقييم كصفر"
+            ]
           }
         ],
         "callout": "رح نبدأ بمدير الموظف Manager وبربع واحد، ونقارن النتيجة بمتوسط KPI العادي"
@@ -987,11 +1004,21 @@ const DAYS = [
           },
           {
             "title": "REMOVEFILTERS",
-            "copy": "اعملي قياسا مرجعيا يتجاهل فلتر اسم القسم فقط، بدون تجاهل الفلاتر الزمنية"
+            "copy": "اعملي قياسا مرجعيا يتجاهل فلتر اسم القسم فقط، بدون تجاهل الفلاتر الزمنية",
+            "code": "Assessment Count All Department Names =\nCALCULATE(\n    [Assessment Count],\n    REMOVEFILTERS(Departments[DepartmentName])\n)",
+            "explain": [
+              "CALCULATE بتعيد حساب Assessment Count بعد ازالة فلتر اسم القسم فقط",
+              "REMOVEFILTERS هون ما بتزيل فلتر Quarter، فالمقارنة بتظل لنفس الفترة"
+            ]
           },
           {
             "title": "DIVIDE",
-            "copy": "اقسمي عدد تقييمات القسم على المجموع المرجعي، واختاري تنسيق Percentage"
+            "copy": "اقسمي عدد تقييمات القسم على المجموع المرجعي، واختاري تنسيق Percentage",
+            "code": "Department Contribution % =\nDIVIDE(\n    [Assessment Count],\n    [Assessment Count All Department Names]\n)",
+            "explain": [
+              "DIVIDE بتقسم تقييمات القسم على مجموع التقييمات المرجعي",
+              "هاي نسبة مساهمة عدد السجلات، مش نسبة الاداء الموزون؛ نسقي النتيجة Percentage"
+            ]
           }
         ],
         "callout": "قارني الاقسام داخل نفس الفترة، وافحصي ليش بتتغير النسبة لما يتغير الفلتر"
@@ -1048,7 +1075,12 @@ const DAYS = [
         "steps": [
           {
             "title": "اختبار النتائج",
-            "copy": "قارنة Weighted Score بمثال موظف واحد، واختبري Contribution % عند تغيير القسم"
+            "copy": "قارنة Weighted Score بمثال موظف واحد، واختبري Contribution % عند تغيير القسم",
+            "code": "Manager Complete Employees =\nIF(\n    HASONEVALUE('Calendar'[QuarterLabel]),\n    COUNTROWS(\n        FILTER(\n            VALUES(Employees[EmployeeID]),\n            NOT(ISBLANK([Manager Employee Weighted (Complete)]))\n        )\n    ),\n    BLANK()\n)",
+            "explain": [
+              "بنعد فقط الموظفين اللي عندهم نتيجة موزونة مكتملة",
+              "مقياس فحص اضافي للتأكد من ان القيم الناقصة ما تعاملنا معها كصفر"
+            ]
           },
           {
             "title": "اختبار التفاعل",

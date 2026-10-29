@@ -20,7 +20,7 @@ function initCourseDayJourney(day, courseHome) {
     const scenes = day.learningScenes || [[`CSV`, `POWER QUERY`], [`RAW`, `CLEAN`], [`JUL + AUG`, `APPEND`], [`EmployeeID`, `MERGE`], [`FOLDER`, `REFRESH`], [`YOUR TURN`, `VALIDATE`]];
     chapters = day.learningSections.map((section, index) => {
       const files = section.files ? resources.filter(file => section.files === `day5-files` && day.id === 5 ? (file.type === `PBIX` || file.type === `ZIP`) : file.stage === section.files).map(file => `<a class="mj-resource" href="${escape(file.url)}" ${file.type === `WEB` ? `target="_blank" rel="noopener"` : `download`}><span class="mj-resource-icon">${escape(file.type || `FILE`)}</span><span><b>${escape(file.name)}</b><small>${escape(file.note)}</small></span></a>`).join(``) : ``;
-      const items = (section.steps || []).map((step, i) => `<article class="mj-block"><span class="mj-num">${String(i + 1).padStart(2, `0`)}</span><h3>${escape(step.title)}</h3><p class="mj-copy" dir="auto">${escape(step.copy)}</p>${day.id === 5 && step.code ? `<div class="mj-dax-code"><div class="mj-dax-code-head"><span>DAX · NEW MEASURE</span><button type="button" class="mj-copy-code">نسخ DAX</button></div><pre dir="ltr"><code>${escape(step.code)}</code></pre></div>` : ``}</article>`).join(``);
+      const items = (section.steps || []).map((step, i) => `<article class="mj-block"><span class="mj-num">${String(i + 1).padStart(2, `0`)}</span><h3>${escape(step.title)}</h3><p class="mj-copy" dir="auto">${escape(step.copy)}</p>${(day.id === 5 || day.id === 6) && step.code ? `<div class="mj-dax-code"><div class="mj-dax-code-head"><span>DAX · NEW MEASURE</span><button type="button" class="mj-copy-code">نسخ DAX</button></div><pre dir="ltr"><code>${escape(step.code)}</code></pre></div>${day.id === 6 && Array.isArray(step.explain) ? `<div class="mj-code-explain"><strong>نفهم الكود</strong>${step.explain.map(part => `<p>${escape(part)}</p>`).join(``)}</div>` : ``}` : ``}</article>`).join(``);
       const final = index === day.learningSections.length - 1;
       const scene = scenes[index] || [`POWER QUERY`, `APPLY`];
       return {...chapter(`${String(index + 1).padStart(2, `0`)} / ${day.phase === `MODEL` ? `DATA MODEL` : day.phase === `MEASURE` ? `DAX LAB` : `POWER QUERY`}`, section.name, escape(section.title), `<p class="mj-lead">${escape(section.lead)}</p>${files ? `<details ${day.id === 5 && section.files === `day5-files` ? `open` : ``}><summary>${section.files === `practice` ? `ملفات التمرين المستقل` : section.files === `lab` ? `مختبر إضافي اختياري` : section.files === `backup` ? `ملف Power BI الحالي` : section.files === `blueprint` ? `مخطط التصميم` : `ملفات الدرس`}</summary>${files}</details>` : ``}${items}<div class="mj-callout">${escape(section.callout)}</div>${final ? `<div class="mj-complete"><h3 id="mj-complete-title">انهيت التطبيق العملي؟</h3><button type="button" id="mj-complete">نسجل اتمام اليوم ${day.id}</button></div><footer class="mj-footer"><a href="${escape(courseHome)}">مركز الدورة</a><a href="day.html?id=${day.id + 1}">خطة اليوم ${day.id + 1} ←</a></footer>` : ``}`, final ? `` : `نكمل للخطوة التالية`), art:`<div class="mj-flow"><span>${escape(scene[0])}</span><i>↓</i><span>${escape(scene[1])}</span></div>`};
@@ -57,6 +57,13 @@ function initCourseDayJourney(day, courseHome) {
     }));
   }
   if (day.id === 6) {
+    const codeCss = document.createElement(`link`);
+    codeCss.rel = `stylesheet`;
+    codeCss.href = `week1/day6/web/day06-code-lab.css?v=20261029-r1`;
+    document.head.append(codeCss);
+    const codeScript = document.createElement(`script`);
+    codeScript.src = `week1/day6/web/day06-code-tools.js?v=20261029-r1`;
+    document.body.append(codeScript);
     document.body.classList.add(`mj-has-preamble`);
     const stylesheet = document.createElement(`link`);
     stylesheet.rel = `stylesheet`;
