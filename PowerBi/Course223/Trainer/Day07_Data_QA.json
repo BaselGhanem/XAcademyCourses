@@ -1,0 +1,51 @@
+{
+  "source": "Day07 synthetic extension dataset",
+  "quarters": {
+    "2025-Q1": {
+      "rows": 5011,
+      "managerScores": 2371,
+      "managerKpiAverage": 75.8773
+    },
+    "2025-Q2": {
+      "rows": 5012,
+      "managerScores": 2372,
+      "managerKpiAverage": 75.9248
+    },
+    "2025-Q3": {
+      "rows": 5011,
+      "managerScores": 2371,
+      "managerKpiAverage": 77.9779
+    },
+    "2025-Q4": {
+      "rows": 5012,
+      "managerScores": 2372,
+      "managerKpiAverage": 79.0245
+    },
+    "2026-Q3": {
+      "rows": 5011,
+      "managerScores": 2371,
+      "managerKpiAverage": 80.3779
+    },
+    "2026-Q4": {
+      "rows": 5012,
+      "managerScores": 2372,
+      "managerKpiAverage": 81.4245
+    }
+  },
+  "rows": 30069,
+  "distinctAssessmentIDs": 30069,
+  "schema": [
+    "AssessmentID",
+    "KPIID",
+    "AssessmentRound",
+    "AssessmentDate",
+    "AssessmentSource",
+    "KPIScore",
+    "ScoreScaleMaximum",
+    "EvaluatorID",
+    "ResponseCount",
+    "AssessmentStatus",
+    "Comment"
+  ],
+  "note": "2025 H1 is aligned with 2026 training KPI IDs. 2025 H2 and 2026 H2 are synthetic extension rows, not real ministry measurements."
+}
