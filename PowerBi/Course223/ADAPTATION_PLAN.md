@@ -144,3 +144,7 @@
 ## ارشيف القرار السابق — غير معتمد بعد 29 اكتوبر 2026
 
 الخطة السابقة كانت تضع EvaluationScores_2025_H1 وObjectiveProgressSnapshots في اليوم السادس مع Append وReference/Group By. هذان الملفان انشئا ونشرا على GitHub لكن قرار المدرب الجديد اعتمد استخدام PBIX الحالي فقط. لا تعرضهما كملفات مطلوبة لليوم السادس ولا تنسب تعليم مهاراتهما للجلسة السادسة. يحتفظ المستودع بهما لاستخدام محتمل في مسار لاحق بعد قرار جديد.
+
+## Day 07 approved revision — 31/10/2026
+
+Quick Measures QoQ and YoY, 8 quarters, Card context during import (not a separate lesson), Comparison page, Field Parameters, Layout Studio and Scroller demo, and Nova Sales independent challenge. Schedule: 40 explanation, 60 guided, 20 challenge. Preserve latest trainer-provided Day06 PBIX unchanged; older Day05 backup is not the latest. New historical and H2 add-on CSVs are synthetic and trainer-validated separately.

@@ -1099,34 +1099,77 @@ const DAYS = [
     "id": 7,
     "date": null,
     "weekday": null,
-    "ready": false,
-    "phase": "EXPLORE",
-    "teachingStatus": "planned",
-    "title": "Drillthrough, Drill Down & Employee Story",
-    "titleAr": "ننتقل من نتائج الاقسام لتفاصيل الموظفين",
-    "hook": "لما يلاقي المدير قسما نتيجته منخفضة، بده يعرف السبب والموظف والمؤشرات اللي تحتاج متابعة بدون ما يرجع لملفات Excel",
-    "mission": "نصمم Employee Detail كصفحة رابعة ونتعلم Drillthrough وDrill Down ونراجع التقييمات غير المكتملة وConditional Formatting",
+    "ready": true,
+    "phase": "COMPARE",
+    "teachingStatus": "ready",
+    "title": "Comparison Studio · Quick Measures",
+    "titleAr": "من البيانات الى مقارنة احترافية",
+    "hook": "نضيف الفترات الناقصة ونعالج البطاقات في نفس الخطوة ثم نصمم صفحة Comparison",
+    "mission": "8 Quarters مع Quick Measures QoQ/YoY وCards وLine/Combo وField Parameters وScroller",
     "topics": [
-      "Drillthrough",
-      "Drill Down / Hierarchy",
-      "Employee Detail",
-      "Conditional Formatting",
-      "Top N",
-      "Blank vs Zero",
-      "Manager vs Self"
+        "Data Update + Card Context",
+        "Quick Measures QoQ / YoY",
+        "KPI Cards",
+        "Line / Combo",
+        "Field Parameters",
+        "Layout Studio",
+        "Scroller"
     ],
     "build": [
-      "نكمل على ملف اليوم السادس ونراجع الصفحة الموزونة",
-      "نبني Employee Detail كصفحة رابعة باستخدام بيانات الموظف والاهداف والمؤشرات",
-      "نطبق Drillthrough من الاقسام الى تفاصيل الموظف مع Back Button",
-      "نضيف Drill Down في تسلسل Directorate → Department أو Objective → KPI حسب الحقول",
-      "نستخدم Conditional Formatting لتمييز الحالات مع فحص Missing KPIs",
-      "نراجع Sidebar وازرار الرجوع ونحفظ نسخة العمل"
+        "افتحي نسخة Day06 المحفوظة لديك واعتمدي Save As",
+        "حدّثي بيانات 2025 و2026 وراجعي Calendar",
+        "اضبطي استخدام البطاقات بعد التحديث",
+        "اعملي Quick Measures QoQ وYoY",
+        "ابني صفحة Comparison واحدة",
+        "جرّبي Field Parameter ثم Layout Studio وScroller"
     ],
-    "challenge": "انتقلي من قسم محدد الى موظف ثم اشرحي سبب اختلاف متوسطه ومؤشراته",
-    "deliverable": "صفحة رابعة Employee Detail مرتبطة بـDrillthrough وتدرج تفاصيل حقيقي",
-    "resources": []
-  },
+    "challenge": "Mini Dashboard من Nova Sales: 3 Cards وTrend وInsight",
+    "deliverable": "صفحة Comparison وتحدي Nova",
+    "resources": [
+        {
+            "name": "Day07 — Comparison Studio",
+            "type": "WEB",
+            "url": "week1/day7/web/Day07_Comparison_Guide.html",
+            "audience": "learner",
+            "note": "رحلة التعلم والتحدي"
+        },
+        {
+            "name": "2025 H1 Aligned",
+            "type": "CSV",
+            "url": "week1/day7/data/EvaluationScores_2025_H1_Aligned.csv",
+            "audience": "learner",
+            "note": "2025 مع نفس مفاتيح المؤشرات التدريبية"
+        },
+        {
+            "name": "2025 H2",
+            "type": "CSV",
+            "url": "week1/day7/data/EvaluationScores_2025_H2.csv",
+            "audience": "learner",
+            "note": "التوسعة التدريبية Q3 وQ4"
+        },
+        {
+            "name": "2026 H2",
+            "type": "CSV",
+            "url": "week1/day7/data/EvaluationScores_2026_H2.csv",
+            "audience": "learner",
+            "note": "التوسعة التدريبية Q3 وQ4"
+        },
+        {
+            "name": "Nova Sales 2025–2026",
+            "type": "CSV",
+            "url": "week1/day7/data/Nova_Sales_2025_2026.csv",
+            "audience": "learner",
+            "note": "تحدي 24000 صف"
+        },
+        {
+            "name": "Calendar reference",
+            "type": "CSV",
+            "url": "week1/day7/data/Calendar_Reference_2025_2026.csv",
+            "audience": "trainer",
+            "note": "المرجع فقط"
+        }
+    ]
+},
   {
     "id": 8,
     "date": null,
@@ -1284,5 +1327,6 @@ function getLearnerResources(day) {
     || ((day.id === 4 || day.id === 5) && /\.zip(?:[?#]|$)/i.test(resource.url || ``)
       && (day.id !== 5 || resource.url === `week1/day4/data/Day04_Project_Starter.zip`))
     || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`)
+    || (day.id === 7 && resource.type === `WEB` && resource.url === `week1/day7/web/Day07_Comparison_Guide.html`)
     || (day.id === 5 && resource.type === `PBIX` && resource.stage === `backup` && resource.url === `week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix`)))));
 }
