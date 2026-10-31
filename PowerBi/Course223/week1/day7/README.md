@@ -1,11 +1,20 @@
-# Day 07 / Source Notes
+# Day 07 — One-file data refresh
 
-The student's latest Day06 PBIX is kept unchanged. Do not substitute the older Day05 backup.
+Source PBIX: `week1/day7/data/HR_Performance_Intelligence_Day06.pbix` (user-uploaded and preserved byte-for-byte; Git blob 117a40c0ecd4d4f0b70e97e5f4c406dedc34ce0a).
 
-Data files share original EvaluationScores_2026_H1 CSV schema. Imported historical 2025 KPI IDs are deliberately aligned to the 2026 training KPI dimension for consistent comparison. The original 2025 H1 is unmodified in Day06.
+Student gets only 3 required downloads: source PBIX, one additional CSV, optional Nova CSV for independent challenge. Trainer sees all checks in `Trainer/Day07_Trainer.html`.
 
-The 2025 H2 and 2026 H2 are synthetic generated quarters, **not actual ministry data**. All new KPI rows originate from the archived 2025 H1 template, with date/quarter and score transformations, preserving the original pattern of missing Manager observations. Do not convert missing assessment to zero.
+## Steps in Power BI Desktop
 
-Append three added evaluation CSVs into the existing EvaluationScores_2026_H1 query on a new Save As copy. Ensure the Calendar covers both years. Evaluate card context separately: loading rows does not fix Employee weighted result without a selected employee/quarter.
+1. Open latest Day06 PBIX and Save As Day07_Working.pbix. DO NOT overwrite uploaded original.
+2. Power Query: Get Data > Text/CSV > `Day07_Additional_Assessments_2025_2026.csv`. Set types: AssessmentID/KPIID/AssessmentRound/AssessmentSource as Text, AssessmentDate as Date, KPIScore as Decimal. Name staging query `Day07_Additional_Assessments` and disable its independent load.
+3. In original query `EvaluationScores_2026_H1` choose Append Queries, append `Day07_Additional_Assessments`. Do not append repeatedly or create a second active fact table.
+4. Extend existing Calendar to include 2025-01-01..2026-12-31; retain Calendar[Date], QuarterLabel, relationship to AssessmentDate and sort mapping. Verify all 8 quarters and one-to-many relationship, and that the Date table is valid.
+5. Cards: original `Manager Employee Weighted (Complete)` requires one employee and one quarter; `Manager Objective Score (Complete)` further needs context of a single Objective and completed KPIs. Loading data cannot remove these intended requirements. For executive summary card use the existing `Manager Weighted Score (Complete)` aggregated across employees WITH a single quarter (2026 case), or `Manager KPI Average` for all-quarter/general comparisons. Preserve original employee/objective measures and do not replace valid BLANKs with zero.
+6. Apply Quick Measures using `Manager KPI Average` and Calendar[Date] for YoY and QoQ, preserve Manager assessment source context, then Field Parameters; do not use weighted performance YoY until 2025 weights are validated against 2026.
 
-Nova sales has 24,000 synthetic rows, exactly 3,000 per quarter; prepare a separate practice PBIX with a date table before training.
+## Data QA
+
+The one appended file contains 30,069 records in 6 quarters (2025 Q1-Q4 and 2026 Q3-Q4); it does not repeat 2026 Q1-Q2. See trainer-only `Trainer/Day07_Data_QA.json` for verified counts and Manager KPI averages. The 2025 data is aligned to the 2026 training KPI dimension to support a single model. The 2025 Q3/Q4 and 2026 Q3/Q4 are SYNTHETIC training extensions, not actual historical or future results. Never present the simulated data as genuine Ministry outcomes.
+
+The PBIX itself is NOT modified on GitHub, because the binary DataModel requires supported Power BI Desktop editing to change Power Query/DAX and verify refresh; a ZIP package edit would not establish a working semantic model.

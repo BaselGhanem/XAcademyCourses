@@ -1103,9 +1103,9 @@ const DAYS = [
     "phase": "COMPARE",
     "teachingStatus": "ready",
     "title": "Comparison Studio · Quick Measures",
-    "titleAr": "من البيانات الى مقارنة احترافية",
-    "hook": "نضيف الفترات الناقصة ونعالج البطاقات في نفس الخطوة ثم نصمم صفحة Comparison",
-    "mission": "8 Quarters مع Quick Measures QoQ/YoY وCards وLine/Combo وField Parameters وScroller",
+    "titleAr": "الارقام صارت جاهزة، نخليها تحكي قصة",
+    "hook": "ملف مشروع واحد وملف بيانات واحد، وبعدها مقارنة ذكية بين 2025 و2026",
+    "mission": "تحميل بيانات 2025 و2026 مع ضبط Cards، وQuick Measures QoQ/YoY وصفحة Comparison",
     "topics": [
         "Data Update + Card Context",
         "Quick Measures QoQ / YoY",
@@ -1116,57 +1116,43 @@ const DAYS = [
         "Scroller"
     ],
     "build": [
-        "افتحي نسخة Day06 المحفوظة لديك واعتمدي Save As",
-        "حدّثي بيانات 2025 و2026 وراجعي Calendar",
-        "اضبطي استخدام البطاقات بعد التحديث",
-        "اعملي Quick Measures QoQ وYoY",
-        "ابني صفحة Comparison واحدة",
-        "جرّبي Field Parameter ثم Layout Studio وScroller"
+        "افتحي آخر ملف Day06 واحفظي Save As",
+        "حملي ملف البيانات الاضافي الواحد واعملي Append للجدول الحالي",
+        "وسعي Calendar ثم تحققي من البطاقات والفترات",
+        "اعملي Quick Measures QoQ وYoY مع Cards وLine/Combo",
+        "جرّبي Field Parameters واختمي بLayout واحد وScroller",
+        "اعملي Mini Dashboard من Nova"
     ],
     "challenge": "Mini Dashboard من Nova Sales: 3 Cards وTrend وInsight",
     "deliverable": "صفحة Comparison وتحدي Nova",
     "resources": [
         {
-            "name": "Day07 — Comparison Studio",
+            "name": "Day 07 — Comparison Studio",
             "type": "WEB",
             "url": "week1/day7/web/Day07_Comparison_Guide.html",
             "audience": "learner",
-            "note": "رحلة التعلم والتحدي"
+            "note": "خطوات التدريب التفاعلية"
         },
         {
-            "name": "2025 H1 Aligned",
-            "type": "CSV",
-            "url": "week1/day7/data/EvaluationScores_2025_H1_Aligned.csv",
+            "name": "HR Performance — Day 06 (Starter)",
+            "type": "PBIX",
+            "url": "week1/day7/data/HR_Performance_Intelligence_Day06.pbix",
             "audience": "learner",
-            "note": "2025 مع نفس مفاتيح المؤشرات التدريبية"
+            "note": "آخر ملف محفوظ من نهاية المحاضرة السادسة"
         },
         {
-            "name": "2025 H2",
+            "name": "Day 07 — Additional Assessments",
             "type": "CSV",
-            "url": "week1/day7/data/EvaluationScores_2025_H2.csv",
+            "url": "week1/day7/data/Day07_Additional_Assessments_2025_2026.csv",
             "audience": "learner",
-            "note": "التوسعة التدريبية Q3 وQ4"
+            "note": "ملف واحد لاستكمال فترات 2025–2026"
         },
         {
-            "name": "2026 H2",
-            "type": "CSV",
-            "url": "week1/day7/data/EvaluationScores_2026_H2.csv",
-            "audience": "learner",
-            "note": "التوسعة التدريبية Q3 وQ4"
-        },
-        {
-            "name": "Nova Sales 2025–2026",
+            "name": "Nova Sales — Mini Challenge",
             "type": "CSV",
             "url": "week1/day7/data/Nova_Sales_2025_2026.csv",
             "audience": "learner",
-            "note": "تحدي 24000 صف"
-        },
-        {
-            "name": "Calendar reference",
-            "type": "CSV",
-            "url": "week1/day7/data/Calendar_Reference_2025_2026.csv",
-            "audience": "trainer",
-            "note": "المرجع فقط"
+            "note": "التمرين المستقل"
         }
     ]
 },
@@ -1328,5 +1314,6 @@ function getLearnerResources(day) {
       && (day.id !== 5 || resource.url === `week1/day4/data/Day04_Project_Starter.zip`))
     || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`)
     || (day.id === 7 && resource.type === `WEB` && resource.url === `week1/day7/web/Day07_Comparison_Guide.html`)
+    || (day.id === 7 && resource.type === `PBIX` && resource.url === `week1/day7/data/HR_Performance_Intelligence_Day06.pbix`)
     || (day.id === 5 && resource.type === `PBIX` && resource.stage === `backup` && resource.url === `week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix`)))));
 }
