@@ -1,4 +1,4 @@
-// Course223 — Days 1–5 preserved as taught. Day 6 hybrid ready; Days 7–10 planned.
+// Course223 — Days 1–5 taught, Day 6 prepared/taught per trainer update; Day 7 ready; Days 8–10 planned.
 const COURSE_CONFIG = {
   id: `course223_mariam`,
   title: `Power BI | X Academy`,
