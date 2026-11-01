@@ -18,3 +18,9 @@ Student gets only 3 required downloads: source PBIX, one additional CSV, optiona
 The one appended file contains 30,069 records in 6 quarters (2025 Q1-Q4 and 2026 Q3-Q4); it does not repeat 2026 Q1-Q2. See trainer-only `Trainer/Day07_Data_QA.json` for verified counts and Manager KPI averages. The 2025 data is aligned to the 2026 training KPI dimension to support a single model. The 2025 Q3/Q4 and 2026 Q3/Q4 are SYNTHETIC training extensions, not actual historical or future results. Never present the simulated data as genuine Ministry outcomes.
 
 The PBIX itself is NOT modified on GitHub, because the binary DataModel requires supported Power BI Desktop editing to change Power Query/DAX and verify refresh; a ZIP package edit would not establish a working semantic model.
+
+## Integration update — 2026-11-01
+
+The standalone Comparison Studio page was merged into the canonical learner URL `day.html?id=7` through `data.js` learningSections plus the Day 07 hero injected by `day-experience.js`. Skill instructions: Data Update + Card Context; Quick Measures QoQ/YoY; KPI Cards; Line/Combo; Field Parameters; Layout Studio; Scroller. No instructor-only timers or answer keys in learner view.
+
+Nova has been upgraded to a 24,000-row XLSX workbook with 24 category-specific medical products, 12 sales representatives, 32 synthetic customers, no Revenue column. Student challenge now uses Quantity, Target, and Distinct Customers (no Revenue measure dependency).

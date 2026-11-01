@@ -23,7 +23,7 @@ function initCourseDayJourney(day, courseHome) {
       const items = (section.steps || []).map((step, i) => `<article class="mj-block"><span class="mj-num">${String(i + 1).padStart(2, `0`)}</span><h3>${escape(step.title)}</h3><p class="mj-copy" dir="auto">${escape(step.copy)}</p>${(day.id === 5 || day.id === 6) && step.code ? `<div class="mj-dax-code"><div class="mj-dax-code-head"><span>DAX · NEW MEASURE</span><button type="button" class="mj-copy-code">نسخ DAX</button></div><pre dir="ltr"><code>${escape(step.code)}</code></pre></div>${day.id === 6 && Array.isArray(step.explain) ? `<div class="mj-code-explain"><strong>نفهم الكود</strong>${step.explain.map(part => `<p>${escape(part)}</p>`).join(``)}</div>` : ``}` : ``}</article>`).join(``);
       const final = index === day.learningSections.length - 1;
       const scene = scenes[index] || [`POWER QUERY`, `APPLY`];
-      return {...chapter(`${String(index + 1).padStart(2, `0`)} / ${day.phase === `MODEL` ? `DATA MODEL` : day.phase === `MEASURE` ? `DAX LAB` : `POWER QUERY`}`, section.name, escape(section.title), `<p class="mj-lead">${escape(section.lead)}</p>${files ? `<details ${day.id === 5 && section.files === `day5-files` ? `open` : ``}><summary>${section.files === `practice` ? `ملفات التمرين المستقل` : section.files === `lab` ? `مختبر إضافي اختياري` : section.files === `backup` ? `ملف Power BI الحالي` : section.files === `blueprint` ? `مخطط التصميم` : `ملفات الدرس`}</summary>${files}</details>` : ``}${items}<div class="mj-callout">${escape(section.callout)}</div>${final ? `<div class="mj-complete"><h3 id="mj-complete-title">انهيت التطبيق العملي؟</h3><button type="button" id="mj-complete">نسجل اتمام اليوم ${day.id}</button></div><footer class="mj-footer"><a href="${escape(courseHome)}">مركز الدورة</a><a href="day.html?id=${day.id + 1}">خطة اليوم ${day.id + 1} ←</a></footer>` : ``}`, final ? `` : `نكمل للخطوة التالية`), art:`<div class="mj-flow"><span>${escape(scene[0])}</span><i>↓</i><span>${escape(scene[1])}</span></div>`};
+      return {...chapter(`${String(index + 1).padStart(2, `0`)} / ${day.phase === `MODEL` ? `DATA MODEL` : day.phase === `MEASURE` ? `DAX LAB` : day.phase === `COMPARE` ? `COMPARISON LAB` : `POWER QUERY`}`, section.name, escape(section.title), `<p class="mj-lead">${escape(section.lead)}</p>${files ? `<details ${day.id === 5 && section.files === `day5-files` ? `open` : ``}><summary>${section.files === `practice` ? `ملفات التمرين المستقل` : section.files === `lab` ? `مختبر إضافي اختياري` : section.files === `backup` ? `ملف Power BI الحالي` : section.files === `blueprint` ? `مخطط التصميم` : `ملفات الدرس`}</summary>${files}</details>` : ``}${items}<div class="mj-callout">${escape(section.callout)}</div>${final ? `<div class="mj-complete"><h3 id="mj-complete-title">انهيت التطبيق العملي؟</h3><button type="button" id="mj-complete">نسجل اتمام اليوم ${day.id}</button></div><footer class="mj-footer"><a href="${escape(courseHome)}">مركز الدورة</a><a href="day.html?id=${day.id + 1}">خطة اليوم ${day.id + 1} ←</a></footer>` : ``}`, final ? `` : `نكمل للخطوة التالية`), art:`<div class="mj-flow"><span>${escape(scene[0])}</span><i>↓</i><span>${escape(scene[1])}</span></div>`};
     });
   }
   document.title = `اليوم ${day.id} | ${day.titleAr} | X Academy`;
@@ -55,6 +55,18 @@ function initCourseDayJourney(day, courseHome) {
       try { await navigator.clipboard.writeText(code); button.textContent = `تم النسخ ✓`; }
       catch { button.textContent = `حددي النص لنسخه`; }
     }));
+  }
+  if (day.id === 7) {
+    document.body.classList.add(`mj-has-preamble`);
+    const theme = document.createElement(`link`);
+    theme.rel = `stylesheet`;
+    theme.href = `week1/day7/media/day07-hero.css?v=20261101-v1`;
+    document.head.append(theme);
+    const hero = document.createElement(`section`);
+    hero.className = `mj-day7-hero`;
+    hero.setAttribute(`aria-label`, `خريطة تطبيق اليوم السابع`);
+    hero.innerHTML = `<div class="mj7-top"><span class="mj7-kicker">X ACADEMY · DAY 07 · POWER BI</span><span class="mj7-chip">8 QUARTERS / 1 REPORT</span></div><div class="mj7-layout"><div class="mj7-copy"><h2>من الارقام<br><em>الى القصة.</em></h2><p>نحدث البيانات، نقارن بين 2025 و2026، ونخلي النتائج اوضح بكثير — على نفس مشروعنا.</p><div class="mj7-tags"><span>QUICK MEASURES</span><span>INTERACTIVE VISUALS</span><span>PREMIUM LAYOUT</span></div></div><div class="mj7-visual" aria-hidden="true"><div class="mj7-visual-label">PERFORMANCE / QUARTERLY</div><div class="mj7-quarter-grid"><div class="mj7-year">2025</div><div>Q1</div><div>Q2</div><div>Q3</div><div>Q4</div><div class="mj7-year">2026</div><div>Q1</div><div>Q2</div><div>Q3</div><div>Q4</div></div><div class="mj7-path"><span>DATA</span><i>→</i><span>COMPARE</span><i>→</i><strong>DESIGN</strong></div></div></div>`;
+    document.querySelector(`.mj-layout`)?.before(hero);
   }
   if (day.id === 6) {
     const codeCss = document.createElement(`link`);

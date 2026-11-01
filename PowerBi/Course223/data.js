@@ -1102,10 +1102,10 @@ const DAYS = [
     "ready": true,
     "phase": "COMPARE",
     "teachingStatus": "ready",
-    "title": "Comparison Studio · Quick Measures",
-    "titleAr": "الارقام صارت جاهزة، نخليها تحكي قصة",
-    "hook": "ملف مشروع واحد وملف بيانات واحد، وبعدها مقارنة ذكية بين 2025 و2026",
-    "mission": "تحميل بيانات 2025 و2026 مع ضبط Cards، وQuick Measures QoQ/YoY وصفحة Comparison",
+    "title": "Day 07 · Comparison Studio",
+    "titleAr": "من البيانات الى داشبورد يحكي قصة",
+    "hook": "تقييمات صارت تمتد لسنتين، رح نحولها لمقارنات واضحة ورسومات تفاعلية بدون تعقيد",
+    "mission": "نحدث البيانات ونراجع الـCards ضمن نفس الخطوة، وبعدها نبني مقارنة QoQ وYoY وصفحة احترافية",
     "topics": [
         "Data Update + Card Context",
         "Quick Measures QoQ / YoY",
@@ -1116,44 +1116,277 @@ const DAYS = [
         "Scroller"
     ],
     "build": [
-        "افتحي آخر ملف Day06 واحفظي Save As",
-        "حملي ملف البيانات الاضافي الواحد واعملي Append للجدول الحالي",
-        "وسعي Calendar ثم تحققي من البطاقات والفترات",
-        "اعملي Quick Measures QoQ وYoY مع Cards وLine/Combo",
-        "جرّبي Field Parameters واختمي بLayout واحد وScroller",
-        "اعملي Mini Dashboard من Nova"
+        "تحديث ملف تقييمات 2025–2026 ومراجعة سياق الـCards",
+        "Quick Measures للمقارنة مع الربع والسنة السابقة",
+        "3 KPI Cards وLine/Combo Chart",
+        "Field Parameters ثم Layout Studio وScroller",
+        "تحدي Nova Sales من ملف Excel"
     ],
-    "challenge": "Mini Dashboard من Nova Sales: 3 Cards وTrend وInsight",
-    "deliverable": "صفحة Comparison وتحدي Nova",
+    "challenge": "من ملف Nova الطبي بصيغة Excel: اعملي 3 KPI Cards وTrend للمبيعات حسب الفترات، واربطي الفلاتر بالمنطقة والصنف والمندوب والزبون",
+    "deliverable": "صفحة Comparison في مشروع التقييم + Mini Dashboard تطبيقي مستقل",
     "resources": [
         {
-            "name": "Day 07 — Comparison Studio",
-            "type": "WEB",
-            "url": "week1/day7/web/Day07_Comparison_Guide.html",
-            "audience": "learner",
-            "note": "خطوات التدريب التفاعلية"
-        },
-        {
-            "name": "HR Performance — Day 06 (Starter)",
+            "name": "مشروع Power BI — نهاية اليوم السادس",
             "type": "PBIX",
             "url": "week1/day7/data/HR_Performance_Intelligence_Day06.pbix",
             "audience": "learner",
-            "note": "آخر ملف محفوظ من نهاية المحاضرة السادسة"
+            "stage": "start",
+            "note": "ابدئي من نفس المشروع واحفظي Save As"
         },
         {
-            "name": "Day 07 — Additional Assessments",
+            "name": "تقييمات 2025–2026 الاضافية",
             "type": "CSV",
             "url": "week1/day7/data/Day07_Additional_Assessments_2025_2026.csv",
             "audience": "learner",
-            "note": "ملف واحد لاستكمال فترات 2025–2026"
+            "stage": "start",
+            "note": "ملف واحد للبيانات الناقصة"
         },
         {
-            "name": "Nova Sales — Mini Challenge",
-            "type": "CSV",
-            "url": "week1/day7/data/Nova_Sales_2025_2026.csv",
+            "name": "Nova Medical Sales — Excel",
+            "type": "XLSX",
+            "url": "week1/day7/data/Nova_Sales_2025_2026.xlsx",
             "audience": "learner",
-            "note": "التمرين المستقل"
+            "stage": "practice",
+            "note": "التمرين المستقل على بيانات المبيعات الطبية"
         }
+    ],
+    "learningSections": [
+        {
+            "name": "نحدث البيانات",
+            "title": "نحدث البيانات، ونفهم الـCards",
+            "lead": "بنبدأ من نفس ملف Power BI، ونضيف الفترات الجديدة بدون ما نغير تصميم الصفحات القديمة",
+            "files": "start",
+            "steps": [
+                {
+                    "title": "افتحي مشروع اليوم السادس",
+                    "copy": "نزلي ملف HR_Performance_Intelligence_Day06.pbix وافتحيه داخل Power BI Desktop، ثم File > Save As واحفظي نسخة جديدة باسم Day07_Working.pbix"
+                },
+                {
+                    "title": "استوردي ملف التقييمات الجديد",
+                    "copy": "Home > Get data > Text/CSV، اختاري Day07_Additional_Assessments_2025_2026.csv ثم Transform Data، وتاكدي ان AssessmentDate من نوع Date وKPIScore من نوع Decimal Number"
+                },
+                {
+                    "title": "اعملي Append للجدول الموجود",
+                    "copy": "من Power Query اختاري الجدول الاصلي EvaluationScores_2026_H1، ثم Home > Append Queries، واضيفي عليه الجدول الجديد، وبعدها Close & Apply. لا تكرري الاضافة عند كل Refresh"
+                },
+                {
+                    "title": "حدّثي Calendar",
+                    "copy": "وسعي جدول Calendar الموجود حتى يشمل كل يوم من 2025-01-01 الى 2026-12-31، وتاكدي من العلاقة مع EvaluationScores_2026_H1[AssessmentDate]"
+                },
+                {
+                    "title": "راجعي الـCards في نفس الخطوة",
+                    "copy": "بطاقة Manager KPI Average بتعرض المتوسط العام. اما Manager Employee Weighted (Complete) فتحتاج موظف واحد وQuarter واحد، وبطاقة Manager Objective Score (Complete) تحتاج سياق الهدف واكتمال مؤشرات التقييم. ما بنحوّل التقييم الناقص الى صفر"
+                },
+                {
+                    "title": "تاكدي من الارباع",
+                    "copy": "جربي Slicer على Calendar[QuarterLabel] وتاكدي من ظهور Q1 الى Q4 لكل سنة، مع بقاء تقارير Overview وDepartments وExecutive Performance كما هي"
+                }
+            ],
+            "callout": "هيك حدثنا البيانات وفهمنا الـCards ضمن نفس التطبيق، بدون درس DAX اضافي"
+        },
+        {
+            "name": "نقارن الفترات",
+            "title": "Quick Measures — QoQ وYoY",
+            "lead": "المقارنة الذكية بتبدأ بسؤال واضح: هل تغير متوسط الاداء عن الربع السابق، او عن نفس الفترة من السنة الماضية؟",
+            "steps": [
+                {
+                    "title": "حددي مقياس المقارنة",
+                    "copy": "استخدمي Manager KPI Average من مشروعك. ما بنستخدم Weighted Score للمقارنة بين سنتين قبل مراجعة اوزان اهداف 2025"
+                },
+                {
+                    "title": "اعملي Quarter-over-Quarter",
+                    "copy": "من Data pane اضغطي يمين على الجدول المناسب > New quick measure، واختاري Time intelligence > Quarter-over-quarter change. اختاري Manager KPI Average كـBase value وCalendar[Date] كحقل التاريخ"
+                },
+                {
+                    "title": "اعملي Year-over-Year",
+                    "copy": "كرري New quick measure، واختاري Time intelligence > Year-over-year change، وبنفس Base value وCalendar[Date]"
+                },
+                {
+                    "title": "افحصي المعنى",
+                    "copy": "قارني Q2 2026 مع Q1 2026 ثم Q2 2026 مع Q2 2025، ولا تحولي تغيير النقاط تلقائيا الى نسبة مئوية"
+                },
+                {
+                    "title": "افهمي غياب المقارنة",
+                    "copy": "اذا ما في فترة سابقة ضمن البيانات، ممكن يظهر BLANK للمقارنة، وهذا طبيعي وغير مشابه لكارد فاضية بسبب خطا"
+                }
+            ],
+            "callout": "بدون كتابة DAX معقد، بس مع فهم النتيجة والتحقق من تاريخ المقارنة"
+        },
+        {
+            "name": "نرتب المؤشرات",
+            "title": "KPI Cards — 3 بطاقات واضحة",
+            "lead": "بدنا المدير يعرف النتيجة الحالية وكيف تغيرت، من اول نظرة",
+            "steps": [
+                {
+                    "title": "اعملي اول Card",
+                    "copy": "من Visualizations اختاري Card، وحطي Manager KPI Average، وسمي البطاقة Current Manager Score"
+                },
+                {
+                    "title": "اضيفي بطاقتي المقارنة",
+                    "copy": "انسخي Card مرتين، وغيري الحقول الى Quick Measures تبعت QoQ Change وYoY Change"
+                },
+                {
+                    "title": "راجعي وحدة العرض",
+                    "copy": "متوسط التقييم على مقياس من 0 الى 100. غيري الاسم والتنسيق وعدد المنازل العشرية، ولا تضعي علامة % الا اذا كان المقياس محسوبا كنسبة مئوية فعلا"
+                },
+                {
+                    "title": "اختبري الفلاتر",
+                    "copy": "بدلي Quarter وDepartment، وتاكدي ان البطاقات الثلاث تعبر عن نفس الفلاتر ونفس AssessmentSource"
+                }
+            ],
+            "callout": "3 Cards بتجاوب: وين احنا؟ شو تغير عن الربع الماضي؟ شو تغير عن السنة الماضية؟"
+        },
+        {
+            "name": "نرسم الاتجاه",
+            "title": "Line وCombo Charts",
+            "lead": "الـCard بتعطينا الرقم، والـTrend بيخلينا نشوف قصة الرقم عبر الزمن",
+            "steps": [
+                {
+                    "title": "انشئي Line Chart",
+                    "copy": "حطي Calendar[QuarterLabel] على X-axis ومقياس Manager KPI Average على Y-axis، ثم رتبي QuarterLabel زمنيا باستخدام YearQuarterSort"
+                },
+                {
+                    "title": "انشئي Combo Chart",
+                    "copy": "اختاري Line and clustered column chart، وضعي QuarterLabel على المحور وManager KPI Average في Column y-axis ومقياس تغيير مناسب في Line y-axis"
+                },
+                {
+                    "title": "نسقي الرسم",
+                    "copy": "اعملي عنوانا واضحا، ولوني سلسلة الاداء بالـTeal، وتأكدي ان الوحدات على المحاور مفهومة بدون مبالغة بالمؤثرات"
+                },
+                {
+                    "title": "اختبري التفاعل",
+                    "copy": "غيري السنة والقسم من Slicers، وتاكدي ان خط الاتجاه لا يخلط ترتيب الارباع او تقييمات Manager وSelf"
+                }
+            ],
+            "callout": "اختاري الرسم اللي يجاوب سؤال المدير، مش الرسم اللي فيه عناصر اكثر"
+        },
+        {
+            "name": "نغير منظور الرسم",
+            "title": "Field Parameters",
+            "lead": "رسم واحد ممكن يجاوب سؤالين بدل ما نعمل نسختين منه",
+            "steps": [
+                {
+                    "title": "انشئي Parameter",
+                    "copy": "اذهبي الى Modeling > New parameter > Fields، وسميه View By"
+                },
+                {
+                    "title": "اختاري الابعاد",
+                    "copy": "اضيفي Directorates[DirectorateName] وDepartments[DepartmentName]، وفعّلي Add slicer to this page، ثم Create"
+                },
+                {
+                    "title": "اربطيه بالرسم",
+                    "copy": "اسحبي View By الى محور الرسم بدلا من اسم القسم الثابت، ثم جرّبي الاختيار من الـSlicer"
+                },
+                {
+                    "title": "تاكدي من النتيجة",
+                    "copy": "بدلي Directorate وDepartment وتاكدي ان متوسط الاداء ثابت المعنى، بينما مستوى التجميع بس هو اللي تغير"
+                }
+            ],
+            "callout": "التفاعل الممتاز بيقلل عدد الرسومات وبيحسن تجربة المستخدم"
+        },
+        {
+            "name": "نصمم الواجهة",
+            "title": "Layout Studio — تصميم احترافي",
+            "lead": "ما بدنا نعقد التصميم. Layout واحد نضيف عليه البطاقات والرسم بشكل متناسق",
+            "steps": [
+                {
+                    "title": "افتحي Layout Studio",
+                    "copy": "من الموقع baselghanem.github.io/pb اختاري Layout مناسب لصفحة Comparison فيه مساحة لثلاث بطاقات ورسم رئيسي"
+                },
+                {
+                    "title": "صدّري التصميم",
+                    "copy": "نزلي الخلفية بصيغة PNG او ملفات التخطيط المتاحة. داخل Power BI استخدمي Format page > Canvas background لتطبيق الصورة واضبطي Fit/Fill والشفافية بما يناسبها"
+                },
+                {
+                    "title": "ركّبي الرسومات",
+                    "copy": "وزعي Cards وLine/Combo ضمن المساحات، ووحدي الالوان والحدود والمسافات بدل تكرار الخلفيات والزخارف"
+                }
+            ],
+            "callout": "الافضل صفحة بسيطة ومتوازنة، مش صفحة مليانة صناديق"
+        },
+        {
+            "name": "نضيف لمسة حركة",
+            "title": "Scroller — Custom Visual",
+            "lead": "الهدف عرض معلومة مختصرة ومتحركة بدون تشتيت الانتباه",
+            "steps": [
+                {
+                    "title": "افتحي AppSource",
+                    "copy": "من Visualizations > ... > Get more visuals، وابحثي عن Scroller ضمن Power BI visuals"
+                },
+                {
+                    "title": "راجعي الـVisual",
+                    "copy": "افتحي تفاصيل النتيجة وتاكدي من الناشر والترخيص والمميزات المجانية المتاحة، ثم اضغطي Add على الخيار المناسب"
+                },
+                {
+                    "title": "اربطي الحقول",
+                    "copy": "اضيفي الـVisual الى صفحة Comparison، واستخدمي DepartmentName مع مقياس بسيط مثل Assessment Count، حسب الحقول التي يطلبها الـVisual المختار"
+                },
+                {
+                    "title": "اضبطي الحركة",
+                    "copy": "خففي السرعة واطفئي الحركة الزائدة ان وجد خيار، وخلي المعلومة قابلة للقراءة؛ اذا ما كان الـVisual متاحا بنكتفي بالصفحة بدون تعطيل العمل"
+                }
+            ],
+            "callout": "Scroller مجرد لمسة اضافية، ما لازم يصير اهم من الـCards والمقارنة"
+        },
+        {
+            "name": "هلا دورك",
+            "title": "Mini Dashboard — Nova Sales",
+            "lead": "رح تطبقي نفس فكرة المقارنة على بيانات مبيعات من القطاع الطبي، من غير ما تتبعي خطوات المدرب حرفيا",
+            "files": "practice",
+            "steps": [
+                {
+                    "title": "افتحي ملف Excel",
+                    "copy": "Home > Get data > Excel workbook، واختاري Nova_Sales_2025_2026.xlsx ثم ورقة Nova Sales. كل صف يمثل طلبا، وبالملف SalesRep وCustomer وProduct وCategory"
+                },
+                {
+                    "title": "اعملي 3 Cards",
+                    "copy": "Total Units من Sum of Quantity، وTotal Target من Sum of Target، وCustomers من Distinct count of Customer"
+                },
+                {
+                    "title": "اعملي Trend واضح",
+                    "copy": "ارسمي Sum of Quantity او Sum of Target حسب الفترات، مع Year وQuarter حتى ما تنخلط ارباع السنتين"
+                },
+                {
+                    "title": "اكتبي Insight واحدة",
+                    "copy": "استخدمي Region او Category وSalesRep لتحددي اين كان الاداء افضل، ثم احكي النتيجة بجملة واضحة من الرسم"
+                }
+            ],
+            "callout": "المخرج: صفحة واحدة من تصميمك تحتوي 3 Cards ورسم اتجاه وتحليل مختصر"
+        }
+    ],
+    "learningScenes": [
+        [
+            "2025",
+            "2026"
+        ],
+        [
+            "QOQ",
+            "YOY"
+        ],
+        [
+            "SCORE",
+            "CHANGE"
+        ],
+        [
+            "CARDS",
+            "TREND"
+        ],
+        [
+            "DIRECTORATE",
+            "DEPARTMENT"
+        ],
+        [
+            "LAYOUT",
+            "PAGE"
+        ],
+        [
+            "APPSOURCE",
+            "SCROLLER"
+        ],
+        [
+            "EXCEL",
+            "DASHBOARD"
+        ]
     ]
 },
   {
@@ -1313,7 +1546,7 @@ function getLearnerResources(day) {
     || ((day.id === 4 || day.id === 5) && /\.zip(?:[?#]|$)/i.test(resource.url || ``)
       && (day.id !== 5 || resource.url === `week1/day4/data/Day04_Project_Starter.zip`))
     || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`)
-    || (day.id === 7 && resource.type === `WEB` && resource.url === `week1/day7/web/Day07_Comparison_Guide.html`)
     || (day.id === 7 && resource.type === `PBIX` && resource.url === `week1/day7/data/HR_Performance_Intelligence_Day06.pbix`)
+    || (day.id === 7 && resource.type === `XLSX` && resource.url === `week1/day7/data/Nova_Sales_2025_2026.xlsx`)
     || (day.id === 5 && resource.type === `PBIX` && resource.stage === `backup` && resource.url === `week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix`)))));
 }
