@@ -109,7 +109,11 @@
         if (filter === 'available' && !open) return;
         if (filter === 'locked' && open) return;
         if (!['all','available','locked','completed'].includes(filter) && runtime !== filter) return;
-        const card = document.createElement('article');
+        const card = document.createElement(open ? 'a' : 'article');
+        if (open) {
+          card.href = `day.html?id=${day.id}`;
+          card.setAttribute('aria-label', `افتح Day ${day.id}: ${day.titleAr}`);
+        }
         card.className = `portal-day ${isCompleted ? 'completed' : ''} ${open ? 'open' : 'locked'}`;
         card.setAttribute('aria-disabled', open ? 'false' : 'true');
         card.innerHTML = `
@@ -125,9 +129,6 @@
             <span class="status-chip ${open ? runtime : 'locked'}"><i class="complete-dot"></i>${open ? (isCompleted ? 'مكتمل' : (COURSE_CONFIG.deliveryMode === 'self-paced' ? 'متاح للتعلم' : (runtime === 'today' ? 'اليوم' : runtime === 'past' ? 'تم موعده' : day.weekday + ' • ' + formatDateAr(day.date)))) : 'غير متاح حالياً'}</span>
             <span class="resource-count">${open ? (COURSE_CONFIG.showLegacyRecordings && hasDayVideo(day.id) ? '▶ التسجيل متاح للمشاهدة' : day.resources.length + ' مواد متاحة لليوم') : 'لم ينشر هذا الدرس بعد'}</span>
           </div>`;
-        if (open) {
-          card.addEventListener('click', () => location.href = `day.html?id=${day.id}`);
-        }
         grid.appendChild(card);
       });
     }
