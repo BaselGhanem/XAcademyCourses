@@ -1,0 +1,47 @@
+name: Course224 Stage4 — Capstone and Release QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/course224-stage4.yml'
+      - 'PowerBi/Course224/tools/generate_stage4.py'
+      - 'PowerBi/Course224/tools/validate_stage4.py'
+      - 'PowerBi/Course224/week3/day8/REPORT_DESIGN_LAB.md'
+      - 'PowerBi/Course224/week3/day9/DAY09_STUDENT_MISSIONS.md'
+      - 'PowerBi/Course224/week3/day9/DAY09_CHECKLIST.md'
+      - 'PowerBi/Course224/week3/day10/CAPSTONE_GUIDE.md'
+      - 'PowerBi/Course224/week3/day10/CAPSTONE_RUBRIC.csv'
+      - 'PowerBi/Course224/week3/day10/CAPSTONE_QA_CHECKLIST.md'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: course224-stage4
+  cancel-in-progress: false
+jobs:
+  stage4:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build generic starters and capstone pack
+        run: python PowerBi/Course224/tools/generate_stage4.py
+      - name: Verify models, site links and capstone
+        run: python PowerBi/Course224/tools/validate_stage4.py
+      - name: Commit only verified student packages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add PowerBi/Course224/week3/day8/downloads/Nova_Day08_Executive_360_PBIR.zip
+          git add PowerBi/Course224/week3/day9/downloads/Day09_INTERACTIVITY_LAB.zip
+          git add PowerBi/Course224/week3/day10/downloads/Nova_Day10_CAPSTONE_START_PBIP.zip
+          git add PowerBi/Course224/week3/day10/downloads/Day10_CAPSTONE.zip
+          git add PowerBi/Course224/datasets/STAGE4_BUILD_MANIFEST.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Course224 stage4: verified universal report/interaction/capstone projects"
+            git push
+          fi
