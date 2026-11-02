@@ -1,0 +1,21 @@
+{
+  "day05_fact_rows": 160000,
+  "day06_fact_rows": 160000,
+  "day07_fact_rows": 320000,
+  "day07_original_day4_rows": 160000,
+  "day07_synthetic_2025_rows": 160000,
+  "source_stage2_jan_apr_revenue": "12534018.65",
+  "domain_examples": [
+    "PERFORMANCE",
+    "OPERATIONS",
+    "FINANCE",
+    "WORKFORCE"
+  ],
+  "pbix_desktop_verified": false,
+  "outputs": [
+    "week2/day5/downloads/Day05_CALCULATE_VISUALIZE.zip",
+    "week2/day6/downloads/Day06_CONTEXT_AND_CALCULATE.zip",
+    "week3/day7/downloads/Day07_UNIVERSAL_SCENARIOS.zip",
+    "week3/day7/downloads/Nova_Day07_START_PBIP.zip"
+  ]
+}

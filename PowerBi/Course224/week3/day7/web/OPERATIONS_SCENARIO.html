@@ -1,0 +1,21 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nova — العمليات</title>
+<style>body{font:16px/1.8 Arial,sans-serif;background:#f6faf9;color:#13233b;margin:0}main{max-width:980px;margin:auto;padding:32px}h1{color:#099999}.card{background:white;border:1px solid #e1e8e8;padding:20px;margin:16px 0;border-radius:14px}pre{direction:ltr;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;padding:16px;background:#edf6f5;border-radius:8px}a{color:#077b7b}</style></head>
+<body><main><a href="../../../dashboard.html">X Academy · Course224</a><h1>العمليات</h1><p>سيناريو اختياري لأي متدرب. لا يرتبط بمسمى وظيفي أو اسم شخص.</p>
+<div class="card"><h2>السؤال</h2><p>أين يتأخر تنفيذ الطلبات؟</p><p>استخدم Year Month وYear من DimDate. قارن 2026 مقابل 2025 الاصطناعية الموثقة، ولا تفترض وجود بيانات خارج الفترة.</p></div>
+<div class="card"><h2>التطبيق</h2><p>ابنِ أربع KPI Cards وLine Chart شهري وBar Chart وMatrix وSlicers؛ تحقق من الأرقام قبل التنسيق.</p><p>Fact/Domain: FactOperations. Measure: [Completed Orders].</p></div>
+<h2>DAX Measures</h2><section class="card"><h3>Orders</h3><pre>Orders =
+COUNTROWS(FactOperations)</pre></section><section class="card"><h3>Completed Orders</h3><pre>Completed Orders =
+CALCULATE([Orders], FactOperations[Status] = &quot;Completed&quot;)</pre></section><section class="card"><h3>On Time Orders</h3><pre>On Time Orders =
+CALCULATE([Orders], FactOperations[Status] = &quot;Completed&quot;, FactOperations[On Time Flag] = 1)</pre></section><section class="card"><h3>On Time %</h3><pre>On Time % =
+DIVIDE([On Time Orders], [Completed Orders])</pre></section><section class="card"><h3>Average Cycle Days</h3><pre>Average Cycle Days =
+CALCULATE(AVERAGE(FactOperations[Cycle Days]), FactOperations[Status] = &quot;Completed&quot;)</pre></section><section class="card"><h3>Open Orders</h3><pre>Open Orders =
+CALCULATE([Orders], FactOperations[Status] = &quot;Open&quot;)</pre></section><section class="card"><h3>Completed Orders PM</h3><pre>Completed Orders PM =
+IF(HASONEVALUE(DimDate[Year Month]), CALCULATE([Completed Orders], DATEADD(DimDate[Date], -1, MONTH)))</pre></section><section class="card"><h3>Completed Orders MoM %</h3><pre>Completed Orders MoM % =
+DIVIDE([Completed Orders] - [Completed Orders PM], [Completed Orders PM])</pre></section><section class="card"><h3>Completed Orders PY</h3><pre>Completed Orders PY =
+CALCULATE([Completed Orders], SAMEPERIODLASTYEAR(DimDate[Date]))</pre></section><section class="card"><h3>Completed Orders YoY %</h3><pre>Completed Orders YoY % =
+DIVIDE([Completed Orders] - [Completed Orders PY], [Completed Orders PY])</pre></section><section class="card"><h3>Completed Orders YTD</h3><pre>Completed Orders YTD =
+IF(HASONEVALUE(DimDate[Year]), CALCULATE([Completed Orders], DATESYTD(DimDate[Date])))</pre></section><section class="card"><h3>Completed Orders PY YTD</h3><pre>Completed Orders PY YTD =
+IF(HASONEVALUE(DimDate[Year]), CALCULATE([Completed Orders YTD], SAMEPERIODLASTYEAR(DimDate[Date])))</pre></section><section class="card"><h3>Completed Orders YTD Growth %</h3><pre>Completed Orders YTD Growth % =
+DIVIDE([Completed Orders YTD] - [Completed Orders PY YTD], [Completed Orders PY YTD])</pre></section><section class="card"><h3>On Time % PM</h3><pre>On Time % PM =
+IF(HASONEVALUE(DimDate[Year Month]), CALCULATE([On Time %], DATEADD(DimDate[Date], -1, MONTH)))</pre></section><section class="card"><h3>On Time Change pp</h3><pre>On Time Change pp =
+IF(NOT ISBLANK([On Time % PM]), ([On Time %] - [On Time % PM]) * 100)</pre></section></main></body></html>
