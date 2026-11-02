@@ -23,16 +23,18 @@ Baseline recovery branch: `backup/course224-before-generalization-2026-11-02`.
 - [x] Rebuild source-aligned Day05 and Day06 PBIP starters, each with full 160K transaction model.
 - [ ] Open, refresh and Save As PBIX inside Power BI Desktop; requires Windows Desktop QA.
 - [x] Replace Day07 named-person portal pages and generated pack with four domain scenario guides.
-- [ ] Remove old unused person-named files after cross-day dependency audit in Phase4.
+- [x] Audit and retire obsolete person-named files and old Day07/Day09 student starters; retain recoverability in Git history.
 - [x] Generate independent source-based PM, YoY and YTD numeric controls for sample period and run cross-year source checks.
 - [ ] Validate DAX outputs against those controls inside Power BI Desktop.
 
-## 4. Report UX, Days 08–10 and final release — PENDING
-- [ ] Rebuild day 8–10 assignments against new scenario model, trim overlap.
-- [ ] Unify chart design, branding, images and concept library.
-- [ ] Keep native-versus-AI numerical parity tests and add assessed capstone.
-- [ ] Scan old resources and remove only fully unused artifacts.
-- [ ] Validate all browser routes, file links and PBIX/PBIP behavior.
-- [ ] Replace videos with approved new recordings; publish agenda only when ready.
+## 4. Report UX, Days 08–10 — COMPLETED (SOURCE / SITE QA); DESKTOP RELEASE GATE OPEN
+- [x] Rebuild Day08–Day10 from the same exact Stage3 semantic model; trim scope overlap.
+- [x] Update teal-first site CSS and remove named trainees from active Concept Studio and Day08/Day10 challenge pages.
+- [ ] Visually inspect browser pages on desktop and mobile and verify image rendering.
+- [x] Introduce mandatory 100-point Capstone; document Native-vs-AI numerical parity as an optional Desktop test.
+- [x] Audit major active dependencies and retire disconnected old student-specific files; record retained assets in LEGACY_CLEANUP.md.
+- [x] Validate ZIP contents, site resource links, JS syntax, shared PBIP semantic model and capstone rubric in CI.
+- [ ] Run real browser interaction tests and open/refresh/validate PBIP/PBIX in Power BI Desktop.
+- [ ] Replace old recordings with approved new media and enable public agenda at launch; do not silently reuse old videos.
 
-**Scope note:** The present code still references old exercise files and some old learner names inside their content. The site foundation is migrated; those training files are explicitly scheduled for stages 2–4. The static course code is not secure authorization.
+**Release gate:** The four source-based stages are implemented, but `Power BI Desktop` and real-browser UX testing have NOT been completed. The portal's client-side password is not secure authorization. Treat the course as **source-ready / runtime-pending**, not fully certified.

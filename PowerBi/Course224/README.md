@@ -9,7 +9,7 @@
 - `day.html`: lesson resources, progress, guided practice and challenge.
 - `progress.js`: learner-name-scoped browser progress, independent of Course223.
 - `access.js`: publication flags, independent of old video embeds.
-- `data.js`: syllabus and original resource paths. The current binary exercises remain **legacy until rebuilt**.
+- `data.js`: syllabus and original resource paths. Core Day01–Day10 learner packages have been rebuilt and source-validated; PBIP/PBIX runtime approval remains pending.
 - `videos.js`: original embeds retained as source inventory; hidden via `showLegacyRecordings: false`.
 - `styles.css`: responsive styles.
 
@@ -33,5 +33,12 @@ GitHub Actions rebuilt and verified **all 4 ZIP packages**, including exact row-
 - Rebuilt Days 05–07 ZIPs with source-linked PBIP projects (5 tables for Days 05/06; 9 tables for Day07). The original legacy PBIX are NOT shipped in the new student ZIPs because they predate the 160K model.
 - The Day05/06 models include **160,000 original Jan–Apr 2026 transactions**; Day07 adds **160,000 clearly labelled synthetic Jan–Apr 2025 comparison transactions**. No 2025 sales were present in the Day04 source.
 - Discount Status is strictly `Discounted` / `Full Price`; Discount Amount = Gross Sales − Revenue, and customer/quantity measure names are standardized.
-- The Day07 portal links domain scenarios instead of names of the four former learners. Original named files may remain in the repository for historical Day08–10 dependency review.
+- The Day07 portal links domain scenarios instead of names of the four former learners. Former personal resources have been audited; obsolete learner-specific files are removed from the active tree while Git history remains the recovery source.
 - Source ZIP + PBIP static checks passed in GitHub Actions; **PBIP has not yet been opened and saved as PBIX in Power BI Desktop**. This remains a mandatory release blocker. Microsoft's desktop file conversion is not a programmatic operation.
+
+## Phase 4 result (2026-11-02)
+- Days 08, 09 and 10 now use a **byte-identical nine-table semantic model** cloned from the Stage3 Day07 PBIP, with one stage-specific instructional page. No fabricated completed Bookmarks, Tooltips or Drillthrough are claimed.
+- Day 08: Report Design Lab, one Tooltip, one Drillthrough and navigation. Day 09: Sync Slicers, Bookmark filter panel, Field Parameter and Dynamic Title. Day 10: mandatory **100-point Capstone**; AI-assisted visual is optional.
+- Concept Studio, domain missions, AI Prompt Builder and the primary course UI no longer depend on named trainees. The site uses teal-first styling and improved keyboard focus and reduced-motion support.
+- See `datasets/LEGACY_CLEANUP.md` for removals and deliberately retained assets.
+- The verified source ZIPs and site links are covered by Stage4 GitHub Actions, but **no Power BI Desktop acceptance has been performed**. See `week3/day10/CAPSTONE_QA_CHECKLIST.md` before enrolling learners in a production course.

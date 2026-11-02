@@ -18,6 +18,10 @@ on:
       - 'PowerBi/Course224/week3/day10/ai-visual-design-lab.html'
       - 'PowerBi/Course224/week3/day8/web/Day08_Every_Visual_Earns_Its_Place.html'
       - 'PowerBi/Course224/concepts/index.html'
+      - 'PowerBi/Course224/datasets/LEGACY_CLEANUP.md'
+      - 'PowerBi/Course224/week3/day7/web/index.html'
+      - 'PowerBi/Course224/week3/day7/web/gallery.html'
+      - 'PowerBi/Course224/IMPLEMENTATION_PHASES.md'
   workflow_dispatch:
 permissions:
   contents: write
