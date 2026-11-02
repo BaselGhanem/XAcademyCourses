@@ -178,16 +178,17 @@ const DAYS = [
     title: 'Build a Report People Want to Use',
     titleAr: 'ابنِ Report الناس فعلاً تريد استخدامه',
     hook: '20 Visual في صفحة واحدة لا تعني Dashboard قوي.',
-    mission: 'حوّل Analyst Report إلى Management Experience واضح وسريع.',
-    topics: ['Visual Hierarchy', 'Chart Selection', 'Grid & White Space', 'Tooltips', 'Drill Down (Quarter → Month)', 'Page Navigation', 'Bookmarks & Buttons', 'Scroller Custom Visual', 'HTML Landing Page Preview'],
-    build: ['Improve White Space and KPI Hierarchy', 'Build Multiple Tooltip Pages', 'Drill Down: Quarter to Month', 'Create Report Navigation', 'Try the Scroller Visual', 'Create a Bookmark', 'Preview the HTML Landing Page'],
-    challenge: 'اختر سؤال أعمال واضحًا، ولك حرية التصميم. كل Visual يجب أن يدافع عن وجوده.',
-    deliverable: 'Executive-ready Report بتجربة استخدام متماسكة.',
-    visualGuide: { image: 'concepts/assets/day8-learner-overview.webp', title: 'Day 8 — Learner Visual Guide', note: 'تحسين التصميم وWhite Space، وTooltips، وDrill Down، وNavigation، وScroller، وBookmarks' },
+    mission: 'حوّل تقريرك إلى تجربة إدارية واضحة باستخدام KPI Hierarchy وTooltip وDrillthrough وNavigation.',
+    topics: ['Visual Hierarchy', 'Chart Choice', 'White Space', 'Report Page Tooltip', 'Drillthrough', 'Page Navigation', 'Accessibility', 'Native Values QA'],
+    build: ['Open the Day08 PBIP built from the same Day07 semantic model', 'Audit two visuals: Keep / Change / Remove', 'Arrange 4 KPIs, trend and diagnostic visuals', 'Build a Report Page Tooltip', 'Create Drillthrough details with a Back button', 'Add Page Navigation', 'Test filter transfer and native values in Desktop', 'Present one documented before/after'],
+    challenge: 'حسّن رسمين بلا تغيير الأرقام، واشرح كيف ساعد التصميم على اتخاذ قرار، مهما كان تخصصك.',
+    deliverable: 'Executive-ready report page plus a tested Tooltip, Drillthrough and evidence of value.',
+    visualGuide: null,
     resources: [
-      { name: 'Day 08 — Unified Executive PBIR Starter', type: 'ZIP', url: 'week3/day8/downloads/Nova_Day08_Executive_360_PBIR.zip', note: 'مشروع PBIR مع أربع صفحات أمثلة مكتملة ونموذج البيانات الأصلي وصفحة انطلاق اليوم الثامن' },
-      { name: '08 — Visual Selection Cards', type: 'PDF', url: 'week3/day8/downloads/08_Visual_Selection_Cards.pdf', note: '5 صفحات: اختيار 8 أنواع من الرسومات مع أمثلة متعددة المجالات' },
-      { name: 'Day 08 — Every Visual Earns Its Place', type: 'Challenge', url: 'week3/day8/web/Day08_Every_Visual_Earns_Its_Place.html', note: 'تحدي 10–15 دقيقة: Audit وImprove وInteractions وInsight مع PDF للطباعة' }
+      { name: 'Day08 Universal PBIP Starter', type: 'ZIP', url: 'week3/day8/downloads/Nova_Day08_Executive_360_PBIR.zip', note: 'مشروع البداية مع نفس نموذج Day07؛ Tooltips وDrillthrough تُبنى أثناء الجلسة' },
+      { name: 'Report Design Lab', type: 'Guide', url: 'week3/day8/REPORT_DESIGN_LAB.md', note: 'خطة 120 دقيقة ونتائج قابلة للاختبار' },
+      { name: 'Visual Selection Cards', type: 'PDF', url: 'week3/day8/downloads/08_Visual_Selection_Cards.pdf', note: 'مرجع لاختيار نوع الرسم، وليس نتائج شركة فعلية' },
+      { name: 'Every Visual Earns Its Place', type: 'Challenge', url: 'week3/day8/web/Day08_Every_Visual_Earns_Its_Place.html', note: 'تحدي عام يناسب كل المجالات' }
     ]
   },
   {
@@ -198,17 +199,17 @@ const DAYS = [
     title: 'Master the Dashboard',
     titleAr: 'تحكم بالتقرير',
     hook: 'شو قيمة الـDashboard اذا المستخدم كل مرة بضيع بين الفلاتر والرسومات؟',
-    mission: 'من نفس Nova Business 360 رح نتعلم نتحكم بمستويات الفلاتر، نضبط التفاعل، ونخفي لوحة الفلاتر بدون ما نخسر الاختيارات.',
-    topics: ['Power Query vs Report Filtering', 'Visual / Page / Report Filters', 'Basic / Advanced / Top N / Relative Date', 'Filter Pane vs Slicer', 'Edit Interactions', 'Sync Slicers', 'Bookmarks + Selection Pane', 'Field Parameters', 'Dynamic Titles', 'Conditional Formatting + QA'],
-    build: ['Filter Scopes Demo', 'Smart Interactions', 'Sync between Pages', 'Show / Hide Filter Panel', 'One Visual, Multiple Perspectives'],
-    challenge: 'خلي مديرك يغير زاوية التحليل بدون ما يضيع: بدّل المنظور، اخفي الفلاتر، وقدم Insight واضح من نفس البيانات.',
-    deliverable: 'Nova Business 360 — Dashboard تفاعلي فيه لوحة فلاتر قابلة للاخفاء، Field Parameters، Dynamic Title وتحكم بالرسومات.',
-    visualGuide: { image: 'week3/day9/assets/Day09_Plan_Poster.svg', title: 'Day 09 — Master the Dashboard', note: 'Filter Scopes وSync Slicers وBookmarks وField Parameters' },
+    mission: 'أضف تحكمًا متقدمًا في الفلاتر والتفاعل دون إعادة بناء النموذج أو إخفاء اختيارات المستخدم.',
+    topics: ['Visual / Page / Report Filters', 'Sync Slicers', 'Selection Pane', 'Bookmarks', 'Field Parameters', 'Dynamic Titles', 'Interactions QA'],
+    build: ['Open Day09 PBIP from the verified Day07 source model', 'Compare Visual/Page/Report filter scopes', 'Sync DimDate slicer on two pages', 'Build Show/Hide filter panel with Display ON and Data OFF', 'Build Field Parameter from real fields', 'Create Dynamic Title for single and multi-select', 'Verify preserved slicer choices', 'Save As PBIX after Power BI Desktop testing'],
+    challenge: 'أنتج لوحة واضحة الفلاتر يمكن تغيير منظورها دون تضليل المستخدم، ثم أثبت نتيجة واحدة رقميًا.',
+    deliverable: 'Filter Panel + Sync Slicers + Field Parameter + Dynamic Title مع اختبارات واضحة.',
+    visualGuide: { image: 'week3/day9/assets/Day09_Plan_Poster.svg', title: 'Day 09 — Interactivity', note: 'Filter Scopes وBookmarks وField Parameters' },
     resources: [
-      { name: 'DAY 09 — STUDENT MISSIONS', type: 'Guide', url: 'week3/day9/DAY09_STUDENT_MISSIONS.md', note: 'مهام تحليلية بحسب المجال' },
-      { name: 'DAY 09 — FINAL CHECKLIST', type: 'Guide', url: 'week3/day9/DAY09_CHECKLIST.md', note: 'قائمة الفحص والتقييم' },
-      { name: 'DAY 09 — NOVA THEME', type: 'Guide', url: 'week3/day9/Nova_Day09_Theme.json', note: 'الوان التقرير بصيغة Power BI Theme' },
-      { name: 'NOVA — DAY 09 EXECUTIVE 360', type: 'PBIX', url: 'week3/day9/downloads/Nova_Day09_Executive_360.pbix', note: 'الملف الاصلي للتطبيق في Power BI Desktop' }
+      { name: 'Day09 Universal Interactivity PBIP', type: 'ZIP', url: 'week3/day9/downloads/Day09_INTERACTIVITY_LAB.zip', note: 'نفس النموذج الموحد مع صفحة تعليمات؛ التفاعلات ليست مهيأة مسبقًا' },
+      { name: 'Universal Student Missions', type: 'Guide', url: 'week3/day9/DAY09_STUDENT_MISSIONS.md', note: 'تمارين عامة تعتمد حقول النموذج الفعلية' },
+      { name: 'Acceptance Checklist', type: 'Guide', url: 'week3/day9/DAY09_CHECKLIST.md', note: 'اختبارات التزامن والـBookmarks والفلاتر' },
+      { name: 'Nova Theme', type: 'Guide', url: 'week3/day9/Nova_Day09_Theme.json', note: 'Report Theme بلون X Academy' }
     ]
   },
   {
@@ -216,23 +217,23 @@ const DAYS = [
     date: '2026-10-11',
     weekday: 'الأحد',
     phase: 'CREATE',
-    title: 'AI Visual Design Masterclass',
-    titleAr: 'من Native Visual الى تجربة HTML احترافية',
-    hook: 'الشكل الجميل لحاله مش كفاية. لازم توصف البيانات والحركة والابعاد للـAI، وبعدين تتأكد إن كل رقم وشريط صح.',
-    mission: 'من خلال AI Visual Design Lab رح تتعلم تحوّل فكرة تحليلية الى DAX HTML/SVG Visual مناسبة لمجالك، وتراجع الناتج وتصلح أخطاء التصميم والبيانات.',
-    topics: ['Before & After — Native vs HTML', 'Prompt Anatomy — 16 Decisions', 'Existing Measures & Dimensions', 'Filter Context & Data Grain', '19 Chart Types', '20 Design Effects', 'Safe Mode & Static-first Motion', 'Canvas Size & Responsive Layout', 'DAX HTML Content & Technical Limits', 'Visual Rescue & Quality Assurance'],
-    build: ['Watch the Before & After showcase', 'Learn what each Prompt field actually means', 'Open the AI Visual Design Lab and pick a scenario preset', 'Copy actual Measures and Dimensions from Nova', 'Choose chart, Top N, size, brand colors and visual effect', 'Keep Safe Mode ON and generate a complete DAX Measure', 'Compare with the original Native Visual using the same slicers', 'Try the Visual Rescue Mode when an effect clips or hides data', 'Finish your chosen scenario mission and explain your design decision'],
-    challenge: 'حوّل Visual من صفحتك الى HTML داخل Power BI. بدنا نفس الأرقام والفلترة، شكل واضح، وبيانات تضل ظاهرة حتى لو وقفت الـAnimation.',
-    deliverable: 'Prompt احترافي + HTML/DAX Measure + نفس الأرقام في Native Visual + نتيجة مخصصة من اختيارك + QA مكتملة.',
-    visualGuide: { image: 'week3/day10/assets/Day10_Studio_Roadmap.svg', title: 'Day 10 — AI Visual Design Masterclass', note: 'Discover → Learn → Create → Validate → Apply، مع خمس محطات ونقاط تحقق.' },
+    title: 'Capstone — From Data to Decision',
+    titleAr: 'المشروع النهائي: من البيانات إلى القرار',
+    hook: 'النتيجة ليست عدد الرسومات، بل تقرير صحيح يدعم قرارًا إداريًا يمكن الدفاع عنه.',
+    mission: 'ابنِ تقرير Power BI متكاملًا حسب سؤال أعمال تختاره، مع إثبات الحسابات والتفاعلات. AI Visual خيار إضافي.',
+    topics: ['Business Question', 'Data Grain', 'Model Integrity', 'DAX Verification', 'Executive Report UX', 'Interaction QA', '100-point Rubric', 'Optional AI Visual', 'Final Presentation'],
+    build: ['Open the Day10 Capstone PBIP starter', 'Define one business decision and its data limitations', 'Validate semantic model and 4 Measures', 'Create 4 KPI cards, trend and 2 diagnostic visuals', 'Add 2 slicers and one Tooltip or Drillthrough', 'Compare filtered metrics with source reference', 'Write one finding, one proposed action and one limitation', 'Save and reopen PBIX in Desktop', 'Optional AI HTML visual with native parity'],
+    challenge: 'سلّم تقريرًا قابلًا للتقييم من 100 نقطة يثبت صحة البيانات والحسابات ويخدم قرارًا؛ أي تخصص مقبول مع بيانات موثقة.',
+    deliverable: 'PBIX بعد اختبار Desktop مع Capstone Rubric، Screenshots، Data QA، وDecision Summary.',
+    visualGuide: { image: 'week3/day10/assets/Day10_Studio_Roadmap.svg', title: 'Optional Day10 AI Extension', note: 'مسار تصميم AI اختياري بعد المشروع الأساسي' },
     resources: [
-      { name: '01 — BEFORE & AFTER SHOWCASE', type: 'WEB', url: 'week3/day10/before-after.html', note: 'مقارنة تفاعلية بين شكل Native ورسم HTML، مع اختبار إيقاف الحركة' },
-      { name: '02 — PROMPT ANATOMY', type: 'WEB', url: 'week3/day10/prompt-anatomy.html', note: 'شرح 16 قرار مهم في كتابة Prompt احترافية وأمثلتها' },
-      { name: '03 — AI VISUAL DESIGN LAB', type: 'WEB', url: 'week3/day10/ai-visual-design-lab.html', note: 'المختبر الرئيسي: 20 تأثير، 19 Chart، Safe Mode وVisual Rescue' },
-      { name: '04 — PERSONAL STUDENT MISSIONS', type: 'WEB', url: 'week3/day10/student-missions.html', note: 'مهام تحليلية بحسب المجال مع نقاط التحقق' },
-      { name: '05 — PROMPT CHEAT SHEET', type: 'WEB', url: 'week3/day10/cheat-sheet.html', note: 'مرجع جاهز للطباعة أو الحفظ PDF، مع خيار تنزيل TXT' },
-      { name: '06 — FOUR DAX REFERENCE MEASURES', type: 'Guide', url: 'week3/day10/examples/README.md', note: 'أكواد مرجعية آمنة للحركة؛ مطلوب اختبارها داخل Power BI Desktop' },
-      { name: '07 — NOVA EXECUTIVE 360 PBIX', type: 'PBIX', url: 'week3/day9/downloads/Nova_Day09_Executive_360.pbix', note: 'نسخة Nova الأصلية؛ اعمل Save As قبل تطبيق Day 10' }
+      { name: 'Day10 Capstone Pack', type: 'ZIP', url: 'week3/day10/downloads/Day10_CAPSTONE.zip', note: 'PBIP ونموذج موحّد وRubric من 100 نقطة واختبارات QA' },
+      { name: 'Capstone Guide', type: 'Guide', url: 'week3/day10/CAPSTONE_GUIDE.md', note: 'متطلبات المشروع وتوزيع الـ120 دقيقة' },
+      { name: 'Capstone Rubric', type: 'Guide', url: 'week3/day10/CAPSTONE_RUBRIC.csv', note: 'ستة معايير مجموعها 100 نقطة' },
+      { name: 'Manual Desktop QA', type: 'Guide', url: 'week3/day10/CAPSTONE_QA_CHECKLIST.md', note: 'اختبارات لا يمكن إثباتها من GitHub وحده' },
+      { name: 'AI Visual Design Lab — Optional', type: 'WEB', url: 'week3/day10/ai-visual-design-lab.html', note: 'Prompt Builder ومعاينة تعليمية، وليس مولّد DAX فعلي' },
+      { name: 'Domain Visual Missions — Optional', type: 'WEB', url: 'week3/day10/student-missions.html', note: 'تحديات عامة دون أسماء متدربين' },
+      { name: 'Reference DAX — Optional', type: 'Guide', url: 'week3/day10/examples/README.md', note: 'أمثلة يجب اختبارها داخل Power BI Desktop' }
     ]
   }
 ];
