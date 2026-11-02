@@ -1,0 +1,72 @@
+{
+  "course": "Course224",
+  "version": "stage2",
+  "packages": {
+    "1": {
+      "path": "week1/day1/downloads/Day01_CONNECT_EVERYTHING.zip",
+      "files": {
+        "00_COURSE_DATA_CONTRACT.txt": "2dd6985088ce92cb84d38396c3e12ccab9f5b979b69a801b1a3026ac9ec27648",
+        "00_UNIVERSAL_LEARNER_GUIDE.txt": "3ebc65ad30bafeec2865be85f33cfc039a9c88670fb60e8ce1eedfb66560f313",
+        "Day01_CONNECT_EVERYTHING/00_DATASET_SCALE.txt": "61222885cbe5e0013c9073a64c04bd0084671a7f0fc24e1201298ce8638fc94d",
+        "Day01_CONNECT_EVERYTHING/00_START_HERE.txt": "5b20641252660ed589e26888ff4602a8fee5e7326acf49c88c147b60cbd60fa5",
+        "Day01_CONNECT_EVERYTHING/01_Nova_Product_Master.csv": "96fa2cf66c5c867fbff455b1b4e79b7c378c7b1e047666cc3ddf670623e3965c",
+        "Day01_CONNECT_EVERYTHING/02_Nova_Sales_Transactions.csv": "ba0990b0d2033e39bef9b987bb54ec5e16cdcd6d15357c7b0178626d19077730",
+        "Day01_CONNECT_EVERYTHING/03_Nova_Workforce_Snapshot.txt": "c609c0bb68d91ddb54632bed9359743b6445321d8a36189f89f26f0b3ed2a0cc",
+        "Day01_CONNECT_EVERYTHING/04_Nova_Budget_and_Targets.pdf": "1413912a4f6205102be7b3629b286994e11df5da540d7e152fe39bdaf2a2f3e3",
+        "Day01_CONNECT_EVERYTHING/05_ETL_Quick_Reference.pdf": "a54017950b47d96c243f6eb9ab46d94eeb15d354f1dec683968b1c4084db7792",
+        "Day01_CONNECT_EVERYTHING/05_Nova_ETL_Reference.xlsx": "38be50dc7f390594146746bf7daf8642afaeef265f526a15ed9a341b12612c9c",
+        "Day01_CONNECT_EVERYTHING/06_Nova_Day_01_Challenge.xlsx": "3cc748f2d4c0ba1e2bf7ecedaa027a44ec30f69159f442d3d75be5461931c3c1",
+        "Day01_CONNECT_EVERYTHING/web/Branch_Performance.html": "cf7de5060b26304e7b396867d0e1cd4f32b6aef84b1c1e3bca14140c313a28e8",
+        "Day01_CONNECT_EVERYTHING/web/Nova_Company_Profile.html": "d72a35db4ae419207f6052e8d4a744f7b8f2d9680aa556722526c5fd83bc59d7"
+      }
+    },
+    "2": {
+      "path": "week1/day2/downloads/Day02_CLEAN_DATA.zip",
+      "files": {
+        "00_COURSE_DATA_CONTRACT.txt": "2dd6985088ce92cb84d38396c3e12ccab9f5b979b69a801b1a3026ac9ec27648",
+        "00_UNIVERSAL_LEARNER_GUIDE.txt": "93cfc8a2b13e3f4565dd3be17eda2a8a35e8a7cd98f8120e8fc7765a7d6b9242",
+        "Day02_CLEAN_DATA/00_START_HERE.txt": "294b23a266816e36c9ab74f344af14ca27c48038dbfd4b1447811acdddb6336a",
+        "Day02_CLEAN_DATA/01_Nova_Branch_Daily_Performance_Dirty_LARGE.csv": "e6caaa06c35c8b84512753bcbd84f9d140835db4cec447f58c31fb3d066344ea",
+        "Day02_CLEAN_DATA/02_Nova_Customer_Master_Dirty_LARGE.csv": "c1e527732831b58e142800a5f2ea215a41583a42d62f7a6651e3604c3ba136a4",
+        "Day02_CLEAN_DATA/03_Nova_Cleaning_Checklist.xlsx": "4368735300b67ffae49ee954e1851017acde8973e54d16a4f8326a64a8ac6d58"
+      }
+    },
+    "3": {
+      "path": "week1/day3/downloads/Day03_STOP_COPYING_FILES_LEARNER.zip",
+      "files": {
+        "00_COURSE_DATA_CONTRACT.txt": "2dd6985088ce92cb84d38396c3e12ccab9f5b979b69a801b1a3026ac9ec27648",
+        "00_UNIVERSAL_LEARNER_GUIDE.txt": "276b32b502750cec254401e72a068680ab708fd6fc67843a04bbe6793ae524c8",
+        "Day03_STOP_COPYING_FILES/00_AUTOMATION_SCALE.txt": "c31694661a3df5eb0350d30646f7dcd3471b27a73810ca10535b7c49bf39bf16",
+        "Day03_STOP_COPYING_FILES/00_START_HERE.txt": "69ac1790afe4869ac7c1c54586cf61a49cdebd1ee7266e0629c48e61a0f37162",
+        "Day03_STOP_COPYING_FILES/02_Nova_Branch_Master.csv": "776695c24ed50b4eb413e607241925c151c6f7abfc98220fa56e274301810be3",
+        "Day03_STOP_COPYING_FILES/03_Nova_Customer_Master.csv": "a78420516c03dfb7007124748a01308ec6363e4ede7f93b5713cf75eb550dec0",
+        "Day03_STOP_COPYING_FILES/04_Nova_Product_Master.csv": "96fa2cf66c5c867fbff455b1b4e79b7c378c7b1e047666cc3ddf670623e3965c",
+        "Day03_STOP_COPYING_FILES/05_Nova_Automation_Challenge.xlsx": "2e733c175fe2bde4d00657d509331da7c9bd9d0c4c73d79d705c4c4f4af51d18",
+        "Day03_STOP_COPYING_FILES/Monthly_Sales/Nova_Sales_2026-01_January.csv": "14b29da5063de1e9e12dc6277d522dca89a743c627fa80a83fddbfd363d9810a",
+        "Day03_STOP_COPYING_FILES/Monthly_Sales/Nova_Sales_2026-02_February.csv": "78178343b14757b9b079fe925ca3e0133ec16083268d3ef4c00489b0e48185c9",
+        "Day03_STOP_COPYING_FILES/Monthly_Sales/Nova_Sales_2026-03_March.csv": "414d930ab0b90db049fae4e57539bbc3b73c84539ddc861f9868e0c82d81ac5d",
+        "Day03_STOP_COPYING_FILES/NEW_MONTH_TO_DROP_AFTER_BUILD/Nova_Sales_2026-04_April.csv": "7016cd1a8bff3991900715d32be5bd1093adf113b115179a7573c4a4b86c1d46"
+      }
+    },
+    "4": {
+      "path": "week2/day4/downloads/Day04_MODEL_THE_BUSINESS.zip",
+      "files": {
+        "00_COURSE_DATA_CONTRACT.txt": "2dd6985088ce92cb84d38396c3e12ccab9f5b979b69a801b1a3026ac9ec27648",
+        "00_START_HERE.txt": "a070b31e103911dfad0452de987858dc7abc053854e4d017972d21fd7c21f18f",
+        "00_UNIVERSAL_LEARNER_GUIDE.txt": "06d7837e68d4814300973decbc7568d4ac0274e8ebbce9e2321a05082a9149be",
+        "01_REVIEW_MERGE/01_Sales_Sample.xlsx": "385de808ba8bac6f3400a21232bde03fd1eb7d491e638ae66226711cc00cef04",
+        "01_REVIEW_MERGE/02_Product_Master.xlsx": "48270663112a7f6999f60670794b32b67694b525176efb3703899ac8e5a43090",
+        "02_REVIEW_APPEND/Sales_February.xlsx": "3fbe75044a68644bb8d222d6e4f6580bb8697a7ee8075ccd1617bab5b38fa63e",
+        "02_REVIEW_APPEND/Sales_January.xlsx": "94449daf057dc03c4294c260f57ff3a5ac9cfade5c2d5cf8e69cf1abbc5fbb1b",
+        "02_REVIEW_APPEND/Sales_March.xlsx": "429a72cbfb8dc12fea83dc0f4ff49bf0e991995e7cd3cb68930d0c0387af687c",
+        "03_REVIEW_FOLDER/Monthly_Sales_Excel/Sales_Apr.xlsx": "6d79a197efbf61af73f6e9040c9d349e7f79e4f0a5dcce7f5bd0ec38d19d951a",
+        "03_REVIEW_FOLDER/Monthly_Sales_Excel/Sales_Feb.xlsx": "53d55e581831c38267c911aef3b13f09ffc5b83fae5edc4ff1a5437c5a9a3684",
+        "03_REVIEW_FOLDER/Monthly_Sales_Excel/Sales_Jan.xlsx": "ac3eb8ab0952d466d3251ff1a86c11f77791e952c69dfbe28736585c4ed0f0cd",
+        "03_REVIEW_FOLDER/Monthly_Sales_Excel/Sales_Mar.xlsx": "d124f11e494571454ca6964ccc39de81ae44c12f2a5fcae8425e4ef07755b875",
+        "03_REVIEW_FOLDER/NEW_MONTH_TO_DROP_AFTER_BUILD/Sales_May.xlsx": "08fe7e942e1e50295b089640c8ec318a287289b5678edede28e190bd8a6dc524",
+        "04_MODEL_LAB/Nova_Day04_Model_Lab.xlsx": "7249fd61afe41092bde1cadf0f1c5513fb565afd88449e2a93cac5bf0d5c8123",
+        "05_Day04_Model_Checklist.xlsx": "86db3dea2f2be692b6907585387504818110f28b4609c5b0b725976f56851921"
+      }
+    }
+  }
+}

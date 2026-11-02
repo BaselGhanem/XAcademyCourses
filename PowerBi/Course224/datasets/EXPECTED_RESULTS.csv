@@ -1,0 +1,30 @@
+Scope,Metric,Value,Unit
+Day01,Sales Jan-Mar Rows,120000,rows
+Day02,Raw Branch Rows,50100,rows
+Day02,Unique Logical Branch Rows,50000,rows
+Day02,Exact Duplicates,100,rows
+Day02,Customer Raw Rows,8008,rows
+Day02,Customer Exact Duplicates,8,rows
+Day02,Invalid Date Source Records,289,rows
+Day02,Revenue Null Source Records,236,rows
+Day02,Actual Headcount N/A Source Records,194,rows
+Day02,Cost Null Source Records,128,rows
+Day04,FactSales Rows,160000,rows
+Day04,Folder After May,200000,rows
+Day04,DimDate Rows,730,dates
+Master,Products,240,rows
+Master,Customers,8000,rows
+Master,Branches,100,rows
+2026-01,Transactions,40000,rows
+2026-01,Net Revenue,3143503.19,JOD
+2026-02,Transactions,40000,rows
+2026-02,Net Revenue,3132584.38,JOD
+2026-03,Transactions,40000,rows
+2026-03,Net Revenue,3110029.26,JOD
+2026-04,Transactions,40000,rows
+2026-04,Net Revenue,3147901.82,JOD
+2026-05,Transactions,40000,rows
+2026-05,Net Revenue,3136566.87,JOD
+Jan-Mar,Net Revenue,9386116.83,JOD
+Jan-Apr,Net Revenue,12534018.65,JOD
+Jan-May,Net Revenue,15670585.52,JOD

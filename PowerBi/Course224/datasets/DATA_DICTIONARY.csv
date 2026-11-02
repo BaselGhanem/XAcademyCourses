@@ -1,0 +1,21 @@
+Table,Column,Type,Grain,Definition
+FactSales,Transaction ID,Text,Transaction ID,Unique business transaction identifier
+FactSales,Order Date,Date,Transaction ID,Typed date of sale
+FactSales,Customer ID,Text,Transaction ID,References DimCustomer[Customer Code]
+FactSales,Product ID,Text,Transaction ID,References DimProduct[Product ID]
+FactSales,Branch ID,Text,Transaction ID,References DimBranch[Branch ID]
+FactSales,Quantity,Integer,Transaction ID,Units per transaction
+FactSales,Unit Price,Decimal JOD,Transaction ID,Actual transaction unit price
+FactSales,Discount %,Decimal fraction,Transaction ID,0.10 means 10 percent
+FactSales,Revenue,Decimal JOD,Transaction ID,Net revenue AFTER discount and rounding
+DimProduct,Product ID,Text,Product ID,"Unique product, 240 rows"
+DimCustomer,Customer Code,Text,Customer Code,"Unique customer, 8000 rows"
+DimBranch,Branch ID,Text,Branch ID,"Unique branch, 100 rows"
+DimBranch,Region,Text,Branch ID,Authoritative branch sales region
+DimBranch,Channel,Text,Branch ID,Authoritative branch sales channel
+DimDate,Date,Date,Date,"730 contiguous typed dates, calendar 2025–2026"
+Branch Daily Dirty,Date,Mixed text,Branch ID + Date,Contains invalid-date and three date formats
+Branch Daily Dirty,Revenue,Decimal or null,Branch ID + Date,Null does not mean zero
+Web Branch Performance,Week Start,Date,Branch ID + Week Start,"Independent weekly KPIs, not summed FactSales"
+Workforce Snapshot,Employee ID,Text,Employee ID,Headcount is not additive across time
+Budget PDF,Region,Text,Region + Period,"Aggregate budget, not transaction-grain facts"
