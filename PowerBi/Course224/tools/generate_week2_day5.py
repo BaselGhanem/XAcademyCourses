@@ -194,12 +194,18 @@ def build():
     if WORK.exists():
         shutil.rmtree(WORK)
     WORK.mkdir(parents=True)
-    restore_start_pbix(WORK/'01_Nova_Day05_Start.pbix')
+    # Old PBIX was generated before the 160K Day04 rebuild. It is NOT an approved starter.
+    import io
+    with zipfile.ZipFile(ROOT/'week2/day4/downloads/Day04_MODEL_THE_BUSINESS.zip') as source:
+        (WORK/'01_Nova_Stage2_Model_Source.xlsx').write_bytes(source.read('04_MODEL_LAB/Nova_Day04_Model_Lab.xlsx'))
+    pbip=ROOT/'week2/day5/downloads/Nova_Day05_Start_PBIP.zip'
+    if not pbip.exists(): raise FileNotFoundError('Build the canonical Stage3 PBIP project first.')
+    shutil.copy2(pbip,WORK/'01_Nova_Day05_Start_PBIP.zip')
 
     (WORK/'00_START_HERE.txt').write_text(
       'NOVA DISTRIBUTION GROUP — DAY 05: CALCULATE & VISUALIZE\n\n'
       'IMPORTANT\n'
-      'There is NO new dataset in Day 5. Start from the included Nova_Day05_Start.pbix, which is the Day 4 model supplied by the trainer.\n'
+      'There is NO new dataset in Day 5. Start with 01_Nova_Day05_Start_PBIP.zip, which contains the complete Day04 160,000-row semantic model. Open the .pbip project in Power BI Desktop, Refresh, and then Save As PBIX after validation.\n'
       'The rest of the pack contains only the new Day 5 learning material.\n\n'
       'TODAY\n'
       '1) Add 3 Power Query columns to FactSales: Gross Sales, Discount Amount, Discount Status.\n'
@@ -208,7 +214,7 @@ def build():
       '4) Build the first Sales Overview report.\n'
       '5) Add Slicers and test how the same Measures change with filters.\n\n'
       'FILES\n'
-      '01_Nova_Day05_Start.pbix\n'
+      '01_Nova_Day05_Start_PBIP.zip\n01_Nova_Stage2_Model_Source.xlsx (reference only)\n'
       '02_Power_Query_Calculations.xlsx\n'
       '03_First_DAX_Measures.xlsx\n'
       '04_Sales_Overview_Blueprint.xlsx\n'

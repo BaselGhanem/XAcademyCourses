@@ -1,4 +1,4 @@
-"""Build the Day 7 four-role lab. Preserve original Day 4 data byte-for-byte."""
+"""Build the Day 7 domain-scenario lab using the full 160K Day04 model."""
 from pathlib import Path
 from datetime import date,timedelta
 import csv,json,io,random,calendar,zipfile,base64,zlib,hashlib,html,shutil,uuid
@@ -30,11 +30,14 @@ def build_data():
   types=['double' if isinstance(rows[0][i],(float,int)) else 'string' for i in range(len(header))]
   table(n,header,rows,types)
  it=wb['FactSales'].values;header=list(next(it));original=[list(r) for r in it]
+ for r in original:
+  if isinstance(r[1], (date,)): r[1]=r[1].date().isoformat() if hasattr(r[1],'date') else r[1].isoformat()
+ assert len(original)==160000, 'Day07 must continue all Day04 transactions'
  header+=['Gross Sales','Discount Amount','Discount Status','Source']
  rows=[]
  for r in original:
   gross=round(r[5]*r[6],2);disc=round(gross-r[8],2)
-  rows.append(r+[gross,disc,'Full Price' if disc==0 else 'Discounted Price','Day04 original'])
+  rows.append(r+[gross,disc,'Full Price' if disc==0 else 'Discounted','Day04 original'])
  # Comparable 2025 has the same transaction count, customer/product/branch mapping.
  # Quantity and discount vary by month and category. This is explicitly synthetic.
  cat={r[0]:r[2] for r in DATA['DimProduct'][1]}
@@ -45,7 +48,7 @@ def build_data():
   factor*=1+((sum(ord(c) for c in cat[rr[3]])%7)-3)*.025
   rr[5]=max(1,round(rr[5]*factor));rr[6]=round(rr[6]*.96,2)
   gross=round(rr[5]*rr[6],2);rr[8]=round(gross*(1-rr[7]),2);disc=round(gross-rr[8],2)
-  rows.append(rr+[gross,disc,'Full Price' if disc==0 else 'Discounted Price','Synthetic 2025 comparison'])
+  rows.append(rr+[gross,disc,'Full Price' if disc==0 else 'Discounted','Synthetic 2025 comparison'])
  table('FactSales',header,rows,['string','dateTime','string','string','string','int64','double','double','double','double','double','string','string'])
  dates=[];d=date(2025,1,1)
  while d<=date(2026,12,31):
@@ -80,7 +83,7 @@ def build_data():
 def build_measures():
  measure('FactSales','Total Revenue','SUM(FactSales[Revenue])','#,##0.00',meaning='Net revenue after discount in JOD.')
  measure('FactSales','Transactions','COUNTROWS(FactSales)',meaning='One row is one sales transaction.')
- measure('FactSales','Customer Count','DISTINCTCOUNT(FactSales[Customer ID])')
+ measure('FactSales','Customers','DISTINCTCOUNT(FactSales[Customer ID])')
  measure('FactSales','Total Quantity','SUM(FactSales[Quantity])')
  measure('FactSales','Average Transaction Value','DIVIDE([Total Revenue], [Transactions])','#,##0.00')
  measure('FactOperations','Orders','COUNTROWS(FactOperations)')
@@ -117,10 +120,10 @@ def build_measures():
  measure('FactWorkforce','Staffing Coverage Change pp','IF(NOT ISBLANK([Staffing Coverage % PM]), ([Staffing Coverage %] - [Staffing Coverage % PM]) * 100)','0.0 "pp"','time')
 
 ROLES=[
- dict(name='MAHMOUD',ar='محمود',domain='SALES',table='FactSales',base='Total Revenue',prefix='Revenue',cards=['Total Revenue','Revenue PY','Revenue YoY %','Customer Count'],axis=('DimProduct','Category'),bar='Total Revenue',question='أي فئة ارتفعت مبيعاتها مقارنة بالسنة الماضية؟',slicer=('DimProduct','Category')),
- dict(name='SOMAYA',ar='سمية',domain='OPERATIONS',table='FactOperations',base='Completed Orders',prefix='Completed Orders',cards=['Orders','Completed Orders','On Time %','Average Cycle Days'],axis=('DimBranch','Region'),bar='Completed Orders',question='أي منطقة تحتاج تحسين الالتزام بوقت التسليم؟',slicer=('FactOperations','Priority')),
- dict(name='HISHAM',ar='هشام',domain='FINANCE',table='FactFinance',base='Finance Revenue',prefix='Finance Revenue',cards=['Finance Revenue','Operating Profit','Operating Margin %','Budget Achievement %'],axis=('DimBranch','Region'),bar='Budget Variance',question='أين الإيرادات أقل من الموازنة رغم نموها؟',slicer=('DimBranch','Channel')),
- dict(name='ENAS',ar='إيناس',domain='WORKFORCE',table='FactWorkforce',base='Headcount',prefix='Headcount',cards=['Headcount','Planned Headcount','Staffing Gap','Staffing Coverage %'],axis=('DimDepartment','Department'),bar='Staffing Gap',question='أي قسم يحتاج زيادة الموارد لتغطية العمل؟',slicer=('DimDepartment','Department'))
+ dict(name='PERFORMANCE',ar='الأداء والمبيعات',domain='SALES',table='FactSales',base='Total Revenue',prefix='Revenue',cards=['Total Revenue','Revenue PY','Revenue YoY %','Customers'],axis=('DimProduct','Category'),bar='Total Revenue',question='أي فئة تحسن أداؤها مقارنة بالسنة السابقة؟',slicer=('DimProduct','Category')),
+ dict(name='OPERATIONS',ar='العمليات',domain='OPERATIONS',table='FactOperations',base='Completed Orders',prefix='Completed Orders',cards=['Orders','Completed Orders','On Time %','Average Cycle Days'],axis=('DimBranch','Region'),bar='Completed Orders',question='أين يتأخر تنفيذ الطلبات؟',slicer=('FactOperations','Priority')),
+ dict(name='FINANCE',ar='المالية',domain='FINANCE',table='FactFinance',base='Finance Revenue',prefix='Finance Revenue',cards=['Finance Revenue','Operating Profit','Operating Margin %','Budget Achievement %'],axis=('DimBranch','Region'),bar='Budget Variance',question='أين تظهر فروقات الموازنة؟',slicer=('DimBranch','Channel')),
+ dict(name='WORKFORCE',ar='الموارد البشرية',domain='WORKFORCE',table='FactWorkforce',base='Headcount',prefix='Headcount',cards=['Headcount','Planned Headcount','Staffing Gap','Staffing Coverage %'],axis=('DimDepartment','Department'),bar='Staffing Gap',question='ما فجوات الموارد في الأقسام؟',slicer=('DimDepartment','Department'))
 ]
 
 def expression(tab,prop,kind='Column'):return {kind:{'Expression':{'SourceRef':{'Entity':tab}},'Property':prop}}
@@ -238,7 +241,7 @@ def build_guides():
   (guide/f'{r["name"]}_DAX.txt').write_text('\n\n'.join(m['name']+' =\n'+m['expression'] for m in MEAS[tab]),encoding='utf-8')
  sources='''<div class="card"><h2>بداية التشغيل</h2><p>افتح ملف البداية مباشرة داخل باور بي آي، ثم انتقل إلى الصفحة التي تحمل اسمك واتبع دليل التدريب. البيانات مدمجة داخل الملف ولا تحتاج إرفاق ملفات المصدر لفتحه.</p><pre>02_PROJECTS/START/Nova_Day07_START.pbix</pre><p>للتحديث والتحقق قبل المحاضرة:</p><pre>Home → Refresh
 Table tools → Mark as date table → DimDate[Date]</pre><p>اختر سنة 2026. استخدم إصدارا حديثا من البرنامج؛ التحويل لا يضمن التوافق مع الإصدارات القديمة.</p><p>ملف البداية محول ومحفوظ بواسطة المدرب. فحصنا سلامة الحزمة والصفحات الست ووجود نموذج البيانات؛ اختبار الحسابات والتحديث داخل البرنامج يبقى ضمن مراجعة المدرب.</p><p>نسختا المتابعة والمرجع متاحتان للمدرب في حزمة منفصلة بصيغة المشروع، وتحتاجان الفتح والتحويل داخل البرنامج.</p><pre>Day07_TRAINER_REFERENCES.zip</pre></div>'''
- sources+='''<div class="card"><h2>البيانات</h2><p>البيانات تدريبية. حافظنا على ملف اليوم الرابع كاملا دون تغيير، وعلى جميع معاملات المبيعات الأصلية البالغ عددها 40,000. أضفنا 40,000 معاملة تدريبية للمقارنة بسنة 2025.</p><p>كل القطاعات تغطي يناير إلى أبريل في 2025 و2026. جدول التاريخ يغطي السنتين كاملتين. الأشهر بدون بيانات لا تمثل مبيعات صفرا مثبتة.</p><p>العمليات: صف واحد لكل طلب. المالية: صف واحد لكل فرع وشهر، بقيم الإيراد والتكلفة وموازنة الإيراد بالدينار الأردني. الموارد: لقطة واحدة لكل فرع وقسم في نهاية الشهر.</p><p>المالية والعمليات والموارد حالات مستقلة تستخدم أبعادا مشتركة؛ لا يشترط أن تتطابق أرقام إيراد المالية مع معاملات مبيعات اليوم الرابع.</p></div>'''
+ sources+='''<div class="card"><h2>البيانات</h2><p>البيانات تدريبية. حافظنا على ملف اليوم الرابع كاملا دون تغيير، وعلى جميع معاملات المبيعات الأصلية البالغ عددها 160,000. أضفنا 160,000 معاملة تدريبية للمقارنة بسنة 2025.</p><p>كل القطاعات تغطي يناير إلى أبريل في 2025 و2026. جدول التاريخ يغطي السنتين كاملتين. الأشهر بدون بيانات لا تمثل مبيعات صفرا مثبتة.</p><p>العمليات: صف واحد لكل طلب. المالية: صف واحد لكل فرع وشهر، بقيم الإيراد والتكلفة وموازنة الإيراد بالدينار الأردني. الموارد: لقطة واحدة لكل فرع وقسم في نهاية الشهر.</p><p>المالية والعمليات والموارد حالات مستقلة تستخدم أبعادا مشتركة؛ لا يشترط أن تتطابق أرقام إيراد المالية مع معاملات مبيعات اليوم الرابع.</p></div>'''
  sources+='''<div class="card"><h2>خطة المدرب — ساعتان</h2><table><tr><th>الوقت</th><th>التطبيق</th></tr><tr><td>0–10</td><td>فتح المشروع وتحديث البيانات والتأكد من العلاقات.</td></tr><tr><td>10–25</td><td>مثال مشترك: إيراد الشهر السابق ونسبة التغير، ثم الفرق بين فلتر الصفحة وفلتر الرسم.</td></tr><tr><td>25–40</td><td>كل متدرب يبني بطاقاته. أول نقطة تحقق.</td></tr><tr><td>40–55</td><td>مقارنة الشهر السابق أو السنة الماضية. ثاني نقطة تحقق.</td></tr><tr><td>55–70</td><td>الاتجاه والرسم والفرز. ثالث نقطة تحقق.</td></tr><tr><td>70–95</td><td>الفلاتر والمصفوفة والتنسيق الشرطي.</td></tr><tr><td>95–110</td><td>اختبار الأرقام ومقارنة النتائج بالمرجع.</td></tr><tr><td>110–120</td><td>استنتاج واحد لكل متدرب وحفظ الملف.</td></tr></table></div>'''
  sources+='''<div class="card"><h2>المتابعة والمرجع</h2><p>البداية: النموذج والصيغ الأساسية، صفحة المثال المشترك، وأماكن واضحة لكل رسم.</p><p>المتابعة: الصيغ الزمنية وبطاقات الأرقام والاتجاه لكل متدرب؛ يكمل الرسوم والمصفوفة بنفسه.</p><p>المرجع: الصيغ وبطاقات الأرقام والاتجاه والرسم والمصفوفة. يضيف المدرب فلتر السنة والتنسيق الشرطي بعد التحقق داخل البرنامج.</p><p>ابدأ بالسنة 2026 كاملة لرؤية اتجاه يناير إلى أبريل. اختر شهرا واحدا لقياس التغير الشهري؛ اختيار أكثر من شهر يعيد قياس الشهر السابق فارغا عمدا.</p></div>'''
  sources+='<div class="card"><h2>التصاميم المرجعية</h2><p><a href="05_VISUAL_REFERENCES/gallery.html">اللوحات الأربع المتوقعة</a></p></div>'
@@ -272,8 +275,8 @@ def validate(original):
  for n,keycols in [('FactSales',['Transaction ID']),('FactOperations',['Order ID']),('FactFinance',['Record ID']),('FactWorkforce',['Snapshot Date','Branch ID','Department ID'])]:
   h,rs=DATA[n];assert len({tuple(r[h.index(c)] for c in keycols) for r in rs})==len(rs),n
  rows=DATA['FactSales'][1]
- assert len(rows)==80000
- assert sum(r[-1]=='Day04 original' for r in rows)==40000
+ assert len(rows)==320000
+ assert sum(r[-1]=='Day04 original' for r in rows)==160000
  controls={'data_rows':{n:len(r) for n,(h,r) in DATA.items()},'original_day4_sha256':hashlib.sha256(original).hexdigest(),'desktop_tested':False,'period':'Jan-Apr 2025 and Jan-Apr 2026','latest_month_checks':{}}
  for year in [2025,2026]:
   for mo in range(1,5):
@@ -291,34 +294,6 @@ def validate(original):
  return controls
 
 def main():
- if WORK.exists():shutil.rmtree(WORK)
- WORK.mkdir(parents=True)
- original=build_data();build_measures()
- for stage in ['START','CHECKPOINT','FINAL_REFERENCE']:
-  folder=WORK/'02_PROJECTS'/stage;build_model(folder,stage);build_report(folder,stage)
- build_guides();shutil.copytree(ROOT/'week3/day7/icons',WORK/'06_ICONS',dirs_exist_ok=True);controls=validate(original)
- visuals=WORK/'05_VISUAL_REFERENCES';visuals.mkdir(parents=True,exist_ok=True)
- for image in (ROOT/'week3/day7/images').glob('*.png'):
-  Image.open(image).save(visuals/(image.stem+'.webp'),format='WEBP',quality=96,method=6)
- gallery=(ROOT/'week3/day7/web/gallery.html').read_text().replace('../images/','').replace('.png','.webp').replace('href="index.html"','href="../00_START_HERE.html"')
- for role in ROLES:gallery=gallery.replace('href="'+role['name']+'_'+role['domain']+'.html"','href="../03_GUIDES/'+role['name']+'_'+role['domain']+'.html"')
- (visuals/'gallery.html').write_text(gallery,encoding='utf-8')
- theme={'name':'X Academy Nova','dataColors':['#099999','#426A8F','#B99355','#7966A8','#658977'],'background':'#F3F7F7','foreground':'#13233B','tableAccent':'#099999','textClasses':{'title':{'fontFace':'Segoe UI','fontSize':14},'label':{'fontFace':'Segoe UI','fontSize':11}}}
- write_json(WORK/'03_GUIDES/X_Academy_Nova_Theme.json',theme)
- pbix=ROOT/'week3/day7/downloads/Nova_Day07_START.pbix'
- if not pbix.exists():raise FileNotFoundError('The trainer-converted START PBIX is required.')
- with zipfile.ZipFile(pbix) as check:
-  if check.testzip() is not None or 'DataModel' not in check.namelist():raise ValueError('Invalid START PBIX')
- with zipfile.ZipFile(OUT.with_name('Day07_TRAINER_REFERENCES.zip'),'w',zipfile.ZIP_DEFLATED,compresslevel=9) as refs:
-  for stage in ['CHECKPOINT','FINAL_REFERENCE']:
-   for p in sorted((WORK/'02_PROJECTS'/stage).rglob('*')):
-    if p.is_file():refs.write(p,p.relative_to(WORK))
- shutil.rmtree(WORK/'02_PROJECTS')
- starter=WORK/'02_PROJECTS/START';starter.mkdir(parents=True)
- shutil.copy2(pbix,starter/pbix.name)
- OUT.parent.mkdir(parents=True,exist_ok=True)
- with zipfile.ZipFile(OUT,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
-  for p in sorted(WORK.rglob('*')):
-   if p.is_file():z.write(p,p.relative_to(WORK))
- print(json.dumps({'zip':str(OUT),'bytes':OUT.stat().st_size,'rows':controls['data_rows'],'april2026':controls['latest_month_checks']['2026-04']},indent=2))
+ raise RuntimeError('Use generate_stage3.py: the legacy role-specific PBIX starter is retired.')
+
 if __name__=='__main__':main()

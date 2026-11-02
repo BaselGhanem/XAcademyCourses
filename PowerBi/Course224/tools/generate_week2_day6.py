@@ -90,13 +90,13 @@ def save_filter_context(path):
     ref.sheet_view.showGridLines=False
     title_block(ref,'WHAT WE ALREADY HAVE','هذا الملف يبدأ من نهاية Day 5 كما تم بناؤها في الصف.')
     pq=[
-      ['Power Query','Discount Amount','[Discount %] * [Revenue]'],
-      ['Power Query','Sales Value','[Unit Price] * [Quantity]'],
-      ['Power Query','Discount Status','if [Discount Amount] = 0 then "Full Price" else "Discounted Price"'],
+      ['Power Query','Discount Amount','[Gross Sales] - [Revenue]'],
+      ['Power Query','Gross Sales','[Quantity] * [Unit Price]'],
+      ['Power Query','Discount Status','if [Discount %] > 0 then "Discounted" else "Full Price"'],
       ['Measure','Total Revenue','Existing Day 5 measure'],
       ['Measure','Transactions','Existing Day 5 measure'],
-      ['Measure','Customer Count','Existing Day 5 measure'],
-      ['Measure','Total QTY','Existing Day 5 measure']
+      ['Measure','Customers','Existing Day 5 measure'],
+      ['Measure','Total Quantity','Existing Day 5 measure']
     ]
     add_table(ref,5,['Type','Name','Logic / Status'],pq,[20,28,80],42)
     path.parent.mkdir(parents=True,exist_ok=True)
@@ -105,12 +105,12 @@ def save_filter_context(path):
 def save_calculate(path):
     wb,ws=new_wb('CALCULATE MEASURES','CALCULATE لا تعني معادلة جديدة فقط؛ هي تعيد تقييم Measure تحت Filter Context معدل.')
     rows=[
-      ['01','Discounted Revenue','CALCULATE','Discounted Revenue =\nCALCULATE(\n    [Total Revenue],\n    FactSales[Discount Status] = "Discounted Price"\n)','Add filter','Revenue من الصفوف Discounted Price فقط','Required'],
+      ['01','Discounted Revenue','CALCULATE','Discounted Revenue =\nCALCULATE(\n    [Total Revenue],\n    FactSales[Discount Status] = "Discounted"\n)','Add filter','Revenue من الصفوف Discounted فقط','Required'],
       ['02','Full Price Revenue','CALCULATE','Full Price Revenue =\nCALCULATE(\n    [Total Revenue],\n    FactSales[Discount Status] = "Full Price"\n)','Add filter','Revenue من Full Price فقط','Required'],
       ['03','Retail Revenue','CALCULATE','Retail Revenue =\nCALCULATE(\n    [Total Revenue],\n    DimBranch[Channel] = "Retail"\n)','Add filter','Revenue لقناة Retail مع احترام Month/Region/Category','Required'],
       ['04','Revenue All Categories','CALCULATE + REMOVEFILTERS','Revenue All Categories =\nCALCULATE(\n    [Total Revenue],\n    REMOVEFILTERS(DimProduct[Category])\n)','Remove one filter','يلغي Category فقط ويبقي بقية Context','Required'],
       ['05','Category Contribution %','DIVIDE','Category Contribution % =\nDIVIDE(\n    [Total Revenue],\n    [Revenue All Categories]\n)','Reuse measures','حصة كل Category من Revenue داخل الفلاتر الحالية','Required'],
-      ['06','Discounted Transactions','CALCULATE','Discounted Transactions =\nCALCULATE(\n    [Transactions],\n    FactSales[Discount Status] = "Discounted Price"\n)','Add filter','عدد Transactions المخفضة','Optional']
+      ['06','Discounted Transactions','CALCULATE','Discounted Transactions =\nCALCULATE(\n    [Transactions],\n    FactSales[Discount Status] = "Discounted"\n)','Add filter','عدد Transactions المخفضة','Optional']
     ]
     add_table(ws,5,['#','Measure','Function','DAX','Context action','Business meaning','Level'],rows,[6,28,25,58,24,46,14],78)
     ws['A13']='احفظها بهذه الطريقة'
@@ -190,7 +190,12 @@ def build():
         shutil.rmtree(WORK)
     WORK.mkdir(parents=True)
 
-    restore_start_pbix(WORK/'01_Nova_Day06_Start.pbix')
+    # Canonical Day06 PBIP is generated from the same full-grain Stage2 model.
+    with zipfile.ZipFile(ROOT/'week2/day4/downloads/Day04_MODEL_THE_BUSINESS.zip') as source:
+        (WORK/'01_Nova_Stage2_Model_Source.xlsx').write_bytes(source.read('04_MODEL_LAB/Nova_Day04_Model_Lab.xlsx'))
+    pbip=ROOT/'week2/day6/downloads/Nova_Day06_Start_PBIP.zip'
+    if not pbip.exists(): raise FileNotFoundError('Build the canonical Stage3 PBIP project first.')
+    shutil.copy2(pbip,WORK/'01_Nova_Day06_Start_PBIP.zip')
     save_filter_context(WORK/'02_Filter_Context_Lab.xlsx')
     save_calculate(WORK/'03_CALCULATE_Measures.xlsx')
     save_blueprint(WORK/'04_Context_Report_Blueprint.xlsx')
@@ -199,7 +204,7 @@ def build():
     (WORK/'00_START_HERE.txt').write_text(
       'NOVA DISTRIBUTION GROUP — DAY 06: CONTEXT CHANGES EVERYTHING\n\n'
       'START\n'
-      'Open 01_Nova_Day06_Start.pbix. It is the completed Day 5 file supplied by the trainer and is our shared starting point.\n'
+      'Open 01_Nova_Day06_Start_PBIP.zip. It is the completed Day 5 file supplied by the trainer and is our shared starting point.\n'
       'No new dataset is introduced today.\n\n'
       'DAY 6 STORY\n'
       'Day 5 proved that the same Measure changes when we use slicers and click visuals. Today we explain WHY.\n\n'

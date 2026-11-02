@@ -121,7 +121,7 @@ const DAYS = [
     deliverable: 'أول Nova Sales Overview فعلي: Power Query calculations + DAX Measures + KPIs + Charts + Slicers، جاهز لـFilter Context في Day 6.',
     visualGuide: { image: 'concepts/assets/day5-learner-overview.svg', title: 'Day 5 — Learner Visual Guide', note: 'Power Query Custom Column وDAX Measures وبناء التقرير' },
     resources: [
-      { name: 'Day 05 — Calculate & Visualize Pack', type: 'ZIP', url: 'week2/day5/downloads/Day05_CALCULATE_VISUALIZE.zip', note: 'يتضمن Nova_Day05_Start.pbix كبداية موحدة من نهاية Day 4، ثم Power Query Lab + DAX Lab + Report Blueprint + Analyst Challenge' },
+      { name: 'Day 05 — Calculate & Visualize Pack (PBIP)', type: 'ZIP', url: 'week2/day5/downloads/Day05_CALCULATE_VISUALIZE.zip', note: 'يتضمن Nova_Day05_Start.pbix كبداية موحدة من نهاية Day 4، ثم Power Query Lab + DAX Lab + Report Blueprint + Analyst Challenge' },
       { name: 'Day 05 — Concept Studio', type: 'WEB', url: 'concepts/index.html', note: 'Power Query Custom Column + Measure vs Column + Basic DAX Aggregations + DIVIDE' }
     ]
   },
@@ -144,7 +144,7 @@ const DAYS = [
       note: 'ملخص بصري لرحلة Day 6 من مراجعة Day 5 إلى Filter Context وCALCULATE وREMOVEFILTERS وContribution ثم Visual Interactions.'
     },
     resources: [
-      { name: 'Day 06 — Context & CALCULATE Pack', type: 'ZIP', url: 'week2/day6/downloads/Day06_CONTEXT_AND_CALCULATE.zip', note: 'Completed Day 5 PBIX reference + Filter Context Lab + CALCULATE Measures + Context Report Blueprint + Analyst Challenge' },
+      { name: 'Day 06 — Context & CALCULATE Pack (PBIP)', type: 'ZIP', url: 'week2/day6/downloads/Day06_CONTEXT_AND_CALCULATE.zip', note: 'Completed Day 5 PBIX reference + Filter Context Lab + CALCULATE Measures + Context Report Blueprint + Analyst Challenge' },
       { name: 'Day 06 — Learner Visual Guide', type: 'IMAGE', url: 'concepts/assets/day6-learner-overview.webp', note: 'الصورة المختصرة التي تلخص رحلة Day 6 كاملة للمتدرب.' },
       { name: 'Day 06 — Process Flow', type: 'FLOW', url: 'concepts/assets/day6-process-flow.svg', note: 'Review → Filter Context → CALCULATE → REMOVEFILTERS → Contribution → Interactions → Context Lab' },
       { name: 'Day 06 — Concept Studio', type: 'WEB', url: 'concepts/index.html', note: 'Filter Context + CALCULATE + REMOVEFILTERS & Contribution + Visual Interactions' }
@@ -166,7 +166,7 @@ const DAYS = [
     visualGuide: { image: `concepts/assets/day7-learner-overview.webp`, title: `Day 7 — Learner Visual Guide`, note: `الأمثلة متعددة المجالات والمقارنة الزمنية وبناء اللوحة ونقاط التحقق.` },
     resources: [
       { name: `Day 07 — DAX Foundations`, type: `WEB`, url: `week3/day7/web/DAX_FOUNDATIONS.html`, note: `شرح الدوال الجديدة خطوة بخطوة مع أمثلة مبسطة وزر نسخ لكل صيغة` },
-      { name: `Day 07 — START`, type: `PBIX`, url: `week3/day7/downloads/Nova_Day07_START.pbix`, note: `ملف البداية المباشر للمتدربين — البيانات مدمجة` },
+      { name: `Day 07 — Start Project (PBIP)`, type: `ZIP`, url: `week3/day7/downloads/Nova_Day07_START_PBIP.zip`, note: `ملف البداية المباشر للمتدربين — البيانات مدمجة` },
       { name: `Sales — Example`, type: `WEB`, url: `week3/day7/web/MAHMOUD_SALES.html`, note: `إيراد ومقارنة ونمو وفئات وعملاء.` },
       { name: `Operations — Example`, type: `WEB`, url: `week3/day7/web/SOMAYA_OPERATIONS.html`, note: `طلبات وإنجاز والتزام بالمهلة ودورة التشغيل.` },
       { name: `Finance — Example`, type: `WEB`, url: `week3/day7/web/HISHAM_FINANCE.html`, note: `إيراد وتكلفة وربح وموازنة.` },
