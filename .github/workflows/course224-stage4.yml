@@ -12,6 +12,12 @@ on:
       - 'PowerBi/Course224/week3/day10/CAPSTONE_GUIDE.md'
       - 'PowerBi/Course224/week3/day10/CAPSTONE_RUBRIC.csv'
       - 'PowerBi/Course224/week3/day10/CAPSTONE_QA_CHECKLIST.md'
+      - 'PowerBi/Course224/data.js'
+      - 'PowerBi/Course224/styles.css'
+      - 'PowerBi/Course224/week3/day10/student-missions.html'
+      - 'PowerBi/Course224/week3/day10/ai-visual-design-lab.html'
+      - 'PowerBi/Course224/week3/day8/web/Day08_Every_Visual_Earns_Its_Place.html'
+      - 'PowerBi/Course224/concepts/index.html'
   workflow_dispatch:
 permissions:
   contents: write

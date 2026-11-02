@@ -40,7 +40,7 @@ assert len(rubric)==6
 
 # Site resource integrity, including archives and native links, without network access.
 site=(ROOT/'data.js').read_text(encoding='utf-8')
-refs=re.findall(r'url:\\s*[\x27\x60\x22]([^\x27\x60\x22]+)[\x27\x60\x22]',site)
+refs=re.findall(r'url:\s*[\x27\x60\x22]([^\x27\x60\x22]+)[\x27\x60\x22]',site)
 assert len(refs)>=40
 broken=[u for u in refs if not u.startswith(('https:','http:')) and not (ROOT/u).is_file()]
 assert not broken,broken
