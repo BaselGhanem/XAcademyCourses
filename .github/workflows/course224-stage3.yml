@@ -1,0 +1,42 @@
+name: Course224 Stage3 — regenerate DAX and domain models
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/course224-stage3.yml'
+      - 'PowerBi/Course224/tools/generate_stage3.py'
+      - 'PowerBi/Course224/tools/validate_stage3.py'
+      - 'PowerBi/Course224/tools/generate_week2_day5.py'
+      - 'PowerBi/Course224/tools/generate_week2_day6.py'
+      - 'PowerBi/Course224/tools/generate_week3_day7.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: course224-stage3
+  cancel-in-progress: false
+jobs:
+  stage3:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r PowerBi/Course224/tools/stage3-requirements.txt
+      - run: python PowerBi/Course224/tools/generate_stage3.py
+      - run: python PowerBi/Course224/tools/validate_stage3.py
+      - name: Commit validated projects and exercises
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add PowerBi/Course224/week2/day5/downloads/Day05_CALCULATE_VISUALIZE.zip PowerBi/Course224/week2/day6/downloads/Day06_CONTEXT_AND_CALCULATE.zip
+          git add PowerBi/Course224/week2/day5/downloads/Nova_Day05_Start_PBIP.zip PowerBi/Course224/week2/day6/downloads/Nova_Day06_Start_PBIP.zip
+          git add PowerBi/Course224/week3/day7/downloads/Day07_UNIVERSAL_SCENARIOS.zip PowerBi/Course224/week3/day7/downloads/Nova_Day07_START_PBIP.zip
+          git add PowerBi/Course224/week3/day7/web/*_SCENARIO.html PowerBi/Course224/datasets/STAGE3*
+          if ! git diff --cached --quiet; then
+            git commit -m "Course224 stage3: validated generic DAX/PBIP learning packs"
+            git push
+          fi
