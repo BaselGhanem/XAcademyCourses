@@ -40,7 +40,7 @@ const DAYS = [
     resources: [
       { name: 'Meet Nova — Company Profile', type: 'WEB', url: 'week1/day1/web/Nova_Company_Profile.html', note: 'ابدأ من هنا: الشركة، الشعار، المنتجات، نموذج العمل والتحدي الإداري.' },
       { name: 'Day 01 — Nova Source Pack', type: 'ZIP', url: 'week1/day1/downloads/Day01_CONNECT_EVERYTHING.zip', note: 'Nova Product Master + Excel ETL Reference + 120K Sales CSV + Workforce TXT + Budget PDF + Challenge' },
-      { name: 'Nova Branch Performance — Web Source', type: 'WEB', url: 'week1/day1/web/Branch_Performance.html', note: '4,000 صف تجمع Sales + Finance + Workforce indicators. استخدم الرابط مباشرة في Get Data > Web.' }
+      { name: 'Nova Branch Performance — Web Source', type: 'WEB', url: 'week1/day1/web/Branch_Performance.html', note: '4,000 صف تجمع Sales + Finance + Workforce indicators. استخدم الرابط مباشرة في Get Data > Web.' },
       { name: 'Nova Data Dictionary', type: 'Guide', url: 'datasets/DATA_DICTIONARY.csv', note: 'تعريف الجداول والمفاتيح والـGrain' },
       { name: 'Nova Business Rules', type: 'Guide', url: 'datasets/BUSINESS_RULES.md', note: 'قواعد البيانات ومتى لا يجوز مقارنة مصادر بأحجام زمنية مختلفة' },
     ]
@@ -60,7 +60,7 @@ const DAYS = [
     deliverable: 'Nova Branch Daily Performance + Customer Master نظيفان، Grain واضح، وقابلان للـRefresh.',
     visualGuide: { image: 'concepts/assets/day2-learner-overview.svg', title: 'Day 2 — Learner Visual Guide', note: 'Power Query: تنظيف القيم والأنواع والأخطاء والتحقق' },
     resources: [
-      { name: 'Day 02 — Nova Cleaning Lab', type: 'ZIP', url: 'week1/day2/downloads/Day02_CLEAN_DATA.zip', note: '50K logical Branch-Day rows + intentional bad duplicates + 8K Dirty Customers + Nova Cleaning Checklist' }
+      { name: 'Day 02 — Nova Cleaning Lab', type: 'ZIP', url: 'week1/day2/downloads/Day02_CLEAN_DATA.zip', note: '50K logical Branch-Day rows + intentional bad duplicates + 8K Dirty Customers + Nova Cleaning Checklist' },
       { name: 'Cleaning Expected Results', type: 'Guide', url: 'datasets/EXPECTED_RESULTS.csv', note: 'إحصاءات موثقة للصفوف المتكررة والقيم غير الصالحة' },
     ]
   },
@@ -79,7 +79,7 @@ const DAYS = [
     deliverable: 'Nova monthly Sales pipeline قابلة للـRefresh وجاهزة للأشهر القادمة، مع Masters موحدة.',
     visualGuide: { image: 'concepts/assets/day3-learner-overview.svg', title: 'Day 3 — Learner Visual Guide', note: 'Folder Connector وCombine وAppend وMerge وRefresh' },
     resources: [
-      { name: 'Day 03 — Nova Automation Pack', type: 'ZIP', url: 'week1/day3/downloads/Day03_STOP_COPYING_FILES_LEARNER.zip', note: 'نفس 120K Rows من Day 1، الآن Jan–Mar × 40K + April refresh proof + Branch/Customer/Product Masters' }
+      { name: 'Day 03 — Nova Automation Pack', type: 'ZIP', url: 'week1/day3/downloads/Day03_STOP_COPYING_FILES_LEARNER.zip', note: 'نفس 120K Rows من Day 1، الآن Jan–Mar × 40K + April refresh proof + Branch/Customer/Product Masters' },
       { name: 'Data Lineage', type: 'Guide', url: 'datasets/DATA_LINEAGE.md', note: 'تطابق معاملات Jan–Mar ثم April' },
       { name: 'Expected Results', type: 'Guide', url: 'datasets/EXPECTED_RESULTS.csv', note: 'أعداد الصفوف والقيم المرجعية قبل Refresh وبعده' },
     ]
@@ -98,10 +98,10 @@ const DAYS = [
     challenge: 'شغّل Auto Detect أولا وراجع ما اكتشفه Power BI بدل قبول كل شيء مباشرة. بعد ذلك أنشئ العلاقات الناقصة يدويا، خصوصا Customer Code ↔ Customer ID وDate ↔ Order Date، ثم اثبت أن كل Dimension تفلتر FactSales بشكل صحيح.',
     deliverable: 'Nova Star Schema يحتوي على كامل 160,000 معاملة Jan–Apr مع 4 Dimensions ومفاتيح صالحة، جاهز للـDAX.',
     visualGuide: null, // Legacy image depicts outdated 40K model; a new 160K image follows in Phase 4.
-        resources: [
+    resources: [
       { name: 'Day 04 — Model the Business Lab', type: 'ZIP', url: 'week2/day4/downloads/Day04_MODEL_THE_BUSINESS.zip', note: 'Merge وAppend بعينات تعليمية، وFolder كامل Jan–Apr (160K)، وMay إلى 200K، وModel Lab كامل وDimDate بتاريخ Excel فعلي' },
       { name: 'Day 04 — Process Flow', type: 'FLOW', url: 'concepts/assets/day4-process-flow.svg', note: 'Review → Fact/Dimensions → Relationships → Star Schema → Test Filters → Ready for DAX' },
-      { name: 'Day 04 — Concept Studio', type: 'WEB', url: 'concepts/index.html', note: 'Fact vs Dimension + Relationships + Star Schema' }
+      { name: 'Day 04 — Concept Studio', type: 'WEB', url: 'concepts/index.html', note: 'Fact vs Dimension + Relationships + Star Schema' },
       { name: 'Model Expected Results', type: 'Guide', url: 'datasets/EXPECTED_RESULTS.csv', note: '160K FactSales و730 تاريخًا وإيراد 12,534,018.65 دينار' },
       { name: 'Source Lineage', type: 'Guide', url: 'datasets/DATA_LINEAGE.md', note: 'العينات التدريبية مقابل المعاملات الكاملة' },
     ]
