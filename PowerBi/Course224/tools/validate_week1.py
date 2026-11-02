@@ -154,8 +154,8 @@ index=(ROOT/'index.html').read_text(encoding='utf-8')
 data=(ROOT/'data.js').read_text(encoding='utf-8')
 if 'Commercial Performance 360' in index or 'COMMERCIAL PERFORMANCE 360' in index:
     fail('Landing page still contains Commercial Performance 360')
-if 'Nova Business Performance 360' not in index:
-    fail('Landing page does not show Nova Business Performance 360')
+if 'nova business performance 360' not in index.lower():
+    fail('Landing page must identify the Nova training case (case-insensitive)')
 if 'Branch Daily Performance' not in data:
     fail('Day 2 story does not reflect daily-grain dataset')
 

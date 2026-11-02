@@ -7,6 +7,7 @@ on:
       - 'PowerBi/Course224/tools/generate_stage2.py'
       - 'PowerBi/Course224/tools/generate_week2_day4.py'
       - 'PowerBi/Course224/tools/validate_stage2.py'
+      - 'PowerBi/Course224/tools/validate_week1.py'
   workflow_dispatch:
 permissions:
   contents: write
