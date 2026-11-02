@@ -1,0 +1,55 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0a1219"><title>Day 10 — Prompt Anatomy | X Academy</title><link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"><style>
+:root{--bg:#09131b;--panel:#12242d;--line:#ffffff19;--ink:#f1fbfb;--teal:#099999;--muted:#adc4ca}*{box-sizing:border-box}
+body{margin:0;font:14px/1.9 Almarai,'Segoe UI',sans-serif;color:var(--ink);background:radial-gradient(circle at 90% 5%,#09999925,transparent 38%),var(--bg)}
+a{color:inherit;text-decoration:none}.wrap{width:min(1130px,calc(100% - 32px));margin:auto}.bar{border-bottom:1px solid var(--line);background:#0b1821eb;position:sticky;top:0;z-index:2;backdrop-filter:blur(15px)}
+.bar>div{display:flex;justify-content:space-between;align-items:center;gap:14px;min-height:64px}.brand{font:800 13px Inter,Arial}.back{border:1px solid #ffffff26;border-radius:10px;padding:7px 12px;font-size:11px}
+.hero{padding:46px 0 21px}.eyebrow{color:#74e5d5;font:800 10px Inter;letter-spacing:1.4px}.hero h1{font-size:clamp(28px,4vw,46px);line-height:1.4;margin:11px 0}
+.hero p{color:var(--muted);max-width:810px;margin:0}.compare{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:25px 0 38px}
+.bad,.good{border:1px solid #ffffff25;border-radius:17px;padding:18px;background:#11212c}.bad{border-color:#c17d6861}.good{border-color:#5fdac375;background:#103132}.compare h3{font-size:14px;margin:0 0 10px}.compare p{font:12px/1.8 Inter,Arial;direction:ltr;text-align:left;margin:0;white-space:pre-wrap;color:#c7e0e2}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.item{border:1px solid #ffffff19;background:#111f2a;border-radius:16px;overflow:hidden}
+.item summary{list-style:none;cursor:pointer;padding:17px;display:flex;justify-content:space-between;align-items:center;gap:13px}.item summary::-webkit-details-marker{display:none}
+.num{color:#74d8d3;font:800 11px Inter;width:29px}.item strong{font-size:14px;flex:1}.item summary:after{content:"+";font:800 21px Inter;color:#7dd8d0}
+.item[open] summary:after{content:"−"}
+.content{border-top:1px solid var(--line);padding:14px 17px 18px}.content p{color:#b2c9cf;font-size:12px;margin:0 0 9px}.content code{display:block;background:#0a1821;border:1px solid #ffffff1a;border-radius:10px;padding:10px;direction:ltr;text-align:left;font:11px/1.8 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:#a1f1e3}
+.rules{margin:34px 0 65px;background:linear-gradient(120deg,#103133,#111f28);border:1px solid #09999977;border-radius:20px;padding:22px}.rules h2{font-size:20px}.rules p{font-size:13px;color:#b5d3d2}
+.cta{background:#099999;color:white;border-radius:12px;padding:11px 18px;display:inline-flex;font-weight:800;font-size:12px}
+@media(max-width:700px){.compare,.grid{grid-template-columns:1fr}.hero{padding:27px 0 15px}}
+</style></head><body><header class="bar"><div class="wrap"><a class="brand" href="ai-visual-design-lab.html">X ACADEMY · PROMPT ANATOMY</a><a class="back" href="../../day.html?id=10">العودة لليوم العاشر ↗</a></div></header><main class="wrap">
+<section class="hero"><div class="eyebrow">02 / LEARN / THE PROMPT BLUEPRINT</div><h1>شو لازم تحكي للـAI قبل ما تطلب منه HTML Visual؟</h1><p>16 قرار واضحين. افتح كل بطاقة وشوف ليش العنصر مهم، شو الخطأ الشائع، ومثال من مشروع Nova. الهدف نتعلم طريقة التفكير، مش نحفظ Prompt واحدة.</p></section>
+<section class="compare"><article class="bad"><h3>Prompt ضعيفة</h3><p>Make an ultimate animated bar chart for sales.</p></article><article class="good"><h3>Prompt محترفة</h3><p>Create a sorted horizontal bar from [Total Revenue] by DimProduct[Category], Top 5, 474×271px. Use static-first bars, #099999, CSS-only decorative shimmer, respect slicers, verify largest category=100%, and return a complete DAX measure.</p></article></section>
+<section class="grid" id="anatomyGrid"></section>
+<section class="rules"><h2>قاعدة النجاح: Specify → Generate → Validate → Improve</h2><p>ما في Prompt بتضمن إن كل كود AI صحيح. بعد التوليد، لازم تتأكد بنفسك من الأرقام والـFilter Context وأن الـHTML Content يدعم المؤثر، وأن الرسم يضل صحيح بعد إيقاف الحركة.</p><a class="cta" href="ai-visual-design-lab.html">افتح المختبر وطبّق بنفسك ←</a></section>
+</main>
+<script>
+const data=[
+["Business Question","السؤال اللي بدك تجاوبه الإدارة","أي Category أعلى بالإيراد؟","Make a beautiful chart"],
+["Existing Measures","الأرقام لازم تجي من Measures حقيقية موجودة","[Total Revenue]","Invent a sales formula"],
+["Dimensions","كيف بدك تقسم الأرقام؟","DimProduct[Category]","By any category"],
+["Filter Context","أي Slicer لازم يؤثر على الرقم؟","Respect Year + Region slicers","Hardcode yearly numbers"],
+["Grain / Time","على أي مستوى بتعرض الوقت؟","Year Month chronological sort","Sort month labels alphabetically"],
+["Chart Type","اختار رسم يناسب السؤال مش الشكل فقط","Horizontal Bar for category ranking","Use donut for 30 categories"],
+["Top N","كم فئة تعرض؟","Top 5 for 474×271","Show 30 tiny rows"],
+["Sort & Tie Break","نفس أعلى قيمة لازم تظل مرتبة","Revenue DESC, Category ASC","Rely on unknown row order"],
+["Size & Layout","المساحة تحدد عدد الصفوف والخط","474×271px, no clipped labels","100vh with overflow hidden"],
+["Visual Identity","الألوان والخلفية والخط واللغة","#099999, Almarai, transparent","Make it premium"],
+["Animation","سمِّ الحركة وحدد مدتها وقوتها","One-time shimmer for 3s","Animate bars from zero as baseline"],
+["Hover / Tooltip","الـHTML Hover غير Native Cross-filter","Hover highlight only, HTML tooltip if supported","Promise automatic cross-filter"],
+["Edge Cases","الـBLANK غير Zero والسالب لازم يظهر","Keep 0, negative; hide blanks only","Convert all blanks to 0"],
+["Technical Host","Power BI HTML Content محدود عن المتصفح","Regular edition, CSS only","Assume browser JS works"],
+["Complete Deliverable","الكود النهائي لازم يكون كامل","Full DAX measure + setup + test","Provide a code fragment"],
+["Quality Assurance","اختبر الرسم مقابل Native Visual","MAX 100%, next 90%, slicers, no animation","Looks good in screenshot"]
+];
+const grid=document.getElementById("anatomyGrid");
+for(let i=0;i<data.length;i++){
+const x=data[i],detail=document.createElement("details");detail.className="item";
+const summary=document.createElement("summary");
+const n=document.createElement("span");n.className="num";n.textContent=String(i+1).padStart(2,"0");
+const heading=document.createElement("strong");heading.textContent=x[0];summary.append(n,heading);
+const content=document.createElement("div");content.className="content";
+const p=document.createElement("p");p.textContent=x[1];
+const label=document.createElement("p");label.textContent="مثال صحيح:";
+const good=document.createElement("code");good.textContent=x[2];
+const wrong=document.createElement("p");wrong.style.marginTop="11px";wrong.textContent="الخطأ الشائع: "+x[3];content.append(p,label,good,wrong);
+detail.append(summary,content);grid.appendChild(detail);
+}
+</script></body></html>

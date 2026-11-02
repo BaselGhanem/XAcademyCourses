@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#091218">
+<meta name="description" content="Day 10 AI Visual Design Lab — build precise Power BI HTML visual prompts with 20 live effects, chart previews and role-based templates">
+<title>AI Visual Design Lab · Day 10 | X Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#091218;--bg2:#0e1b23;--panel:#111f29;--panel2:#162732;--ink:#f1f7f9;--muted:#9ab0bb;--soft:#6f8793;--line:rgba(173,215,223,.13);--teal:#099999;--aqua:#63e0dc;--yellow:#f2c811;--good:#56d6a7;--radius:22px;--motion:3s;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:94px}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.9 Almarai,'Segoe UI',sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 83% 5%,rgba(9,153,153,.11),transparent 39%),radial-gradient(ellipse at 6% 72%,rgba(242,200,17,.045),transparent 31%),linear-gradient(155deg,#091218,#081017)}
+a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--aqua);outline-offset:3px}
+button:disabled{cursor:not-allowed;opacity:.5}svg{max-width:100%}
+[hidden]{display:none!important}
+.wrap{width:min(1380px,calc(100% - 48px));margin-inline:auto}
+.en{font-family:Inter,Arial,sans-serif;direction:ltr;unicode-bidi:isolate}
+.nav{position:sticky;top:0;z-index:35;border-bottom:1px solid var(--line);background:rgba(9,18,24,.91);backdrop-filter:blur(22px)}
+.nav-inner{min-height:75px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,#13b8b4,#075d67);box-shadow:0 9px 25px #09999924;color:#fff;font:800 22px Inter,Arial}
+.brand strong{display:block;font:800 14px Inter,Arial}.brand small{color:var(--muted);font-size:10px}
+.nav-link{border:1px solid var(--line);border-radius:13px;padding:9px 15px;font-weight:700;font-size:12px;color:#dde9ed;white-space:nowrap}
+.nav-link:hover{border-color:var(--teal);color:var(--aqua)}
+.hero{position:relative;isolation:isolate;overflow:hidden;padding:70px 0 54px;border-bottom:1px solid var(--line)}
+.hero:before{content:"";position:absolute;z-index:-1;inset:0;opacity:.15;background-image:linear-gradient(#8bdad720 1px,transparent 1px),linear-gradient(90deg,#8bdad720 1px,transparent 1px);background-size:43px 43px;mask-image:linear-gradient(90deg,#000,transparent 90%)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:35px;align-items:center}
+.eyebrow{color:var(--aqua);font:800 11px Inter,Arial;letter-spacing:.14em;text-transform:uppercase}
+.hero h1{font-size:clamp(33px,4.9vw,72px);line-height:1.32;letter-spacing:-.035em;margin:16px 0;color:#fff;max-width:800px}
+.hero h1 em{font-style:normal;background:linear-gradient(120deg,#71e2de,#c9fff1);background-clip:text;color:transparent}
+.hero p{color:#b3c9d1;font-size:clamp(14px,1.32vw,18px);line-height:2;max-width:650px}
+.hero-ctas{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:27px}
+.primary{border:1px solid #099999;background:linear-gradient(125deg,#079b99,#0ab5a9);box-shadow:0 9px 25px #09999925;color:white;font-weight:800;border-radius:14px;padding:12px 22px;display:inline-flex;align-items:center;gap:9px;justify-content:center}
+.primary:hover{background:#08b6b0}
+.secondary{border:1px solid #3a5962;color:#e6f5f7;background:#ffffff06;border-radius:14px;padding:12px 19px;font-weight:700;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.secondary:hover{border-color:var(--aqua);background:#ffffff0c}
+.stats{display:flex;gap:20px;flex-wrap:wrap;margin-top:34px}
+.stat b{font:800 25px Inter,Arial;color:#fff}.stat small{display:block;color:var(--soft);font-size:11px}
+.hero-demo{min-height:360px;border:1px solid #7bd6d22d;background:linear-gradient(125deg,#122c34b0,#101a24f0);border-radius:31px;padding:25px;box-shadow:0 25px 90px #0006;position:relative;overflow:hidden}
+.hero-demo:after{content:"";position:absolute;width:270px;height:270px;background:radial-gradient(circle,#0db6b334,transparent 70%);inset:auto auto -110px -80px;pointer-events:none}
+.mock-bar{height:8px;width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;color:#8cb2bb}
+.mock-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 15px #12cfca}
+.mock-card{background:#10232c;border:1px solid #61acb52a;border-radius:20px;padding:22px;position:relative}
+.mock-top{display:flex;justify-content:space-between;color:#a4c6ca;font-size:11px}
+.mock-value{font:800 clamp(27px,3.5vw,51px) Inter,Arial;color:white;line-height:1.35;margin-top:10px}
+.mock-value small{font:700 12px Inter,Arial;color:var(--good);margin-inline-start:10px}
+.mini-bars{height:100px;display:flex;align-items:end;gap:9px;margin-top:15px}
+.mini-bars i{flex:1;max-height:100%;height:var(--h);border-radius:7px 7px 2px 2px;background:linear-gradient(#56d5ce,#096869);transform-origin:bottom;animation:barRise 1s ease both}
+.mini-bars i:nth-child(2){animation-delay:.12s}.mini-bars i:nth-child(3){animation-delay:.24s}.mini-bars i:nth-child(4){animation-delay:.36s}.mini-bars i:nth-child(5){animation-delay:.48s}.mini-bars i:nth-child(6){animation-delay:.6s}
+.mock-bottom{display:flex;justify-content:space-between;margin-top:14px;color:#a1c1c4;font-size:10px}
+.mock-glow{height:5px;width:58%;margin:15px auto 0;border-radius:20px;background:#44d9ce;filter:blur(15px);animation:softGlow 3s ease-in-out infinite}
+.section{padding:55px 0 22px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:24px}
+.section-head h2{font-size:clamp(23px,2.8vw,36px);line-height:1.4;margin:6px 0 0}.section-head p{color:var(--muted);margin:8px 0 0}
+.kicker{color:var(--aqua);font:800 11px Inter,Arial;letter-spacing:.12em}
+.workbench{display:grid;grid-template-columns:minmax(0,1.23fr) minmax(340px,.77fr);gap:20px;align-items:start}
+.studio{background:#101d26;border:1px solid var(--line);border-radius:25px;overflow:hidden}
+.studio-top{display:flex;justify-content:space-between;align-items:center;gap:13px;padding:20px 23px;border-bottom:1px solid var(--line)}
+.studio-top strong{font-size:16px}.subtle{font-size:12px;color:var(--muted)}
+.step-tabs{display:grid;grid-template-columns:repeat(4,1fr);padding:12px;gap:7px;border-bottom:1px solid var(--line);background:#0b1921}
+.step-tab{border:1px solid transparent;padding:12px 8px;color:#9db3bd;border-radius:12px;background:transparent;display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:700;line-height:1.5}
+.step-tab .num{font:800 11px Inter,Arial;border-radius:50%;background:#ffffff12;width:23px;height:23px;display:grid;place-items:center;flex-shrink:0}
+.step-tab[aria-selected=true]{border-color:#09999980;background:#09999922;color:#e4ffff}.step-tab[aria-selected=true] .num{background:var(--teal);color:white}
+.step-panel{padding:25px;min-height:475px}.step-panel h3{font-size:20px;margin:0 0 6px}.step-panel>p{margin:0 0 20px;color:var(--muted);font-size:12px}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.field{display:flex;flex-direction:column;min-width:0;gap:8px}.span2{grid-column:1/-1}
+.field label,.group-label{font-size:12px;font-weight:800;color:#d6e5e9}
+.field .hint{color:var(--soft);font-size:11px;line-height:1.6}
+input:not([type=checkbox]):not([type=file]),select,textarea{color:#edf6fa;width:100%;min-width:0;background:#0b1820;border:1px solid #34505a;border-radius:12px;padding:11px 12px;outline:0;min-height:44px}
+input[type=color]{height:44px;padding:4px 5px;cursor:pointer}
+input:focus,textarea:focus,select:focus{border-color:#45c7c6;box-shadow:0 0 0 3px #09999922}
+textarea{resize:vertical;min-height:79px}select{cursor:pointer}
+small.tip{color:var(--soft);font-size:11px}
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin:7px 0 23px}
+.preset{background:#ffffff06;border:1px solid #ffffff1e;border-radius:100px;padding:9px 14px;font-weight:700;color:#c0d1d8;font-size:12px}
+.preset:hover,.preset.active{background:#09999928;border-color:var(--teal);color:#ddffff}
+.inline-toggles{display:flex;flex-wrap:wrap;gap:12px 19px;margin:7px 0}
+.ck{display:inline-flex;align-items:center;gap:8px;color:#d2e2e6;font-size:12px;cursor:pointer}
+.ck input{accent-color:#099999;width:17px;height:17px;flex-shrink:0}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.fx-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+.fx-option{min-width:0;position:relative;border:1px solid #ffffff18;background:#101f28;border-radius:14px;padding:12px 8px;color:#d9e9ed;text-align:center;min-height:108px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;overflow:hidden}
+.fx-option:hover{background:#162d37;border-color:#50b9bc}
+.fx-option[aria-pressed=true]{border-color:#31c8c3;background:#0c4243;box-shadow:inset 0 0 0 1px #31c8c380}
+.fx-option .effect-mini{display:grid;place-items:center;width:44px;height:31px;border:1px solid #6daca760;background:#1d464b;border-radius:9px;position:relative}
+.effect-mini:before{content:"";height:7px;width:24px;border-radius:9px;background:#80efeb;display:block}
+.fx-option b{font:700 10px/1.5 Inter,Arial;direction:ltr}
+.fx-option small{font-size:9px;color:#a3b7c0;line-height:1.5}
+.fx-option[aria-pressed=true] .effect-mini{box-shadow:0 0 19px #16d0c867}
+.motion-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:21px}
+.below-tools{border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center;padding:15px 23px;background:#0c1a22}
+.plain{border:0;background:none;color:#9ad6d6;font-weight:800;padding:8px}
+.plain:hover{color:white}
+.preview{position:sticky;top:93px;border-radius:24px;overflow:hidden;border:1px solid #77bbb52f;background:linear-gradient(150deg,#13252f,#09141c);box-shadow:0 20px 60px #0004}
+.preview-head{padding:18px 19px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.preview-head h3{margin:0;font-size:15px}.preview-note{font-size:10px;color:var(--muted)}
+.preview-indicator{color:var(--good);font:700 10px Inter,Arial;display:flex;align-items:center;gap:6px}
+.preview-indicator:before{content:"";width:7px;height:7px;background:var(--good);border-radius:50%}
+.preview-stage{--accent:#099999;--accent2:#f2c811;position:relative;isolation:isolate;min-height:250px;margin:0 17px 12px;overflow:hidden;border:1px solid #47788262;border-radius:17px;background:#10232a;color:#edf9f9;padding:19px;display:flex;flex-direction:column;align-items:stretch;justify-content:center;transition:transform .3s ease,box-shadow .3s ease}
+.preview-stage:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 15% 10%,#0cb1ad22,transparent 40%)}
+.preview-stage .sample-kicker{font:800 10px Inter,Arial;color:#97c8c7;letter-spacing:.08em}
+.preview-stage .chart-title{font-size:14px;font-weight:800;margin:6px 0 16px;overflow-wrap:anywhere}
+.preview-stage svg{width:100%;height:152px;overflow:visible;display:block}
+.preview-stage text{font:10px Inter,Arial;fill:#a9c9d1}
+.preview-stage .bar-fill{fill:var(--accent)}
+.preview-stage .bar-pale{fill:#22535b}
+.preview-stage .chart-line{stroke:var(--accent);fill:none;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}
+.preview-stage .accent2{stroke:var(--accent2);fill:none}
+.preview-stage .dot{fill:var(--accent2)}
+.preview-footer{display:flex;gap:8px;flex-wrap:wrap;color:#96b9bc;font-size:10px;padding:0 18px 17px}
+.preview-footer span{border:1px solid #ffffff15;border-radius:20px;padding:2px 9px}
+.fit-text{font:700 11px Inter;color:#84e4dd}
+.quality{margin:0 17px 18px;border:1px solid #ffffff18;border-radius:16px;background:#0b1a23;padding:16px}
+.quality-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.quality-top strong{font-size:12px}.quality-top span{font:700 12px Inter;color:#77d8ce}
+.quality-line{height:6px;background:#263741;border-radius:10px;margin:11px 0;overflow:hidden}
+.quality-line i{display:block;height:100%;width:0%;background:linear-gradient(90deg,#099999,#63e0dc);transition:width .25s;border-radius:inherit}
+.quality p{font-size:11px;color:#9fb9be;margin:0}
+.ref-drop{border:1.5px dashed #427880;border-radius:15px;background:#0a1f27;padding:18px;text-align:center}
+.ref-drop.drag{border-color:var(--aqua);background:#174149}
+.ref-drop input{display:none}
+.ref-drop button{border:1px solid #3e7778;background:#16393d;border-radius:10px;color:white;padding:8px 15px;margin:7px 0;font-weight:700}
+.ref-drop p{margin:5px 0;color:#a5c7ca;font-size:11px}
+.ref-preview{margin-top:15px;display:flex;align-items:center;gap:12px}
+.ref-preview img{max-width:135px;max-height:100px;border-radius:10px;object-fit:contain}
+.note{padding:13px 14px;border-radius:13px;border:1px solid #4fa5a23a;background:#09999913;color:#cbe9e8;font-size:12px;line-height:1.85}
+.prompt-section{padding:34px 0 80px}
+.prompt-panel{border:1px solid #77d6d040;background:linear-gradient(125deg,#10272e,#0b1a24);border-radius:24px;overflow:hidden}
+.prompt-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:13px;padding:21px 24px;border-bottom:1px solid var(--line)}
+.prompt-toolbar strong{font-size:17px}.prompt-toolbar small{display:block;color:#a6bbc3;font-size:11px}
+.prompt-actions{display:flex;gap:8px;flex-wrap:wrap}
+.prompt-output{margin:0;padding:23px 25px;max-height:440px;min-height:250px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;direction:ltr;text-align:left;color:#d9edeb;font:12px/1.85 'Consolas','Courier New',monospace;background:#091820}
+.prompt-meta{border-top:1px solid var(--line);padding:13px 24px;color:#94b4b9;font-size:11px}
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+.skill{border:1px solid #ffffff17;background:#111e27;border-radius:18px;padding:19px}
+.skill b{color:#c8f3ef;font-size:13px}.skill p{color:#a6b9c2;font-size:12px;line-height:1.95}
+.skill-code{font:700 10px Inter;color:#f2c811;letter-spacing:.08em;margin-bottom:11px}
+.footer{border-top:1px solid var(--line);padding:22px 0 40px;display:flex;justify-content:space-between;gap:15px;color:#8fa6ae;font-size:11px}
+.toast{position:fixed;inset:auto 50% 22px auto;transform:translateX(50%) translateY(30px);opacity:0;z-index:100;background:#0b3538;border:1px solid #2baca6;border-radius:14px;padding:12px 20px;color:white;box-shadow:0 12px 55px #0007;pointer-events:none;transition:.25s}
+.toast.show{opacity:1;transform:translateX(50%) translateY(0)}
+/* Keep the 20-option library efficient: animate selected and hovered samples only */
+.fx-option:not(:hover):not([aria-pressed=true]) .effect-mini,
+.fx-option:not(:hover):not([aria-pressed=true]) .effect-mini:before,
+.fx-option:not(:hover):not([aria-pressed=true]) .effect-mini:after {animation-play-state:paused!important}
+.fx-neon{box-shadow:0 0 17px #0fcac466,inset 0 0 20px #0fcac41d;animation:softGlow var(--motion) infinite alternate}
+.fx-glass{backdrop-filter:blur(12px);background:linear-gradient(135deg,#3bb9bf26,#ffffff08)!important;border-color:#c5ffff55}
+.fx-aurora:before{background:linear-gradient(110deg,transparent,#1bd4cf43,#c8b1ff31,transparent)!important;background-size:250% 100%!important;animation:aurora 7s linear infinite}
+.fx-holo{box-shadow:inset 0 0 23px #09999940;background-image:linear-gradient(125deg,#48d8d91b,transparent 48%,#f2c8111b)!important}
+.fx-liquid{background:linear-gradient(125deg,#105058,#10232a,#352454,#133c43)!important;background-size:280% 280%!important;animation:liquid 7s ease-in-out infinite}
+.fx-metal:after,.fx-shimmer:after{content:"";position:absolute;inset:-50% auto -50% -40%;width:30%;background:linear-gradient(90deg,transparent,#f0ffff24,transparent);transform:rotate(25deg);animation:shine 3s ease-in-out infinite;pointer-events:none}
+.fx-metal:after{background:linear-gradient(90deg,transparent,#f2c81146,transparent)}
+.fx-radar:after{content:"";position:absolute;inset:8% auto auto 50%;width:45%;height:80%;background:conic-gradient(from 0deg,transparent 0 255deg,#0bd6cb36 320deg,transparent);border-radius:50%;animation:rotate 5s linear infinite;pointer-events:none}
+.fx-border{border-color:#37e8d8;animation:borderCycle 3s ease-in-out infinite}
+.fx-pulse{animation:softGlow 3s ease-in-out infinite}
+.fx-float{animation:float 4s ease-in-out infinite}
+.fx-slide{animation:slideIn .9s both}
+.fx-fade{animation:fadeScale .9s both}
+.fx-tilt:hover{transform:perspective(600px) rotateX(3deg) rotateY(-3deg) translateY(-4px)}
+.fx-spot:hover{box-shadow:inset 0 0 65px #55ddcc42}
+.fx-ripple:after{content:"";position:absolute;top:45%;left:45%;width:15px;height:15px;border:1px solid #63e0dc7d;border-radius:50%;animation:ripple 3s ease-out infinite;pointer-events:none}
+.fx-wave:before{background:repeating-radial-gradient(ellipse at 50% 100%,#09999922 0 3px,transparent 4px 26px)!important;animation:wave 4s linear infinite}
+.fx-draw svg .chart-line{stroke-dasharray:800;stroke-dashoffset:800;animation:lineDraw 3s ease forwards}
+.fx-grow svg .bar-fill{transform-origin:center bottom;transform-box:fill-box;animation:barRise 1.5s ease both}
+.fx-segments svg .bar-fill{animation:fadeScale 1.4s ease both}
+@keyframes barRise{from{transform:scaleY(.06);opacity:.35}to{transform:scaleY(1);opacity:1}}
+@keyframes softGlow{50%{box-shadow:0 0 29px #0fcac477,inset 0 0 20px #0fcac426}}
+@keyframes aurora{to{background-position:250% 0}}
+@keyframes liquid{50%{background-position:90% 80%}}
+@keyframes shine{to{left:130%}}
+@keyframes rotate{to{transform:rotate(360deg)}}
+@keyframes borderCycle{50%{box-shadow:0 0 22px #2eebe087;filter:brightness(1.12)}}
+@keyframes float{50%{transform:translateY(-7px)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeScale{from{opacity:.25;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes ripple{from{transform:scale(1);opacity:.9}to{transform:scale(13);opacity:0}}
+@keyframes wave{50%{transform:translateY(13px)}}
+@keyframes lineDraw{to{stroke-dashoffset:0}}
+@media(max-width:1100px){.workbench{grid-template-columns:minmax(0,1fr) 330px}.fx-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:880px){.hero-grid{grid-template-columns:1fr}.hero-demo{min-height:300px;max-width:550px}.workbench{grid-template-columns:1fr}.preview{position:static;order:-1}.preview-stage{min-height:230px}.preview-stage svg{height:140px}.fx-grid{grid-template-columns:repeat(4,1fr)}.skills{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.wrap{width:min(100% - 26px,1380px)}.hero{padding:38px 0}.hero h1{font-size:36px}.hero p{font-size:14px}.hero-demo{min-height:290px;padding:15px}.stats{gap:16px}.nav-inner{min-height:64px}.brand small{display:none}.brand strong{font-size:12px}.section{padding-top:34px}.studio-top,.step-panel,.below-tools,.prompt-toolbar{padding:16px}.step-tabs{grid-template-columns:repeat(4,1fr);gap:2px;padding:7px}.step-tab{font-size:10px;flex-direction:column;gap:4px;padding:9px 2px}.fields{grid-template-columns:1fr;gap:15px}.span2{grid-column:auto}.fx-grid{grid-template-columns:repeat(2,1fr)}.fx-option{min-height:101px}.motion-row,.field-row{grid-template-columns:1fr}.hero-ctas a{flex:1}.skills{grid-template-columns:1fr}.prompt-output{padding:16px;font-size:11px}.prompt-actions{width:100%}.prompt-actions button{flex:1}.footer{flex-direction:column;gap:5px}.section-head{align-items:start;flex-direction:column}.stats .stat{flex:1}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* Day 10 reliability & repair workshop */
+.safety-ribbon{margin:16px 0 2px;padding:13px 16px;display:flex;align-items:flex-start;gap:10px;border:1px solid rgba(99,224,220,.34);border-radius:15px;background:linear-gradient(120deg,rgba(9,153,153,.16),rgba(9,153,153,.035));color:#dcf6f4;font-size:12px;line-height:1.85}
+.safety-ribbon b{color:#93f1e6}
+.safety-ribbon .safety-glyph{font:800 18px Inter;color:#86e4ce;flex-shrink:0}
+.safety-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:17px}
+.safety-card{padding:18px;border-radius:17px;border:1px solid rgba(149,211,207,.15);background:#12252d}
+.safety-card strong{display:block;color:#c7f5f0;font-size:13px}
+.safety-card p{font-size:12px;line-height:1.9;color:#b1c6cd;margin:8px 0 0}
+.safety-card .number{display:block;color:#77ddd2;font:800 10px Inter;letter-spacing:1px;margin-bottom:10px}
+.repair-panel{border:1px solid rgba(99,224,220,.31);background:linear-gradient(145deg,#142831,#0b1923);border-radius:24px;overflow:hidden;margin-top:25px}
+.repair-head{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:22px;border-bottom:1px solid var(--line)}
+.repair-head h3{margin:5px 0 0;font-size:22px;line-height:1.55}
+.repair-body{padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.repair-body textarea{min-height:165px;font:12px/1.75 Consolas,'Courier New',monospace;direction:ltr;text-align:left}
+.repair-body .field{align-self:start}
+.repair-actions{grid-column:1/-1;display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.repair-actions p{font-size:11px;color:#aec3ca;max-width:500px;margin:0}
+.repair-status{margin-top:9px;font-size:11px;color:#c9e7e2}
+.reliability-alert{margin:12px 0 0;padding:11px 13px;border-radius:11px;border:1px solid #d8b15a5b;background:#aa7a201c;color:#ffdf9e;font-size:11px;line-height:1.8}
+.reliability-alert.good{border-color:#3ea99357;background:#09999919;color:#aef1d9}
+.preview-check{margin:10px 17px 19px;border-top:1px solid var(--line);padding-top:13px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.preview-check .subtle{font-size:10px}
+.preview-check button{font-size:11px;padding:8px 12px}
+.preview-stage.qa-mode .chart-title{display:none}
+.preview-stage.qa-mode .sample-kicker{color:#67e4d8}
+.preview-stage.qa-mode .qa-rows{display:grid;gap:8px;padding-top:12px}
+.preview-stage.qa-mode .qa-row{display:grid;grid-template-columns:70px minmax(0,1fr) 42px;align-items:center;gap:9px;font:700 10px Inter;color:#d5ebed}
+.preview-stage.qa-mode .qa-track{height:16px;border-radius:5px;background:#25434a;overflow:hidden}
+.preview-stage.qa-mode .qa-bar{display:block;height:100%;width:var(--fraction);background:var(--accent);border-radius:4px}
+.preview-stage.qa-mode .qa-row:last-child .qa-bar{min-width:0}
+.preview-stage.qa-mode .qa-row:nth-child(2) .qa-bar{background:var(--accent2)}
+.preview-stage.qa-mode .qa-row label{text-align:right}
+.preview-stage.qa-mode #chartSvg{display:none}
+@media(max-width:880px){.safety-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.safety-grid,.repair-body{grid-template-columns:1fr}.repair-body,.repair-head{padding:16px}.repair-head h3{font-size:20px}.repair-actions{grid-column:auto}.repair-actions button{width:100%}.preview-check{align-items:stretch}.preview-check button{width:100%}}
+
+
+/* Day 10 learning-path and in-context teaching tools */
+.lab-journey{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:22px 0 2px}
+.lab-journey a{border:1px solid rgba(99,224,220,.19);border-radius:15px;padding:15px 11px;background:linear-gradient(145deg,#18313a,#10222c);min-width:0;transition:transform .2s ease,border-color .2s ease}
+.lab-journey a:hover{border-color:#54dcd2;transform:translateY(-2px)}.lab-journey strong{font:800 11px/1.5 Inter,Arial;display:block;color:#b6f0eb}.lab-journey small{display:block;color:#9fbac2;font-size:11px;margin-top:6px;line-height:1.6}
+.lab-help{margin-top:0;border:1px solid rgba(99,224,220,.18);border-radius:10px;background:#0b272b;padding:8px 11px}
+.lab-help summary{list-style:none;cursor:pointer;color:#87d9d2;font-size:11px;font-weight:800}
+.lab-help summary::-webkit-details-marker{display:none}.lab-help summary:after{content:" +";color:#e7f7f4}
+.lab-help[open] summary:after{content:" −"}.lab-help p{color:#bfdae0;font-size:11px;line-height:1.8;margin:7px 0}
+.lab-help code{color:#ffe29b;font-size:11px;overflow-wrap:anywhere;direction:ltr;unicode-bidi:plaintext}
+.safe-switch{margin:17px 0 3px;padding:16px;border:1px solid rgba(100,224,186,.43);border-radius:15px;background:linear-gradient(125deg,rgba(16,110,94,.27),rgba(9,153,153,.08))}
+.safe-switch label{display:flex;gap:10px;align-items:start;font-size:13px;font-weight:800;cursor:pointer}
+.safe-switch input{width:18px;height:18px;accent-color:#0baa9e;margin-top:5px;flex-shrink:0}
+.safe-switch p{color:#a4d4ce;font-size:11px;margin:7px 0 0}
+@media(max-width:880px){.lab-journey{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:620px){.lab-journey{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.lab-journey a{padding:12px 9px}}
+
+</style>
+<link rel="stylesheet" href="./ai-visual-design-lab-live.css?v=20261013e">
+</head>
+<body>
+<header class="nav"><div class="wrap nav-inner">
+<a class="brand" href="../../day.html?id=10"><span class="brand-icon">X</span><span><strong>AI VISUAL DESIGN LAB</strong><small>DAY 10 · X ACADEMY · NOVA</small></span></a>
+<a class="nav-link" href="../../day.html?id=10">↗ العودة لليوم العاشر</a>
+</div></header>
+<main>
+<section class="hero"><div class="wrap hero-grid">
+<div>
+<div class="eyebrow">DAY 10 / POWER BI / PROMPT ENGINEERING</div>
+<h1>ما تكتفي بالـVisual الجاهز<br><em>انت وجّه الذكاء الاصطناعي</em></h1>
+<p>حوّل أي فكرة تحليلية مناسبة إلى HTML Visual بتصميم احترافي. انت بتحدد البيانات، نوع الرسم، الأبعاد، الألوان، الحركة والتفاعل. والـAI بكتب الكود بناء على مواصفاتك، مش بناء على تخميناته.</p>
+<div class="hero-ctas"><a class="primary" href="#studio">ابدأ تصميم الـPrompt <span aria-hidden="true">←</span></a><a class="secondary" href="#principles">قبل ما تبدأ: القواعد الذهبية</a></div>
+<div class="stats"><div class="stat"><b>20</b><small>Visual Effects</small></div><div class="stat"><b>19</b><small>Chart Types</small></div><div class="stat"><b>4</b><small>Role Presets</small></div><div class="stat"><b>1</b><small>Prompt جاهز للنسخ</small></div></div>
+</div>
+<div class="hero-demo" aria-hidden="true"><div class="mock-bar"><span class="en">NOVA / EXECUTIVE INTELLIGENCE</span><span class="mock-dot"></span></div><div class="mock-card"><div class="mock-top"><span>SALES PERFORMANCE</span><span class="en">LIVE DESIGN CONCEPT</span></div><div class="mock-value">$842,500 <small>↗ +12.8%</small></div><div class="mini-bars"><i style="--h:39%"></i><i style="--h:62%"></i><i style="--h:49%"></i><i style="--h:78%"></i><i style="--h:68%"></i><i style="--h:91%"></i></div><div class="mock-bottom"><span>JAN</span><span>FEB</span><span>MAR</span><span>APR</span><span>MAY</span><span>JUN</span></div></div><div class="mock-glow"></div></div>
+</div></section>
+<div class="wrap"><nav class="lab-journey" aria-label="مراحل اليوم العاشر">
+ <a href="before-after.html"><strong>01 · DISCOVER</strong><small>Before &amp; After</small></a>
+ <a href="prompt-anatomy.html"><strong>02 · LEARN</strong><small>Prompt Anatomy</small></a>
+ <a href="#studio"><strong>03 · CREATE</strong><small>AI Prompt Builder</small></a>
+ <a href="#repairMode"><strong>04 · VALIDATE</strong><small>Visual Rescue Mode</small></a>
+ <a href="student-missions.html"><strong>05 · APPLY</strong><small>Personal Missions</small></a>
+</nav></div>
+<section class="section" id="studio"><div class="wrap">
+<div class="section-head"><div><span class="kicker">THE DESIGN WORKBENCH</span><h2>ابنِ الـPrompt خطوة بخطوة</h2><p>اختار، جرّب، راجع المعاينة، وانسخ وصف جاهز ومفصل للـAI</p></div><button class="secondary" type="button" id="resetButton">↺ بدء من جديد</button></div>
+<div class="workbench">
+<div class="studio">
+<div class="studio-top"><strong>Prompt Configuration</strong><span class="subtle">كل خطوة بتحدّث الـPrompt تلقائيا</span></div>
+<div class="step-tabs" role="tablist" aria-label="مراحل بناء البرومبت">
+<button class="step-tab" type="button" id="tab0" data-step="0" role="tab" aria-selected="true" aria-controls="step0"><span class="num">01</span> البيانات</button>
+<button class="step-tab" type="button" id="tab1" data-step="1" role="tab" aria-selected="false" aria-controls="step1"><span class="num">02</span> الرسم والحجم</button>
+<button class="step-tab" type="button" id="tab2" data-step="2" role="tab" aria-selected="false" aria-controls="step2"><span class="num">03</span> التصميم والحركة</button>
+<button class="step-tab" type="button" id="tab3" data-step="3" role="tab" aria-selected="false" aria-controls="step3"><span class="num">04</span> الجودة والإخراج</button>
+</div>
+<section class="step-panel" id="step0" role="tabpanel" aria-labelledby="tab0">
+<h3>01 — اشرح للـAI شو بدك تحلل</h3><p>أهم خطوة. لا تبدأ بالحركة قبل ما تحدد السؤال والبيانات الصحيحة</p>
+<div class="group-label">أمثلة جاهزة حسب مجال المتدرب</div>
+<div class="note" style="margin:11px 0">كيف تجيب أسماء الحقول الصحيحة؟ افتح <b>Data / Fields Pane</b> داخل Power BI، وانسخ اسم الـMeasure كما هو (مثال <span dir="ltr">[Total Revenue]</span>) واسم العمود مع اسم الجدول (مثال <span dir="ltr">DimProduct[Category]</span>). أسماء الـMeasures تحت أي جدول ما بتغير طريقة استخدامها داخل Measure.</div><div class="presets" id="rolePresets">
+<button class="preset" type="button" data-role="sales">محمود · Sales</button><button class="preset" type="button" data-role="ops">سمية · Operations</button><button class="preset" type="button" data-role="finance">هشام · Finance</button><button class="preset" type="button" data-role="workforce">ايناس · Workforce</button>
+</div>
+<div class="fields">
+<div class="field span2"><label for="business">السؤال الإداري المطلوب من الـVisual *</label><textarea id="business" placeholder="مثال: أي فئة منتجات تحقق أعلى مبيعات؟" data-prompt></textarea></div>
+<div class="field"><label for="measures">الـMeasures الموجودة فعليا *</label><textarea id="measures" dir="ltr" placeholder="[Total Revenue], [Revenue YoY %]" data-prompt></textarea><span class="hint">اكتب أسماء الـMeasures، وإذا كتبت Total Revenue لحالها رح نجهزها بالـPrompt على شكل [Total Revenue]. راجع أسماءها من Power BI</span></div>
+<div class="field"><label for="dimension">Dimension / Axis</label><textarea id="dimension" dir="ltr" placeholder="DimProduct[Category] — verify exact name" data-prompt></textarea><span class="hint">للبطاقات الفردية ممكن تتركه فاضي</span></div>
+<div class="field"><label for="period">مستوى الوقت / Grain</label><select id="period" data-prompt><option value="Respect current slicer and filter context">حسب Slicers الحالية</option><option value="Daily, with a continuous date axis">يومي</option><option value="Month over month, chronological sorting">شهري</option><option value="Year over year">سنوي</option><option value="Latest available snapshot only; never sum headcount snapshots">آخر Snapshot فقط</option></select></div>
+<div class="field"><label for="unit">الوحدة والتنسيق</label><select id="unit" data-prompt><option value="Automatic based on measures">تلقائي</option><option value="JOD currency, 2 decimals">دينار أردني JOD</option><option value="Percentage, 1 decimal place">نسبة مئوية %</option><option value="Whole number with thousands separator">عدد صحيح</option><option value="Compact numbers: K/M">مختصر K / M</option></select></div>
+<div class="field span2"><label for="compare">المرجع أو المقارنة</label><input id="compare" type="text" placeholder="مثال: Previous Year / Budget / Planned Headcount" data-prompt></div>
+</div></section>
+
+<section class="step-panel" id="step1" role="tabpanel" aria-labelledby="tab1" hidden>
+<h3>02 — حدّد نوع الـChart ومساحته</h3><p>نفس البيانات ممكن تنعرض بأكثر من شكل. اختار اللي بخدم السؤال الإداري</p>
+<div class="fields">
+<div class="field span2"><label for="chart">نوع الـVisual *</label><select id="chart" data-prompt></select></div>
+<div class="field"><label for="topN">Top N / عدد العناصر</label><input id="topN" type="number" min="1" max="100" value="8" data-prompt></div>
+<div class="field"><label for="sort">ترتيب العناصر</label><select id="sort" data-prompt><option value="Descending by primary measure">تنازلي حسب القيمة</option><option value="Ascending by primary measure">تصاعدي حسب القيمة</option><option value="Chronological by date">ترتيب زمني</option><option value="Custom business stage order">حسب مراحل العمل</option><option value="No enforced sorting">بدون ترتيب محدد</option></select></div>
+<div class="field"><label for="width">عرض الـVisual (px)</label><input id="width" type="number" min="150" max="3840" value="850" data-prompt></div>
+<div class="field"><label for="height">ارتفاع الـVisual (px)</label><input id="height" type="number" min="100" max="2160" value="400" data-prompt></div>
+<div class="field span2"><label for="sizePreset">أحجام مقترحة</label><select id="sizePreset"><option value="">— اختار الحجم —</option><option value="280x160">Small KPI · 280 × 160</option><option value="450x220">Large KPI · 450 × 220</option><option value="850x400">Chart · 850 × 400</option><option value="1280x220">Wide Banner · 1280 × 220</option><option value="320x750">Side Panel · 320 × 750</option><option value="1920x1080">Landing Page · 1920 × 1080</option></select></div>
+<div class="field span2"><div class="inline-toggles"><label class="ck"><input type="checkbox" id="responsive" checked data-prompt> Responsive داخل الحاوية</label><label class="ck"><input type="checkbox" id="labels" checked data-prompt> Data Labels</label><label class="ck"><input type="checkbox" id="legend" data-prompt> Legend</label><label class="ck"><input type="checkbox" id="axes" checked data-prompt> Axes & Gridlines</label></div></div>
+<div class="field span2"><label for="chartNotes">تعليمات إضافية لشكل الرسم</label><textarea id="chartNotes" placeholder="مثال: عمود Forecast متقطع، Actual بلون Teal، Labels خارج الأعمدة، تجنب ازدحام النصوص" data-prompt></textarea></div>
+</div></section>
+
+<section class="step-panel" id="step2" role="tabpanel" aria-labelledby="tab2" hidden>
+<h3>03 — الألوان والهوية والحركة</h3><p>اختار التأثير وجرّبه على المعاينة. مش كل تأثير مناسب لكل رسم أو مدعوم بنفس الطريقة</p>
+<div class="fields">
+<div class="field"><label for="bg">الخلفية</label><select id="bg" data-prompt><option value="Transparent">شفافة تماما</option><option value="Dark navy">Dark Navy</option><option value="Light pearl">Light Pearl</option><option value="Glass translucent">Glass translucent</option></select></div>
+<div class="field"><label for="font">الخط</label><select id="font" data-prompt><option value="Almarai with Segoe UI and sans-serif fallback">Almarai</option><option value="Segoe UI with Arial fallback">Segoe UI</option><option value="Inter with Arial fallback">Inter</option></select></div>
+<div class="field"><label for="primaryColor">Primary Color</label><input type="color" id="primaryColor" value="#099999" data-prompt></div>
+<div class="field"><label for="secondaryColor">Accent Color</label><input type="color" id="secondaryColor" value="#f2c811" data-prompt></div>
+<div class="field"><label for="radius">Border Radius (px)</label><input type="number" id="radius" value="18" min="0" max="70" data-prompt></div>
+<div class="field"><label for="padding">Inner Padding (px)</label><input type="number" id="padding" value="16" min="0" max="90" data-prompt></div>
+</div>
+<div class="group-label" style="margin-top:24px">20 Visual Effects — اختار واحد كتأثير رئيسي</div>
+<div class="fx-grid" id="effectsGrid"></div>
+<div class="motion-row">
+<div class="field"><label for="intensity">قوة الحركة</label><select id="intensity" data-prompt><option value="Subtle">هادئة</option><option value="Moderate">متوسطة</option><option value="Expressive">واضحة</option><option value="Off">بدون حركة</option></select></div>
+<div class="field"><label for="speed">مدة الحركة (ثانية)</label><input id="speed" type="number" value="3" min=".3" max="30" step=".5" data-prompt></div>
+<div class="field"><label for="hover">Hover Interaction</label><select id="hover" data-prompt><option value="Highlight the hovered series or card">تحديد العنصر</option><option value="Subtle lift and shadow">ارتفاع خفيف</option><option value="HTML tooltip with contextual value">HTML Tooltip</option><option value="No hover interaction">بدون</option></select></div>
+</div>
+<div class="inline-toggles" style="margin-top:15px"><label class="ck"><input id="loop" type="checkbox" data-prompt> حركة مستمرة</label><label class="ck"><input id="tooltip" type="checkbox" checked data-prompt> Tooltip داخل HTML</label><label class="ck"><input id="reduced" type="checkbox" checked data-prompt> Respect reduced motion</label></div>
+<div class="field" style="margin-top:18px"><label for="designNotes">تفاصيل إضافية للهوية</label><textarea id="designNotes" placeholder="مثال: إضاءة خفيفة حول الـKPI فقط، لا تستخدم ألوان كثيرة، واجعل الأرقام كبيرة وواضحة" data-prompt></textarea></div>
+</section>
+
+<section class="step-panel" id="step3" role="tabpanel" aria-labelledby="tab3" hidden>
+<h3>04 — الحدود التقنية وجودة الناتج</h3><p>هاي الخطوة بتمنع كثير من المشاكل الشائعة: أرقام غلط، Scrollbar، كود غير مدعوم، أو Measures مختلقة</p><div class="safety-ribbon"><span class="safety-glyph" aria-hidden="true">✓</span><span><b>DATA FIRST / ANIMATION SECOND</b><br>الرسم لازم يظهر كاملا حتى لو الحركة ما اشتغلت. لا تخفي الأعمدة أو الخطوط بـscaleX(0) أو opacity:0 في الحالة الأساسية، وافحص أكبر قيمة وأصغر قيمة قبل اعتماد الكود.</span></div>
+<div class="fields">
+<div class="field"><label for="target">نوع الـHTML Content Visual</label><select id="target" data-prompt><option value="HTML Content (regular) visual">HTML Content Regular</option><option value="HTML Content Secure/Lite; conservative markup and CSS only">HTML Content Secure / Lite</option></select></div>
+<div class="field"><label for="output">صيغة الناتج</label><select id="output" data-prompt><option value="Complete copy-paste Power BI DAX measure returning HTML/SVG">DAX Measure جاهزة</option><option value="Self-contained HTML prototype first, then complete DAX measure">HTML Preview + DAX</option><option value="Complete SVG string wrapped in a DAX measure">SVG داخل DAX Measure</option></select></div>
+<div class="field"><label for="language">اتجاه النص</label><select id="language" data-prompt><option value="Arabic RTL labels and LTR technical terms/numbers">Arabic RTL + Numbers LTR</option><option value="English LTR">English LTR</option><option value="Bilingual labels, explicit direction per element">Arabic / English</option></select></div>
+<div class="field"><label for="maxRows">الحد الأقصى للفئات المعروضة</label><input id="maxRows" type="number" min="1" max="300" value="20" data-prompt></div>
+<div class="field span2"><label for="edgeCases">القيم الفارغة والسالبة والـZero</label><select id="edgeCases" data-prompt><option value="Distinguish BLANK from zero, display an empty-state message, preserve negative values">فرّق بين Blank وZero</option><option value="Replace blanks with a visible em dash only; never silently alter the underlying number">اعرض — للفراغات</option><option value="Hide categories with blank primary measure; keep real zeros and negatives">أخفِ الفئات ذات القيمة الفارغة فقط</option></select></div>
+<div class="field span2"><div class="safe-switch"><label><input id="safeMode" type="checkbox" checked data-prompt><span>Safe Mode — ابدأ بنسخة Static قبل الـPremium</span></label><p>لما يكون مفعل، رح يطلب من الـAI نسخة ثابتة كاملة وسليمة أولاً، وبعدها يضيف تأثير بصري غير مؤثر على طول الأعمدة أو ظهور القيم. الخيار الأفضل للعرض المباشر.</p></div></div>
+<div class="field span2"><label for="technicalNotes">شروط إضافية للكود</label><textarea id="technicalNotes" placeholder="مثال: لا تستخدم JavaScript، لا تعتمد على CDN، لا تفترض أن HTML Hover = Native Cross Filter" data-prompt></textarea></div>
+<div class="field span2"><label>مرجع بصري اختياري — Screenshot</label>
+<div class="ref-drop" id="referenceDrop">
+<strong>عندك رسم عاجبك؟ استخدمه كمرجع</strong><br>
+<button type="button" id="chooseReference">اختيار صورة من جهازك</button>
+<input type="file" accept="image/png,image/jpeg,image/webp" id="referenceInput">
+<p>الصورة بتظل على جهازك. بعد نسخ الـPrompt أرفقها بنفسك للـAI؛ الموقع ما برفعها لأي سيرفر</p>
+<div id="referenceInfo" class="ref-preview" hidden><img id="referencePreview" alt="معاينة الصورة المرجعية"><span id="referenceName"></span><button type="button" id="removeReference">إزالة</button></div>
+</div></div>
+<div class="field span2"><div class="note">مهم: التصميم التفاعلي داخل HTML مش نفس Power BI Native Cross-filtering. اطلب من الـAI يشرح شو مدعوم فعليا في إصدارك، ويعطيك بديل باستخدام Native Visuals أو Buttons عند الحاجة. لا تفترض أن JavaScript أو ملف SVG قابل للضغط رح يعمل بكل البيئات</div></div>
+</div>
+</section>
+<div class="below-tools"><button class="plain" id="prevStep" type="button">السابق →</button><span class="subtle" id="stepCounter">الخطوة 1 من 4</span><button class="primary" id="nextStep" type="button">التالي ←</button></div>
+</div>
+
+<aside class="preview" aria-label="معاينة للتصميم">
+<div class="preview-head"><div><h3>Live Visual Preview</h3><div class="preview-note">معاينة شكل فقط ببيانات توضيحية، مش بيانات Nova</div></div><span class="preview-indicator">PREVIEW</span></div>
+<div class="preview-stage fx-neon" id="previewStage"><span class="sample-kicker en" id="previewChartType">BAR CHART</span><div class="chart-title" id="previewTitle">Nova · Business Performance</div><div id="chartSvg"></div></div>
+<div class="preview-check"><span class="subtle">اختبار بصري سريع: أطول شريط = أكبر قيمة</span><button class="secondary" id="previewQAToggle" type="button" aria-pressed="false">فحص الأعمدة 100% / 90% / 0%</button></div><div class="preview-footer"><span id="previewSize">850 × 400</span><span id="previewEffect">Neon Pulse</span><span id="previewMode">Transparent</span></div>
+<div id="validationAlert" class="reliability-alert" role="status" aria-live="polite">راجع بياناتك وابعادك قبل النسخ</div><div class="quality"><div class="quality-top"><strong>جاهزية مواصفات الـPrompt</strong><span id="readyValue">0 / 8</span></div><div class="quality-line"><i id="readyBar"></i></div><p id="readyHint">كمّل البيانات الرئيسية حتى تكون تعليماتك للـAI أدق</p></div>
+</aside>
+</div>
+</div></section>
+
+<section class="prompt-section" id="promptResult"><div class="wrap">
+<div class="section-head"><div><span class="kicker">READY TO USE</span><h2>الـPrompt النهائي</h2><p>انسخه كما هو، وأرفق صورة إذا اخترتها، وبعدها اطلب من الـAI ينتج Measure كاملة</p></div></div>
+<div class="prompt-panel">
+<div class="prompt-toolbar"><div><strong>Complete AI Visual Specification</strong><small>يتم تحديث النص تلقائيا مع كل تعديل</small></div><div class="prompt-actions"><button class="secondary" id="downloadPrompt" type="button">↓ TXT</button><button class="primary" id="copyPrompt" type="button">نسخ الـPrompt ⧉</button></div></div>
+<pre class="prompt-output" id="promptOutput" tabindex="0" aria-label="البرومبت الجاهز"></pre>
+<div class="prompt-meta" id="promptMeta">راجع أسماء الـMeasures والـDimensions قبل النسخ. المعاينة توضيحية وليست ناتجا من نموذج البيانات.</div>
+</div>
+</div></section>
+
+<section class="wrap" id="visualSafety" style="padding-bottom:42px">
+<div class="section-head"><div><span class="kicker">VISUAL RELIABILITY CHECK</span><h2>قبل ما تعرض الـVisual قدام الناس</h2><p>المعادلة الصحيحة لازم تنتج أرقام صحيحة ورسم يضل واضح حتى لو الحركة ما اشتغلت</p></div></div>
+<div class="safety-grid">
+<article class="safety-card"><span class="number">01 / DATA SCALE</span><strong>أكبر رقم = أطول Bar</strong><p>إذا عندك 1M و900K لازم 1M يظهر شريطه كامل 100%، وممنوع يختفي أو يصير خط رفيع بسبب حركة CSS</p></article>
+<article class="safety-card"><span class="number">02 / MOTION FAILSAFE</span><strong>الحركة تجميلية فقط</strong><p>خلي الشريط ثابت وظاهر افتراضيا، وحرّك الإضاءة أو الحدود أو طبقة فوقه. جرب إيقاف Animation بالكامل</p></article>
+<article class="safety-card"><span class="number">03 / SMALL CANVAS</span><strong>لا تقص البيانات</strong><p>في مساحة مثل 474 × 271 ممكن 8 صفوف ما يتسعوا. قلل Top N أو زيد الارتفاع بموافقة المستخدم؛ ما تخفي صفوف من غير ما تحكي</p></article>
+</div>
+<div class="repair-panel" id="repairMode">
+<div class="repair-head"><div><span class="kicker">VISUAL RESCUE MODE</span><h3>الـAI أعطاك كود فيه مشكلة؟</h3><p class="subtle">اختار العطل، الصق الـMeasure، وانسخ Prompt متخصص لإصلاحه بدون ما نرجع نبني من الصفر</p></div><span class="preview-indicator">DEBUG LAB</span></div>
+<div class="repair-body">
+<div class="field"><label for="repairIssue">شو المشكلة اللي صارت؟</label><select id="repairIssue">
+<option value="Largest / first category bar is invisible or only a tiny line, although its value is maximum">أول أو أكبر عمود مختفي</option>
+<option value="Animation hides a bar or leaves it stuck at zero width">الحركة بتخفي الرسم</option>
+<option value="Categories are missing or clipped in the available height">فئات ناقصة أو مقصوصة</option>
+<option value="Bar ordering or scaling does not match numeric measure values">ترتيب أو طول الأعمدة غلط</option>
+<option value="The DAX expression fails to parse or renders blank">خطأ DAX أو الشاشة فاضية</option>
+<option value="BLANK, zero, or negative values are rendered incorrectly">القيم الفارغة أو السالبة غلط</option>
+<option value="Power BI HTML Content does not support a requested CSS or hover behavior">Hover أو CSS مش شغال</option>
+<option value="The visual breaks at smaller sizes or shows scrollbars">المقاسات الصغيرة فيها قص أو Scroll</option>
+</select></div>
+<div class="field"><label for="repairSymptom">تفاصيل المشكلة / الحجم</label><textarea id="repairSymptom" placeholder="مثال: 474 × 271 px، أكبر Category قيمتها 1M والشريط مش ظاهر، بينما ثاني Category 901K ظاهر"></textarea></div>
+<div class="field span2"><label for="repairCode">الصق كود الـDAX أو الـHTML اللي أعطاك إياه AI</label><textarea id="repairCode" placeholder="Paste your full generated DAX measure here. The code stays inside your browser; it is not uploaded."></textarea><span class="hint">ما بنرفع الكود لأي سيرفر. رح يندمج داخل Repair Prompt لما تنسخه انت</span></div>
+<div class="repair-actions"><p id="repairStatus" role="status">الصق الكود اللي بدك تصلحه حتى نولد تعليمات إصلاح دقيقة</p><button class="primary" id="copyRepairPrompt" type="button">نسخ Repair Prompt ⧉</button></div>
+</div>
+</div>
+</section>
+
+<section id="principles" class="wrap" style="padding-bottom:58px"><div class="section-head"><div><span class="kicker">THE NON-NEGOTIABLES</span><h2>أهم 3 قواعد قبل استخدام أي كود</h2></div></div>
+<div class="skills">
+<article class="skill"><div class="skill-code">01 / CORRECT DATA</div><b>لا تعتمد على شكل جميل ورقم غلط</b><p>استخدم الـMeasures الحقيقية، اطلب احترام Filter Context وراجع نفس الرقم بVisual أصلية قبل اعتماد نسخة HTML</p></article>
+<article class="skill"><div class="skill-code">02 / POWER BI LIMITS</div><b>مش كل Hover يعني تفاعل مع التقرير</b><p>Hover داخل HTML ممكن يكون بصري فقط. اختبر إصدار HTML Content الموجود عندك، ولا تفترض دعم JavaScript أو Native Selection</p></article>
+<article class="skill"><div class="skill-code">03 / PERFORMANCE</div><b>رسم سريع وواضح أحسن من 10 حركات</b><p>حدد Top N والحد الأقصى للعناصر، وتجنب كود ثقيل ورسومات كثيرة، وخلي الحركة خفيفة وقابلة للإيقاف</p></article>
+</div></section>
+</main>
+<footer class="footer wrap"><span>© X Academy · Power BI Specialist · DAY 10</span><span>Learn the specification · Validate the output · Own the design</span></footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id);};
+var chartTypes=["KPI Card","Horizontal Bar Chart","Column Chart","Line Chart","Area Chart","Donut Chart","Gauge","Bullet Chart","Waterfall","Funnel","Heatmap","Progress Ring","Matrix","Scatter Plot","Timeline","Waffle Chart","Lollipop Chart","Diverging Bar Chart","Treemap"];
+var effects=[
+["Neon Pulse","توهج نيون نابض","neon"],["Glassmorphism","زجاج ناعم وشفافية","glass"],
+["Aurora Flow","أضواء متدرجة","aurora"],["Holographic","انعكاسات مستقبلية","holo"],
+["Liquid Gradient","تدرج لوني سائل","liquid"],["Metallic Shine","لمعة معدنية","metal"],
+["Radar Sweep","دوران شعاع رادار","radar"],["Animated Border","حدود مضيئة","border"],
+["Shimmer","وميض عابر","shimmer"],["Soft Pulse","نبضة ضوئية","pulse"],
+["Floating","طفو ناعم","float"],["Slide Reveal","ظهور انزلاقي","slide"],
+["Fade & Scale","تلاشي وتكبير","fade"],["3D Hover Lift","ميل عند المرور","tilt"],
+["Spotlight Hover","إضاءة عند المرور","spot"],["Ripple","دوائر متموجة","ripple"],
+["Wave Motion","حركة أمواج","wave"],["SVG Line Draw","رسم الخط تدريجيا","draw"],
+["Bar Growth","نمو الأعمدة","grow"],["Segment Reveal","ظهور القطع","segments"]
+];
+var selectedEffect=0,currentStep=0,referenceName="",referenceURL="",suppressSave=false,qaPreview=false;
+var profiles={
+ sales:{business:"أي Category تحقق أعلى إيراد، وكيف يتغير الأداء مع الفلاتر؟",measures:"[Total Revenue], [Revenue YoY %]",dimension:"DimProduct[Category] — VERIFY EXACT FIELD",compare:"Previous Year",chart:"Horizontal Bar Chart",unit:"JOD currency, 2 decimals"},
+ ops:{business:"أي منطقة تسجل أضعف نسبة التزام بالمواعيد؟",measures:"[On Time %], [Completed Orders]",dimension:"VERIFY: Region field from operations model",compare:"Completed Orders",chart:"Progress Ring",unit:"Percentage, 1 decimal place"},
+ finance:{business:"كيف يقارن الأداء المالي بالموازنة، وأين يوجد أكبر انحراف؟",measures:"[Operating Profit], [Budget Achievement %]",dimension:"VERIFY: Branch or Department field",compare:"Budget",chart:"Bullet Chart",unit:"JOD currency, 2 decimals"},
+ workforce:{business:"وين أكبر فجوة بين التوظيف الفعلي والمخطط حسب القسم؟",measures:"[Staffing Gap], [Staffing Coverage %]",dimension:"VERIFY: Department field from workforce model",compare:"Planned Headcount",chart:"Diverging Bar Chart",unit:"Whole number with thousands separator"}
+};
+function v(id){var el=$(id);return el.type==="checkbox"?el.checked:el.value.trim();}
+function toast(message){var t=$("toast");t.textContent=message;t.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(function(){t.classList.remove("show");},2700);}
+function selectStep(n){currentStep=Math.max(0,Math.min(3,n));for(var i=0;i<4;i++){var active=i===currentStep;$("step"+i).hidden=!active;$("tab"+i).setAttribute("aria-selected",String(active));} $("stepCounter").textContent="الخطوة "+(currentStep+1)+" من 4";$("prevStep").disabled=currentStep===0;$("nextStep").textContent=currentStep===3?"شوف الـPrompt ↓":"التالي ←"; }
+function effectButton(effect,i){var b=document.createElement("button");b.type="button";b.className="fx-option";b.setAttribute("aria-pressed",String(i===selectedEffect));b.setAttribute("data-effect",String(i));var m=document.createElement("span");m.className="effect-mini fx-"+effect[2];var name=document.createElement("b");name.textContent=effect[0];var desc=document.createElement("small");desc.textContent=effect[1];b.append(m,name,desc);b.addEventListener("click",function(){selectedEffect=i;document.querySelectorAll(".fx-option").forEach(function(x){x.setAttribute("aria-pressed",String(x===b));});update();});return b;}
+effects.forEach(function(e,i){$("effectsGrid").appendChild(effectButton(e,i));});
+chartTypes.forEach(function(c){var o=document.createElement("option");o.value=c;o.textContent=c;$("chart").appendChild(o);});
+$("chart").value="Horizontal Bar Chart";
+function svgWrap(body){return '<svg viewBox="0 0 350 160" role="img" aria-label="بيانات توضيحية لشكل الرسم" xmlns="http://www.w3.org/2000/svg">'+body+'</svg>';}
+function bars(horizontal){var values=[82,62,44,29];var s="";for(var i=0;i<4;i++){if(horizontal){s+='<text x="1" y="'+(26+i*36)+'">'+["A","B","C","D"][i]+'</text><rect class="bar-pale" x="26" y="'+(13+i*36)+'" width="292" height="18" rx="8"/><rect class="bar-fill" x="26" y="'+(13+i*36)+'" width="'+(values[i]*2.9)+'" height="18" rx="8"/>';}else{s+='<rect class="bar-pale" x="'+(35+i*76)+'" y="7" width="40" height="125" rx="7"/><rect class="bar-fill" x="'+(35+i*76)+'" y="'+(132-values[i]*1.45)+'" width="40" height="'+(values[i]*1.45)+'" rx="7"/><text x="'+(54+i*76)+'" y="152">'+["A","B","C","D"][i]+'</text>';}}return s;}
+function renderPreview(){
+ var stage=$("previewStage"),chart=v("chart"),code=effects[selectedEffect][2];
+ stage.className="preview-stage fx-"+code;
+ stage.style.setProperty("--accent",v("primaryColor"));stage.style.setProperty("--accent2",v("secondaryColor"));
+ stage.style.setProperty("--motion",Math.max(.3,Math.min(30,Number(v("speed"))||3))+"s");
+ if(v("intensity")==="Off")stage.style.animation="none";else stage.style.animation="";
+ stage.style.borderRadius=Math.max(0,Math.min(70,Number(v("radius"))||0))+"px";
+ var bg=v("bg");stage.style.background=bg==="Transparent"?"#10232a":bg==="Light pearl"?"#e4f2f2":bg==="Glass translucent"?"#184147aa":"#10202b";
+ stage.style.color=bg==="Light pearl"?"#133d45":"#edf9f9";
+ $("previewChartType").textContent=chart.toUpperCase();
+ $("previewTitle").textContent=(v("business")||"Nova · Business Performance").slice(0,94);
+ $("previewSize").textContent=v("width")+" × "+v("height");
+ $("previewEffect").textContent=effects[selectedEffect][0];$("previewMode").textContent=bg;
+ var svg="",dots='<circle cx="45" cy="91" r="7" class="dot"/><circle cx="135" cy="52" r="7" class="dot"/><circle cx="215" cy="73" r="7" class="dot"/><circle cx="305" cy="20" r="7" class="dot"/>';
+ if(chart==="Horizontal Bar Chart")svg=bars(true);
+ else if(chart==="Column Chart")svg=bars(false);
+ else if(chart==="Line Chart"||chart==="Area Chart"){svg=(chart==="Area Chart"?'<path d="M25 115 L105 85 L188 99 L268 38 L328 16 L328 135 L25 135 Z" fill="#18aaa866"/>':"")+'<path class="chart-line" d="M25 115 L105 85 L188 99 L268 38 L328 16"/>'+dots;}
+ else if(chart==="Donut Chart"||chart==="Progress Ring"){svg='<circle cx="170" cy="77" r="55" stroke="#24505a" stroke-width="23" fill="none"/><circle cx="170" cy="77" r="55" stroke="var(--accent)" stroke-width="23" stroke-dasharray="'+(chart==="Donut Chart"?"180 345":"270 345")+'" fill="none" transform="rotate(-90 170 77)"/><circle cx="170" cy="77" r="55" stroke="var(--accent2)" stroke-width="23" stroke-dasharray="65 345" stroke-dashoffset="-185" fill="none" transform="rotate(-90 170 77)"/><text x="170" y="85" text-anchor="middle" style="fill:currentColor;font-weight:800;font-size:25px">'+(chart==="Progress Ring"?"78%":"360")+'</text>';}
+ else if(chart==="KPI Card"){svg='<text x="18" y="84" style="fill:currentColor;font-weight:800;font-size:56px">842.5K</text><text x="20" y="116" style="fill:var(--accent2);font-size:16px">↗ +12.8% vs previous</text><path class="chart-line" d="M240 125 L260 90 L280 105 L300 46 L330 25"/>';}
+ else if(chart==="Gauge"){svg='<path d="M75 127 A100 100 0 0 1 275 127" stroke="#27535b" stroke-width="24" fill="none"/><path d="M75 127 A100 100 0 0 1 244 50" stroke="var(--accent)" stroke-width="24" fill="none"/><text x="175" y="135" text-anchor="middle" style="fill:currentColor;font-size:30px">78%</text>';}
+ else if(chart==="Bullet Chart"){svg='<rect x="25" y="55" width="310" height="48" fill="#214851" rx="7"/><rect x="25" y="67" width="225" height="24" class="bar-fill" rx="5"/><line x1="280" y1="48" x2="280" y2="109" stroke="var(--accent2)" stroke-width="6"/><text x="25" y="133">Actual vs Target</text>';}
+ else if(chart==="Scatter Plot"){for(var p=0;p<12;p++){svg+='<circle class="dot" cx="'+(27+p*25)+'" cy="'+(128-((p*37+18)%95))+'" r="'+(4+p%3*2)+'" opacity=".85"/>';}svg+='<path d="M22 132 H333 M24 12 V132" stroke="#55757e" fill="none"/>';}
+ else if(chart==="Heatmap"||chart==="Matrix"){for(var row=0;row<4;row++)for(var col=0;col<6;col++){svg+='<rect x="'+(12+col*55)+'" y="'+(10+row*35)+'" width="46" height="27" rx="5" fill="'+((row+col)%3===0?"var(--accent)":"#1b535a")+'" opacity="'+(.48+(row+col)%4*.14)+'"/>';}}
+ else if(chart==="Funnel"){for(var f=0;f<4;f++)svg+='<path d="M'+(25+f*38)+' '+(12+f*36)+' H'+(330-f*38)+' L'+(315-f*35)+' '+(42+f*36)+' H'+(40+f*35)+' Z" fill="var(--accent)" opacity="'+(1-f*.18)+'"/>';}
+ else if(chart==="Waterfall"){var vls=[62,40,27,86];for(var w=0;w<4;w++)svg+='<rect x="'+(29+w*81)+'" y="'+(136-vls[w]*1.25)+'" width="46" height="'+(vls[w]*1.25)+'" rx="5" fill="'+(w===3?"var(--accent2)":"var(--accent)")+'"/>';}
+ else if(chart==="Timeline"){svg='<line x1="23" y1="80" x2="332" y2="80" stroke="#5baaa8" stroke-width="5"/>';for(var t=0;t<4;t++)svg+='<circle cx="'+(45+t*88)+'" cy="80" r="11" fill="var(--accent2)"/><text x="'+(27+t*88)+'" y="'+(107+(t%2)*9)+'">Q'+(t+1)+'</text>';}
+ else if(chart==="Waffle Chart"){for(var q=0;q<100;q++)svg+='<rect x="'+(13+(q%20)*16.4)+'" y="'+(10+Math.floor(q/20)*28)+'" width="12.6" height="20" rx="3" fill="'+(q<73?"var(--accent)":"#264b54")+'"/>';}
+ else if(chart==="Lollipop Chart"){for(var l=0;l<4;l++){var yy=24+l*36,xx=34+[247,190,128,77][l];svg+='<line x1="32" y1="'+yy+'" x2="'+xx+'" y2="'+yy+'" stroke="var(--accent)" stroke-width="5"/><circle cx="'+xx+'" cy="'+yy+'" r="9" fill="var(--accent2)"/>';}}
+ else if(chart==="Diverging Bar Chart"){for(var d=0;d<4;d++){var length=[86,45,100,65][d],negative=d%2===0;svg+='<rect x="'+(negative?173-length:178)+'" y="'+(16+d*36)+'" width="'+length+'" height="18" rx="6" fill="'+(negative?"var(--accent2)":"var(--accent)")+'"/>';}svg+='<line x1="175" y1="5" x2="175" y2="155" stroke="#c8d6d5"/>';}
+ else if(chart==="Treemap"){svg='<rect x="15" y="13" width="160" height="135" rx="7" fill="var(--accent)"/><rect x="182" y="13" width="153" height="65" rx="7" fill="#225e63"/><rect x="182" y="85" width="75" height="63" rx="7" fill="var(--accent2)"/><rect x="264" y="85" width="71" height="63" rx="7" fill="#287b7d"/>';}
+ else svg=bars(true);
+ $("chartSvg").innerHTML=svgWrap(svg);
+ var previousQA=$("qaRows");if(previousQA)previousQA.remove();
+ if(qaPreview){
+   stage.classList.add("qa-mode");
+   stage.style.animation="none";
+   $("previewChartType").textContent="BAR SCALE CHECK · ILLUSTRATIVE";
+   $("chartSvg").insertAdjacentHTML("afterend",'<div class="qa-rows" id="qaRows"><div class="qa-row"><span>MAX</span><div class="qa-track"><i class="qa-bar" style="--fraction:100%"></i></div><label>100%</label></div><div class="qa-row"><span>SECOND</span><div class="qa-track"><i class="qa-bar" style="--fraction:90%"></i></div><label>90%</label></div><div class="qa-row"><span>ZERO</span><div class="qa-track"><i class="qa-bar" style="--fraction:0%"></i></div><label>0%</label></div></div>');
+ }
+}
+function spec(){
+var chart=v("chart"),dim=v("dimension"),measures=normalizedMeasures(),title=v("business"),top=Math.max(1,Math.min(100,Number(v("topN"))||8)),maxRows=Math.max(1,Math.min(300,Number(v("maxRows"))||20));
+var lines=[
+"ROLE: Senior Power BI developer, DAX specialist and HTML/CSS/SVG dashboard designer.",
+"TASK: Create a production-oriented premium HTML visual for Power BI based on the specification below.",
+"",
+"1) BUSINESS OBJECTIVE",
+"Business question: "+(title||"[MISSING — ASK ME THE BUSINESS QUESTION BEFORE CODING]"),
+"Visual type: "+chart,
+"Comparison / benchmark: "+(v("compare")||"None specified; ask if required by chart."),
+"",
+"2) REAL POWER BI MODEL",
+"Use these existing DAX measures exactly: "+(measures||"[MISSING — ASK ME FOR EXACT EXISTING MEASURE NAMES]"),
+"Dimension / grouping column(s): "+(dim||"None specified. If this chart requires a dimension, ASK before writing code."),
+"Date grain and filter behavior: "+v("period"),
+"Number formatting: "+v("unit"),
+"Aggregation: Reuse existing measures. For grouped charts build a context-aware table using appropriate DAX table expressions. Never double-aggregate or invent tables/columns.",
+"Top N / category selection: "+top+"; hard maximum rendered categories: "+maxRows,
+"Sort: "+v("sort"),
+"Respect existing relationships, report-level, page-level, visual-level and slicer filter context. Preserve business grain.",
+"",
+"3) VISUAL STRUCTURE AND DIMENSIONS",
+"Visual canvas reference: "+v("width")+" x "+v("height")+" px.",
+"Responsive: "+(v("responsive")?"yes, fill the visual container without horizontal or vertical overflow":"fixed-size requested, explain risks of clipping"),
+"Data labels: "+(v("labels")?"show where legible":"hide unless essential"),
+"Legend: "+(v("legend")?"show":"hide"),
+"Axes / gridlines: "+(v("axes")?"show when applicable":"minimal or none"),
+"Chart-specific requirements: "+(v("chartNotes")||"Clean hierarchy and legible labels; do not imply unsupported chart interactions."),
+"",
+"4) PREMIUM BRAND DESIGN",
+"Brand: Nova Business 360 / X Academy educational example.",
+"Primary color: "+v("primaryColor")+"; accent color: "+v("secondaryColor"),
+"Background: "+v("bg")+"; font: "+v("font"),
+"Corner radius: "+v("radius")+" px; inner padding: "+v("padding")+" px.",
+"Labels and numeric direction: "+v("language"),
+"Visual effect: "+effects[selectedEffect][0]+" — "+effects[selectedEffect][1],
+"Motion intensity: "+v("intensity")+"; motion duration: "+v("speed")+" seconds; continuous loop: "+(v("loop")?"yes, only where non-distracting":"no, prefer one-time or hover-triggered motion"),
+"Hover behavior: "+v("hover"),
+"Tooltip within HTML: "+(v("tooltip")?"requested if supported":"not required"),
+"Respect prefers-reduced-motion: "+(v("reduced")?"yes":"not explicitly requested; still avoid inaccessible motion"),
+"Extra design directions: "+(v("designNotes")||"Premium and restrained; readable at actual visual size."),
+"Interpret vague requests such as Ultimate Design as: balanced visual hierarchy, excellent readability at the requested size, precise alignment, subtle restrained motion and clear values. Do not sacrifice data visibility for visual flair.",
+"",
+"5) TECHNICAL CONTRACT",
+"Target host: "+v("target"),
+"Output format: "+v("output"),
+"Return complete paste-ready code with all relevant DAX VAR declarations and final RETURN. Use FORMAT/COALESCE/conditional formatting only when semantically appropriate.",
+"SAFE MODE: "+(v("safeMode")?"ENABLED. Return TWO complete DAX measures: first a fully visible STATIC baseline with no animations, then the premium enhancement. Both must display identical data and filter context; premium motion must affect decorative layers only.":"OFF. Return one complete premium measure, but the same static-visibility and data-accuracy requirements remain mandatory."),
+
+"Do not use fake business data or hard-coded KPI numbers. Mockup values are not actual report values.",
+"Distinguish BLANK, 0 and negative values. Rule: "+v("edgeCases"),
+"Use valid HTML/SVG markup, safe escaping of text/labels, self-contained CSS and safe animation. No external libraries/CDNs unless I explicitly approve.",
+"If a requested feature depends on unsupported scripts or sandbox restrictions, say so and use a reliable CSS/SVG or native Power BI alternative.",
+"An HTML tooltip/hover is not the same as native Power BI cross-filtering, drillthrough or visual selections.",
+"Performance: restrict categories, avoid unnecessary per-row concatenation, and use stable label/number formatting. Avoid scrollbars and clipped text.",
+"Other technical conditions: "+(v("technicalNotes")||"None."),
+"",
+"6) VALIDATION AND EDGE CASES",
+"Check total against a native Card or Table. Verify slicers change values as expected.",
+"Test BLANK vs zero vs negatives, Top N ordering, overflow, RTL/LTR, small visual container and hover behavior.",
+"State which interactivity is actually supported in my Power BI HTML Content edition; never assert browser parity.",
+"",
+
+"CRITICAL VISUAL SAFETY / MANDATORY ACCEPTANCE TESTS:",
+"STATIC FIRST: the correct final chart with all real bars/lines/segments MUST be visible and accurately sized when CSS animations are completely disabled, unsupported, interrupted, or retriggered by Power BI.",
+"Never set transform: scaleX(0), scaleY(0), opacity: 0, clip-path: inset(100%), width:0 or height:0 on the ACTUAL data-bearing bar/series as its base state or as an animation fill-mode fallback. Do not use animation-fill-mode: both/backwards if it can leave data at zero size. Animate only optional decorative overlays, shimmer or borders; for Bar Growth, simulate growth over an already visible, correct static bar using a nonessential overlay that can disappear harmlessly.",
+"BAR SCALING: calculate geometry from numeric values, not FORMAT text. For strictly nonnegative bars use width = DIVIDE(value, MAXX(visibleCategories,value),0)*100 percent; the positive maximum must be exactly 100%. Second-largest 90% of maximum must be 90%, not 0.9%. With negatives use an explicit zero baseline and separate positive/negative extents.",
+"DATA ORDER: deterministic TOPN with a category tie-breaker, followed by deterministic CONCATENATEX ordering; do not confuse sorted data with visually arranged rows. Blank is not zero.",
+"ZERO-LINE: baseline must not cover or masquerade as the maximum bar. For positive-only scale place zero at the left edge; avoid decorative marks over bars.",
+"SIZE SAFETY: compute whether the requested category count fits in the visual height after header, labels, axis, padding and minimum readable row height. For 474x271 px with 8 categories, do not silently squeeze/clamp/hide rows; recommend increasing height or explicitly reducing Top N if needed.",
+"LAYOUT: prefer height:100% plus a sensible min-height:0 and a well-defined host container; avoid relying on height:100vh inside Power BI HTML Content. Avoid flex children collapsing to zero, arbitrary fixed header sizes, and overflow:hidden that masks rows.",
+"FIRST-ROW REGRESSION: simulate categories A=1,000,000 and B=900,000 (TEST VALUES ONLY, never hardcode into output), expect A width 100% and B width 90%. Test largest, smallest, zero and negative after any animation completes or is disabled.",
+"ROBUST CSS: scope every selector to a unique component root, include @media (prefers-reduced-motion: reduce) where supported, and provide a CSS-free/no-animation baseline. Do not rely on JavaScript timers for essential rendering.",
+"BEFORE FINAL ANSWER: explicitly self-check first bar full length, no missing rows, no bad scaling, no animation-dependent visibility, correct filter context, and no clipped text at actual requested pixel dimensions.",
+"",
+"7) DELIVERABLE",
+"A) Any essential clarification questions FIRST if model fields or chart requirements are missing.",
+"B) Complete code only after sufficient information, with no placeholder column or measure names.",
+"C) Exact Power BI setup steps to add the measure and bind it to HTML Content.",
+"D) Short customization guide: change colors, size, duration and animation.",
+"E) Known limitations, plus a 5-point visual and data QA checklist.",
+referenceName?"":""
+];
+if(referenceName){lines.push("","8) VISUAL REFERENCE","I will separately attach a screenshot named '"+referenceName+"' to the AI chat. Use it for VISUAL STYLE ONLY, never infer real dataset fields or metrics from the image.");}
+return lines.join("\n").trim();
+}
+function normalizedMeasures(){
+ var raw=v("measures");if(!raw)return "";
+ return raw.split(/[,;\n]+/).map(function(item){
+  var x=item.trim();if(!x)return "";
+  if(/^(?:'[^']+'|[A-Za-z_][A-Za-z0-9_]*)?\[[^\]]+\]$/.test(x))return x;
+  x=x.replace(/^["']+|["']+$/g,"");
+  return "["+x+"]";
+ }).filter(Boolean).join(", ");
+}
+function validation(){
+ var issues=[];
+ var chart=v("chart"),needsDim=!["KPI Card","Gauge","Progress Ring"].includes(chart);
+ if(!v("business"))issues.push("السؤال الإداري");
+ if(!v("measures"))issues.push("أسماء الـMeasures");
+ if(needsDim&&!v("dimension"))issues.push("Dimension للرسم");
+ if(/VERIFY EXACT FIELD|VERIFY:/.test(v("dimension")))issues.push("تأكيد اسم الـDimension الحقيقي");
+ if(Number(v("width"))<150||Number(v("height"))<100)issues.push("أبعاد صحيحة");
+ if(Number(v("topN"))>Number(v("maxRows")))issues.push("Top N أكبر من الحد المسموح");
+ var top=Math.min(Math.max(1,Number(v("topN"))||8),Math.max(1,Number(v("maxRows"))||20));
+ var requiredHeight=top*27+105;
+ if(needsDim&&["Horizontal Bar Chart","Column Chart","Lollipop Chart","Diverging Bar Chart","Heatmap","Matrix"].includes(chart)&&Number(v("height"))<requiredHeight){
+  issues.push("المساحة قد لا تكفي لـ"+top+" فئات (جرّب "+requiredHeight+"px أو قلل Top N)");
+ }
+ return issues;
+}
+function readiness(){
+ var chart=v("chart"),needsDim=!["KPI Card","Gauge","Progress Ring"].includes(chart);
+ var top=Math.min(Math.max(1,Number(v("topN"))||8),Math.max(1,Number(v("maxRows"))||20));
+ var fitOK=!(needsDim&&["Horizontal Bar Chart","Column Chart","Lollipop Chart","Diverging Bar Chart","Heatmap","Matrix"].includes(chart)&&Number(v("height"))<top*27+105);
+ var tests=[!!v("business"),!!v("measures"),!needsDim||(!!v("dimension")&&!/VERIFY EXACT FIELD|VERIFY:/.test(v("dimension"))),!!chart,Number(v("width"))>=150&&Number(v("height"))>=100,Number(v("topN"))<=Number(v("maxRows")),fitOK,!!v("target")&&!!v("output")];
+ var count=tests.filter(Boolean).length,issues=validation();
+ $("readyValue").textContent=count+" / 8";
+ $("readyBar").style.width=count/8*100+"%";
+ $("readyHint").textContent=issues.length?("راجع قبل النسخ: "+issues.join("، ")):"جاهز مبدئيا. تحقق من الكود الناتج داخل Power BI على نفس بيانات التقرير";
+ var warning=$("validationAlert");if(warning){warning.textContent=issues.length?"تنبيه: "+issues.join(" • "):"المواصفات مكتملة مبدئيا، افحص أكبر قيمة وحركة الرسم بعد توليد الكود";warning.classList.toggle("good",!issues.length);}
+}
+function update(){renderPreview();$("promptOutput").textContent=spec();readiness();if(!suppressSave){var obj={};document.querySelectorAll("[data-prompt]").forEach(function(e){obj[e.id]=e.type==="checkbox"?e.checked:e.value;});obj.effect=selectedEffect;try{localStorage.setItem("day10_nova_visual_lab_v1",JSON.stringify(obj));}catch(e){}}}
+document.querySelectorAll("[data-prompt]").forEach(function(x){x.addEventListener("input",update);x.addEventListener("change",update);});
+$("sizePreset").addEventListener("change",function(){if(!this.value)return;var parts=this.value.split("x");$("width").value=parts[0];$("height").value=parts[1];update();});
+document.querySelectorAll("[data-step]").forEach(function(x){x.addEventListener("click",function(){selectStep(Number(x.dataset.step));});});
+$("prevStep").addEventListener("click",function(){selectStep(currentStep-1);});
+$("nextStep").addEventListener("click",function(){if(currentStep===3){$("promptResult").scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}else selectStep(currentStep+1);});
+document.querySelectorAll("[data-role]").forEach(function(button){button.addEventListener("click",function(){var p=profiles[button.dataset.role];Object.keys(p).forEach(function(key){$(key).value=p[key];});document.querySelectorAll("[data-role]").forEach(function(b){b.classList.toggle("active",b===button);});update();toast("تم تحميل المثال. راجع أسماء الحقول الفعلية قبل إرسال الـPrompt");});});
+function clipboardCopy(value){if(navigator.clipboard&&window.isSecureContext){return navigator.clipboard.writeText(value);}return new Promise(function(resolve,reject){var t=document.createElement("textarea");t.value=value;t.setAttribute("readonly","");t.style.position="fixed";t.style.left="-9999px";document.body.appendChild(t);t.select();try{if(document.execCommand("copy"))resolve();else reject(new Error("copy failed"));}catch(e){reject(e);}t.remove();});}
+$("copyPrompt").addEventListener("click",function(){var issues=validation();if(issues.length){toast("راجع التنبيهات قبل النسخ: "+issues[0]);$("validationAlert").scrollIntoView({behavior:"smooth",block:"center"});return;}clipboardCopy(spec()).then(function(){toast("تم نسخ الـPrompt، الصقه بالـAI");}).catch(function(){toast("تعذر النسخ التلقائي، حدد النص وانسخه يدويا");});});
+$("downloadPrompt").addEventListener("click",function(){var issues=validation();if(issues.length){toast("راجع التنبيهات قبل التحميل: "+issues[0]);return;}var blob=new Blob([spec()],{type:"text/plain;charset=utf-8"});var url=URL.createObjectURL(blob);var a=document.createElement("a");a.href=url;a.download="Day10_AI_Visual_Prompt.txt";a.click();setTimeout(function(){URL.revokeObjectURL(url);},1000);toast("تم تجهيز ملف الـPrompt");});
+$("resetButton").addEventListener("click",function(){if(!confirm("نرجع إعدادات المختبر للبداية؟"))return;window.day10LiveReset?.();document.querySelectorAll("[data-prompt]").forEach(function(e){if(e.type==="checkbox"){e.checked=e.defaultChecked;}else if(e.tagName==="SELECT"){e.selectedIndex=0;}else if(e.type==="color"){e.value=e.id==="primaryColor"?"#099999":"#f2c811";}else if(["topN","width","height","padding","radius","speed","maxRows"].includes(e.id)){e.value={topN:8,width:850,height:400,padding:16,radius:18,speed:3,maxRows:20}[e.id];}else{e.value="";}});$("responsive").checked=true;$("labels").checked=true;$("axes").checked=true;$("tooltip").checked=true;$("reduced").checked=true;selectedEffect=0;document.querySelectorAll(".fx-option").forEach(function(x){x.setAttribute("aria-pressed",String(Number(x.dataset.effect)===0));});document.querySelectorAll(".preset").forEach(function(x){x.classList.remove("active");});removeReference();localStorage.removeItem("day10_nova_visual_lab_v1");selectStep(0);update();toast("رجعنا للإعدادات الافتراضية");});
+$("previewQAToggle").addEventListener("click",function(){qaPreview=!qaPreview;this.setAttribute("aria-pressed",String(qaPreview));this.textContent=qaPreview?"رجوع للمعاينة الأصلية":"فحص الأعمدة 100% / 90% / 0%";renderPreview();toast(qaPreview?"فحص تجريبي: أكبر رقم = أطول Bar. بدون أي حركة على البيانات":"رجعنا لمعاينة نوع الرسم");});
+function repairPrompt(){
+ return [
+ "ROLE: Power BI DAX and HTML Content visual debugging specialist.",
+ "TASK: FIX an existing broken HTML/SVG/DAX visual, not rewrite its design from scratch.",
+ "SYMPTOM: "+v("repairIssue"),
+ "ADDITIONAL OBSERVATIONS: "+(v("repairSymptom")||"None provided."),
+ "ORIGINAL REQUEST: "+(v("business")||"Refer to the attached DAX measure.")+" / "+v("chart"),
+ "EXPECTED MEASURES: "+(normalizedMeasures()||"Use existing measures from the pasted code; do not invent model fields."),
+ "DIMENSION: "+(v("dimension")||"Read from supplied code and ask if not unambiguous."),
+ "TARGET CANVAS: "+v("width")+" x "+v("height")+" px.",
+ "HOST: "+v("target"),
+ "",
+ "MANDATORY DEBUG CHECKS",
+ "1. Examine the first/largest category and calculate bar geometry with DAX numeric values BEFORE FORMAT.",
+ "2. For positive-only horizontal bars, the max must render as 100% track width; 900K vs 1M = 90%. Check MAXX, DIVIDE, left/width styles, CSS clipping and z-index.",
+ "3. Temporarily disable ALL animations and transforms. If visibility returns, fix CSS using static always-visible bars and animate only decorative layers.",
+ "4. Make data visibility independent of keyframes, CSS animation fill modes, hover and JavaScript.",
+ "5. Check CSS flex/min-height, overflow, label and header budget at small canvas height; do not silently remove categories.",
+ "6. Preserve existing filter context, real zeros, negative values, sorting and true blanks.",
+ "7. Verify the HTML Content edition restrictions. Native visual interaction must not be claimed without verified support.",
+ "",
+ "DELIVERABLE",
+ "A) State the exact likely root cause and why the symptom occurs.",
+ "B) Return a COMPLETE replacement DAX measure with no omitted or placeholder sections.",
+ "C) Highlight the minimal fix and a regression checklist for max, second, zero, BLANK, negative and small height.",
+ "D) If essential model details are missing, ask first and do not fabricate columns.",
+ "",
+ "ORIGINAL CODE:",
+ v("repairCode")
+ ].join("\n");
+}
+$("repairCode").addEventListener("input",function(){$("repairStatus").textContent=this.value.trim()?"الكود جاهز لتوليد Repair Prompt. تأكد من اختيار المشكلة الصحيحة":"الصق الكود اللي بدك تصلحه حتى نولد تعليمات إصلاح دقيقة";});
+$("copyRepairPrompt").addEventListener("click",function(){
+ if(!v("repairCode")){toast("الصق كود الـMeasure أولاً");$("repairCode").focus();return;}
+ clipboardCopy(repairPrompt()).then(function(){toast("تم نسخ Repair Prompt، الصقه بالـAI");}).catch(function(){toast("تعذر النسخ. جرّب تحديد النص ولصقه يدويا");});
+});
+$("chooseReference").addEventListener("click",function(){$("referenceInput").click();});
+function readReference(file){if(!file)return;if(!["image/png","image/jpeg","image/webp"].includes(file.type)){toast("اختار صورة PNG أو JPG أو WebP");return;}if(file.size>8*1024*1024){toast("حجم الصورة أكبر من 8 MB");return;}if(referenceURL)URL.revokeObjectURL(referenceURL);referenceURL=URL.createObjectURL(file);referenceName=file.name;$("referencePreview").src=referenceURL;$("referenceName").textContent=file.name;$("referenceInfo").hidden=false;update();toast("الصورة جاهزة للمعاينة فقط — أرفقها يدويا للـAI");}
+function removeReference(){if(referenceURL)URL.revokeObjectURL(referenceURL);referenceURL="";referenceName="";$("referenceInput").value="";$("referencePreview").removeAttribute("src");$("referenceInfo").hidden=true;update();}
+$("referenceInput").addEventListener("change",function(){readReference(this.files&&this.files[0]);});
+$("removeReference").addEventListener("click",removeReference);
+$("referenceDrop").addEventListener("dragover",function(e){e.preventDefault();this.classList.add("drag");});
+$("referenceDrop").addEventListener("dragleave",function(){this.classList.remove("drag");});
+$("referenceDrop").addEventListener("drop",function(e){e.preventDefault();this.classList.remove("drag");readReference(e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0]);});
+try{var saved=JSON.parse(localStorage.getItem("day10_nova_visual_lab_v1")||"null");if(saved&&typeof saved==="object"){suppressSave=true;document.querySelectorAll("[data-prompt]").forEach(function(e){if(Object.prototype.hasOwnProperty.call(saved,e.id)){if(e.type==="checkbox")e.checked=!!saved[e.id];else e.value=String(saved[e.id]);}});selectedEffect=Number.isInteger(saved.effect)&&saved.effect>=0&&saved.effect<effects.length?saved.effect:0;document.querySelectorAll(".fx-option").forEach(function(x){x.setAttribute("aria-pressed",String(Number(x.dataset.effect)===selectedEffect));});suppressSave=false;}}catch(e){}
+window.addEventListener("beforeunload",function(){if(referenceURL)URL.revokeObjectURL(referenceURL);});
+// Contextual help for the highest-impact prompt decisions.
+var helpTexts={
+ business:["حدد السؤال الإداري، مش مجرد اسم الرسم.","مثال: Which category has highest revenue?"],
+ measures:["اكتب أسماء الـMeasures الحالية. بدونهم الـAI ممكن يخمن حسابات غلط.","مثال: [Total Revenue], [Revenue YoY %]"],
+ dimension:["Dimension بتحدد تجميع البيانات؛ انسخ الاسم الدقيق من Model Pane.","مثال: DimProduct[Category]"],
+ period:["هل النتيجة شهرية أم يومية أم آخر Snapshot؟","مثال: Latest monthly workforce snapshot only"],
+ chart:["اختيار نوع الرسم يعتمد على السؤال وعدد الفئات.","مثال: Horizontal Bar لعرض ترتيب Categories"],
+ topN:["إذا الصفحة صغيرة، تقليل الفئات أفضل من قص النصوص أو تصغيرها كثيرا.","مثال: 474x271 -> Top 5 rather than Top 8"],
+ sort:["TOPN لوحدها ما بتضمن عرض الصفوف بنفس الترتيب؛ لازم ترتيب CONCATENATEX أيضا.","مثال: Revenue DESC, Category ASC"],
+ width:["حجم الـVisual داخل Power BI Desktop، مش حجم شاشة الكمبيوتر.","مثال: 474px width, 271px height"],
+ height:["احسب صفوف الرسم مع Header وPadding وAxis.","مثال: 8 rows may need ~321px"],
+ primaryColor:["اختار لون متناسق مع هوية التقرير، وخلي لون الخط مقروء.","مثال: #099999"],
+ bg:["Transparent تعني الخلفية لا تحتوي لون معبأ، لكن العنصر ممكن يكون له Border.","مثال: Transparent + readable contrast"],
+ intensity:["الحركة ما لازم تكون جزء من حساب أو ظهور البيانات.","مثال: animated shimmer above static bar"],
+ speed:["وضح مدة الحركة وكم مرة تتكرر؛ الحركة القصيرة غالبا أقل تشتيتا.","مثال: 3s, once, decorative only"],
+ target:["Regular وSecure ممكن يختلفوا بالقيود. اختبر على نسخة الـVisual عندك.","مثال: CSS-only before scripts"],
+ output:["اطلب DAX Measure كاملة، مع RETURN، مش مقتطفات CSS فقط.","مثال: Complete paste-ready DAX measure"],
+ maxRows:["حط سقف حتى ما يختفي النص أو يصير الرسم بطيئا.","مثال: max 10 categories when space allows"],
+ edgeCases:["BLANK مش نفسه 0؛ السالب بده محور مناسب.","مثال: show real 0, hide BLANK only"]
+};
+Object.keys(helpTexts).forEach(function(id){
+ var target=$(id);if(!target)return;
+ var field=target.closest(".field");if(!field)return;
+ var help=document.createElement("details");help.className="lab-help";
+ var sum=document.createElement("summary");sum.textContent="ليش هذا الخيار مهم؟";
+ var note=document.createElement("p");note.textContent=helpTexts[id][0];
+ var code=document.createElement("code");code.textContent=helpTexts[id][1];
+ help.append(sum,note,code);field.appendChild(help);
+});
+selectStep(0);update();
+})();
+</script>
+<script src="./ai-visual-design-lab-live.js?v=20261013e"></script>
+</body>
+</html>

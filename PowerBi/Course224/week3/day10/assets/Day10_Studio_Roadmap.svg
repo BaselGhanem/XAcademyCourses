@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="790" viewBox="0 0 1200 790" role="img" aria-labelledby="t d">
+<title id="t">Day 10 — AI Visual Design Masterclass</title><desc id="d">Five-stage roadmap: Discover, Learn, Create, Validate and Apply</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#09131a"/><stop offset="1" stop-color="#142732"/></linearGradient><linearGradient id="sea" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#077f81"/><stop offset="1" stop-color="#6be0d2"/></linearGradient><linearGradient id="y" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#f0c644"/><stop offset="1" stop-color="#ffe4a1"/></linearGradient><filter id="blur"><feGaussianBlur stdDeviation="44"/></filter></defs>
+<rect width="1200" height="790" rx="34" fill="url(#bg)"/>
+<ellipse cx="955" cy="80" rx="235" ry="105" fill="#099999" opacity=".19" filter="url(#blur)"/>
+<g stroke="#5fe2db" stroke-opacity=".075"><path d="M0 140H1200M0 260H1200M0 380H1200M0 500H1200M0 620H1200M0 740H1200M100 0V790M300 0V790M500 0V790M700 0V790M900 0V790M1100 0V790"/></g>
+<g font-family="Inter,Arial,sans-serif"><text x="80" y="85" font-size="18" font-weight="800" letter-spacing="4" fill="#66d6d0">X ACADEMY  /  POWER BI SPECIALIST</text>
+<text x="80" y="160" font-size="65" font-weight="800" fill="#f1f8fa">AI VISUAL DESIGN</text><text x="80" y="225" font-size="65" font-weight="800" fill="#8de5dc">MASTERCLASS</text>
+<text x="80" y="268" font-size="21" fill="#a5cbd0">DAY 10   •   DON’T CODE THE VISUAL. DIRECT THE AI.</text></g>
+<g transform="translate(80 330)">
+<rect width="1040" height="338" rx="28" fill="#0b1c25" stroke="#6bd2d2" stroke-opacity=".3"/>
+<path d="M99 137H951" stroke="#67dcd0" stroke-opacity=".38" stroke-width="5" stroke-dasharray="5 13"/>
+<g font-family="Inter,Arial,sans-serif" text-anchor="middle">
+<g transform="translate(110 137)"><circle r="45" fill="#0c6868" stroke="#71e0d7" stroke-width="2"/><text y="8" fill="white" font-size="24" font-weight="800">01</text><text y="85" fill="#e3f5f5" font-size="19" font-weight="800">DISCOVER</text><text y="111" fill="#8ebcc4" font-size="13">Before &amp; After</text></g>
+<g transform="translate(310 137)"><circle r="45" fill="#113b49" stroke="#71e0d7" stroke-width="2"/><text y="8" fill="white" font-size="24" font-weight="800">02</text><text y="85" fill="#e3f5f5" font-size="19" font-weight="800">LEARN</text><text y="111" fill="#8ebcc4" font-size="13">Prompt Anatomy</text></g>
+<g transform="translate(510 137)"><circle r="52" fill="#087f7b" stroke="#f2c811" stroke-width="3"/><text y="8" fill="white" font-size="26" font-weight="800">03</text><text y="85" fill="#e3f5f5" font-size="19" font-weight="800">CREATE</text><text y="111" fill="#8ebcc4" font-size="13">20 Effects / 19 Charts</text></g>
+<g transform="translate(710 137)"><circle r="45" fill="#113b49" stroke="#71e0d7" stroke-width="2"/><text y="8" fill="white" font-size="24" font-weight="800">04</text><text y="85" fill="#e3f5f5" font-size="19" font-weight="800">VALIDATE</text><text y="111" fill="#8ebcc4" font-size="13">Static-First / QA</text></g>
+<g transform="translate(910 137)"><circle r="45" fill="#113b49" stroke="#71e0d7" stroke-width="2"/><text y="8" fill="white" font-size="24" font-weight="800">05</text><text y="85" fill="#e3f5f5" font-size="19" font-weight="800">APPLY</text><text y="111" fill="#8ebcc4" font-size="13">4 Personal Missions</text></g>
+</g></g>
+<rect x="80" y="713" width="1040" height="1" fill="#64c8c8" opacity=".25"/>
+<text x="80" y="749" font-family="Inter,Arial" font-size="18" fill="#f2d271">DATA ACCURACY FIRST</text><text x="1120" y="749" text-anchor="end" font-family="Inter,Arial" font-size="18" fill="#8db9c0">120 MINUTES  /  NOVA BUSINESS 360</text>
+</svg>

@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071219">
+<meta name="description" content="Day 10 — an interactive transformation from a standard reporting mockup to a premium executive revenue experience, using identical illustrative values.">
+<title>Before → Beyond | Day 10 — X Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#061118;--dark:#091820;--ink:#f3f9fc;--muted:#a2b7c1;--teal:#099999;--ice:#81ffdf;--lime:#c8ff85;--gold:#f2c811;--stroke:rgba(192,238,238,.15)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;background:radial-gradient(ellipse at 5% 10%,#115b5a26,transparent 33%),radial-gradient(ellipse at 100% 68%,#19687920,transparent 40%),#061118;color:var(--ink);font:14px/1.85 Almarai,'Segoe UI',sans-serif}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8affdb;outline-offset:3px}
+.wrap{width:min(1320px,calc(100% - 46px));margin-inline:auto}
+.en{font-family:Inter,Arial,sans-serif;direction:ltr;unicode-bidi:isolate}
+.topbar{z-index:30;position:sticky;top:0;background:rgba(6,17,24,.87);backdrop-filter:blur(18px);border-bottom:1px solid #bedad91c}
+.top-inner{display:flex;align-items:center;justify-content:space-between;min-height:72px;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.xmark{width:41px;height:41px;border-radius:12px;background:linear-gradient(140deg,#0ad1b6,#09686c);display:grid;place-items:center;font:900 23px Inter;box-shadow:0 0 20px #0798983b}
+.brand strong{display:block;font:800 12px Inter;letter-spacing:.11em}.brand small{font-size:10px;color:#a0b6bd}
+.back{padding:10px 15px;border:1px solid #8bbaba41;border-radius:11px;color:#dbeded;font-size:11px;font-weight:800;white-space:nowrap}
+.back:hover{background:#0d353b;border-color:#80d7ce}
+.hero{padding:52px 0 24px;position:relative}
+.hero:before{content:"";position:absolute;z-index:-1;width:410px;height:200px;right:4%;top:10px;border-radius:100%;background:#13aa9450;filter:blur(100px);pointer-events:none}
+.kicker{display:flex;gap:9px;align-items:center;font:800 11px Inter,Arial;color:#72e4d6;letter-spacing:.19em}
+.kicker:before{content:"";display:inline-block;width:7px;height:7px;background:#7df5d7;box-shadow:0 0 15px #67ffee;border-radius:50%}
+.hero h1{font-size:clamp(38px,5.7vw,77px);line-height:1.23;letter-spacing:-.038em;margin:13px 0 13px;max-width:1060px}
+.hero h1 span{background:linear-gradient(90deg,#ffffff 3%,#7cf3da 58%,#d6ffa4);background-clip:text;color:transparent}
+.hero p{margin:0;max-width:840px;font-size:clamp(13px,1.35vw,16px);color:#bacfd3}
+.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.hero-tag{border:1px solid #ffffff25;color:#a4c9ca;background:#ffffff05;border-radius:100px;padding:7px 12px;font:700 10px Inter;letter-spacing:.03em}
+.hero-tag.emphasis{border-color:#46d5ca59;color:#8affde;background:#09999916}
+.command{margin:22px 0 17px;display:flex;justify-content:space-between;gap:13px;align-items:center;flex-wrap:wrap}
+.command-left{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.switch{display:flex;gap:4px;border-radius:16px;background:#11222b;border:1px solid #ffffff24;padding:5px}
+.switch button{min-height:43px;display:flex;align-items:center;gap:9px;padding:10px 17px;border:0;border-radius:11px;background:transparent;color:#bbd1d6;font-weight:800;font-size:12px}
+.switch button[aria-pressed=true]{background:#099999;color:#f7ffff;box-shadow:0 5px 20px #04aca749}
+.switch button em{font-style:normal;font:800 10px Inter;opacity:.8}
+.activate{border:1px solid #c1ffad;background:linear-gradient(125deg,#b8ff8d,#79f1ce);color:#062422;border-radius:14px;padding:13px 20px;font-weight:800;box-shadow:0 0 20px #a7ffaa44;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:49px}
+.activate:hover{filter:brightness(1.08)}
+.motion-btn{background:#ffffff09;border:1px solid #ffffff2f;color:#d9e9e9;border-radius:13px;padding:10px 16px;font-weight:700;font-size:12px;min-height:44px}
+.motion-btn:hover{border-color:#74dbc6}
+.data-note{color:#98b2bb;font-size:11px;display:flex;align-items:center;gap:9px}
+.data-note:before{content:"";width:6px;height:6px;border-radius:50%;background:#64ddc4}
+.scene-frame{position:relative;isolation:isolate;border:1px solid #ffffff2a;border-radius:30px;padding:10px;overflow:hidden;background:linear-gradient(135deg,#132c36,#0b1a22);box-shadow:0 37px 96px #0007,0 0 0 1px #50cdc20a}
+.scene-frame:before{content:"";z-index:-1;position:absolute;inset:0;background:radial-gradient(circle at 92% 3%,#37d7bf15,transparent 37%);pointer-events:none}
+.scene{min-height:590px;border-radius:21px;overflow:hidden;position:relative}
+.frame-strip{height:29px;background:#0e2028;border-radius:20px 20px 0 0;display:flex;align-items:center;justify-content:space-between;padding:0 15px;gap:12px;border-bottom:1px solid #ffffff13}
+.dots{display:flex;gap:5px;direction:ltr}.dots i{height:7px;width:7px;border-radius:50%;background:#627781}.dots i:first-child{background:#2a968f}.dots i:nth-child(2){background:#738c8b}
+.frame-mode{font:700 9px Inter;color:#89b3b8;letter-spacing:.13em}
+.before-view{background:#f6f8fb;color:#253a4c;min-height:561px;direction:ltr;padding:30px 34px 35px}
+.before-appbar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:23px;border-bottom:1px solid #dae1e8}
+.before-logo{font:800 15px Inter;color:#314459}.before-sub{display:block;font:500 10px Inter;color:#8c98a5;margin-top:3px}
+.before-filter{display:flex;gap:11px;flex-wrap:wrap}.before-filter span{border:1px solid #d3dbe5;color:#748596;background:#fff;padding:6px 12px;border-radius:6px;font:700 10px Inter}
+.before-title{margin:28px 0 15px}
+.before-title h2{font:800 29px Inter;color:#25384a;letter-spacing:-.04em;margin:0 0 3px}
+.before-title p{margin:0;color:#8293a2;font:11px Inter}
+.before-paper{border:1px solid #dfe5eb;border-radius:9px;background:white;padding:29px 25px;box-shadow:0 4px 16px #2339570a}
+.before-paper-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:19px;font:700 12px Inter;color:#536574}
+.before-paper-head span{color:#98a8b4;font-size:10px;font-weight:600}
+.before-chart{display:grid;gap:17px;direction:ltr}
+.before-row{display:grid;grid-template-columns:152px minmax(0,1fr) 77px;align-items:center;gap:14px;min-width:0}
+.before-label{font:600 11px Inter;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#63778a}
+.before-track{height:21px;background:#f2f5f8;border-left:1px solid #d3dde3;position:relative}
+.before-track:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent calc(25% - 1px),#dce5e9 calc(25% - 1px),#dce5e9 25%,transparent 25%,transparent calc(50% - 1px),#dce5e9 calc(50% - 1px),#dce5e9 50%,transparent 50%,transparent calc(75% - 1px),#dce5e9 calc(75% - 1px),#dce5e9 75%,transparent 75%)}
+.before-bar{height:100%;position:relative;background:#8aa6ba}
+.before-num{font:700 11px Inter;text-align:right;color:#46586c;white-space:nowrap}
+.before-axis{display:flex;justify-content:space-between;color:#9cadbb;font:10px Inter;margin:12px 91px 0 166px;border-top:1px solid #d6e1e8;padding-top:7px}
+.before-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;font:10px Inter;color:#8a9eae;margin-top:22px}
+.after-view{min-height:561px;color:#eaf9fa;position:relative;overflow:hidden;direction:ltr;background:linear-gradient(141deg,#0a1925 8%,#071a20 56%,#09262c 100%)}
+.after-view:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 12% -2%,#20c6bc36,transparent 32%),radial-gradient(circle at 85% 94%,#96ff9020,transparent 32%)}
+.after-view:after{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(to bottom,#0004,transparent 95%);opacity:.35}
+.aurora{position:absolute;pointer-events:none;filter:blur(40px);opacity:.23;border-radius:50%;transition:opacity .35s}
+.aurora.one{width:360px;height:240px;right:-60px;top:-120px;background:#1bf5ca;animation:auroraDrift 9s ease-in-out infinite alternate}
+.aurora.two{width:250px;height:300px;left:-130px;bottom:-150px;background:#56cfac;animation:auroraDrift 12s ease-in-out infinite alternate-reverse}
+.after-content{position:relative;z-index:1;padding:24px 30px 23px}
+.after-header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:21px}
+.after-brand{display:flex;align-items:center;gap:11px}
+.after-brand-mark{width:43px;height:43px;display:grid;place-items:center;border-radius:12px;background:#0b958c33;border:1px solid #89e9d85c;color:#90ffdf;font:900 21px Inter;box-shadow:0 0 26px #0999992c}
+.after-brand b{font:800 13px Inter;letter-spacing:.15em;display:block}
+.after-brand small{display:block;font:700 9px Inter;letter-spacing:.1em;color:#8bacb4;margin-top:4px}
+.after-badge{display:flex;align-items:center;gap:8px;font:700 10px Inter;color:#aee8df;border:1px solid #70d0c14d;border-radius:100px;padding:8px 12px;background:#0d514b34}
+.after-badge:before{content:"";width:6px;height:6px;border-radius:50%;background:#a2ffab;box-shadow:0 0 10px #78ffb1}
+.headline{margin-bottom:20px;display:flex;justify-content:space-between;align-items:end;gap:12px}
+.headline .over{font:800 9px Inter;letter-spacing:.22em;color:#85d5ce}
+.headline h2{font:800 clamp(23px,3.1vw,41px)/1.16 Inter,Arial;letter-spacing:-.06em;margin:7px 0 0;color:#f3ffff}
+.headline h2 em{font-style:normal;background:linear-gradient(90deg,#8ff6d6,#e2ffba);background-clip:text;color:transparent}
+.headline .sub{color:#8cafb7;font:11px Inter;max-width:300px;text-align:right}
+.after-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(255px,.8fr);gap:15px;align-items:stretch}
+.glass{position:relative;isolation:isolate;background:linear-gradient(135deg,#12303bdb,#0e2732cd);border:1px solid #a6efdb26;border-radius:18px;box-shadow:inset 0 1px #e0fffc13,0 15px 35px #0002}
+.glass:hover{border-color:#7ef6dc58}
+.primary-card{padding:20px 21px 17px;min-width:0}
+.primary-top{display:flex;justify-content:space-between;gap:10px;align-items:start}
+.card-over{font:800 10px Inter;letter-spacing:.12em;color:#86bfbf}
+.total{font:800 clamp(28px,3.5vw,47px)/1.24 Inter,Arial;letter-spacing:-.055em;color:white;margin-top:5px;font-variant-numeric:tabular-nums}
+.unit{font:700 11px Inter;letter-spacing:.05em;color:#a6c8c8}
+.status-pill{border:1px solid #a7ff9d62;background:#7aff8920;color:#c0ffaa;font:800 9px Inter;border-radius:9px;padding:8px 9px;white-space:nowrap}
+.bar-head{margin:20px 0 13px;display:flex;align-items:center;justify-content:space-between;color:#c8eeee;font:800 10px Inter}
+.bar-head span:last-child{font:700 9px Inter;color:#77aaa9}
+.premium-chart{display:grid;gap:11px}
+.premium-row{display:grid;grid-template-columns:130px minmax(0,1fr) 60px;align-items:center;gap:12px;min-width:0}
+.premium-label{font:600 10px Inter;color:#bdcfda;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.premium-track{position:relative;height:13px;border-radius:6px;background:#ffffff11;overflow:visible}
+.premium-track:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(25% - 1px),#ffffff18 calc(25% - 1px),#ffffff18 25%);border-radius:inherit}
+.premium-fill{height:100%;width:var(--w);background:linear-gradient(90deg,#078f8e,#59edd0);border-radius:6px;position:relative;box-shadow:0 0 14px #10b5a34d;min-width:0}
+.premium-row:first-child .premium-fill{background:linear-gradient(90deg,#28d6ba,#c4ff91);box-shadow:0 0 18px #3df4bc77}
+.premium-fill .sheen{pointer-events:none;position:absolute;inset:0;background:linear-gradient(90deg,transparent,#ffffff48,transparent);background-size:250% 100%;border-radius:inherit;animation:shine 3.5s ease-in-out 1}
+.premium-value{font:800 10px Inter;color:#e7fff9;text-align:right;font-variant-numeric:tabular-nums}
+.premium-row:first-child .premium-label{color:#d4ffef;font-weight:800}
+.premium-row:first-child .premium-value{color:#bbffab}
+.primary-foot{display:flex;justify-content:space-between;align-items:center;color:#6fa5ab;font:700 9px Inter;border-top:1px solid #ffffff14;padding-top:12px;margin-top:15px;gap:12px}
+.side{display:grid;grid-template-rows:auto 1fr;gap:13px}
+.side-top{padding:19px 20px;overflow:hidden;min-height:192px}
+.side-top .card-over{color:#b2d1c7}
+.side-top .share{font:800 40px/1.2 Inter;color:#d6ffad;letter-spacing:-.05em;margin:13px 0 4px}
+.side-top p{font:11px/1.6 Inter;color:#a6c5c4;margin:0}
+.top-two{margin-top:16px;display:flex;gap:6px;height:9px;border-radius:99px;background:#23414a;overflow:hidden}
+.top-two i{display:block;height:100%;background:linear-gradient(90deg,#39dabc,#c8ff93)}
+.side-bottom{padding:18px 19px;display:grid;grid-template-columns:minmax(0,1fr) 121px;gap:10px;align-items:center;min-height:180px}
+.top-name{font:800 17px/1.3 Inter;margin-top:10px;color:#e6fbf1;overflow-wrap:anywhere}
+.top-value{font:700 12px Inter;color:#8bf9d2;margin-top:7px}
+.donut{width:119px;aspect-ratio:1;border-radius:50%;background:conic-gradient(var(--donut));display:grid;place-items:center;position:relative;box-shadow:0 0 28px #29bdad36}
+.donut:before{content:"";inset:19px;position:absolute;border-radius:50%;background:#102c33;box-shadow:inset 0 0 12px #0007}
+.donut-inner{position:relative;z-index:2;text-align:center;font:800 19px Inter;color:#f1fff4;line-height:1.2}
+.donut-inner small{display:block;font:700 9px Inter;color:#94c3c0;margin-top:3px}
+.after-rail{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.rail{min-height:67px;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;gap:9px}
+.rail small{font:800 9px Inter;letter-spacing:.1em;color:#8abcb8;display:block}
+.rail b{font:800 22px Inter;color:#ddfff2;display:block;margin-top:4px}
+.rail .mark{color:#79f0d2;font:800 15px Inter;opacity:.9}
+.after-signature{margin-top:11px;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#88acb5;font:700 9px Inter;letter-spacing:.1em}
+.after-signature strong{color:#bbffdf;font-weight:700}
+.scene-flare{position:absolute;z-index:8;pointer-events:none;inset:0;opacity:0;background:linear-gradient(105deg,transparent 8%,#a3ffee32 35%,#edffe68a 49%,#a3ffee26 62%,transparent 86%);transform:translateX(110%);}
+.scene-frame.reveal .scene-flare{animation:reveal .9s cubic-bezier(.2,.6,.3,1) both}
+.scene-frame.reveal{border-color:#b0ffe191;box-shadow:0 35px 100px #0008,0 0 37px #1fbda638}
+.explanation{display:grid;grid-template-columns:1.08fr .92fr;gap:15px;margin-top:24px}
+.explain-card{padding:24px;border:1px solid #ffffff1a;background:linear-gradient(145deg,#142a34,#0d202a);border-radius:18px}
+.explain-card .label{font:800 10px Inter;letter-spacing:.12em;color:#7fe2d8}
+.explain-card h3{margin:7px 0 9px;font-size:19px;line-height:1.5}
+.explain-card p{margin:0;color:#adc5cb;font-size:12px}
+.explain-card .detail{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.detail span{border:1px solid #ffffff2a;border-radius:10px;padding:7px 10px;color:#c6dfe0;font:700 10px Inter}
+.lesson{margin:21px 0 60px;border:1px solid #50d9b361;padding:23px 25px;border-radius:19px;background:linear-gradient(120deg,#16423e,#0d2529)}
+.lesson-head{display:flex;align-items:center;gap:10px;color:#c5ffdc;font:800 11px Inter;letter-spacing:.08em}
+.lesson h3{margin:9px 0;font-size:20px}
+.lesson p{font-size:12px;color:#b4d0c8;margin:0 0 15px}
+.lesson a{display:inline-flex;background:#ccff9a;color:#073b34;padding:11px 17px;border-radius:11px;font-weight:800;font-size:12px}
+.motion-off *, .motion-off *:before,.motion-off *:after{animation:none!important;transition:none!important}
+@keyframes auroraDrift{to{transform:translate(28px,25px)}}
+@keyframes shine{from{background-position:180% 0}to{background-position:-160% 0}}
+@keyframes reveal{0%{transform:translateX(110%);opacity:0}25%{opacity:1}100%{transform:translateX(-130%);opacity:0}}
+@media(max-width:1100px){.after-grid{grid-template-columns:1fr 290px}.premium-row{grid-template-columns:113px minmax(0,1fr) 58px;gap:8px}.after-content{padding:19px}.primary-card{padding:17px}.side-bottom{grid-template-columns:1fr 100px}.donut{width:100px}.donut:before{inset:17px}}
+@media(max-width:820px){.wrap{width:min(100% - 26px,1320px)}.top-inner{min-height:62px}.hero{padding:35px 0 16px}.command{align-items:stretch}.command-left{width:100%}.activate{flex:1}.after-grid{grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr;grid-template-rows:auto}.side-top,.side-bottom{min-height:176px}.after-rail{grid-template-columns:repeat(3,1fr)}.scene,.before-view,.after-view{min-height:0}.before-view{padding:20px}.before-row{grid-template-columns:112px 1fr 60px;gap:9px}.before-axis{margin-left:121px;margin-right:70px}}
+@media(max-width:580px){.wrap{width:min(100% - 22px,1320px)}.brand strong{font-size:10px}.brand small{font-size:9px}.back{font-size:10px;padding:8px 10px}.hero h1{font-size:37px}.scene-frame{padding:5px;border-radius:19px}.scene{border-radius:14px}.frame-strip{height:24px}.before-view{padding:15px 12px 21px}.before-appbar{align-items:flex-start}.before-filter{justify-content:flex-end;gap:4px}.before-filter span{font-size:8px;padding:3px 5px}.before-title h2{font-size:22px}.before-paper{padding:15px 9px}.before-row{grid-template-columns:72px minmax(0,1fr) 48px;gap:5px}.before-label,.before-num{font-size:9px}.before-track{height:17px}.before-chart{gap:17px}.before-axis{margin-left:78px;margin-right:54px}.before-bottom{font-size:9px;flex-direction:column;align-items:flex-start}.after-content{padding:16px 12px}.after-brand-mark{width:34px;height:34px;font-size:17px}.after-brand b{font-size:10px}.after-brand small{font-size:8px}.after-badge{padding:6px 8px;font-size:8px}.headline h2{font-size:27px}.headline .sub{display:none}.primary-card{padding:15px 12px}.premium-row{grid-template-columns:85px minmax(0,1fr) 51px;gap:6px}.premium-label,.premium-value{font-size:9px}.side{grid-template-columns:1fr}.side-top{min-height:0}.side-bottom{min-height:0}.after-rail{grid-template-columns:1fr 1fr;gap:7px}.rail{padding:9px 10px;min-height:60px}.rail b{font-size:19px}.rail:last-child{grid-column:1/-1}.explanation{grid-template-columns:1fr}.switch{width:100%}.switch button{flex:1;justify-content:center;padding:9px 6px;font-size:11px}.hero-meta{gap:5px}.hero-tag{font-size:9px}.data-note{font-size:10px}.command-left{gap:8px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap top-inner">
+ <a class="brand" href="ai-visual-design-lab.html"><span class="xmark">X</span><span><strong>X ACADEMY / DAY 10</strong><small>Visual Design Masterclass</small></span></a>
+ <a class="back" href="../../day.html?id=10">العودة لليوم العاشر ↗</a>
+</div></header>
+<main class="wrap">
+<section class="hero">
+ <div class="kicker">THE VISUAL TRANSFORMATION EXPERIENCE</div>
+ <h1>من تقرير عادي<br><span>إلى تجربة بتلفت الأنظار</span></h1>
+ <p>مش تغيير لون عمود من رمادي لأخضر. رح نحول نفس بيانات الإيراد إلى واجهة Executive فيها هوية، تسلسل بصري، مؤشرات واستنتاج واضح — بدون ما نغير أي قيمة أو نختلق نمو بالمبيعات.</p>
+ <div class="hero-meta"><span class="hero-tag emphasis">BEFORE → BEYOND</span><span class="hero-tag">SAME FIVE CATEGORIES</span><span class="hero-tag">SAME VALUES</span><span class="hero-tag">ILLUSTRATIVE DATA ONLY</span></div>
+</section>
+<div class="command" aria-label="Interactive display controls">
+ <div class="command-left">
+  <div class="switch" role="group" aria-label="التبديل بين المثالين">
+   <button type="button" id="native" aria-pressed="true"><em>01</em> Standard Report</button>
+   <button type="button" id="premium" aria-pressed="false"><em>02</em> Executive Experience</button>
+  </div>
+  <button type="button" class="activate" id="transform"><span>✦</span> TRANSFORM THE REPORT <span>←</span></button>
+  <button type="button" class="motion-btn" id="toggleMotion" aria-pressed="false">إيقاف الحركة</button>
+ </div>
+ <div class="data-note">Mockup تعليمي — مش تقرير Power BI مباشر</div>
+</div>
+<div class="scene-frame" id="frame">
+ <div class="scene-flare" aria-hidden="true"></div>
+ <div class="frame-strip" aria-hidden="true"><div class="dots"><i></i><i></i><i></i></div><span class="frame-mode" id="frameMode">STANDARD REPORT / PRESENTATION PREVIEW</span></div>
+ <div class="scene" id="scene" aria-live="polite">
+  <section class="before-view" id="beforeView" aria-label="تصميم تقرير قياسي">
+   <div class="before-appbar"><div><strong class="before-logo">NOVA · Business Report</strong><span class="before-sub">Sales / Category performance</span></div><div class="before-filter"><span>All Categories ⌄</span><span>All Periods ⌄</span></div></div>
+   <div class="before-title"><h2>Revenue by category</h2><p>Revenue distribution across five product categories</p></div>
+   <div class="before-paper"><div class="before-paper-head"><strong>Total Revenue by Category</strong><span>Sorted descending</span></div><div class="before-chart" id="beforeChart"></div><div class="before-axis"><span>0</span><span>250K</span><span>500K</span><span>750K</span><span>1M</span></div></div>
+   <div class="before-bottom"><span>5 categories · values displayed as illustrative samples</span><span>Basic analytical view</span></div>
+  </section>
+  <section class="after-view" id="afterView" hidden aria-label="تصميم Executive Premium">
+   <div class="aurora one" aria-hidden="true"></div><div class="aurora two" aria-hidden="true"></div>
+   <div class="after-content">
+     <div class="after-header"><div class="after-brand"><span class="after-brand-mark">N</span><div><b>NOVA BUSINESS 360</b><small>EXECUTIVE INTELLIGENCE PLATFORM</small></div></div><span class="after-badge">DESIGN CONCEPT · SAMPLE</span></div>
+     <div class="headline"><div><span class="over">FROM RAW DATA TO CLEAR DECISIONS</span><h2>Revenue <em>intelligence.</em></h2></div><div class="sub">One dataset.<br>Sharper hierarchy. More meaningful context.</div></div>
+     <div class="after-grid">
+       <section class="glass primary-card">
+         <div class="primary-top"><div><div class="card-over">PORTFOLIO / TOTAL REVENUE</div><div class="total" id="premiumTotal">—</div><div class="unit">Across the same five categories</div></div><span class="status-pill">REVENUE MIX</span></div>
+         <div class="bar-head"><span>CATEGORY PERFORMANCE</span><span>RANKED · TOP 05</span></div>
+         <div class="premium-chart" id="premiumChart"></div>
+         <div class="primary-foot"><span>100% scale = highest value</span><span>STATIC FIRST · MOTION SAFE</span></div>
+       </section>
+       <div class="side">
+        <section class="glass side-top"><div class="card-over">REVENUE CONCENTRATION</div><div class="share" id="topTwoShare">—</div><p>of revenue comes from<br>the two largest categories</p><div class="top-two" aria-label="Share of top two categories"><i id="topTwoFill"></i></div></section>
+        <section class="glass side-bottom"><div><div class="card-over">CATEGORY LEADER</div><div class="top-name" id="topName"></div><div class="top-value" id="topValue"></div></div><div class="donut" id="donut"><div class="donut-inner" id="donutLabel">—<small>TOP SHARE</small></div></div></section>
+       </div>
+     </div>
+     <div class="after-rail">
+      <div class="glass rail"><div><small>TOTAL REVENUE</small><b id="railTotal"></b></div><span class="mark">↗</span></div>
+      <div class="glass rail"><div><small>ACTIVE CATEGORIES</small><b id="railCount"></b></div><span class="mark">◈</span></div>
+      <div class="glass rail"><div><small>LARGEST CATEGORY</small><b id="railLargest"></b></div><span class="mark">◆</span></div>
+     </div>
+     <div class="after-signature"><span>DESIGNED FOR A DECISION, NOT JUST A NUMBER</span><strong>AI VISUAL DESIGN STUDIO / NOVA</strong></div>
+   </div>
+  </section>
+ </div>
+</div>
+<div class="explanation">
+ <article class="explain-card"><span class="label">01 / STANDARD REPORT</span><h3>الـNative Visual مش سيئة</h3><p>الرسومات الأصلية ممتازة للتحليل والفلاتر والتفاعل. هون عم نعرض محاكاة بسيطة لتقرير اعتيادي، مش Screenshot من Power BI نفسه.</p><div class="detail"><span>Fast</span><span>Familiar</span><span>Native Interactions</span></div></article>
+ <article class="explain-card"><span class="label">02 / EXECUTIVE EXPERIENCE</span><h3>التطوير الحقيقي أعمق من الشكل</h3><p>حوّلنا نفس الخمس قيم إلى Revenue Story: إجمالي، ترتيب الفئات، التركيز في أعلى فئتين، والحصة النسبية للمتصدر. هاي واجهة توضيحية بالمتصفح وليست Measure واحدة جاهزة.</p><div class="detail"><span>Visual Hierarchy</span><span>Decision Context</span><span>CSS Motion</span></div></article>
+</div>
+<section class="lesson"><div class="lesson-head">✦ THE DAY 10 LESSON</div><h3>أبهرهم بالشكل. أقنعهم بدقة الأرقام.</h3><p>اضغط «إيقاف الحركة» في الـExecutive Experience: كل القيم والأعمدة رح تضل موجودة. هذا المبدأ لازم نضيفه لأي Prompt لتحويل Visual إلى HTML داخل Power BI. والـHTML Hover مش بديل مضمون عن Cross-filtering الأصلي.</p><a href="ai-visual-design-lab.html">ابنِ الـPrompt تبعك في AI Visual Design Lab ←</a></section>
+</main>
+<script>
+(function(){
+"use strict";
+const raw=[
+ {name:"Office & Tech",value:1000000},
+ {name:"Seasonal",value:900000},
+ {name:"Health & Wellness",value:450000},
+ {name:"Home Care",value:340000},
+ {name:"Personal Care",value:280000}
+];
+const rows=raw.slice().sort((a,b)=>b.value-a.value||a.name.localeCompare(b.name));
+const total=rows.reduce((sum,row)=>sum+row.value,0);
+const maximum=Math.max(...rows.map(row=>row.value));
+const compact=new Intl.NumberFormat("en-US",{notation:"compact",maximumFractionDigits:2});
+const valueText=v=>compact.format(v).replace("M","M").replace("K","K");
+const money=v=>"$"+valueText(v);
+const share=v=>total?100*v/total:0;
+const pct=v=>v.toFixed(1)+"%";
+const $=id=>document.getElementById(id);
+let premium=false,motionOff=false,revealTimer=null;
+function el(tag,className,text){
+ const node=document.createElement(tag);
+ if(className)node.className=className;
+ if(text!==undefined)node.textContent=text;
+ return node;
+}
+function buildBefore(){
+ const chart=$("beforeChart");chart.replaceChildren();
+ for(const item of rows){
+  const row=el("div","before-row"),name=el("span","before-label",item.name),track=el("div","before-track");
+  const bar=el("div","before-bar"),amount=el("span","before-num",valueText(item.value));
+  bar.style.width=(item.value/maximum*100).toFixed(4)+"%";
+  track.append(bar);row.append(name,track,amount);chart.append(row);
+ }
+}
+function buildAfter(){
+ const chart=$("premiumChart");chart.replaceChildren();
+ for(const item of rows){
+  const row=el("div","premium-row"),name=el("span","premium-label",item.name),track=el("div","premium-track"),bar=el("div","premium-fill"),sheen=el("span","sheen"),amount=el("span","premium-value",valueText(item.value));
+  const relative=maximum?item.value/maximum*100:0;
+  bar.style.setProperty("--w",relative.toFixed(4)+"%");
+  bar.title=item.name+" — "+money(item.value)+"; "+pct(share(item.value))+" of total";
+  bar.append(sheen);track.append(bar);row.append(name,track,amount);chart.append(row);
+ }
+ $("premiumTotal").textContent=money(total);
+ $("railTotal").textContent=money(total);
+ $("railCount").textContent=String(rows.length).padStart(2,"0");
+ $("railLargest").textContent=money(rows[0].value);
+ $("topName").textContent=rows[0].name;
+ $("topValue").textContent=money(rows[0].value);
+ const top2=share(rows.slice(0,2).reduce((acc,row)=>acc+row.value,0));
+ $("topTwoShare").textContent=pct(top2);
+ $("topTwoFill").style.width=top2.toFixed(4)+"%";
+ $("topTwoFill").title=pct(top2);
+ $("donutLabel").replaceChildren(document.createTextNode(pct(share(rows[0].value))),(()=>{let sm=el("small",null,"TOP SHARE");return sm;})());
+ const colors=["#baff91","#31d1b9","#2b8f9f","#265b76","#344a60"];
+ let previous=0;
+ const stops=[];
+ rows.forEach((row,i)=>{
+  const current=previous+share(row.value);
+  stops.push(colors[i]+" "+previous.toFixed(4)+"% "+current.toFixed(4)+"%");
+  previous=current;
+ });
+ $("donut").style.setProperty("--donut",stops.join(","));
+}
+function setMode(next,{replay=false}={}){
+ premium=next;
+ $("beforeView").hidden=next;
+ $("afterView").hidden=!next;
+ $("native").setAttribute("aria-pressed",String(!next));
+ $("premium").setAttribute("aria-pressed",String(next));
+ $("frameMode").textContent=next?"NOVA 360 / EXECUTIVE EXPERIENCE":"STANDARD REPORT / PRESENTATION PREVIEW";
+ $("transform").textContent=next?"✦ REPLAY THE REVEAL":"✦ TRANSFORM THE REPORT  ←";
+ const frame=$("frame");
+ frame.classList.remove("reveal");
+ if(revealTimer!==null){clearTimeout(revealTimer);revealTimer=null;}
+ if(next&&!motionOff&&(!window.matchMedia("(prefers-reduced-motion: reduce)").matches||replay)){
+  // Flash is purely decorative; data bars are always fully sized before and after the reveal.
+  void frame.offsetWidth;
+  frame.classList.add("reveal");
+  revealTimer=setTimeout(()=>{frame.classList.remove("reveal");revealTimer=null;},950);
+ }
+}
+function toggleMotion(){
+ motionOff=!motionOff;
+ document.body.classList.toggle("motion-off",motionOff);
+ $("toggleMotion").setAttribute("aria-pressed",String(motionOff));
+ $("toggleMotion").textContent=motionOff?"تشغيل الحركة":"إيقاف الحركة";
+ if(motionOff){$("frame").classList.remove("reveal");if(revealTimer!==null){clearTimeout(revealTimer);revealTimer=null;}}
+}
+$("native").addEventListener("click",()=>setMode(false));
+$("premium").addEventListener("click",()=>setMode(true));
+$("transform").addEventListener("click",()=>setMode(true,{replay:true}));
+$("toggleMotion").addEventListener("click",toggleMotion);
+buildBefore();buildAfter();setMode(false);
+})();
+</script>
+</body>
+</html>

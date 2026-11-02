@@ -1,0 +1,53 @@
+Nova D10 | Operations OnTime HTML =
+VAR _Rate = [On Time %]
+VAR _Orders = [Completed Orders]
+VAR _SafeRate = MIN ( 1, MAX ( 0, COALESCE ( _Rate, 0 ) ) )
+-- The existing On Time % measure is expected to return a fractional rate (0..1).
+-- Verify that assumption using a native Card before using this visual.
+VAR _Stroke = FORMAT ( _SafeRate * 314.159, "0.###", "en-US" )
+VAR _RateText = IF ( ISBLANK ( _Rate ), "—", FORMAT ( _Rate, "0.0%" ) )
+VAR _OrdersText = IF ( ISBLANK ( _Orders ), "—", FORMAT ( _Orders, "#,##0" ) )
+VAR _Status =
+    IF ( ISBLANK ( _Rate ), "NO DATA",
+        IF ( _Rate >= 0.9, "ON TRACK", IF ( _Rate >= 0.75, "MONITOR", "REVIEW" ) ) )
+VAR _StatusColor =
+    IF ( ISBLANK ( _Rate ), "#9bb3bf",
+        IF ( _Rate >= 0.9, "#4bd2a1", IF ( _Rate >= 0.75, "#f2c811", "#e37e7e" ) ) )
+RETURN
+"<style>
+  #d10-ops{width:100%;height:100%;min-height:0;box-sizing:border-box;padding:14px;
+    background:#101e2a;color:#ecf8fa;border:1px solid #305662;border-radius:18px;
+    font:12px/1.4 'Segoe UI',Arial,sans-serif;overflow:visible}
+  #d10-ops *{box-sizing:border-box}
+  #d10-ops .hdr{display:flex;align-items:start;justify-content:space-between;gap:9px}
+  #d10-ops .eyebrow{color:#80d7d1;font-size:9px;letter-spacing:1.3px}
+  #d10-ops h3{font-size:15px;margin:4px 0}
+  #d10-ops .state{font-size:9px;font-weight:700;border:1px solid currentColor;border-radius:7px;padding:4px 7px}
+  #d10-ops .center{display:grid;grid-template-columns:145px minmax(0,1fr);gap:12px;align-items:center}
+  #d10-ops svg{width:145px;height:145px;max-width:100%;display:block}
+  #d10-ops .number{font-size:29px;font-weight:800;line-height:1.1}
+  #d10-ops .caption{font-size:11px;color:#9dc3c6;margin-top:8px}
+  #d10-ops .orders{font-size:18px;font-weight:750}
+  #d10-ops .ring{filter:drop-shadow(0 0 6px #09999944)}
+  #d10-ops .glint{animation:d10opsGlow 3s ease-in-out infinite alternate}
+  @keyframes d10opsGlow{to{opacity:.25}}
+  @media(prefers-reduced-motion:reduce){#d10-ops .glint{animation:none}}
+  @media(max-width:380px){#d10-ops .center{grid-template-columns:110px 1fr}#d10-ops svg{height:110px;width:110px}}
+</style>
+<div id='d10-ops' dir='ltr'>
+  <div class='hdr'><div><div class='eyebrow'>NOVA / OPERATIONS</div><h3>On-time completion</h3></div>
+    <span class='state' style='color:" & _StatusColor & "'>" & _Status & "</span></div>
+  <div class='center'>
+    <svg viewBox='0 0 140 140' role='img' aria-label='On time rate'>
+      <circle cx='70' cy='70' r='50' stroke='#25434c' stroke-width='13' fill='none'/>
+      <circle class='ring' cx='70' cy='70' r='50' stroke='#099999' stroke-width='13'
+        stroke-linecap='round' fill='none' transform='rotate(-90 70 70)'
+        stroke-dasharray='" & _Stroke & " 314.159'/>
+      <circle class='glint' cx='70' cy='70' r='40' stroke='#5ce2d9' stroke-width='1'
+        stroke-dasharray='3 8' fill='none'/>
+    </svg>
+    <div><div class='number'>" & _RateText & "</div>
+      <div class='caption'>Completed orders</div><div class='orders'>" & _OrdersText & "</div>
+      <div class='caption'>Responsive, current filter context</div></div>
+  </div>
+</div>"

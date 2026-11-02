@@ -1,0 +1,78 @@
+Nova D10 | Sales Category HTML =
+VAR _RowsBase =
+    ADDCOLUMNS (
+        VALUES ( DimProduct[Category] ),
+        "@Value", [Total Revenue]
+    )
+VAR _Valid = FILTER ( _RowsBase, NOT ISBLANK ( [@Value] ) )
+-- Five rows fit the 474 x 271 training canvas more reliably than eight.
+VAR _Top = TOPN ( 5, _Valid, [@Value], DESC, DimProduct[Category], ASC )
+VAR _MaxPos = MAX ( 0, MAXX ( _Top, [@Value] ) )
+VAR _MaxNeg = MAX ( 0, MAXX ( _Top, -[@Value] ) )
+VAR _Zero =
+    IF ( _MaxPos + _MaxNeg = 0, 50, DIVIDE ( _MaxNeg, _MaxPos + _MaxNeg, 0 ) * 100 )
+VAR _Header =
+    "<style>
+      #d10-sales{box-sizing:border-box;width:100%;height:100%;min-height:0;
+        padding:11px 13px;background:#101e2a;color:#ecf8fa;border:1px solid #305662;
+        border-radius:16px;font:12px/1.45 'Segoe UI',Arial,sans-serif;overflow:visible}
+      #d10-sales *{box-sizing:border-box}
+      #d10-sales .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+      #d10-sales .brand{font-size:9px;color:#89dcd6;letter-spacing:1.5px;font-weight:700}
+      #d10-sales h3{font-size:15px;margin:2px 0 0;font-weight:750}
+      #d10-sales .tag{font-size:9px;color:#f2c811;border:1px solid #f2c81155;border-radius:7px;padding:4px 7px}
+      #d10-sales .item{display:grid;grid-template-columns:minmax(66px,98px) minmax(0,1fr) 64px;
+        gap:8px;align-items:center;min-height:30px}
+      #d10-sales .name{font-size:10px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+      #d10-sales .track{height:13px;position:relative;border-radius:4px;background:#26404e}
+      #d10-sales .bar{position:absolute;top:0;bottom:0;border-radius:4px;
+        background:linear-gradient(90deg,#099999,#5fe1cf)}
+      #d10-sales .bar.neg{background:linear-gradient(90deg,#d88b88,#b54858)}
+      #d10-sales .bar:after{content:'';position:absolute;inset:0;border-radius:inherit;
+        background:linear-gradient(90deg,transparent,#ffffff22,transparent);
+        background-size:220% 100%;animation:d10salesSheen 3s ease-in-out 1;pointer-events:none}
+      #d10-sales .zero{position:absolute;top:-2px;bottom:-2px;width:1px;background:#efc96066;pointer-events:none}
+      #d10-sales .number{text-align:right;font:700 10px 'Segoe UI',Arial;white-space:nowrap}
+      #d10-sales .foot{display:flex;justify-content:space-between;margin-top:8px;color:#8db4be;font-size:9px}
+      #d10-sales .empty{padding:15px 0;color:#a5bbc6}
+      @keyframes d10salesSheen{0%{background-position:200% 0}100%{background-position:-200% 0}}
+      @media(prefers-reduced-motion:reduce){#d10-sales .bar:after{animation:none}}
+    </style>
+    <div id='d10-sales' dir='ltr'>
+      <div class='hd'><div><div class='brand'>NOVA / SALES</div><h3>Revenue by category</h3></div>
+      <div class='tag'>TOP 05</div></div>"
+VAR _HTML =
+    CONCATENATEX (
+        _Top,
+        VAR _Name0 = COALESCE ( DimProduct[Category], "Unassigned" )
+        VAR _Name1 = SUBSTITUTE ( _Name0, "&", "&amp;" )
+        VAR _Name2 = SUBSTITUTE ( SUBSTITUTE ( _Name1, "<", "&lt;" ), ">", "&gt;" )
+        VAR _Name = SUBSTITUTE ( SUBSTITUTE ( _Name2, UNICHAR ( 34 ), "&quot;" ), UNICHAR ( 39 ), "&#39;" )
+        VAR _V = [@Value]
+        VAR _Sector = IF ( _V >= 0, 100 - _Zero, _Zero )
+        VAR _Denominator = IF ( _V >= 0, _MaxPos, _MaxNeg )
+        VAR _Width = DIVIDE ( ABS ( _V ), _Denominator, 0 ) * _Sector
+        VAR _Left = IF ( _V >= 0, _Zero, _Zero - _Width )
+        VAR _Style =
+            "left:" & FORMAT ( _Left, "0.####", "en-US" ) &
+            "%;width:" & FORMAT ( _Width, "0.####", "en-US" ) & "%;"
+        VAR _ZeroStyle = "left:" & FORMAT ( _Zero, "0.####", "en-US" ) & "%;"
+        VAR _Label =
+            IF (
+                ABS ( _V ) >= 1000000, FORMAT ( _V / 1000000, "0.##", "en-US" ) & "M",
+                IF ( ABS ( _V ) >= 1000, FORMAT ( _V / 1000, "0.##", "en-US" ) & "K",
+                    FORMAT ( _V, "#,##0.##", "en-US" ) )
+            )
+        RETURN
+            "<div class='item'><span class='name' title='" & _Name & "'>" & _Name &
+            "</span><span class='track'><span class='zero' style='" & _ZeroStyle & "'></span>" &
+            "<span class='bar" & IF ( _V < 0, " neg", "" ) & "' style='" & _Style &
+            "' title='" & _Name & ": " & FORMAT ( _V, "#,##0.##", "en-US" ) & "'></span></span>" &
+            "<span class='number'>" & _Label & "</span></div>",
+        "",
+        [@Value], DESC, DimProduct[Category], ASC
+    )
+RETURN
+    _Header &
+    IF ( COUNTROWS ( _Top ) = 0, "<div class='empty'>No data for current filters</div>", _HTML ) &
+    "<div class='foot'><span>Actual measure · current filters</span><span>Values are always visible</span></div></div>"

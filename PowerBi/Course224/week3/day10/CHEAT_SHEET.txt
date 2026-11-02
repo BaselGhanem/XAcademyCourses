@@ -1,0 +1,59 @@
+DAY 10 | AI VISUAL DESIGN CHEAT SHEET
+X ACADEMY — POWER BI / NOVA
+
+THE PROMPT RECIPE — 12 QUESTIONS
+01 BUSINESS: What business question must the visual answer?
+02 MODEL: Exact existing [Measure Names] + 'Table'[Column], copied from Power BI
+03 GRAIN: Category, Department, Year-Month, Latest Snapshot...
+04 CHART: Bar, Line, KPI, Progress Ring, Bullet, Diverging...
+05 TOP N & SORT: Max items, DESC/ASC, tie-break, limits
+06 SIZE: 474x271? 850x400? Padding? Responsive? No clipping?
+07 STYLE: Primary/Accent, transparency, font, labels
+08 MOTION: Effect name, duration, intensity, once/hover/loop
+09 INTERACTION: HTML hover vs native Power BI selection: not the same
+10 OUTPUT: Full DAX Measure returning HTML/SVG, no placeholders
+11 FAILSAFE: STATIC FIRST — data always visible without animation
+12 QA: Compare totals, slicers, MAX=100%, BLANK/0/negative, small canvas
+
+20 EFFECTS:
+Neon Pulse | Glassmorphism | Aurora Flow | Holographic | Liquid Gradient
+Metallic Shine | Radar Sweep | Animated Border | Shimmer | Soft Pulse
+Floating | Slide Reveal | Fade & Scale | 3D Hover Lift | Spotlight Hover
+Ripple | Wave Motion | SVG Line Draw | Bar Growth | Segment Reveal
+
+19 CHART TYPES:
+KPI Card | Horizontal Bar | Column | Line | Area | Donut | Gauge
+Bullet | Waterfall | Funnel | Heatmap | Progress Ring | Matrix | Scatter
+Timeline | Waffle | Lollipop | Diverging Bar | Treemap
+
+CRITICAL SAFETY
+- Never animate the real bar from scaleX(0)/width:0 as the required data state.
+- If positive-only: largest value=100% track, 900K vs 1M=90%.
+- Bar order: TOPN + explicit CONCATENATEX sort; test tie-break.
+- Numeric DAX calculation first, FORMAT only for displayed labels.
+- Avoid 100vh and overflow:hidden masking rows in Power BI HTML.
+- Test in actual HTML Content edition; no automatic native crossfilter.
+- Always offer a static-safe fallback if motion fails.
+
+RECOVERY:
+1. Disable animations in the generated visual.
+2. Compare with a native Card/Bar using same filters.
+3. Inspect row count, max values, scale and CSS widths.
+4. Check whether font, flex, overflow or small height clipped elements.
+5. Paste broken DAX into Day 10's Visual Rescue Mode.
+
+ORIGINAL NOVA MODEL:
+Mahmoud [Total Revenue] + DimProduct[Category]
+Somaya [On Time %] + [Completed Orders]
+Hisham [Budget Achievement %]
+Enas [Staffing Gap] + DimDepartment[Department]
+
+COPY/PASTE FIX INSTRUCTION:
+"Fix my complete Power BI HTML/DAX measure without changing the business
+numbers. Keep all data marks visible with CSS animations OFF.
+Check the highest value renders as the longest bar, verify row order,
+numeric scale and filter context, preserve BLANK/0/negative semantics,
+and return the FULL replacement measure plus a QA checklist."
+
+TEST BEFORE SHOW: correct formula, same slicers, no clipping, all marks
+visible with animation disabled, labels readable at actual dimensions.

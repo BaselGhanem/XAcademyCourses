@@ -1,0 +1,54 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#09141b"><title>Day 10 — Personal Missions | X Academy</title><link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"><style>
+:root{--ink:#edfafa;--muted:#acc5ca;--teal:#099999;--line:#ffffff1c}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:radial-gradient(ellipse at 80% 0,#09999922,transparent 35%),#09141b;font:13px/1.9 Almarai,'Segoe UI',sans-serif}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer;color:inherit}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #60e5dd;outline-offset:3px}
+.wrap{width:min(1080px,calc(100% - 30px));margin:auto}.nav{border-bottom:1px solid var(--line);background:#09141bee;position:sticky;top:0;z-index:2;backdrop-filter:blur(12px)}.nav>div{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:65px}.brand{font:800 12px Inter,Arial}.back{padding:8px 12px;border:1px solid var(--line);border-radius:10px}
+.hero{padding:45px 0 12px}.eyebrow{color:#70ddd5;font:800 10px Inter;letter-spacing:.12em}.hero h1{font-size:clamp(28px,4vw,46px);margin:12px 0 9px;line-height:1.4}.hero p{max-width:770px;color:#acc8ce}
+.roles{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:24px 0 18px}
+.role{border:1px solid #ffffff25;border-radius:13px;background:#12252d;padding:16px 9px;font-weight:800}.role span{display:block;color:#91bcc5;font:700 10px Inter,Arial;margin-top:5px}
+.role[aria-pressed=true]{border-color:#099999;color:#b4f3ed;background:#0c4544}
+.mission{border:1px solid #ffffff22;border-radius:21px;padding:26px;background:linear-gradient(130deg,#172f37,#111f2c)}
+.mission-header{display:flex;gap:17px;align-items:start;justify-content:space-between}.mission-header h2{font-size:24px;margin:4px 0}.mission-sub{color:#9bbac2;font:700 11px Inter}
+.question{font-size:17px;font-weight:800;margin:19px 0}
+.dax{border:1px solid #5bbdb460;background:#071922;color:#ccf5ef;border-radius:13px;padding:16px;direction:ltr;text-align:left;font:12px/1.9 Consolas,monospace;overflow-wrap:anywhere}
+.pill{display:inline-block;border:1px solid #599a9c66;border-radius:30px;padding:4px 11px;color:#91e9dd;font:700 10px Inter,Arial}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.card{border:1px solid #ffffff1c;background:#102730;border-radius:15px;padding:16px}.card h3{font-size:14px;margin:0 0 7px}.card p{margin:0;color:#b1c8cd}
+.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.link{display:inline-block;border:1px solid #419d97;border-radius:12px;padding:10px 14px;font-weight:700;background:#075b5b;color:white}.link.secondary{background:#0b2029;color:#b5e1e0}
+.ticks{margin:21px 0 20px;display:grid;gap:10px}.tick{background:#10242e;border:1px solid #ffffff1b;border-radius:12px;padding:12px;display:flex;align-items:start;gap:12px;cursor:pointer}.tick input{margin-top:5px;accent-color:#099999;width:18px;height:18px}.tick span{flex:1}
+.status{margin:17px 0 42px;padding:18px;border:1px solid #349e9a44;border-radius:15px;background:#09999918}
+.track{height:8px;background:#28434a;border-radius:20px;overflow:hidden;margin-top:10px}.track i{display:block;height:100%;width:0;background:linear-gradient(90deg,#099999,#70e0cd);transition:width .3s}.status p{color:#b3d0d1}
+.checkpoints{margin-bottom:50px}.checkpoints h2{font-size:21px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.grid .card b{color:#b9f1e7}
+@media(max-width:700px){.roles{grid-template-columns:repeat(2,1fr)}.two,.grid{grid-template-columns:1fr}.mission{padding:17px}.hero{padding:24px 0 9px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body><header class="nav"><div class="wrap"><a class="brand" href="ai-visual-design-lab.html">X ACADEMY / PERSONAL MISSIONS</a><a class="back" href="../../day.html?id=10">العودة إلى Day 10 ↗</a></div></header><main class="wrap"><section class="hero"><span class="eyebrow">04 / APPLY / PERSONAL MISSIONS</span><h1>اختار اسمك. ابنِ تصميمك.</h1><p>نفس المهارة للجميع، لكن كل واحد بيحل سؤال من مجاله. لا تتقيد بالألوان والحركة، لكن ممنوع تتنازل عن دقة الأرقام أو Filter Context.</p></section>
+<nav class="roles" aria-label="اختر تخصص المتدرب"><button class="role" type="button" data-role="mahmoud" aria-pressed="true">محمود<span>SALES</span></button><button class="role" type="button" data-role="somaya" aria-pressed="false">سمية<span>OPERATIONS</span></button><button class="role" type="button" data-role="hisham" aria-pressed="false">هشام<span>FINANCE</span></button><button class="role" type="button" data-role="enas" aria-pressed="false">إيناس<span>WORKFORCE</span></button></nav>
+<section class="mission" id="missionPanel"><div class="mission-header"><div><span class="eyebrow" id="roleLabel">SALES</span><h2 id="roleName">محمود</h2></div><span class="pill">PERSONAL CHALLENGE</span></div>
+<p class="question" id="question"></p><pre class="dax" id="bindings"></pre>
+<div class="two"><div class="card"><h3>نوع الـVisual المقترح</h3><p id="chart"></p></div><div class="card"><h3>أهم اختبار</h3><p id="test"></p></div></div>
+<div class="links"><a class="link" href="ai-visual-design-lab.html">افتح Prompt Builder ↗</a><a class="link secondary" id="reference" href="examples/README.md" target="_blank" rel="noopener">Recovery DAX — مرجع</a><a class="link secondary" href="examples/README.md">تعليمات التحقق</a></div>
+<div class="ticks" id="ticks"><label class="tick"><input type="checkbox" data-check="0"><span>نسخت أسماء الـMeasures والـDimensions من Power BI نفسه</span></label>
+<label class="tick"><input type="checkbox" data-check="1"><span>ولدت Prompt فيها Chart + Size + Data + Motion + Constraints</span></label>
+<label class="tick"><input type="checkbox" data-check="2"><span>أضفت DAX Measure وعرضتها داخل HTML Content Visual</span></label>
+<label class="tick"><input type="checkbox" data-check="3"><span>قارنت الأرقام مع Native Visual تحت نفس Slicers</span></label>
+<label class="tick"><input type="checkbox" data-check="4"><span>أوقفت Animation وتأكدت إنه البيانات لسه ظاهرة</span></label></div>
+<div class="status"><strong id="progressLabel">0 من 5 نقاط تحقق</strong><div class="track"><i id="progress"></i></div><p>التقدم محفوظ على نفس الجهاز والمتصفح فقط</p></div></section>
+<section class="checkpoints"><h2>30-minute checkpoints</h2><div class="grid"><div class="card"><b>Minute 10</b><p>الـPrompt جاهزة، وأسماء الحقول صحيحة</p></div><div class="card"><b>Minute 20</b><p>الرسم موجود والرقم مطابق للـNative</p></div><div class="card"><b>Minute 30</b><p>الشكل مضبوط، والـAnimation لا تخفي البيانات</p></div></div></section></main>
+<script>
+const profiles={
+mahmoud:{name:"محمود",label:"SALES",question:"أي Category تحقق أعلى إيراد؟ وهل الترتيب صحيح تحت الفلاتر؟",bindings:"[Total Revenue] + DimProduct[Category]",chart:"Horizontal Bar · Top 5 · decorative shimmer",test:"أكبر رقم = أطول Bar. عند 1M و900K النسبة 100% مقابل 90%.",ref:"01_MAHMOUD_SALES_BAR.dax"},
+somaya:{name:"سمية",label:"OPERATIONS",question:"كم نسبة الطلبات المكتملة في الوقت؟",bindings:"[On Time %] + [Completed Orders]",chart:"Progress Ring · soft ambient glow",test:"تحققي إن On Time % من 0 إلى 1 داخل الـMeasure، وقارنيها بالـNative Card.",ref:"02_SOMAYA_OPERATIONS_RING.dax"},
+hisham:{name:"هشام",label:"FINANCE",question:"كم حققنا من الموازنة مقارنة بهدف 100%؟",bindings:"[Budget Achievement %]",chart:"Bullet Chart · visible 100% target marker",test:"النسبة فوق 100% ما تنقص أو تنقصّر بسبب Scale ثابت، والـTarget واضح.",ref:"03_HISHAM_FINANCE_BULLET.dax"},
+enas:{name:"إيناس",label:"WORKFORCE",question:"وين أكبر فجوات الموظفين حسب القسم؟",bindings:"[Staffing Gap] + DimDepartment[Department]",chart:"Diverging Bar · static zero baseline",test:"اختبري السالب والموجب، ولا تجمعي Headcount عبر أشهر مختلفة.",ref:"04_ENAS_WORKFORCE_DIVERGING.dax"}};
+let current="mahmoud";const $=id=>document.getElementById(id);const buttons=[...document.querySelectorAll("[data-role]")],ticks=[...document.querySelectorAll("[data-check]")];
+function key(){return "day10_mission_"+current}
+function render(){
+const p=profiles[current];$("roleName").textContent=p.name;$("roleLabel").textContent=p.label;$("question").textContent=p.question;$("bindings").textContent=p.bindings;$("chart").textContent=p.chart;$("test").textContent=p.test;$("reference").href="examples/"+p.ref;
+buttons.forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.role===current)));
+let saved=[];try{saved=JSON.parse(localStorage.getItem(key())||"[]")}catch(e){}
+ticks.forEach((t,i)=>{t.checked=saved.includes(i)});progress();
+}
+function progress(){const selected=ticks.flatMap((t,i)=>t.checked?[i]:[]);$("progress").style.width=selected.length/5*100+"%";$("progressLabel").textContent=selected.length+" من 5 نقاط تحقق";try{localStorage.setItem(key(),JSON.stringify(selected))}catch(e){}}
+buttons.forEach(b=>b.addEventListener("click",()=>{current=b.dataset.role;render()}));
+ticks.forEach(t=>t.addEventListener("change",progress));render();
+</script></body></html>
