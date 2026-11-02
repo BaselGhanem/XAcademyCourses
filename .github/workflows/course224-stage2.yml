@@ -1,0 +1,34 @@
+name: Course224 stage2 — generate and validate
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/course224-stage2.yml'
+      - 'PowerBi/Course224/tools/generate_stage2.py'
+      - 'PowerBi/Course224/tools/generate_week2_day4.py'
+      - 'PowerBi/Course224/tools/validate_stage2.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rebuild:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r PowerBi/Course224/tools/stage2-requirements.txt
+      - run: python PowerBi/Course224/tools/generate_stage2.py
+      - run: python PowerBi/Course224/tools/validate_stage2.py
+      - name: Commit validated binary ZIPs and reference files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add PowerBi/Course224/week1/day1/downloads/Day01_CONNECT_EVERYTHING.zip PowerBi/Course224/week1/day2/downloads/Day02_CLEAN_DATA.zip PowerBi/Course224/week1/day3/downloads/Day03_STOP_COPYING_FILES_LEARNER.zip PowerBi/Course224/week2/day4/downloads/Day04_MODEL_THE_BUSINESS.zip PowerBi/Course224/week1/day1/web PowerBi/Course224/datasets/
+          if ! git diff --cached --quiet; then
+            git commit -m "Course224 stage2: rebuilt and verified Days 01-04 binaries"
+            git push
+          fi

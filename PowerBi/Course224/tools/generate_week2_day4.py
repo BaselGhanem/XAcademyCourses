@@ -64,11 +64,11 @@ def model_workbook(path, fact, products, customers, branches):
     branch_rows = [[b['branch_id'],b['branch_name'],b['city'],b['region'],b['channel'],b['manager'],b['status']] for b in branches]
     add_sheet(wb, 'DimBranch', ['Branch ID','Branch Name','City','Region','Channel','Branch Manager','Status'], branch_rows)
 
-    start=date(2026,1,1); end=date(2026,4,30)
+    start=date(2025,1,1); end=date(2026,12,31)
     names=['January','February','March','April','May','June','July','August','September','October','November','December']
     d=[]; cur=start
     while cur<=end:
-        d.append([cur.isoformat(),cur.year,cur.month,names[cur.month-1],f'Q{((cur.month-1)//3)+1}',f'{cur.year}-{cur.month:02d}'])
+        d.append([cur,cur.year,cur.month,names[cur.month-1],f'Q{((cur.month-1)//3)+1}',f'{cur.year}-{cur.month:02d}'])
         cur += timedelta(days=1)
     add_sheet(wb, 'DimDate', ['Date','Year','Month Number','Month','Quarter','Year Month'], d)
 
@@ -89,7 +89,7 @@ def build():
     customers=w1.customer_catalog_rows()
     branches=w1.branch_catalog_rows()
 
-    months={m:list(w1.monthly_sales_rows(10000,m,products,customers,branches)) for m in range(1,6)}
+    months={m:list(w1.monthly_sales_rows(40000,m,products,customers,branches)) for m in range(1,6)}
 
     # 01 — Merge review
     merge_dir=WORK/'01_REVIEW_MERGE'
@@ -110,11 +110,11 @@ def build():
     new_dir=WORK/'03_REVIEW_FOLDER'/'NEW_MONTH_TO_DROP_AFTER_BUILD'
     write_xlsx(new_dir/'Sales_May.xlsx', SALES_HEADER, months[5], 'Sales')
 
-    # 04 — Model lab. Same Jan-Apr business universe, shaped for Star Schema.
+    # 04 — Model lab. Full Day03 Jan-Apr facts at the original 160k transaction grain.
     fact=[]
     for m in range(1,5):
         for r in months[m]:
-            fact.append([r[0],r[1],r[2],r[3],r[5],r[8],r[9],r[10],r[11]])
+            fact.append([r[0],date.fromisoformat(r[1]),r[2],r[3],r[5],r[8],r[9],r[10],r[11]])
     model_workbook(WORK/'04_MODEL_LAB'/'Nova_Day04_Model_Lab.xlsx', fact, products, customers, branches)
 
     # Checklist/reference
@@ -128,7 +128,8 @@ def build():
             ['5','Set filter direction','Single: Dimension → Fact'],
             ['6','Arrange Star Schema','FactSales center, Dimensions around it'],
             ['7','Test filters','Slicers from each Dimension change Sales results'],
-            ['8','Finish','Model is Ready for DAX']
+            ['8','Validate continuity','160,000 FactSales records; exact Day03 Jan-Apr Transaction IDs'],
+            ['9','Finish','Model is Ready for DAX']
         ]),
         ('Relationship Map', [
             ['Dimension','Key (1 side)','Fact column (* side)','Cardinality','Filter Direction','Training Intent'],
@@ -149,7 +150,8 @@ def build():
     ])
 
     # QA before packing
-    assert len(fact)==40000
+    assert len(fact)==160000
+    assert len({r[0] for r in fact})==160000
     assert len({p['product_id'] for p in products})==len(products)==240
     assert len({c['customer_id'] for c in customers})==len(customers)==8000
     assert len({b['branch_id'] for b in branches})==len(branches)==100
@@ -170,6 +172,8 @@ def build():
         'First run Auto Detect and inspect what Power BI found. Product ID and Branch ID use matching names; Customer and Date intentionally use different key names.\n'
         'Create the missing relationships manually: DimCustomer[Customer Code] → FactSales[Customer ID] and DimDate[Date] → FactSales[Order Date].\n'
         'Use 1:* cardinality and single filter direction from Dimension to FactSales. Arrange a Star Schema and test filters.\n\n'
+        'DATA CONTRACT: FactSales 160,000 Jan-Apr; folder after May 200,000.\n'
+        'DimDate covers all dates in 2025–2026 as typed Excel Date values.\n'
         'SUCCESS = FactSales + 4 Dimensions + working filters + READY FOR DAX.\n',
         encoding='utf-8'
     )
