@@ -27,7 +27,8 @@
         <div class="welcome-card">
           <span class="eyebrow">YOUR COURSE HUB</span>
           <h1>أهلاً، <span id="studentName"></span>.</h1>
-          <p>كل يوم فيه التسجيل والملفات والخطوات والتحدي. افتح اليوم اللي بدك اياه وكمل من مكانك.</p>
+          <p>تابع مسارك التعليمي وحمّل الملفات ونفّذ التمارين بحسب تقدمك.</p>
+          <p class="learner-interest" id="learnerInterest"></p>
           <div class="progress-line"><i id="progressFill" style="width:0%"></i></div>
           <div class="progress-meta"><span id="progressText">0 من 10 أيام مكتملة</span><span id="progressPct">0%</span></div>
         </div>
@@ -38,11 +39,11 @@
     <section class="portal-section">
       <div class="shell">
         <div class="portal-head">
-          <div><h2>الأيام العشرة</h2><p>الأيام تفتح تدريجياً مع تقدم الدورة.</p></div>
+          <div><h2>الأيام العشرة</h2><p>جميع المهارات مشتركة مهما كان تخصصك. تقدمك محفوظ محليًا في هذا المتصفح.</p></div>
           <div class="filter-row">
             <button class="filter-btn active" data-filter="all">الكل</button>
-            <button class="filter-btn" data-filter="past">تم موعدها</button>
-            <button class="filter-btn" data-filter="upcoming">قادمة</button>
+            <button class="filter-btn" data-filter="available">متاحة</button>
+            <button class="filter-btn" data-filter="locked">غير متاحة</button>
             <button class="filter-btn" data-filter="completed">مكتملة عندي</button>
           </div>
         </div>
@@ -52,17 +53,17 @@
   </main>
 
   <script src="data.js"></script>
+  <script src="progress.js"></script>
   <script src="videos.js"></script>
   <script src="access.js"></script>
   <script>
-    const student = localStorage.getItem('pbi_student_name');
+    const learnerProfile = CourseProgress.getProfile();
+    const student = learnerProfile?.name;
     if (!student) location.href = 'login.html';
     document.getElementById('studentName').textContent = student || '';
+    document.getElementById('learnerInterest').textContent = `مجال اهتمامك: ${CourseProgress.domainLabel(learnerProfile?.domain)}`;
 
-    function getCompleted() {
-      try { return JSON.parse(localStorage.getItem('pbi_completed_days') || '[]'); }
-      catch { return []; }
-    }
+    function getCompleted() { return CourseProgress.getCompleted(); }
 
     function renderProgress() {
       const done = getCompleted();
@@ -73,26 +74,23 @@
     }
 
     function getNextRelevantDay() {
-      const today = new Date();
-      const todayOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-      const openDays = DAYS.filter(day => isDayOpen(day.id));
-      return openDays.find(d => new Date(`${d.date}T00:00:00`) >= todayOnly)
-        || openDays[openDays.length - 1]
-        || DAYS[0];
+      const open = DAYS.filter(day => isDayOpen(day.id));
+      const done = getCompleted();
+      return open.find(day => !done.includes(day.id)) || open[open.length - 1] || DAYS[0];
     }
 
     function renderNextCard() {
       const day = getNextRelevantDay();
-      const status = dayRuntimeStatus(day);
+      const status = COURSE_CONFIG.deliveryMode === 'self-paced' ? 'available' : dayRuntimeStatus(day);
       const open = isDayOpen(day.id);
       const liveButton = COURSE_CONFIG.liveUrl
         ? `<a class="btn btn-primary" href="${COURSE_CONFIG.liveUrl}" target="_blank" rel="noopener">دخول الجلسة المباشرة</a>`
-        : `<span class="btn btn-ghost btn-disabled">رابط الجلسة يضاف قبل الموعد</span>`;
+        : '';
       document.getElementById('nextCard').innerHTML = `
-        <span class="next-label">${status === 'today' ? 'TODAY' : 'NEXT AVAILABLE DAY'}</span>
+        <span class="next-label">${COURSE_CONFIG.deliveryMode === 'self-paced' ? 'YOUR NEXT LESSON' : (status === 'today' ? 'TODAY' : 'NEXT AVAILABLE DAY')}</span>
         <h2>Day ${String(day.id).padStart(2,'0')} — ${day.titleAr}</h2>
         <p>${day.hook}</p>
-        <span class="next-date">${day.weekday} • ${formatDateAr(day.date)}</span>
+        <span class="next-date">${COURSE_CONFIG.deliveryMode === 'self-paced' ? '120 دقيقة · تعلّم مرن' : `${day.weekday} • ${formatDateAr(day.date)}`}</span>
         <div class="live-slot">
           ${open ? `<a class="btn btn-ghost" href="day.html?id=${day.id}">عرض تفاصيل اليوم</a>` : ''}
           ${liveButton}
@@ -104,11 +102,13 @@
       const grid = document.getElementById('daysGrid');
       grid.innerHTML = '';
       DAYS.forEach(day => {
-        const runtime = dayRuntimeStatus(day);
+        const runtime = COURSE_CONFIG.deliveryMode === 'self-paced' ? 'available' : dayRuntimeStatus(day);
         const isCompleted = done.includes(day.id);
         if (filter === 'completed' && !isCompleted) return;
-        if (filter !== 'all' && filter !== 'completed' && runtime !== filter) return;
         const open = isDayOpen(day.id);
+        if (filter === 'available' && !open) return;
+        if (filter === 'locked' && open) return;
+        if (!['all','available','locked','completed'].includes(filter) && runtime !== filter) return;
         const card = document.createElement('article');
         card.className = `portal-day ${isCompleted ? 'completed' : ''} ${open ? 'open' : 'locked'}`;
         card.setAttribute('aria-disabled', open ? 'false' : 'true');
@@ -122,8 +122,8 @@
             ${open ? '' : '<span class="day-lock-badge" aria-label="مقفل">LOCKED</span>'}
           </div>
           <div class="portal-day-bottom">
-            <span class="status-chip ${open ? runtime : 'locked'}"><i class="complete-dot"></i>${open ? (runtime === 'today' ? 'اليوم' : runtime === 'past' ? 'تم موعده' : day.weekday + ' • ' + formatDateAr(day.date)) : 'غير متاح حالياً'}</span>
-            <span class="resource-count">${open ? (hasDayVideo(day.id) ? '▶ التسجيل متاح للمشاهدة' : day.resources.length + ' مواد متاحة لليوم') : 'يفتح مع تقدم الدورة'}</span>
+            <span class="status-chip ${open ? runtime : 'locked'}"><i class="complete-dot"></i>${open ? (isCompleted ? 'مكتمل' : (COURSE_CONFIG.deliveryMode === 'self-paced' ? 'متاح للتعلم' : (runtime === 'today' ? 'اليوم' : runtime === 'past' ? 'تم موعده' : day.weekday + ' • ' + formatDateAr(day.date)))) : 'غير متاح حالياً'}</span>
+            <span class="resource-count">${open ? (COURSE_CONFIG.showLegacyRecordings && hasDayVideo(day.id) ? '▶ التسجيل متاح للمشاهدة' : day.resources.length + ' مواد متاحة لليوم') : 'لم ينشر هذا الدرس بعد'}</span>
           </div>`;
         if (open) {
           card.addEventListener('click', () => location.href = `day.html?id=${day.id}`);
@@ -139,7 +139,7 @@
     }));
 
     document.getElementById('logoutBtn').addEventListener('click', () => {
-      localStorage.removeItem('pbi_student_name');
+      CourseProgress.logout();
       location.href = 'login.html';
     });
 

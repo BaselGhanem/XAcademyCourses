@@ -7,9 +7,12 @@ const COURSE_CONFIG = {
   totalDays: 10,
   totalHours: 20,
   sessionHours: 2,
+  courseId: 'Course224',
+  deliveryMode: 'self-paced',
+  showLegacyRecordings: false,
   portalPassword: 'PowerBI',
   powerBiDownloadUrl: 'https://www.microsoft.com/en-us/power-platform/products/power-bi/downloads',
-  liveUrl: 'https://teams.microsoft.com/meet/384079113607436?p=lgLLd5ReKE51ncdmN8',
+  liveUrl: '',
   dashboardPreviewUrl: 'https://app.powerbi.com/view?r=eyJrIjoiMWUwODU5MjEtMjQ2OS00OTM0LWJmNWMtY2Q0MjY5ZDg1NGVmIiwidCI6IjhiNjAyNDRiLTFiZGQtNDk4YS04ODY3LTljNzJhNGQ5NzFhMCIsImMiOjl9',
   instructorImage: 'https://raw.githubusercontent.com/BaselGhanem/Portfolio/refs/heads/main/BaselGhanem.jpg',
   contact: {
@@ -150,22 +153,22 @@ const DAYS = [
     date: `2026-10-04`,
     weekday: `الأحد`,
     phase: `APPLY`,
-    title: `Four Dashboards, Four Decisions`,
-    titleAr: `أربع لوحات وأربع قرارات`,
-    hook: `محمود للمبيعات، سمية للعمليات، هشام للمالية، وإيناس للموارد والتخطيط. نفس المهارات، وأسئلة تناسب عمل كل متدرب.`,
+    title: `Four Domains, Four Decisions`,
+    titleAr: `أربعة مجالات وأربع قرارات`,
+    hook: `مهارات مشتركة، مع أمثلة من المبيعات والعمليات والمالية والموارد البشرية يمكن تطبيق منهجها في تخصصات أخرى.`,
     mission: `ابدأ بمثال مشترك للمقارنة الشهرية، ثم ابن لوحة خاصة بدورك باستخدام البيانات والصيغ والتعليمات الجاهزة.`,
     topics: [`Date Table`, `Previous Month`, `MoM Growth %`, `Previous Year`, `YoY Growth %`, `YTD`, `KPI Cards`, `Line / Bar / Matrix`, `Slicers`, `Visual vs Page Filters`, `Conditional Formatting`, `Sorting`],
-    build: [`Open Nova_Day07_START.pbix and Refresh`, `Use BASEL DEMO to compare March and April`, `Open your named page and learner guide`, `Build 4 KPI Cards`, `Apply time comparison measures`, `Build Actual vs Previous Year or Planned trend for your role`, `Build sorted Bar Chart and comparison Matrix`, `Add Year / Year Month / role-specific Slicers`, `Test page filters and visual filters`, `Apply conditional formatting`, `Validate one result with the trainer during class`, `Explain one finding and save your PBIX`],
-    challenge: `كل متدرب يقدم استنتاجا واحدا وإجراء مرتبطا بدوره. نقاط تحقق بعد 15 و30 و45 دقيقة، ومساعدة مباشرة من المدرب عند التعطل.`,
-    deliverable: `أربع لوحات: Sales / Operations / Finance / Workforce، مع مقارنة زمنية وفلاتر وأرقام قابلة للتحقق.`,
-    visualGuide: { image: `concepts/assets/day7-learner-overview.webp`, title: `Day 7 — Learner Visual Guide`, note: `الأدوار الأربعة والمقارنة الزمنية وبناء اللوحة ونقاط التحقق.` },
+    build: [`Open Nova_Day07_START.pbix and Refresh`, `Use BASEL DEMO to compare March and April`, `Choose a business scenario and open its learner guide`, `Build 4 KPI Cards`, `Apply time comparison measures`, `Build Actual vs Previous Year or Planned trend for your role`, `Build sorted Bar Chart and comparison Matrix`, `Add Year / Year Month / role-specific Slicers`, `Test page filters and visual filters`, `Apply conditional formatting`, `Validate one result with the trainer during class`, `Explain one finding and save your PBIX`],
+    challenge: `قدّم استنتاجًا واحدًا وإجراءً مرتبطًا بسؤال أعمال تختاره. نقاط تحقق بعد 15 و30 و45 دقيقة، ومساعدة مباشرة من المدرب عند التعطل.`,
+    deliverable: `تقرير تحليلي مناسب للسيناريو المختار، مع مقارنة زمنية وفلاتر ونتائج قابلة للتحقق.`,
+    visualGuide: { image: `concepts/assets/day7-learner-overview.webp`, title: `Day 7 — Learner Visual Guide`, note: `الأمثلة متعددة المجالات والمقارنة الزمنية وبناء اللوحة ونقاط التحقق.` },
     resources: [
       { name: `Day 07 — DAX Foundations`, type: `WEB`, url: `week3/day7/web/DAX_FOUNDATIONS.html`, note: `شرح الدوال الجديدة خطوة بخطوة مع أمثلة مبسطة وزر نسخ لكل صيغة` },
       { name: `Day 07 — START`, type: `PBIX`, url: `week3/day7/downloads/Nova_Day07_START.pbix`, note: `ملف البداية المباشر للمتدربين — البيانات مدمجة` },
-      { name: `Mahmoud — Sales`, type: `WEB`, url: `week3/day7/web/MAHMOUD_SALES.html`, note: `إيراد ومقارنة ونمو وفئات وعملاء.` },
-      { name: `Somaya — Operations`, type: `WEB`, url: `week3/day7/web/SOMAYA_OPERATIONS.html`, note: `طلبات وإنجاز والتزام بالمهلة ودورة التشغيل.` },
-      { name: `Hisham — Finance`, type: `WEB`, url: `week3/day7/web/HISHAM_FINANCE.html`, note: `إيراد وتكلفة وربح وموازنة.` },
-      { name: `Enas — Workforce`, type: `WEB`, url: `week3/day7/web/ENAS_WORKFORCE.html`, note: `آخر لقطة شهرية للموظفين والعجز وتغطية الموارد.` }
+      { name: `Sales — Example`, type: `WEB`, url: `week3/day7/web/MAHMOUD_SALES.html`, note: `إيراد ومقارنة ونمو وفئات وعملاء.` },
+      { name: `Operations — Example`, type: `WEB`, url: `week3/day7/web/SOMAYA_OPERATIONS.html`, note: `طلبات وإنجاز والتزام بالمهلة ودورة التشغيل.` },
+      { name: `Finance — Example`, type: `WEB`, url: `week3/day7/web/HISHAM_FINANCE.html`, note: `إيراد وتكلفة وربح وموازنة.` },
+      { name: `Workforce — Example`, type: `WEB`, url: `week3/day7/web/ENAS_WORKFORCE.html`, note: `آخر لقطة شهرية للموظفين والعجز وتغطية الموارد.` }
     ]
   },
   {
@@ -179,12 +182,12 @@ const DAYS = [
     mission: 'حوّل Analyst Report إلى Management Experience واضح وسريع.',
     topics: ['Visual Hierarchy', 'Chart Selection', 'Grid & White Space', 'Tooltips', 'Drill Down (Quarter → Month)', 'Page Navigation', 'Bookmarks & Buttons', 'Scroller Custom Visual', 'HTML Landing Page Preview'],
     build: ['Improve White Space and KPI Hierarchy', 'Build Multiple Tooltip Pages', 'Drill Down: Quarter to Month', 'Create Report Navigation', 'Try the Scroller Visual', 'Create a Bookmark', 'Preview the HTML Landing Page'],
-    challenge: 'نفس 5 Business Questions، لكن لكل متدرب حرية التصميم. كل Visual يجب أن يدافع عن وجوده.',
+    challenge: 'اختر سؤال أعمال واضحًا، ولك حرية التصميم. كل Visual يجب أن يدافع عن وجوده.',
     deliverable: 'Executive-ready Report بتجربة استخدام متماسكة.',
     visualGuide: { image: 'concepts/assets/day8-learner-overview.webp', title: 'Day 8 — Learner Visual Guide', note: 'تحسين التصميم وWhite Space، وTooltips، وDrill Down، وNavigation، وScroller، وBookmarks' },
     resources: [
-      { name: 'Day 08 — Unified Executive PBIR Starter', type: 'ZIP', url: 'week3/day8/downloads/Nova_Day08_Executive_360_PBIR.zip', note: 'مشروع PBIR مع الصفحات الأربع المكتملة ونموذج البيانات الأصلي وصفحة انطلاق اليوم الثامن' },
-      { name: '08 — Visual Selection Cards', type: 'PDF', url: 'week3/day8/downloads/08_Visual_Selection_Cards.pdf', note: '5 صفحات: اختيار 8 أنواع من الرسومات وأمثلة من لوحات محمود وسمية وهشام وإيناس' },
+      { name: 'Day 08 — Unified Executive PBIR Starter', type: 'ZIP', url: 'week3/day8/downloads/Nova_Day08_Executive_360_PBIR.zip', note: 'مشروع PBIR مع أربع صفحات أمثلة مكتملة ونموذج البيانات الأصلي وصفحة انطلاق اليوم الثامن' },
+      { name: '08 — Visual Selection Cards', type: 'PDF', url: 'week3/day8/downloads/08_Visual_Selection_Cards.pdf', note: '5 صفحات: اختيار 8 أنواع من الرسومات مع أمثلة متعددة المجالات' },
       { name: 'Day 08 — Every Visual Earns Its Place', type: 'Challenge', url: 'week3/day8/web/Day08_Every_Visual_Earns_Its_Place.html', note: 'تحدي 10–15 دقيقة: Audit وImprove وInteractions وInsight مع PDF للطباعة' }
     ]
   },
@@ -203,7 +206,7 @@ const DAYS = [
     deliverable: 'Nova Business 360 — Dashboard تفاعلي فيه لوحة فلاتر قابلة للاخفاء، Field Parameters، Dynamic Title وتحكم بالرسومات.',
     visualGuide: { image: 'week3/day9/assets/Day09_Plan_Poster.svg', title: 'Day 09 — Master the Dashboard', note: 'Filter Scopes وSync Slicers وBookmarks وField Parameters' },
     resources: [
-      { name: 'DAY 09 — STUDENT MISSIONS', type: 'Guide', url: 'week3/day9/DAY09_STUDENT_MISSIONS.md', note: 'مهام محمود وسمية وهشام وايناس' },
+      { name: 'DAY 09 — STUDENT MISSIONS', type: 'Guide', url: 'week3/day9/DAY09_STUDENT_MISSIONS.md', note: 'مهام تحليلية بحسب المجال' },
       { name: 'DAY 09 — FINAL CHECKLIST', type: 'Guide', url: 'week3/day9/DAY09_CHECKLIST.md', note: 'قائمة الفحص والتقييم' },
       { name: 'DAY 09 — NOVA THEME', type: 'Guide', url: 'week3/day9/Nova_Day09_Theme.json', note: 'الوان التقرير بصيغة Power BI Theme' },
       { name: 'NOVA — DAY 09 EXECUTIVE 360', type: 'PBIX', url: 'week3/day9/downloads/Nova_Day09_Executive_360.pbix', note: 'الملف الاصلي للتطبيق في Power BI Desktop' }
@@ -219,7 +222,7 @@ const DAYS = [
     hook: 'الشكل الجميل لحاله مش كفاية. لازم توصف البيانات والحركة والابعاد للـAI، وبعدين تتأكد إن كل رقم وشريط صح.',
     mission: 'من خلال AI Visual Design Lab رح تتعلم تحوّل فكرة تحليلية الى DAX HTML/SVG Visual مناسبة لمجالك، وتراجع الناتج وتصلح أخطاء التصميم والبيانات.',
     topics: ['Before & After — Native vs HTML', 'Prompt Anatomy — 16 Decisions', 'Existing Measures & Dimensions', 'Filter Context & Data Grain', '19 Chart Types', '20 Design Effects', 'Safe Mode & Static-first Motion', 'Canvas Size & Responsive Layout', 'DAX HTML Content & Technical Limits', 'Visual Rescue & Quality Assurance'],
-    build: ['Watch the Before & After showcase', 'Learn what each Prompt field actually means', 'Open the AI Visual Design Lab and pick a role preset', 'Copy actual Measures and Dimensions from Nova', 'Choose chart, Top N, size, brand colors and visual effect', 'Keep Safe Mode ON and generate a complete DAX Measure', 'Compare with the original Native Visual using the same slicers', 'Try the Visual Rescue Mode when an effect clips or hides data', 'Finish your own role mission and explain your design decision'],
+    build: ['Watch the Before & After showcase', 'Learn what each Prompt field actually means', 'Open the AI Visual Design Lab and pick a scenario preset', 'Copy actual Measures and Dimensions from Nova', 'Choose chart, Top N, size, brand colors and visual effect', 'Keep Safe Mode ON and generate a complete DAX Measure', 'Compare with the original Native Visual using the same slicers', 'Try the Visual Rescue Mode when an effect clips or hides data', 'Finish your chosen scenario mission and explain your design decision'],
     challenge: 'حوّل Visual من صفحتك الى HTML داخل Power BI. بدنا نفس الأرقام والفلترة، شكل واضح، وبيانات تضل ظاهرة حتى لو وقفت الـAnimation.',
     deliverable: 'Prompt احترافي + HTML/DAX Measure + نفس الأرقام في Native Visual + نتيجة مخصصة من اختيارك + QA مكتملة.',
     visualGuide: { image: 'week3/day10/assets/Day10_Studio_Roadmap.svg', title: 'Day 10 — AI Visual Design Masterclass', note: 'Discover → Learn → Create → Validate → Apply، مع خمس محطات ونقاط تحقق.' },
@@ -227,7 +230,7 @@ const DAYS = [
       { name: '01 — BEFORE & AFTER SHOWCASE', type: 'WEB', url: 'week3/day10/before-after.html', note: 'مقارنة تفاعلية بين شكل Native ورسم HTML، مع اختبار إيقاف الحركة' },
       { name: '02 — PROMPT ANATOMY', type: 'WEB', url: 'week3/day10/prompt-anatomy.html', note: 'شرح 16 قرار مهم في كتابة Prompt احترافية وأمثلتها' },
       { name: '03 — AI VISUAL DESIGN LAB', type: 'WEB', url: 'week3/day10/ai-visual-design-lab.html', note: 'المختبر الرئيسي: 20 تأثير، 19 Chart، Safe Mode وVisual Rescue' },
-      { name: '04 — PERSONAL STUDENT MISSIONS', type: 'WEB', url: 'week3/day10/student-missions.html', note: 'مهام محمود وسمية وهشام وايناس مع نقاط التحقق' },
+      { name: '04 — PERSONAL STUDENT MISSIONS', type: 'WEB', url: 'week3/day10/student-missions.html', note: 'مهام تحليلية بحسب المجال مع نقاط التحقق' },
       { name: '05 — PROMPT CHEAT SHEET', type: 'WEB', url: 'week3/day10/cheat-sheet.html', note: 'مرجع جاهز للطباعة أو الحفظ PDF، مع خيار تنزيل TXT' },
       { name: '06 — FOUR DAX REFERENCE MEASURES', type: 'Guide', url: 'week3/day10/examples/README.md', note: 'أكواد مرجعية آمنة للحركة؛ مطلوب اختبارها داخل Power BI Desktop' },
       { name: '07 — NOVA EXECUTIVE 360 PBIX', type: 'PBIX', url: 'week3/day9/downloads/Nova_Day09_Executive_360.pbix', note: 'نسخة Nova الأصلية؛ اعمل Save As قبل تطبيق Day 10' }

@@ -21,6 +21,7 @@
       </a>
       <nav class="nav-links" aria-label="التنقل الرئيسي">
         <a href="#journey">الأيام العشرة</a>
+        <a href="#audiences">التخصصات</a>
         <a href="#project">المشروع</a>
         <a href="#preview">النتيجة</a>
         <a href="#trainer">المدرب</a>
@@ -37,7 +38,7 @@
         <div>
           <span class="hero-kicker"><i></i> 10 Days • 20 Hours • One Real Project</span>
           <h1>لا تتعلم<br><span>Power BI.</span><br>فكّر كمحلل.</h1>
-          <p class="hero-desc">دورة عملية تبني فيها مشروع <strong>Nova Business Performance 360</strong> يومًا بعد يوم. نبدأ بملفات خام، وننتهي بتقرير إداري متكامل يشرح ماذا حدث، لماذا حدث، وأين يجب أن تتدخل الإدارة.</p>
+          <p class="hero-desc">مسار عملي لكل التخصصات. نبدأ ببيانات خام، ونبني مؤشرات وتقارير تساعد على اتخاذ القرارات، مع أمثلة من مجالات أعمال متعددة بدل ربط التدريب بوظيفة محددة.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#journey">شاهد الرحلة يوم بيوم ←</a>
             <a class="btn btn-ghost" href="login.html">التسجيلات والملفات</a>
@@ -74,7 +75,7 @@
         <div>
           <span class="eyebrow">ONE BUSINESS UNIVERSE</span>
           <h2 style="margin:9px 0 7px;font-size:1.45rem">نفس البيانات. نفس المشروع. مستوى أعلى كل يوم.</h2>
-          <p class="section-copy" style="margin:0;font-size:.86rem">بدل 10 دروس منفصلة، نفس الـPBIX يكبر معنا: تنظيف، Automation، Modeling، DAX، Time Intelligence، Design ثم Decision.</p>
+          <p class="section-copy" style="margin:0;font-size:.86rem">مسار متدرج من الاتصال بالبيانات وتنظيفها إلى نمذجتها وتحليلها وتصميم تقارير قابلة للاستخدام، مع تمارين قابلة لإعادة التطبيق.</p>
         </div>
         <div class="project-flow" aria-label="Project flow">
           <span class="flow-pill">RAW DATA</span><span class="flow-arrow">→</span>
@@ -82,6 +83,20 @@
           <span class="flow-pill">MEASURES</span><span class="flow-arrow">→</span>
           <span class="flow-pill">INSIGHTS</span><span class="flow-arrow">→</span>
           <span class="flow-pill">DECISION</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tight" id="audiences">
+      <div class="shell">
+        <span class="eyebrow">ONE SKILL SET · MANY CAREERS</span>
+        <h2 class="section-title">مهارات مشتركة، مهما كان تخصصك.</h2>
+        <p class="section-copy">لا تحتاج إلى خلفية في المبيعات أو المحاسبة. نتعلم Power BI على حالة أعمال واضحة، ثم نعيد تطبيق المنهج على أسئلة مختلفة. التعليم والصحة والتسويق والتقنية أمثلة مجالات يمكن نقل المهارة إليها عند توفر بيانات مناسبة.</p>
+        <div class="scenario-grid">
+          <article class="scenario-card"><strong>Performance & Sales</strong><span>الإيرادات والمقارنات والنمو</span></article>
+          <article class="scenario-card"><strong>Operations</strong><span>الطلبات والإنجاز والالتزام</span></article>
+          <article class="scenario-card"><strong>Finance</strong><span>التكاليف والموازنة والفروقات</span></article>
+          <article class="scenario-card"><strong>Workforce</strong><span>الطاقة الاستيعابية والموارد</span></article>
         </div>
       </div>
     </section>
@@ -146,7 +161,7 @@
       card.innerHTML = `
         <div class="day-card-head">
           <span class="day-num">DAY ${String(day.id).padStart(2,'0')}</span>
-          <span class="day-date">${day.weekday}<br>${formatDateAr(day.date)}</span>
+          <span class="day-date">${COURSE_CONFIG.deliveryMode === 'self-paced' ? '120 دقيقة · تعلم مرن' : `${day.weekday}<br>${formatDateAr(day.date)}`}</span>
         </div>
         <span class="phase">${day.phase}</span>
         <h3>${day.titleAr}<span class="en" dir="ltr">${day.title}</span></h3>

@@ -145,10 +145,11 @@
   </main>
 
   <script src="data.js"></script>
+  <script src="progress.js"></script>
   <script src="videos.js"></script>
   <script src="access.js"></script>
   <script>
-    const student = localStorage.getItem('pbi_student_name');
+    const student = CourseProgress.getProfile()?.name;
     if (!student) location.href = 'login.html';
     const params = new URLSearchParams(location.search);
     const day = getDay(params.get('id') || 1);
@@ -164,8 +165,8 @@
     document.getElementById('phase').textContent = `${day.phase} • DAY ${String(day.id).padStart(2,'0')}`;
     document.getElementById('titleAr').textContent = day.titleAr;
     document.getElementById('titleEn').textContent = day.title;
-    document.getElementById('dayLabel').textContent = `${day.weekday} — Day ${String(day.id).padStart(2,'0')}`;
-    document.getElementById('dateLabel').textContent = formatDateAr(day.date);
+    document.getElementById('dayLabel').textContent = COURSE_CONFIG.deliveryMode === 'self-paced' ? `Day ${String(day.id).padStart(2,'0')} · Self-paced` : `${day.weekday} — Day ${String(day.id).padStart(2,'0')}`;
+    document.getElementById('dateLabel').textContent = COURSE_CONFIG.deliveryMode === 'self-paced' ? '120 دقيقة تدريب' : formatDateAr(day.date);
     document.getElementById('hook').textContent = day.hook;
     document.getElementById('mission').textContent = day.mission;
     document.getElementById('challenge').textContent = day.challenge;
@@ -175,6 +176,7 @@
     if (COURSE_CONFIG.liveUrl) {
       liveSessionBtn.href = COURSE_CONFIG.liveUrl;
     } else {
+      document.getElementById('liveSessionPanel').hidden = true;
       liveSessionBtn.textContent = 'رابط Teams يضاف قبل الجلسة';
       liveSessionBtn.classList.add('btn-disabled');
       liveSessionBtn.removeAttribute('href');
@@ -222,7 +224,7 @@
 
     const recordingHeroWrap = document.getElementById('recordingHeroWrap');
     const videoBox = document.getElementById('videoBox');
-    const videoEmbed = getDayVideo(day.id).trim();
+    const videoEmbed = COURSE_CONFIG.showLegacyRecordings ? getDayVideo(day.id).trim() : '';
     document.getElementById('recordingDayNumber').textContent = String(day.id).padStart(2, '0');
 
     if (videoEmbed) {
@@ -244,7 +246,7 @@
       </${available ? 'a' : 'div'}>`;
     }).join('');
 
-    function getCompleted(){ try{return JSON.parse(localStorage.getItem('pbi_completed_days') || '[]')}catch{return []} }
+    function getCompleted(){ return CourseProgress.getCompleted(); }
     function updateCompleteUI(){
       const done = getCompleted();
       const completed = done.includes(day.id);
@@ -258,7 +260,7 @@
     document.getElementById('completeBtn').addEventListener('click', () => {
       const done = getCompleted();
       const next = done.includes(day.id) ? done.filter(id => id !== day.id) : [...done, day.id].sort((a,b)=>a-b);
-      localStorage.setItem('pbi_completed_days', JSON.stringify(next));
+      CourseProgress.setCompleted(next);
       updateCompleteUI();
     });
 

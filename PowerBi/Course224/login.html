@@ -33,9 +33,20 @@
           <input class="form-input" id="name" type="text" autocomplete="name" placeholder="مثال: Basel Ghanem">
         </div>
         <div class="form-group">
+          <label class="form-label" for="interest">مجال اهتمامك (اختياري)</label>
+          <select class="form-input" id="interest">
+            <option value="general">تحليل البيانات العام</option><option value="sales">المبيعات والأداء</option>
+            <option value="operations">العمليات</option><option value="finance">المالية</option>
+            <option value="hr">الموارد البشرية</option><option value="marketing">التسويق</option>
+            <option value="education">التعليم</option><option value="healthcare">الإدارة الصحية</option>
+            <option value="technology">التقنية</option><option value="other">مجال آخر</option>
+          </select>
+          <div class="form-hint">اختيارك لا يقيّد الدروس المتاحة؛ كل المهارات مشتركة.</div>
+        </div>
+        <div class="form-group">
           <label class="form-label" for="password">رمز الدورة</label>
           <input class="form-input" id="password" type="password" autocomplete="current-password" placeholder="PowerBI">
-          <div class="form-hint">يمكن تغيير رمز الدخول من ملف <strong>data.js</strong> في سطر <span dir="ltr">portalPassword</span>.</div>
+          <div class="form-hint">رمز الدورة للتنظيم فقط؛ لا يوفّر حماية للملفات الموجودة في مستودع عام.</div>
         </div>
         <div class="auth-error" id="errorBox">تحقق من الاسم ورمز الدورة.</div>
         <button class="btn btn-primary" id="loginBtn" style="width:100%;margin-top:18px">دخول إلى مركز الدورة ←</button>
@@ -45,14 +56,16 @@
   </main>
 
   <script src="data.js"></script>
+  <script src="progress.js"></script>
   <script>
     const nameInput = document.getElementById('name');
     const passInput = document.getElementById('password');
+    const interestInput = document.getElementById('interest');
     const errorBox = document.getElementById('errorBox');
     const loginBtn = document.getElementById('loginBtn');
 
-    const savedName = localStorage.getItem('pbi_student_name');
-    if (savedName) nameInput.value = savedName;
+    const savedProfile = CourseProgress.getProfile();
+    if (savedProfile) { nameInput.value = savedProfile.name; interestInput.value = savedProfile.domain; }
 
     function login() {
       const name = nameInput.value.trim();
@@ -63,8 +76,7 @@
         errorBox.classList.add('show');
         return;
       }
-      localStorage.setItem('pbi_student_name', name);
-      if (!localStorage.getItem('pbi_completed_days')) localStorage.setItem('pbi_completed_days', '[]');
+      CourseProgress.setProfile({ name, domain: interestInput.value });
       location.href = 'dashboard.html';
     }
     loginBtn.addEventListener('click', login);
