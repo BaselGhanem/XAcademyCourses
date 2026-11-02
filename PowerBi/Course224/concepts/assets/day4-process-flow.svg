@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<rect width="1800" height="1000" fill="#0b1116"/><rect x="55" y="50" width="1690" height="900" rx="38" fill="#121a21" stroke="#27343d"/>
+<text x="100" y="125" fill="#f2c811" font-size="28" font-family="Arial" font-weight="700">WEEK 2 • DAY 4</text>
+<text x="100" y="190" fill="#fff" font-size="58" font-family="Arial" font-weight="800">MODEL THE BUSINESS</text>
+<text x="100" y="235" fill="#9eb0bc" font-size="27" font-family="Arial">Review what we know → Build the model → Prove the filters → Ready for DAX</text>
+<rect x="100" y="290" width="1600" height="120" rx="25" fill="#0d292b" stroke="#099999" stroke-width="3"/>
+<text x="130" y="335" fill="#6edbd7" font-size="25" font-family="Arial" font-weight="700">REVIEW POWER QUERY</text>
+<g fill="#fff" font-size="25" font-family="Arial" font-weight="700"><text x="130" y="380">Merge = Add Columns</text><text x="580" y="380">Append = Add Rows</text><text x="1020" y="380">Excel Folder = Combine + Refresh May</text></g>
+<g font-family="Arial" font-weight="700" text-anchor="middle">
+<rect x="120" y="485" width="220" height="90" rx="20" fill="#211f12" stroke="#f2c811"/><text x="230" y="540" fill="#fff" font-size="22">Load Tables</text>
+<rect x="385" y="485" width="220" height="90" rx="20" fill="#211f12" stroke="#f2c811"/><text x="495" y="525" fill="#fff" font-size="21">Identify</text><text x="495" y="553" fill="#fff" font-size="21">FactSales</text>
+<rect x="650" y="485" width="220" height="90" rx="20" fill="#0d292b" stroke="#099999"/><text x="760" y="525" fill="#fff" font-size="21">Identify</text><text x="760" y="553" fill="#fff" font-size="21">Dimensions</text>
+<rect x="915" y="485" width="220" height="90" rx="20" fill="#0d292b" stroke="#099999"/><text x="1025" y="525" fill="#fff" font-size="21">Define Grain</text><text x="1025" y="553" fill="#fff" font-size="21">Check Keys</text>
+<rect x="1180" y="485" width="220" height="90" rx="20" fill="#0d292b" stroke="#099999"/><text x="1290" y="525" fill="#fff" font-size="21">Create</text><text x="1290" y="553" fill="#fff" font-size="21">Relationships</text>
+<rect x="1445" y="485" width="220" height="90" rx="20" fill="#0d292b" stroke="#099999"/><text x="1555" y="525" fill="#fff" font-size="21">Check 1:*</text><text x="1555" y="553" fill="#fff" font-size="21">Filter Direction</text>
+</g>
+<g stroke="#73858f" stroke-width="5" fill="#73858f"><line x1="340" y1="530" x2="375" y2="530"/><polygon points="375,530 360,520 360,540"/><line x1="605" y1="530" x2="640" y2="530"/><polygon points="640,530 625,520 625,540"/><line x1="870" y1="530" x2="905" y2="530"/><polygon points="905,530 890,520 890,540"/><line x1="1135" y1="530" x2="1170" y2="530"/><polygon points="1170,530 1155,520 1155,540"/><line x1="1400" y1="530" x2="1435" y2="530"/><polygon points="1435,530 1420,520 1420,540"/></g>
+<rect x="250" y="680" width="360" height="110" rx="24" fill="#211f12" stroke="#f2c811" stroke-width="3"/><text x="430" y="745" text-anchor="middle" fill="#fff" font-size="28" font-family="Arial" font-weight="800">Build Star Schema</text>
+<rect x="720" y="680" width="360" height="110" rx="24" fill="#0d292b" stroke="#099999" stroke-width="3"/><text x="900" y="730" text-anchor="middle" fill="#fff" font-size="27" font-family="Arial" font-weight="800">Test Filters</text><text x="900" y="765" text-anchor="middle" fill="#9eb0bc" font-size="21" font-family="Arial">Product • Customer • Branch • Date</text>
+<rect x="1190" y="680" width="360" height="110" rx="24" fill="#2b2440" stroke="#a98bff" stroke-width="3"/><text x="1370" y="745" text-anchor="middle" fill="#fff" font-size="30" font-family="Arial" font-weight="800">READY FOR DAX</text>
+<g stroke="#73858f" stroke-width="6"><line x1="610" y1="735" x2="705" y2="735"/><line x1="1080" y1="735" x2="1175" y2="735"/></g>
+<text x="900" y="885" text-anchor="middle" fill="#fff" font-size="32" font-family="Arial" font-weight="700">Fact = What happened • Dimension = Describe what happened</text>
+</svg>
