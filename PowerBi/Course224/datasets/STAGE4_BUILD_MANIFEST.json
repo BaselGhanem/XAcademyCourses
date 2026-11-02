@@ -1,0 +1,23 @@
+{
+  "source": "week3/day7/downloads/Nova_Day07_START_PBIP.zip",
+  "source_sha256": "1721ab93e4c0c408ee1ee2bc8eda25fb29f3dd1447b46b1b786dee2fdef9518b",
+  "days": {
+    "8": {
+      "file": "week3/day8/downloads/Nova_Day08_Executive_360_PBIR.zip",
+      "model_sha256": "5821a83e2135c63aea2a4864f748eefadaa3b87f1e166d1025538f80520e3828",
+      "archive_sha256": "fb3c21fb4a402e10b2639dae841037ec896782769c00d3c06c7d7def70be41c2"
+    },
+    "9": {
+      "file": "week3/day9/downloads/Day09_INTERACTIVITY_LAB.zip",
+      "model_sha256": "5821a83e2135c63aea2a4864f748eefadaa3b87f1e166d1025538f80520e3828",
+      "archive_sha256": "58b90fb6a12eb54d723136b04a8bcf6ad38002ae963cd04cd658bea6e9eabca5"
+    },
+    "10": {
+      "file": "week3/day10/downloads/Nova_Day10_CAPSTONE_START_PBIP.zip",
+      "model_sha256": "5821a83e2135c63aea2a4864f748eefadaa3b87f1e166d1025538f80520e3828",
+      "archive_sha256": "c687a7a60a720ce92882cbef786b844087c13f20ec674545aaa5581b718fbfa3"
+    }
+  },
+  "desktop_tested": false,
+  "date": "2026-11-02"
+}
