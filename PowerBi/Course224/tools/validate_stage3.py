@@ -61,6 +61,36 @@ for path in paths:
             vals=' '.join(str(v) for row in wb['Day5 Reference'].values for v in row if v is not None)
             assert 'Gross Sales' in vals and 'Discounted Price' not in vals
             wb.close()
+# Independent month-based controls for the native DAX PM / PY / YTD exercises.
+# These are source-calculated expectations, NOT claims of DAX Desktop execution.
+with (ROOT/'datasets/STAGE3_EXPECTED_RESULTS.csv').open(encoding='utf-8',newline='') as fh:
+    detail={r['Year Month']:Decimal(r['Net Revenue JOD']) for r in csv.DictReader(fh)}
+time_controls=[]
+for month in range(1,5):
+    ym=f'2026-{month:02d}'
+    py=f'2025-{month:02d}'
+    pm=f'2026-{month-1:02d}' if month>1 else '2025-12'
+    current=detail[ym]
+    prior=detail[py]
+    previous=detail.get(pm)
+    ytd=sum((detail[f"2026-{m:02d}"] for m in range(1,month+1)),Decimal('0'))
+    py_ytd=sum((detail[f"2025-{m:02d}"] for m in range(1,month+1)),Decimal('0'))
+    yoy=(current/prior-1) if prior else None
+    mom=(current/previous-1) if previous else None
+    ytd_growth=(ytd/py_ytd-1) if py_ytd else None
+    time_controls.append((ym,f'{current:.2f}',f'{previous:.2f}' if previous is not None else '',
+                          f'{prior:.2f}',f'{ytd:.2f}',f'{py_ytd:.2f}',
+                          f'{mom:.8f}' if mom is not None else '',
+                          f'{yoy:.8f}' if yoy is not None else '',
+                          f'{ytd_growth:.8f}' if ytd_growth is not None else ''))
+assert len(time_controls)==4
+assert time_controls[0][2]==''  # no 2025-12 records; never manufacture a PM result
+assert time_controls[3][4]=='12534018.65'
+with (ROOT/'datasets/STAGE3_TIME_VALIDATION.csv').open('w',encoding='utf-8',newline='') as fh:
+    writer=csv.writer(fh)
+    writer.writerow(['Year Month','Net Revenue JOD','PM Revenue JOD','PY Revenue JOD','YTD Revenue JOD','PY YTD Revenue JOD','MoM Growth decimal','YoY Growth decimal','YTD Growth decimal'])
+    writer.writerows(time_controls)
+
 summary=json.loads((ROOT/'datasets/STAGE3_BUILD_SUMMARY.json').read_text())
 assert summary['pbix_desktop_verified'] is False
 assert len(summary['domain_examples'])==4

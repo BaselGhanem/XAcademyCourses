@@ -18,11 +18,14 @@ Baseline recovery branch: `backup/course224-before-generalization-2026-11-02`.
 - [x] Validate 160K Day03→Day04 transaction rows, source-level keys, real Excel dates, money, May files, and ZIP checksums.
 - [ ] Validate relationships and visuals inside Power BI Desktop as part of final QA.
 
-## 3. DAX and Days 05–07 — PENDING
-- [ ] Correct all discount definitions and measure names across lessons.
-- [ ] Rebuild and Desktop-test Day 05 and 06 PBIX from a shared model.
-- [ ] Refactor day 7 personalized guides, names and visuals into generic scenario packs.
-- [ ] Verify previous month/year, growth and YTD numeric results.
+## 3. DAX and Days 05–07 — COMPLETED (SOURCE & PBIP STATIC QA)
+- [x] Correct discount calculations/status and DAX names across Day05/Day06.
+- [x] Rebuild source-aligned Day05 and Day06 PBIP starters, each with full 160K transaction model.
+- [ ] Open, refresh and Save As PBIX inside Power BI Desktop; requires Windows Desktop QA.
+- [x] Replace Day07 named-person portal pages and generated pack with four domain scenario guides.
+- [ ] Remove old unused person-named files after cross-day dependency audit in Phase4.
+- [x] Generate independent source-based PM, YoY and YTD numeric controls for sample period and run cross-year source checks.
+- [ ] Validate DAX outputs against those controls inside Power BI Desktop.
 
 ## 4. Report UX, Days 08–10 and final release — PENDING
 - [ ] Rebuild day 8–10 assignments against new scenario model, trim overlap.

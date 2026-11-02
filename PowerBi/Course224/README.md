@@ -28,3 +28,10 @@ Brand: #099999 · Learn. Analyse. Lead.
 
 ## Phase 2 result (2026-11-02)
 GitHub Actions rebuilt and verified **all 4 ZIP packages**, including exact row-level comparison of 160,000 Jan–Apr Day04 FactSales records to Day03. Folder Review is 160,000 before May and 200,000 after; DimDate is 730 typed Excel dates for 2025–2026. Jan–Apr net Revenue equals **12,534,018.65 JOD**, derived from the same transaction source. See `datasets/EXPECTED_RESULTS.csv` and `datasets/STAGE2_BUILD_MANIFEST.json`. The older Day04 40K infographic is hidden until it can be redesigned. Power BI Desktop execution tests remain outstanding and do not follow from source QA.
+
+## Phase 3 result (2026-11-02)
+- Rebuilt Days 05–07 ZIPs with source-linked PBIP projects (5 tables for Days 05/06; 9 tables for Day07). The original legacy PBIX are NOT shipped in the new student ZIPs because they predate the 160K model.
+- The Day05/06 models include **160,000 original Jan–Apr 2026 transactions**; Day07 adds **160,000 clearly labelled synthetic Jan–Apr 2025 comparison transactions**. No 2025 sales were present in the Day04 source.
+- Discount Status is strictly `Discounted` / `Full Price`; Discount Amount = Gross Sales − Revenue, and customer/quantity measure names are standardized.
+- The Day07 portal links domain scenarios instead of names of the four former learners. Original named files may remain in the repository for historical Day08–10 dependency review.
+- Source ZIP + PBIP static checks passed in GitHub Actions; **PBIP has not yet been opened and saved as PBIX in Power BI Desktop**. This remains a mandatory release blocker. Microsoft's desktop file conversion is not a programmatic operation.
