@@ -1,0 +1,63 @@
+Nova D10 | Workforce Gap HTML =
+VAR _Base =
+    ADDCOLUMNS (
+        VALUES ( DimDepartment[Department] ),
+        "@Gap", [Staffing Gap]
+    )
+VAR _Valid = FILTER ( _Base, NOT ISBLANK ( [@Gap] ) )
+-- Biggest absolute gaps; no assumption whether positive means shortage or surplus.
+VAR _Top =
+    TOPN ( 6, _Valid, ABS ( [@Gap] ), DESC, DimDepartment[Department], ASC )
+VAR _MaxAbs = MAX ( 0, MAXX ( _Top, ABS ( [@Gap] ) ) )
+VAR _Rows =
+    CONCATENATEX (
+        _Top,
+        VAR _Name0 = COALESCE ( DimDepartment[Department], "Unassigned" )
+        VAR _Name = SUBSTITUTE (
+            SUBSTITUTE (
+                SUBSTITUTE ( _Name0, "&", "&amp;" ), "<", "&lt;" ), ">", "&gt;" )
+        VAR _Gap = [@Gap]
+        VAR _Width = DIVIDE ( ABS ( _Gap ), _MaxAbs, 0 ) * 50
+        VAR _Left = IF ( _Gap >= 0, 50, 50 - _Width )
+        VAR _WidthCSS = FORMAT ( _Width, "0.####", "en-US" )
+        VAR _LeftCSS = FORMAT ( _Left, "0.####", "en-US" )
+        VAR _ValueText = FORMAT ( _Gap, "+#,##0;-#,##0;0", "en-US" )
+        RETURN
+            "<div class='item'><div class='name' title='" & _Name & "'>" & _Name &
+            "</div><div class='track'><i class='zero'></i><i class='bar " &
+            IF ( _Gap < 0, "negative", "positive" ) & "' style='left:" & _LeftCSS &
+            "%;width:" & _WidthCSS & "%;'></i></div><span class='value'>" &
+            _ValueText & "</span></div>",
+        "",
+        ABS ( [@Gap] ), DESC, DimDepartment[Department], ASC
+    )
+RETURN
+"<style>
+  #d10-wf{width:100%;height:100%;min-height:0;box-sizing:border-box;padding:13px;
+    background:#111e2b;border:1px solid #315260;border-radius:18px;
+    color:#eef6f8;font:12px/1.5 'Segoe UI',Arial,sans-serif;overflow:visible}
+  #d10-wf *{box-sizing:border-box}
+  #d10-wf .brand{color:#7ddbd4;font-size:9px;letter-spacing:1.4px}
+  #d10-wf h3{font-size:15px;margin:3px 0 12px}
+  #d10-wf .item{display:grid;grid-template-columns:minmax(65px,112px) minmax(0,1fr) 54px;
+    align-items:center;gap:9px;min-height:31px}
+  #d10-wf .name{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #d10-wf .track{background:#223d4b;height:13px;border-radius:5px;position:relative}
+  #d10-wf .zero{position:absolute;top:-3px;bottom:-3px;left:50%;border-left:2px solid #c8ded9;z-index:2}
+  #d10-wf .bar{display:block;position:absolute;top:0;bottom:0;border-radius:4px;min-width:0}
+  #d10-wf .positive{background:#099999}
+  #d10-wf .negative{background:#d48683}
+  #d10-wf .value{font-size:10px;font-weight:750;text-align:right}
+  #d10-wf .legend{margin-top:11px;display:flex;justify-content:space-between;gap:6px;
+    font-size:9px;color:#92b0bd}
+  #d10-wf .bar:after{content:'';position:absolute;inset:0;border-radius:inherit;
+    box-shadow:inset 0 0 10px #ffffff19;pointer-events:none}
+  #d10-wf .empty{color:#9aafb9;padding:14px 0}
+</style>
+<div id='d10-wf' dir='ltr'>
+  <div class='brand'>NOVA / WORKFORCE</div><h3>Staffing gap by department</h3>" &
+  IF ( COUNTROWS ( _Top ) = 0,
+      "<div class='empty'>No data for current selection</div>", _Rows ) &
+  "<div class='legend'><span>Negative gap ←</span>
+    <span>0 / baseline</span><span>Positive gap →</span></div>
+  </div>"

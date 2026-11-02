@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#091218">
-<meta name="description" content="Day 10 AI Visual Design Lab — build precise Power BI HTML visual prompts with 20 live effects, chart previews and role-based templates">
+<meta name="description" content="Day 10 AI Visual Design Lab — build precise Power BI HTML visual prompts with 20 live effects, chart previews and domain-based templates">
 <title>AI Visual Design Lab · Day 10 | X Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -249,6 +249,7 @@ small.tip{color:var(--soft);font-size:11px}
 <section class="hero"><div class="wrap hero-grid">
 <div>
 <div class="eyebrow">DAY 10 / POWER BI / PROMPT ENGINEERING</div>
+<p class="note" role="note">هذا المختبر يبني Prompt ومعاينة توضيحية فقط، ولا يولّد كود DAX جاهزًا للتنفيذ داخل Power BI. تصميم AI اختياري بعد Capstone.</p>
 <h1>ما تكتفي بالـVisual الجاهز<br><em>انت وجّه الذكاء الاصطناعي</em></h1>
 <p>حوّل أي فكرة تحليلية مناسبة إلى HTML Visual بتصميم احترافي. انت بتحدد البيانات، نوع الرسم، الأبعاد، الألوان، الحركة والتفاعل. والـAI بكتب الكود بناء على مواصفاتك، مش بناء على تخميناته.</p>
 <div class="hero-ctas"><a class="primary" href="#studio">ابدأ تصميم الـPrompt <span aria-hidden="true">←</span></a><a class="secondary" href="#principles">قبل ما تبدأ: القواعد الذهبية</a></div>
@@ -278,7 +279,7 @@ small.tip{color:var(--soft);font-size:11px}
 <h3>01 — اشرح للـAI شو بدك تحلل</h3><p>أهم خطوة. لا تبدأ بالحركة قبل ما تحدد السؤال والبيانات الصحيحة</p>
 <div class="group-label">أمثلة جاهزة حسب مجال المتدرب</div>
 <div class="note" style="margin:11px 0">كيف تجيب أسماء الحقول الصحيحة؟ افتح <b>Data / Fields Pane</b> داخل Power BI، وانسخ اسم الـMeasure كما هو (مثال <span dir="ltr">[Total Revenue]</span>) واسم العمود مع اسم الجدول (مثال <span dir="ltr">DimProduct[Category]</span>). أسماء الـMeasures تحت أي جدول ما بتغير طريقة استخدامها داخل Measure.</div><div class="presets" id="rolePresets">
-<button class="preset" type="button" data-role="sales">محمود · Sales</button><button class="preset" type="button" data-role="ops">سمية · Operations</button><button class="preset" type="button" data-role="finance">هشام · Finance</button><button class="preset" type="button" data-role="workforce">ايناس · Workforce</button>
+<button class="preset" type="button" data-role="sales">Performance / Sales</button><button class="preset" type="button" data-role="ops">Operations</button><button class="preset" type="button" data-role="finance">Finance</button><button class="preset" type="button" data-role="workforce">Workforce</button>
 </div>
 <div class="fields">
 <div class="field span2"><label for="business">السؤال الإداري المطلوب من الـVisual *</label><textarea id="business" placeholder="مثال: أي فئة منتجات تحقق أعلى مبيعات؟" data-prompt></textarea></div>

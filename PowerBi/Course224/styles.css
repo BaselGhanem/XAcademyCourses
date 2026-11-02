@@ -522,3 +522,15 @@ select.form-input{width:100%;background:var(--surface-2);color:var(--text)}
 select.form-input option{background:#fff;color:#111}
 @media(max-width:900px){.scenario-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.scenario-grid{grid-template-columns:1fr}}
+
+/* Course224 final design integration: readable, keyboard-accessible premium teal */
+:root{--pbi:#099999;--pbi-soft:rgba(9,153,153,.12);--pbi-glow:rgba(9,153,153,.16);--shadow:0 16px 48px rgba(0,0,0,.23)}
+::selection{background:#099999;color:#fff}
+.btn-primary{background:#099999;color:#fff;box-shadow:0 8px 26px rgba(9,153,153,.18)}
+.btn-primary:hover{box-shadow:0 12px 32px rgba(9,153,153,.25)}
+.eyebrow,.nav-links a:hover{color:#56c9c4}
+.hero-kicker{color:#8ae3dc;border-color:rgba(9,153,153,.32);background:rgba(9,153,153,.11)}
+.hero-kicker i{background:#099999;box-shadow:0 0 0 6px rgba(9,153,153,.09)}
+.scenario-card{border-color:rgba(9,153,153,.16);background:linear-gradient(160deg,#1b2025,#151a1e);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+:is(a,button,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #67d5d0;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}

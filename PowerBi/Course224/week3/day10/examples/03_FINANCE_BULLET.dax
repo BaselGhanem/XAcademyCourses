@@ -1,0 +1,51 @@
+Nova D10 | Finance Budget HTML =
+VAR _Achievement = [Budget Achievement %]
+VAR _Raw = COALESCE ( _Achievement, 0 )
+-- Dynamic scale: target is always 100%, actual may exceed 100%.
+VAR _Scale = MAX ( 1.25, CEILING ( MAX ( 0, _Raw ), 0.25 ) )
+VAR _ActualWidth = MIN ( 100, DIVIDE ( MAX ( 0, _Raw ), _Scale, 0 ) * 100 )
+VAR _TargetLeft = DIVIDE ( 1, _Scale, 0 ) * 100
+VAR _AchievementText =
+    IF ( ISBLANK ( _Achievement ), "—", FORMAT ( _Achievement, "0.0%" ) )
+VAR _WidthCSS = FORMAT ( _ActualWidth, "0.####", "en-US" )
+VAR _TargetCSS = FORMAT ( _TargetLeft, "0.####", "en-US" )
+VAR _ScaleText = FORMAT ( _Scale, "0%" )
+VAR _State =
+    IF ( ISBLANK ( _Achievement ), "NO DATA",
+        IF ( _Achievement >= 1, "TARGET MET", "BELOW TARGET" ) )
+VAR _Color =
+    IF ( ISBLANK ( _Achievement ), "#94aeba",
+        IF ( _Achievement >= 1, "#48d1a4", "#f2c811" ) )
+RETURN
+"<style>
+  #d10-fin{width:100%;height:100%;min-height:0;padding:18px;box-sizing:border-box;
+    background:#111e2c;border-radius:18px;border:1px solid #335366;color:#f4f9fb;
+    font:12px/1.5 'Segoe UI',Arial,sans-serif;overflow:visible}
+  #d10-fin *{box-sizing:border-box}
+  #d10-fin .hd{display:flex;justify-content:space-between;gap:10px;align-items:start}
+  #d10-fin .brand{color:#8bdbd3;font-size:9px;letter-spacing:1.5px}
+  #d10-fin h3{font-size:16px;margin:4px 0 9px}
+  #d10-fin .state{font-size:9px;color:" & _Color & ";border:1px solid " & _Color & ";
+    border-radius:9px;padding:4px 8px}
+  #d10-fin .value{font-size:34px;font-weight:800;margin:5px 0 12px}
+  #d10-fin .bullet{position:relative;height:29px;width:100%;border-radius:8px;
+    background:linear-gradient(90deg,#273a4a,#405567);overflow:visible}
+  #d10-fin .actual{position:absolute;height:14px;top:7px;left:0;width:" & _WidthCSS & "%;
+    background:#099999;border-radius:5px;min-width:0}
+  #d10-fin .target{position:absolute;top:-6px;height:41px;left:" & _TargetCSS & "%;
+    border-left:4px solid #f2c811;z-index:2}
+  #d10-fin .hint{display:flex;justify-content:space-between;color:#97aebc;font-size:10px;margin-top:13px}
+  #d10-fin .glow{height:2px;margin-top:12px;background:#5bcbbe;opacity:.4;
+    animation:d10finGlow 2.8s ease-in-out infinite alternate}
+  @keyframes d10finGlow{to{opacity:.08}}
+  @media(prefers-reduced-motion:reduce){#d10-fin .glow{animation:none}}
+</style>
+<div id='d10-fin' dir='ltr'>
+  <div class='hd'><div><div class='brand'>NOVA / FINANCE</div><h3>Budget achievement</h3></div>
+  <span class='state'>" & _State & "</span></div>
+  <div class='value'>" & _AchievementText & "</div>
+  <div class='bullet'><div class='actual'></div><div class='target'
+      title='100% Target'></div></div>
+  <div class='hint'><span>0%</span><span>Yellow marker = 100% target</span><span>" & _ScaleText & "</span></div>
+  <div class='glow'></div>
+</div>"
