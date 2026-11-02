@@ -16,7 +16,7 @@ for path in paths:
         names=z.namelist()
         assert any(n.endswith('.xlsx') for n in names) or path.name.startswith('Day07'),path
         assert not any(n.endswith('.pbix') for n in names), 'Legacy PBIX cannot be labeled source-compatible'
-        pbips=[n for n in names if n.endswith('_Start_PBIP.zip')]
+        pbips=[n for n in names if n.lower().endswith('_start_pbip.zip')]
         assert len(pbips)==1, (path,pbips)
         with zipfile.ZipFile(io.BytesIO(z.read(pbips[0]))) as project:
             assert project.testzip() is None
