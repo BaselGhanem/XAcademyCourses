@@ -42,3 +42,8 @@ GitHub Actions rebuilt and verified **all 4 ZIP packages**, including exact row-
 - Concept Studio, domain missions, AI Prompt Builder and the primary course UI no longer depend on named trainees. The site uses teal-first styling and improved keyboard focus and reduced-motion support.
 - See `datasets/LEGACY_CLEANUP.md` for removals and deliberately retained assets.
 - The verified source ZIPs and site links are covered by Stage4 GitHub Actions, but **no Power BI Desktop acceptance has been performed**. See `week3/day10/CAPSTONE_QA_CHECKLIST.md` before enrolling learners in a production course.
+
+## Actual Chromium browser QA (2026-11-02)
+GitHub Actions [Chromium learner smoke run](https://github.com/BaselGhanem/XAcademyCourses/actions/runs/41453916196) **PASSED**. Verified wrong-code handling, learner login, interest display, dashboard day links, Day08–10 ZIP HTTP availability, Domain Mission switching, optional AI Prompt Builder, and Day07 scenario navigation. The run reported **0 uncaught JavaScript page errors**. Native day cards were changed from mouse-only `article` click handlers to keyboard-accessible `<a>` elements during this validation. The test used Chromium at 1280×800; it does not certify every responsive viewport or Power BI Desktop behaviour.
+
+**Release status:** source ZIPs, site links and Chromium smoke checks passed. **Power BI Desktop PBIP → PBIX opening, refresh, DAX execution and report interactivity remain NOT TESTED.** See `week3/day10/CAPSTONE_QA_CHECKLIST.md`.

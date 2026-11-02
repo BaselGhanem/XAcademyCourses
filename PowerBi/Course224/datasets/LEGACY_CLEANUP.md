@@ -26,3 +26,10 @@ These historical files remain recoverable from Git history and the backup branch
 
 ## Release gates
 Static ZIP integrity, local-resource existence, JavaScript syntax and Capstone sum can be passed by GitHub Actions. `Nova.pbip` open/refresh/DAX compile, relationship runtime, Drillthrough, Bookmarks, HTML Content and PBIX Save As **remain NOT TESTED in Desktop**. Mark the course as source-ready, not Desktop-certified.
+
+## Real browser verification
+- Chromium 141 (Playwright) on Ubuntu 24.04 passed the learner-journey smoke test on 2026-11-02.
+- Verified login, domain preference, dashboard navigation, Day08–10 package HEAD responses, four-domain mission selector, AI Prompt Builder and generic Day07 navigation.
+- No uncaught JS errors were observed in the tested routes.
+- Native cards now use keyboard-focusable anchors, not mouse-only click handlers.
+- Responsive visual inspection on small devices and runtime Power BI Desktop tests remain outstanding.

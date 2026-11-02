@@ -34,7 +34,8 @@ Baseline recovery branch: `backup/course224-before-generalization-2026-11-02`.
 - [x] Introduce mandatory 100-point Capstone; document Native-vs-AI numerical parity as an optional Desktop test.
 - [x] Audit major active dependencies and retire disconnected old student-specific files; record retained assets in LEGACY_CLEANUP.md.
 - [x] Validate ZIP contents, site resource links, JS syntax, shared PBIP semantic model and capstone rubric in CI.
-- [ ] Run real browser interaction tests and open/refresh/validate PBIP/PBIX in Power BI Desktop.
+- [x] Test learner login, domain selection, all 3 final day resources and scenario navigation in Chromium with zero uncaught JS errors.
+- [ ] Review mobile responsive layouts and run Power BI Desktop PBIP/PBIX open/refresh/DAX/report tests.
 - [ ] Replace old recordings with approved new media and enable public agenda at launch; do not silently reuse old videos.
 
 **Release gate:** The four source-based stages are implemented, but `Power BI Desktop` and real-browser UX testing have NOT been completed. The portal's client-side password is not secure authorization. Treat the course as **source-ready / runtime-pending**, not fully certified.
