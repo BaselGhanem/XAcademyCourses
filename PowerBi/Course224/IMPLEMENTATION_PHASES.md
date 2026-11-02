@@ -11,11 +11,12 @@ Baseline recovery branch: `backup/course224-before-generalization-2026-11-02`.
 - [x] Existing ZIP/PBIX paths kept intact until content replacement.
 - [x] README and migration QA boundaries documented.
 
-## 2. Dataset and Days 01–04 — PENDING
-- [ ] Shared reproducible dataset with fixed seed and documented fact grains.
-- [ ] Data dictionary, source lineage, business rules, expected results.
-- [ ] Rebuild source packs (Connect, Clean, Folder Refresh, Model).
-- [ ] Validate row counts, date types, duplicates, joins and relationships.
+## 2. Dataset and Days 01–04 — COMPLETED (DATA & PACKAGE QA)
+- [x] Shared reproducible dataset with fixed seed and documented fact grains.
+- [x] Data dictionary, source lineage, business rules, expected results.
+- [x] Regenerate and publish the 4 existing ZIP packs after CI QA.
+- [x] Validate 160K Day03→Day04 transaction rows, source-level keys, real Excel dates, money, May files, and ZIP checksums.
+- [ ] Validate relationships and visuals inside Power BI Desktop as part of final QA.
 
 ## 3. DAX and Days 05–07 — PENDING
 - [ ] Correct all discount definitions and measure names across lessons.

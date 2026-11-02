@@ -1,6 +1,6 @@
 # Course224 — Power BI Specialist | X Academy
 
-**Course224 is the editable course**, cloned from the historical Course223. Do not create Course225. Phase 1 makes the student portal domain-neutral; source files and existing lessons are migrated in phases 2–4.
+**Course224 is the editable course**, cloned from the historical Course223. Do not create Course225. Phases 1–2 generalize the portal and source datasets. Original PBIX references and advanced lessons migrate in Phases 3–4.
 
 ## Learner portal
 - `index.html`: overview with cross-domain examples; `agenda` is still OFF until approved publication.
@@ -25,3 +25,6 @@ The site is static and public. `portalPassword` inside JavaScript is **not authe
 See [IMPLEMENTATION_PHASES.md](IMPLEMENTATION_PHASES.md) for the exact four-stage scope and acceptance criteria. Do not represent current PBIX or training ZIP files as fully re-validated until their relevant phase and Desktop QA are completed.
 
 Brand: #099999 · Learn. Analyse. Lead.
+
+## Phase 2 result (2026-11-02)
+GitHub Actions rebuilt and verified **all 4 ZIP packages**, including exact row-level comparison of 160,000 Jan–Apr Day04 FactSales records to Day03. Folder Review is 160,000 before May and 200,000 after; DimDate is 730 typed Excel dates for 2025–2026. Jan–Apr net Revenue equals **12,534,018.65 JOD**, derived from the same transaction source. See `datasets/EXPECTED_RESULTS.csv` and `datasets/STAGE2_BUILD_MANIFEST.json`. The older Day04 40K infographic is hidden until it can be redesigned. Power BI Desktop execution tests remain outstanding and do not follow from source QA.

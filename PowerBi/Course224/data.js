@@ -33,7 +33,7 @@ const DAYS = [
     hook: 'أول يوم لك مع Nova: Sales، Workforce، Budget، Web وPDF... البيانات موجودة، لكن القصة موزعة في كل مكان.',
     mission: 'تعرّف على Nova أولاً، ثم ثبّت Power BI Desktop ووصل Excel وCSV وTXT وPDF وWeb لتبدأ أول نسخة من Business Performance 360.',
     topics: ['Nova Company Case', 'Power BI Desktop Installation', 'Get Data', 'Excel / CSV / Text', 'Web Connector', 'PDF Connector', 'ETL Concept', 'Report / Data / Model Views', 'Card & Bar Chart', 'Slicer & Filters'],
-    build: ['Open Nova Company Profile and understand the management challenge', 'Install & launch Power BI Desktop', 'Connect Nova Excel, CSV, TXT, PDF and Web sources', 'Understand Extract → Transform → Load', 'Tour the interface only after using it', 'Build Total Revenue Card', 'Build Revenue vs Target by Region', 'Add Channel Slicer and test interactions', 'Save Nova_Business_Performance_360_[Name].pbix'],
+    build: ['Open Nova Company Profile and understand the management challenge', 'Install & launch Power BI Desktop', 'Connect Nova Excel, CSV, TXT, PDF and Web sources', 'Understand Extract → Transform → Load', 'Tour the interface only after using it', 'Build Total Revenue Card', 'Build Revenue by Region; inspect weekly Web Targets separately (different data grain)', 'Add Channel Slicer and test interactions', 'Save Nova_Business_Performance_360_[Name].pbix'],
     challenge: 'الإدارة لا تريد Chart جميل فقط. ابدأ بالسؤال: أي Region أو Branch يحتاج انتباه أولاً؟',
     deliverable: 'أول نسخة من Nova Business Performance 360 + فهم واضح لـETL وواجهات Power BI الأساسية.',
     visualGuide: { image: 'concepts/assets/day1-etl-poster.png', title: 'Day 1 — Learner Visual Guide', note: 'رحلة الاتصال بالمصادر وETL وبناء أول تقرير' },
@@ -41,6 +41,8 @@ const DAYS = [
       { name: 'Meet Nova — Company Profile', type: 'WEB', url: 'week1/day1/web/Nova_Company_Profile.html', note: 'ابدأ من هنا: الشركة، الشعار، المنتجات، نموذج العمل والتحدي الإداري.' },
       { name: 'Day 01 — Nova Source Pack', type: 'ZIP', url: 'week1/day1/downloads/Day01_CONNECT_EVERYTHING.zip', note: 'Nova Product Master + Excel ETL Reference + 120K Sales CSV + Workforce TXT + Budget PDF + Challenge' },
       { name: 'Nova Branch Performance — Web Source', type: 'WEB', url: 'week1/day1/web/Branch_Performance.html', note: '4,000 صف تجمع Sales + Finance + Workforce indicators. استخدم الرابط مباشرة في Get Data > Web.' }
+      { name: 'Nova Data Dictionary', type: 'Guide', url: 'datasets/DATA_DICTIONARY.csv', note: 'تعريف الجداول والمفاتيح والـGrain' },
+      { name: 'Nova Business Rules', type: 'Guide', url: 'datasets/BUSINESS_RULES.md', note: 'قواعد البيانات ومتى لا يجوز مقارنة مصادر بأحجام زمنية مختلفة' },
     ]
   },
   {
@@ -53,12 +55,13 @@ const DAYS = [
     hook: 'Nova عندها ملف Branch Daily Performance كبير يبدو مفيداً... لكنه مليان تواريخ مختلطة، Regions غير موحدة، Revenue ناقص، Headcount فيه أخطاء وRows مكررة.',
     mission: 'حوّل ملف Nova Branch Daily Performance غير الموثوق إلى Power Query pipeline نظيفة مع Grain واضح: Branch + Date.',
     topics: ['Power Query Editor', 'Data Types', 'Trim & Clean', 'Replace Values', 'Standardize Categories', 'Nulls', 'Duplicates', 'Errors', 'Applied Steps'],
-    build: ['Confirm the intended grain: Branch ID + Date', 'Inspect Nova dirty data before touching it', 'Fix date and numeric data types', 'Trim & clean manager and category fields', 'Standardize Region and Channel labels', 'Handle missing Revenue / Cost / Headcount intentionally', 'Remove only true duplicate rows', 'Review Applied Steps and Refresh'],
+    build: ['Confirm the intended grain: Branch ID + Date', 'Inspect Nova dirty data before touching it', 'Audit invalid-date; convert valid dates with explicit locale; document exceptions', 'Trim & clean manager and category fields', 'Standardize Region and Channel labels', 'Audit missing Revenue, Cost and Headcount; never silently fill unknown values with zero', 'Remove only true duplicate rows', 'Review Applied Steps and Refresh'],
     challenge: 'بعد تنظيف Branch Performance، نظّف Nova Customer Master باستخدام الـCleaning Checklist فقط، بدون recipe خطوة بخطوة.',
     deliverable: 'Nova Branch Daily Performance + Customer Master نظيفان، Grain واضح، وقابلان للـRefresh.',
     visualGuide: { image: 'concepts/assets/day2-learner-overview.svg', title: 'Day 2 — Learner Visual Guide', note: 'Power Query: تنظيف القيم والأنواع والأخطاء والتحقق' },
     resources: [
       { name: 'Day 02 — Nova Cleaning Lab', type: 'ZIP', url: 'week1/day2/downloads/Day02_CLEAN_DATA.zip', note: '50K logical Branch-Day rows + intentional bad duplicates + 8K Dirty Customers + Nova Cleaning Checklist' }
+      { name: 'Cleaning Expected Results', type: 'Guide', url: 'datasets/EXPECTED_RESULTS.csv', note: 'إحصاءات موثقة للصفوف المتكررة والقيم غير الصالحة' },
     ]
   },
   {
@@ -71,12 +74,14 @@ const DAYS = [
     hook: 'Nova تستلم ملف Sales جديد كل شهر. January، February، March... وApril بالطريق. هل سنعيد نفس الشغل كل شهر؟',
     mission: 'حوّل نفس Jan–Mar الذي استخدمناه في Day 1 من ملف consolidated إلى Folder pipeline شهرية، ثم Merge مع Masters وأثبت أن April يدخل بالـRefresh فقط.',
     topics: ['Folder Connector', 'Combine Files', 'Append Thinking', 'Merge Queries', 'Expand Columns', 'Reference vs Duplicate', 'Enable Load', 'Query Dependencies', 'Refresh'],
-    build: ['Connect to Nova Monthly_Sales folder', 'Combine January–March', 'Keep Source File Name', 'Merge Nova Branch Master', 'Merge Customer Master', 'Merge Product Master', 'Load only the final analytical query', 'Drop April file and Refresh'],
+    build: ['Connect to Nova Monthly_Sales folder', 'Combine January–March', 'Keep Source File Name', 'Merge Nova Branch Master', 'Merge Customer Master', 'Merge Product Master', 'Validate Merge does not multiply rows', 'Load only the final analytical query', 'Drop April file and Refresh (160,000 rows)'],
     challenge: 'ابنِ العملية كاملة من Folder إلى Dataset موحد. النجاح الحقيقي: إضافة April بدون Copy/Paste أو تعديل يدوي.',
     deliverable: 'Nova monthly Sales pipeline قابلة للـRefresh وجاهزة للأشهر القادمة، مع Masters موحدة.',
     visualGuide: { image: 'concepts/assets/day3-learner-overview.svg', title: 'Day 3 — Learner Visual Guide', note: 'Folder Connector وCombine وAppend وMerge وRefresh' },
     resources: [
       { name: 'Day 03 — Nova Automation Pack', type: 'ZIP', url: 'week1/day3/downloads/Day03_STOP_COPYING_FILES_LEARNER.zip', note: 'نفس 120K Rows من Day 1، الآن Jan–Mar × 40K + April refresh proof + Branch/Customer/Product Masters' }
+      { name: 'Data Lineage', type: 'Guide', url: 'datasets/DATA_LINEAGE.md', note: 'تطابق معاملات Jan–Mar ثم April' },
+      { name: 'Expected Results', type: 'Guide', url: 'datasets/EXPECTED_RESULTS.csv', note: 'أعداد الصفوف والقيم المرجعية قبل Refresh وبعده' },
     ]
   },
   {
@@ -89,19 +94,16 @@ const DAYS = [
     hook: 'البيانات صارت نظيفة وتتحدث تلقائياً… لكن الجداول ما زالت تحتاج Model واضح حتى تتكلم مع بعضها بدون أرقام مضللة.',
     mission: 'ثبّت Merge وAppend وFolder باستخدام Excel، ثم حوّل Nova Sales إلى Star Schema واضح: FactSales في الوسط وDimensions حوله.',
     topics: ['Merge vs Append Review', 'Excel Files from Folder', 'Fact vs Dimension', 'Grain', 'Relationships', 'Primary & Foreign Keys', 'One-to-Many', 'Filter Direction', 'Star Schema'],
-    build: ['Review Merge = Add Columns', 'Review Append = Add Rows', 'Combine monthly Excel files from Folder and refresh May', 'Load FactSales + DimProduct + DimCustomer + DimBranch + DimDate', 'Define the grain of each table', 'Check unique keys in dimensions', 'Run Auto Detect and inspect what Power BI found', 'Manually connect DimCustomer[Customer Code] → FactSales[Customer ID]', 'Manually connect DimDate[Date] → FactSales[Order Date]', 'Confirm 1:* cardinality and single filter direction', 'Arrange the model as a Star Schema', 'Test slicers and confirm filters reach FactSales'],
+    build: ['Review Merge = Add Columns', 'Review Append = Add Rows', 'Combine full Jan–Apr Excel source (160,000 rows), then refresh May (200,000)', 'Load all 160,000 FactSales transactions + DimProduct + DimCustomer + DimBranch + DimDate', 'Define the grain of each table', 'Check unique keys in dimensions', 'Run Auto Detect and inspect what Power BI found', 'Manually connect DimCustomer[Customer Code] → FactSales[Customer ID]', 'Manually connect DimDate[Date] → FactSales[Order Date]', 'Confirm 1:* cardinality and single filter direction', 'Arrange the model as a Star Schema', 'Verify the full 160K model revenue and test filters from all dimensions'],
     challenge: 'شغّل Auto Detect أولا وراجع ما اكتشفه Power BI بدل قبول كل شيء مباشرة. بعد ذلك أنشئ العلاقات الناقصة يدويا، خصوصا Customer Code ↔ Customer ID وDate ↔ Order Date، ثم اثبت أن كل Dimension تفلتر FactSales بشكل صحيح.',
-    deliverable: 'Nova Star Schema نظيف من FactSales + 4 Dimensions، جاهز لبناء Measures في Day 5.',
-    visualGuide: {
-      image: 'concepts/assets/day4-learner-overview.webp',
-      title: 'Day 4 — Learner Visual Guide',
-      note: 'ملخص بصري للمتدرب يربط مراجعة Merge وAppend وFolder مع Fact vs Dimension والعلاقات وStar Schema واختبار النموذج.'
-    },
-    resources: [
-      { name: 'Day 04 — Model the Business Lab', type: 'ZIP', url: 'week2/day4/downloads/Day04_MODEL_THE_BUSINESS.zip', note: 'Excel review for Merge / Append / Folder + May refresh proof + Nova Model Lab + relationship checklist' },
-      { name: 'Day 04 — Learner Visual Guide', type: 'IMAGE', url: 'concepts/assets/day4-learner-overview.webp', note: 'الصورة المختصرة التي تلخص رحلة Day 4 للمتدرب من المراجعة حتى Star Schema.' },
+    deliverable: 'Nova Star Schema يحتوي على كامل 160,000 معاملة Jan–Apr مع 4 Dimensions ومفاتيح صالحة، جاهز للـDAX.',
+    visualGuide: null, // Legacy image depicts outdated 40K model; a new 160K image follows in Phase 4.
+        resources: [
+      { name: 'Day 04 — Model the Business Lab', type: 'ZIP', url: 'week2/day4/downloads/Day04_MODEL_THE_BUSINESS.zip', note: 'Merge وAppend بعينات تعليمية، وFolder كامل Jan–Apr (160K)، وMay إلى 200K، وModel Lab كامل وDimDate بتاريخ Excel فعلي' },
       { name: 'Day 04 — Process Flow', type: 'FLOW', url: 'concepts/assets/day4-process-flow.svg', note: 'Review → Fact/Dimensions → Relationships → Star Schema → Test Filters → Ready for DAX' },
       { name: 'Day 04 — Concept Studio', type: 'WEB', url: 'concepts/index.html', note: 'Fact vs Dimension + Relationships + Star Schema' }
+      { name: 'Model Expected Results', type: 'Guide', url: 'datasets/EXPECTED_RESULTS.csv', note: '160K FactSales و730 تاريخًا وإيراد 12,534,018.65 دينار' },
+      { name: 'Source Lineage', type: 'Guide', url: 'datasets/DATA_LINEAGE.md', note: 'العينات التدريبية مقابل المعاملات الكاملة' },
     ]
   },
   {
