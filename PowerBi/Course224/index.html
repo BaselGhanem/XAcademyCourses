@@ -1,1 +1,163 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Power BI Specialist — From Data to Decision | X Academy">
+  <title>Power BI Specialist | X Academy</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="access.js"></script>
+  <script>
+    // إذا أغلقت الـAgenda من access.js، لا نعرض الصفحة الرئيسية أصلاً.
+    if (!isAgendaEnabled()) location.replace('login.html');
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="index.html">
+        <span class="pbi-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="brand-copy"><strong>Power BI Specialist</strong><small>FROM DATA TO DECISION</small></span>
+      </a>
+      <nav class="nav-links" aria-label="التنقل الرئيسي">
+        <a href="#journey">الأيام العشرة</a>
+        <a href="#project">المشروع</a>
+        <a href="#preview">النتيجة</a>
+        <a href="#trainer">المدرب</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="login.html">مركز الدورة</a>
+      </div>
+    </div>
+  </header>
 
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <span class="hero-kicker"><i></i> 10 Days • 20 Hours • One Real Project</span>
+          <h1>لا تتعلم<br><span>Power BI.</span><br>فكّر كمحلل.</h1>
+          <p class="hero-desc">دورة عملية تبني فيها مشروع <strong>Nova Business Performance 360</strong> يومًا بعد يوم. نبدأ بملفات خام، وننتهي بتقرير إداري متكامل يشرح ماذا حدث، لماذا حدث، وأين يجب أن تتدخل الإدارة.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#journey">شاهد الرحلة يوم بيوم ←</a>
+            <a class="btn btn-ghost" href="login.html">التسجيلات والملفات</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><strong>10</strong><span>أيام تدريب</span></div>
+            <div class="hero-stat"><strong>20H</strong><span>ساعات عملية</span></div>
+            <div class="hero-stat"><strong>1</strong><span>مشروع حي</span></div>
+          </div>
+        </div>
+
+        <div class="report-window" aria-label="Power BI report mockup">
+          <div class="window-bar">
+            <div class="window-dots"><i></i><i></i><i></i></div>
+            <div class="window-label">NOVA BUSINESS PERFORMANCE 360</div>
+          </div>
+          <div class="mock-report">
+            <div class="mock-card mock-kpi"><b>1.24M</b><small>ACTUAL SALES</small></div>
+            <div class="mock-card mock-kpi"><b>108.6%</b><small>ACHIEVEMENT</small></div>
+            <div class="mock-card wide"><div class="bar-chart"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="mock-card wide line-chart">
+              <svg viewBox="0 0 500 120" preserveAspectRatio="none" aria-hidden="true">
+                <path class="gridline" d="M0 28 H500 M0 60 H500 M0 92 H500"></path>
+                <path class="trend" d="M0 94 C65 96,75 60,132 71 S213 22,273 48 S365 89,500 18"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-strip" id="project">
+      <div class="shell project-inner">
+        <div>
+          <span class="eyebrow">ONE BUSINESS UNIVERSE</span>
+          <h2 style="margin:9px 0 7px;font-size:1.45rem">نفس البيانات. نفس المشروع. مستوى أعلى كل يوم.</h2>
+          <p class="section-copy" style="margin:0;font-size:.86rem">بدل 10 دروس منفصلة، نفس الـPBIX يكبر معنا: تنظيف، Automation، Modeling، DAX، Time Intelligence، Design ثم Decision.</p>
+        </div>
+        <div class="project-flow" aria-label="Project flow">
+          <span class="flow-pill">RAW DATA</span><span class="flow-arrow">→</span>
+          <span class="flow-pill">MODEL</span><span class="flow-arrow">→</span>
+          <span class="flow-pill">MEASURES</span><span class="flow-arrow">→</span>
+          <span class="flow-pill">INSIGHTS</span><span class="flow-arrow">→</span>
+          <span class="flow-pill">DECISION</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="journey">
+      <div class="shell">
+        <div class="journey-head">
+          <div>
+            <span class="eyebrow">THE 10-DAY JOURNEY</span>
+            <h2 class="section-title">كل يوم له مشكلة.<br>وكل يوم نبني شيئاً حقيقياً.</h2>
+            <p class="section-copy">الخطة كاملة ظاهرة للمتدرب من البداية. لا أسماء Topics جامدة؛ كل يوم يبدأ بسؤال Business وينتهي بمخرج يمكن رؤيته داخل المشروع.</p>
+          </div>
+          <a class="btn btn-ghost" href="login.html">ادخل لمركز الدورة</a>
+        </div>
+        <div class="journey-grid" id="journeyGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="preview">
+      <div class="shell">
+        <div style="text-align:center;margin-bottom:30px">
+          <span class="eyebrow">WHERE WE ARE GOING</span>
+          <h2 class="section-title">شوف النتيجة قبل ما تبدأ الرحلة.</h2>
+          <p class="section-copy" style="margin-inline:auto">مثال حي على نوع التقارير التفاعلية التي نبني طريقة التفكير اللازمة للوصول إليها.</p>
+        </div>
+        <div class="preview-wrap">
+          <iframe class="preview-frame" id="previewFrame" title="Power BI Dashboard Preview" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="trainer">
+      <div class="shell">
+        <div class="instructor-card">
+          <div class="instructor-photo"><img id="trainerImage" alt="Basel Ghanem"></div>
+          <div class="instructor-copy">
+            <span class="eyebrow">YOUR TRAINER</span>
+            <h3>Basel Ghanem</h3>
+            <p>Senior Sales Analyst ومدرب متخصص في Power BI وExcel وData Analytics. أسلوب الدورة مبني على مشاكل عمل حقيقية، تطبيق مباشر، وتحديات تجعل المتدرب يبني الحل بنفسه.</p>
+            <div class="instructor-meta">
+              <span class="tag">Power BI</span><span class="tag">Advanced Excel</span><span class="tag">Data Analytics</span><span class="tag">Business Storytelling</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <span>© 2026 X Academy — Learn. Analyse. Lead.</span>
+      <div class="footer-links"><span id="contactEmail"></span><span id="contactPhone" dir="ltr"></span></div>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script>
+    const grid = document.getElementById('journeyGrid');
+    DAYS.forEach(day => {
+      const card = document.createElement('article');
+      card.className = 'day-card';
+      card.innerHTML = `
+        <div class="day-card-head">
+          <span class="day-num">DAY ${String(day.id).padStart(2,'0')}</span>
+          <span class="day-date">${day.weekday}<br>${formatDateAr(day.date)}</span>
+        </div>
+        <span class="phase">${day.phase}</span>
+        <h3>${day.titleAr}<span class="en" dir="ltr">${day.title}</span></h3>
+        <p class="day-hook">${day.hook}</p>
+        <div class="day-mini">${day.topics.slice(0,4).map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
+      grid.appendChild(card);
+    });
+    document.getElementById('previewFrame').src = COURSE_CONFIG.dashboardPreviewUrl;
+    document.getElementById('trainerImage').src = COURSE_CONFIG.instructorImage;
+    document.getElementById('contactEmail').textContent = COURSE_CONFIG.contact.email;
+    document.getElementById('contactPhone').textContent = COURSE_CONFIG.contact.phone;
+  </script>
+</body>
+</html>

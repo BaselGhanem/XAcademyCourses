@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مركز الدورة | Power BI Specialist</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="auth-page">
+    <div class="auth-shell">
+      <section class="auth-art">
+        <a class="brand" href="index.html">
+          <span class="pbi-mark"><span></span><span></span><span></span></span>
+          <span class="brand-copy"><strong>Power BI Specialist</strong><small>FROM DATA TO DECISION</small></span>
+        </a>
+        <div>
+          <span class="hero-kicker"><i></i> COURSE HUB</span>
+          <h1>مكان واحد<br>لكل <span>Day.</span></h1>
+          <p>الخطة، التسجيل، الملفات، التحدي، والمخرج النهائي لكل يوم. ادخل باسمك لتبقى نسبة تقدمك محفوظة على هذا الجهاز.</p>
+        </div>
+        <div class="project-flow">
+          <span class="flow-pill">10 DAYS</span><span class="flow-arrow">→</span><span class="flow-pill">20 HOURS</span><span class="flow-arrow">→</span><span class="flow-pill">1 PROJECT</span>
+        </div>
+      </section>
+      <section class="auth-form">
+        <span class="eyebrow">STUDENT ACCESS</span>
+        <h2>ادخل إلى مركز الدورة</h2>
+        <p class="muted" style="font-size:.8rem;line-height:1.7;margin:0 0 4px">اكتب اسمك ورمز الدورة للوصول للتسجيلات والملفات.</p>
+
+        <div class="form-group">
+          <label class="form-label" for="name">اسمك</label>
+          <input class="form-input" id="name" type="text" autocomplete="name" placeholder="مثال: Basel Ghanem">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">رمز الدورة</label>
+          <input class="form-input" id="password" type="password" autocomplete="current-password" placeholder="PowerBI">
+          <div class="form-hint">يمكن تغيير رمز الدخول من ملف <strong>data.js</strong> في سطر <span dir="ltr">portalPassword</span>.</div>
+        </div>
+        <div class="auth-error" id="errorBox">تحقق من الاسم ورمز الدورة.</div>
+        <button class="btn btn-primary" id="loginBtn" style="width:100%;margin-top:18px">دخول إلى مركز الدورة ←</button>
+        <div class="return-link"><a href="index.html">العودة للصفحة الرئيسية</a></div>
+      </section>
+    </div>
+  </main>
+
+  <script src="data.js"></script>
+  <script>
+    const nameInput = document.getElementById('name');
+    const passInput = document.getElementById('password');
+    const errorBox = document.getElementById('errorBox');
+    const loginBtn = document.getElementById('loginBtn');
+
+    const savedName = localStorage.getItem('pbi_student_name');
+    if (savedName) nameInput.value = savedName;
+
+    function login() {
+      const name = nameInput.value.trim();
+      const pass = passInput.value.trim();
+      errorBox.classList.remove('show');
+      if (!name || pass !== COURSE_CONFIG.portalPassword) {
+        errorBox.textContent = !name ? 'اكتب اسمك أولاً.' : 'رمز الدورة غير صحيح.';
+        errorBox.classList.add('show');
+        return;
+      }
+      localStorage.setItem('pbi_student_name', name);
+      if (!localStorage.getItem('pbi_completed_days')) localStorage.setItem('pbi_completed_days', '[]');
+      location.href = 'dashboard.html';
+    }
+    loginBtn.addEventListener('click', login);
+    document.addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+  </script>
+</body>
+</html>
