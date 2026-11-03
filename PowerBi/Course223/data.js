@@ -1,4 +1,4 @@
-// Course223 — Days 1–5 taught, Day 6 prepared/taught per trainer update; Day 7 ready; Days 8–10 planned.
+// Course223 — Days 1–5 taught, Day 6 prepared/taught per trainer update; Day 7 taught and documented; Days 8–10 planned.
 const COURSE_CONFIG = {
   id: `course223_mariam`,
   title: `Power BI | X Academy`,
@@ -1095,35 +1095,33 @@ const DAYS = [
       }
     ]
   },
-  {
+{
     "id": 7,
     "date": null,
     "weekday": null,
     "ready": true,
     "phase": "COMPARE",
-    "teachingStatus": "ready",
-    "title": "Day 07 · Comparison Studio",
-    "titleAr": "من البيانات الى داشبورد يحكي قصة",
-    "hook": "تقييمات صارت تمتد لسنتين، رح نحولها لمقارنات واضحة ورسومات تفاعلية بدون تعقيد",
-    "mission": "نحدث البيانات ونراجع الـCards ضمن نفس الخطوة، وبعدها نبني مقارنة QoQ وYoY وصفحة احترافية",
+    "teachingStatus": "completed",
+    "title": "Day 07 · Sales Data, Parameters & Layout",
+    "titleAr": "تطبيق المبيعات والتصميم التفاعلي",
+    "hook": "انتقلنا الى بيانات المبيعات، فتحنا صفحة جديدة، وطبقنا Field Parameters وتصميم Layout وTooltips",
+    "mission": "توثيق ما طبقناه فعليا على بيانات المبيعات والصفحة الجديدة، مع ترحيل المواضيع التي لم تشرح الى اليوم الثامن",
     "topics": [
-        "Data Update + Card Context",
-        "Quick Measures QoQ / YoY",
-        "KPI Cards",
-        "Line / Combo",
+        "Sales Data Import",
+        "New Sales Report Page",
         "Field Parameters",
-        "Layout Studio",
-        "Scroller"
+        "Tooltips — introduction",
+        "Layout Studio"
     ],
     "build": [
-        "تحديث ملف تقييمات 2025–2026 ومراجعة سياق الـCards",
-        "Quick Measures للمقارنة مع الربع والسنة السابقة",
-        "3 KPI Cards وLine/Combo Chart",
-        "Field Parameters ثم Layout Studio وScroller",
-        "تحدي Nova Sales من ملف Excel"
+        "استيراد بيانات المبيعات والعمل عليها داخل Power BI",
+        "فتح صفحة تقرير جديدة للتطبيق",
+        "انشاء Field Parameter وتجربة التبديل بين الحقول",
+        "التعرف على Tooltip وتطبيقها مبدئيا — مراجعتها في اليوم الثامن",
+        "انشاء Layout باستخدام https://baselghanem.github.io/pb/"
     ],
-    "challenge": "من ملف Nova الطبي بصيغة Excel: اعملي 3 KPI Cards وTrend للمبيعات حسب الفترات، واربطي الفلاتر بالمنطقة والصنف والمندوب والزبون",
-    "deliverable": "صفحة Comparison في مشروع التقييم + Mini Dashboard تطبيقي مستقل",
+    "challenge": "مراجعة صفحة المبيعات الجديدة وتجربة التبديل باستخدام Parameter والتحقق من Tooltip والتخطيط",
+    "deliverable": "صفحة مبيعات جديدة مع Field Parameter وتطبيق Tooltip وتصميم Layout",
     "resources": [
         {
             "name": "مشروع Power BI — نهاية اليوم السادس",
@@ -1152,276 +1150,108 @@ const DAYS = [
     ],
     "learningSections": [
         {
-            "name": "نحدث البيانات",
-            "title": "نحدث البيانات، ونفهم الـCards",
-            "lead": "بنبدأ من نفس ملف Power BI، ونضيف الفترات الجديدة بدون ما نغير تصميم الصفحات القديمة",
-            "files": "start",
-            "steps": [
-                {
-                    "title": "افتحي مشروع اليوم السادس",
-                    "copy": "نزلي ملف HR_Performance_Intelligence_Day06.pbix وافتحيه داخل Power BI Desktop، ثم File > Save As واحفظي نسخة جديدة باسم Day07_Working.pbix"
-                },
-                {
-                    "title": "استوردي ملف التقييمات الجديد",
-                    "copy": "Home > Get data > Text/CSV، اختاري Day07_Additional_Assessments_2025_2026.csv ثم Transform Data، وتاكدي ان AssessmentDate من نوع Date وKPIScore من نوع Decimal Number"
-                },
-                {
-                    "title": "اعملي Append للجدول الموجود",
-                    "copy": "من Power Query اختاري الجدول الاصلي EvaluationScores_2026_H1، ثم Home > Append Queries، واضيفي عليه الجدول الجديد، وبعدها Close & Apply. لا تكرري الاضافة عند كل Refresh"
-                },
-                {
-                    "title": "حدّثي Calendar",
-                    "copy": "وسعي جدول Calendar الموجود حتى يشمل كل يوم من 2025-01-01 الى 2026-12-31، وتاكدي من العلاقة مع EvaluationScores_2026_H1[AssessmentDate]"
-                },
-                {
-                    "title": "راجعي الـCards في نفس الخطوة",
-                    "copy": "بطاقة Manager KPI Average بتعرض المتوسط العام. اما Manager Employee Weighted (Complete) فتحتاج موظف واحد وQuarter واحد، وبطاقة Manager Objective Score (Complete) تحتاج سياق الهدف واكتمال مؤشرات التقييم. ما بنحوّل التقييم الناقص الى صفر"
-                },
-                {
-                    "title": "تاكدي من الارباع",
-                    "copy": "جربي Slicer على Calendar[QuarterLabel] وتاكدي من ظهور Q1 الى Q4 لكل سنة، مع بقاء تقارير Overview وDepartments وExecutive Performance كما هي"
-                }
-            ],
-            "callout": "هيك حدثنا البيانات وفهمنا الـCards ضمن نفس التطبيق، بدون درس DAX اضافي"
-        },
-        {
-            "name": "نقارن الفترات",
-            "title": "Quick Measures — QoQ وYoY",
-            "lead": "المقارنة الذكية بتبدأ بسؤال واضح: هل تغير متوسط الاداء عن الربع السابق، او عن نفس الفترة من السنة الماضية؟",
-            "steps": [
-                {
-                    "title": "حددي مقياس المقارنة",
-                    "copy": "استخدمي Manager KPI Average من مشروعك. ما بنستخدم Weighted Score للمقارنة بين سنتين قبل مراجعة اوزان اهداف 2025"
-                },
-                {
-                    "title": "اعملي Quarter-over-Quarter",
-                    "copy": "من Data pane اضغطي يمين على الجدول المناسب > New quick measure، واختاري Time intelligence > Quarter-over-quarter change. اختاري Manager KPI Average كـBase value وCalendar[Date] كحقل التاريخ"
-                },
-                {
-                    "title": "اعملي Year-over-Year",
-                    "copy": "كرري New quick measure، واختاري Time intelligence > Year-over-year change، وبنفس Base value وCalendar[Date]"
-                },
-                {
-                    "title": "افحصي المعنى",
-                    "copy": "قارني Q2 2026 مع Q1 2026 ثم Q2 2026 مع Q2 2025، ولا تحولي تغيير النقاط تلقائيا الى نسبة مئوية"
-                },
-                {
-                    "title": "افهمي غياب المقارنة",
-                    "copy": "اذا ما في فترة سابقة ضمن البيانات، ممكن يظهر BLANK للمقارنة، وهذا طبيعي وغير مشابه لكارد فاضية بسبب خطا"
-                }
-            ],
-            "callout": "بدون كتابة DAX معقد، بس مع فهم النتيجة والتحقق من تاريخ المقارنة"
-        },
-        {
-            "name": "نرتب المؤشرات",
-            "title": "KPI Cards — 3 بطاقات واضحة",
-            "lead": "بدنا المدير يعرف النتيجة الحالية وكيف تغيرت، من اول نظرة",
-            "steps": [
-                {
-                    "title": "اعملي اول Card",
-                    "copy": "من Visualizations اختاري Card، وحطي Manager KPI Average، وسمي البطاقة Current Manager Score"
-                },
-                {
-                    "title": "اضيفي بطاقتي المقارنة",
-                    "copy": "انسخي Card مرتين، وغيري الحقول الى Quick Measures تبعت QoQ Change وYoY Change"
-                },
-                {
-                    "title": "راجعي وحدة العرض",
-                    "copy": "متوسط التقييم على مقياس من 0 الى 100. غيري الاسم والتنسيق وعدد المنازل العشرية، ولا تضعي علامة % الا اذا كان المقياس محسوبا كنسبة مئوية فعلا"
-                },
-                {
-                    "title": "اختبري الفلاتر",
-                    "copy": "بدلي Quarter وDepartment، وتاكدي ان البطاقات الثلاث تعبر عن نفس الفلاتر ونفس AssessmentSource"
-                }
-            ],
-            "callout": "3 Cards بتجاوب: وين احنا؟ شو تغير عن الربع الماضي؟ شو تغير عن السنة الماضية؟"
-        },
-        {
-            "name": "نرسم الاتجاه",
-            "title": "Line وCombo Charts",
-            "lead": "الـCard بتعطينا الرقم، والـTrend بيخلينا نشوف قصة الرقم عبر الزمن",
-            "steps": [
-                {
-                    "title": "انشئي Line Chart",
-                    "copy": "حطي Calendar[QuarterLabel] على X-axis ومقياس Manager KPI Average على Y-axis، ثم رتبي QuarterLabel زمنيا باستخدام YearQuarterSort"
-                },
-                {
-                    "title": "انشئي Combo Chart",
-                    "copy": "اختاري Line and clustered column chart، وضعي QuarterLabel على المحور وManager KPI Average في Column y-axis ومقياس تغيير مناسب في Line y-axis"
-                },
-                {
-                    "title": "نسقي الرسم",
-                    "copy": "اعملي عنوانا واضحا، ولوني سلسلة الاداء بالـTeal، وتأكدي ان الوحدات على المحاور مفهومة بدون مبالغة بالمؤثرات"
-                },
-                {
-                    "title": "اختبري التفاعل",
-                    "copy": "غيري السنة والقسم من Slicers، وتاكدي ان خط الاتجاه لا يخلط ترتيب الارباع او تقييمات Manager وSelf"
-                }
-            ],
-            "callout": "اختاري الرسم اللي يجاوب سؤال المدير، مش الرسم اللي فيه عناصر اكثر"
-        },
-        {
-            "name": "نغير منظور الرسم",
-            "title": "Field Parameters",
-            "lead": "رسم واحد ممكن يجاوب سؤالين بدل ما نعمل نسختين منه",
-            "steps": [
-                {
-                    "title": "انشئي Parameter",
-                    "copy": "اذهبي الى Modeling > New parameter > Fields، وسميه View By"
-                },
-                {
-                    "title": "اختاري الابعاد",
-                    "copy": "اضيفي Directorates[DirectorateName] وDepartments[DepartmentName]، وفعّلي Add slicer to this page، ثم Create"
-                },
-                {
-                    "title": "اربطيه بالرسم",
-                    "copy": "اسحبي View By الى محور الرسم بدلا من اسم القسم الثابت، ثم جرّبي الاختيار من الـSlicer"
-                },
-                {
-                    "title": "تاكدي من النتيجة",
-                    "copy": "بدلي Directorate وDepartment وتاكدي ان متوسط الاداء ثابت المعنى، بينما مستوى التجميع بس هو اللي تغير"
-                }
-            ],
-            "callout": "التفاعل الممتاز بيقلل عدد الرسومات وبيحسن تجربة المستخدم"
-        },
-        {
-            "name": "نصمم الواجهة",
-            "title": "Layout Studio — تصميم احترافي",
-            "lead": "ما بدنا نعقد التصميم. Layout واحد نضيف عليه البطاقات والرسم بشكل متناسق",
-            "steps": [
-                {
-                    "title": "افتحي Layout Studio",
-                    "copy": "من الموقع baselghanem.github.io/pb اختاري Layout مناسب لصفحة Comparison فيه مساحة لثلاث بطاقات ورسم رئيسي"
-                },
-                {
-                    "title": "صدّري التصميم",
-                    "copy": "نزلي الخلفية بصيغة PNG او ملفات التخطيط المتاحة. داخل Power BI استخدمي Format page > Canvas background لتطبيق الصورة واضبطي Fit/Fill والشفافية بما يناسبها"
-                },
-                {
-                    "title": "ركّبي الرسومات",
-                    "copy": "وزعي Cards وLine/Combo ضمن المساحات، ووحدي الالوان والحدود والمسافات بدل تكرار الخلفيات والزخارف"
-                }
-            ],
-            "callout": "الافضل صفحة بسيطة ومتوازنة، مش صفحة مليانة صناديق"
-        },
-        {
-            "name": "نضيف لمسة حركة",
-            "title": "Scroller — Custom Visual",
-            "lead": "الهدف عرض معلومة مختصرة ومتحركة بدون تشتيت الانتباه",
-            "steps": [
-                {
-                    "title": "افتحي AppSource",
-                    "copy": "من Visualizations > ... > Get more visuals، وابحثي عن Scroller ضمن Power BI visuals"
-                },
-                {
-                    "title": "راجعي الـVisual",
-                    "copy": "افتحي تفاصيل النتيجة وتاكدي من الناشر والترخيص والمميزات المجانية المتاحة، ثم اضغطي Add على الخيار المناسب"
-                },
-                {
-                    "title": "اربطي الحقول",
-                    "copy": "اضيفي الـVisual الى صفحة Comparison، واستخدمي DepartmentName مع مقياس بسيط مثل Assessment Count، حسب الحقول التي يطلبها الـVisual المختار"
-                },
-                {
-                    "title": "اضبطي الحركة",
-                    "copy": "خففي السرعة واطفئي الحركة الزائدة ان وجد خيار، وخلي المعلومة قابلة للقراءة؛ اذا ما كان الـVisual متاحا بنكتفي بالصفحة بدون تعطيل العمل"
-                }
-            ],
-            "callout": "Scroller مجرد لمسة اضافية، ما لازم يصير اهم من الـCards والمقارنة"
-        },
-        {
-            "name": "هلا دورك",
-            "title": "Mini Dashboard — Nova Sales",
-            "lead": "رح تطبقي نفس فكرة المقارنة على بيانات مبيعات من القطاع الطبي، من غير ما تتبعي خطوات المدرب حرفيا",
+            "name": "بيانات المبيعات",
+            "title": "استيراد بيانات المبيعات وفتح صفحة جديدة",
+            "lead": "طبقنا على بيانات المبيعات وفتحنا صفحة تقرير جديدة",
             "files": "practice",
             "steps": [
                 {
-                    "title": "افتحي ملف Excel",
-                    "copy": "Home > Get data > Excel workbook، واختاري Nova_Sales_2025_2026.xlsx ثم ورقة Nova Sales. كل صف يمثل طلبا، وبالملف SalesRep وCustomer وProduct وCategory"
+                    "title": "بيانات المبيعات",
+                    "copy": "فتحنا بيانات مبيعات Nova وطبقنا عليها داخل Power BI"
                 },
                 {
-                    "title": "اعملي 3 Cards",
-                    "copy": "Total Units من Sum of Quantity، وTotal Target من Sum of Target، وCustomers من Distinct count of Customer"
-                },
+                    "title": "صفحة جديدة",
+                    "copy": "أنشأنا صفحة جديدة للتطبيق على بيانات المبيعات"
+                }
+            ]
+        },
+        {
+            "name": "Field Parameters",
+            "title": "تغيير منظور العرض",
+            "lead": "تعلمنا انشاء Parameter والتبديل بين الحقول",
+            "steps": [
                 {
-                    "title": "اعملي Trend واضح",
-                    "copy": "ارسمي Sum of Quantity او Sum of Target حسب الفترات، مع Year وQuarter حتى ما تنخلط ارباع السنتين"
-                },
+                    "title": "Parameter",
+                    "copy": "من Modeling > New parameter > Fields، اخترنا الحقول المناسبة وجربنا التبديل بينها"
+                }
+            ]
+        },
+        {
+            "name": "Tooltip",
+            "title": "تعرفنا على Tooltip",
+            "lead": "تعلمنا Tooltip وسنراجعها في اليوم الثامن",
+            "steps": [
                 {
-                    "title": "اكتبي Insight واحدة",
-                    "copy": "استخدمي Region او Category وSalesRep لتحددي اين كان الاداء افضل، ثم احكي النتيجة بجملة واضحة من الرسم"
+                    "title": "Tooltip",
+                    "copy": "طبقنا Tooltip مبدئيا، ومراجعتها وتثبيتها ضمن خطة اليوم الثامن"
+                }
+            ]
+        },
+        {
+            "name": "Layout Studio",
+            "title": "تصميم Layout",
+            "lead": "تعلمنا تجهيز Layout من موقع التصميم",
+            "steps": [
+                {
+                    "title": "افتحي Layout Studio",
+                    "copy": "افتحي https://baselghanem.github.io/pb/ لتجهيز Layout ثم طبقيه على صفحة التقرير"
                 }
             ],
-            "callout": "المخرج: صفحة واحدة من تصميمك تحتوي 3 Cards ورسم اتجاه وتحليل مختصر"
+            "callout": "https://baselghanem.github.io/pb/"
         }
     ],
     "learningScenes": [
         [
-            "2025",
-            "2026"
+            "SALES",
+            "DATA"
         ],
         [
-            "QOQ",
-            "YOY"
-        ],
-        [
-            "SCORE",
-            "CHANGE"
-        ],
-        [
-            "CARDS",
-            "TREND"
-        ],
-        [
-            "DIRECTORATE",
-            "DEPARTMENT"
-        ],
-        [
-            "LAYOUT",
+            "NEW",
             "PAGE"
         ],
         [
-            "APPSOURCE",
-            "SCROLLER"
+            "FIELD",
+            "PARAMETER"
         ],
         [
-            "EXCEL",
-            "DASHBOARD"
+            "TOOLTIP",
+            "REVIEW"
+        ],
+        [
+            "LAYOUT",
+            "STUDIO"
         ]
     ]
 },
-  {
+{
     "id": 8,
     "date": null,
     "weekday": null,
     "ready": false,
     "phase": "INSIGHT",
     "teachingStatus": "planned",
-    "title": "Report Page Tooltips, Field Parameters & Dynamic Titles",
-    "titleAr": "نصنع تحليلا يتغير حسب سؤال المدير",
-    "hook": "بدل ما نعمل عشر رسومات شبه بعض، بنخلي الرسم الواحد يغير منظور العرض، ونعطي المستخدم تفاصيل اضافية بمجرد المرور عليه",
-    "mission": "نبني صفحة خامسة Analysis Explorer ونستخدم Tooltips وField Parameters وDynamic Titles مع ترتيب بصري متقن",
+    "title": "Day 08 · Tooltip Review, Quick Measures & Scroller",
+    "titleAr": "مراجعة Tooltip واستكمال مهارات التحليل",
+    "hook": "نراجع Tooltip ونكمل المهارات المؤجلة من اليوم السابع دون اعادة ما تعلمناه",
+    "mission": "مراجعة Tooltip عمليا، ثم تعليم Quick Measures وScroller اذا سمح الوقت، مع المحافظة على تطبيق المبيعات",
     "topics": [
-      "Report Page Tooltips",
-      "Field Parameters",
-      "Dynamic Titles",
-      "SWITCH / SELECTEDVALUE as needed",
-      "Advanced Matrix",
-      "Top N",
-      "Visual Hierarchy",
-      "Design QA"
+        "Tooltip Review",
+        "Quick Measures — QoQ / YoY (not taught Day 7)",
+        "Scroller (not taught Day 7)",
+        "Field Parameters — brief practice",
+        "Dynamic Titles — time permitting"
     ],
     "build": [
-      "ننظم عناصر الصفحة الخامسة Analysis Explorer",
-      "نعمل Tooltip Page مخصصة لتفاصيل الهدف او القسم",
-      "ننشىء Field Parameter للتبديل بين Directorate وDepartment وEmployee بحسب الحقول المتاحة",
-      "نربط عنوانا ديناميكيا بالاختيار مع فحص Single/Multiple selection",
-      "نضبط Visual hierarchy وTop N وConditional Formatting",
-      "نتحقق من مطابقة الارقام بين Tooltips والرسوم الرئيسية"
+        "نراجع Tooltip على صفحة المبيعات ونختبر تفاعلها",
+        "نشرح Quick Measures للمرة الاولى ان كانت البيانات والتواريخ جاهزة",
+        "نطبق Scroller للمرة الاولى بعد التحقق من توفره",
+        "نستخدم Field Parameter الذي تعلمناه في اليوم السابع من غير تكرار الشرح",
+        "نضيف عنوانا ديناميكيا فقط اذا بقي وقت"
     ],
-    "challenge": "بدلي منظور الرسم واختبري Tooltip على قسم ثم موظف مع التحقق من السياق",
-    "deliverable": "صفحة خامسة Explorer بميزات Tooltips وField Parameters وعناوين ديناميكية",
+    "challenge": "مراجعة Tooltip وربطها بعرض صحيح، ثم تجربة Quick Measure او Scroller بحسب وقت المحاضرة",
+    "deliverable": "صفحة مبيعات محسنة مع Tooltip مراجعة، وتطبيقات جديدة بحسب وقت اليوم الثامن",
     "resources": []
-  },
+},
   {
     "id": 9,
     "date": null,
