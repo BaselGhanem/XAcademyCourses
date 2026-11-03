@@ -9,8 +9,8 @@ const days=[
 ["نموذج بيانات الاداء","Day04_Model.html"],
 ["Change Source وMeasures · منجز","Day05_DAX.html"],
 ["Weighted DAX + صفحة ثالثة","Day06_Expansion.html"],
-["Drillthrough وتفاصيل الموظف",null],
-["Tooltips وField Parameters",null],
+["المبيعات وField Parameters","Day07_Trainer.html"],
+["Sales Analysis · Matrix · Top N","Day08_Trainer.html"],
 ["Sidebar وBookmarks المتقدم",null],
 ["HTML/SVG والست صفحات",null]
 ];
