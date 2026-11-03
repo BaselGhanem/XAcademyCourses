@@ -1194,7 +1194,9 @@ const DAYS = [
             "steps": [
                 {
                     "title": "افتحي Layout Studio",
-                    "copy": "افتحي https://baselghanem.github.io/pb/ لتجهيز Layout ثم طبقيه على صفحة التقرير"
+                    "copy": "افتحي Layout Studio، جهزي التصميم ثم طبقيه على صفحة التقرير",
+                    "url": "https://baselghanem.github.io/pb/",
+                    "linkLabel": "فتح Layout Studio"
                 }
             ],
             "callout": "https://baselghanem.github.io/pb/"
