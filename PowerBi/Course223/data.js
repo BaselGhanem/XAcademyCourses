@@ -1232,26 +1232,29 @@ const DAYS = [
     "ready": false,
     "phase": "INSIGHT",
     "teachingStatus": "planned",
-    "title": "Day 08 · Tooltip Review, Quick Measures & Scroller",
-    "titleAr": "مراجعة Tooltip واستكمال مهارات التحليل",
-    "hook": "نراجع Tooltip ونكمل المهارات المؤجلة من اليوم السابع دون اعادة ما تعلمناه",
-    "mission": "مراجعة Tooltip عمليا، ثم تعليم Quick Measures وScroller اذا سمح الوقت، مع المحافظة على تطبيق المبيعات",
+    "title": "Day 08 · Sales Analysis & Interactive Storytelling",
+    "titleAr": "من صفحة المبيعات الى تحليل تفاعلي احترافي",
+    "hook": "نستخدم صفحة المبيعات التي بدأناها في اليوم السابع لنحلل التغيرات والافضل اداء ونكشف التفاصيل دون ازدحام",
+    "mission": "نراجع Tooltip ثم نبني Matrix تفاعلية مع Conditional Formatting وTop N، ونجرب Quick Measures وScroller ونختبر التقرير",
     "topics": [
-        "Tooltip Review",
-        "Quick Measures — QoQ / YoY (not taught Day 7)",
-        "Scroller (not taught Day 7)",
-        "Field Parameters — brief practice",
-        "Dynamic Titles — time permitting"
+        "Report Page Tooltip — review",
+        "Matrix and Conditional Formatting",
+        "Top N Filters",
+        "Quick Measures — YoY and QoQ",
+        "Scroller — new visual",
+        "Visual Hierarchy and Design QA"
     ],
     "build": [
-        "نراجع Tooltip على صفحة المبيعات ونختبر تفاعلها",
-        "نشرح Quick Measures للمرة الاولى ان كانت البيانات والتواريخ جاهزة",
-        "نطبق Scroller للمرة الاولى بعد التحقق من توفره",
-        "نستخدم Field Parameter الذي تعلمناه في اليوم السابع من غير تكرار الشرح",
-        "نضيف عنوانا ديناميكيا فقط اذا بقي وقت"
+        "00–10 | نفتح صفحة المبيعات ونراجع ما تم في اليوم السابع دون اعادة شرح Field Parameters او Layout Studio",
+        "10–25 | نراجع Tooltip ونطبق Report Page Tooltip على رسم من صفحة المبيعات",
+        "25–45 | نبني Matrix للمبيعات حسب الفئة والصنف، ونطبق Data Bars او Color Scale",
+        "45–60 | نستخدم Top N لاستخراج افضل خمسة منتجات وفق Quantity او Target",
+        "60–95 | نعلم Quick Measures لأول مرة: YoY اساسا وQoQ اذا كان Calendar والتواريخ جاهزين، مع اختبار القيم وعدم كتابة DAX معقد",
+        "95–110 | نضيف Scroller لاول مرة اذا كان الـCustom Visual متاحا؛ دون تعطيل التطبيق اذا تعذر",
+        "110–120 | نراجع الفلاتر وتفاعل الرسومات والتنسيق ونحفظ نسخة العمل"
     ],
-    "challenge": "مراجعة Tooltip وربطها بعرض صحيح، ثم تجربة Quick Measure او Scroller بحسب وقت المحاضرة",
-    "deliverable": "صفحة مبيعات محسنة مع Tooltip مراجعة، وتطبيقات جديدة بحسب وقت اليوم الثامن",
+    "challenge": "قدمي صفحة المبيعات وفيها Matrix منسقة وTop 5 وTooltip تعمل، ومقارنة زمنية صحيحة اذا اكتملت متطلبات التاريخ",
+    "deliverable": "صفحة Sales Analysis متكاملة على بيانات Nova مع Tooltip وMatrix وTop N ومقارنة زمنية، وScroller عند توفره",
     "resources": []
 },
   {
