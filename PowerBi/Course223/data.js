@@ -1226,36 +1226,243 @@ const DAYS = [
     ]
 },
 {
-    "id": 8,
-    "date": null,
-    "weekday": null,
-    "ready": false,
-    "phase": "INSIGHT",
-    "teachingStatus": "planned",
-    "title": "Day 08 · Sales Analysis & Interactive Storytelling",
-    "titleAr": "من صفحة المبيعات الى تحليل تفاعلي احترافي",
-    "hook": "نستخدم صفحة المبيعات التي بدأناها في اليوم السابع لنحلل التغيرات والافضل اداء ونكشف التفاصيل دون ازدحام",
-    "mission": "نراجع Tooltip ثم نبني Matrix تفاعلية مع Conditional Formatting وTop N، ونجرب Quick Measures وScroller ونختبر التقرير",
-    "topics": [
-        "Report Page Tooltip — review",
-        "Matrix and Conditional Formatting",
-        "Top N Filters",
-        "Quick Measures — YoY and QoQ",
-        "Scroller — new visual",
-        "Visual Hierarchy and Design QA"
+  "id": 8,
+  "date": null,
+  "weekday": null,
+  "ready": true,
+  "phase": "INSIGHT",
+  "teachingStatus": "prepared",
+  "title": "Day 08 · Sales Analysis Lab",
+  "titleAr": "مختبر تحليل المبيعات والتفاعل",
+  "hook": "نكمل على صفحة المبيعات من اليوم السابع، ونخلي كل رسم يجاوب سؤال واضح",
+  "mission": "نتقن Tooltip، ونحلل افضل المنتجات باستخدام Matrix وTop N، ثم نقارن الفترات عن طريق Quick Measures ونجرب Scroller",
+  "topics": [
+    "Report Page Tooltip",
+    "Matrix",
+    "Conditional Formatting",
+    "Top N",
+    "Quick Measures — YoY / QoQ",
+    "Scroller",
+    "Report QA"
+  ],
+  "build": [
+    "نكمل على نسخة Power BI اللي حفظناها من اليوم السابع ونراجع البيانات والتاريخ",
+    "نراجع Report Page Tooltip على اصناف المبيعات",
+    "نبني Matrix للفئات والاصناف مع تنسيق شرطي واضح",
+    "نطبق Top N لمعرفة اكثر خمسة اصناف من حيث الكمية",
+    "نجرب Quick Measures للمقارنة سنة بسنة وربع بربع بعد التأكد من التاريخ",
+    "نجرب Scroller كعنصر اضافي اذا كان متاحا",
+    "نختبر التفاعلات ونحفظ نسخة اليوم الثامن"
+  ],
+  "challenge": "جهزي صفحة Sales Analysis تعرض افضل خمسة اصناف، Matrix بتنسيق شرطي، وTooltip صحيحة؛ ثم تحققي من مقارنة زمنية واحدة على الاقل",
+  "deliverable": "صفحة مبيعات تفاعلية فيها Matrix وTop N وTooltip ومقارنة زمنية قابلة للفحص، مع Scroller اذا توفر",
+  "resources": [
+    {
+      "name": "Nova Medical Sales — بيانات التطبيق",
+      "type": "XLSX",
+      "url": "week1/day7/data/Nova_Sales_2025_2026.xlsx",
+      "audience": "learner",
+      "stage": "start",
+      "note": "نفس ملف المبيعات المستخدم في اليوم السابع، لا داعي لاستيراده مرة ثانية اذا كان موجودا في المشروع"
+    }
+  ],
+  "learningSections": [
+    {
+      "name": "نكمل مشروعنا",
+      "title": "نفس الصفحة، اسئلة اقوى",
+      "lead": "افتحي النسخة المحفوظة من نهاية اليوم السابع، ونكمل على صفحة مبيعات Nova بدل بدء مشروع جديد",
+      "files": "start",
+      "steps": [
+        {
+          "title": "افتحي ملف Power BI الذي حفظتيه",
+          "copy": "افتحي مشروعك المحفوظ من اليوم السابع واعتمدي صفحة المبيعات نفسها. اذا فقدت ملف البيانات، نزلي Excel الموجود هنا واستورديه مرة واحدة فقط"
+        },
+        {
+          "title": "تأكدي من الحقول",
+          "copy": "نحتاج Product وCategory وQuantity وTarget وحقل التاريخ الفعلي. تأكدي ان Quantity وTarget رقميان، والتاريخ من نوع Date"
+        },
+        {
+          "title": "احفظي نسخة جديدة",
+          "copy": "File > Save As ثم احفظي نسخة العمل الجديدة باسم Day08_Sales_Analysis.pbix حتى يبقى ملف اليوم السابق بدون تغيير"
+        }
+      ],
+      "callout": "المهم نكمل نفس التقرير، بدون تحميل البيانات مرتين"
+    },
+    {
+      "name": "Tooltip",
+      "title": "معلومة اضافية بمجرد المرور",
+      "lead": "نراجع Report Page Tooltip ونربطها باحد رسوم المبيعات",
+      "steps": [
+        {
+          "title": "حضري صفحة Tooltip",
+          "copy": "اعملي صفحة صغيرة وسميها Product Tooltip، ومن Canvas settings اختاري Page size > Tooltip ثم فعلي Tooltip من Page information"
+        },
+        {
+          "title": "اعرضي معلومات الصنف",
+          "copy": "داخل الصفحة اضيفي معلومات مثل مجموع Quantity ومجموع Target للصنف، ولا تحطي Slicer او زر يحتاج ضغط داخل Tooltip"
+        },
+        {
+          "title": "اربطي الصفحة بالرسم",
+          "copy": "اختاري رسم المنتجات في صفحة Sales Analysis، ومن Format visual > General > Tooltips اختاري Type = Report page ثم Page = Product Tooltip (قد تختلف المسميات حسب نسخة Power BI)"
+        },
+        {
+          "title": "اختبري التصفية",
+          "copy": "مرري المؤشر فوق منتجين مختلفين وتاكدي ان الارقام في Tooltip تتغير مع كل صنف، ثم اخفي صفحة Product Tooltip من تبويبات التنقل"
+        }
+      ],
+      "callout": "لا يكفي ظهور Tooltip: لازم يظهر سياق الصنف الصحيح"
+    },
+    {
+      "name": "Matrix",
+      "title": "نقرأ المبيعات بالتفصيل",
+      "lead": "Matrix بتظهر حجم المبيعات بشكل هرمي وبتخلي الفروقات واضحة",
+      "steps": [
+        {
+          "title": "انشئي Matrix",
+          "copy": "من Visualizations اختاري Matrix، وضعي Category ثم Product في Rows، واختاري Sum of Quantity وSum of Target في Values"
+        },
+        {
+          "title": "جربي Drill Down",
+          "copy": "وسعي الفئة الى المنتجات، وراجعي ان الارقام لا تتضاعف عند التجميع"
+        },
+        {
+          "title": "طبقي Conditional Formatting",
+          "copy": "من تنسيق الخلايا او قائمة حقل Sum of Quantity اختاري Data bars. ويمكنك تلوين Sum of Target بتدرج خفيف اذا كان المعنى واضحا"
+        },
+        {
+          "title": "راجعي سهولة القراءة",
+          "copy": "حافظي على تباين واضح واسماء اعمدة قصيرة، واستخدمي وحدات فعلية بدل نسبة مئوية للكمية"
+        }
+      ],
+      "callout": "اللون يوضح الفرق، لكن الرقم هو المرجع"
+    },
+    {
+      "name": "Top N",
+      "title": "مين افضل خمسة اصناف؟",
+      "lead": "نحدد افضل المنتجات وفقا لمقياس واضح، مش حسب الترتيب الابجدي",
+      "steps": [
+        {
+          "title": "انشئي رسم افقي للمنتجات",
+          "copy": "اختاري Clustered bar chart. ضعي Product على Y-axis وSum of Quantity على X-axis"
+        },
+        {
+          "title": "فعلي Top N",
+          "copy": "من Filters on this visual افتحي Product واختاري Filter type > Top N، ثم Show items > Top > 5"
+        },
+        {
+          "title": "حددي اساس الترتيب",
+          "copy": "في By value اسحبي Sum of Quantity ثم اضغطي Apply filter ورتبي الرسم من الاعلى للاقل"
+        },
+        {
+          "title": "قارني النتيجة",
+          "copy": "اختاري Category مختلفا وشوفي اذا تتغير افضل خمسة منتجات حسب الفلتر. لا تخلطي Quantity مع Target في معيار Top N"
+        }
+      ],
+      "callout": "السؤال اللي بيجاوبه الرسم: اكثر خمسة منتجات بالوحدات ضمن الفلاتر المختارة"
+    },
+    {
+      "name": "Quick Measures",
+      "title": "نقارن المبيعات عبر الزمن",
+      "lead": "ما بنكتب DAX معقد؛ نخلي Power BI يولد المقارنة، ونفهم النتيجة",
+      "steps": [
+        {
+          "title": "تاكدي من جاهزية التاريخ",
+          "copy": "راجعي ان حقل تاريخ المبيعات من نوع Date ويغطي الفترة المطلوبة. اذا احتجتي جدول Calendar مخصصا، يجب ان يكون مرتبطا بتاريخ المبيعات ومحددا كـ Date table قبل المقارنة"
+        },
+        {
+          "title": "اعملي Year-over-Year change",
+          "copy": "من Data pane اختاري New quick measure ثم Time intelligence > Year-over-year change، واختاري Sum of Quantity او المقياس الاساسي الموجود، وحقل Date الصحيح"
+        },
+        {
+          "title": "افحصي مقارنة فعلية",
+          "copy": "قارني نفس الربع بين 2025 و2026 ضمن فلاتر متطابقة، وتاكدي من معنى الناتج ووحدته"
+        },
+        {
+          "title": "جربي Quarter-over-Quarter change",
+          "copy": "بنفس الطريقة اختاري Quarter-over-quarter change، وقارني ربعين متتاليين لهما بيانات. اذا كانت فترة المقارنة غير موجودة، لا تستبدلي BLANK بصفر"
+        },
+        {
+          "title": "اقرئي المعادلة المولدة",
+          "copy": "اختاري Quick Measure وشوفي DAX اللي انشأه Power BI، للمعرفة فقط، بدون تعديل معادلات طويلة"
+        }
+      ],
+      "callout": "المقارنة الصحيحة اهم من ظهور رقم على البطاقة"
+    },
+    {
+      "name": "Scroller",
+      "title": "عنصر متحرك بدون تشتيت",
+      "lead": "نجرب Scroller لاول مرة كاضافة اختيارية وليس شرطا لنجاح التقرير",
+      "steps": [
+        {
+          "title": "افتحي متجر الرسومات",
+          "copy": "من Visualizations > Get more visuals وابحثي عن Scroller، وراجعي الناشر والترخيص وامكانية اضافته في بيئة العمل"
+        },
+        {
+          "title": "اربطي معلومة قصيرة",
+          "copy": "اذا كان Scroller متاحا اختاري حقول المبيعات المتوافقة معه واجعلي النص مختصرا وسرعته مناسبة"
+        },
+        {
+          "title": "احتفظي بخطة بديلة",
+          "copy": "اذا تعذر تثبيت الـVisual او لم يسمح الترخيص، اكتفي بملخص ثابت ولا تخسري وقت التطبيق الاساسي"
+        }
+      ],
+      "callout": "Scroller ليس بديلا عن Matrix وTop N"
+    },
+    {
+      "name": "اختبار وتسليم",
+      "title": "صفحة مبيعات جاهزة للعرض",
+      "lead": "نختبر التقرير كأننا مستخدمون فعليون، ثم نحفظ نسخة اليوم الثامن",
+      "steps": [
+        {
+          "title": "اختبري الفلاتر",
+          "copy": "غيري Category وProduct وتاكدي ان Top N وMatrix وTooltip تعرض ارقاما متسقة"
+        },
+        {
+          "title": "راجعي المقارنات",
+          "copy": "افحصي ان YoY يقارن نفس الفترة عبر سنتين، وQoQ يقارن فترتين متتاليتين"
+        },
+        {
+          "title": "احفظي العمل",
+          "copy": "احفظي ملف Day08_Sales_Analysis.pbix وقدمي استنتاجا واحدا من افضل خمسة اصناف"
+        },
+        {
+          "title": "سؤال التطبيق",
+          "copy": "ما المنتج الاول بالوحدات داخل الفئة التي اخترتيها؟ وهل تغيرت مبيعاته عن الفترة السابقة؟"
+        }
+      ],
+      "callout": "النتيجة: تقرير واضح وقابل للفحص، مش مجرد تصميم جميل"
+    }
+  ],
+  "learningScenes": [
+    [
+      "SALES",
+      "PAGE"
     ],
-    "build": [
-        "00–10 | نفتح صفحة المبيعات ونراجع ما تم في اليوم السابع دون اعادة شرح Field Parameters او Layout Studio",
-        "10–25 | نراجع Tooltip ونطبق Report Page Tooltip على رسم من صفحة المبيعات",
-        "25–45 | نبني Matrix للمبيعات حسب الفئة والصنف، ونطبق Data Bars او Color Scale",
-        "45–60 | نستخدم Top N لاستخراج افضل خمسة منتجات وفق Quantity او Target",
-        "60–95 | نعلم Quick Measures لأول مرة: YoY اساسا وQoQ اذا كان Calendar والتواريخ جاهزين، مع اختبار القيم وعدم كتابة DAX معقد",
-        "95–110 | نضيف Scroller لاول مرة اذا كان الـCustom Visual متاحا؛ دون تعطيل التطبيق اذا تعذر",
-        "110–120 | نراجع الفلاتر وتفاعل الرسومات والتنسيق ونحفظ نسخة العمل"
+    [
+      "HOVER",
+      "DETAIL"
     ],
-    "challenge": "قدمي صفحة المبيعات وفيها Matrix منسقة وTop 5 وTooltip تعمل، ومقارنة زمنية صحيحة اذا اكتملت متطلبات التاريخ",
-    "deliverable": "صفحة Sales Analysis متكاملة على بيانات Nova مع Tooltip وMatrix وTop N ومقارنة زمنية، وScroller عند توفره",
-    "resources": []
+    [
+      "MATRIX",
+      "FORMAT"
+    ],
+    [
+      "TOP 5",
+      "RANK"
+    ],
+    [
+      "YOY",
+      "QOQ"
+    ],
+    [
+      "SCROLL",
+      "INSIGHT"
+    ],
+    [
+      "TEST",
+      "SAVE"
+    ]
+  ]
 },
   {
     "id": 9,
@@ -1383,5 +1590,6 @@ function getLearnerResources(day) {
     || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`)
     || (day.id === 7 && resource.type === `PBIX` && resource.url === `week1/day7/data/HR_Performance_Intelligence_Day06.pbix`)
     || (day.id === 7 && resource.type === `XLSX` && resource.url === `week1/day7/data/Nova_Sales_2025_2026.xlsx`)
+    || (day.id === 8 && resource.type === `XLSX` && resource.url === `week1/day7/data/Nova_Sales_2025_2026.xlsx`)
     || (day.id === 5 && resource.type === `PBIX` && resource.stage === `backup` && resource.url === `week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix`)))));
 }
