@@ -64,6 +64,33 @@ async def smoke(base):
         await page.goto(base+'/week3/day7/web/index.html')
         assert await page.locator('a[href="FINANCE_SCENARIO.html"]').count()==1
         events.append('general_scenario_navigation')
+        # Full Concept Studio coverage: every concept must display and open a real lesson.
+        # These three days were previously empty and would incorrectly show "0 concepts".
+        for day,expected in [(8,5),(9,5),(10,6)]:
+            await page.goto(base+'/concepts/?day='+str(day),wait_until='domcontentloaded')
+            cards=page.locator('#dayConceptGrid .card')
+            await cards.first.wait_for()
+            assert await cards.count()==expected,(day,'concepts',await cards.count())
+            assert (await page.locator('#conceptCount').inner_text()).strip()==str(expected)
+            for idx in range(expected):
+                card=cards.nth(idx)
+                assert await card.get_attribute('role')=='button'
+                await card.click()
+                dialog=page.locator('#conceptDialog')
+                assert await dialog.is_visible(),(day,idx,'modal failed')
+                assert (await page.locator('#dialogTitle').inner_text()).strip(),(day,idx,'no title')
+                assert (await page.locator('#dialogVisual').inner_text()).strip(),(day,idx,'no visual')
+                await page.locator('#closeDialog').click()
+                assert not await dialog.is_visible(),(day,idx,'modal did not close')
+            await cards.first.focus()
+            await cards.first.press('Enter')
+            assert await page.locator('#conceptDialog').is_visible(),(day,'keyboard not working')
+            await page.locator('#closeDialog').click()
+            events.append('day'+str(day)+'_concepts_'+str(expected)+'_modal_and_keyboard')
+        await page.get_by_role('button',name='استكشف أكثر').click()
+        assert await page.locator('#cardsGrid .card').count()>=16, 'Concept Explore mode failed'
+        events.append('concept_explore_mode')
+
         if errors:
             raise AssertionError('Unhandled browser JavaScript errors: '+json.dumps(errors,ensure_ascii=False))
         print(json.dumps({'status':'PASS','browser':'Chromium','checks':events,'uncaught_errors':errors},ensure_ascii=False))

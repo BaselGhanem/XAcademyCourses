@@ -11,6 +11,7 @@ on:
       - 'PowerBi/Course224/login.html'
       - 'PowerBi/Course224/week3/day10/student-missions.html'
       - 'PowerBi/Course224/week3/day10/ai-visual-design-lab.html'
+      - 'PowerBi/Course224/concepts/index.html'
   workflow_dispatch:
 permissions:
   contents: read
