@@ -59,6 +59,8 @@
     .filter.active{background:var(--accent);color:#151515;border-color:var(--accent)}
     .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
     .card{border-radius:22px;padding:20px;cursor:pointer;position:relative;overflow:hidden;transition:.2s ease;min-height:250px}
+    .card:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-color:var(--teal)}
+    @media (prefers-reduced-motion: reduce){.card{transition:none}.card:hover{transform:none}}
     .card:hover{transform:translateY(-4px);border-color:rgba(242,200,17,.28)}
     .card::before{content:"";position:absolute;inset-inline-start:0;top:0;width:4px;height:100%;background:var(--card-color,var(--accent))}
     .card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
@@ -1341,6 +1343,369 @@ SUMX (
           "badTitle": "Relative growth",
           "badText": "(85% − 80%) / 80%\n= +6.25%"
         }
+      },
+      {
+        "id": 65,
+        "title": "Visual Hierarchy",
+        "titleAr": "الترتيب البصري للمعلومات",
+        "category": "analysis",
+        "kind": "flow",
+        "blurb": "رتّب التقرير ليرى المستخدم الأهم أولًا بدل توزيع الرسومات عشوائيًا.",
+        "memory": "السؤال أولًا، ثم الرقم، ثم التفسير، ثم الإجراء.",
+        "why": "الإدارة تحتاج فهم الأداء قبل البحث عن الأسباب والتفاصيل.",
+        "notice": "ابدأ بأربع KPI Cards كحد أقصى في التمرين ثم Trend وBreakdown؛ الرقم الكبير وحده لا يشرح القرار.",
+        "mistake": "تكديس عشرة رسوم متساوية الحجم وإخفاء المؤشر الرئيسي.",
+        "explain": "في تقرير Nova اعرض إجمالي الإيراد والمعاملات والعملاء والكميات، ثم اتجاه الإيراد شهريًا، ثم الفئات والفروع. في العمليات قد يكون الالتزام بالمواعيد أهم من الإيراد. الترتيب يتبع السؤال، لا نوع الوظيفة.",
+        "tip": "اختبر الصفحة بالسؤال: ما الذي يفهمه القارئ خلال عشر ثوانٍ؟",
+        "warning": "الهرمية لا تعني تضخيم بطاقات KPIs دون توضيح الفترة أو الوحدة.",
+        "visualCaption": "مسار بصري مقترح من السؤال حتى القرار؛ ليس Dashboard مكتملة جاهزة.",
+        "visual": {
+          "steps": [
+            "Business Question",
+            "4 KPIs",
+            "Time Trend",
+            "Diagnostic Breakdown",
+            "Decision"
+          ]
+        }
+      },
+      {
+        "id": 66,
+        "title": "Choosing the Right Visual",
+        "titleAr": "اختيار الرسم بحسب السؤال",
+        "category": "analysis",
+        "kind": "compare",
+        "blurb": "نوع الرسم يُحدد بناءً على المقارنة المطلوبة، وليس شكله الجميل.",
+        "memory": "الاتجاه عبر الزمن → Line؛ ترتيب الفئات → Bar.",
+        "why": "الرسم المناسب يختصر وقت القراءة ويمنع الاستنتاج الخاطئ.",
+        "notice": "استخدم Line لفترات ذات ترتيب زمني، وBar لترتيب فئات مستقلة. يمكن استخدام Matrix للتفاصيل.",
+        "mistake": "استخدام Pie بعشرين فئة أو Line لأسماء فروع لا تمثل زمنًا.",
+        "explain": "في Nova: Revenue by Year Month يحتاج Line Chart مع ترتيب زمني صحيح. Revenue by Category أو Branch يستفيد من Horizontal Bar. أما التفاصيل الدقيقة فيناسبها Table أو Matrix. لا تستخدم 3D لتضخيم الفروق.",
+        "tip": "اكتب السؤال التحليلي فوق الرسم قبل اختيار Visual.",
+        "warning": "قارن على نفس المقياس؛ لا تخلط نسبًا ومبالغ على محور واحد بلا توضيح.",
+        "visualCaption": "مقارنة بين رسم يوافق طبيعة السؤال وآخر يحجب الرسالة.",
+        "visual": {
+          "goodTitle": "GOOD: Question → Visual",
+          "goodText": "Monthly trend → Line\nRank branches → Bar\nDetails → Matrix",
+          "badTitle": "BAD: Visual → Question",
+          "badText": "20-category Pie\nUnsorted dates\n3D effects"
+        }
+      },
+      {
+        "id": 67,
+        "title": "Report Page Tooltip",
+        "titleAr": "صفحة معلومات عند تمرير المؤشر",
+        "category": "analysis",
+        "kind": "flow",
+        "blurb": "صفحة صغيرة تعرض تفاصيل سياقية بمجرد مرور المؤشر على نقطة بيانات.",
+        "memory": "Tooltip للشرح السريع؛ ليست صفحة تفاعل.",
+        "why": "تسمح بإظهار أرقام ثانوية دون ازدحام الرسم الأصلي.",
+        "notice": "أنشئ صفحة Tooltip وأسنِدها إلى رسم يدعمها؛ تأكد أن حقول النقطة تمرر السياق الصحيح.",
+        "mistake": "إضافة Slicer أو زر داخل Tooltip وتتوقع أن المستخدم سيتفاعل معه.",
+        "explain": "عند تمرير المؤشر فوق فئة Product Category، يمكن عرض إيرادها وعدد معاملاتها ومتوسط قيمة العملية. يقيم Power BI هذه المقاييس ضمن سياق النقطة. يجب أن تظهر المعلومات دون حاجة للتمرير داخل Tooltip.",
+        "tip": "اختبر Hover على فئتين مختلفتين وتأكد من تغير القيم تبعًا للفئة.",
+        "warning": "Report Page Tooltips ليست تفاعلية؛ للتحليل بالنقر وتغيير الفلاتر استخدم Drillthrough.",
+        "visualCaption": "سلسلة انتقال السياق من نقطة الرسم إلى صفحة Tooltip.",
+        "visual": {
+          "steps": [
+            "Hover Data Point",
+            "Pass Filter Context",
+            "Show Extra KPIs",
+            "Return to Report"
+          ]
+        }
+      },
+      {
+        "id": 68,
+        "title": "Drillthrough Details",
+        "titleAr": "الانتقال من الملخص إلى التفاصيل",
+        "category": "analysis",
+        "kind": "flow",
+        "blurb": "تنقل إلى صفحة تفصيلية مفلترة بقيمة اختارها المستخدم من الرسم الأصلي.",
+        "memory": "Tooltip يشرح؛ Drillthrough يحلّل بتعمق.",
+        "why": "يتيح فحص المعاملات أو الأسباب التي تقف خلف قيمة مجمعة.",
+        "notice": "ضع حقل Drillthrough المناسب في صفحة الهدف، وأضف Back Button وتحقق من انتقال الفلتر.",
+        "mistake": "بناء صفحة تفاصيل لا تستقبل نفس الحقل، ثم الظن أنها مفلترة تلقائيًا.",
+        "explain": "من Revenue by Branch، يفتح المستخدم تفاصيل فرع مختار في صفحة تعرض Transaction Count وTrend وProduct Categories وربما جدول المعاملات. لا يكفي الانتقال إلى صفحة أخرى؛ يجب التأكد من وصول Branch Filter.",
+        "tip": "اختبر فرعين مختلفين وتأكد من أن الصفحة التفصيلية تعكس كل فرع.",
+        "warning": "إذا لم يظهر Drillthrough، راجع الحقل المشترك وسياق نقطة المصدر وإعدادات الصفحة.",
+        "visualCaption": "انتقال من الإجمالي إلى التفاصيل مع الحفاظ على السياق.",
+        "visual": {
+          "steps": [
+            "Select Branch",
+            "Drillthrough Filter",
+            "Detail Page",
+            "Back to Overview"
+          ]
+        }
+      },
+      {
+        "id": 69,
+        "title": "Page Navigation vs Bookmarks",
+        "titleAr": "التنقل بين الصفحات مقابل حالات العرض",
+        "category": "analysis",
+        "kind": "compare",
+        "blurb": "التنقل يغيّر الصفحة، بينما Bookmark تستعيد حالة محفوظة.",
+        "memory": "Page Navigator = أين أذهب؟ Bookmark = أي عرض أستعيد؟",
+        "why": "لكل منهما دور مختلف في تجربة مستخدم التقرير.",
+        "notice": "استخدم Page Navigator للانتقال بين Overview وDetails؛ استخدم Bookmark لإظهار لوحة فلاتر أو حفظ منظور.",
+        "mistake": "إنشاء عشرات Bookmarks للتنقل العادي دون داعٍ.",
+        "explain": "في Day 08 أنشئ Overview وDetail وصفحة Tooltip منفصلة ثم اختبر Page Navigation. في Day 09 ستتعلم كيف تتحكم Bookmarks بإظهار لوحة فلاتر مع عدم إعادة تعيين الاختيارات.",
+        "tip": "أبقِ أسماء الصفحات قصيرة وواضحة، وأظهر زر الرجوع عند Drillthrough.",
+        "warning": "Navigation لا تصلح مشكلة Relationships أو Measures الخاطئة.",
+        "visualCaption": "وظيفتان مختلفتان ينبغي عدم الخلط بينهما.",
+        "visual": {
+          "goodTitle": "PAGE NAVIGATION",
+          "goodText": "Overview → Detail\nChanges page\nClear route for readers",
+          "badTitle": "BOOKMARK",
+          "badText": "Restores saved view\nVisibility or filters\nConfigured in Day 09"
+        }
+      },
+      {
+        "id": 70,
+        "title": "Sync Slicers",
+        "titleAr": "مزامنة فلاتر الصفحات",
+        "category": "analysis",
+        "kind": "flow",
+        "blurb": "ربط اختيار Slicer واحد بصفحات متعددة دون تكرار الاختيار يدويًا.",
+        "memory": "Sync ينسّق الاختيار؛ Visible يتحكم بظهور العنصر.",
+        "why": "يحافظ على مقارنة متسقة بين Overview وDetails.",
+        "notice": "استخدم DimDate[Year Month] أو حقلًا مشتركًا، وحدد الصفحات المراد مزامنتها صراحة.",
+        "mistake": "توقع أن الاختيار يتزامن لمجرد نسخ Slicer دون إعداد Sync.",
+        "explain": "اختر March 2026 في صفحة التقرير الأولى، ثم انتقل إلى الصفحة الثانية. يجب أن يبقى اختيار الفترة متسقًا إذا فعّلت Sync عليهما. يمكن إبقاء Slicer مخفيًا على صفحة مع بقائه متزامنًا.",
+        "tip": "اختبر اختيار قيمة ثم Clear، وراجع الصفحات التي يجب أن تتأثر فقط.",
+        "warning": "المزامنة لا تعالج مسارات فلترة خاطئة بين Facts غير المرتبطة.",
+        "visualCaption": "اختيار مشترك ينسحب إلى الصفحات المقصودة.",
+        "visual": {
+          "steps": [
+            "Date Slicer",
+            "Sync Panel",
+            "Overview + Details",
+            "Verify Values"
+          ]
+        }
+      },
+      {
+        "id": 71,
+        "title": "Bookmark Data vs Display",
+        "titleAr": "التحكم فيما تحفظه Bookmarks",
+        "category": "analysis",
+        "kind": "compare",
+        "blurb": "Bookmark تستطيع حفظ حالة الفلاتر أو ظهور الرسومات أو كليهما حسب الإعدادات.",
+        "memory": "Filter Panel → Display ON وData OFF.",
+        "why": "إظهار لوحة الفلاتر يجب ألا يعيد تعيين اختيارات المستخدم.",
+        "notice": "عند بناء Show/Hide، اختر Visuals الخاصة باللوحة، وفعّل Display، وأوقف Data، واختبر Current Page.",
+        "mistake": "ترك Data ON في Bookmark ثم مسح الفلاتر دون قصد عند الضغط على الزر.",
+        "explain": "Bookmarks لحالة Show وHide تحفظ ظهور لوحة الفلاتر. عند ضبط Data OFF يبقى Slicer المختار كما هو حتى لو أُخفيت اللوحة. وSelected visuals تحدد نطاق التأثير حتى لا تتبدل أجزاء أخرى من الصفحة.",
+        "tip": "جرّب Region واحدة ثم افتح وأغلق اللوحة؛ لا ينبغي أن يتغير Total Revenue بسبب الزر وحده.",
+        "warning": "إذا أضفت أو غيّرت عناصر بعد إنشاء Bookmark، راجع Update وتحديد العناصر المتأثرة.",
+        "visualCaption": "الإعداد الذي يحفظ الاختيارات مقابل الإعداد الذي قد يمحوها.",
+        "visual": {
+          "goodTitle": "SHOW/HIDE PANEL",
+          "goodText": "Display ON\nData OFF\nSelected visuals",
+          "badTitle": "ACCIDENTAL RESET",
+          "badText": "Data ON\nOld slicer state restored\nUnexpected KPI change"
+        }
+      },
+      {
+        "id": 72,
+        "title": "Selection Pane & Filter Panel",
+        "titleAr": "تنظيم عناصر لوحة الفلاتر",
+        "category": "analysis",
+        "kind": "flow",
+        "blurb": "استخدم Selection Pane لتنظيم وإخفاء عناصر لوحة الفلاتر.",
+        "memory": "الإخفاء البصري لا يعني إزالة الفلتر.",
+        "why": "يسهّل إعداد واجهة مرتبة وBookmarks تعمل على عناصر محددة.",
+        "notice": "اجمع خلفية اللوحة وSlicers وزر الإغلاق في مجموعة واضحة وسمّها بأسماء مفهومة.",
+        "mistake": "إخفاء Slicer نشط وتوقع اختفاء تأثيره من الصفحة.",
+        "explain": "ابنِ Filter Panel تتكون من الخلفية وDimDate Slicer وDimBranch Slicer وزر الإغلاق. اضبط ظهور المجموعة بواسطة Bookmarks. اختبر حالة Clear Filters مستقلًا، لأن زر إخفاء اللوحة ليس زر مسح الفلاتر.",
+        "tip": "أظهر حالة الفلاتر النشطة حتى عندما تكون لوحة الفلاتر مخفية.",
+        "warning": "استخدم Data OFF في Bookmarks عند التحكم بالظهور فقط.",
+        "visualCaption": "تسلسل من ترتيب العناصر إلى اختبار الفلاتر.",
+        "visual": {
+          "steps": [
+            "Group Elements",
+            "Selection Pane",
+            "Show / Hide",
+            "Check Active Filters"
+          ]
+        }
+      },
+      {
+        "id": 73,
+        "title": "Field Parameters",
+        "titleAr": "تغيير البعد المعروض في الرسم",
+        "category": "modeling",
+        "kind": "code",
+        "blurb": "تسمح للمستخدم بتبديل الحقل الذي يحلل وفقه الرسم نفسه.",
+        "memory": "الحقل يتغير؛ الـMeasure يمكن أن يبقى نفسه.",
+        "why": "تغني عن تكرار رسم Revenue حسب Region ورسم آخر حسب Branch.",
+        "notice": "أنشئ Field Parameter من Modeling > New parameter > Fields، وأدخل أعمدة موجودة فعلًا.",
+        "mistake": "استخدام أعمدة غير موجودة أو افتراض أن Field Parameter تصلح العلاقات الخاطئة.",
+        "explain": "في Nova يمكنك التبديل بين DimBranch[Region] وDimBranch[Branch Name] عند تحليل [Total Revenue]. يمكن اختيار أحدهما من Slicer ويحدث الرسم. هذا نموذج DAX للجدول الذي تنشئه الواجهة؛ لا تضفه كـMeasure.",
+        "tip": "اختبر اختيار Region ثم Branch وتأكد من تبدل أسماء الفئات مع بقاء حساب الإيراد صحيحًا.",
+        "warning": "قد يكون تبديل Dimensions غير مفيد بين Facts ذات Grain مختلفة؛ تأكد من العلاقة ومن معنى المقارنة.",
+        "visualCaption": "مثال Parameter مبني على حقول موجودة في DimBranch.",
+        "visual": {
+          "code": "View By = {\n    (\"Region\", NAMEOF('DimBranch'[Region]), 0),\n    (\"Branch\", NAMEOF('DimBranch'[Branch Name]), 1)\n}"
+        }
+      },
+      {
+        "id": 74,
+        "title": "Dynamic Titles",
+        "titleAr": "عناوين تتغير بحسب الاختيار",
+        "category": "dax",
+        "kind": "code",
+        "blurb": "عنوان الرسم يُقرأ من Measure تتفاعل مع Filter Context.",
+        "memory": "العنوان جزء من تفسير النتيجة، وليس مجرد شكل.",
+        "why": "يساعد المستخدم على معرفة هل يشاهد فرعًا واحدًا أم عدة فروع.",
+        "notice": "استخدم HASONEVALUE وSELECTEDVALUE في Title Measure ثم اربطه بالتنسيق الشرطي لعنوان الرسم.",
+        "mistake": "استخدام SELECTEDVALUE وحدها وعرض فرع واحد رغم وجود عدة اختيارات أو عدم وجود أي اختيار.",
+        "explain": "عند اختيار Region واحدة يمكن عرض اسمها؛ وعند تعدد المناطق أو عدم التحديد اعرض وصفًا عامًا صحيحًا. مثال DAX التالي يعمل بشرط وجود DimBranch[Region] وحفظه كـMeasure:",
+        "tip": "اختبر حالة اختيار Region واحدة، ثم منطقتين، ثم Clear All.",
+        "warning": "مقاييس العنوان لا تُصلح خطأ فلتر؛ تأكد أن النص يعكس السياق المعروض فعليًا.",
+        "visualCaption": "صيغة تتجنب الإيحاء باختيار وحيد عند وجود عدة اختيارات.",
+        "visual": {
+          "code": "View Title =\nIF(\n    HASONEVALUE(DimBranch[Region]),\n    \"Region: \" & SELECTEDVALUE(DimBranch[Region]),\n    \"All / Multiple Regions\"\n)"
+        }
+      },
+      {
+        "id": 75,
+        "title": "Decision-First Analysis",
+        "titleAr": "ابدأ من القرار لا من الرسم",
+        "category": "analysis",
+        "kind": "flow",
+        "blurb": "عرّف القرار الإداري المطلوب قبل إنشاء KPIs والرسومات.",
+        "memory": "قرار → سؤال → مقياس → تفسير → إجراء.",
+        "why": "التقرير بلا سؤال واضح ينتهي غالبًا إلى مجموعة رسومات بلا فائدة.",
+        "notice": "اكتب في Capstone من يستخدم التقرير، وما القرار الذي سيتخذه، وكيف ستساعده المقاييس.",
+        "mistake": "بناء تقرير مليء برسومات جميلة ثم اختراع سؤال يناسبها.",
+        "explain": "قد يسأل مدير العمليات: أي فروع لديها تراجع في On Time %؟ أو يسأل محلل الموارد: أين توجد Staffing Gaps؟ يختلف المجال لكن يظل منطق التقييم واحدًا: سؤال قابل للقياس وقرار قابل للتنفيذ.",
+        "tip": "اختصر السؤال الإداري في جملة واحدة وحدد صاحب القرار.",
+        "warning": "استنتاج الارتباط وحده لا يثبت السبب؛ تجنب ادعاء السببية دون دليل.",
+        "visualCaption": "مسار Capstone من القرار إلى الإجراء المقترح.",
+        "visual": {
+          "steps": [
+            "Decision Owner",
+            "Business Question",
+            "Validated KPI",
+            "Insight",
+            "Action"
+          ]
+        }
+      },
+      {
+        "id": 76,
+        "title": "Source-Based Metric Validation",
+        "titleAr": "التحقق من الرقم بمصدر مستقل",
+        "category": "analysis",
+        "kind": "compare",
+        "blurb": "قارن نتيجة التقرير برقم مرجعي محسوب من البيانات المصدرية تحت نفس الفلاتر.",
+        "memory": "القيمة الصحيحة لا تأتي من شكل الـCard.",
+        "why": "قد تظهر Measure صحيحة الصيغة لكنها غير صحيحة بسبب العلاقات أو سياق الفلترة.",
+        "notice": "افتح EXPECTED_RESULTS وStage3 Time Validation، وطابق السنة والفترة وجميع الفلاتر قبل المقارنة.",
+        "mistake": "الاعتماد على أرقام مكتوبة في صورة توضيحية، أو مقارنة فترات مختلفة.",
+        "explain": "في نموذج Nova بلغ صافي إيراد Jan–Apr 2026 مبلغ 12,534,018.65 JOD من المعاملات الأصلية. هذا الرقم لا ينطبق على فترة April وحدها، ولا بعد فلترة Region أو Category. بيانات المقارنة لعام 2025 اصطناعية ومعلّمة.",
+        "tip": "وثّق Period وSlicers والـMeasure والنتيجة المتوقعة والنتيجة الفعلية.",
+        "warning": "نجاح اختبار CSV لا يعني تشغيل DAX فعليًا داخل Power BI Desktop؛ هذا اختبار مستقل.",
+        "visualCaption": "مطابقة رقم بنفس السياق، وليس مجرد تشابه بصري.",
+        "visual": {
+          "goodTitle": "VALIDATED",
+          "goodText": "Jan–Apr 2026\nAll Regions, All Categories\n12,534,018.65 JOD",
+          "badTitle": "NOT VALIDATED",
+          "badText": "April only\nFiltered Region\nSame total claimed"
+        }
+      },
+      {
+        "id": 77,
+        "title": "Capstone Evidence & Rubric",
+        "titleAr": "مخرجات المشروع ومعايير التقييم",
+        "category": "analysis",
+        "kind": "flow",
+        "blurb": "المشروع النهائي يُقيّم بالأدلة وليس بعدد الرسومات.",
+        "memory": "Model + Measures + UX + Decision + QA.",
+        "why": "وجود Rubric واضحة يجعل التسليم منصفًا لمتدربين من تخصصات مختلفة.",
+        "notice": "سلّم ملف PBIX بعد اختباره، وصورًا للتقرير، وفحص مصدر رقمين، واستنتاجًا وإجراءً محددين.",
+        "mistake": "اعتبار ملف PBIP أو Screenshot وحده إثباتًا أن النموذج يعمل.",
+        "explain": "توزيع تقييم Capstone: Data Model 25 نقطة، DAX 20، Business Decision 20، Report UX 15، Interactivity 10، QA & Delivery 10. استخدم ملف CAPSTONE_RUBRIC.csv بدل التقييم الانطباعي.",
+        "tip": "احرص أن يكون الاستنتاج قابلًا للدفاع عنه أمام شخص ليس لديه تخصصك.",
+        "warning": "لا تعتبر المشروع جاهزًا للإطلاق قبل فتحه وتحديثه وحفظه داخل Power BI Desktop.",
+        "visualCaption": "مسار التسليم من الـModel إلى التقييم النهائي.",
+        "visual": {
+          "steps": [
+            "Validate Model",
+            "Check Measures",
+            "Test Interactions",
+            "Present Decision",
+            "Submit 100pt Rubric"
+          ]
+        }
+      },
+      {
+        "id": 78,
+        "title": "AI Prompt vs Executable DAX",
+        "titleAr": "الفرق بين الطلب البرمجي والكود العامل",
+        "category": "dax",
+        "kind": "compare",
+        "blurb": "كتابة Prompt دقيقة ليست بحد ذاتها إنشاء DAX قابلة للتنفيذ.",
+        "memory": "Prompt = Specification؛ DAX = Code يجب اختباره.",
+        "why": "التمييز يمنع تسليم معاينة بصرية على أنها تقرير محسوب فعليًا.",
+        "notice": "حدّد جدول Fact والـMeasure والفلتر ونوع الرسم وطريقة التعامل مع BLANK في طلب الـAI.",
+        "mistake": "نسخ كود يولده AI دون مراجعة أسماء الأعمدة أو العلاقات أو القيم.",
+        "explain": "مختبر AI Visual Design في Day 10 يكوّن Prompt ومعاينة توضيحية. تحتاج أداة AI منفصلة لتوليد الكود، ثم Power BI Desktop لاختبار الـDAX وHTML Content حسب الإمكانيات المتاحة. هذا النشاط اختياري.",
+        "tip": "قارن الكود بالـSemantic Model الفعلي؛ لا تختلق أسماء Tables أو Measures غير موجودة.",
+        "warning": "AI قد تنتج صيغة تبدو صحيحة ولكنها تفشل Compilation أو تعرض أرقامًا خاطئة.",
+        "visualCaption": "الحدود الصحيحة بين المواصفات والمخرج المُختبر.",
+        "visual": {
+          "goodTitle": "AI PROMPT",
+          "goodText": "Business question\nFields + Measure\nExpected behavior",
+          "badTitle": "WORKING RESULT",
+          "badText": "Compile DAX\nTest Filter Context\nMatch native values"
+        }
+      },
+      {
+        "id": 79,
+        "title": "Native vs HTML Visual Parity",
+        "titleAr": "مطابقة الرسم التقليدي مع HTML",
+        "category": "analysis",
+        "kind": "compare",
+        "blurb": "إذا استخدمت HTML Visual اختيارية، يجب أن تحسب نفس القيم التي يعرضها Native Visual.",
+        "memory": "نفس البيانات والفلاتر = نفس النتائج.",
+        "why": "جمال CSS لا يبرر أي اختلاف في إجمالي الإيرادات أو النسب.",
+        "notice": "قارن نفس Category وYear Month في رسمين، وتحقق من BLANK والصفر والقيم السالبة والترتيب.",
+        "mistake": "مقارنة رسمين مع Slicers مختلفة أو استخدام Dataset وهمية في معاينة HTML.",
+        "explain": "يمكنك تصميم Horizontal Bar مخصص لعرض [Total Revenue] حسب DimProduct[Category]. قبل اعتماد التصميم، قارنه برسم Bar عادي تحت الفلاتر نفسها؛ يجب أن تتطابق الأرقام حتى لو اختلف التنسيق.",
+        "tip": "احتفظ بنسخة Native كمصدر تحقق وأرفق Screenshot لنتيجة متطابقة.",
+        "warning": "توافق HTML Content وقيود Custom Visual تعتمد على البيئة والإعدادات؛ اختبر داخل Desktop.",
+        "visualCaption": "المعيار هو تكافؤ البيانات، لا تطابق الشكل.",
+        "visual": {
+          "goodTitle": "PASS",
+          "goodText": "Same Date + Category\nSame DAX Measure\nSame values",
+          "badTitle": "FAIL",
+          "badText": "Hard-coded values\nDifferent filters\nHidden negative data"
+        }
+      },
+      {
+        "id": 80,
+        "title": "Static-First & Accessibility",
+        "titleAr": "عرض ثابت أولًا مع إمكانية الوصول",
+        "category": "analysis",
+        "kind": "compare",
+        "blurb": "صمّم Visual يظل مفهومًا دون حركة، ومع ألوان واضحة ونص قابل للقراءة.",
+        "memory": "Animation تحسين بصري، لا وسيلة لعرض الرقم نفسه.",
+        "why": "بعض المستخدمين يفضّلون تقليل الحركة أو يتصفحون على شاشات صغيرة.",
+        "notice": "اعرض الأعمدة والقيم من البداية، واستخدم تباينًا مناسبًا ووسومًا صريحة ووحدات صحيحة.",
+        "mistake": "إخفاء القيمة حتى تنتهي الحركة، أو الاعتماد على لون وحده لتمييز التحسن والتراجع.",
+        "explain": "في AI Visual اختيارية، تظهر قيمة Staffing Gap ونوع الإشارة دون Animation. يمكن إضافة انتقال بسيط بعد ذلك، لكن عند تعطّل الحركة أو صغر الشاشة تبقى الرسالة قابلة للفهم.",
+        "tip": "اختبر العرض دون حركة، وبحجم صغير، ومع الصفر وBLANK والقيم السالبة.",
+        "warning": "لا تُخفِ نتائج غير مرغوبة أو قيمًا ناقصة باستخدام CSS أو ألوان الخلفية.",
+        "visualCaption": "حركة اختيارية فوق معلومات موجودة مسبقًا.",
+        "visual": {
+          "goodTitle": "STATIC-FIRST",
+          "goodText": "Visible values\nClear labels + units\nReadable without motion",
+          "badTitle": "MOTION-DEPENDENT",
+          "badText": "Numbers appear late\nColor only\nClipped at small size"
+        }
       }
     ];
 
@@ -1476,9 +1841,9 @@ SUMX (
       5:[50,51,52,53],
       6:[54,55,56,57],
       7:[19,58,59,60,61,62,20,64],
-      8:[],
-      9:[],
-      10:[]
+      8:[65,66,67,68,69],
+      9:[70,71,72,73,74],
+      10:[75,76,77,78,79,80]
     };
 
     const conceptToDay = Object.fromEntries(
@@ -1489,6 +1854,9 @@ SUMX (
 
     // روابط صغيرة فقط بين المفاهيم القريبة؛ لا تظهر إلا عند فتح Card.
     const relatedMap = {
+      65:[66,67,69], 66:[65,36,44], 67:[68,57,69], 68:[67,69,48], 69:[68,71,72],
+      70:[61,71,74], 71:[72,70,57], 72:[71,70,57], 73:[37,70,74], 74:[73,8,55],
+      75:[36,76,77], 76:[55,75,79], 77:[75,76,80], 78:[79,80,53], 79:[78,76,80], 80:[79,66,77],
       47:[2,3,5],
       48:[5,6,7],
       49:[4,47,48],
@@ -1567,7 +1935,7 @@ SUMX (
         ? '<span class="day-tag">معرفة إضافية</span>'
         : (day ? '<span class="day-tag">Day '+day+'</span>' : '');
       return `
-        <article class="card" data-id="${c.id}" style="--card-color:${categoryMap[c.category].color}">
+        <article class="card" role="button" tabindex="0" aria-label="افتح مفهوم ${c.titleAr}" data-id="${c.id}" style="--card-color:${categoryMap[c.category].color}">
           <div class="card-top">
             <span><span class="pill">${categoryMap[c.category].label}</span>${meta}</span>
             <span class="count">#${String(c.id).padStart(2,'0')}</span>
@@ -1582,7 +1950,15 @@ SUMX (
     }
 
     function wireCards(root){
-      [...root.querySelectorAll('.card')].forEach(card => card.addEventListener('click', () => openConcept(Number(card.dataset.id))));
+      [...root.querySelectorAll('.card')].forEach(card => {
+        card.addEventListener('click', () => openConcept(Number(card.dataset.id)));
+        card.addEventListener('keydown', (event) => {
+          if(event.key === 'Enter' || event.key === ' '){
+            event.preventDefault();
+            openConcept(Number(card.dataset.id));
+          }
+        });
+      });
     }
 
     function renderPath(){
