@@ -87,6 +87,18 @@ function initCourseDayJourney(day, courseHome) {
     section.innerHTML = `<div class="mj6-content"><span class="mj6-kicker">X ACADEMY / DAY 06 / HYBRID LAB</span><h2 id="mj6-title">من مجرد متوسط<br><em>لاداء موزون.</em></h2><p>نحسب نتيجة الاهداف بدقة، ونحولها الى صفحة تقرير تفاعلية من نفس مشروعنا الحالي.</p><div class="mj6-tags"><span>SUMX + DIVIDE</span><span>REMOVEFILTERS</span><span>BOOKMARKS</span></div></div><div class="mj6-pipeline" aria-label="مسار التطبيق"><div><strong>KPIs</strong><small>SCORES</small></div><b>→</b><div><strong>WEIGHTS</strong><small>OBJECTIVES</small></div><b>→</b><div class="mj6-result"><strong>PAGE 03</strong><small>INTERACTIVE</small></div></div>`;
     document.querySelector(`.mj-layout`).before(section);
   }
+  // Day 08: a non-interactive visual introduction; learner sees no instructor-only materials.
+  if (day.id === 8) {
+    const stylesheet = document.createElement(`link`);
+    stylesheet.rel = `stylesheet`;
+    stylesheet.href = `week1/day8/web/day08-hero.css?v=20261103-day8`;
+    document.head.append(stylesheet);
+    const section = document.createElement(`section`);
+    section.className = `mj-day8-hero`;
+    section.setAttribute(`aria-labelledby`, `mj8-title`);
+    section.innerHTML = `<div class="mj8-intro"><span class="mj8-kicker">X ACADEMY / DAY 08 / SALES LAB</span><h2 id="mj8-title">من بيانات المبيعات<br><em>لقرار واضح</em></h2><p>نكمل على مشروع Nova ونطلع بافضل خمسة منتجات، جدول تحليلي مقروء ومقارنات زمنية قابلة للفحص</p><div class="mj8-tracks"><span>TOOLTIP</span><span>MATRIX</span><span>TOP 05</span><span>QUICK MEASURES</span><span>SCROLLER</span></div></div><div class="mj8-visual" aria-hidden="true"><div class="mj8-visual-label">INSIGHT PIPELINE / 03 LAYERS</div><div class="mj8-node"><span>01</span><strong>EXPLORE</strong><small>TOOLTIP + MATRIX</small></div><div class="mj8-node"><span>02</span><strong>RANK</strong><small>TOP 05</small></div><div class="mj8-node accent"><span>03</span><strong>COMPARE</strong><small>YOY / QOQ</small></div></div>`;
+    document.querySelector(`.mj-layout`)?.before(section);
+  }
   // Day 04: the user-selected data model graphic is the full-width lesson introduction.
   if (day.id === 4) {
     const diagram = 'week1/day4/media/Day04_Data_Model_Relationships.webp';
