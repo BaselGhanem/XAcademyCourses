@@ -1483,15 +1483,14 @@ const DAYS = [
       "Sync Slicers",
       "Page Navigation",
       "Theme",
-      "Visual Hierarchy",
-      "Mobile Layout"
+      "Visual Hierarchy"
     ],
     "build": [
       "نبني صفحة سادسة Executive Insights بملخص القرارات",
       "نضيف Sidebar موحدا للصفحات الست",
       "نطور Bookmarks وSelection Pane مع Show/Hide Panel من غير مسح الفلاتر",
       "نضبط Sync Slicers على الصفحات المناسبة وBack Buttons",
-      "نستعرض تجربة الموبايل ومساحات العناصر وتناسق الالوان والخطوط",
+      "نراجع التسلسل البصري وتناسق الالوان والخطوط والمسافات بين العناصر",
       "نختبر انتقال المستخدم بين الصفحات الست"
     ],
     "challenge": "نفذي رحلة مدير من الملخص الى القسم الى الموظف ثم العودة من غير فقدان سياق مهم",
