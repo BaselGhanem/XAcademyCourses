@@ -29,8 +29,18 @@ function initCourseDayJourney(day, courseHome) {
   document.title = `اليوم ${day.id} | ${day.titleAr} | X Academy`;
   initMariamJourney(day, courseHome, chapters);
   if (day.id === 9) {
-    const style = document.createElement(`link`); style.rel = `stylesheet`; style.href = `week1/day9/web/day09.css?v=20261105`; document.head.append(style);
-    const lab = document.createElement(`a`); lab.className = `d9-lab`; lab.href = `week1/day9/web/Navigation_Lab.html`; lab.target = `_blank`; lab.rel = `noopener`; lab.textContent = `جربي القائمة التفاعلية · Navigation Lab ↗`; document.querySelector(`.mj-layout`)?.before(lab);
+    const style = document.createElement(`link`); style.rel = `stylesheet`; style.href = `week1/day9/web/day09.css?v=20261105b`; document.head.append(style);
+    const lab = document.createElement(`a`); lab.className = `d9-lab`; lab.href = `week1/day9/web/Navigation_Lab.html`; lab.target = `_blank`; lab.rel = `noopener`; lab.textContent = `جربي القائمة التفاعلية · Navigation Lab ↗`; document.body.classList.add(`day9-workspace`); document.querySelector(`.mj-chapter-browser`)?.append(lab);
+    const feedback=document.createElement(`script`);feedback.src=`week1/day9/web/feedback.js?v=20261105b`;document.body.append(feedback);
+    document.querySelectorAll(`.mj-chapter`).forEach(chapter=>{
+      const steps=[...chapter.querySelectorAll(`.mj-block`)];if(steps.length<2)return;let index=0;
+      const pager=document.createElement(`div`);pager.className=`d9-step-pager`;
+      const previous=document.createElement(`button`),next=document.createElement(`button`),label=document.createElement(`span`);
+      previous.textContent=`الخطوة السابقة`;next.textContent=`الخطوة التالية`;
+      previous.type=next.type=`button`;pager.append(previous,label,next);steps.at(-1).after(pager);
+      function show(){steps.forEach((step,i)=>step.hidden=i!==index);label.textContent=`${index+1} / ${steps.length}`;previous.disabled=index===0;next.disabled=index===steps.length-1;}
+      previous.onclick=()=>{index--;show()};next.onclick=()=>{index++;show();window.day9Feedback?.(`خطوة جديدة · نكمل التطبيق`)};show();
+    });
   }
   if (day.id === 4 || day.id === 5) document.body.classList.add(`mj-has-preamble`);
   // Day 05 actual taught content; weighted performance lab remains optional prep for Day 07.
