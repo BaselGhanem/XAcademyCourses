@@ -1464,39 +1464,315 @@ const DAYS = [
     ]
   ]
 },
-  {
-    "id": 9,
-    "date": null,
-    "weekday": null,
-    "ready": false,
-    "phase": "UX",
-    "teachingStatus": "planned",
-    "title": "Premium Sidebar, Bookmarks & Executive UX",
-    "titleAr": "نحول التقرير الى تجربة ادارية متكاملة",
-    "hook": "تقرير الست صفحات رح يصير اسهل بالاستخدام لما التنقل والفلاتر والمحتوى يتصرفوا بشكل متناسق",
-    "mission": "نكمل صفحة Executive Insights السادسة ونوحد Sidebar وBookmarks وButtons وSync Slicers عبر صفحات التقرير",
-    "topics": [
-      "Advanced Bookmarks",
-      "Buttons",
-      "Selection Pane",
-      "Sidebar Navigation",
-      "Sync Slicers",
-      "Page Navigation",
-      "Theme",
-      "Visual Hierarchy"
+{
+  "id": 9,
+  "date": null,
+  "weekday": null,
+  "ready": true,
+  "phase": "UX",
+  "teachingStatus": "prepared",
+  "title": "Day 09 · Executive Experience Studio",
+  "titleAr": "نحول التقرير الى تجربة ادارية متكاملة",
+  "hook": "تقرير الست صفحات رح يصير اسهل بالاستخدام لما التنقل والفلاتر والمحتوى يتصرفوا بشكل متناسق",
+  "mission": "نبني Executive Insights ونوحد القائمة الجانبية والتنقل ونحافظ على الفلاتر ضمن صفحاتها المناسبة",
+  "topics": [
+    "Advanced Bookmarks",
+    "Buttons",
+    "Selection Pane",
+    "Sidebar Navigation",
+    "Sync Slicers",
+    "Page Navigation",
+    "Theme",
+    "Visual Hierarchy"
+  ],
+  "build": [
+    "نبني صفحة سادسة Executive Insights بملخص القرارات",
+    "نضيف Sidebar موحدا للصفحات الست",
+    "نطور Bookmarks وSelection Pane مع Show/Hide Panel من غير مسح الفلاتر",
+    "نضبط Sync Slicers على الصفحات المناسبة وBack Buttons",
+    "نراجع التسلسل البصري وتناسق الالوان والخطوط والمسافات بين العناصر",
+    "نختبر انتقال المستخدم بين الصفحات الست"
+  ],
+  "challenge": "نفذي رحلة مدير من الملخص الى القسم الى الموظف ثم العودة من غير فقدان سياق مهم",
+  "deliverable": "ست صفحات مترابطة بملاحة Premium وفلاتر متناسقة",
+  "resources": [],
+  "learningSections": [
+    {
+      "name": "تهيئة",
+      "title": "نحدد رحلة المستخدم",
+      "lead": "افتحي مشروعك المحفوظ من اليوم الثامن ونكمل عليه تجربة التنقل",
+      "steps": [
+        {
+          "title": "الخطوة 1",
+          "copy": "افتحي نسخة نهاية اليوم الثامن ثم Save As باسم Day09_Executive_Experience.pbix"
+        },
+        {
+          "title": "الخطوة 2",
+          "copy": "اكتبي اسم كل صفحة فعلية وحددي صفحات التقرير وصفحات Tooltip وDrillthrough"
+        },
+        {
+          "title": "الخطوة 3",
+          "copy": "الهدف ست صفحات رئيسية ولا نحسب الصفحات المساعدة ضمنها"
+        }
+      ],
+      "callout": "اختاري صفحة البداية وحددي سؤالا واحدا لكل صفحة • اذا ناقص صفحة، انشئيها لهدف واضح"
+    },
+    {
+      "name": "ملخص تنفيذي",
+      "title": "نبني Executive Insights",
+      "lead": "اول شاشة لازم تعطيني ملخص اقدر اثق فيه، وبعدها اخد التفاصيل من مكانها",
+      "steps": [
+        {
+          "title": "الخطوة 1",
+          "copy": "انشئي Executive Insights اذا لم تكن موجودة"
+        },
+        {
+          "title": "الخطوة 2",
+          "copy": "انسخي بطاقتي Employee Count وAssessment Count المعتمدتين من صفحات HR"
+        },
+        {
+          "title": "الخطوة 3",
+          "copy": "اضيفي رسما موجودا مناسبا للقسم"
+        },
+        {
+          "title": "الخطوة 4",
+          "copy": "استخدمي النتيجة الموزونة فقط اذا تم التحقق منها، مع توضيح مصدر التقييم"
+        },
+        {
+          "title": "الخطوة 5",
+          "copy": "ضعي عنوانا ووحدة واضحة"
+        }
+      ],
+      "callout": "قارني البطاقات بالصفحة الاصلية تحت نفس الفلاتر • اكتبي استنتاجا واحدا مدعوما بالبيانات"
+    },
+    {
+      "name": "ملاحة",
+      "title": "Sidebar واضح ومتناسق",
+      "lead": "القائمة مش زينة، كل اسم فيها لازم ياخدني للمكان المتوقع",
+      "steps": [
+        {
+          "title": "الخطوة 1",
+          "copy": "Insert > Buttons > Navigator > Page navigator"
+        },
+        {
+          "title": "الخطوة 2",
+          "copy": "من Grid layout اختاري اتجاها عموديا"
+        },
+        {
+          "title": "الخطوة 3",
+          "copy": "ضعيه فوق خلفية جانبية بعرض ثابت"
+        },
+        {
+          "title": "الخطوة 4",
+          "copy": "اضبطي Default وHover وSelected بتباين واضح"
+        },
+        {
+          "title": "الخطوة 5",
+          "copy": "من Pages استبعدي الصفحات المساعدة والمخفية حسب الخيارات المتاحة"
+        },
+        {
+          "title": "الخطوة 6",
+          "copy": "سمي الصفحات باسم مفهوم"
+        }
+      ],
+      "callout": "جربي كل وجهة باستخدام Ctrl + Click في وضع التحرير • انسخي القائمة للصفحات الرئيسية بعد تثبيت اسمائها"
+    },
+    {
+      "name": "طبقات",
+      "title": "نرتب Selection Pane",
+      "lead": "قبل ما نخفي ونظهر، بدنا نعرف كل عنصر اسمه ومكانه",
+      "steps": [
+        {
+          "title": "الخطوة 1",
+          "copy": "View > Selection وBookmarks"
+        },
+        {
+          "title": "الخطوة 2",
+          "copy": "سمي خلفية القائمة Nav_BG والنافيجيتور Nav_Pages وزر الاغلاق Nav_Close"
+        },
+        {
+          "title": "الخطوة 3",
+          "copy": "اجمعيها في Nav_Panel"
+        },
+        {
+          "title": "الخطوة 4",
+          "copy": "اتركي زر الفتح Nav_Open خارج المجموعة"
+        },
+        {
+          "title": "الخطوة 5",
+          "copy": "ارفعي المجموعة فوق الرسوم وراجعي ترتيب الطبقات"
+        }
+      ],
+      "callout": "اخفي Nav_Panel من علامة العين واظهري Nav_Open ثم اعكسي الحالة"
+    },
+    {
+      "name": "Bookmarks",
+      "title": "فتح واغلاق بدون فقدان الفلاتر",
+      "lead": "اختاري قسم، افتحي القائمة وسكريها، القسم لازم يضل مثل ما هو",
+      "steps": [
+        {
+          "title": "الخطوة 1",
+          "copy": "اظهري Nav_Panel واخفي Nav_Open"
+        },
+        {
+          "title": "الخطوة 2",
+          "copy": "حددي عناصر المجموعة وزر الفتح في Selection قبل Add bookmark"
+        },
+        {
+          "title": "الخطوة 3",
+          "copy": "سميها HR_Overview_Nav_Open"
+        },
+        {
+          "title": "الخطوة 4",
+          "copy": "اطفئي Data وCurrent page وفعلي Display واختاري Selected visuals ثم Update"
+        },
+        {
+          "title": "الخطوة 5",
+          "copy": "اعكسي الظهور وانشئي HR_Overview_Nav_Closed بنفس العناصر والاعدادات"
+        },
+        {
+          "title": "الخطوة 6",
+          "copy": "اربطي زر الفتح والاغلاق: Action > Bookmark"
+        }
+      ],
+      "callout": "غيري Slicer ثم Ctrl + Click لفتح واغلاق القائمة مرتين • عند نقل التصميم لصفحة اخرى انشئي زوج Bookmarks خاصا بعناصر تلك الصفحة وحدثي وجهات الازرار"
+    },
+    {
+      "name": "Sync Slicers",
+      "title": "نحافظ على السياق الصحيح",
+      "lead": "فلتر القسم منطقي يمشي معي بين صفحات الموظفين، بس ما اله معنى يتحكم بمبيعات Nova",
+      "steps": [
+        {
+          "title": "الخطوة 1",
+          "copy": "حددي Slicer من حقل HR مشترك مرتبط بالنموذج"
+        },
+        {
+          "title": "الخطوة 2",
+          "copy": "View > Sync slicers"
+        },
+        {
+          "title": "الخطوة 3",
+          "copy": "فعلي Sync فقط لصفحات HR المناسبة وحددي Visible حسب الحاجة"
+        },
+        {
+          "title": "الخطوة 4",
+          "copy": "لا تزامني الحقل مع صفحات Nova غير المرتبطة"
+        },
+        {
+          "title": "الخطوة 5",
+          "copy": "للمبيعات استخدمي Slicer من نموذج المبيعات"
+        },
+        {
+          "title": "الخطوة 6",
+          "copy": "اختبري كل مجموعة بشكل مستقل"
+        }
+      ],
+      "callout": "اختاري قسما وانتقلي بين صفحتين HR • ارجعي وافحصي الاختيار • افتحي المبيعات وتحققي انها لا توحي بتطبيق فلتر HR"
+    },
+    {
+      "name": "اتساق",
+      "title": "نوحد الواجهة ونضبط الرجوع",
+      "lead": "المستخدم لازم يلاقي نفس مكان القائمة والعنوان بكل صفحة",
+      "steps": [
+        {
+          "title": "الخطوة 1",
+          "copy": "ثبتي الخلفية الفاتحة واللون #099999 للعناصر المهمة"
+        },
+        {
+          "title": "الخطوة 2",
+          "copy": "استخدمي Align وDistribute ومسافات متناسقة"
+        },
+        {
+          "title": "الخطوة 3",
+          "copy": "اضيفي زر Home من Action > Page navigation الى Executive Insights"
+        },
+        {
+          "title": "الخطوة 4",
+          "copy": "استخدمي Back في صفحة Drillthrough الموجودة للرجوع ضمن الرحلة"
+        },
+        {
+          "title": "الخطوة 5",
+          "copy": "اضيفي Alt text وعناوين واضحة"
+        },
+        {
+          "title": "الخطوة 6",
+          "copy": "اضبطي Tab order من Selection"
+        }
+      ],
+      "callout": "طبقي التصميم على الصفحات الرئيسية الموجودة • تحققي من كل زوج Bookmarks بعد النسخ ومن عدم تغطية الرسوم"
+    },
+    {
+      "name": "تسليم",
+      "title": "نختبر رحلة المدير",
+      "lead": "هلا انا المدير وانتي رح تورجيني كيف اوصل للمعلومة بثلاث خطوات مفهومة",
+      "steps": [
+        {
+          "title": "الخطوة 1",
+          "copy": "ابدئي من Executive Insights"
+        },
+        {
+          "title": "الخطوة 2",
+          "copy": "اختاري قسما"
+        },
+        {
+          "title": "الخطوة 3",
+          "copy": "افتحي واغلقي القائمة"
+        },
+        {
+          "title": "الخطوة 4",
+          "copy": "انتقلي لصفحة HR اخرى وافحصي الفلتر"
+        },
+        {
+          "title": "الخطوة 5",
+          "copy": "جربي صفحة تفاصيل الموظف اذا كانت موجودة ثم Back"
+        },
+        {
+          "title": "الخطوة 6",
+          "copy": "افتحي Nova وافحصي سياق المبيعات"
+        },
+        {
+          "title": "الخطوة 7",
+          "copy": "افحصي جميع وجهات التنقل ثم احفظي الملف"
+        }
+      ],
+      "callout": "احفظي Day09_Executive_Experience.pbix بعد فحص التنقل والفلاتر والارقام"
+    }
+  ],
+  "learningScenes": [
+    [
+      "REPORT",
+      "JOURNEY"
     ],
-    "build": [
-      "نبني صفحة سادسة Executive Insights بملخص القرارات",
-      "نضيف Sidebar موحدا للصفحات الست",
-      "نطور Bookmarks وSelection Pane مع Show/Hide Panel من غير مسح الفلاتر",
-      "نضبط Sync Slicers على الصفحات المناسبة وBack Buttons",
-      "نراجع التسلسل البصري وتناسق الالوان والخطوط والمسافات بين العناصر",
-      "نختبر انتقال المستخدم بين الصفحات الست"
+    [
+      "EXECUTIVE",
+      "INSIGHTS"
     ],
-    "challenge": "نفذي رحلة مدير من الملخص الى القسم الى الموظف ثم العودة من غير فقدان سياق مهم",
-    "deliverable": "ست صفحات مترابطة بملاحة Premium وفلاتر متناسقة",
-    "resources": []
-  },
+    [
+      "SIDEBAR",
+      "NAVIGATION"
+    ],
+    [
+      "LAYERS",
+      "SELECTION"
+    ],
+    [
+      "OPEN / CLOSE",
+      "KEEP FILTERS"
+    ],
+    [
+      "SYNC",
+      "CONTEXT"
+    ],
+    [
+      "ALIGN",
+      "REFINE"
+    ],
+    [
+      "TEST",
+      "DELIVER"
+    ]
+  ]
+},
   {
     "id": 10,
     "date": null,

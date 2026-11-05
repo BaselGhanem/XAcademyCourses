@@ -148,3 +148,13 @@
 ## Day 07 approved revision — 31/10/2026
 
 Quick Measures QoQ and YoY, 8 quarters, Card context during import (not a separate lesson), Comparison page, Field Parameters, Layout Studio and Scroller demo, and Nova Sales independent challenge. Schedule: 40 explanation, 60 guided, 20 challenge. Preserve latest trainer-provided Day06 PBIX unchanged; older Day05 backup is not the latest. New historical and H2 add-on CSVs are synthetic and trainer-validated separately.
+
+
+## تجهيز اليوم التاسع — 5 نوفمبر 2026
+الحالة: جاهز للتدريس، وليس سجلا بانه تم تدريسه
+8 مراحل: تهيئة 10، Executive Insights 15، Sidebar 15، Selection 10، Bookmarks 25، Sync Slicers 15، اتساق 15، QA 15 = 120 دقيقة
+تم الغاء Mobile Layout من الدورة بناء على قرار المدرب
+نستكمل PBIX الفعلي من اليوم الثامن، دون افتراض اكتمال الست صفحات ودون اعادة استيراد البيانات
+صفحات HR وNova لها نطاقات فلاتر منفصلة حسب النموذج، وBookmarks الاظهار تخزن Display للعناصر المحددة مع Data وCurrent page غير مفعلة
+تم تجهيز صفحة المتدربة ودليل مدرب خاص ومختبر تفاعلي للسلوك؛ لم يتم تعديل PBIX نفسه
+اليوم العاشر يبقى HTML/SVG والاختبار والتسليم
