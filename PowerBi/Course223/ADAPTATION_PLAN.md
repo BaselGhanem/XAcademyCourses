@@ -80,7 +80,7 @@
 
 ### Day 09 — Premium Navigation & UX (120 دقيقة)
 
-ننشئ الصفحة السادسة **Executive Insights**، ونوحد Sidebar مع Buttons وPage Navigation وAdvanced Bookmarks (Selection Pane وData OFF وDisplay ON وSelected visuals)، وSync Slicers على الصفحات المناسبة. نركز على hierarchy وspacing وmobile layout وTheme وهوية X Academy. لا نعيد بناء المقاييس الصحيحة من الصفر.
+ننشئ الصفحة السادسة **Executive Insights**، ونوحد Sidebar مع Buttons وPage Navigation وAdvanced Bookmarks (Selection Pane وData OFF وDisplay ON وSelected visuals)، وSync Slicers على الصفحات المناسبة. نركز على hierarchy وspacing وTheme وهوية X Academy. لا نعيد بناء المقاييس الصحيحة من الصفر.
 
 ### Day 10 — HTML/SVG & Final QA (120 دقيقة)
 
