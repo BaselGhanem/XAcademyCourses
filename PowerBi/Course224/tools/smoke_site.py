@@ -29,7 +29,20 @@ async def smoke(base):
         await page.locator('#loginBtn').click()
         assert await page.locator('#errorBox').is_visible(), 'No error for missing identity'
         await page.locator('#name').fill('QA Learner')
-        await page.locator('#interest').select_option('finance')
+        await page.locator('#interestSummary').click()
+        await page.locator('button[data-domain="finance"]').click()
+        assert await page.locator('#interest').input_value() == 'finance'
+        assert 'المالية' in await page.locator('#interestLabel').inner_text()
+        assert not await page.locator('#interestPicker').evaluate('(node) => node.open')
+        # Keyboard selection must not submit the login form.
+        await page.locator('#interestSummary').focus()
+        await page.keyboard.press('ArrowDown')
+        await page.keyboard.press('End')
+        await page.keyboard.press('Enter')
+        assert await page.locator('#interest').input_value() == 'other'
+        assert page.url.endswith('/login.html')
+        await page.locator('#interestSummary').click()
+        await page.locator('button[data-domain="finance"]').click()
         await page.locator('#password').fill('PowerBI')
         await page.locator('#loginBtn').click()
         await page.wait_for_url('**/dashboard.html')
