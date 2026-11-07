@@ -252,7 +252,7 @@
       const completed = done.includes(day.id);
       document.getElementById('completeBox').classList.toggle('completed', completed);
       document.getElementById('completeTitle').textContent = completed ? 'مكتمل ✓' : 'أنهيت هذا اليوم؟';
-      document.getElementById('completeCopy').textContent = completed ? 'تم حفظ تقدمك على هذا الجهاز.' : 'سجل إتمامك ليظهر تقدمك داخل Course Hub.';
+      document.getElementById('completeCopy').textContent = completed ? 'تم حفظ تقدمك.' : 'سجل إتمامك ليظهر تقدمك داخل Course Hub.';
       document.getElementById('completeBtn').textContent = completed ? 'إلغاء علامة الإتمام' : `سجّل إتمام Day ${day.id}`;
       document.getElementById('completeBtn').className = `btn ${completed ? 'btn-ghost' : 'btn-primary'}`;
       document.getElementById('completeBtn').style.width='100%';
