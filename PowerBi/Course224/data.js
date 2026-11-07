@@ -152,7 +152,7 @@ const DAYS = [
     phase: `APPLY`,
     title: `Four Domains, Four Decisions`,
     titleAr: `أربعة مجالات وأربع قرارات`,
-    hook: `مهارات مشتركة، مع أمثلة من المبيعات والعمليات والمالية والموارد البشرية يمكن تطبيق منهجها في تخصصات أخرى.`,
+    hook: `طبق مهارات التحليل على اسئلة من المبيعات والعمليات والمالية والموارد البشرية.`,
     mission: `تعلّم مقارنة الأداء عبر الزمن باستخدام Measure صحيحة وDate Table. اختر حالة أعمال مناسبة لك من أربعة أمثلة قابلة للتعميم على تخصصات أخرى.`,
     topics: [`Calendar Table`, `Filter Context over Dates`, `Previous Month`, `MoM Growth %`, `Previous Year`, `YoY Growth %`, `YTD`, `Non-additive Snapshot Metrics`, `KPI Cards`, `Line / Bar / Matrix`, `Source-based Validation`],
     build: [`Open Nova_Day07_START_PBIP.zip and open Nova.pbip in Power BI Desktop`, `Refresh and validate 160K original Jan–Apr 2026 sales plus 160K synthetic 2025 comparison records`, `Mark DimDate[Date] as the date table`, `Choose a domain scenario without selecting a named learner`, `Build 4 KPI Cards`, `Compare Previous Month and Previous Year within chosen period`, `Compute MoM, YoY and YTD where meaningful`, `Avoid summing Workforce snapshots across months`, `Build a trend, a bar chart and a matrix`, `Test Year / Year Month / domain filters`, `Validate one current and one comparison figure against Stage3 Expected Results`, `Save as PBIX from Power BI Desktop only after validation`],
@@ -230,7 +230,7 @@ const DAYS = [
       { name: 'Day10 Capstone Pack', type: 'ZIP', url: 'week3/day10/downloads/Day10_CAPSTONE.zip', note: 'PBIP ونموذج موحّد وRubric من 100 نقطة واختبارات QA' },
       { name: 'Capstone Guide', type: 'Guide', url: 'week3/day10/CAPSTONE_GUIDE.md', note: 'متطلبات المشروع وتوزيع الـ120 دقيقة' },
       { name: 'Capstone Rubric', type: 'Guide', url: 'week3/day10/CAPSTONE_RUBRIC.csv', note: 'ستة معايير مجموعها 100 نقطة' },
-      { name: 'Manual Desktop QA', type: 'Guide', url: 'week3/day10/CAPSTONE_QA_CHECKLIST.md', note: 'اختبارات لا يمكن إثباتها من GitHub وحده' },
+      { name: 'Manual Desktop QA', type: 'Guide', url: 'week3/day10/CAPSTONE_QA_CHECKLIST.md', note: 'راجع التقرير وتحقق من التفاعل ودقة النتائج في Power BI Desktop' },
       { name: 'AI Visual Design Lab — Optional', type: 'WEB', url: 'week3/day10/ai-visual-design-lab.html', note: 'Prompt Builder ومعاينة تعليمية، وليس مولّد DAX فعلي' },
       { name: 'Domain Visual Missions — Optional', type: 'WEB', url: 'week3/day10/student-missions.html', note: 'تحديات عامة دون أسماء متدربين' },
       { name: 'Reference DAX — Optional', type: 'Guide', url: 'week3/day10/examples/README.md', note: 'أمثلة يجب اختبارها داخل Power BI Desktop' }
