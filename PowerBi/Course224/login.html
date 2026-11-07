@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>مركز الدورة | Power BI Specialist</title>
   <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .interest-picker{position:relative}
+    .interest-picker summary{display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;list-style:none;font-family:Almarai,sans-serif}
+    .interest-picker summary::-webkit-details-marker{display:none}
+    .interest-picker summary:focus-visible{outline:2px solid #099999;outline-offset:3px}
+    .interest-picker[open] summary{border-color:#099999}
+    .interest-options{position:absolute;inset-inline:0;top:calc(100% + 8px);z-index:20;max-height:260px;overflow-y:auto;overscroll-behavior:contain;padding:6px;background:#171c20;border:1px solid rgba(9,153,153,.4);border-radius:14px;box-shadow:0 18px 45px #0008;scrollbar-width:thin;scrollbar-color:#376565 #171c20}
+    .interest-options button{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:start;padding:12px 14px;border:0;border-radius:9px;background:transparent;color:#dce5e8;font:inherit;font-size:.85rem;line-height:1.5}
+    .interest-options button span{visibility:hidden;color:#55d2cb}
+    .interest-options button[aria-pressed="true"]{background:rgba(9,153,153,.17);color:#72ded8}
+    .interest-options button[aria-pressed="true"] span{visibility:visible}
+    .interest-options button:hover,.interest-options button:focus-visible{background:rgba(9,153,153,.24);outline:2px solid #099999;outline-offset:-2px}
+  </style>
 </head>
 <body>
   <main class="auth-page">
@@ -17,7 +31,7 @@
         <div>
           <span class="hero-kicker"><i></i> COURSE HUB</span>
           <h1>مكان واحد<br>لكل <span>Day.</span></h1>
-          <p>الخطة، التسجيل، الملفات، التحدي، والمخرج النهائي لكل يوم. ادخل باسمك لتبقى نسبة تقدمك محفوظة على هذا الجهاز.</p>
+          <p>الخطة، التسجيل، الملفات، التحدي، والمخرج النهائي لكل يوم. ادخل لمتابعة دروسك وتمارينك.</p>
         </div>
         <div class="project-flow">
           <span class="flow-pill">10 DAYS</span><span class="flow-arrow">→</span><span class="flow-pill">20 HOURS</span><span class="flow-arrow">→</span><span class="flow-pill">1 PROJECT</span>
@@ -34,19 +48,26 @@
         </div>
         <div class="form-group">
           <label class="form-label" for="interest">مجال اهتمامك (اختياري)</label>
-          <select class="form-input" id="interest">
-            <option value="general">تحليل البيانات العام</option><option value="sales">المبيعات والأداء</option>
-            <option value="operations">العمليات</option><option value="finance">المالية</option>
-            <option value="hr">الموارد البشرية</option><option value="marketing">التسويق</option>
-            <option value="education">التعليم</option><option value="healthcare">الإدارة الصحية</option>
-            <option value="technology">التقنية</option><option value="other">مجال آخر</option>
-          </select>
-          <div class="form-hint">اختيارك لا يقيّد الدروس المتاحة؛ كل المهارات مشتركة.</div>
+          <input id="interest" type="hidden" value="general">
+          <details class="interest-picker" id="interestPicker">
+            <summary class="form-input" aria-label="مجال اهتمامك" id="interestSummary"><span id="interestLabel">تحليل البيانات العام</span><span aria-hidden="true">⌄</span></summary>
+            <div class="interest-options" role="group" aria-label="اختر مجال اهتمامك">
+              <button type="button" data-domain="general" aria-pressed="true">تحليل البيانات العام<span aria-hidden="true">✓</span></button>
+              <button type="button" data-domain="sales" aria-pressed="false">المبيعات والأداء<span aria-hidden="true">✓</span></button>
+              <button type="button" data-domain="operations" aria-pressed="false">العمليات<span aria-hidden="true">✓</span></button>
+              <button type="button" data-domain="finance" aria-pressed="false">المالية<span aria-hidden="true">✓</span></button>
+              <button type="button" data-domain="hr" aria-pressed="false">الموارد البشرية<span aria-hidden="true">✓</span></button>
+              <button type="button" data-domain="marketing" aria-pressed="false">التسويق<span aria-hidden="true">✓</span></button>
+              <button type="button" data-domain="education" aria-pressed="false">التعليم<span aria-hidden="true">✓</span></button>
+              <button type="button" data-domain="healthcare" aria-pressed="false">الإدارة الصحية<span aria-hidden="true">✓</span></button>
+              <button type="button" data-domain="technology" aria-pressed="false">التقنية<span aria-hidden="true">✓</span></button>
+              <button type="button" data-domain="other" aria-pressed="false">مجال آخر<span aria-hidden="true">✓</span></button>
+            </div>
+          </details>
         </div>
         <div class="form-group">
           <label class="form-label" for="password">رمز الدورة</label>
           <input class="form-input" id="password" type="password" autocomplete="current-password">
-          <div class="form-hint">رمز الدورة للتنظيم فقط؛ لا يوفّر حماية للملفات الموجودة في مستودع عام.</div>
         </div>
         <div class="auth-error" id="errorBox">تحقق من الاسم ورمز الدورة.</div>
         <button class="btn btn-primary" id="loginBtn" style="width:100%;margin-top:18px">دخول إلى مركز الدورة ←</button>
@@ -67,6 +88,34 @@
     const savedProfile = CourseProgress.getProfile();
     if (savedProfile) { nameInput.value = savedProfile.name; interestInput.value = savedProfile.domain; }
 
+
+    const picker = document.getElementById(`interestPicker`);
+    const pickerSummary = document.getElementById(`interestSummary`);
+    const domainButtons = [...picker.querySelectorAll(`[data-domain]`)];
+    function updateInterest(value) {
+      const chosen = domainButtons.find(button => button.dataset.domain === value) || domainButtons[0];
+      interestInput.value = chosen.dataset.domain;
+      document.getElementById(`interestLabel`).textContent = chosen.firstChild.textContent;
+      domainButtons.forEach(button => button.setAttribute(`aria-pressed`, String(button === chosen)));
+    }
+    updateInterest(interestInput.value);
+    domainButtons.forEach(button => button.addEventListener(`click`, () => {
+      updateInterest(button.dataset.domain);
+      picker.open = false;
+      pickerSummary.focus();
+    }));
+    picker.addEventListener(`keydown`, event => {
+      if (event.key === `Escape`) { picker.open = false; pickerSummary.focus(); }
+      if ([`ArrowDown`, `ArrowUp`, `Home`, `End`].includes(event.key)) {
+        event.preventDefault();
+        picker.open = true;
+        const index = domainButtons.indexOf(document.activeElement);
+        const next = event.key === `Home` ? 0 : event.key === `End` ? domainButtons.length - 1 : (index + (event.key === `ArrowDown` ? 1 : -1) + domainButtons.length) % domainButtons.length;
+        domainButtons[next].focus();
+      }
+    });
+    document.addEventListener(`click`, event => { if (!picker.contains(event.target)) picker.open = false; });
+
     function login() {
       const name = nameInput.value.trim();
       const pass = passInput.value.trim();
@@ -80,7 +129,7 @@
       location.href = 'dashboard.html';
     }
     loginBtn.addEventListener('click', login);
-    document.addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+    document.addEventListener('keydown', e => { if (e.key === `Enter` && !picker.contains(e.target)) login(); });
   </script>
 </body>
 </html>
