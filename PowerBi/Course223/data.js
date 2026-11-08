@@ -1773,40 +1773,222 @@ const DAYS = [
     ]
   ]
 },
-  {
-    "id": 10,
-    "date": null,
-    "weekday": null,
-    "ready": false,
-    "phase": "DESIGN",
-    "teachingStatus": "planned",
-    "title": "HTML/SVG Visual Design + Final Six-Page QA",
-    "titleAr": "اللمسات السينمائية والاختبار النهائي للمشروع",
-    "hook": "الخطوة الاخيرة مش بس نجمل الرسوم، بدنا نحافظ على معنى البيانات ونختبر كل تفاعل",
-    "mission": "نستخدم HTML Content وSVG بشكل محسوب مع AI Design Prompt ونتحقق من الارقام والفلاتر والاداء في كل الصفحات",
-    "topics": [
-      "HTML Content",
-      "SVG",
-      "AI Prompt Design",
-      "DAX HTML Measures",
-      "Safe Motion",
-      "Responsive Canvas",
-      "Native Visual QA",
-      "Navigation QA",
-      "Final Demo"
+{
+  "id": 10,
+  "date": null,
+  "weekday": null,
+  "ready": true,
+  "phase": "DESIGN",
+  "teachingStatus": "prepared",
+  "title": "AI Prompting · Motion Visual Studio",
+  "titleAr": "من البرومبت الى Visual مبهر",
+  "hook": "كيف نحول رسما موجودا الى تجربة جميلة ومتحركة بدون تغيير معنى الارقام؟",
+  "mission": "نكتب برومبتات دقيقة في ChatGPT ونكرر التحسين لننتج HTML/CSS مرتبطا بالمقاييس الفعلية داخل Power BI",
+  "topics": [
+    "Prompt Anatomy",
+    "ChatGPT Iteration",
+    "HTML / CSS",
+    "DAX String Output",
+    "Entrance Motion",
+    "Hover Feedback",
+    "Data Validation"
+  ],
+  "build": [
+    "نفتح مشروعنا ونحدد الـvisual",
+    "نكتب مواصفات واضحة",
+    "من Card الى بطاقة جذابة",
+    "نضيف حركة الها معنى",
+    "نحول Bar Chart بطلب مختلف",
+    "نصلح بدليل واضح",
+    "نختار Visual ثاني بوعي",
+    "نثبت الارقام ونقدم النتيجة"
+  ],
+  "challenge": "حولي Visualين من ملفك باستعمال برومبتين واضحين، وقارني النتائج بالاصل عند تغيير الفلاتر",
+  "deliverable": "نسخة PBIX محسنة بصريا مع برومبتات محفوظة ونتائج مطابقة للاصل",
+  "resources": [
+    {
+      "name": "ملف البداية — نهاية اليوم التاسع",
+      "type": "PBIX",
+      "url": "week1/HR_Performance_Intelligence_Day09.pbix",
+      "audience": "learner",
+      "stage": "start",
+      "note": "افتحي هذا الملف ثم احفظي نسخة جديدة لليوم العاشر"
+    },
+    {
+      "name": "Prompt Studio — مختبر البرومبت والموشن",
+      "type": "WEB",
+      "url": "week1/day10-studio/Prompt_Studio.html",
+      "audience": "learner",
+      "stage": "start",
+      "note": "قوالب قابلة للنسخ ومعاينة تعليمية للحركة"
+    }
+  ],
+  "learningSections": [
+    {
+      "name": "نقطة البداية",
+      "title": "نفتح مشروعنا ونحدد الـvisual",
+      "lead": "اليوم مش بدنا نتعلم برمجة، بدنا نتعلم كيف نطلب التصميم الصح ونفحص النتيجة",
+      "files": "start",
+      "steps": [
+        {
+          "title": "نطبق",
+          "copy": "نزلي ملف نهاية التاسع من بداية صفحة اليوم العاشر • Save As باسم Day10_AI_Visuals.pbix • افتحي Card موجودة وانسخي DAX للمقياس الفعلي واسم الـvisual والناشر والنسخة من About"
+        },
+        {
+          "title": "نجرب",
+          "copy": "اختاري بطاقة واحدة واحفظي قيمتها تحت فلترين للمقارنة"
+        }
+      ],
+      "callout": "HTML5 اسم تقنية وليس اسما كافيا لتحديد الاضافة • افتحي About للـvisual المستخدم قبل طلب الكود"
+    },
+    {
+      "name": "بناء البرومبت",
+      "title": "نكتب مواصفات واضحة",
+      "lead": "لما احكي خليه حلو، انا خليت القرار كله للتخمين، بدنا نعطيه حدود واضحة",
+      "steps": [
+        {
+          "title": "نطبق",
+          "copy": "افتحي Prompt Studio • اختاري Card • اكتبي اسم المقياس كما هو مع الاقواس وكود DAX والابعاد والسؤال التحليلي • ارفقي لقطة الرسم فقط بدون بيانات حساسة • اطلبي HTML/CSS ثم DAX كامل"
+        },
+        {
+          "title": "نجرب",
+          "copy": "اكتبي البرومبت وانسخيه الى ChatGPT يدويا"
+        }
+      ],
+      "callout": "لا نخمن اسم حقل • اذا لم تتوفر اسماء المقاييس نطلب اسئلة قبل الكود • لا حاجة لمفتاح API"
+    },
+    {
+      "name": "اول تحويل",
+      "title": "من Card الى بطاقة جذابة",
+      "lead": "خلينا ننجح ببطاقة واحدة، بعدين منوسع نفس الطريقة",
+      "steps": [
+        {
+          "title": "نطبق",
+          "copy": "اطلبي حاوية Premium بلون #099999 مع حركة دخول واحدة وHover خفيف • اعتمدي HTML/CSS بدون مكتبات خارجية • من Modeling > New measure الصقي DAX الناتج واضيفيه لحقل المحتوى في الـvisual حسب واجهته"
+        },
+        {
+          "title": "نجرب",
+          "copy": "قارني البطاقة الجديدة بالاصلية مع تغيير الفلاتر"
+        }
+      ],
+      "callout": "لا تضعي HTML الخام في شريط DAX • المعادلة ترجع نص HTML • النصوص الديناميكية تحتاج HTML escaping • لا نفترض دعم JavaScript"
+    },
+    {
+      "name": "موشن",
+      "title": "نضيف حركة الها معنى",
+      "lead": "بدنا نحس ان العنصر حي، بس الرقم يضل سهل ينقرا",
+      "steps": [
+        {
+          "title": "نطبق",
+          "copy": "اطلبي opacity وtransform لدخول 450ms مرة واحدة، Hover بارتفاع 3px خلال 180ms، وشريط هدف ينمو فقط اذا في هدف فعلي • اطلبي prefers-reduced-motion وحالة ثابتة بديلة • جربي داخل Power BI"
+        },
+        {
+          "title": "نجرب",
+          "copy": "غيري الفلتر وشوفي هل الحركة بتتكرر عند اعادة الرسم، ثم خففيها اذا بتشتت"
+        }
+      ],
+      "callout": "CSS counter ليس قيمة المقياس • لا نعرض عدادا يبدأ بصفر بدل القيمة الحقيقية • لا نضمن الحركة في كل نسخة او في التصدير"
+    },
+    {
+      "name": "مقارنة وفئات",
+      "title": "نحول Bar Chart بطلب مختلف",
+      "lead": "الرسم فيه فئات، اذا حولناه لرقم واحد ضيعنا القصة",
+      "steps": [
+        {
+          "title": "نطبق",
+          "copy": "اختاري Bar Chart فعليا موجودا • انسخي اسم حقل الفئة والمقياس • اطلبي DAX يستخدم VALUES وADDCOLUMNS وCONCATENATEX مع ترتيب ثابت وTop 5 فقط • عرض الشريط من القيمة الفعلية وبمقياس مشترك • ارفقي لقطة النتيجة لتصحيحها"
+        },
+        {
+          "title": "نجرب",
+          "copy": "قارني اسماء الفئات والقيم والترتيب والـTotal مع الرسم الاصلي"
+        }
+      ],
+      "callout": "الفئة السالبة تحتاج محور مناسب ولا تتحول لصفر • Top 5 ليس المجموع الكلي • نقرة HTML لا تعني cross-filter تلقائيا"
+    },
+    {
+      "name": "اصلاح وتكرار",
+      "title": "نصلح بدليل واضح",
+      "lead": "بدل ما نقول مش شغال، نحكي شو توقعنا وشو طلع",
+      "steps": [
+        {
+          "title": "نطبق",
+          "copy": "انسخي نص الخطا مع السطر واسم الـvisual ونسخته والكود كاملا • اذا الكود يعمل والشكل خطا ارفقي لقطة مع الابعاد • اطلبي اصغر تعديل يحافظ على المقاييس والحسابات • بعد كل تصحيح اعيدي اختبار الفلاتر"
+        },
+        {
+          "title": "نجرب",
+          "copy": "عدلي نوع حركة واحدا بدون تعديل منطق المقياس"
+        }
+      ],
+      "callout": "لا تعيدي توليد التقرير كله لحل مشكلة لون • افتحي نسخة ثابتة اذا الـvisual يزيل style او keyframes"
+    },
+    {
+      "name": "تطبيق مستقل",
+      "title": "نختار Visual ثاني بوعي",
+      "lead": "مش لازم نستبدل كل رسم، بدنا نعرف امتى التحويل بخدم القصة",
+      "steps": [
+        {
+          "title": "نطبق",
+          "copy": "اختاري Card او تقدم نحو هدف او قائمة فئات من مشروعك • اكتبي برومبت جديد بنفس القالب • للـMatrix والرسوم اللي تحتاج Drilldown حافظي على الاصل اذا HTML لا يوفر السلوك • اختبري صفر وBLANK وبدون بيانات"
+        },
+        {
+          "title": "نجرب",
+          "copy": "نفذي التحويل وحددي سبب اختيار التصميم والحركة"
+        }
+      ],
+      "callout": "لا نخترع هدفا او اتجاها او نسبة • Self وManager وUpward يضلوا منفصلين • مقياس HTML واحد لا يضمن Drillthrough او Tooltip اصلي"
+    },
+    {
+      "name": "تسليم",
+      "title": "نثبت الارقام ونقدم النتيجة",
+      "lead": "ورجيني قبل وبعد واحكيلي كيف تاكدتي ان الارقام نفسها",
+      "steps": [
+        {
+          "title": "نطبق",
+          "copy": "راجعي القيم تحت فلترين وClear filters • افحصي قائمة اليوم التاسع • قارني نسخة بحركة ونسخة ثابتة • اذا تنشرين افحصي Service ايضا • Save As نسخة نهائية مع الاحتفاظ بالاصل"
+        },
+        {
+          "title": "نجرب",
+          "copy": "اعرضي Visualين محسنتين وبرومبت كل واحدة واختبار مقارنة واضح"
+        }
+      ],
+      "callout": "النجاح وضوح ودقة وسلاسة، مش عدد الحركات • لا نسجل انه تم التدريس بمجرد تجهيز الصفحة"
+    }
+  ],
+  "learningScenes": [
+    [
+      "PROMPT",
+      "DESIGN"
     ],
-    "build": [
-      "نشوف Before/After لعنصر Native ونسخة HTML Content",
-      "نبني مكونا بصريا Premium من المقاييس الموجودة بدون ارقام ثابتة",
-      "نضيف SVG او HTML صغيرا مع حركة آمنة عند الحاجة",
-      "نقارن قيم HTML مع Native عبر عدة Slicers ونتحقق من BLANK وZero",
-      "نراجع Drillthrough وTooltips وField Parameters وBookmarks عبر الصفحات الست",
-      "نحفظ نسخة التسليم النهائية وتعرض مريم استنتاجات ادارية من التقرير"
+    [
+      "PROMPT",
+      "DESIGN"
     ],
-    "challenge": "قارني نفس Measure في Native وHTML عند تغيير الفلاتر ثم قدمي النتيجة التنفيذية",
-    "deliverable": "PBIX نهائي بست صفحات مع تجربة Premium وحسابات قابلة للتدقيق",
-    "resources": []
-  }
+    [
+      "PROMPT",
+      "DESIGN"
+    ],
+    [
+      "PROMPT",
+      "DESIGN"
+    ],
+    [
+      "PROMPT",
+      "DESIGN"
+    ],
+    [
+      "PROMPT",
+      "DESIGN"
+    ],
+    [
+      "PROMPT",
+      "DESIGN"
+    ],
+    [
+      "PROMPT",
+      "DESIGN"
+    ]
+  ]
+}
 ];
 
 function getDay(id) {
@@ -1865,6 +2047,8 @@ function getLearnerResources(day) {
     || (day.id === 5 && resource.type === `WEB` && resource.url === `week1/day5/web/Score_Lab.html`)
     || (day.id === 7 && resource.type === `PBIX` && resource.url === `week1/day7/data/HR_Performance_Intelligence_Day06.pbix`)
     || (day.id === 7 && resource.type === `XLSX` && resource.url === `week1/day7/data/Nova_Sales_2025_2026.xlsx`)
+    || (day.id === 10 && [ `PBIX`, `WEB` ].includes(resource.type))
     || (day.id === 8 && resource.type === `XLSX` && resource.url === `week1/day7/data/Nova_Sales_2025_2026.xlsx`)
     || (day.id === 5 && resource.type === `PBIX` && resource.stage === `backup` && resource.url === `week1/day5/data/HR_Performance_Intelligence_Day04_Backup.pbix`)))));
 }
+
