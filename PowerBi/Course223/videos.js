@@ -10,7 +10,7 @@ const DAY_VIDEOS = {
   6: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQQXGDVz9ozqR6vKE_bPACYrAUPLAxCyVzQwDpd46t48GJg" width="1920" height="1080" frameborder="0" scrolling="no" title="تسجيل اليوم السادس" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`,
   7: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQSPVvf6ApClQqK5sMHY3NJbAYdk_gtnnRuNJ7-r0qgjucA" width="1920" height="1080" frameborder="0" scrolling="no" title="تسجيل اليوم السابع" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`,
   8: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQQEkCcsuSEHTrlFpA-wfPv2ASLbCAp-jXdoajI5uk45f0s" width="1920" height="1080" frameborder="0" scrolling="no" title="تسجيل اليوم الثامن" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`,
-  9: ``,
+  9: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQTdle5ybTpHRopO3xi2tyEOAQUYIOjI1l4pqTPLWnowPg8" width="1920" height="1080" title="تسجيل اليوم التاسع" allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`,
   10: ``
 };
 
@@ -53,3 +53,4 @@ function getDayVideo(dayId) {
 function hasDayVideo(dayId) {
   return Boolean(getDayVideo(dayId).trim());
 }
+
