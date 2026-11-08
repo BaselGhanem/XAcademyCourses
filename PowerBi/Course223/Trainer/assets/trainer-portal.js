@@ -1,20 +1,20 @@
 (()=>{"use strict";
-const paths={1:"../week1/day1/web/Day01_Trainer.html",2:"Day02_Performance.html",3:"Day03_Integration.html",4:"Day04_Model.html",5:"Day05_DAX.html",6:"Day06_Expansion.html",7:"Day07_Trainer.html",8:"Day08_Trainer.html",9:`Day09_Trainer.html`};
+const paths={1:"../week1/day1/web/Day01_Trainer.html",2:"Day02_Performance.html",3:"Day03_Integration.html",4:"Day04_Model.html",5:"Day05_DAX.html",6:"Day06_Expansion.html",7:"Day07_Trainer.html",8:"Day08_Trainer.html",9:`Day09_Trainer.html`,10:`Day10_Trainer.html`};
 const dates={1:"15 OCT",2:"18 OCT",3:"20 OCT",4:"22 OCT",5:"26 OCT"};
 const parent=document.getElementById("xp-days"),cards=document.getElementById("xp-daycards");
 if(!parent||!cards||typeof DAYS==="undefined")return;
 for(const day of DAYS){
  const linked=Boolean(paths[day.id]);
  const a=document.createElement(linked?"a":"div");
- a.className="xp-day-link"+(day.id===9?" is-active":"")+(!linked?" is-planned":"");
+ a.className="xp-day-link"+(day.id===10?" is-active":"")+(!linked?" is-planned":"");
  if(linked)a.href=paths[day.id];
- if(day.id===9)a.setAttribute("aria-current","page");
+ if(day.id===10)a.setAttribute("aria-current","page");
  const numeral=document.createElement("span");numeral.className="xp-day-numeral";numeral.textContent=String(day.id).padStart(2,"0");
  const text=document.createElement("span");text.className="xp-day-text";
  const title=document.createElement("strong");title.textContent=day.titleAr;
  const sub=document.createElement("small");sub.textContent=["taught","completed"].includes(day.teachingStatus)?"تم التدريب":day.ready?"جاهز للتدريس":"مخطط · لم تجهز المواد";
  text.append(title,sub);a.append(numeral,text);parent.append(a);
- const card=document.createElement(linked?"a":"article");card.className="xp-daycard"+(day.id===9?" is-featured":"")+(!linked?" is-planned":"");
+ const card=document.createElement(linked?"a":"article");card.className="xp-daycard"+(day.id===10?" is-featured":"")+(!linked?" is-planned":"");
  if(linked)card.href=paths[day.id];
  const head=document.createElement("div");head.className="xp-daycard-head";
  const number=document.createElement("span");number.className="xp-card-num";number.textContent="DAY "+String(day.id).padStart(2,"0");
