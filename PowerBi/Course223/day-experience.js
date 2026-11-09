@@ -33,7 +33,7 @@ function initCourseDayJourney(day, courseHome) {
     const start=document.createElement(`a`);start.href=`week1/HR_Performance_Intelligence_Day09.pbix`;start.download=`HR_Performance_Intelligence_Day09.pbix`;start.className=`d9-lab`;start.textContent=`ابدئي هنا · تنزيل ملف نهاية اليوم التاسع للعمل عليه اليوم ↓`;document.querySelector(`.mj-layout`)?.before(start);
   }
   if (day.id === 9 || day.id === 10) {
-    const style = document.createElement(`link`); style.rel = `stylesheet`; style.href = `week1/day9/web/day09.css?v=20261105b`; document.head.append(style);
+    const style = document.createElement(`link`); style.rel = `stylesheet`; style.href = `week1/day9/web/day09.css?v=20261109-scroll-fix`; document.head.append(style);
     const lab = document.createElement(`a`); lab.className = `d9-lab`; lab.href = day.id === 10 ? `week1/day10-studio/Prompt_Studio.html` : `week1/day9/web/Navigation_Lab.html`; lab.target = `_blank`; lab.rel = `noopener`; lab.textContent = day.id === 10 ? `Prompt Studio · برومبتات وموشن ↗` : `جربي القائمة التفاعلية · Navigation Lab ↗`; document.body.classList.add(`day9-workspace`); document.querySelector(`.mj-chapter-browser`)?.append(lab);
     const feedback=document.createElement(`script`);feedback.src=`week1/day9/web/feedback.js?v=20261105b`;document.body.append(feedback);
     document.querySelectorAll(`.mj-chapter`).forEach(chapter=>{
