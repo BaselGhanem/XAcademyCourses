@@ -224,7 +224,7 @@
 
     const recordingHeroWrap = document.getElementById('recordingHeroWrap');
     const videoBox = document.getElementById('videoBox');
-    const videoEmbed = COURSE_CONFIG.showLegacyRecordings ? getDayVideo(day.id).trim() : '';
+    const videoEmbed = (isApprovedDayVideo(day.id) || COURSE_CONFIG.showLegacyRecordings) ? getDayVideo(day.id).trim() : '';
     document.getElementById('recordingDayNumber').textContent = String(day.id).padStart(2, '0');
 
     if (videoEmbed) {
