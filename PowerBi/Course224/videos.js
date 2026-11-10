@@ -2,7 +2,7 @@
 // Paste a OneDrive video iframe or its image-preview embed code.
 
 const DAY_VIDEOS = {
-  1: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQQ1ap9rXHqTRIOXnbs6dHSyAU4SDPKYweIgT7t9-M3ZI-M" width="1920" height="1080" frameborder="0" scrolling="no" allowfullscreen></iframe>`,
+  1: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQRhd2OqUAiGS4Z9nRq-RX3dATYBszhzhg0VC8u919tFtLQ" title="تسجيل اليوم الأول" width="1920" height="1080" frameborder="0" scrolling="no" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>`,
   2: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQQdzObmVlepT7WOdE4uwMxvAYXzc2tIlFNgx_WoGPSjqpk" width="1920" height="1080" frameborder="0" scrolling="no" allowfullscreen></iframe>`,
   3: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQQbURQVtjzYTamX2kGOJUrYAb6y8D--6S4kD2mVi-nQhao" width="320" height="320" frameborder="0" scrolling="no" allowfullscreen></iframe>`,
   4: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQTeSmYgUTlvRJNAhC5MOPkXAWcguZovui8VamiwwKBRkgY" width="1920" height="1080" frameborder="0" scrolling="no" allowfullscreen></iframe>`,
@@ -13,6 +13,12 @@ const DAY_VIDEOS = {
   9: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQRmHrXlvimHR6962-2T8qPXASEJSGtyROyNF68-o2xqq9A" width="1920" height="1080" frameborder="0" scrolling="no" allowfullscreen></iframe>`,
   10: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQQBTzuirV7oR7H6eeHsRfitAUUEftN_DVwgBlrUdVw-OiY" width="1920" height="1080" frameborder="0" scrolling="no" allowfullscreen></iframe>`
 };
+
+const APPROVED_RECORDING_DAYS = new Set([1]);
+
+function isApprovedDayVideo(dayId) {
+  return APPROVED_RECORDING_DAYS.has(Number(dayId));
+}
 
 function getDayVideo(dayId) {
   const embed = DAY_VIDEOS[Number(dayId)] || ``;
