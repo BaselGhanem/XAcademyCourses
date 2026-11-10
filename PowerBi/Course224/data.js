@@ -41,8 +41,6 @@ const DAYS = [
       { name: 'Meet Nova — Company Profile', type: 'WEB', url: 'week1/day1/web/Nova_Company_Profile.html', note: 'ابدأ من هنا: الشركة، الشعار، المنتجات، نموذج العمل والتحدي الإداري.' },
       { name: 'Day 01 — Nova Source Pack', type: 'ZIP', url: 'week1/day1/downloads/Day01_CONNECT_EVERYTHING.zip', note: 'Nova Product Master + Excel ETL Reference + 120K Sales CSV + Workforce TXT + Budget PDF + Challenge' },
       { name: 'Nova Branch Performance — Web Source', type: 'WEB', url: 'week1/day1/web/Branch_Performance.html', note: '4,000 صف تجمع Sales + Finance + Workforce indicators. استخدم الرابط مباشرة في Get Data > Web.' },
-      { name: 'Nova Data Dictionary', type: 'Guide', url: 'datasets/DATA_DICTIONARY.csv', note: 'تعريف الجداول والمفاتيح والـGrain' },
-      { name: 'Nova Business Rules', type: 'Guide', url: 'datasets/BUSINESS_RULES.md', note: 'قواعد البيانات ومتى لا يجوز مقارنة مصادر بأحجام زمنية مختلفة' },
     ]
   },
   {
