@@ -7,6 +7,7 @@ on:
       - 'PowerBi/Course224/tools/smoke_site.py'
       - 'PowerBi/Course224/data.js'
       - 'PowerBi/Course224/day.html'
+      - 'PowerBi/Course224/videos.js'
       - 'PowerBi/Course224/dashboard.html'
       - 'PowerBi/Course224/login.html'
       - 'PowerBi/Course224/week3/day10/student-missions.html'
