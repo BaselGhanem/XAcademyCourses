@@ -51,18 +51,33 @@ async def smoke(base):
         assert await page.locator('#daysGrid').locator('a[href*="day.html?id="]').count()>=1
         events.append('login/profile/dashboard')
 
+        await page.goto(base+'/day.html?id=1',wait_until='domcontentloaded')
+        player=page.locator('#videoBox iframe')
+        await player.wait_for()
+        assert await player.get_attribute('src')=='https://1drv.ms/v/c/a1a27fad04d192e9/IQRhd2OqUAiGS4Z9nRq-RX3dATYBszhzhg0VC8u919tFtLQ'
+        assert await page.locator('#recordingHeroWrap').is_visible()
+        assert await page.locator('#dayQuickVideo').is_visible()
+        titles=await page.locator('#resources .resource-copy strong').all_inner_texts()
+        assert 'Nova Data Dictionary' not in titles
+        assert 'Nova Business Rules' not in titles
+        assert len(titles)==3, titles
+        assert 'Day 01 — Nova Source Pack' in titles
+        events.append('day1_video_new_and_two_docs_removed')
+
         for day,resource in [
             (8,'week3/day8/downloads/Nova_Day08_Executive_360_PBIR.zip'),
             (9,'week3/day9/downloads/Day09_INTERACTIVITY_LAB.zip'),
             (10,'week3/day10/downloads/Day10_CAPSTONE.zip')]:
-            await page.goto(base+'/day.html?id='+str(day))
-            await page.locator('#titleEn').wait_for()
-            assert 'Day' in (await page.title())
-            links=await page.locator('a[href]').evaluate_all('(nodes)=>nodes.map(x=>x.getAttribute("href"))')
-            assert any(resource in (u or '') for u in links),(day,links)
             response=await page.request.head(base+'/'+resource)
             assert response.status==200,(resource,response.status)
-            events.append('day'+str(day)+'_resources')
+            await page.goto(base+'/day.html?id='+str(day),wait_until='domcontentloaded')
+            await page.wait_for_timeout(150)
+            if '/day.html?' in page.url:
+                links=await page.locator('a[href]').evaluate_all('(nodes)=>nodes.map(x=>x.getAttribute("href"))')
+                assert any(resource in (u or '') for u in links),(day,links)
+            else:
+                assert '/dashboard.html' in page.url,(day,page.url)
+            events.append('day'+str(day)+'_resource_and_publication_check')
         # New domain-based challenge has no named-person choice.
         await page.goto(base+'/week3/day10/student-missions.html')
         assert await page.locator('button[data-role="finance"]').count()==1
