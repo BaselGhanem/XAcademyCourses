@@ -1,11 +1,11 @@
 // Course224 publication controls. These settings do NOT secure files on public GitHub.
 const ACCESS_CONFIG = {
-  agenda: "OFF", // Preserve the prior public agenda setting until release.
-  publishedDays: [1,2,3,4,5,6,7,8,9,10],
+  agenda: "ON", // Publish the course agenda and introduction.
+  publishedDays: [1],
   days: {
-    "Day 1": "AUTO", "Day 2": "AUTO", "Day 3": "AUTO",
-    "Day 4": "AUTO", "Day 5": "AUTO", "Day 6": "AUTO",
-    "Day 7": "AUTO", "Day 8": "AUTO", "Day 9": "AUTO", "Day 10": "AUTO"
+    "Day 1": "ON", "Day 2": "OFF", "Day 3": "OFF",
+    "Day 4": "OFF", "Day 5": "OFF", "Day 6": "OFF",
+    "Day 7": "OFF", "Day 8": "OFF", "Day 9": "OFF", "Day 10": "OFF"
   }
 };
 function normalizeAccessMode(value) {
