@@ -1,0 +1,18 @@
+name: Course224 - Hyphen Typography Audit
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'PowerBi/Course224/**'
+      - '.github/workflows/course224-hyphen-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  typography:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan all course website text and teaching source files
+        run: python3 PowerBi/Course224/tools/validate_typography.py
