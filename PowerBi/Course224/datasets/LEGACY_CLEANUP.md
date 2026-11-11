@@ -1,4 +1,4 @@
-# Course224 — Stage4 Legacy File Audit (2026-11-02)
+# Course224 - Stage4 Legacy File Audit (2026-11-02)
 
 Baseline recovery branch: `backup/course224-before-stage4-2026-11-02`.
 

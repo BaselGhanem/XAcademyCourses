@@ -1,4 +1,4 @@
-# Nova Data Contract — General-audience Course224
+# Nova Data Contract - General-audience Course224
 
 Synthetic training company, not specific trainees or professions.
 

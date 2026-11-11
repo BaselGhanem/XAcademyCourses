@@ -160,12 +160,12 @@
     } else {
       document.body.classList.remove('access-pending');
 
-    document.title = `Day ${day.id} — ${day.title} | Power BI Specialist`;
+    document.title = `Day ${day.id} - ${day.title} | Power BI Specialist`;
     document.getElementById('crumb').textContent = `Day ${String(day.id).padStart(2,'0')}`;
     document.getElementById('phase').textContent = `${day.phase} • DAY ${String(day.id).padStart(2,'0')}`;
     document.getElementById('titleAr').textContent = day.titleAr;
     document.getElementById('titleEn').textContent = day.title;
-    document.getElementById('dayLabel').textContent = COURSE_CONFIG.deliveryMode === 'self-paced' ? `Day ${String(day.id).padStart(2,'0')} · Self-paced` : `${day.weekday} — Day ${String(day.id).padStart(2,'0')}`;
+    document.getElementById('dayLabel').textContent = COURSE_CONFIG.deliveryMode === 'self-paced' ? `Day ${String(day.id).padStart(2,'0')} · Self-paced` : `${day.weekday} - Day ${String(day.id).padStart(2,'0')}`;
     document.getElementById('dateLabel').textContent = COURSE_CONFIG.deliveryMode === 'self-paced' ? '120 دقيقة تدريب' : formatDateAr(day.date);
     document.getElementById('hook').textContent = day.hook;
     document.getElementById('mission').textContent = day.mission;
