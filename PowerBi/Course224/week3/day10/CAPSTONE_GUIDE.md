@@ -1,4 +1,4 @@
-# Day 10 — Capstone: From Data to Decision
+# Day 10 - Capstone: From Data to Decision
 
 **Mandatory final assessment** for all professions. Choose one question from Nova Performance, Operations, Finance or Workforce, or use another documented dataset with its own validated metrics.
 

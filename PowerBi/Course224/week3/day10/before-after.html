@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#071219">
-<meta name="description" content="Day 10 — an interactive transformation from a standard reporting mockup to a premium executive revenue experience, using identical illustrative values.">
-<title>Before → Beyond | Day 10 — X Academy</title>
+<meta name="description" content="Day 10 - an interactive transformation from a standard reporting mockup to a premium executive revenue experience, using identical illustrative values.">
+<title>Before → Beyond | Day 10 - X Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -171,7 +171,7 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8aff
 <section class="hero">
  <div class="kicker">THE VISUAL TRANSFORMATION EXPERIENCE</div>
  <h1>من تقرير عادي<br><span>إلى تجربة بتلفت الأنظار</span></h1>
- <p>مش تغيير لون عمود من رمادي لأخضر. رح نحول نفس بيانات الإيراد إلى واجهة Executive فيها هوية، تسلسل بصري، مؤشرات واستنتاج واضح — بدون ما نغير أي قيمة أو نختلق نمو بالمبيعات.</p>
+ <p>مش تغيير لون عمود من رمادي لأخضر. رح نحول نفس بيانات الإيراد إلى واجهة Executive فيها هوية، تسلسل بصري، مؤشرات واستنتاج واضح - بدون ما نغير أي قيمة أو نختلق نمو بالمبيعات.</p>
  <div class="hero-meta"><span class="hero-tag emphasis">BEFORE → BEYOND</span><span class="hero-tag">SAME FIVE CATEGORIES</span><span class="hero-tag">SAME VALUES</span><span class="hero-tag">ILLUSTRATIVE DATA ONLY</span></div>
 </section>
 <div class="command" aria-label="Interactive display controls">
@@ -183,7 +183,7 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8aff
   <button type="button" class="activate" id="transform"><span>✦</span> TRANSFORM THE REPORT <span>←</span></button>
   <button type="button" class="motion-btn" id="toggleMotion" aria-pressed="false">إيقاف الحركة</button>
  </div>
- <div class="data-note">Mockup تعليمي — مش تقرير Power BI مباشر</div>
+ <div class="data-note">Mockup تعليمي - مش تقرير Power BI مباشر</div>
 </div>
 <div class="scene-frame" id="frame">
  <div class="scene-flare" aria-hidden="true"></div>
@@ -202,14 +202,14 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8aff
      <div class="headline"><div><span class="over">FROM RAW DATA TO CLEAR DECISIONS</span><h2>Revenue <em>intelligence.</em></h2></div><div class="sub">One dataset.<br>Sharper hierarchy. More meaningful context.</div></div>
      <div class="after-grid">
        <section class="glass primary-card">
-         <div class="primary-top"><div><div class="card-over">PORTFOLIO / TOTAL REVENUE</div><div class="total" id="premiumTotal">—</div><div class="unit">Across the same five categories</div></div><span class="status-pill">REVENUE MIX</span></div>
+         <div class="primary-top"><div><div class="card-over">PORTFOLIO / TOTAL REVENUE</div><div class="total" id="premiumTotal">-</div><div class="unit">Across the same five categories</div></div><span class="status-pill">REVENUE MIX</span></div>
          <div class="bar-head"><span>CATEGORY PERFORMANCE</span><span>RANKED · TOP 05</span></div>
          <div class="premium-chart" id="premiumChart"></div>
          <div class="primary-foot"><span>100% scale = highest value</span><span>STATIC FIRST · MOTION SAFE</span></div>
        </section>
        <div class="side">
-        <section class="glass side-top"><div class="card-over">REVENUE CONCENTRATION</div><div class="share" id="topTwoShare">—</div><p>of revenue comes from<br>the two largest categories</p><div class="top-two" aria-label="Share of top two categories"><i id="topTwoFill"></i></div></section>
-        <section class="glass side-bottom"><div><div class="card-over">CATEGORY LEADER</div><div class="top-name" id="topName"></div><div class="top-value" id="topValue"></div></div><div class="donut" id="donut"><div class="donut-inner" id="donutLabel">—<small>TOP SHARE</small></div></div></section>
+        <section class="glass side-top"><div class="card-over">REVENUE CONCENTRATION</div><div class="share" id="topTwoShare">-</div><p>of revenue comes from<br>the two largest categories</p><div class="top-two" aria-label="Share of top two categories"><i id="topTwoFill"></i></div></section>
+        <section class="glass side-bottom"><div><div class="card-over">CATEGORY LEADER</div><div class="top-name" id="topName"></div><div class="top-value" id="topValue"></div></div><div class="donut" id="donut"><div class="donut-inner" id="donutLabel">-<small>TOP SHARE</small></div></div></section>
        </div>
      </div>
      <div class="after-rail">
@@ -269,7 +269,7 @@ function buildAfter(){
   const row=el("div","premium-row"),name=el("span","premium-label",item.name),track=el("div","premium-track"),bar=el("div","premium-fill"),sheen=el("span","sheen"),amount=el("span","premium-value",valueText(item.value));
   const relative=maximum?item.value/maximum*100:0;
   bar.style.setProperty("--w",relative.toFixed(4)+"%");
-  bar.title=item.name+" — "+money(item.value)+"; "+pct(share(item.value))+" of total";
+  bar.title=item.name+" - "+money(item.value)+"; "+pct(share(item.value))+" of total";
   bar.append(sheen);track.append(bar);row.append(name,track,amount);chart.append(row);
  }
  $("premiumTotal").textContent=money(total);

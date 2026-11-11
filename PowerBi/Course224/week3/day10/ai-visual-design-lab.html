@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#091218">
-<meta name="description" content="Day 10 AI Visual Design Lab — build precise Power BI HTML visual prompts with 20 live effects, chart previews and domain-based templates">
+<meta name="description" content="Day 10 AI Visual Design Lab - build precise Power BI HTML visual prompts with 20 live effects, chart previews and domain-based templates">
 <title>AI Visual Design Lab · Day 10 | X Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -276,7 +276,7 @@ small.tip{color:var(--soft);font-size:11px}
 <button class="step-tab" type="button" id="tab3" data-step="3" role="tab" aria-selected="false" aria-controls="step3"><span class="num">04</span> الجودة والإخراج</button>
 </div>
 <section class="step-panel" id="step0" role="tabpanel" aria-labelledby="tab0">
-<h3>01 — اشرح للـAI شو بدك تحلل</h3><p>أهم خطوة. لا تبدأ بالحركة قبل ما تحدد السؤال والبيانات الصحيحة</p>
+<h3>01 - اشرح للـAI شو بدك تحلل</h3><p>أهم خطوة. لا تبدأ بالحركة قبل ما تحدد السؤال والبيانات الصحيحة</p>
 <div class="group-label">أمثلة جاهزة حسب مجال المتدرب</div>
 <div class="note" style="margin:11px 0">كيف تجيب أسماء الحقول الصحيحة؟ افتح <b>Data / Fields Pane</b> داخل Power BI، وانسخ اسم الـMeasure كما هو (مثال <span dir="ltr">[Total Revenue]</span>) واسم العمود مع اسم الجدول (مثال <span dir="ltr">DimProduct[Category]</span>). أسماء الـMeasures تحت أي جدول ما بتغير طريقة استخدامها داخل Measure.</div><div class="presets" id="rolePresets">
 <button class="preset" type="button" data-role="sales">Performance / Sales</button><button class="preset" type="button" data-role="ops">Operations</button><button class="preset" type="button" data-role="finance">Finance</button><button class="preset" type="button" data-role="workforce">Workforce</button>
@@ -284,27 +284,27 @@ small.tip{color:var(--soft);font-size:11px}
 <div class="fields">
 <div class="field span2"><label for="business">السؤال الإداري المطلوب من الـVisual *</label><textarea id="business" placeholder="مثال: أي فئة منتجات تحقق أعلى مبيعات؟" data-prompt></textarea></div>
 <div class="field"><label for="measures">الـMeasures الموجودة فعليا *</label><textarea id="measures" dir="ltr" placeholder="[Total Revenue], [Revenue YoY %]" data-prompt></textarea><span class="hint">اكتب أسماء الـMeasures، وإذا كتبت Total Revenue لحالها رح نجهزها بالـPrompt على شكل [Total Revenue]. راجع أسماءها من Power BI</span></div>
-<div class="field"><label for="dimension">Dimension / Axis</label><textarea id="dimension" dir="ltr" placeholder="DimProduct[Category] — verify exact name" data-prompt></textarea><span class="hint">للبطاقات الفردية ممكن تتركه فاضي</span></div>
+<div class="field"><label for="dimension">Dimension / Axis</label><textarea id="dimension" dir="ltr" placeholder="DimProduct[Category] - verify exact name" data-prompt></textarea><span class="hint">للبطاقات الفردية ممكن تتركه فاضي</span></div>
 <div class="field"><label for="period">مستوى الوقت / Grain</label><select id="period" data-prompt><option value="Respect current slicer and filter context">حسب Slicers الحالية</option><option value="Daily, with a continuous date axis">يومي</option><option value="Month over month, chronological sorting">شهري</option><option value="Year over year">سنوي</option><option value="Latest available snapshot only; never sum headcount snapshots">آخر Snapshot فقط</option></select></div>
 <div class="field"><label for="unit">الوحدة والتنسيق</label><select id="unit" data-prompt><option value="Automatic based on measures">تلقائي</option><option value="JOD currency, 2 decimals">دينار أردني JOD</option><option value="Percentage, 1 decimal place">نسبة مئوية %</option><option value="Whole number with thousands separator">عدد صحيح</option><option value="Compact numbers: K/M">مختصر K / M</option></select></div>
 <div class="field span2"><label for="compare">المرجع أو المقارنة</label><input id="compare" type="text" placeholder="مثال: Previous Year / Budget / Planned Headcount" data-prompt></div>
 </div></section>
 
 <section class="step-panel" id="step1" role="tabpanel" aria-labelledby="tab1" hidden>
-<h3>02 — حدّد نوع الـChart ومساحته</h3><p>نفس البيانات ممكن تنعرض بأكثر من شكل. اختار اللي بخدم السؤال الإداري</p>
+<h3>02 - حدّد نوع الـChart ومساحته</h3><p>نفس البيانات ممكن تنعرض بأكثر من شكل. اختار اللي بخدم السؤال الإداري</p>
 <div class="fields">
 <div class="field span2"><label for="chart">نوع الـVisual *</label><select id="chart" data-prompt></select></div>
 <div class="field"><label for="topN">Top N / عدد العناصر</label><input id="topN" type="number" min="1" max="100" value="8" data-prompt></div>
 <div class="field"><label for="sort">ترتيب العناصر</label><select id="sort" data-prompt><option value="Descending by primary measure">تنازلي حسب القيمة</option><option value="Ascending by primary measure">تصاعدي حسب القيمة</option><option value="Chronological by date">ترتيب زمني</option><option value="Custom business stage order">حسب مراحل العمل</option><option value="No enforced sorting">بدون ترتيب محدد</option></select></div>
 <div class="field"><label for="width">عرض الـVisual (px)</label><input id="width" type="number" min="150" max="3840" value="850" data-prompt></div>
 <div class="field"><label for="height">ارتفاع الـVisual (px)</label><input id="height" type="number" min="100" max="2160" value="400" data-prompt></div>
-<div class="field span2"><label for="sizePreset">أحجام مقترحة</label><select id="sizePreset"><option value="">— اختار الحجم —</option><option value="280x160">Small KPI · 280 × 160</option><option value="450x220">Large KPI · 450 × 220</option><option value="850x400">Chart · 850 × 400</option><option value="1280x220">Wide Banner · 1280 × 220</option><option value="320x750">Side Panel · 320 × 750</option><option value="1920x1080">Landing Page · 1920 × 1080</option></select></div>
+<div class="field span2"><label for="sizePreset">أحجام مقترحة</label><select id="sizePreset"><option value="">- اختار الحجم -</option><option value="280x160">Small KPI · 280 × 160</option><option value="450x220">Large KPI · 450 × 220</option><option value="850x400">Chart · 850 × 400</option><option value="1280x220">Wide Banner · 1280 × 220</option><option value="320x750">Side Panel · 320 × 750</option><option value="1920x1080">Landing Page · 1920 × 1080</option></select></div>
 <div class="field span2"><div class="inline-toggles"><label class="ck"><input type="checkbox" id="responsive" checked data-prompt> Responsive داخل الحاوية</label><label class="ck"><input type="checkbox" id="labels" checked data-prompt> Data Labels</label><label class="ck"><input type="checkbox" id="legend" data-prompt> Legend</label><label class="ck"><input type="checkbox" id="axes" checked data-prompt> Axes & Gridlines</label></div></div>
 <div class="field span2"><label for="chartNotes">تعليمات إضافية لشكل الرسم</label><textarea id="chartNotes" placeholder="مثال: عمود Forecast متقطع، Actual بلون Teal، Labels خارج الأعمدة، تجنب ازدحام النصوص" data-prompt></textarea></div>
 </div></section>
 
 <section class="step-panel" id="step2" role="tabpanel" aria-labelledby="tab2" hidden>
-<h3>03 — الألوان والهوية والحركة</h3><p>اختار التأثير وجرّبه على المعاينة. مش كل تأثير مناسب لكل رسم أو مدعوم بنفس الطريقة</p>
+<h3>03 - الألوان والهوية والحركة</h3><p>اختار التأثير وجرّبه على المعاينة. مش كل تأثير مناسب لكل رسم أو مدعوم بنفس الطريقة</p>
 <div class="fields">
 <div class="field"><label for="bg">الخلفية</label><select id="bg" data-prompt><option value="Transparent">شفافة تماما</option><option value="Dark navy">Dark Navy</option><option value="Light pearl">Light Pearl</option><option value="Glass translucent">Glass translucent</option></select></div>
 <div class="field"><label for="font">الخط</label><select id="font" data-prompt><option value="Almarai with Segoe UI and sans-serif fallback">Almarai</option><option value="Segoe UI with Arial fallback">Segoe UI</option><option value="Inter with Arial fallback">Inter</option></select></div>
@@ -313,7 +313,7 @@ small.tip{color:var(--soft);font-size:11px}
 <div class="field"><label for="radius">Border Radius (px)</label><input type="number" id="radius" value="18" min="0" max="70" data-prompt></div>
 <div class="field"><label for="padding">Inner Padding (px)</label><input type="number" id="padding" value="16" min="0" max="90" data-prompt></div>
 </div>
-<div class="group-label" style="margin-top:24px">20 Visual Effects — اختار واحد كتأثير رئيسي</div>
+<div class="group-label" style="margin-top:24px">20 Visual Effects - اختار واحد كتأثير رئيسي</div>
 <div class="fx-grid" id="effectsGrid"></div>
 <div class="motion-row">
 <div class="field"><label for="intensity">قوة الحركة</label><select id="intensity" data-prompt><option value="Subtle">هادئة</option><option value="Moderate">متوسطة</option><option value="Expressive">واضحة</option><option value="Off">بدون حركة</option></select></div>
@@ -325,16 +325,16 @@ small.tip{color:var(--soft);font-size:11px}
 </section>
 
 <section class="step-panel" id="step3" role="tabpanel" aria-labelledby="tab3" hidden>
-<h3>04 — الحدود التقنية وجودة الناتج</h3><p>هاي الخطوة بتمنع كثير من المشاكل الشائعة: أرقام غلط، Scrollbar، كود غير مدعوم، أو Measures مختلقة</p><div class="safety-ribbon"><span class="safety-glyph" aria-hidden="true">✓</span><span><b>DATA FIRST / ANIMATION SECOND</b><br>الرسم لازم يظهر كاملا حتى لو الحركة ما اشتغلت. لا تخفي الأعمدة أو الخطوط بـscaleX(0) أو opacity:0 في الحالة الأساسية، وافحص أكبر قيمة وأصغر قيمة قبل اعتماد الكود.</span></div>
+<h3>04 - الحدود التقنية وجودة الناتج</h3><p>هاي الخطوة بتمنع كثير من المشاكل الشائعة: أرقام غلط، Scrollbar، كود غير مدعوم، أو Measures مختلقة</p><div class="safety-ribbon"><span class="safety-glyph" aria-hidden="true">✓</span><span><b>DATA FIRST / ANIMATION SECOND</b><br>الرسم لازم يظهر كاملا حتى لو الحركة ما اشتغلت. لا تخفي الأعمدة أو الخطوط بـscaleX(0) أو opacity:0 في الحالة الأساسية، وافحص أكبر قيمة وأصغر قيمة قبل اعتماد الكود.</span></div>
 <div class="fields">
 <div class="field"><label for="target">نوع الـHTML Content Visual</label><select id="target" data-prompt><option value="HTML Content (regular) visual">HTML Content Regular</option><option value="HTML Content Secure/Lite; conservative markup and CSS only">HTML Content Secure / Lite</option></select></div>
 <div class="field"><label for="output">صيغة الناتج</label><select id="output" data-prompt><option value="Complete copy-paste Power BI DAX measure returning HTML/SVG">DAX Measure جاهزة</option><option value="Self-contained HTML prototype first, then complete DAX measure">HTML Preview + DAX</option><option value="Complete SVG string wrapped in a DAX measure">SVG داخل DAX Measure</option></select></div>
 <div class="field"><label for="language">اتجاه النص</label><select id="language" data-prompt><option value="Arabic RTL labels and LTR technical terms/numbers">Arabic RTL + Numbers LTR</option><option value="English LTR">English LTR</option><option value="Bilingual labels, explicit direction per element">Arabic / English</option></select></div>
 <div class="field"><label for="maxRows">الحد الأقصى للفئات المعروضة</label><input id="maxRows" type="number" min="1" max="300" value="20" data-prompt></div>
-<div class="field span2"><label for="edgeCases">القيم الفارغة والسالبة والـZero</label><select id="edgeCases" data-prompt><option value="Distinguish BLANK from zero, display an empty-state message, preserve negative values">فرّق بين Blank وZero</option><option value="Replace blanks with a visible em dash only; never silently alter the underlying number">اعرض — للفراغات</option><option value="Hide categories with blank primary measure; keep real zeros and negatives">أخفِ الفئات ذات القيمة الفارغة فقط</option></select></div>
-<div class="field span2"><div class="safe-switch"><label><input id="safeMode" type="checkbox" checked data-prompt><span>Safe Mode — ابدأ بنسخة Static قبل الـPremium</span></label><p>لما يكون مفعل، رح يطلب من الـAI نسخة ثابتة كاملة وسليمة أولاً، وبعدها يضيف تأثير بصري غير مؤثر على طول الأعمدة أو ظهور القيم. الخيار الأفضل للعرض المباشر.</p></div></div>
+<div class="field span2"><label for="edgeCases">القيم الفارغة والسالبة والـZero</label><select id="edgeCases" data-prompt><option value="Distinguish BLANK from zero, display an empty-state message, preserve negative values">فرّق بين Blank وZero</option><option value="Replace blanks with a visible em dash only; never silently alter the underlying number">اعرض - للفراغات</option><option value="Hide categories with blank primary measure; keep real zeros and negatives">أخفِ الفئات ذات القيمة الفارغة فقط</option></select></div>
+<div class="field span2"><div class="safe-switch"><label><input id="safeMode" type="checkbox" checked data-prompt><span>Safe Mode - ابدأ بنسخة Static قبل الـPremium</span></label><p>لما يكون مفعل، رح يطلب من الـAI نسخة ثابتة كاملة وسليمة أولاً، وبعدها يضيف تأثير بصري غير مؤثر على طول الأعمدة أو ظهور القيم. الخيار الأفضل للعرض المباشر.</p></div></div>
 <div class="field span2"><label for="technicalNotes">شروط إضافية للكود</label><textarea id="technicalNotes" placeholder="مثال: لا تستخدم JavaScript، لا تعتمد على CDN، لا تفترض أن HTML Hover = Native Cross Filter" data-prompt></textarea></div>
-<div class="field span2"><label>مرجع بصري اختياري — Screenshot</label>
+<div class="field span2"><label>مرجع بصري اختياري - Screenshot</label>
 <div class="ref-drop" id="referenceDrop">
 <strong>عندك رسم عاجبك؟ استخدمه كمرجع</strong><br>
 <button type="button" id="chooseReference">اختيار صورة من جهازك</button>
@@ -421,7 +421,7 @@ var effects=[
 ];
 var selectedEffect=0,currentStep=0,referenceName="",referenceURL="",suppressSave=false,qaPreview=false;
 var profiles={
- sales:{business:"أي Category تحقق أعلى إيراد، وكيف يتغير الأداء مع الفلاتر؟",measures:"[Total Revenue], [Revenue YoY %]",dimension:"DimProduct[Category] — VERIFY EXACT FIELD",compare:"Previous Year",chart:"Horizontal Bar Chart",unit:"JOD currency, 2 decimals"},
+ sales:{business:"أي Category تحقق أعلى إيراد، وكيف يتغير الأداء مع الفلاتر؟",measures:"[Total Revenue], [Revenue YoY %]",dimension:"DimProduct[Category] - VERIFY EXACT FIELD",compare:"Previous Year",chart:"Horizontal Bar Chart",unit:"JOD currency, 2 decimals"},
  ops:{business:"أي منطقة تسجل أضعف نسبة التزام بالمواعيد؟",measures:"[On Time %], [Completed Orders]",dimension:"VERIFY: Region field from operations model",compare:"Completed Orders",chart:"Progress Ring",unit:"Percentage, 1 decimal place"},
  finance:{business:"كيف يقارن الأداء المالي بالموازنة، وأين يوجد أكبر انحراف؟",measures:"[Operating Profit], [Budget Achievement %]",dimension:"VERIFY: Branch or Department field",compare:"Budget",chart:"Bullet Chart",unit:"JOD currency, 2 decimals"},
  workforce:{business:"وين أكبر فجوة بين التوظيف الفعلي والمخطط حسب القسم؟",measures:"[Staffing Gap], [Staffing Coverage %]",dimension:"VERIFY: Department field from workforce model",compare:"Planned Headcount",chart:"Diverging Bar Chart",unit:"Whole number with thousands separator"}
@@ -482,12 +482,12 @@ var lines=[
 "TASK: Create a production-oriented premium HTML visual for Power BI based on the specification below.",
 "",
 "1) BUSINESS OBJECTIVE",
-"Business question: "+(title||"[MISSING — ASK ME THE BUSINESS QUESTION BEFORE CODING]"),
+"Business question: "+(title||"[MISSING - ASK ME THE BUSINESS QUESTION BEFORE CODING]"),
 "Visual type: "+chart,
 "Comparison / benchmark: "+(v("compare")||"None specified; ask if required by chart."),
 "",
 "2) REAL POWER BI MODEL",
-"Use these existing DAX measures exactly: "+(measures||"[MISSING — ASK ME FOR EXACT EXISTING MEASURE NAMES]"),
+"Use these existing DAX measures exactly: "+(measures||"[MISSING - ASK ME FOR EXACT EXISTING MEASURE NAMES]"),
 "Dimension / grouping column(s): "+(dim||"None specified. If this chart requires a dimension, ASK before writing code."),
 "Date grain and filter behavior: "+v("period"),
 "Number formatting: "+v("unit"),
@@ -510,7 +510,7 @@ var lines=[
 "Background: "+v("bg")+"; font: "+v("font"),
 "Corner radius: "+v("radius")+" px; inner padding: "+v("padding")+" px.",
 "Labels and numeric direction: "+v("language"),
-"Visual effect: "+effects[selectedEffect][0]+" — "+effects[selectedEffect][1],
+"Visual effect: "+effects[selectedEffect][0]+" - "+effects[selectedEffect][1],
 "Motion intensity: "+v("intensity")+"; motion duration: "+v("speed")+" seconds; continuous loop: "+(v("loop")?"yes, only where non-distracting":"no, prefer one-time or hover-triggered motion"),
 "Hover behavior: "+v("hover"),
 "Tooltip within HTML: "+(v("tooltip")?"requested if supported":"not required"),
@@ -646,7 +646,7 @@ $("copyRepairPrompt").addEventListener("click",function(){
  clipboardCopy(repairPrompt()).then(function(){toast("تم نسخ Repair Prompt، الصقه بالـAI");}).catch(function(){toast("تعذر النسخ. جرّب تحديد النص ولصقه يدويا");});
 });
 $("chooseReference").addEventListener("click",function(){$("referenceInput").click();});
-function readReference(file){if(!file)return;if(!["image/png","image/jpeg","image/webp"].includes(file.type)){toast("اختار صورة PNG أو JPG أو WebP");return;}if(file.size>8*1024*1024){toast("حجم الصورة أكبر من 8 MB");return;}if(referenceURL)URL.revokeObjectURL(referenceURL);referenceURL=URL.createObjectURL(file);referenceName=file.name;$("referencePreview").src=referenceURL;$("referenceName").textContent=file.name;$("referenceInfo").hidden=false;update();toast("الصورة جاهزة للمعاينة فقط — أرفقها يدويا للـAI");}
+function readReference(file){if(!file)return;if(!["image/png","image/jpeg","image/webp"].includes(file.type)){toast("اختار صورة PNG أو JPG أو WebP");return;}if(file.size>8*1024*1024){toast("حجم الصورة أكبر من 8 MB");return;}if(referenceURL)URL.revokeObjectURL(referenceURL);referenceURL=URL.createObjectURL(file);referenceName=file.name;$("referencePreview").src=referenceURL;$("referenceName").textContent=file.name;$("referenceInfo").hidden=false;update();toast("الصورة جاهزة للمعاينة فقط - أرفقها يدويا للـAI");}
 function removeReference(){if(referenceURL)URL.revokeObjectURL(referenceURL);referenceURL="";referenceName="";$("referenceInput").value="";$("referencePreview").removeAttribute("src");$("referenceInfo").hidden=true;update();}
 $("referenceInput").addEventListener("change",function(){readReference(this.files&&this.files[0]);});
 $("removeReference").addEventListener("click",removeReference);
