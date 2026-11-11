@@ -88,7 +88,7 @@
         : '';
       document.getElementById('nextCard').innerHTML = `
         <span class="next-label">${COURSE_CONFIG.deliveryMode === 'self-paced' ? 'YOUR NEXT LESSON' : (status === 'today' ? 'TODAY' : 'NEXT AVAILABLE DAY')}</span>
-        <h2>Day ${String(day.id).padStart(2,'0')} — ${day.titleAr}</h2>
+        <h2>Day ${String(day.id).padStart(2,'0')} - ${day.titleAr}</h2>
         <p>${day.hook}</p>
         <span class="next-date">${COURSE_CONFIG.deliveryMode === 'self-paced' ? '120 دقيقة · تعلّم مرن' : `${day.weekday} • ${formatDateAr(day.date)}`}</span>
         <div class="live-slot">

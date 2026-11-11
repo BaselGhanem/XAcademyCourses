@@ -36,11 +36,11 @@ const DAYS = [
     build: ['Open Nova Company Profile and understand the management challenge', 'Install & launch Power BI Desktop', 'Connect Nova Excel, CSV, TXT, PDF and Web sources', 'Understand Extract → Transform → Load', 'Tour the interface only after using it', 'Build Total Revenue Card', 'Build Revenue by Region; inspect weekly Web Targets separately (different data grain)', 'Add Channel Slicer and test interactions', 'Save Nova_Business_Performance_360_[Name].pbix'],
     challenge: 'الإدارة لا تريد Chart جميل فقط. ابدأ بالسؤال: أي Region أو Branch يحتاج انتباه أولاً؟',
     deliverable: 'أول نسخة من Nova Business Performance 360 + فهم واضح لـETL وواجهات Power BI الأساسية.',
-    visualGuide: { image: 'concepts/assets/day1-etl-poster.png', title: 'Day 1 — Learner Visual Guide', note: 'رحلة الاتصال بالمصادر وETL وبناء أول تقرير' },
+    visualGuide: { image: 'concepts/assets/day1-etl-poster.png', title: 'Day 1 - Learner Visual Guide', note: 'رحلة الاتصال بالمصادر وETL وبناء أول تقرير' },
     resources: [
-      { name: 'Meet Nova — Company Profile', type: 'WEB', url: 'week1/day1/web/Nova_Company_Profile.html', note: 'ابدأ من هنا: الشركة، الشعار، المنتجات، نموذج العمل والتحدي الإداري.' },
-      { name: 'Day 01 — Nova Source Pack', type: 'ZIP', url: 'week1/day1/downloads/Day01_CONNECT_EVERYTHING.zip', note: 'Nova Product Master + Excel ETL Reference + 120K Sales CSV + Workforce TXT + Budget PDF + Challenge' },
-      { name: 'Nova Branch Performance — Web Source', type: 'WEB', url: 'week1/day1/web/Branch_Performance.html', note: '4,000 صف تجمع Sales + Finance + Workforce indicators. استخدم الرابط مباشرة في Get Data > Web.' },
+      { name: 'Meet Nova - Company Profile', type: 'WEB', url: 'week1/day1/web/Nova_Company_Profile.html', note: 'ابدأ من هنا: الشركة، الشعار، المنتجات، نموذج العمل والتحدي الإداري.' },
+      { name: 'Day 01 - Nova Source Pack', type: 'ZIP', url: 'week1/day1/downloads/Day01_CONNECT_EVERYTHING.zip', note: 'Nova Product Master + Excel ETL Reference + 120K Sales CSV + Workforce TXT + Budget PDF + Challenge' },
+      { name: 'Nova Branch Performance - Web Source', type: 'WEB', url: 'week1/day1/web/Branch_Performance.html', note: '4,000 صف تجمع Sales + Finance + Workforce indicators. استخدم الرابط مباشرة في Get Data > Web.' },
     ]
   },
   {
@@ -56,9 +56,9 @@ const DAYS = [
     build: ['Confirm the intended grain: Branch ID + Date', 'Inspect Nova dirty data before touching it', 'Audit invalid-date; convert valid dates with explicit locale; document exceptions', 'Trim & clean manager and category fields', 'Standardize Region and Channel labels', 'Audit missing Revenue, Cost and Headcount; never silently fill unknown values with zero', 'Remove only true duplicate rows', 'Review Applied Steps and Refresh'],
     challenge: 'بعد تنظيف Branch Performance، نظّف Nova Customer Master باستخدام الـCleaning Checklist فقط، بدون recipe خطوة بخطوة.',
     deliverable: 'Nova Branch Daily Performance + Customer Master نظيفان، Grain واضح، وقابلان للـRefresh.',
-    visualGuide: { image: 'concepts/assets/day2-learner-overview.svg', title: 'Day 2 — Learner Visual Guide', note: 'Power Query: تنظيف القيم والأنواع والأخطاء والتحقق' },
+    visualGuide: { image: 'concepts/assets/day2-learner-overview.svg', title: 'Day 2 - Learner Visual Guide', note: 'Power Query: تنظيف القيم والأنواع والأخطاء والتحقق' },
     resources: [
-      { name: 'Day 02 — Nova Cleaning Lab', type: 'ZIP', url: 'week1/day2/downloads/Day02_CLEAN_DATA.zip', note: '50K logical Branch-Day rows + intentional bad duplicates + 8K Dirty Customers + Nova Cleaning Checklist' },
+      { name: 'Day 02 - Nova Cleaning Lab', type: 'ZIP', url: 'week1/day2/downloads/Day02_CLEAN_DATA.zip', note: '50K logical Branch-Day rows + intentional bad duplicates + 8K Dirty Customers + Nova Cleaning Checklist' },
       { name: 'Cleaning Expected Results', type: 'Guide', url: 'datasets/EXPECTED_RESULTS.csv', note: 'إحصاءات موثقة للصفوف المتكررة والقيم غير الصالحة' },
     ]
   },
@@ -75,9 +75,9 @@ const DAYS = [
     build: ['Connect to Nova Monthly_Sales folder', 'Combine January–March', 'Keep Source File Name', 'Merge Nova Branch Master', 'Merge Customer Master', 'Merge Product Master', 'Validate Merge does not multiply rows', 'Load only the final analytical query', 'Drop April file and Refresh (160,000 rows)'],
     challenge: 'ابنِ العملية كاملة من Folder إلى Dataset موحد. النجاح الحقيقي: إضافة April بدون Copy/Paste أو تعديل يدوي.',
     deliverable: 'Nova monthly Sales pipeline قابلة للـRefresh وجاهزة للأشهر القادمة، مع Masters موحدة.',
-    visualGuide: { image: 'concepts/assets/day3-learner-overview.svg', title: 'Day 3 — Learner Visual Guide', note: 'Folder Connector وCombine وAppend وMerge وRefresh' },
+    visualGuide: { image: 'concepts/assets/day3-learner-overview.svg', title: 'Day 3 - Learner Visual Guide', note: 'Folder Connector وCombine وAppend وMerge وRefresh' },
     resources: [
-      { name: 'Day 03 — Nova Automation Pack', type: 'ZIP', url: 'week1/day3/downloads/Day03_STOP_COPYING_FILES_LEARNER.zip', note: 'نفس 120K Rows من Day 1، الآن Jan–Mar × 40K + April refresh proof + Branch/Customer/Product Masters' },
+      { name: 'Day 03 - Nova Automation Pack', type: 'ZIP', url: 'week1/day3/downloads/Day03_STOP_COPYING_FILES_LEARNER.zip', note: 'نفس 120K Rows من Day 1، الآن Jan–Mar × 40K + April refresh proof + Branch/Customer/Product Masters' },
       { name: 'Data Lineage', type: 'Guide', url: 'datasets/DATA_LINEAGE.md', note: 'تطابق معاملات Jan–Mar ثم April' },
       { name: 'Expected Results', type: 'Guide', url: 'datasets/EXPECTED_RESULTS.csv', note: 'أعداد الصفوف والقيم المرجعية قبل Refresh وبعده' },
     ]
@@ -97,9 +97,9 @@ const DAYS = [
     deliverable: 'Nova Star Schema يحتوي على كامل 160,000 معاملة Jan–Apr مع 4 Dimensions ومفاتيح صالحة، جاهز للـDAX.',
     visualGuide: null, // Legacy image depicts outdated 40K model; a new 160K image follows in Phase 4.
     resources: [
-      { name: 'Day 04 — Model the Business Lab', type: 'ZIP', url: 'week2/day4/downloads/Day04_MODEL_THE_BUSINESS.zip', note: 'Merge وAppend بعينات تعليمية، وFolder كامل Jan–Apr (160K)، وMay إلى 200K، وModel Lab كامل وDimDate بتاريخ Excel فعلي' },
-      { name: 'Day 04 — Process Flow', type: 'FLOW', url: 'concepts/assets/day4-process-flow.svg', note: 'Review → Fact/Dimensions → Relationships → Star Schema → Test Filters → Ready for DAX' },
-      { name: 'Day 04 — Concept Studio', type: 'WEB', url: 'concepts/index.html', note: 'Fact vs Dimension + Relationships + Star Schema' },
+      { name: 'Day 04 - Model the Business Lab', type: 'ZIP', url: 'week2/day4/downloads/Day04_MODEL_THE_BUSINESS.zip', note: 'Merge وAppend بعينات تعليمية، وFolder كامل Jan–Apr (160K)، وMay إلى 200K، وModel Lab كامل وDimDate بتاريخ Excel فعلي' },
+      { name: 'Day 04 - Process Flow', type: 'FLOW', url: 'concepts/assets/day4-process-flow.svg', note: 'Review → Fact/Dimensions → Relationships → Star Schema → Test Filters → Ready for DAX' },
+      { name: 'Day 04 - Concept Studio', type: 'WEB', url: 'concepts/index.html', note: 'Fact vs Dimension + Relationships + Star Schema' },
       { name: 'Model Expected Results', type: 'Guide', url: 'datasets/EXPECTED_RESULTS.csv', note: '160K FactSales و730 تاريخًا وإيراد 12,534,018.65 دينار' },
       { name: 'Source Lineage', type: 'Guide', url: 'datasets/DATA_LINEAGE.md', note: 'العينات التدريبية مقابل المعاملات الكاملة' },
     ]
@@ -117,10 +117,10 @@ const DAYS = [
     build: ['Open the Day 05 PBIP project, Refresh the full 160K model, then create the row-level Power Query columns', 'Power Query: Gross Sales = Quantity × Unit Price', 'Power Query: Discount Amount = Gross Sales - Revenue', 'Power Query: Discount Status using if...then...else', 'Close & Apply', 'Create Total Revenue', 'Create Total Quantity', 'Create Transactions with COUNTROWS', 'Create Customers with DISTINCTCOUNT', 'Create Average Transaction Value with DIVIDE', 'Build 4 KPI Cards', 'Build Revenue Trend by Month and sort Month correctly', 'Build Revenue by Category', 'Build Top 10 Branches by Revenue', 'Build Discount Analysis', 'Add Month / Branch / Category Slicers', 'Format and align the report', 'Test filters and observe Measures changing'],
     challenge: 'ابنِ Sales Overview يحتوي 4 KPIs وTrend وCategory وBranch وDiscount Analysis و3 Slicers على الأقل، ثم اشرح لماذا نفس الـMeasures تغيرت بدون تعديل الـDAX.',
     deliverable: 'أول Nova Sales Overview فعلي: Power Query calculations + DAX Measures + KPIs + Charts + Slicers، جاهز لـFilter Context في Day 6.',
-    visualGuide: { image: 'concepts/assets/day5-learner-overview.svg', title: 'Day 5 — Learner Visual Guide', note: 'Power Query Custom Column وDAX Measures وبناء التقرير' },
+    visualGuide: { image: 'concepts/assets/day5-learner-overview.svg', title: 'Day 5 - Learner Visual Guide', note: 'Power Query Custom Column وDAX Measures وبناء التقرير' },
     resources: [
-      { name: 'Day 05 — Calculate & Visualize Pack (PBIP)', type: 'ZIP', url: 'week2/day5/downloads/Day05_CALCULATE_VISUALIZE.zip', note: 'يتضمن مشروع PBIP بمبيعات Jan–Apr الكاملة (160K)، وتمارين Power Query وDAX والتقرير والتحدي؛ احفظ PBIX بعد التحقق داخل Desktop' },
-      { name: 'Day 05 — Concept Studio', type: 'WEB', url: 'concepts/index.html', note: 'Power Query Custom Column + Measure vs Column + Basic DAX Aggregations + DIVIDE' }
+      { name: 'Day 05 - Calculate & Visualize Pack (PBIP)', type: 'ZIP', url: 'week2/day5/downloads/Day05_CALCULATE_VISUALIZE.zip', note: 'يتضمن مشروع PBIP بمبيعات Jan–Apr الكاملة (160K)، وتمارين Power Query وDAX والتقرير والتحدي؛ احفظ PBIX بعد التحقق داخل Desktop' },
+      { name: 'Day 05 - Concept Studio', type: 'WEB', url: 'concepts/index.html', note: 'Power Query Custom Column + Measure vs Column + Basic DAX Aggregations + DIVIDE' }
     ]
   },
   {
@@ -138,9 +138,9 @@ const DAYS = [
     deliverable: 'Context Lab عملي يثبت فهم Filter Context وCALCULATE وREMOVEFILTERS وVisual Interactions، جاهز للانتقال إلى Time Intelligence في Day 7.',
     visualGuide: null, // Legacy Day06 poster reflects older discount semantics; replace in Phase4.
         resources: [
-      { name: 'Day 06 — Context & CALCULATE Pack (PBIP)', type: 'ZIP', url: 'week2/day6/downloads/Day06_CONTEXT_AND_CALCULATE.zip', note: 'مشروع PBIP من نفس 160K مع Gross Sales وDiscount Amount وDiscount Status الموحدين، ثم Labs وCALCULATE وReport Blueprint' },
-      { name: 'Day 06 — Process Flow', type: 'FLOW', url: 'concepts/assets/day6-process-flow.svg', note: 'Review → Filter Context → CALCULATE → REMOVEFILTERS → Contribution → Interactions → Context Lab' },
-      { name: 'Day 06 — Concept Studio', type: 'WEB', url: 'concepts/index.html', note: 'Filter Context + CALCULATE + REMOVEFILTERS & Contribution + Visual Interactions' }
+      { name: 'Day 06 - Context & CALCULATE Pack (PBIP)', type: 'ZIP', url: 'week2/day6/downloads/Day06_CONTEXT_AND_CALCULATE.zip', note: 'مشروع PBIP من نفس 160K مع Gross Sales وDiscount Amount وDiscount Status الموحدين، ثم Labs وCALCULATE وReport Blueprint' },
+      { name: 'Day 06 - Process Flow', type: 'FLOW', url: 'concepts/assets/day6-process-flow.svg', note: 'Review → Filter Context → CALCULATE → REMOVEFILTERS → Contribution → Interactions → Context Lab' },
+      { name: 'Day 06 - Concept Studio', type: 'WEB', url: 'concepts/index.html', note: 'Filter Context + CALCULATE + REMOVEFILTERS & Contribution + Visual Interactions' }
     ]
   },
   {
@@ -158,8 +158,8 @@ const DAYS = [
     deliverable: `تقرير تحليلي حسب السؤال المختار، مع PM / YoY / YTD عند ملاءمتها، وتحقق رقمي موثق. لا تُجمع لقطات Headcount عبر الزمن.`,
     visualGuide: null, // Old illustration depicts four named trainees and is retired.
     resources: [
-      { name: `Day 07 — Universal Scenario Pack`, type: `ZIP`, url: `week3/day7/downloads/Day07_UNIVERSAL_SCENARIOS.zip`, note: `أربع حالات أعمال عامة، مشروع PBIP، وأمثلة DAX ونتائج متوقعة` },
-      { name: `Day 07 — PBIP Start Project`, type: `ZIP`, url: `week3/day7/downloads/Nova_Day07_START_PBIP.zip`, note: `مبيعات Day04 الأصلية بالكامل + بيانات 2025 الاصطناعية للمقارنة، مع Operations وFinance وWorkforce` },
+      { name: `Day 07 - Universal Scenario Pack`, type: `ZIP`, url: `week3/day7/downloads/Day07_UNIVERSAL_SCENARIOS.zip`, note: `أربع حالات أعمال عامة، مشروع PBIP، وأمثلة DAX ونتائج متوقعة` },
+      { name: `Day 07 - PBIP Start Project`, type: `ZIP`, url: `week3/day7/downloads/Nova_Day07_START_PBIP.zip`, note: `مبيعات Day04 الأصلية بالكامل + بيانات 2025 الاصطناعية للمقارنة، مع Operations وFinance وWorkforce` },
       { name: `Performance & Sales`, type: `WEB`, url: `week3/day7/web/PERFORMANCE_SCENARIO.html`, note: `إيراد ونمو وفئات وعملاء` },
       { name: `Operations`, type: `WEB`, url: `week3/day7/web/OPERATIONS_SCENARIO.html`, note: `الطلبات والالتزام والدورة التشغيلية` },
       { name: `Finance`, type: `WEB`, url: `week3/day7/web/FINANCE_SCENARIO.html`, note: `الميزانية والربحية وفروقات الأداء` },
@@ -202,7 +202,7 @@ const DAYS = [
     build: ['Open Day09 PBIP from the verified Day07 source model', 'Compare Visual/Page/Report filter scopes', 'Sync DimDate slicer on two pages', 'Build Show/Hide filter panel with Display ON and Data OFF', 'Build Field Parameter from real fields', 'Create Dynamic Title for single and multi-select', 'Verify preserved slicer choices', 'Save As PBIX after Power BI Desktop testing'],
     challenge: 'أنتج لوحة واضحة الفلاتر يمكن تغيير منظورها دون تضليل المستخدم، ثم أثبت نتيجة واحدة رقميًا.',
     deliverable: 'Filter Panel + Sync Slicers + Field Parameter + Dynamic Title مع اختبارات واضحة.',
-    visualGuide: { image: 'week3/day9/assets/Day09_Plan_Poster.svg', title: 'Day 09 — Interactivity', note: 'Filter Scopes وBookmarks وField Parameters' },
+    visualGuide: { image: 'week3/day9/assets/Day09_Plan_Poster.svg', title: 'Day 09 - Interactivity', note: 'Filter Scopes وBookmarks وField Parameters' },
     resources: [
       { name: 'Day09 Universal Interactivity PBIP', type: 'ZIP', url: 'week3/day9/downloads/Day09_INTERACTIVITY_LAB.zip', note: 'نفس النموذج الموحد مع صفحة تعليمات؛ التفاعلات ليست مهيأة مسبقًا' },
       { name: 'Universal Student Missions', type: 'Guide', url: 'week3/day9/DAY09_STUDENT_MISSIONS.md', note: 'تمارين عامة تعتمد حقول النموذج الفعلية' },
@@ -215,7 +215,7 @@ const DAYS = [
     date: '2026-12-01',
     weekday: 'الثلاثاء',
     phase: 'CREATE',
-    title: 'Capstone — From Data to Decision',
+    title: 'Capstone - From Data to Decision',
     titleAr: 'المشروع النهائي: من البيانات إلى القرار',
     hook: 'النتيجة ليست عدد الرسومات، بل تقرير صحيح يدعم قرارًا إداريًا يمكن الدفاع عنه.',
     mission: 'ابنِ تقرير Power BI متكاملًا حسب سؤال أعمال تختاره، مع إثبات الحسابات والتفاعلات. AI Visual خيار إضافي.',
@@ -229,9 +229,9 @@ const DAYS = [
       { name: 'Capstone Guide', type: 'Guide', url: 'week3/day10/CAPSTONE_GUIDE.md', note: 'متطلبات المشروع وتوزيع الـ120 دقيقة' },
       { name: 'Capstone Rubric', type: 'Guide', url: 'week3/day10/CAPSTONE_RUBRIC.csv', note: 'ستة معايير مجموعها 100 نقطة' },
       { name: 'Manual Desktop QA', type: 'Guide', url: 'week3/day10/CAPSTONE_QA_CHECKLIST.md', note: 'راجع التقرير وتحقق من التفاعل ودقة النتائج في Power BI Desktop' },
-      { name: 'AI Visual Design Lab — Optional', type: 'WEB', url: 'week3/day10/ai-visual-design-lab.html', note: 'Prompt Builder ومعاينة تعليمية، وليس مولّد DAX فعلي' },
-      { name: 'Domain Visual Missions — Optional', type: 'WEB', url: 'week3/day10/student-missions.html', note: 'تحديات عامة دون أسماء متدربين' },
-      { name: 'Reference DAX — Optional', type: 'Guide', url: 'week3/day10/examples/README.md', note: 'أمثلة يجب اختبارها داخل Power BI Desktop' }
+      { name: 'AI Visual Design Lab - Optional', type: 'WEB', url: 'week3/day10/ai-visual-design-lab.html', note: 'Prompt Builder ومعاينة تعليمية، وليس مولّد DAX فعلي' },
+      { name: 'Domain Visual Missions - Optional', type: 'WEB', url: 'week3/day10/student-missions.html', note: 'تحديات عامة دون أسماء متدربين' },
+      { name: 'Reference DAX - Optional', type: 'Guide', url: 'week3/day10/examples/README.md', note: 'أمثلة يجب اختبارها داخل Power BI Desktop' }
     ]
   }
 ];
