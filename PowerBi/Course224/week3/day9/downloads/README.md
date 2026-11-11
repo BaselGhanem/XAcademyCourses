@@ -1,4 +1,4 @@
-# Day 09 — Power BI Report
+# Day 09 - Power BI Report
 
 Upload the original report binary to this folder without converting or renaming it:
 

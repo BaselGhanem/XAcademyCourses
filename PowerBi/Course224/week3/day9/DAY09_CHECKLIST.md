@@ -1,4 +1,4 @@
-# Day 09 — Acceptance Checklist
+# Day 09 - Acceptance Checklist
 
 - [ ] Model uses the same Day07 nine tables and 11 intended relationships
 - [ ] Filters use real fields, correct grain and correct scope

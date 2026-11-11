@@ -1,4 +1,4 @@
-# Day 09 — Advanced Interactivity, Any Profession
+# Day 09 - Advanced Interactivity, Any Profession
 
 Continue from the Day08 report using the same verified nine-table Day07 model. No named learner roles.
 

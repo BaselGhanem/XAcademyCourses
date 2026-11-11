@@ -1,4 +1,4 @@
-# Day 08 — Report Design Lab (120 minutes)
+# Day 08 - Report Design Lab (120 minutes)
 
 Audience: every professional field. Base: identical Day07 nine-table semantic model.
 

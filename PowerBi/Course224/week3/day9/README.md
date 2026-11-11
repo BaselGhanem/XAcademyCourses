@@ -1,4 +1,4 @@
-# Day 09 — Advanced Interactivity · Course224
+# Day 09 - Advanced Interactivity · Course224
 
 No named learners. Continue from the Day08 report with the **same Stage3 nine-table model**, or open [the Day09 source-aligned PBIP starter](downloads/Day09_INTERACTIVITY_LAB.zip).
 
