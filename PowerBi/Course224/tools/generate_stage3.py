@@ -133,7 +133,7 @@ def produce_domain_guides(full):
         snippets='\n\n'.join(x['name']+' =\n'+x['expression'] for x in chosen)
         (folder/(name+'_DAX.dax')).write_text(snippets+'\n',encoding='utf-8')
         lines=''.join('<section class="card"><h3>'+html.escape(x['name'])+'</h3><pre>'+html.escape(x['name']+' =\n'+x['expression'])+'</pre></section>' for x in chosen)
-        body=f'''<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nova — {html.escape(role["ar"])}</title>
+        body=f'''<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nova - {html.escape(role["ar"])}</title>
 <style>body{{font:16px/1.8 Arial,sans-serif;background:#f6faf9;color:#13233b;margin:0}}main{{max-width:980px;margin:auto;padding:32px}}h1{{color:#099999}}.card{{background:white;border:1px solid #e1e8e8;padding:20px;margin:16px 0;border-radius:14px}}pre{{direction:ltr;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;padding:16px;background:#edf6f5;border-radius:8px}}a{{color:#077b7b}}</style></head>
 <body><main><a href="../../../dashboard.html">X Academy · Course224</a><h1>{html.escape(role["ar"])}</h1><p>سيناريو اختياري لأي متدرب. لا يرتبط بمسمى وظيفي أو اسم شخص.</p>
 <div class="card"><h2>السؤال</h2><p>{html.escape(role["question"])}</p><p>استخدم Year Month وYear من DimDate. قارن 2026 مقابل 2025 الاصطناعية الموثقة، ولا تفترض وجود بيانات خارج الفترة.</p></div>

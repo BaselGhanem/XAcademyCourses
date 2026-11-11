@@ -111,7 +111,7 @@ def save_dax(path):
     wb.save(path)
 
 def save_report(path):
-    wb,ws=new_wb('SALES OVERVIEW — REPORT BLUEPRINT','أول Report حقيقي: KPIs + Trend + Category + Branch + Discount + Slicers.')
+    wb,ws=new_wb('SALES OVERVIEW - REPORT BLUEPRINT','أول Report حقيقي: KPIs + Trend + Category + Branch + Discount + Slicers.')
     layout=[
       ['KPI 1','Card','[Total Revenue]','','Format as Currency'],
       ['KPI 2','Card','[Customers]','','Whole Number'],
@@ -154,7 +154,7 @@ def save_report(path):
     wb.save(path)
 
 def save_challenge(path):
-    wb,ws=new_wb('DAY 5 — ANALYST CHALLENGE','ابنِ Sales Overview بدون تقليد خطوات المدرب واحدة واحدة.')
+    wb,ws=new_wb('DAY 5 - ANALYST CHALLENGE','ابنِ Sales Overview بدون تقليد خطوات المدرب واحدة واحدة.')
     req=[
       ['01','4 KPI Cards','Total Revenue • Customers • Transactions • Total Quantity'],
       ['02','1 Trend','Revenue by Month'],
@@ -176,7 +176,7 @@ def save_challenge(path):
     ]
     add_table(ws,15,['#','Question'],questions,[8,100])
     ws.merge_cells('A22:F24')
-    ws['A22']='Bridge to Day 6: نفس الـMeasure أعطى نتيجة مختلفة بعد اختيار Filter. غدا سنفهم لماذا — Filter Context + CALCULATE.'
+    ws['A22']='Bridge to Day 6: نفس الـMeasure أعطى نتيجة مختلفة بعد اختيار Filter. غدا سنفهم لماذا - Filter Context + CALCULATE.'
     ws['A22'].font=Font(name='Almarai',size=13,bold=True,color=WHITE)
     ws['A22'].fill=PatternFill('solid',fgColor=TEAL)
     ws['A22'].alignment=Alignment(horizontal='center',vertical='center',wrap_text=True)
@@ -203,7 +203,7 @@ def build():
     shutil.copy2(pbip,WORK/'01_Nova_Day05_Start_PBIP.zip')
 
     (WORK/'00_START_HERE.txt').write_text(
-      'NOVA DISTRIBUTION GROUP — DAY 05: CALCULATE & VISUALIZE\n\n'
+      'NOVA DISTRIBUTION GROUP - DAY 05: CALCULATE & VISUALIZE\n\n'
       'IMPORTANT\n'
       'There is NO new dataset in Day 5. Start with 01_Nova_Day05_Start_PBIP.zip, which contains the complete Day04 160,000-row semantic model. Open the .pbip project in Power BI Desktop, Refresh, and then Save As PBIX after validation.\n'
       'The rest of the pack contains only the new Day 5 learning material.\n\n'

@@ -1,4 +1,4 @@
-# Course224 — Power BI Specialist | X Academy
+# Course224 - Power BI Specialist | X Academy
 
 **Course224 is the editable course**, cloned from the historical Course223. Do not create Course225. Phases 1–2 generalize the portal and source datasets. Original PBIX references and advanced lessons migrate in Phases 3–4.
 

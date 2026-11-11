@@ -188,7 +188,7 @@ img { max-width: 100%; display: block; }
 }
 
 
-/* DAY EXPERIENCE V2 — recording-first layout */
+/* DAY EXPERIENCE V2 - recording-first layout */
 .recording-hero-wrap[hidden]{display:none!important}
 .recording-hero-wrap{padding:0 0 24px}
 .recording-hero-panel{
@@ -378,7 +378,7 @@ img { max-width: 100%; display: block; }
 
 
 /* ───────────────────────────────────────────────────────────
-   COURSE UX REFINEMENT — consistent readability & navigation
+   COURSE UX REFINEMENT - consistent readability & navigation
    Scope: course hub and day pages, keeps all existing content.
    ─────────────────────────────────────────────────────────── */
 html { scroll-padding-top: 146px; }

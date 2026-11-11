@@ -18,7 +18,7 @@ PROJECT_NAME='Nova'
 PAGE_ROOT=Path('Nova.Report/definition/pages')
 STEPS={
 8:('DESIGN','Report Experience',[
-  'DAY 08 — REPORT DESIGN / X ACADEMY',
+  'DAY 08 - REPORT DESIGN / X ACADEMY',
   'Use the same 9-table Day07 domain-neutral model, including 160K original Jan–Apr 2026 sales.',
   'Choose one validated domain question. Audit two visuals: Keep / Change / Remove.',
   'Build clear KPI hierarchy, align whitespace, make a useful report-page tooltip.',
@@ -28,7 +28,7 @@ STEPS={
   'Validate numbers and report behaviour in Desktop; Save As PBIX only after checks.'
 ]),
 9:('CONTROL','Advanced Interactivity',[
-  'DAY 09 — ADVANCED INTERACTIVITY / X ACADEMY',
+  'DAY 09 - ADVANCED INTERACTIVITY / X ACADEMY',
   'Continue from the validated Day08 model (same Day07 full-grain data).',
   'Audit Visual / Page / Report filters; do not filter unrelated facts blindly.',
   'Sync a DimDate slicer on two pages; document exactly which pages it affects.',
@@ -39,7 +39,7 @@ STEPS={
   'Interactive buttons/parameters are classroom tasks, not pre-built promises.'
 ]),
 10:('CAPSTONE','From Data to Decision',[
-  'DAY 10 — CAPSTONE / X ACADEMY',
+  'DAY 10 - CAPSTONE / X ACADEMY',
   'Complete one continuous business case, any chosen professional domain.',
   'Required: 1 business decision, correct model, 4 KPIs, trend and 2 diagnostic visuals.',
   'Required: DAX validated with expected source outcomes, working drillthrough or tooltip.',
@@ -76,7 +76,7 @@ def add_page(project,day):
     }
     write_json(loc/'visuals/v0000/visual.json',visual)
     (project/'README.txt').write_text(
-      f'COURSE224 — DAY {day:02d} {label}\n'
+      f'COURSE224 - DAY {day:02d} {label}\n'
       'Unzip the whole project. Open Nova.pbip using current Power BI Desktop.\n'
       'The model is a copy of the validated Stage3 Day07 PBIP source. No new data source was invented.\n'
       'The instructional page is a STARTING POINT, not a finished report.\n'

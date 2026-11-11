@@ -91,26 +91,26 @@ def build():
 
     months={m:list(w1.monthly_sales_rows(40000,m,products,customers,branches)) for m in range(1,6)}
 
-    # 01 — Merge review
+    # 01 - Merge review
     merge_dir=WORK/'01_REVIEW_MERGE'
     write_xlsx(merge_dir/'01_Sales_Sample.xlsx', SALES_HEADER, months[1][:1200], 'Sales')
     product_header=['Product ID','SKU','Product Name','Category','Subcategory','Brand','Pack / Variant','Unit Cost','List Price','Supplier','Portfolio Role','Status']
     product_rows=[[p['product_id'],p['sku'],p['product_name'],p['category'],p['subcategory'],p['brand'],p['variant'],p['unit_cost'],p['list_price'],p['supplier'],p['portfolio_role'],p['status']] for p in products]
     write_xlsx(merge_dir/'02_Product_Master.xlsx', product_header, product_rows, 'Products')
 
-    # 02 — Append review
+    # 02 - Append review
     append_dir=WORK/'02_REVIEW_APPEND'
     for m,name in [(1,'January'),(2,'February'),(3,'March')]:
         write_xlsx(append_dir/f'Sales_{name}.xlsx', SALES_HEADER, months[m][:2500], 'Sales')
 
-    # 03 — Folder review with Excel and May held out
+    # 03 - Folder review with Excel and May held out
     folder_dir=WORK/'03_REVIEW_FOLDER'/'Monthly_Sales_Excel'
     for m,name in [(1,'Jan'),(2,'Feb'),(3,'Mar'),(4,'Apr')]:
         write_xlsx(folder_dir/f'Sales_{name}.xlsx', SALES_HEADER, months[m], 'Sales')
     new_dir=WORK/'03_REVIEW_FOLDER'/'NEW_MONTH_TO_DROP_AFTER_BUILD'
     write_xlsx(new_dir/'Sales_May.xlsx', SALES_HEADER, months[5], 'Sales')
 
-    # 04 — Model lab. Full Day03 Jan-Apr facts at the original 160k transaction grain.
+    # 04 - Model lab. Full Day03 Jan-Apr facts at the original 160k transaction grain.
     fact=[]
     for m in range(1,5):
         for r in months[m]:
@@ -133,10 +133,10 @@ def build():
         ]),
         ('Relationship Map', [
             ['Dimension','Key (1 side)','Fact column (* side)','Cardinality','Filter Direction','Training Intent'],
-            ['DimProduct','Product ID','FactSales[Product ID]','1:*','Single → FactSales','Same name — inspect Auto Detect'],
-            ['DimBranch','Branch ID','FactSales[Branch ID]','1:*','Single → FactSales','Same name — inspect Auto Detect'],
-            ['DimCustomer','Customer Code','FactSales[Customer ID]','1:*','Single → FactSales','Different names — create manually'],
-            ['DimDate','Date','FactSales[Order Date]','1:*','Single → FactSales','Different names — create manually']
+            ['DimProduct','Product ID','FactSales[Product ID]','1:*','Single → FactSales','Same name - inspect Auto Detect'],
+            ['DimBranch','Branch ID','FactSales[Branch ID]','1:*','Single → FactSales','Same name - inspect Auto Detect'],
+            ['DimCustomer','Customer Code','FactSales[Customer ID]','1:*','Single → FactSales','Different names - create manually'],
+            ['DimDate','Date','FactSales[Order Date]','1:*','Single → FactSales','Different names - create manually']
         ]),
         ('Memory', [
             ['Concept','Remember'],
@@ -160,14 +160,14 @@ def build():
     assert all(r[4] in {b['branch_id'] for b in branches} for r in fact)
 
     (WORK/'00_START_HERE.txt').write_text(
-        'NOVA DISTRIBUTION GROUP — DAY 04: MODEL THE BUSINESS\n\n'
+        'NOVA DISTRIBUTION GROUP - DAY 04: MODEL THE BUSINESS\n\n'
         'STORY\n'
         'Week 1 gave us connected, clean and refreshable data. Today we first review Merge, Append and Folder using Excel files, then build a real Star Schema.\n\n'
-        'PART A — REVIEW\n'
+        'PART A - REVIEW\n'
         '01_REVIEW_MERGE: Merge Sales with Product Master on Product ID. Remember: Merge = Add Columns.\n'
         '02_REVIEW_APPEND: Append January + February + March. Remember: Append = Add Rows.\n'
         '03_REVIEW_FOLDER: Connect to Monthly_Sales_Excel as Folder, combine Jan-Apr, then move Sales_May.xlsx into the folder and Refresh.\n\n'
-        'PART B — MODEL\n'
+        'PART B - MODEL\n'
         'Open 04_MODEL_LAB/Nova_Day04_Model_Lab.xlsx and load FactSales, DimProduct, DimCustomer, DimBranch and DimDate.\n'
         'First run Auto Detect and inspect what Power BI found. Product ID and Branch ID use matching names; Customer and Date intentionally use different key names.\n'
         'Create the missing relationships manually: DimCustomer[Customer Code] → FactSales[Customer ID] and DimDate[Date] → FactSales[Order Date].\n'
