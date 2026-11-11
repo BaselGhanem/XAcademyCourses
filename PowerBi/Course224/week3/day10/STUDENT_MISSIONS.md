@@ -1,4 +1,4 @@
-# Day 10 — Optional Domain Visual Missions
+# Day 10 - Optional Domain Visual Missions
 
 These are optional extensions, **not the mandatory Capstone**. Each learner selects a question, not a person.
 

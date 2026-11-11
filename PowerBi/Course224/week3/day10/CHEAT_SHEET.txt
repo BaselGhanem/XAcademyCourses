@@ -1,7 +1,7 @@
 DAY 10 | AI VISUAL DESIGN CHEAT SHEET
-X ACADEMY — POWER BI / NOVA
+X ACADEMY - POWER BI / NOVA
 
-THE PROMPT RECIPE — 12 QUESTIONS
+THE PROMPT RECIPE - 12 QUESTIONS
 01 BUSINESS: What business question must the visual answer?
 02 MODEL: Exact existing [Measure Names] + 'Table'[Column], copied from Power BI
 03 GRAIN: Category, Department, Year-Month, Latest Snapshot...
@@ -12,7 +12,7 @@ THE PROMPT RECIPE — 12 QUESTIONS
 08 MOTION: Effect name, duration, intensity, once/hover/loop
 09 INTERACTION: HTML hover vs native Power BI selection: not the same
 10 OUTPUT: Full DAX Measure returning HTML/SVG, no placeholders
-11 FAILSAFE: STATIC FIRST — data always visible without animation
+11 FAILSAFE: STATIC FIRST - data always visible without animation
 12 QA: Compare totals, slicers, MAX=100%, BLANK/0/negative, small canvas
 
 20 EFFECTS:

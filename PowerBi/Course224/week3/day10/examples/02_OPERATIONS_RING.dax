@@ -5,8 +5,8 @@ VAR _SafeRate = MIN ( 1, MAX ( 0, COALESCE ( _Rate, 0 ) ) )
 -- The existing On Time % measure is expected to return a fractional rate (0..1).
 -- Verify that assumption using a native Card before using this visual.
 VAR _Stroke = FORMAT ( _SafeRate * 314.159, "0.###", "en-US" )
-VAR _RateText = IF ( ISBLANK ( _Rate ), "—", FORMAT ( _Rate, "0.0%" ) )
-VAR _OrdersText = IF ( ISBLANK ( _Orders ), "—", FORMAT ( _Orders, "#,##0" ) )
+VAR _RateText = IF ( ISBLANK ( _Rate ), "-", FORMAT ( _Rate, "0.0%" ) )
+VAR _OrdersText = IF ( ISBLANK ( _Orders ), "-", FORMAT ( _Orders, "#,##0" ) )
 VAR _Status =
     IF ( ISBLANK ( _Rate ), "NO DATA",
         IF ( _Rate >= 0.9, "ON TRACK", IF ( _Rate >= 0.75, "MONITOR", "REVIEW" ) ) )

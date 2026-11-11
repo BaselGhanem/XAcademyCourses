@@ -6,7 +6,7 @@ VAR _Scale = MAX ( 1.25, CEILING ( MAX ( 0, _Raw ), 0.25 ) )
 VAR _ActualWidth = MIN ( 100, DIVIDE ( MAX ( 0, _Raw ), _Scale, 0 ) * 100 )
 VAR _TargetLeft = DIVIDE ( 1, _Scale, 0 ) * 100
 VAR _AchievementText =
-    IF ( ISBLANK ( _Achievement ), "—", FORMAT ( _Achievement, "0.0%" ) )
+    IF ( ISBLANK ( _Achievement ), "-", FORMAT ( _Achievement, "0.0%" ) )
 VAR _WidthCSS = FORMAT ( _ActualWidth, "0.####", "en-US" )
 VAR _TargetCSS = FORMAT ( _TargetLeft, "0.####", "en-US" )
 VAR _ScaleText = FORMAT ( _Scale, "0%" )

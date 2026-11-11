@@ -1,4 +1,4 @@
-# Day 10 — Universal Capstone
+# Day 10 - Universal Capstone
 
 The required outcome is a validated decision-ready Power BI report **for any documented business domain**; AI-assisted visuals are optional.
 
