@@ -96,4 +96,4 @@ assert summary['pbix_desktop_verified'] is False
 assert len(summary['domain_examples'])==4
 for s in ['MAHMOUD','SOMAYA','HISHAM','ENAS']:
     assert s not in ' '.join(summary['domain_examples'])
-print('STAGE3 SOURCE & PBIP QA PASSED — 160K/160K/320K source-aligned; no mismatched legacy PBIX distributed.')
+print('STAGE3 SOURCE & PBIP QA PASSED - 160K/160K/320K source-aligned; no mismatched legacy PBIX distributed.')

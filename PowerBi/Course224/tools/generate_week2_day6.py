@@ -124,7 +124,7 @@ def save_calculate(path):
     wb.save(path)
 
 def save_blueprint(path):
-    wb,ws=new_wb('CONTEXT LAB — REPORT BLUEPRINT','ابن صفحة ثانية فوق تقرير Day 5 لتشاهد كيف تتغير الـMeasures وكيف تتفاعل الـVisuals.')
+    wb,ws=new_wb('CONTEXT LAB - REPORT BLUEPRINT','ابن صفحة ثانية فوق تقرير Day 5 لتشاهد كيف تتغير الـMeasures وكيف تتفاعل الـVisuals.')
     layout=[
       ['Page','Context Lab','','','Duplicate Day 5 report page or start a clean page'],
       ['Card 1','Card','[Total Revenue]','','Baseline measure'],
@@ -155,7 +155,7 @@ def save_blueprint(path):
     wb.save(path)
 
 def save_challenge(path):
-    wb,ws=new_wb('DAY 6 — CONTEXT CHALLENGE','ابن Context Analysis واثبت أنك تفهم لماذا تغيرت النتيجة، لا فقط كيف تكتب DAX.')
+    wb,ws=new_wb('DAY 6 - CONTEXT CHALLENGE','ابن Context Analysis واثبت أنك تفهم لماذا تغيرت النتيجة، لا فقط كيف تكتب DAX.')
     req=[
       ['01','Create required Measures','Discounted Revenue • Full Price Revenue • Retail Revenue • Revenue All Categories • Category Contribution %'],
       ['02','Build 4 Cards','Total Revenue • Discounted Revenue • Full Price Revenue • Retail Revenue'],
@@ -202,13 +202,13 @@ def build():
     save_challenge(WORK/'05_Day06_Analyst_Challenge.xlsx')
 
     (WORK/'00_START_HERE.txt').write_text(
-      'NOVA DISTRIBUTION GROUP — DAY 06: CONTEXT CHANGES EVERYTHING\n\n'
+      'NOVA DISTRIBUTION GROUP - DAY 06: CONTEXT CHANGES EVERYTHING\n\n'
       'START\n'
       'Open 01_Nova_Day06_Start_PBIP.zip. It is the completed Day 5 file supplied by the trainer and is our shared starting point.\n'
       'No new dataset is introduced today.\n\n'
       'DAY 6 STORY\n'
       'Day 5 proved that the same Measure changes when we use slicers and click visuals. Today we explain WHY.\n\n'
-      'FLOW — ABOUT 2 HOURS\n'
+      'FLOW - ABOUT 2 HOURS\n'
       '00–10 min  Review Day 5 report and existing Measures.\n'
       '10–30 min  Filter Context: same Measure + different filters = different result.\n'
       '30–55 min  CALCULATE: add a filter using Discount Status and Channel.\n'

@@ -61,7 +61,7 @@ async def smoke(base):
         assert 'Nova Data Dictionary' not in titles
         assert 'Nova Business Rules' not in titles
         assert len(titles)==3, titles
-        assert 'Day 01 — Nova Source Pack' in titles
+        assert 'Day 01 - Nova Source Pack' in titles
         events.append('day1_video_new_and_two_docs_removed')
 
         for day,resource in [
