@@ -2,7 +2,7 @@
 // Paste a OneDrive video iframe or its image-preview embed code.
 
 const DAY_VIDEOS = {
-  1: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQRhd2OqUAiGS4Z9nRq-RX3dATYBszhzhg0VC8u919tFtLQ" title="تسجيل اليوم الأول" width="1920" height="1080" frameborder="0" scrolling="no" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>`,
+  1: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQTqpY85pMLnRL7-26lzGNBNAQ1PHFuwmHv3Zo5mGgYKTtI" title="تسجيل اليوم الأول" width="1920" height="1080" frameborder="0" scrolling="no" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>`,
   2: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQQdzObmVlepT7WOdE4uwMxvAYXzc2tIlFNgx_WoGPSjqpk" width="1920" height="1080" frameborder="0" scrolling="no" allowfullscreen></iframe>`,
   3: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQQbURQVtjzYTamX2kGOJUrYAb6y8D--6S4kD2mVi-nQhao" width="320" height="320" frameborder="0" scrolling="no" allowfullscreen></iframe>`,
   4: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQTeSmYgUTlvRJNAhC5MOPkXAWcguZovui8VamiwwKBRkgY" width="1920" height="1080" frameborder="0" scrolling="no" allowfullscreen></iframe>`,

@@ -54,7 +54,7 @@ async def smoke(base):
         await page.goto(base+'/day.html?id=1',wait_until='domcontentloaded')
         player=page.locator('#videoBox iframe')
         await player.wait_for()
-        assert await player.get_attribute('src')=='https://1drv.ms/v/c/a1a27fad04d192e9/IQRhd2OqUAiGS4Z9nRq-RX3dATYBszhzhg0VC8u919tFtLQ'
+        assert await player.get_attribute('src')=='https://1drv.ms/v/c/a1a27fad04d192e9/IQTqpY85pMLnRL7-26lzGNBNAQ1PHFuwmHv3Zo5mGgYKTtI'
         assert await page.locator('#recordingHeroWrap').is_visible()
         assert await page.locator('#dayQuickVideo').is_visible()
         titles=await page.locator('#resources .resource-copy strong').all_inner_texts()
