@@ -51,3 +51,6 @@ GitHub Actions [Chromium learner smoke run](https://github.com/BaselGhanem/XAcad
 ## Concept Studio follow-up (2026-11-03)
 
 The missing Day08–Day10 Concept Studio learning path has been restored: **Day08: 5 topics** (visual hierarchy/selection, tooltip, drillthrough, navigation); **Day09: 5 topics** (slicer sync, bookmark state, selection pane, field parameters, dynamic titles); **Day10: 6 topics** (decision framing, source validation, capstone evidence, AI prompt scope, Native/HTML parity, accessibility). Every new concept has a full explanation, source-aligned example, common mistake, warning and an in-page visual. All concept cards now support keyboard Enter/Space. The Chromium smoke test opens and closes every new concept. These are documented **learning concepts**, not Desktop-tested Power BI runtime artifacts.
+
+## Automatic access after session recording (2026-11-15)
+With `Day N+1 = AUTO`, adding an **approved, nonempty Day N recording** unlocks the following lesson automatically. `ON` explicitly publishes; `OFF` explicitly locks. Existing old unapproved Days 02-10 recordings do not unlock future lessons. Today Day 02 becomes available from approved Day 01 video; Day 03 remains locked. Publication flags are client-side UI controls, not GitHub file authorization.
