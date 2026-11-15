@@ -51,35 +51,48 @@ async def smoke(base):
         assert await page.locator('#daysGrid').locator('a[href*="day.html?id="]').count()>=1
         events.append('login/profile/dashboard')
 
-        assert await page.locator('#daysGrid a[href="day.html?id=2"]').count()==1, 'Day2 must unlock after approved Day1 recording'
-        assert await page.locator('#daysGrid a[href="day.html?id=3"]').count()==0, 'Day3 must remain locked'
+        assert await page.locator('#daysGrid a[href="day.html?id=2"]').count()==1, 'Day2 must be unlocked'
+        assert await page.locator('#daysGrid a[href="day.html?id=3"]').count()==1, 'Day3 must unlock after approved Day2 recording'
+        assert await page.locator('#daysGrid a[href="day.html?id=4"]').count()==0, 'Day4 must remain locked'
         rules=await page.evaluate("""() => {
-            const before = [isDayOpen(1),isDayOpen(2),isDayOpen(3),isDayOpen(10)];
-            const original = DAY_VIDEOS[1];
-            DAY_VIDEOS[1] = '';
-            const missingVideo = isDayOpen(2);
-            DAY_VIDEOS[1] = original;
-            const approved = APPROVED_RECORDING_DAYS.has(2);
+            const before = [isDayOpen(1),isDayOpen(2),isDayOpen(3),isDayOpen(4),isDayOpen(10)];
+            const original = DAY_VIDEOS[2];
+            DAY_VIDEOS[2] = '';
+            const missingVideoLocksDay3 = isDayOpen(3);
+            DAY_VIDEOS[2] = original;
+            APPROVED_RECORDING_DAYS.delete(2);
+            const unapprovedLocksDay3 = isDayOpen(3);
             APPROVED_RECORDING_DAYS.add(2);
-            const futureWithApproval = isDayOpen(3);
-            if (!approved) APPROVED_RECORDING_DAYS.delete(2);
-            const override = ACCESS_CONFIG.days['Day 2'];
-            ACCESS_CONFIG.days['Day 2'] = 'OFF';
-            const forcedOff = isDayOpen(2);
-            ACCESS_CONFIG.days['Day 2'] = override;
-            return {before,missingVideo,futureWithApproval,forcedOff};
+            const override = ACCESS_CONFIG.days['Day 3'];
+            ACCESS_CONFIG.days['Day 3'] = 'OFF';
+            const forcedOff = isDayOpen(3);
+            ACCESS_CONFIG.days['Day 3'] = override;
+            const previouslyApproved = APPROVED_RECORDING_DAYS.has(3);
+            APPROVED_RECORDING_DAYS.add(3);
+            const futureWithApproval = isDayOpen(4);
+            if (!previouslyApproved) APPROVED_RECORDING_DAYS.delete(3);
+            return {before,missingVideoLocksDay3,unapprovedLocksDay3,forcedOff,futureWithApproval};
         }""")
-        assert rules['before']==[True,True,False,False],rules
-        assert rules['missingVideo'] is False,rules
-        assert rules['futureWithApproval'] is True,rules
+        assert rules['before']==[True,True,True,False,False],rules
+        assert rules['missingVideoLocksDay3'] is False,rules
+        assert rules['unapprovedLocksDay3'] is False,rules
         assert rules['forcedOff'] is False,rules
+        assert rules['futureWithApproval'] is True,rules
         await page.goto(base+'/day.html?id=2',wait_until='domcontentloaded')
         await page.locator('#titleEn').wait_for()
         assert 'Clean Data' in await page.locator('#titleEn').inner_text()
-        assert not await page.locator('#recordingHeroWrap').is_visible()
+        day2_player=page.locator('#videoBox iframe')
+        await day2_player.wait_for()
+        assert await day2_player.get_attribute('src')=='https://1drv.ms/v/c/a1a27fad04d192e9/IQSWDYNKHDbBQ602lNS7udOcAcuD28vPEVjoSLwJs1SNQz0'
+        assert await page.locator('#recordingHeroWrap').is_visible()
+        assert await page.locator('#dayQuickVideo').is_visible()
         await page.goto(base+'/day.html?id=3',wait_until='domcontentloaded')
+        await page.locator('#titleEn').wait_for()
+        assert 'Copy' in await page.locator('#titleEn').inner_text()
+        assert not await page.locator('#recordingHeroWrap').is_visible(), 'Old unapproved Day3 recording shown'
+        await page.goto(base+'/day.html?id=4',wait_until='domcontentloaded')
         await page.wait_for_url('**/dashboard.html')
-        events.append('day02_auto_unlocked_day03_locked')
+        events.append('day02_recording_live_day03_unlocked_day04_locked')
 
         await page.goto(base+'/day.html?id=1',wait_until='domcontentloaded')
         player=page.locator('#videoBox iframe')
