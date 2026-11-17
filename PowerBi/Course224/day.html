@@ -102,6 +102,16 @@
             <small class="visual-guide-hint">اضغط على الصورة لفتحها بالحجم الكامل</small>
           </article>
 
+          <article class="panel visual-guide-panel" id="pqComparePanel" hidden>
+            <span class="panel-kicker">POWER QUERY · VISUAL COMPARISON</span>
+            <h2>الفرق بين Append و From Folder و Merge</h2>
+            <p>متى بنجمع الصفوف من جداول مستوردة، ومتى بنستخدم فولدر واحد، ومتى بنربط جداول بمفتاح مشترك؟</p>
+            <a class="visual-guide-link" href="concepts/assets/day3-append-folder-merge.svg" target="_blank" rel="noopener" aria-label="فتح رسمة مقارنة Append و From Folder و Merge بالحجم الكامل">
+              <img src="concepts/assets/day3-append-folder-merge.svg" alt="رسمة مقارنة بين Append و From Folder مع Combine Files و Merge في Power Query" loading="lazy">
+            </a>
+            <small class="visual-guide-hint">اضغط على الرسمة لفتحها بالحجم الكامل</small>
+          </article>
+
           <article class="panel challenge-panel" id="challengePanel">
             <span class="panel-kicker">YOUR TURN</span>
             <h2>تحدي اليوم</h2>
@@ -210,6 +220,8 @@
     }
     setupDayExpander('topicsToggle', '.day-topic-item', topicLimit);
     setupDayExpander('stepsToggle', '.day-step-item', stepLimit);
+
+    document.getElementById('pqComparePanel').hidden = day.id !== 3;
 
     const visualGuidePanel = document.getElementById('visualGuidePanel');
     if (day.visualGuide?.image) {
