@@ -4,7 +4,7 @@
 const DAY_VIDEOS = {
   1: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQTqpY85pMLnRL7-26lzGNBNAQ1PHFuwmHv3Zo5mGgYKTtI" title="تسجيل اليوم الأول" width="1920" height="1080" frameborder="0" scrolling="no" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>`,
   2: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQSWDYNKHDbBQ602lNS7udOcAcuD28vPEVjoSLwJs1SNQz0" title="تسجيل اليوم الثاني" width="1920" height="1080" frameborder="0" scrolling="no" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>`,
-  3: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQQbURQVtjzYTamX2kGOJUrYAb6y8D--6S4kD2mVi-nQhao" width="320" height="320" frameborder="0" scrolling="no" allowfullscreen></iframe>`,
+  3: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQTpsploPbtcQpzdzm-_eYXwAZNuwU5M6m3-T3bHtWIQbzM" title="تسجيل اليوم الثالث" width="1920" height="1080" frameborder="0" scrolling="no" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>`,
   4: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQTeSmYgUTlvRJNAhC5MOPkXAWcguZovui8VamiwwKBRkgY" width="1920" height="1080" frameborder="0" scrolling="no" allowfullscreen></iframe>`,
   5: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQS3hrZmuNiZRZfNXGpV5aKSAVbJ-WXMggnKrb-G6xdGgfo" width="320" height="320" frameborder="0" scrolling="no" allowfullscreen></iframe>`,
   6: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQTPbrgcfrW-SKD7fSJlRBlfAdyP_9bD29CLpWD4uXWNBMU?width=1920&height=1080" width="1920" height="1080" frameborder="0" scrolling="no" allowfullscreen></iframe>`,
@@ -14,7 +14,7 @@ const DAY_VIDEOS = {
   10: `<iframe src="https://1drv.ms/v/c/a1a27fad04d192e9/IQQBTzuirV7oR7H6eeHsRfitAUUEftN_DVwgBlrUdVw-OiY" width="1920" height="1080" frameborder="0" scrolling="no" allowfullscreen></iframe>`
 };
 
-const APPROVED_RECORDING_DAYS = new Set([1, 2]);
+const APPROVED_RECORDING_DAYS = new Set([1, 2, 3]);
 
 function isApprovedDayVideo(dayId) {
   return APPROVED_RECORDING_DAYS.has(Number(dayId));
