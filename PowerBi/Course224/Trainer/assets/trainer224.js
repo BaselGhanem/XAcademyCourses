@@ -67,7 +67,8 @@
       ]
     }
   };
-  const ready=new Set([1,2,3]);
+  Object.assign(plans,additionalTrainerPlans());
+  const ready=new Set([1,2,3,4,5]);
   const sourceDays=typeof DAYS!==`undefined`?DAYS:[];
   const view=document.body.dataset.view;
   const id=Number(new URLSearchParams(location.search).get(`id`)||`1`);
@@ -102,7 +103,7 @@
       sourceDays.forEach(day=>{
         const linked=ready.has(day.id);
         const el=document.createElement(linked?`a`:`article`);
-        el.className=`xp-daycard${linked?``:` is-planned`}${day.id===3?` is-featured`:``}`;
+        el.className=`xp-daycard${linked?``:` is-planned`}${day.id===5?` is-featured`:``}`;
         if(linked)el.href=`day.html?id=${day.id}`;
         const date=day.date?new Date(`${day.date}T12:00:00`).toLocaleDateString(`en-GB`,{day:`2-digit`,month:`short`}).toUpperCase():`—`;
         el.innerHTML=`<div class="xp-daycard-head"><span class="xp-card-num">DAY ${String(day.id).padStart(2,`0`)}</span><span class="xp-card-date">${escapeHtml(date)}</span></div><h3>${escapeHtml(day.titleAr)}</h3><div class="xp-daycard-foot"><span>${linked?`خطة المدرب · 120 دقيقة`:`قيد التجهيز`}</span><span>${linked?`↖`:`—`}</span></div>`;
@@ -173,10 +174,109 @@
     const next=document.getElementById(`day-next`);
     if(id>1){prev.href=`day.html?id=${id-1}`;prev.textContent=`السابق · DAY ${String(id-1).padStart(2,`0`)}`;}
     else{prev.classList.add(`disabled`);prev.removeAttribute(`href`);prev.textContent=`لا يوجد يوم سابق`;}
-    if(id<3){next.href=`day.html?id=${id+1}`;next.textContent=`التالي · DAY ${String(id+1).padStart(2,`0`)}`;}
-    else{next.classList.add(`disabled`);next.removeAttribute(`href`);next.textContent=`اليوم الرابع لاحقاً`;}
+    if(id<5){next.href=`day.html?id=${id+1}`;next.textContent=`التالي · DAY ${String(id+1).padStart(2,`0`)}`;}
+    else{next.classList.add(`disabled`);next.removeAttribute(`href`);next.textContent=`اليوم السادس لاحقاً`;}
   }
   createNav();
   if(view===`overview`)renderOverview();
   if(view===`day`)renderDay();
 })();
+function additionalTrainerPlans(){
+  return {
+    4:{
+      phase:`MODEL`,
+      intro:`ننقل بيانات Nova من جداول قابلة للتحديث إلى Star Schema موثوق. نراجع Merge وAppend وملفات Excel الشهرية، ثم نحدد FactSales وDimensions ونبني علاقات صحيحة قبل أي DAX.`,
+      question:`كيف نجعل كل Dimension تفلتر كامل المبيعات دون ازدواجية أو أرقام مضللة؟`,
+      case:`NOVA · STAR SCHEMA`,
+      steps:[
+        {time:`00–15`,title:`تثبيت Merge وAppend وGrain`,
+          say:`راجع اليوم الثالث: Append يضيف صفوفاً متجانسة، وMerge يضيف أعمدة اعتماداً على مفتاح. فرّق بين عينات المراجعة وبيانات المبيعات الكاملة.`,
+          show:`افتح تمارين Merge وAppend داخل Day04 Lab، ثم حدد Grain في FactSales: معاملة واحدة لكل Transaction ID.`,
+          practice:`يطبق المتدرب مراجعة صغيرة لكل من Merge وAppend ويشرح متى يستخدم كل عملية.`,
+          check:`لا يخلط بين إضافة الصفوف وإضافة الأعمدة؛ ويحدد Transaction ID مفتاحاً لسجل البيع.`},
+        {time:`15–35`,title:`Excel Folder والعدّ المرجعي`,
+          say:`فكرة الـFolder تشمل Excel أيضاً، لكن نموذج اليوم الأساسي يحتاج جميع معاملات January–April دون اقتطاع.`,
+          show:`Combine لملفات Excel الشهرية January–April: 160,000 معاملة. اختبر إضافة May في نسخة Folder Review منفصلة لتصبح 200,000 بعد Refresh.`,
+          practice:`يوثق المتدرب عدد المعاملات قبل May وبعدها، ويحافظ على نموذج Jan–Apr الأساسي لإكمال اليوم.`,
+          check:`Jan–Apr = 160,000؛ Folder Review بعد May = 200,000؛ دون احتساب May ضمن نموذج الـ160K المرجعي.`},
+        {time:`35–55`,title:`تمييز Fact وDimensions`,
+          say:`FactSales يسجّل الحدث القابل للجمع، وDimensions تعطيه وصفاً. مفتاح الـDimension يجب أن يكون فريداً؛ لا تفترض أن List Price يساوي سعر المعاملة.`,
+          show:`حمّل FactSales وDimProduct وDimCustomer وDimBranch وDimDate، وعرّف مفاتيح كل جدول. راجع 240 Product و8,000 Customer و100 Branch و730 Date.`,
+          practice:`يرسم المتدرب مخطط Star صغيراً ويصنف الأعمدة إلى Fact أو Dimension.`,
+          check:`خمسة جداول أساسية؛ Keys فريدة في Dimensions؛ التاريخ Date حقيقي وليس نصاً.`},
+        {time:`55–80`,title:`العلاقات: Auto Detect ثم مراجعة`,
+          say:`استخدم Auto Detect كنقطة بداية لا كحكم نهائي. العلاقات المطلوبة 1:* من الـDimension إلى FactSales باتجاه فلترة واحد.`,
+          show:`راجع علاقات Product وBranch، ثم أنشئ عند الحاجة DimCustomer[Customer Code] → FactSales[Customer ID] وDimDate[Date] → FactSales[Order Date].`,
+          practice:`يصل المتدرب الجداول الأربعة، ويفحص Cardinality وCross-filter direction وحالة Active.`,
+          check:`أربع علاقات أساسية نشطة، كل منها One-to-Many وSingle direction من Dimension إلى Fact.`},
+        {time:`80–105`,title:`تنسيق Star Schema والتحقق الرقمي`,
+          say:`النموذج الجيد ليس خطوطاً جميلة فقط؛ يجب أن يفلتر ويعيد أرقاماً صحيحة. افحص Count وRevenue قبل بناء مؤشرات متقدمة.`,
+          show:`رتّب FactSales في الوسط حوله Dimensions، واختبر فلترة Region وProduct وCustomer وDate. قارن الإيراد المرجعي Jan–Apr: 12,534,018.65 JOD.`,
+          practice:`يعيد المتدرب اختبار الفلاتر ويقارن جمع Revenue مع المرجع دون مضاعفة للصفوف.`,
+          check:`160,000 صف في FactSales، إيراد مطابق للمرجع، والفلاتر من جميع Dimensions تعمل.`},
+        {time:`105–120`,title:`تحدي الاستقلال والتسليم`,
+          say:`اطلب تفسير كل علاقة في النموذج، ولا تقبل نتيجة Auto Detect دون تدقيق. هذا هو الأساس الذي ستبنى عليه Measures غداً.`,
+          show:`اعرض القائمة النهائية للفحص: Keys، 1:*، Single، Active، Rows، Revenue، ولقطة Model View.`,
+          practice:`ينشئ المتدرب العلاقات الناقصة يدوياً، يختبرها، ويحفظ نسخة العمل الجاهزة لليوم الخامس.`,
+          check:`ملف العمل محفوظ، أربع علاقات سليمة، Screenshot للموديل، ونتائج تحقق موثقة.`}
+      ],
+      output:`Nova Star Schema: جدول FactSales يحوي كامل 160,000 معاملة Jan–Apr، محاطاً بأربعة Dimensions وعلاقات 1:* سليمة، وجاهز لبناء DAX.`,
+      criteria:`التحقق: 240 Product · 8,000 Customer · 100 Branch · 730 Date، إيراد Jan–Apr = 12,534,018.65 JOD. اختبار May (200K) على نسخة Folder Review منفصلة.`,
+      challenge:`شغّل Auto Detect ثم صحح العلاقات بنفسك. أثبت أن DimCustomer وDimDate وDimBranch وDimProduct تفلتر FactSales، وأن عدد المعاملات والإيراد لم يتغيرا.`,
+      resources:[
+        {title:`Day 04 Model Lab`,type:`ZIP`,url:`../week2/day4/downloads/Day04_MODEL_THE_BUSINESS.zip`},
+        {title:`Day 04 Process Flow`,type:`SVG`,url:`../concepts/assets/day4-process-flow.svg`},
+        {title:`Concept Studio`,type:`WEB`,url:`../concepts/index.html`},
+        {title:`Expected Results`,type:`CSV`,url:`../datasets/EXPECTED_RESULTS.csv`},
+        {title:`Data Lineage`,type:`MD`,url:`../datasets/DATA_LINEAGE.md`}
+      ]
+    },
+    5:{
+      phase:`MEASURE`,
+      intro:`نحوّل نموذج Nova إلى Sales Overview: نحسب أعمدة صفية في Power Query، وننشئ DAX Measures أساسية، ثم نبني KPIs وVisuals وSlicers تشرح أداء المبيعات.`,
+      question:`كيف يتحوّل جدول FactSales إلى KPIs وتقرير يجيب عن أسئلة الإدارة؟`,
+      case:`NOVA · SALES OVERVIEW`,
+      steps:[
+        {time:`00–10`,title:`افتتاح وتحقيق نموذج اليوم الرابع`,
+          say:`راجع لماذا تبدأ الحسابات من Model صحيح. اشرح الفرق القادم بين Column تُحسب لكل صف وMeasure تتغير حسب الفلترة.`,
+          show:`افتح Day05 PBIP في Power BI Desktop، ثم Refresh، وافحص FactSales = 160,000 والإيراد Jan–Apr = 12,534,018.65 JOD.`,
+          practice:`يفتح المتدرب مشروع البداية ويتحقق من وجود FactSales والعلاقات والبيانات المطلوبة.`,
+          check:`ملف PBIP يفتح بنجاح في Desktop، والنموذج يحوي بيانات Jan–Apr الكاملة قبل التعديل.`},
+        {time:`10–30`,title:`ثلاثة أعمدة داخل Power Query`,
+          say:`أعمدة Power Query هنا حسابات على مستوى المعاملة، ولا تعتبر Measures. Gross Sales يسبق الخصم، وRevenue صافي بعد الخصم.`,
+          show:`Custom Column: Gross Sales = Quantity × Unit Price؛ Discount Amount = Gross Sales − Revenue؛ Discount Status باستخدام if [Discount %] > 0 then "Discounted" else "Full Price".`,
+          practice:`ينشئ المتدرب الأعمدة الثلاثة ثم يطبق Close & Apply ويفحص الأنواع والنتائج.`,
+          check:`Discount Amount غير سالب للحالات الصحيحة، والتصنيف محصور في Discounted وFull Price؛ مع مراعاة التقريب النقدي.`},
+        {time:`30–50`,title:`بناء Measures الأساسية`,
+          say:`Measure تستجيب لـFilter Context؛ لا تخلطها مع عمود ثابت على مستوى الصف. اشرح SUM وCOUNTROWS وDISTINCTCOUNT وDIVIDE.`,
+          show:`أنشئ Total Revenue وTotal Quantity وTransactions وCustomers وAverage Transaction Value؛ استخدم DIVIDE لقيمة متوسط المعاملة.`,
+          practice:`يكتب المتدرب Measures ويجربها في Table أو Card مع أسماء واضحة وتنسيق JOD.`,
+          check:`Total Revenue يطابق 12,534,018.65 JOD دون فلاتر، وTransactions = 160,000؛ المتوسط = Revenue ÷ Transactions.`},
+        {time:`50–70`,title:`أربعة KPI Cards`,
+          say:`ابدأ بمؤشرات تجيب عن أسئلة واضحة، لا تملأ الصفحة بأرقام دون تفسير. اختر عدد معاملات ومبيعات وعملاء ومتوسط قيمة معاملة.`,
+          show:`ضع Cards لكل من Total Revenue وTransactions وCustomers وAverage Transaction Value، مع تنسيق Units وDecimal Places.`,
+          practice:`يبني المتدرب صف KPIs متّسقاً بصرياً ويتحقق من مواءمة القيم مع Measures.`,
+          check:`أربع Cards واضحة، Revenue بصيغة JOD، ومتوسط المعاملة يعتمد على DIVIDE.`},
+        {time:`70–95`,title:`تحليل الاتجاه والفئة والفرع والخصم`,
+          say:`اقترح Visual مناسباً للسؤال: Line للتغيّر عبر الزمن وBar للمقارنة بين الفئات والفروع. تجنّب ترتيب الأشهر أبجدياً.`,
+          show:`Revenue Trend حسب Year Month بترتيب زمني، Revenue by Category، Top 10 Branches by Revenue، وتحليل Discount Status أو Discount Amount.`,
+          practice:`يبني المتدرب الرسوم الأربعة ويضبط Sort وTop N وTitles.`,
+          check:`Month مرتّب زمنياً، Top 10 مطبّق فعلاً، ورسوم الخصومات لا تخلط Gross Sales مع صافي Revenue.`},
+        {time:`95–120`,title:`Slicers والتنسيق وتحدي التسليم`,
+          say:`غيّر Month وBranch وCategory لتوضح أن نفس Measure تتغير نتيجتها دون تعديل DAX. هذا تمهيد لدرس Filter Context التالي.`,
+          show:`أضف ثلاثة Slicers، اختبر Visual Interactions، ثم اصطفاف العناصر والعناوين واحفظ نسخة PBIX بعد التحقق داخل Desktop.`,
+          practice:`يبني المتدرب Sales Overview النهائي، يختبر حالتي فلترة على الأقل ويشرح تغير Total Revenue.`,
+          check:`4 KPIs + 4 تحليلات بصرية + 3 Slicers، تفاعلات صحيحة، ملف PBIX محفوظ ونتيجة واحدة مفسّرة.`}
+      ],
+      output:`صفحة Nova Sales Overview كاملة: 3 أعمدة Power Query، و5 Measures أساسية، و4 KPI Cards، وTrend/Category/Top 10 Branches/Discount Analysis، و3 Slicers.`,
+      criteria:`التحقق: FactSales = 160,000، إجمالي Revenue = 12,534,018.65 JOD بدون فلاتر، Months مرتبة، ومقاييس تتغير مع Slicers دون تعديل صيغ DAX.`,
+      challenge:`ابنِ Sales Overview مستقلاً؛ أثبت تغير نفس Measure عند تغيير Month وBranch وCategory، واشرح السبب كمقدمة إلى Filter Context في اليوم السادس.`,
+      resources:[
+        {title:`Day 05 Calculate & Visualize PBIP`,type:`ZIP`,url:`../week2/day5/downloads/Day05_CALCULATE_VISUALIZE.zip`},
+        {title:`Day 05 Concept Studio`,type:`WEB`,url:`../concepts/index.html`},
+        {title:`Day 05 Learner Visual Guide`,type:`SVG`,url:`../concepts/assets/day5-learner-overview.svg`},
+        {title:`Expected Results`,type:`CSV`,url:`../datasets/EXPECTED_RESULTS.csv`}
+      ]
+    }
+  };
+}
