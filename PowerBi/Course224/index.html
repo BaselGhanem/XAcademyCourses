@@ -36,7 +36,7 @@
     <section class="hero">
       <div class="shell hero-grid">
         <div>
-          <span class="hero-kicker"><i></i> 10 Days • 20 Hours • One Practical Case</span>
+          <span class="hero-kicker"><i></i> 10 Modules • 11 Meetings • 20 Hours</span>
           <h1>لا تتعلم<br><span>Power BI.</span><br>فكّر كمحلل.</h1>
           <p class="hero-desc">مسار عملي لكل التخصصات. نبدأ ببيانات خام، ونبني مؤشرات وتقارير تساعد على اتخاذ القرارات، مع أمثلة من مجالات أعمال متعددة بدل ربط التدريب بوظيفة محددة.</p>
           <div class="hero-actions">
@@ -161,7 +161,7 @@
       card.innerHTML = `
         <div class="day-card-head">
           <span class="day-num">DAY ${String(day.id).padStart(2,'0')}</span>
-          <span class="day-date">${COURSE_CONFIG.deliveryMode === 'self-paced' ? '120 دقيقة · تعلم مرن' : `${day.weekday}<br>${formatDateAr(day.date)}`}</span>
+          <span class="day-date">${COURSE_CONFIG.deliveryMode === 'self-paced' ? '120 دقيقة · تعلم مرن' : `${formatDayScheduleAr(day)}`}</span>
         </div>
         <span class="phase">${day.phase}</span>
         <h3>${day.titleAr}<span class="en" dir="ltr">${day.title}</span></h3>
