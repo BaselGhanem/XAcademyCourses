@@ -170,8 +170,12 @@ const DAYS = [
   },
   {
     id: 8,
-    date: '2026-12-06',
-    weekday: 'الأحد',
+    date: '2026-12-02',
+    weekday: 'الأربعاء',
+    meetings: [
+      { date: '2026-12-02', weekday: 'الأربعاء', hours: 1 },
+      { date: '2026-12-06', weekday: 'الأحد', hours: 1 }
+    ],
     phase: 'DESIGN',
     title: 'Build a Report People Want to Use',
     titleAr: 'ابنِ Report الناس فعلاً تريد استخدامه',
@@ -191,8 +195,12 @@ const DAYS = [
   },
   {
     id: 9,
-    date: '2026-12-08',
-    weekday: 'الثلاثاء',
+    date: '2026-12-06',
+    weekday: 'الأحد',
+    meetings: [
+      { date: '2026-12-06', weekday: 'الأحد', hours: 1 },
+      { date: '2026-12-07', weekday: 'الاثنين', hours: 1 }
+    ],
     phase: 'CONTROL',
     title: 'Master the Dashboard',
     titleAr: 'تحكم بالتقرير',
@@ -212,8 +220,8 @@ const DAYS = [
   },
   {
     id: 10,
-    date: '2026-12-13',
-    weekday: 'الأحد',
+    date: '2026-12-08',
+    weekday: 'الثلاثاء',
     phase: 'CREATE',
     title: 'Capstone - From Data to Decision',
     titleAr: 'المشروع النهائي: من البيانات إلى القرار',
@@ -245,10 +253,25 @@ function formatDateAr(dateString) {
   return new Intl.DateTimeFormat('ar-JO', { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
 }
 
+// Content remains 10 modules (2 hours each), delivered across 11 live meetings.
+// After December 1, extra one-hour blocks on Wednesday and Monday allow
+// the full 20 training hours to finish on December 8.
+function courseDayMeetings(day) {
+  return Array.isArray(day.meetings) && day.meetings.length
+    ? day.meetings
+    : [{ date: day.date, weekday: day.weekday, hours: COURSE_CONFIG.sessionHours }];
+}
+
+function formatDayScheduleAr(day) {
+  return courseDayMeetings(day).map(meeting => {
+    const duration = meeting.hours === 1 ? 'ساعة' : meeting.hours === 2 ? 'ساعتان' : `${meeting.hours} ساعات`;
+    return `${meeting.weekday} ${formatDateAr(meeting.date)} (${duration})`;
+  }).join(' + ');
+}
+
 function dayRuntimeStatus(day, now = new Date()) {
-  const target = new Date(`${day.date}T00:00:00`);
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  if (target.getTime() === today.getTime()) return 'today';
-  if (target < today) return 'past';
-  return 'upcoming';
+  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+  const dates = courseDayMeetings(day).map(meeting => meeting.date);
+  if (dates.includes(today)) return 'today';
+  return dates.every(date => date < today) ? 'past' : 'upcoming';
 }
