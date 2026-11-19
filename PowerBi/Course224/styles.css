@@ -534,3 +534,9 @@ select.form-input option{background:#fff;color:#111}
 .scenario-card{border-color:rgba(9,153,153,.16);background:linear-gradient(160deg,#1b2025,#151a1e);box-shadow:0 8px 24px rgba(0,0,0,.12)}
 :is(a,button,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #67d5d0;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Course224 accelerated timetable: let split one-hour meeting labels wrap safely. */
+.day-card .day-date{max-width:68%;overflow-wrap:anywhere}
+.portal-day-bottom{flex-wrap:wrap}
+.status-chip{max-width:100%;height:auto;line-height:1.6;white-space:normal;border-radius:12px}
+.next-date{max-width:100%;line-height:1.7;white-space:normal}
