@@ -105,7 +105,7 @@
         const el=document.createElement(linked?`a`:`article`);
         el.className=`xp-daycard${linked?``:` is-planned`}${day.id===5?` is-featured`:``}`;
         if(linked)el.href=`day.html?id=${day.id}`;
-        const date=day.date?new Date(`${day.date}T12:00:00`).toLocaleDateString(`en-GB`,{day:`2-digit`,month:`short`}).toUpperCase():`—`;
+        const date=courseDayMeetings(day).map(slot=>new Date(`${slot.date}T12:00:00`).toLocaleDateString(`en-GB`,{day:`2-digit`,month:`short`}).toUpperCase()).join(` + `);
         el.innerHTML=`<div class="xp-daycard-head"><span class="xp-card-num">DAY ${String(day.id).padStart(2,`0`)}</span><span class="xp-card-date">${escapeHtml(date)}</span></div><h3>${escapeHtml(day.titleAr)}</h3><div class="xp-daycard-foot"><span>${linked?`خطة المدرب · 120 دقيقة`:`قيد التجهيز`}</span><span>${linked?`↖`:`—`}</span></div>`;
         cards.append(el);
       });
