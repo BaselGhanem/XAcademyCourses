@@ -11,7 +11,7 @@
     <div class="shell topbar-inner">
       <a class="brand" href="dashboard.html">
         <span class="pbi-mark"><span></span><span></span><span></span></span>
-        <span class="brand-copy"><strong>Power BI Course Hub</strong><small>10 DAYS • 20 HOURS</small></span>
+        <span class="brand-copy"><strong>Power BI Course Hub</strong><small>10 MODULES • 20 HOURS</small></span>
       </a>
       <div class="nav-actions">
         <a class="btn btn-ghost" href="concepts/">Concept Cards</a>
@@ -90,7 +90,7 @@
         <span class="next-label">${COURSE_CONFIG.deliveryMode === 'self-paced' ? 'YOUR NEXT LESSON' : (status === 'today' ? 'TODAY' : 'NEXT AVAILABLE DAY')}</span>
         <h2>Day ${String(day.id).padStart(2,'0')} - ${day.titleAr}</h2>
         <p>${day.hook}</p>
-        <span class="next-date">${COURSE_CONFIG.deliveryMode === 'self-paced' ? '120 دقيقة · تعلّم مرن' : `${day.weekday} • ${formatDateAr(day.date)}`}</span>
+        <span class="next-date">${COURSE_CONFIG.deliveryMode === 'self-paced' ? '120 دقيقة · تعلّم مرن' : `${formatDayScheduleAr(day)}`}</span>
         <div class="live-slot">
           ${open ? `<a class="btn btn-ghost" href="day.html?id=${day.id}">عرض تفاصيل اليوم</a>` : ''}
           ${liveButton}
@@ -126,7 +126,7 @@
             ${open ? '' : '<span class="day-lock-badge" aria-label="مقفل">LOCKED</span>'}
           </div>
           <div class="portal-day-bottom">
-            <span class="status-chip ${open ? runtime : 'locked'}"><i class="complete-dot"></i>${open ? (isCompleted ? 'مكتمل' : (COURSE_CONFIG.deliveryMode === 'self-paced' ? 'متاح للتعلم' : (runtime === 'today' ? 'اليوم' : runtime === 'past' ? 'تم موعده' : day.weekday + ' • ' + formatDateAr(day.date)))) : 'غير متاح حالياً'}</span>
+            <span class="status-chip ${open ? runtime : 'locked'}"><i class="complete-dot"></i>${open ? (isCompleted ? 'مكتمل' : (COURSE_CONFIG.deliveryMode === 'self-paced' ? 'متاح للتعلم' : (runtime === 'today' ? 'اليوم' : runtime === 'past' ? 'تم موعده' : formatDayScheduleAr(day)))) : 'غير متاح حالياً'}</span>
             <span class="resource-count">${open ? (COURSE_CONFIG.showLegacyRecordings && hasDayVideo(day.id) ? '▶ التسجيل متاح للمشاهدة' : day.resources.length + ' مواد متاحة لليوم') : 'لم ينشر هذا الدرس بعد'}</span>
           </div>`;
         grid.appendChild(card);
