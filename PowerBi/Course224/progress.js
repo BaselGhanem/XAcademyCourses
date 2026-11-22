@@ -1,6 +1,8 @@
 // Course224-local learner state. NOT authentication or server-synchronized progress.
 const CourseProgress = (() => {
   const PROFILE_KEY = 'xacademy_course224_profile';
+  const SESSION_KEY = 'xacademy_course224_access_session_v1';
+  const REMEMBER_KEY = 'xacademy_course224_remember_device_v1';
   const DOMAINS = Object.freeze({
     general:'تحليل البيانات العام',sales:'المبيعات والأداء',operations:'العمليات',
     finance:'المالية',hr:'الموارد البشرية',marketing:'التسويق',
@@ -22,6 +24,31 @@ const CourseProgress = (() => {
     localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));
     return profile;
   }
+  // Remember successful entry on this browser, never the course password itself.
+  // This is only a convenience gate for a public static course portal.
+  function authenticate(input){
+    const profile = setProfile(input);
+    const identity = normalized(profile.name);
+    try {
+      sessionStorage.setItem(SESSION_KEY, identity);
+      if (input?.remember) localStorage.setItem(REMEMBER_KEY, identity);
+      else localStorage.removeItem(REMEMBER_KEY);
+    } catch { /* Browser may block storage. The learner profile still persists. */ }
+    return profile;
+  }
+  function isRemembered(){
+    const profile = getProfile();
+    if (!profile) return false;
+    try { return localStorage.getItem(REMEMBER_KEY) === normalized(profile.name); }
+    catch { return false; }
+  }
+  function isAuthenticated(){
+    const profile = getProfile();
+    if (!profile) return false;
+    if (isRemembered()) return true;
+    try { return sessionStorage.getItem(SESSION_KEY) === normalized(profile.name); }
+    catch { return false; }
+  }
   function getCompleted(){
     const profile=getProfile();
     if(!profile)return [];
@@ -37,7 +64,11 @@ const CourseProgress = (() => {
     localStorage.setItem(keyFor(profile.name),JSON.stringify(cleaned));
     return cleaned;
   }
-  function logout(){localStorage.removeItem(PROFILE_KEY);}
+  function logout(){
+    try { sessionStorage.removeItem(SESSION_KEY); } catch {}
+    try { localStorage.removeItem(REMEMBER_KEY); } catch {}
+    try { localStorage.removeItem(PROFILE_KEY); } catch {}
+  }
   function domainLabel(domain){return DOMAINS[domain]||DOMAINS.general;}
-  return Object.freeze({getProfile,setProfile,getCompleted,setCompleted,logout,domainLabel,domains:DOMAINS});
+  return Object.freeze({getProfile,setProfile,authenticate,isAuthenticated,isRemembered,getCompleted,setCompleted,logout,domainLabel,domains:DOMAINS});
 })();
