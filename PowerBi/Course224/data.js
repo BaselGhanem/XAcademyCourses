@@ -95,13 +95,13 @@ const DAYS = [
     build: ['Review Merge = Add Columns', 'Review Append = Add Rows', 'Combine full Jan–Apr Excel source (160,000 rows), then refresh May (200,000)', 'Load all 160,000 FactSales transactions + DimProduct + DimCustomer + DimBranch + DimDate', 'Define the grain of each table', 'Check unique keys in dimensions', 'Run Auto Detect and inspect what Power BI found', 'Manually connect DimCustomer[Customer Code] → FactSales[Customer ID]', 'Manually connect DimDate[Date] → FactSales[Order Date]', 'Confirm 1:* cardinality and single filter direction', 'Arrange the model as a Star Schema', 'Verify the full 160K model revenue and test filters from all dimensions'],
     challenge: 'شغّل Auto Detect أولا وراجع ما اكتشفه Power BI بدل قبول كل شيء مباشرة. بعد ذلك أنشئ العلاقات الناقصة يدويا، خصوصا Customer Code ↔ Customer ID وDate ↔ Order Date، ثم اثبت أن كل Dimension تفلتر FactSales بشكل صحيح.',
     deliverable: 'Nova Star Schema يحتوي على كامل 160,000 معاملة Jan–Apr مع 4 Dimensions ومفاتيح صالحة، جاهز للـDAX.',
-    visualGuide: null, // Legacy image depicts outdated 40K model; a new 160K image follows in Phase 4.
+    visualGuide: {
+      image: 'concepts/assets/day4-process-flow.svg',
+      title: 'Day 04 · Process Flow',
+      note: 'مخطط مراحل بناء النموذج: Power Query → Fact & Dimensions → Relationships → Star Schema → Test Filters → DAX.'
+    },
     resources: [
-      { name: 'Day 04 - Model the Business Lab', type: 'ZIP', url: 'week2/day4/downloads/Day04_MODEL_THE_BUSINESS.zip', note: 'Merge وAppend بعينات تعليمية، وFolder كامل Jan–Apr (160K)، وMay إلى 200K، وModel Lab كامل وDimDate بتاريخ Excel فعلي' },
-      { name: 'Day 04 - Process Flow', type: 'FLOW', url: 'concepts/assets/day4-process-flow.svg', note: 'Review → Fact/Dimensions → Relationships → Star Schema → Test Filters → Ready for DAX' },
-      { name: 'Day 04 - Concept Studio', type: 'WEB', url: 'concepts/index.html', note: 'Fact vs Dimension + Relationships + Star Schema' },
-      { name: 'Model Expected Results', type: 'Guide', url: 'datasets/EXPECTED_RESULTS.csv', note: '160K FactSales و730 تاريخًا وإيراد 12,534,018.65 دينار' },
-      { name: 'Source Lineage', type: 'Guide', url: 'datasets/DATA_LINEAGE.md', note: 'العينات التدريبية مقابل المعاملات الكاملة' },
+      { name: 'Day 04 - Model the Business Lab', type: 'ZIP', url: 'week2/day4/downloads/Day04_MODEL_THE_BUSINESS.zip', note: 'Merge وAppend بعينات تعليمية، وFolder كامل Jan–Apr (160K)، وMay إلى 200K، وModel Lab كامل وDimDate بتاريخ Excel فعلي' }
     ]
   },
   {
