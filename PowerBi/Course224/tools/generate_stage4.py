@@ -75,14 +75,10 @@ def add_page(project,day):
       ]}}]}}
     }
     write_json(loc/'visuals/v0000/visual.json',visual)
-    (project/'README.txt').write_text(
-      f'COURSE224 - DAY {day:02d} {label}\n'
-      'Unzip the whole project. Open Nova.pbip using current Power BI Desktop.\n'
-      'The model is a copy of the validated Stage3 Day07 PBIP source. No new data source was invented.\n'
-      'The instructional page is a STARTING POINT, not a finished report.\n'
-      'Keep Report and SemanticModel folders together. Refresh and test measures/relationships.\n'
-      'Power BI Desktop Save As PBIX is required for a final runnable learner handoff.\n',
-      encoding='utf-8')
+    # The PBIP contains its instructions in the new report page.
+    # Remove any inherited README from a legacy Day07 source.
+    (project/'README.txt').unlink(missing_ok=True)
+
 def pack_dir(folder,path):
     path.parent.mkdir(parents=True,exist_ok=True)
     with zipfile.ZipFile(path,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
@@ -112,10 +108,7 @@ def make_capstone_pack(folder,out):
     shutil.copy2(out,stage/'01_CAPSTONE_START_PBIP.zip')
     for p in (guide,rubric,qa): shutil.copy2(p,stage/p.name)
     shutil.copy2(ROOT/'datasets/STAGE3_TIME_VALIDATION.csv',stage/'SOURCE_TIME_REFERENCE.csv')
-    link=stage/'02_DOMAIN_EXAMPLES.txt'
-    link.write_text('Optional example domains: Performance/Sales, Operations, Finance, Workforce.\n'
-                    'Browse Course224/week3/day7/web/*_SCENARIO.html and choose one question; every learner may propose another field-backed question.\n'
-                    'AI Visual Design Lab is an optional extension, not mandatory to pass.\n',encoding='utf-8')
+    # Domain examples are already available via the Day07 website; no TXT handout needed.
     pack_dir(stage,OUTPUTS[10])
 def main():
     assert START.is_file(),START

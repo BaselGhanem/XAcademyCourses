@@ -24,6 +24,7 @@ for day,info in manifest['days'].items():
         assert 'stage'+day in meta['pageOrder']
         assert meta['activePageName']=='stage'+day
         assert 'Nova.pbip' in z.namelist()
+        assert not any(n.lower().endswith('.txt') for n in z.namelist()), f'Day {day} includes instructional TXT'
         assert not any(n.lower().endswith('.pbix') for n in z.namelist())
         pages=[n for n in z.namelist() if n.endswith('/page.json')]
         assert len(pages)>=2
@@ -34,6 +35,11 @@ with zipfile.ZipFile(cap) as z:
     assert z.testzip() is None
     assert {'01_CAPSTONE_START_PBIP.zip','CAPSTONE_GUIDE.md','CAPSTONE_RUBRIC.csv',
             'CAPSTONE_QA_CHECKLIST.md','SOURCE_TIME_REFERENCE.csv'}.issubset(set(z.namelist()))
+    assert not any(name.lower().endswith('.txt') for name in z.namelist()), 'Day10 capstone bundle includes instructional TXT'
+    with zipfile.ZipFile(io.BytesIO(z.read('01_CAPSTONE_START_PBIP.zip'))) as nested:
+        assert nested.testzip() is None
+        assert not any(name.lower().endswith('.txt') for name in nested.namelist()), 'Day10 nested PBIP includes TXT'
+        assert 'Nova.pbip' in nested.namelist()
 rubric=list(csv.DictReader((ROOT/'week3/day10/CAPSTONE_RUBRIC.csv').open(encoding='utf-8')))
 assert sum(int(row['Points']) for row in rubric)==100
 assert len(rubric)==6
