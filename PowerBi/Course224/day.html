@@ -38,6 +38,7 @@
         <a class="day-quick-link day-quick-video" id="dayQuickVideo" href="#recordingHeroWrap" hidden><span aria-hidden="true">▶</span> التسجيل</a>
         <a class="day-quick-link day-quick-primary" href="#filesPanel">ملفات اليوم</a>
         <a class="day-quick-link" href="#buildPanel">خطوات التطبيق</a>
+        <a class="day-quick-link" id="dayQuickCompare" href="#day4ComparisonSection" hidden>Merge vs Relationship</a>
         <a class="day-quick-link" href="#challengePanel">التحدي</a>
         <a class="day-quick-link" href="concepts/">مكتبة المفاهيم <span aria-hidden="true">↗</span></a>
       </div>
@@ -58,6 +59,29 @@
             <div class="recording-day-badge">DAY <span id="recordingDayNumber"></span></div>
           </div>
           <div class="video-stage" id="videoBox"></div>
+        </article>
+      </div>
+    </section>
+
+
+    <section class="day4-comparison-wrap" id="day4ComparisonSection" aria-labelledby="day4ComparisonTitle" hidden>
+      <div class="shell">
+        <article class="day4-comparison-card">
+          <div class="day4-comparison-topline">
+            <span class="panel-kicker">DAY 04 · MODEL DESIGN REFERENCE</span>
+            <span class="day4-comparison-chip">MERGE vs RELATIONSHIP</span>
+          </div>
+          <div class="day4-comparison-heading">
+            <div>
+              <h2 id="day4ComparisonTitle">الفرق بين الدمج (Merge) والعلاقة (Relationship)</h2>
+              <p>مرجع بصري يوضح كيف يختلف دمج الجداول في Power Query عن ربطها داخل نموذج البيانات، ومتى تستخدم كل طريقة.</p>
+            </div>
+            <a class="day4-comparison-open" href="concepts/assets/day4-merge-vs-relationship.jpg" target="_blank" rel="noopener" aria-label="فتح مقارنة Merge وRelationship بالحجم الكامل">عرض بالحجم الكامل <span aria-hidden="true">↗</span></a>
+          </div>
+          <a class="day4-comparison-image" href="concepts/assets/day4-merge-vs-relationship.jpg" target="_blank" rel="noopener" aria-label="فتح الصورة التعليمية للفرق بين Merge وRelationship بالحجم الكامل">
+            <img src="concepts/assets/day4-merge-vs-relationship.jpg" width="1536" height="1024" loading="lazy" decoding="async" alt="إنفوجرافيك عربي يقارن بين Merge في Power Query وRelationship في نموذج Power BI، مع أمثلة جداول ومتى نستخدم كل طريقة">
+          </a>
+          <p class="day4-comparison-caption">اضغط على الصورة لتكبيرها وقراءة تفاصيل المقارنة.</p>
         </article>
       </div>
     </section>
@@ -223,6 +247,8 @@
     setupDayExpander('stepsToggle', '.day-step-item', stepLimit);
 
     document.getElementById('pqComparePanel').hidden = day.id !== 3;
+    document.getElementById('day4ComparisonSection').hidden = day.id !== 4;
+    document.getElementById('dayQuickCompare').hidden = day.id !== 4;
 
     const visualGuidePanel = document.getElementById('visualGuidePanel');
     if (day.visualGuide?.image) {

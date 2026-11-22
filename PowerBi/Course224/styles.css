@@ -540,3 +540,95 @@ select.form-input option{background:#fff;color:#111}
 .portal-day-bottom{flex-wrap:wrap}
 .status-chip{max-width:100%;height:auto;line-height:1.6;white-space:normal;border-radius:12px}
 .next-date{max-width:100%;line-height:1.7;white-space:normal}
+
+
+/* DAY 04 — Merge vs Relationship infographic */
+#day4ComparisonSection[hidden],
+#dayQuickCompare[hidden] { display: none !important; }
+.day4-comparison-wrap {
+  padding: 26px 0 6px;
+  scroll-margin-top: 155px;
+}
+.day4-comparison-card {
+  padding: clamp(18px, 3vw, 34px);
+  border: 1px solid rgba(9,153,153,.3);
+  border-radius: 24px;
+  background: linear-gradient(145deg,rgba(9,153,153,.09),rgba(255,255,255,.025) 62%);
+  box-shadow: 0 22px 55px rgba(0,0,0,.17);
+}
+.day4-comparison-topline,
+.day4-comparison-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.day4-comparison-topline { margin-bottom: 12px; }
+.day4-comparison-chip {
+  flex-shrink: 0;
+  border: 1px solid rgba(9,153,153,.32);
+  background: rgba(9,153,153,.1);
+  color: #8de4df;
+  border-radius: 100px;
+  padding: 6px 11px;
+  font: 700 .64rem/1.4 'Inter',sans-serif;
+  letter-spacing: .03em;
+}
+.day4-comparison-heading { align-items: end; margin-bottom: 20px; }
+.day4-comparison-heading h2 { margin: 0 0 8px; font-size: clamp(1.18rem,2.5vw,1.65rem); line-height: 1.5; }
+.day4-comparison-heading p { margin: 0; color: var(--muted); line-height: 1.8; max-width: 730px; }
+.day4-comparison-open {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(9,153,153,.4);
+  border-radius: 12px;
+  color: #a6e5e1;
+  background: rgba(9,153,153,.085);
+  padding: 10px 14px;
+  font-size: .8rem;
+  font-weight: 700;
+  transition: background .2s ease, border-color .2s ease;
+}
+.day4-comparison-open:hover,
+.day4-comparison-open:focus-visible {
+  color: #fff;
+  background: rgba(9,153,153,.19);
+  border-color: rgba(9,153,153,.7);
+}
+.day4-comparison-image {
+  display: block;
+  max-width: 1536px;
+  margin: 0 auto;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f4f8fb;
+  box-shadow: 0 12px 36px rgba(0,0,0,.2);
+  transition: border-color .2s ease, transform .2s ease;
+}
+.day4-comparison-image:hover {
+  border-color: rgba(9,153,153,.6);
+  transform: translateY(-2px);
+}
+.day4-comparison-image img { display: block; width: 100%; height: auto; }
+.day4-comparison-caption {
+  text-align: center;
+  color: var(--muted-2);
+  font-size: .76rem;
+  margin: 12px 0 0;
+}
+@media (max-width: 720px) {
+  .day4-comparison-wrap { padding-top: 18px; }
+  .day4-comparison-card { border-radius: 18px; }
+  .day4-comparison-topline { flex-wrap: wrap; gap: 8px; }
+  .day4-comparison-heading { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .day4-comparison-open { align-self: flex-start; }
+  .day4-comparison-image { border-radius: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .day4-comparison-image,
+  .day4-comparison-open { transition: none; }
+  .day4-comparison-image:hover { transform: none; }
+}
