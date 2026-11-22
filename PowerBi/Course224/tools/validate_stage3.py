@@ -14,6 +14,8 @@ for path in paths:
     with zipfile.ZipFile(path) as z:
         assert z.testzip() is None,path
         names=z.namelist()
+        if path.name.startswith('Day05'):
+            assert not any(name.lower().endswith('.txt') for name in names), 'Day05 learner ZIP must contain no TXT instructions'
         assert any(n.endswith('.xlsx') for n in names) or path.name.startswith('Day07'),path
         assert not any(n.endswith('.pbix') for n in names), 'Legacy PBIX cannot be labeled source-compatible'
         pbips=[n for n in names if n.lower().endswith('_start_pbip.zip')]
@@ -21,6 +23,8 @@ for path in paths:
         with zipfile.ZipFile(io.BytesIO(z.read(pbips[0]))) as project:
             assert project.testzip() is None
             assert 'Nova.pbip' in project.namelist()
+            if path.name.startswith('Day05'):
+                assert not any(name.lower().endswith('.txt') for name in project.namelist()), 'Nested Day05 PBIP must contain no TXT instructions'
             model=json.loads(project.read('Nova.SemanticModel/model.bim'))
             tables={t['name']:t for t in model['model']['tables']}
             assert len(model['model']['relationships'])==(11 if 'day7' in path.as_posix() else 4)
@@ -61,6 +65,11 @@ for path in paths:
             vals=' '.join(str(v) for row in wb['Day5 Reference'].values for v in row if v is not None)
             assert 'Gross Sales' in vals and 'Discounted Price' not in vals
             wb.close()
+# The standalone Day05 PBIP download must also be TXT-free.
+with zipfile.ZipFile(ROOT/'week2/day5/downloads/Nova_Day05_Start_PBIP.zip') as standalone:
+    assert standalone.testzip() is None
+    assert not any(n.lower().endswith('.txt') for n in standalone.namelist())
+
 # Independent month-based controls for the native DAX PM / PY / YTD exercises.
 # These are source-calculated expectations, NOT claims of DAX Desktop execution.
 with (ROOT/'datasets/STAGE3_EXPECTED_RESULTS.csv').open(encoding='utf-8',newline='') as fh:

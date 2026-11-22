@@ -214,6 +214,9 @@ def main():
           'Day 06: use standardized Discounted vs Full Price and CALCULATE/REMOVEFILTERS.',
           'Test all four 1:* relationships and filters in Power BI Desktop before saving PBIX.'
         ])
+        # The Day05 PBIP has guidance on its START HERE report page. Drop the redundant TXT readme.
+        if d == 5:
+            (loc/'README.txt').unlink(missing_ok=True)
         path=ROOT/f'week2/day{d}/downloads/Nova_Day{d:02d}_Start_PBIP.zip'
         zip_dir(loc,path)
     d5.build();d6.build()

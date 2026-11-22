@@ -202,26 +202,8 @@ def build():
     if not pbip.exists(): raise FileNotFoundError('Build the canonical Stage3 PBIP project first.')
     shutil.copy2(pbip,WORK/'01_Nova_Day05_Start_PBIP.zip')
 
-    (WORK/'00_START_HERE.txt').write_text(
-      'NOVA DISTRIBUTION GROUP - DAY 05: CALCULATE & VISUALIZE\n\n'
-      'IMPORTANT\n'
-      'There is NO new dataset in Day 5. Start with 01_Nova_Day05_Start_PBIP.zip, which contains the complete Day04 160,000-row semantic model. Open the .pbip project in Power BI Desktop, Refresh, and then Save As PBIX after validation.\n'
-      'The rest of the pack contains only the new Day 5 learning material.\n\n'
-      'TODAY\n'
-      '1) Add 3 Power Query columns to FactSales: Gross Sales, Discount Amount, Discount Status.\n'
-      '2) Close & Apply.\n'
-      '3) Create basic DAX Measures.\n'
-      '4) Build the first Sales Overview report.\n'
-      '5) Add Slicers and test how the same Measures change with filters.\n\n'
-      'FILES\n'
-      '01_Nova_Day05_Start_PBIP.zip\n01_Nova_Stage2_Model_Source.xlsx (reference only)\n'
-      '02_Power_Query_Calculations.xlsx\n'
-      '03_First_DAX_Measures.xlsx\n'
-      '04_Sales_Overview_Blueprint.xlsx\n'
-      '05_Day05_Analyst_Challenge.xlsx\n\n'
-      'SUCCESS = Clean model from Day 4 + new Power Query columns + Measures + first working report.\n',
-      encoding='utf-8'
-    )
+    # Day05 learning instructions are on the course page and in Excel workbooks.
+    # Only reusable training files and the PBIP project belong in the ZIP.
 
     save_power_query(WORK/'02_Power_Query_Calculations.xlsx')
     save_dax(WORK/'03_First_DAX_Measures.xlsx')
