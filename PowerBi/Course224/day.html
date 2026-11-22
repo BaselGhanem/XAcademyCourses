@@ -159,12 +159,13 @@
   <script src="videos.js"></script>
   <script src="access.js"></script>
   <script>
-    const student = CourseProgress.getProfile()?.name;
-    if (!student) location.href = 'login.html';
+    const student = CourseProgress.isAuthenticated() ? CourseProgress.getProfile()?.name : null;
     const params = new URLSearchParams(location.search);
     const day = getDay(params.get('id') || 1);
 
-    if (!day || !isDayOpen(day.id)) {
+    if (!student) {
+      location.replace('login.html');
+    } else if (!day || !isDayOpen(day.id)) {
       // لا نظهر محتوى يوم مقفل حتى للحظة عند فتح رابطه مباشرة.
       location.replace('dashboard.html');
     } else {
