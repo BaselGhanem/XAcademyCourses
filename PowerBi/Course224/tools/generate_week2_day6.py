@@ -201,27 +201,8 @@ def build():
     save_blueprint(WORK/'04_Context_Report_Blueprint.xlsx')
     save_challenge(WORK/'05_Day06_Analyst_Challenge.xlsx')
 
-    (WORK/'00_START_HERE.txt').write_text(
-      'NOVA DISTRIBUTION GROUP - DAY 06: CONTEXT CHANGES EVERYTHING\n\n'
-      'START\n'
-      'Open 01_Nova_Day06_Start_PBIP.zip. It is the completed Day 5 file supplied by the trainer and is our shared starting point.\n'
-      'No new dataset is introduced today.\n\n'
-      'DAY 6 STORY\n'
-      'Day 5 proved that the same Measure changes when we use slicers and click visuals. Today we explain WHY.\n\n'
-      'FLOW - ABOUT 2 HOURS\n'
-      '00–10 min  Review Day 5 report and existing Measures.\n'
-      '10–30 min  Filter Context: same Measure + different filters = different result.\n'
-      '30–55 min  CALCULATE: add a filter using Discount Status and Channel.\n'
-      '55–75 min  REMOVEFILTERS + Category Contribution %.\n'
-      '75–100 min Build Context Lab page.\n'
-      '100–110 min Cross-filtering + Edit interactions.\n'
-      '110–120 min Analyst Challenge + bridge to Time Intelligence.\n\n'
-      'TODAY WE DO NOT TEACH\n'
-      'FILTER table function, VAR, SELECTEDVALUE, ALLSELECTED, Dynamic Titles or advanced time intelligence. Keep the mental model clean.\n\n'
-      'SUCCESS\n'
-      'The learner can explain why a Measure changed, use CALCULATE to add a filter, use REMOVEFILTERS to remove one filter, calculate Category Contribution %, and intentionally control a visual interaction.\n',
-      encoding='utf-8'
-    )
+    # Instructions already appear on the lesson webpage and in Excel labs.
+    # Ship only training inputs, PBIP and Excel exercises (no instructional TXT files).
 
     OUT.parent.mkdir(parents=True,exist_ok=True)
     if OUT.exists():

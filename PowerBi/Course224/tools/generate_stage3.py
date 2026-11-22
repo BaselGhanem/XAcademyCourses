@@ -214,18 +214,20 @@ def main():
           'Day 06: use standardized Discounted vs Full Price and CALCULATE/REMOVEFILTERS.',
           'Test all four 1:* relationships and filters in Power BI Desktop before saving PBIX.'
         ])
-        # The Day05 PBIP has guidance on its START HERE report page. Drop the redundant TXT readme.
-        if d == 5:
-            (loc/'README.txt').unlink(missing_ok=True)
+        # Days 05/06 already provide guidance inside their START HERE report pages.
+        # Do not ship text-only instructional notes in learner PBIP archives.
+        (loc/'README.txt').unlink(missing_ok=True)
         path=ROOT/f'week2/day{d}/downloads/Nova_Day{d:02d}_Start_PBIP.zip'
         zip_dir(loc,path)
     d5.build();d6.build()
     guides=produce_domain_guides(full)
     source=day7_project(full)
+    # Day07 has an embedded START HERE report page and HTML domain guides.
+    (source/'README.txt').unlink(missing_ok=True)
     stage7zip=OUT/'Nova_Day07_START_PBIP.zip'
     zip_dir(source,stage7zip)
     learner=WORK/'day7_bundle';learner.mkdir()
-    (learner/'00_START_HERE.txt').write_text('DAY07 / UNIVERSAL DOMAIN LAB: Choose one business question; open 01_Nova_Day07_START_PBIP.zip and the matching scenario guide. The 2025 comparison rows are synthetic and labelled. No learner-name-specific pages are required. Validate in Power BI Desktop before producing PBIX.\n',encoding='utf-8')
+    # The Day07 web lesson and the PBIP START HERE page carry the instructions.
     shutil.copy2(stage7zip,learner/'01_Nova_Day07_START_PBIP.zip')
     shutil.copytree(guides,learner/'02_DOMAIN_GUIDES')
     shutil.copy2(ROOT/'datasets/STAGE3_EXPECTED_RESULTS.csv',learner/'03_EXPECTED_RESULTS.csv')
