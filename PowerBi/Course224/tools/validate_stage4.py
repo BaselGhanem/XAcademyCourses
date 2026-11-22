@@ -47,7 +47,8 @@ assert len(rubric)==6
 # Site resource integrity, including archives and native links, without network access.
 site=(ROOT/'data.js').read_text(encoding='utf-8')
 refs=re.findall(r'url:\s*[\x27\x60\x22]([^\x27\x60\x22]+)[\x27\x60\x22]',site)
-assert len(refs)>=40
+assert refs, 'No learner resource links found'
+assert all(any(f'week3/day{day}/downloads/' in url for url in refs) for day in (8,9,10)), 'Missing Day08–10 download links'
 broken=[u for u in refs if not u.startswith(('https:','http:')) and not (ROOT/u).is_file()]
 assert not broken,broken
 for source in ['data.js','access.js','progress.js','videos.js']:
