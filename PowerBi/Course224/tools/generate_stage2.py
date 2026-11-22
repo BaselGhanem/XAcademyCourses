@@ -84,7 +84,7 @@ def main():
     w4.build()
     # Day04 ships only actual Excel training sources, not text instruction files.
     for day,path in PACKS.items():
-        if day != 4:
+        if day == 1:
             insert_guide(day,path)
     write_references()
     make_manifest()

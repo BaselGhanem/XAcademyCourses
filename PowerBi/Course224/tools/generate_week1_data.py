@@ -109,6 +109,15 @@ def rezip_pack(src_root: Path, zip_path: Path):
                 z.write(p, f'{src_root.name}/{p.relative_to(src_root)}')
     tmp.replace(zip_path)
 
+def remove_instruction_txt(root: Path):
+    """Remove only instructional TXT files, not TXT data sources imported into Power BI."""
+    notes = {'00_START_HERE.txt', '00_AUTOMATION_SCALE.txt',
+             '00_COURSE_DATA_CONTRACT.txt', '00_UNIVERSAL_LEARNER_GUIDE.txt'}
+    for path in root.rglob('*.txt'):
+        if path.name in notes:
+            path.unlink()
+
+
 def write_csv(path, header, rows):
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open('w', newline='', encoding='utf-8-sig') as f:
@@ -572,15 +581,8 @@ def update_day2():
         h, r = dirty_customers(customer_catalog_rows())
         write_csv(root / '02_Nova_Customer_Master_Dirty_LARGE.csv', h, r)
         make_day2_excel_files(root)
-        (root / '00_START_HERE.txt').write_text(
-            'NOVA DISTRIBUTION GROUP - DAY 02\n\n'
-            'Yesterday you connected Nova data. Today management tells you the Branch Daily Performance file is not trustworthy.\n'
-            'Its intended grain is ONE row per Branch ID + Date. The clean business universe contains 100 branches x 500 dates = 50,000 logical records.\n'
-            'Extra repeated rows are intentional bad duplicates to remove; they are not legitimate business events.\n\n'
-            'Main lab: 01_Nova_Branch_Daily_Performance_Dirty_LARGE.csv (~50,000 logical rows + intentional duplicates)\n'
-            'Challenge: 02_Nova_Customer_Master_Dirty_LARGE.csv (~8,000 customers)\n'
-            'Use the checklist only after you inspect the data yourself.\n',
-            encoding='utf-8')
+        # Day02 has CSV/XLSX learning inputs; no instructional TXT files.
+        remove_instruction_txt(root)
         rezip_pack(root, zp)
 
 def update_day3():
@@ -619,23 +621,8 @@ def update_day3():
         write_product_master_csv(root / '04_Nova_Product_Master.csv', catalog)
         make_day3_excel_files(root)
 
-        (root / '00_START_HERE.txt').write_text(
-            'NOVA DISTRIBUTION GROUP - DAY 03\n\n'
-            'The Day 1 consolidated Sales file contained January-March 2026. Today you receive those EXACT SAME 120,000 business rows as three monthly source files.\n'
-            'Nova receives one new Sales CSV every month, so the process cannot depend on Copy/Paste.\n\n'
-            '1) Connect to Monthly_Sales as a Folder.\n'
-            '2) Combine January-March.\n'
-            '3) Keep Source File Name.\n'
-            '4) Merge Branch, Customer and Nova Product masters.\n'
-            '5) Move April into Monthly_Sales only after the pipeline works, then Refresh.\n\n'
-            'Data integrity: Branch ID determines Region and Channel consistently in both facts and Branch Master. Product and Customer IDs all come from the supplied masters.\n'
-            'Budget and Workforce remain separate business facts for the semantic model later; do not force them into Sales transactions.\n',
-            encoding='utf-8')
-        (root / '00_AUTOMATION_SCALE.txt').write_text(
-            'Monthly_Sales: Jan-Mar = 3 x 40,000 = 120,000 rows, identical to Day 1 consolidated Sales.\n'
-            'April: 40,000 new rows held separately for the refresh proof.\n'
-            'Branches: 100 | Customers: 8,000 | Products: 240.\n',
-            encoding='utf-8')
+        # Day03 has CSV/XLSX learning inputs; no instructional TXT files.
+        remove_instruction_txt(root)
         rezip_pack(root, zp)
 
 def main():
