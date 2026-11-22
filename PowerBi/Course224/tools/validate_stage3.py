@@ -66,7 +66,8 @@ for path in paths:
 # All standalone PBIP downloads (Days 05–07) must also be TXT-free.
 for day in (5, 6, 7):
     folder = 'week3/day7' if day == 7 else f'week2/day{day}'
-    with zipfile.ZipFile(ROOT/f'{folder}/downloads/Nova_Day{day:02d}_Start_PBIP.zip') as standalone:
+    filename = 'Nova_Day07_START_PBIP.zip' if day == 7 else f'Nova_Day{day:02d}_Start_PBIP.zip'
+    with zipfile.ZipFile(ROOT/f'{folder}/downloads/{filename}') as standalone:
         assert standalone.testzip() is None
         assert not any(n.lower().endswith('.txt') for n in standalone.namelist()), f'Day{day:02d} standalone PBIP includes TXT'
 
