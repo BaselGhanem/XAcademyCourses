@@ -159,24 +159,8 @@ def build():
     assert all(r[2] in {c['customer_id'] for c in customers} for r in fact)
     assert all(r[4] in {b['branch_id'] for b in branches} for r in fact)
 
-    (WORK/'00_START_HERE.txt').write_text(
-        'NOVA DISTRIBUTION GROUP - DAY 04: MODEL THE BUSINESS\n\n'
-        'STORY\n'
-        'Week 1 gave us connected, clean and refreshable data. Today we first review Merge, Append and Folder using Excel files, then build a real Star Schema.\n\n'
-        'PART A - REVIEW\n'
-        '01_REVIEW_MERGE: Merge Sales with Product Master on Product ID. Remember: Merge = Add Columns.\n'
-        '02_REVIEW_APPEND: Append January + February + March. Remember: Append = Add Rows.\n'
-        '03_REVIEW_FOLDER: Connect to Monthly_Sales_Excel as Folder, combine Jan-Apr, then move Sales_May.xlsx into the folder and Refresh.\n\n'
-        'PART B - MODEL\n'
-        'Open 04_MODEL_LAB/Nova_Day04_Model_Lab.xlsx and load FactSales, DimProduct, DimCustomer, DimBranch and DimDate.\n'
-        'First run Auto Detect and inspect what Power BI found. Product ID and Branch ID use matching names; Customer and Date intentionally use different key names.\n'
-        'Create the missing relationships manually: DimCustomer[Customer Code] → FactSales[Customer ID] and DimDate[Date] → FactSales[Order Date].\n'
-        'Use 1:* cardinality and single filter direction from Dimension to FactSales. Arrange a Star Schema and test filters.\n\n'
-        'DATA CONTRACT: FactSales 160,000 Jan-Apr; folder after May 200,000.\n'
-        'DimDate covers all dates in 2025–2026 as typed Excel Date values.\n'
-        'SUCCESS = FactSales + 4 Dimensions + working filters + READY FOR DAX.\n',
-        encoding='utf-8'
-    )
+    # Written instructions live on the lesson webpage and in the Excel checklist.
+    # No .txt files are packed into Day04; its inputs are Excel workbooks only.
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     if OUT.exists(): OUT.unlink()

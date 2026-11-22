@@ -22,7 +22,10 @@ def xl(z,suffix):
 with zipfile.ZipFile(p[0]) as a,zipfile.ZipFile(p[1]) as b,zipfile.ZipFile(p[2]) as c,zipfile.ZipFile(p[3]) as d:
     for z in (a,b,c,d):
         assert z.testzip() is None
+    for z in (a,b,c):
         assert '00_UNIVERSAL_LEARNER_GUIDE.txt' in z.namelist()
+    assert not [name for name in d.namelist() if name.lower().endswith('.txt')], 'Day04 ZIP must not contain .txt files'
+    assert any(name.endswith('05_Day04_Model_Checklist.xlsx') for name in d.namelist())
     s=read(a,'02_Nova_Sales_Transactions.csv')
     months=[read(c,f'Nova_Sales_2026-{m:02d}_{name}.csv') for m,name in [(1,'January'),(2,'February'),(3,'March'),(4,'April')]]
     assert s==months[0]+months[1]+months[2]

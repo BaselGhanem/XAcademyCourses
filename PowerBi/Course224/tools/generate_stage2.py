@@ -82,7 +82,10 @@ def make_manifest():
 def main():
     w1.main()
     w4.build()
-    for day,path in PACKS.items():insert_guide(day,path)
+    # Day04 ships only actual Excel training sources, not text instruction files.
+    for day,path in PACKS.items():
+        if day != 4:
+            insert_guide(day,path)
     write_references()
     make_manifest()
     print('Stage2 build complete: four ZIPs; 160k Day04 transaction facts; typed 730-day DimDate')
