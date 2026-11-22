@@ -57,9 +57,9 @@
   <script src="videos.js"></script>
   <script src="access.js"></script>
   <script>
-    const learnerProfile = CourseProgress.getProfile();
+    const learnerProfile = CourseProgress.isAuthenticated() ? CourseProgress.getProfile() : null;
     const student = learnerProfile?.name;
-    if (!student) location.href = 'login.html';
+    if (!student) location.replace('login.html');
     document.getElementById('studentName').textContent = student || '';
     document.getElementById('learnerInterest').textContent = `مجال اهتمامك: ${CourseProgress.domainLabel(learnerProfile?.domain)}`;
 
